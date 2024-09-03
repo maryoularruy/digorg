@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>whatsapp</string>
+		<string>telegram</string>
+		<string>viber</string>
+	</array>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Give it</string>
+	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+	<string>Give it</string>
+</dict>
+</plist>

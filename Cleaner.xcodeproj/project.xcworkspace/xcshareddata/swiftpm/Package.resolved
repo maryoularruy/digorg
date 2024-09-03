@@ -1,0 +1,157 @@
+{
+  "pins" : [
+    {
+      "identity" : "bottompopup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ergunemr/BottomPopup",
+      "state" : {
+        "revision" : "23e3ce5ab9e1576aae60bad90cf7eea34709881d",
+        "version" : "0.7.1"
+      }
+    },
+    {
+      "identity" : "disk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/saoudrizwan/Disk",
+      "state" : {
+        "revision" : "b0cb4fdf23e51849cc2460bdc6de795c3bcca99d",
+        "version" : "0.6.4"
+      }
+    },
+    {
+      "identity" : "gradientprogressbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fxm90/GradientProgressBar",
+      "state" : {
+        "branch" : "main",
+        "revision" : "19871af9f6ae2bebd1d125c4faa0d1e5e9a561d5"
+      }
+    },
+    {
+      "identity" : "hanekeswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Haneke/HanekeSwift.git",
+      "state" : {
+        "revision" : "a2e8e5b9a91eef90138a4f43c9a0044c4e90a6ef"
+      }
+    },
+    {
+      "identity" : "internetspeed",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/HumorousGhost/InternetSpeed",
+      "state" : {
+        "revision" : "e0ebbcbc6bd083788c05296141dee4373ba00b6e",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "iqkeyboardmanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hackiftekhar/IQKeyboardManager",
+      "state" : {
+        "revision" : "c00b1ae9fa1ad8af4465bb6ca901f6943fc98eba",
+        "version" : "6.5.16"
+      }
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios",
+      "state" : {
+        "revision" : "45517c3cfec9469bbdd4f86e32393c28ae9df0bc",
+        "version" : "4.3.3"
+      }
+    },
+    {
+      "identity" : "networkflows",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/megabitsenmzq/NetworkFlows",
+      "state" : {
+        "branch" : "master",
+        "revision" : "eebd5b15ebb87b4cfc07b521b650a0a4f56f6eab"
+      }
+    },
+    {
+      "identity" : "reachability.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ashleymills/Reachability.swift",
+      "state" : {
+        "revision" : "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
+        "version" : "5.1.0"
+      }
+    },
+    {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core.git",
+      "state" : {
+        "revision" : "7227d6a447821c28895daa099b6c7cd4c99d461b",
+        "version" : "13.25.1"
+      }
+    },
+    {
+      "identity" : "realm-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-swift",
+      "state" : {
+        "branch" : "master",
+        "revision" : "569c656a8494ad03d790fd1075338c1da92d495a"
+      }
+    },
+    {
+      "identity" : "reusable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AliSoftware/Reusable",
+      "state" : {
+        "revision" : "18674709421360e210c2ecd4e8e08b217d4ea61d",
+        "version" : "4.1.2"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "e278c13e46e8d20c895c221e922c6ac6b72aaca9",
+        "version" : "5.18.7"
+      }
+    },
+    {
+      "identity" : "sdwebimagephotosplugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImagePhotosPlugin.git",
+      "state" : {
+        "revision" : "50ad20e10396527afd8e4a4b698bd5df76efc9bc",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "swiftycontacts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftyContacts/SwiftyContacts",
+      "state" : {
+        "branch" : "master",
+        "revision" : "6671f40607f5a8c65e40fed90517967003ec11de"
+      }
+    },
+    {
+      "identity" : "swiftyuserdefaults",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sunshinejr/SwiftyUserDefaults.git",
+      "state" : {
+        "revision" : "f66bcd04088582c8fbb5cb8554d577e303bae396",
+        "version" : "5.3.0"
+      }
+    },
+    {
+      "identity" : "valet",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/square/Valet",
+      "state" : {
+        "revision" : "89f12b93553055f4908c0d2548c9b8655926940a",
+        "version" : "4.2.0"
+      }
+    }
+  ],
+  "version" : 2
+}

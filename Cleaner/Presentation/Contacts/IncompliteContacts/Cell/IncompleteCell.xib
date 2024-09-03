@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-Pro-Display-Bold.otf">
+            <string>SFProDisplay-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="YBT-nm-Z9q" customClass="IncompleteCell" customModule="Cleaner" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="284" height="76"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="IrU-lg-gES">
+                <rect key="frame" x="0.0" y="0.0" width="284" height="76"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tK2-ic-aJn">
+                        <rect key="frame" x="0.0" y="0.0" width="284" height="76"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectedCheckBox" translatesAutoresizingMaskIntoConstraints="NO" id="ZVr-xK-cWU">
+                                <rect key="frame" x="240" y="16" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="aRT-Xf-wa8"/>
+                                    <constraint firstAttribute="height" constant="44" id="fO9-Hh-cxs"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKT-Xo-yD5">
+                                <rect key="frame" x="12" y="28" width="211" height="20"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" name="Dark"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="Cards"/>
+                        <constraints>
+                            <constraint firstItem="nKT-Xo-yD5" firstAttribute="centerY" secondItem="ZVr-xK-cWU" secondAttribute="centerY" id="1ev-Eo-evz"/>
+                            <constraint firstItem="ZVr-xK-cWU" firstAttribute="centerY" secondItem="tK2-ic-aJn" secondAttribute="centerY" id="E2e-yC-baP"/>
+                            <constraint firstAttribute="trailing" secondItem="ZVr-xK-cWU" secondAttribute="trailing" id="Sh7-Ii-4bI"/>
+                            <constraint firstItem="nKT-Xo-yD5" firstAttribute="leading" secondItem="tK2-ic-aJn" secondAttribute="leading" constant="12" id="k4p-LW-r1x"/>
+                            <constraint firstItem="ZVr-xK-cWU" firstAttribute="leading" secondItem="nKT-Xo-yD5" secondAttribute="trailing" constant="17" id="sv1-Eu-bOC"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tK2-ic-aJn" firstAttribute="leading" secondItem="IrU-lg-gES" secondAttribute="leading" id="bPT-P3-vXl"/>
+                    <constraint firstItem="tK2-ic-aJn" firstAttribute="top" secondItem="IrU-lg-gES" secondAttribute="top" id="csB-rU-E8W"/>
+                    <constraint firstAttribute="trailing" secondItem="tK2-ic-aJn" secondAttribute="trailing" id="j3l-LE-PSE"/>
+                    <constraint firstAttribute="bottom" secondItem="tK2-ic-aJn" secondAttribute="bottom" id="z93-ro-htB"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="284" height="76"/>
+            <connections>
+                <outlet property="cardView" destination="tK2-ic-aJn" id="sGl-Tn-U5Q"/>
+                <outlet property="infoLabel" destination="nKT-Xo-yD5" id="ADi-16-D9V"/>
+                <outlet property="statusImage" destination="ZVr-xK-cWU" id="gK1-Uq-6v0"/>
+            </connections>
+            <point key="canvasLocation" x="267" y="113"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="SelectedCheckBox" width="44" height="44"/>
+        <namedColor name="Cards">
+            <color red="0.94499999284744263" green="0.9570000171661377" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Dark">
+            <color red="0.054999999701976776" green="0.016000000759959221" blue="0.11400000005960464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
