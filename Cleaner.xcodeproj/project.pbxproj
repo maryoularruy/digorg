@@ -75,6 +75,7 @@
 		75FC42202AD2A0AC008F3E3A /* TutorialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC421F2AD2A0AC008F3E3A /* TutorialCell.swift */; };
 		75FC42222AD2A0C5008F3E3A /* TutorialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */; };
 		75FC42262AD31061008F3E3A /* GradientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC42252AD31061008F3E3A /* GradientService.swift */; };
+		A50F58B52CB6D10100AB3166 /* MainViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58B42CB6D10100AB3166 /* MainViewControllerProtocol.swift */; };
 		A576FAD52CB69C9700B018DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576FAD42CB69C9700B018DE /* ContentView.swift */; };
 		FA3987232B303A460096F335 /* AdBlockerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987222B303A460096F335 /* AdBlockerViewController.swift */; };
 		FA3987252B303A540096F335 /* AdBlocker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3987242B303A540096F335 /* AdBlocker.storyboard */; };
@@ -305,6 +306,7 @@
 		75FC421F2AD2A0AC008F3E3A /* TutorialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialCell.swift; sourceTree = "<group>"; };
 		75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialCell.xib; sourceTree = "<group>"; };
 		75FC42252AD31061008F3E3A /* GradientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientService.swift; sourceTree = "<group>"; };
+		A50F58B42CB6D10100AB3166 /* MainViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerProtocol.swift; sourceTree = "<group>"; };
 		A576FAD42CB69C9700B018DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FA3987222B303A460096F335 /* AdBlockerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockerViewController.swift; sourceTree = "<group>"; };
 		FA3987242B303A540096F335 /* AdBlocker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdBlocker.storyboard; sourceTree = "<group>"; };
@@ -823,6 +825,7 @@
 				756DF0AB2ADFD66C00CC187D /* Cells */,
 				75D3FC3C2A6069AF00F351A3 /* Main.storyboard */,
 				75D3FC3A2A6069AF00F351A3 /* MainViewController.swift */,
+				A50F58B42CB6D10100AB3166 /* MainViewControllerProtocol.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -1730,6 +1733,7 @@
 				FA3988702B3080B50096F335 /* PrivateMenuViewController.swift in Sources */,
 				FA3988032B305FA50096F335 /* DKPhotoGalleryScrollView.swift in Sources */,
 				756866D42AD1B9FE008DBF7C /* TutorialViewController.swift in Sources */,
+				A50F58B52CB6D10100AB3166 /* MainViewControllerProtocol.swift in Sources */,
 				75D3FC5E2A606BA100F351A3 /* Storyboards.swift in Sources */,
 				FA641DE32B34575300F6A466 /* CalendarListViewController.swift in Sources */,
 				756866D92AD1D398008DBF7C /* PhoneInfoViewController.swift in Sources */,

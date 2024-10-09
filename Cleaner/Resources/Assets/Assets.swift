@@ -80,7 +80,6 @@ internal enum Asset {
   internal static let black = ColorAsset(name: "Black")
   internal static let blue = ColorAsset(name: "Blue")
   internal static let cards = ColorAsset(name: "Cards")
-  internal static let dark = ColorAsset(name: "Dark")
   internal static let grey = ColorAsset(name: "Grey")
   internal static let red = ColorAsset(name: "Red")
   internal static let white = ColorAsset(name: "White")

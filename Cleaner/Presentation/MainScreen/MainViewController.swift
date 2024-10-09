@@ -8,8 +8,9 @@
 import UIKit
 import Contacts
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
+    @IBOutlet weak var deviceInfoLabel: UILabel!
     @IBOutlet weak var phoneInfoStackView: UIStackView!
     @IBOutlet weak var busyCPULabel: UILabel!
     @IBOutlet weak var totalRAMLabel: UILabel!
@@ -22,7 +23,12 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPhoneInfoSection()
-        setupActions()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        addGestureRecognizers()
     }
     
     private func setupPhoneInfoSection() {
@@ -42,14 +48,6 @@ class MainViewController: UIViewController {
     
     @objc func updateSpeed() {
         downoladSpeedLabel.text = PhoneInfoService.shared.downloadSpeed
-    }
-    
-    private func setupActions() {
-        phoneInfoStackView.addTapGestureRecognizer {
-            let vc = StoryboardScene.PhoneInfo.initialScene.instantiate()
-            vc.modalPresentationStyle = .fullScreen
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
     }
     
     private func checkAccessStatus() {
@@ -86,5 +84,19 @@ class MainViewController: UIViewController {
         alertController.addAction(disallowAction)
         alertController.addAction(settingsAction)
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension MainViewController: MainViewControllerProtocol {
+    internal func addGestureRecognizers() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhoneInfoScreen))
+        deviceInfoLabel.addTapGestureRecognizer(action: openPhoneInfoScreen)
+        phoneInfoStackView.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func openPhoneInfoScreen() {
+        let vc = StoryboardScene.PhoneInfo.initialScene.instantiate()
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
