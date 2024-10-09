@@ -12,7 +12,6 @@ import Contacts
 class ViewController: UIViewController {
 
     @IBOutlet weak var phoneInfoStackView: UIStackView!
-    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var busyCPULabel: UILabel!
     @IBOutlet weak var totalRAMLabel: UILabel!
@@ -26,7 +25,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupPhoneInfoSection()
         setupActions()
-        setupUI()
         setupCollectionView()
     }
     
@@ -35,11 +33,6 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(cellType: MainFirstCell.self)
         collectionView.register(cellType: MainSecondCell.self)
-    }
-
-    private func setupUI() {
-        pageControl.isUserInteractionEnabled = false
-        pageControl.numberOfPages = 2
     }
     
     private func setupPhoneInfoSection() {
@@ -108,7 +101,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -170,20 +163,14 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: collectionView.frame.width - 48, height: collectionView.frame.height)
+        CGSize(width: collectionView.frame.width - 48, height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 48
+        48
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-        
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+        UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="atv-mq-zYo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="atv-mq-zYo">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -193,8 +193,8 @@
                                     <constraint firstItem="adT-z5-Zhs" firstAttribute="width" secondItem="GUe-Qp-1GM" secondAttribute="width" multiplier="1.25893" id="lIJ-6q-zhu"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcm-ak-VUc">
-                                <rect key="frame" x="175.33333333333334" y="777.66666666666663" width="42.666666666666657" height="15"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcm-ak-VUc">
+                                <rect key="frame" x="196.66666666666666" y="777.66666666666663" width="0.0" height="15"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.82745098039999998" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="1cA-hH-W5n"/>
@@ -205,14 +205,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="rb5-Tp-HsG">
-                                <rect key="frame" x="147.33333333333334" y="772" width="98.666666666666657" height="26"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="pageIndicatorTintColor" name="White"/>
-                                <color key="currentPageIndicatorTintColor" red="0.30980392159999998" green="0.4431372549" blue="0.83921568629999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
-                            </pageControl>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4n0-9G-Yop">
-                                <rect key="frame" x="0.0" y="185" width="393" height="563"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4n0-9G-Yop">
+                                <rect key="frame" x="0.0" y="185" width="393" height="563.33333333333337"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="x7u-tQ-0z4">
                                     <size key="itemSize" width="128" height="128"/>
@@ -227,19 +221,13 @@
                         <color key="backgroundColor" name="White"/>
                         <constraints>
                             <constraint firstItem="4n0-9G-Yop" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2iH-CB-VZU"/>
-                            <constraint firstItem="dcm-ak-VUc" firstAttribute="centerY" secondItem="rb5-Tp-HsG" secondAttribute="centerY" id="JgY-7r-PyU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4n0-9G-Yop" secondAttribute="trailing" id="N89-fU-IXX"/>
                             <constraint firstItem="80D-7X-N8u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="OrY-Bq-Sds"/>
-                            <constraint firstItem="rb5-Tp-HsG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Qzt-c2-KSu"/>
-                            <constraint firstItem="dcm-ak-VUc" firstAttribute="leading" secondItem="rb5-Tp-HsG" secondAttribute="leading" constant="28" id="aiY-hQ-vFz"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rb5-Tp-HsG" secondAttribute="bottom" constant="20" id="b5z-f3-PrU"/>
                             <constraint firstItem="80D-7X-N8u" firstAttribute="top" secondItem="lu2-o2-cXL" secondAttribute="bottom" constant="12" id="cSe-ZP-klu"/>
                             <constraint firstItem="lu2-o2-cXL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="cc5-Kh-0Bl"/>
-                            <constraint firstItem="rb5-Tp-HsG" firstAttribute="top" secondItem="4n0-9G-Yop" secondAttribute="bottom" constant="24" id="jsq-go-kpp"/>
                             <constraint firstAttribute="trailing" secondItem="80D-7X-N8u" secondAttribute="trailing" constant="24" id="kqy-7Q-Oqg"/>
                             <constraint firstItem="4n0-9G-Yop" firstAttribute="top" secondItem="80D-7X-N8u" secondAttribute="bottom" constant="24" id="tiD-Q4-2jG"/>
                             <constraint firstItem="lu2-o2-cXL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="uQx-aN-wD2"/>
-                            <constraint firstItem="dcm-ak-VUc" firstAttribute="trailing" secondItem="rb5-Tp-HsG" secondAttribute="trailing" constant="-28" id="v0n-sI-d1u"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hOv-Uz-ffd"/>
@@ -248,7 +236,6 @@
                         <outlet property="collectionView" destination="4n0-9G-Yop" id="Qav-HN-wXq"/>
                         <outlet property="downoladSpeedLabel" destination="duc-MO-Nay" id="d5u-dZ-lbS"/>
                         <outlet property="freeRAMLabel" destination="KHn-6R-3Kw" id="49W-6E-3f6"/>
-                        <outlet property="pageControl" destination="rb5-Tp-HsG" id="86w-I8-Yba"/>
                         <outlet property="phoneInfoStackView" destination="80D-7X-N8u" id="hmM-Ge-llP"/>
                         <outlet property="totalRAMLabel" destination="Moi-wb-d7Q" id="8zC-WD-5ox"/>
                     </connections>
@@ -283,7 +270,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="White">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
