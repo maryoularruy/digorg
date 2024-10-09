@@ -54,7 +54,6 @@ class MainViewController: UIViewController {
         downoladSpeedLabel.text = PhoneInfoService.shared.downloadSpeed
     }
     
-
     private func setupActions() {
         phoneInfoStackView.addTapGestureRecognizer {
             let vc = StoryboardScene.PhoneInfo.initialScene.instantiate()
@@ -66,7 +65,7 @@ class MainViewController: UIViewController {
     private func checkAccessStatus() {
         let store = CNContactStore()
         store.requestAccess(for: .contacts) { [weak self] (granted, error) in
-            guard let self = self else { return }
+            guard let self else { return }
             if granted {
                 DispatchQueue.main.async {
                     let vc = StoryboardScene.ContactsMenu.initialScene.instantiate()
@@ -80,6 +79,7 @@ class MainViewController: UIViewController {
             }
         }
     }
+    
     private func showPermissionAlert() {
         let alertController = UIAlertController(title: "You did not give access to 'Contacts'",
                                                 message: "We need access to the “Contacts”. Please go to the settings and allow access, then restart the app.",
