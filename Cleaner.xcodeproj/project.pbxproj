@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -478,6 +478,10 @@
 		FACA30922B3E03230018FA5F /* AppLocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLocker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A50F58AE2CB6BB6C00AB3166 /* Poppins */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Poppins; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		75D3FC302A6069AF00F351A3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -744,6 +748,7 @@
 		75D3FC512A606BA100F351A3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				A50F58AE2CB6BB6C00AB3166 /* Poppins */,
 				75D3FC852A606FF500F351A3 /* SF Pro Display */,
 				75D3FC5A2A606BA100F351A3 /* Fonts.swift */,
 			);
@@ -1486,6 +1491,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A50F58AE2CB6BB6C00AB3166 /* Poppins */,
 			);
 			name = Cleaner;
 			packageProductDependencies = (
