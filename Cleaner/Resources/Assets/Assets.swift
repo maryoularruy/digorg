@@ -84,7 +84,7 @@ internal enum Asset {
   internal static let grey = ColorAsset(name: "Grey")
   internal static let red = ColorAsset(name: "Red")
   internal static let white = ColorAsset(name: "White")
-  internal static let bgOnCards = ColorAsset(name: "bgOnCards")
+  internal static let greyBackgroundColor = ColorAsset(name: "GreyBackground") //used
   internal static let download = ImageAsset(name: "download")
   internal static let upload = ImageAsset(name: "upload")
   internal static let wifiConnection = ImageAsset(name: "wifiConnection")

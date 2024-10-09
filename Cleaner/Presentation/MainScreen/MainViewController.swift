@@ -6,13 +6,11 @@
 //
 
 import UIKit
-import SwiftyUserDefaults
 import Contacts
 
 class MainViewController: UIViewController {
 
     @IBOutlet weak var phoneInfoStackView: UIStackView!
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var busyCPULabel: UILabel!
     @IBOutlet weak var totalRAMLabel: UILabel!
     @IBOutlet weak var freeRAMLabel: UILabel!
@@ -25,14 +23,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupPhoneInfoSection()
         setupActions()
-        setupCollectionView()
-    }
-    
-    private func setupCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(cellType: MainFirstCell.self)
-        collectionView.register(cellType: MainSecondCell.self)
     }
     
     private func setupPhoneInfoSection() {
@@ -96,81 +86,5 @@ class MainViewController: UIViewController {
         alertController.addAction(disallowAction)
         alertController.addAction(settingsAction)
         present(alertController, animated: true, completion: nil)
-    }
-}
-
-extension MainViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == 0 {
-            let cell = self.collectionView.dequeueReusableCell(for: indexPath) as MainFirstCell
-            cell.storiesView.addTapGestureRecognizer {
-                let vc = StoryboardScene.Stories.initialScene.instantiate()
-                vc.modalPresentationStyle = .fullScreen
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            cell.CalendarView.addTapGestureRecognizer {
-                let vc = StoryboardScene.CalendarList.initialScene.instantiate()
-                vc.modalPresentationStyle = .fullScreen
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            cell.contactsView.addTapGestureRecognizer {
-                self.checkAccessStatus()
-            }
-            cell.mediaView.addTapGestureRecognizer {
-                let vc = StoryboardScene.PhotoVideoMenu.initialScene.instantiate()
-                vc.modalPresentationStyle = .fullScreen
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            return cell
-        } else {
-            let cell = self.collectionView.dequeueReusableCell(for: indexPath) as MainSecondCell
-            cell.connectionView.addTapGestureRecognizer {
-                let vc = StoryboardScene.Connection.initialScene.instantiate()
-                vc.modalPresentationStyle = .fullScreen
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            cell.batteryView.addTapGestureRecognizer {
-                let vc = StoryboardScene.MainBattery.initialScene.instantiate()
-                vc.modalPresentationStyle = .fullScreen
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            cell.adBlockView.addTapGestureRecognizer {
-                let vc = StoryboardScene.AdBlocker.initialScene.instantiate()
-                vc.modalPresentationStyle = .fullScreen
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            cell.settingsView.addTapGestureRecognizer {
-                let vc = StoryboardScene.Settings.initialScene.instantiate()
-                vc.modalPresentationStyle = .fullScreen
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            cell.passwordsView.addTapGestureRecognizer {
-                let vc = StoryboardScene.PasswordList.initialScene.instantiate()
-                vc.modalPresentationStyle = .fullScreen
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            cell.secretFoldersView.addTapGestureRecognizer {
-                AppLocker.present(with: .create)
-            }
-            return cell
-        }
-    }
-}
-
-extension MainViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.width - 48, height: collectionView.frame.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        48
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     }
 }

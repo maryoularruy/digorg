@@ -75,6 +75,7 @@
 		75FC42202AD2A0AC008F3E3A /* TutorialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC421F2AD2A0AC008F3E3A /* TutorialCell.swift */; };
 		75FC42222AD2A0C5008F3E3A /* TutorialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */; };
 		75FC42262AD31061008F3E3A /* GradientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC42252AD31061008F3E3A /* GradientService.swift */; };
+		A576FAD52CB69C9700B018DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576FAD42CB69C9700B018DE /* ContentView.swift */; };
 		FA3987232B303A460096F335 /* AdBlockerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987222B303A460096F335 /* AdBlockerViewController.swift */; };
 		FA3987252B303A540096F335 /* AdBlocker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3987242B303A540096F335 /* AdBlocker.storyboard */; };
 		FA3987282B303DCC0096F335 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987272B303DCC0096F335 /* SettingsViewController.swift */; };
@@ -304,6 +305,7 @@
 		75FC421F2AD2A0AC008F3E3A /* TutorialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialCell.swift; sourceTree = "<group>"; };
 		75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialCell.xib; sourceTree = "<group>"; };
 		75FC42252AD31061008F3E3A /* GradientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientService.swift; sourceTree = "<group>"; };
+		A576FAD42CB69C9700B018DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FA3987222B303A460096F335 /* AdBlockerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockerViewController.swift; sourceTree = "<group>"; };
 		FA3987242B303A540096F335 /* AdBlocker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdBlocker.storyboard; sourceTree = "<group>"; };
 		FA3987272B303DCC0096F335 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -691,8 +693,8 @@
 		75D3FC352A6069AF00F351A3 /* Cleaner */ = {
 			isa = PBXGroup;
 			children = (
+				A576FADA2CB6A9EE00B018DE /* Base */,
 				FA3987452B30553A0096F335 /* Frameworks */,
-				75D3FC6B2A606BEB00F351A3 /* AppDelegate */,
 				75D3FC7A2A606E6F00F351A3 /* Extensions */,
 				75FC42242AD3104D008F3E3A /* Services */,
 				756866CD2ACD9EB6008DBF7C /* Models */,
@@ -755,14 +757,6 @@
 				75D3FC3F2A6069B000F351A3 /* Assets.xcassets */,
 			);
 			path = Assets;
-			sourceTree = "<group>";
-		};
-		75D3FC6B2A606BEB00F351A3 /* AppDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				75D3FC362A6069AF00F351A3 /* AppDelegate.swift */,
-			);
-			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		75D3FC6C2A606C0600F351A3 /* Presentation */ = {
@@ -866,6 +860,31 @@
 				FA53586C2B3C4D6A0026FDC2 /* DBService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		A576FACF2CB69A7700B018DE /* BaseConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				75D3FC362A6069AF00F351A3 /* AppDelegate.swift */,
+			);
+			path = BaseConfiguration;
+			sourceTree = "<group>";
+		};
+		A576FAD32CB69C8D00B018DE /* BaseUIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				A576FAD42CB69C9700B018DE /* ContentView.swift */,
+			);
+			path = BaseUIComponents;
+			sourceTree = "<group>";
+		};
+		A576FADA2CB6A9EE00B018DE /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A576FAD32CB69C8D00B018DE /* BaseUIComponents */,
+				A576FACF2CB69A7700B018DE /* BaseConfiguration */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		FA3987212B303A210096F335 /* AdBlocker */ = {
@@ -1699,6 +1718,7 @@
 				FA3987F32B305FA50096F335 /* DKPhotoGalleryItem.swift in Sources */,
 				FA3987582B3055510096F335 /* StagedChangeset.swift in Sources */,
 				FA641DF82B357C7A00F6A466 /* NSImage+SwiftyGif.swift in Sources */,
+				A576FAD52CB69C9700B018DE /* ContentView.swift in Sources */,
 				FA3988702B3080B50096F335 /* PrivateMenuViewController.swift in Sources */,
 				FA3988032B305FA50096F335 /* DKPhotoGalleryScrollView.swift in Sources */,
 				756866D42AD1B9FE008DBF7C /* TutorialViewController.swift in Sources */,
