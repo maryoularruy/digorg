@@ -96,4 +96,3 @@ class PhoneInfoService: TrafficMonitorDelegate {
         return totalUsageOfCPU
     }
 }
-

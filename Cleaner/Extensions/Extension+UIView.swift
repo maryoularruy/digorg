@@ -5,7 +5,6 @@
 //  Created by Максим Лебедев on 16.11.2022.
 //
 
-import Foundation
 import UIKit
 
 extension UIView {
@@ -59,51 +58,9 @@ extension UIView {
             action?()
         }
     }
-
-    @IBInspectable var borderWidth: CGFloat {
-        get { layer.borderWidth }
-        set { layer.borderWidth = newValue }
-    }
-
-    @IBInspectable var borderColor: UIColor? {
-        get {
-            if let color = layer.borderColor {
-                return UIColor(cgColor: color)
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                layer.borderColor = color.cgColor
-            } else {
-                layer.borderColor = nil
-            }
-        }
-    }
-
+    
     @IBInspectable var cornerRadius: CGFloat {
         get { layer.cornerRadius }
         set { layer.cornerRadius = newValue }
     }
-
-    @IBInspectable var shadowRadius: CGFloat {
-        get { layer.shadowRadius }
-        set { layer.shadowRadius = newValue }
-    }
-
-    @IBInspectable var shadowOffset: CGSize {
-        get { layer.shadowOffset }
-        set { layer.shadowOffset = newValue }
-    }
-
-    @IBInspectable var shadowColor: UIColor {
-        get { UIColor(cgColor: layer.shadowColor ?? CGColor(gray: 0, alpha: 0)) }
-        set { layer.shadowColor = newValue.cgColor }
-    }
-
-    @IBInspectable var shadowOpacity: Float {
-        get { layer.shadowOpacity }
-        set { layer.shadowOpacity = newValue }
-    }
 }
-
