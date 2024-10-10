@@ -12,10 +12,10 @@ class PhoneInfoService: TrafficMonitorDelegate {
     
     static let shared = PhoneInfoService()
     
-    var downloadSpeed: String = ""
-    var freeRAM: String = ""
-    var totalRAM: String = ""
-    var busyCPU: String = ""
+    lazy var downloadSpeed: String = ""
+    lazy var freeRAM: String = ""
+    lazy var totalRAM: String = ""
+    lazy var busyCPU: String = ""
     
     init() {
         TrafficMonitor.shared.delegate = self
@@ -35,7 +35,6 @@ class PhoneInfoService: TrafficMonitorDelegate {
     
     func getBusyCPU() {
         busyCPU = "\(([8,9,10,10,10,10,11,12,13].randomElement() ?? 10) + Int(cpuUsage())) %"
-        
     }
     
     func trafficMonitor(updatedInfo: TrafficInfo) {

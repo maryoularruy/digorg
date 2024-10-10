@@ -8,17 +8,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="SF-Pro-Display-Bold.otf">
-            <string>SFProDisplay-Bold</string>
-        </array>
-        <array key="SF-Pro-Display-Light.otf">
-            <string>SFProDisplay-Light</string>
-        </array>
-        <array key="SF-Pro-Display-Regular.otf">
-            <string>SFProDisplay-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -47,152 +36,30 @@
                                                 </attributedString>
                                                 <color key="highlightedColor" name="BlackTextColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="80D-7X-N8u">
-                                                <rect key="frame" x="0.0" y="120.66666666666666" width="353" height="50"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="80D-7X-N8u">
+                                                <rect key="frame" x="0.0" y="85.666666666666657" width="353" height="55"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GUe-Qp-1GM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="114.66666666666667" height="50"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Download" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mA1-jg-aD4">
-                                                                <rect key="frame" x="43" y="11" width="42.666666666666657" height="10"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="10" id="rT8-SU-jZX"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
-                                                                <color key="textColor" name="Black"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duc-MO-Nay">
-                                                                <rect key="frame" x="43.000000000000007" y="23" width="68.666666666666686" height="14"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="14" id="bN2-1x-zHi"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="14"/>
-                                                                <color key="textColor" name="Black"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainDownload" translatesAutoresizingMaskIntoConstraints="NO" id="oDN-WK-oi6">
-                                                                <rect key="frame" x="8" y="9" width="32" height="32"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="32" id="2si-Nl-HwW"/>
-                                                                    <constraint firstAttribute="width" constant="32" id="M6H-VA-PG4"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                        </subviews>
-                                                        <color key="backgroundColor" red="0.94509803921568625" green="0.95686274509803915" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <constraints>
-                                                            <constraint firstItem="mA1-jg-aD4" firstAttribute="leading" secondItem="oDN-WK-oi6" secondAttribute="trailing" constant="3" id="2UI-u7-0LH"/>
-                                                            <constraint firstAttribute="bottom" secondItem="duc-MO-Nay" secondAttribute="bottom" constant="13" id="AHU-8h-LH0"/>
-                                                            <constraint firstAttribute="height" constant="50" id="FKW-uB-Zf5"/>
-                                                            <constraint firstAttribute="trailing" secondItem="duc-MO-Nay" secondAttribute="trailing" constant="3" id="Ho2-X8-uTD"/>
-                                                            <constraint firstItem="duc-MO-Nay" firstAttribute="leading" secondItem="oDN-WK-oi6" secondAttribute="trailing" constant="3" id="Qai-Pg-1SN"/>
-                                                            <constraint firstItem="oDN-WK-oi6" firstAttribute="centerY" secondItem="GUe-Qp-1GM" secondAttribute="centerY" id="TzW-jp-CNX"/>
-                                                            <constraint firstItem="oDN-WK-oi6" firstAttribute="leading" secondItem="GUe-Qp-1GM" secondAttribute="leading" constant="8" id="qac-xn-Qo4"/>
-                                                            <constraint firstItem="mA1-jg-aD4" firstAttribute="top" secondItem="GUe-Qp-1GM" secondAttribute="top" constant="11" id="vCn-wK-MAH"/>
-                                                        </constraints>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GUe-Qp-1GM" customClass="DeviceInfoCell" customModule="Cleaner" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="115" height="55"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="6"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adT-z5-Zhs">
-                                                        <rect key="frame" x="118.66666666666664" y="0.0" width="144.33333333333337" height="50"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ly9-ZB-qDV">
-                                                                <rect key="frame" x="43" y="11" width="18.666666666666671" height="10"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="10" id="h3l-su-UUn"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
-                                                                <color key="textColor" name="Black"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHn-6R-3Kw">
-                                                                <rect key="frame" x="43" y="23" width="63.333333333333343" height="14"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="14" id="UV5-Mo-fiC"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="14"/>
-                                                                <color key="textColor" name="Black"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainRAM" translatesAutoresizingMaskIntoConstraints="NO" id="p5U-Ug-xha">
-                                                                <rect key="frame" x="8" y="9" width="32" height="32"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="32" id="QyU-9f-sJG"/>
-                                                                    <constraint firstAttribute="height" constant="32" id="vs3-CO-QL9"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="of 8 GB" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Moi-wb-d7Q">
-                                                                <rect key="frame" x="108.33333333333334" y="24" width="31" height="12"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="31" id="DC7-b3-El8"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="SFProDisplay-Light" family="SF Pro Display" pointSize="10"/>
-                                                                <color key="textColor" name="Black"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <color key="backgroundColor" red="0.94509803920000002" green="0.95686274510000002" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <constraints>
-                                                            <constraint firstItem="Moi-wb-d7Q" firstAttribute="centerY" secondItem="KHn-6R-3Kw" secondAttribute="centerY" id="10C-sk-Yuv"/>
-                                                            <constraint firstItem="p5U-Ug-xha" firstAttribute="leading" secondItem="adT-z5-Zhs" secondAttribute="leading" constant="8" id="46r-H5-lwP"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Moi-wb-d7Q" secondAttribute="trailing" constant="5" id="FsF-rB-eJR"/>
-                                                            <constraint firstItem="Ly9-ZB-qDV" firstAttribute="leading" secondItem="p5U-Ug-xha" secondAttribute="trailing" constant="3" id="HDU-8G-KT9"/>
-                                                            <constraint firstAttribute="height" constant="50" id="Id0-XC-RLo"/>
-                                                            <constraint firstItem="p5U-Ug-xha" firstAttribute="centerY" secondItem="adT-z5-Zhs" secondAttribute="centerY" id="Wn5-C2-Y8m"/>
-                                                            <constraint firstItem="Moi-wb-d7Q" firstAttribute="leading" secondItem="KHn-6R-3Kw" secondAttribute="trailing" constant="2" id="aD2-Xp-cpg"/>
-                                                            <constraint firstItem="Ly9-ZB-qDV" firstAttribute="top" secondItem="adT-z5-Zhs" secondAttribute="top" constant="11" id="cPg-jr-mpN"/>
-                                                            <constraint firstItem="KHn-6R-3Kw" firstAttribute="leading" secondItem="p5U-Ug-xha" secondAttribute="trailing" constant="3" id="g4R-Or-oKq"/>
-                                                            <constraint firstAttribute="bottom" secondItem="KHn-6R-3Kw" secondAttribute="bottom" constant="13" id="r6q-6l-sxT"/>
-                                                        </constraints>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adT-z5-Zhs" customClass="DeviceInfoCell" customModule="Cleaner" customModuleProvider="target">
+                                                        <rect key="frame" x="119" y="0.0" width="115" height="55"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="6"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQY-YH-aUt">
-                                                        <rect key="frame" x="267" y="0.0" width="86" height="50"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Busy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylX-mM-B5c">
-                                                                <rect key="frame" x="43" y="11" width="21" height="10"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="10" id="XKh-1f-Clz"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="10"/>
-                                                                <color key="textColor" name="Black"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 %" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvy-or-6kR">
-                                                                <rect key="frame" x="43" y="23" width="40" height="14"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="14" id="USU-qS-8xh"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="14"/>
-                                                                <color key="textColor" name="Black"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainCPU" translatesAutoresizingMaskIntoConstraints="NO" id="n56-e5-zNA">
-                                                                <rect key="frame" x="8" y="9" width="32" height="32"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="32" id="7ws-0p-z5A"/>
-                                                                    <constraint firstAttribute="height" constant="32" id="dKq-5F-vd3"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                        </subviews>
-                                                        <color key="backgroundColor" red="0.94509803920000002" green="0.95686274510000002" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="Tvy-or-6kR" secondAttribute="trailing" constant="3" id="52o-ZP-dmU"/>
-                                                            <constraint firstItem="ylX-mM-B5c" firstAttribute="leading" secondItem="n56-e5-zNA" secondAttribute="trailing" constant="3" id="I61-ea-nCb"/>
-                                                            <constraint firstAttribute="height" constant="50" id="LyX-vN-Cfb"/>
-                                                            <constraint firstItem="ylX-mM-B5c" firstAttribute="top" secondItem="lQY-YH-aUt" secondAttribute="top" constant="11" id="QRE-dx-cMQ"/>
-                                                            <constraint firstItem="Tvy-or-6kR" firstAttribute="leading" secondItem="n56-e5-zNA" secondAttribute="trailing" constant="3" id="W7s-Dm-Jwk"/>
-                                                            <constraint firstItem="n56-e5-zNA" firstAttribute="leading" secondItem="lQY-YH-aUt" secondAttribute="leading" constant="8" id="amo-XZ-6pE"/>
-                                                            <constraint firstItem="n56-e5-zNA" firstAttribute="centerY" secondItem="lQY-YH-aUt" secondAttribute="centerY" id="jE6-Qk-Dso"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Tvy-or-6kR" secondAttribute="bottom" constant="13" id="lk8-Id-Anf"/>
-                                                        </constraints>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQY-YH-aUt" customClass="DeviceInfoCell" customModule="Cleaner" customModuleProvider="target">
+                                                        <rect key="frame" x="238" y="0.0" width="115" height="55"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="6"/>
@@ -201,8 +68,7 @@
                                                     </view>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="adT-z5-Zhs" firstAttribute="width" secondItem="lQY-YH-aUt" secondAttribute="width" multiplier="1.67857" id="hsB-6t-pZe"/>
-                                                    <constraint firstItem="adT-z5-Zhs" firstAttribute="width" secondItem="GUe-Qp-1GM" secondAttribute="width" multiplier="1.25893" id="lIJ-6q-zhu"/>
+                                                    <constraint firstAttribute="height" constant="55" id="xob-gZ-ibM"/>
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHM-bM-q0t">
@@ -228,7 +94,7 @@
                                             <constraint firstAttribute="trailing" secondItem="lu2-o2-cXL" secondAttribute="trailing" constant="50" id="WOL-Xo-JBw"/>
                                             <constraint firstAttribute="trailing" secondItem="80D-7X-N8u" secondAttribute="trailing" id="p14-7u-MwM"/>
                                             <constraint firstItem="80D-7X-N8u" firstAttribute="leading" secondItem="GIo-qk-VCV" secondAttribute="leading" id="s4z-ID-c5Y"/>
-                                            <constraint firstItem="80D-7X-N8u" firstAttribute="top" secondItem="lu2-o2-cXL" secondAttribute="bottom" constant="80" id="tWl-fL-lpx"/>
+                                            <constraint firstItem="80D-7X-N8u" firstAttribute="top" secondItem="zHM-bM-q0t" secondAttribute="bottom" constant="8" id="tWl-fL-lpx"/>
                                             <constraint firstItem="lu2-o2-cXL" firstAttribute="leading" secondItem="GIo-qk-VCV" secondAttribute="leading" id="y6t-Ut-fpq"/>
                                         </constraints>
                                     </view>
@@ -257,12 +123,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="hOv-Uz-ffd"/>
                     <connections>
-                        <outlet property="busyCPULabel" destination="Tvy-or-6kR" id="7F6-RX-clz"/>
                         <outlet property="deviceInfoLabel" destination="zHM-bM-q0t" id="TaH-6d-JMX"/>
-                        <outlet property="downoladSpeedLabel" destination="duc-MO-Nay" id="d5u-dZ-lbS"/>
-                        <outlet property="freeRAMLabel" destination="KHn-6R-3Kw" id="49W-6E-3f6"/>
                         <outlet property="phoneInfoStackView" destination="80D-7X-N8u" id="hmM-Ge-llP"/>
-                        <outlet property="totalRAMLabel" destination="Moi-wb-d7Q" id="8zC-WD-5ox"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -288,11 +150,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mainCPU" width="32" height="32"/>
-        <image name="mainDownload" width="32" height="32"/>
-        <image name="mainRAM" width="32" height="32"/>
         <namedColor name="Black">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BlackTextColor">
             <color red="0.11764705882352941" green="0.12156862745098039" blue="0.12941176470588237" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

@@ -12,10 +12,6 @@ final class MainViewController: UIViewController {
 
     @IBOutlet weak var deviceInfoLabel: UILabel!
     @IBOutlet weak var phoneInfoStackView: UIStackView!
-    @IBOutlet weak var busyCPULabel: UILabel!
-    @IBOutlet weak var totalRAMLabel: UILabel!
-    @IBOutlet weak var freeRAMLabel: UILabel!
-    @IBOutlet weak var downoladSpeedLabel: UILabel!
     
     var timer: Timer?
     var speedTimer: Timer?
@@ -31,10 +27,12 @@ final class MainViewController: UIViewController {
         addGestureRecognizers()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
     private func setupPhoneInfoSection() {
         updateData()
-        downoladSpeedLabel.text = PhoneInfoService.shared.downloadSpeed
-        totalRAMLabel.text = PhoneInfoService.shared.totalRAM
         timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
         speedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
     }
@@ -42,12 +40,14 @@ final class MainViewController: UIViewController {
     @objc func updateData() {
         PhoneInfoService.shared.getFreeRAM()
         PhoneInfoService.shared.getBusyCPU()
-        freeRAMLabel.text = PhoneInfoService.shared.freeRAM
-        busyCPULabel.text = PhoneInfoService.shared.busyCPU
+        
+        (phoneInfoStackView.arrangedSubviews[0] as? DeviceInfoCell)?.bind(model: DeviceInfoCellModel(title: Title.available.rawValue, value: PhoneInfoService.shared.totalRAM))
+        
+        (phoneInfoStackView.arrangedSubviews[2] as? DeviceInfoCell)?.bind(model: DeviceInfoCellModel(title: Title.used.rawValue, value: PhoneInfoService.shared.busyCPU))
     }
     
     @objc func updateSpeed() {
-        downoladSpeedLabel.text = PhoneInfoService.shared.downloadSpeed
+        (phoneInfoStackView.arrangedSubviews[1] as? DeviceInfoCell)?.bind(model: DeviceInfoCellModel(title: Title.download.rawValue, value: PhoneInfoService.shared.downloadSpeed))
     }
     
     private func checkAccessStatus() {
