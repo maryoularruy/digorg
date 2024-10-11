@@ -8,11 +8,6 @@
 import UIKit
 
 final class UILabelSubtitleStyle: UILabel {
-    let attributes: [NSAttributedString.Key: Any] = [
-        .foregroundColor: UIColor.blackText,
-        .font: UIFont.bold15 ?? UIFont.boldSystemFont(ofSize: 15)
-    ]
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -24,11 +19,12 @@ final class UILabelSubtitleStyle: UILabel {
     }
     
     private func setup() {
-        attributedText = NSAttributedString(string: "", attributes: attributes)
+        font = UIFont.bold15 ?? UIFont.boldSystemFont(ofSize: 15)
+        textColor = .blackText
     }
 }
 
-final class UILabelSubheadline1Style: UILabel {
+class UILabelSubheadline11sizeStyle: UILabel {
     let attributes: [NSAttributedString.Key: Any] = [
         .foregroundColor: UIColor.greyText,
         .font: UIFont.regular11 ?? UIFont.systemFont(ofSize: 13)
@@ -44,7 +40,15 @@ final class UILabelSubheadline1Style: UILabel {
         setup()
     }
     
-    private func setup() {
-        attributedText = NSAttributedString(string: "", attributes: attributes)
+    fileprivate func setup() {
+        font = UIFont.regular11 ?? UIFont.systemFont(ofSize: 11)
+        textColor = .greyText
+    }
+}
+
+final class UILabelSubhealine13sizeStyle: UILabelSubheadline11sizeStyle {
+    override func setup() {
+        font = UIFont.regular13 ?? UIFont.systemFont(ofSize: 13)
+        textColor = .greyText
     }
 }

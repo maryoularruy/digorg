@@ -25,7 +25,6 @@ enum Title: String, CaseIterable {
 }
 
 class DeviceInfoCell: UIView {
-    
     private lazy var title: UILabel = UILabel.subheadline()
     private lazy var value: UILabel = UILabel.subtitle()
     

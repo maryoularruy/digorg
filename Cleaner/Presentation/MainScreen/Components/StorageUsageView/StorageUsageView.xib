@@ -31,7 +31,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZG-Bg-fQ1" customClass="UILabelSubheadline1Style" customModule="Cleaner" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZG-Bg-fQ1" customClass="UILabelSubheadline11sizeStyle" customModule="Cleaner" customModuleProvider="target">
                     <rect key="frame" x="141" y="47" width="232" height="18.333333333333329"/>
                     <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                     <color key="textColor" systemColor="systemGrayColor"/>

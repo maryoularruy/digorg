@@ -15,7 +15,7 @@ final class StorageUsageView: UIView {
     @IBOutlet weak var circularProgressBarView: CircularProgressBarView!
     @IBOutlet weak var freeStorageMemoryLabel: UILabelSubtitleStyle!
     @IBOutlet weak var analyzeStorageButton: UIButtonMainScreenStyle!
-    @IBOutlet weak var usedMemoryLabel: UILabelSubheadline1Style!
+    @IBOutlet weak var usedMemoryLabel: UILabelSubhealine13sizeStyle!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

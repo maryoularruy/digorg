@@ -26,7 +26,6 @@ final class CleanupOptionView: UIView {
     
     func bind(_ option: CleanupOption) {
         titleLabel.text = option.rawValue
-        titleLabel.attributedText = NSAttributedString(string: option.rawValue, attributes: titleLabel.attributes)
     }
     
     private func setup() {
