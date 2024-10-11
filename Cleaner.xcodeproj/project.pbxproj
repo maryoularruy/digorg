@@ -43,10 +43,6 @@
 		756866D92AD1D398008DBF7C /* PhoneInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866D82AD1D398008DBF7C /* PhoneInfoViewController.swift */; };
 		756866DB2AD1D3A3008DBF7C /* PhoneInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756866DA2AD1D3A3008DBF7C /* PhoneInfo.storyboard */; };
 		756DF0A92ADC6D0700CC187D /* InternetSpeed in Frameworks */ = {isa = PBXBuildFile; productRef = 756DF0A82ADC6D0700CC187D /* InternetSpeed */; };
-		756DF0AE2ADFD6A900CC187D /* MainFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756DF0AD2ADFD6A900CC187D /* MainFirstCell.swift */; };
-		756DF0B02ADFD6B100CC187D /* MainFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 756DF0AF2ADFD6B100CC187D /* MainFirstCell.xib */; };
-		756DF0B32ADFD6EB00CC187D /* MainSecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756DF0B22ADFD6EB00CC187D /* MainSecondCell.swift */; };
-		756DF0B52ADFD6F200CC187D /* MainSecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 756DF0B42ADFD6F200CC187D /* MainSecondCell.xib */; };
 		75D3FC372A6069AF00F351A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC362A6069AF00F351A3 /* AppDelegate.swift */; };
 		75D3FC3B2A6069AF00F351A3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC3A2A6069AF00F351A3 /* MainViewController.swift */; };
 		75D3FC3E2A6069AF00F351A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC3C2A6069AF00F351A3 /* Main.storyboard */; };
@@ -277,10 +273,6 @@
 		756866D52AD1BA12008DBF7C /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		756866D82AD1D398008DBF7C /* PhoneInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInfoViewController.swift; sourceTree = "<group>"; };
 		756866DA2AD1D3A3008DBF7C /* PhoneInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhoneInfo.storyboard; sourceTree = "<group>"; };
-		756DF0AD2ADFD6A900CC187D /* MainFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFirstCell.swift; sourceTree = "<group>"; };
-		756DF0AF2ADFD6B100CC187D /* MainFirstCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainFirstCell.xib; sourceTree = "<group>"; };
-		756DF0B22ADFD6EB00CC187D /* MainSecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSecondCell.swift; sourceTree = "<group>"; };
-		756DF0B42ADFD6F200CC187D /* MainSecondCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainSecondCell.xib; sourceTree = "<group>"; };
 		75D3FC332A6069AF00F351A3 /* Cleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75D3FC362A6069AF00F351A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75D3FC3A2A6069AF00F351A3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -660,33 +652,6 @@
 			path = PhoneInfo;
 			sourceTree = "<group>";
 		};
-		756DF0AB2ADFD66C00CC187D /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				756DF0AC2ADFD67600CC187D /* FirstCell */,
-				756DF0B12ADFD6CF00CC187D /* SecondCell */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		756DF0AC2ADFD67600CC187D /* FirstCell */ = {
-			isa = PBXGroup;
-			children = (
-				756DF0AF2ADFD6B100CC187D /* MainFirstCell.xib */,
-				756DF0AD2ADFD6A900CC187D /* MainFirstCell.swift */,
-			);
-			path = FirstCell;
-			sourceTree = "<group>";
-		};
-		756DF0B12ADFD6CF00CC187D /* SecondCell */ = {
-			isa = PBXGroup;
-			children = (
-				756DF0B42ADFD6F200CC187D /* MainSecondCell.xib */,
-				756DF0B22ADFD6EB00CC187D /* MainSecondCell.swift */,
-			);
-			path = SecondCell;
-			sourceTree = "<group>";
-		};
 		75D3FC2A2A6069AF00F351A3 = {
 			isa = PBXGroup;
 			children = (
@@ -833,7 +798,6 @@
 			isa = PBXGroup;
 			children = (
 				A50F58B62CB6D39A00AB3166 /* Components */,
-				756DF0AB2ADFD66C00CC187D /* Cells */,
 				75D3FC3C2A6069AF00F351A3 /* Main.storyboard */,
 				75D3FC3A2A6069AF00F351A3 /* MainViewController.swift */,
 				A50F58B42CB6D10100AB3166 /* MainViewControllerProtocol.swift */,
@@ -1604,7 +1568,6 @@
 				756866DB2AD1D3A3008DBF7C /* PhoneInfo.storyboard in Resources */,
 				FA3987AE2B30599C0096F335 /* RegularAssets.storyboard in Resources */,
 				FA641DE12B34574300F6A466 /* CalendarList.storyboard in Resources */,
-				756DF0B52ADFD6F200CC187D /* MainSecondCell.xib in Resources */,
 				FACA30932B3E03230018FA5F /* AppLocker.xib in Resources */,
 				FA99F2D82B35C24C00D4B239 /* CalendarHeaderView.xib in Resources */,
 				75D3FC8F2A606FF500F351A3 /* SF-Pro-Display-Light.otf in Resources */,
@@ -1632,7 +1595,6 @@
 				75D3FC902A606FF500F351A3 /* SF-Pro-Display-Regular.otf in Resources */,
 				FA3987C32B305F850096F335 /* DuplicateTableViewCell.xib in Resources */,
 				7532F8602AE290C2007469EA /* ContactsMenu.storyboard in Resources */,
-				756DF0B02ADFD6B100CC187D /* MainFirstCell.xib in Resources */,
 				FA3987342B3049100096F335 /* PhotoVideoMenu.storyboard in Resources */,
 				7532F8682AE29750007469EA /* DuplicateContacts.storyboard in Resources */,
 				75D3FC3E2A6069AF00F351A3 /* Main.storyboard in Resources */,
@@ -1767,7 +1729,6 @@
 				75D3FC5F2A606BA100F351A3 /* UserDefaults.swift in Sources */,
 				FA39872D2B303FB90096F335 /* PaywallViewController.swift in Sources */,
 				FA99F2ED2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.swift in Sources */,
-				756DF0B32ADFD6EB00CC187D /* MainSecondCell.swift in Sources */,
 				FA3987EB2B305FA50096F335 /* DKPhotoPreviewFactory.swift in Sources */,
 				FA3988592B30602A0096F335 /* PlayerSeeker.swift in Sources */,
 				FA39884B2B30602A0096F335 /* String.swift in Sources */,
@@ -1775,7 +1736,6 @@
 				FA3987812B3058140096F335 /* Extension+PHAsset.swift in Sources */,
 				FA39885F2B30602A0096F335 /* ImageFormat.swift in Sources */,
 				FA3987FB2B305FA50096F335 /* DKPhotoBaseImagePreviewVC.swift in Sources */,
-				756DF0AE2ADFD6A900CC187D /* MainFirstCell.swift in Sources */,
 				FA53586D2B3C4D6A0026FDC2 /* DBService.swift in Sources */,
 				FA3987762B3055930096F335 /* OSTypes.m in Sources */,
 				FA3987522B3055510096F335 /* ContentEquatable.swift in Sources */,
