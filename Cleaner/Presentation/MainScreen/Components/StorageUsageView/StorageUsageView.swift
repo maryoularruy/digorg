@@ -13,6 +13,7 @@ final class StorageUsageView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var storageUsageLabel: UILabelSubtitleStyle!
     @IBOutlet weak var circularProgressBarView: CircularProgressBarView!
+    @IBOutlet weak var freeStorageMemoryLabel: UILabelSubtitleStyle!
     @IBOutlet weak var analyzeStorageButton: UIButtonMainScreenStyle!
     @IBOutlet weak var usedMemoryLabel: UILabelSubheadline1Style!
     
@@ -33,6 +34,9 @@ final class StorageUsageView: UIView {
         contentView.frame = bounds
         
         storageUsageLabel.text = "Storage Usage"
+        
+        freeStorageMemoryLabel.text = "55%"
+        freeStorageMemoryLabel.font = .bold24
         
         guard let buttonTitle = analyzeStorageButton.titleLabel else { return }
         buttonTitle.text = "Analyze Storage"

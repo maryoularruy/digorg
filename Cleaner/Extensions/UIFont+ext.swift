@@ -14,6 +14,7 @@ extension UIFont {
     static var medium12: UIFont? = UIFont(type: .medium, size: 12)
     
     static var bold15: UIFont? = UIFont(type: .bold, size: 15)
+    static var bold24: UIFont? = UIFont(type: .bold, size: 24)
     
     enum MyFont {
         case regular, medium, bold
