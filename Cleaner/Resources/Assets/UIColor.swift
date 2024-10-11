@@ -18,5 +18,7 @@ extension UIColor {
     
     static var blueButtonBackground = UIColor(resource: .blueButtonBackground)
     
+    static var yellowProgressBar = UIColor(resource: .yellowProgressBar)
+    
     static var shadowColor = UIColor(resource: .shadow)
 }

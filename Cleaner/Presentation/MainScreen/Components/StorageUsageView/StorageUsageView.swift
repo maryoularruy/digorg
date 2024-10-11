@@ -12,6 +12,7 @@ final class StorageUsageView: UIView {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var storageUsageLabel: UILabelSubtitleStyle!
+    @IBOutlet weak var circularProgressBarView: CircularProgressBarView!
     @IBOutlet weak var analyzeStorageButton: UIButtonMainScreenStyle!
     @IBOutlet weak var usedMemoryLabel: UILabelSubheadline1Style!
     

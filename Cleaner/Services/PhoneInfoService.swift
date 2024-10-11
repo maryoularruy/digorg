@@ -22,9 +22,7 @@ class PhoneInfoService: TrafficMonitorDelegate {
     }
     
     func getFreeRAM() {
-        let availableMemoryForApp = os_proc_available_memory() / 1024 / 1024
-        let freeMem = Int(memoryUsage()) + ([-56,-43, 34,48,-12,1,2,3,4,5,-1,-6,-8,-9,-8,9,10,10,10,10,11,12,13].randomElement() ?? 10) + Int(Double(availableMemoryForApp)/1.3)
-        freeRAM = "\(freeMem) MB"
+        freeRAM = "\(((ProcessInfo.processInfo.physicalMemory / 1024) - memoryUsage()) / (1024 * 1024)) GB"
     }
     
     
@@ -57,7 +55,6 @@ class PhoneInfoService: TrafficMonitorDelegate {
             used = UInt64(taskInfo.phys_footprint)
         }
         
-        let total = ProcessInfo.processInfo.physicalMemory
         return used / 1024 / 1024
     }
     

@@ -25,6 +25,12 @@ final class MainViewController: UIViewController {
         storageUsageView.usedMemoryLabel.text = "45 / 234 GB"
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        storageUsageView.circularProgressBarView.progressAnimation(0.65)
+    }
+    
     private func setupDeviceInfoSection() {
         bindDeviceInfoStackView()
         updateData()
@@ -42,9 +48,7 @@ final class MainViewController: UIViewController {
         PhoneInfoService.shared.getFreeRAM()
         PhoneInfoService.shared.getBusyCPU()
         
-        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.totalRAM)
-        
-        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.totalRAM)
+        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.freeRAM)
         
         (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.busyCPU)
     }
