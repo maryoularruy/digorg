@@ -13,10 +13,12 @@ final class MainViewController: UIViewController {
     @IBOutlet weak var deviceInfoLabel: UILabel!
     @IBOutlet weak var deviceInfoStackView: UIStackView!
     @IBOutlet weak var storageUsageView: StorageUsageView!
+    @IBOutlet weak var cleanupOptionsStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDeviceInfoSection()
+        setupCleanupOptions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +57,14 @@ final class MainViewController: UIViewController {
     
     @objc func updateSpeed() {
         (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.downloadSpeed)
+    }
+    
+    private func setupCleanupOptions() {
+        CleanupOption.allCases.forEach { option in
+            let view = CleanupOptionView()
+            view.bind(option)
+            cleanupOptionsStackView.addArrangedSubview(view)
+        }
     }
     
     private func checkAccessStatus() {
