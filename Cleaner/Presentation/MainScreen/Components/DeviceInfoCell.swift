@@ -12,13 +12,16 @@ protocol CustomComponentProtocol {
     func initConstraints()
 }
 
-struct DeviceInfoCellModel {
-    let title: Title.RawValue
-    let value: String
-}
-
-enum Title: String {
+enum Title: String, CaseIterable {
     case available = "Available", download = "Download", used = "Used"
+    
+    var index: Int {
+        switch self {
+        case .available: 0
+        case .download: 1
+        case .used: 2
+        }
+    }
 }
 
 class DeviceInfoCell: UIView {
@@ -26,13 +29,11 @@ class DeviceInfoCell: UIView {
     private lazy var title: UILabel = UILabel.subheadline()
     private lazy var value: UILabel = UILabel.subtitle()
     
-    func bind(model: DeviceInfoCellModel) {
-        title.text = model.title
-        value.text = model.value
-    }
-    
-    override init(frame: CGRect) {
+    init(cell: Title) {
         super.init(frame: .zero)
+        title.text = cell.rawValue
+        value.text = ""
+        
         setupView()
         initConstraints()
     }
@@ -42,10 +43,13 @@ class DeviceInfoCell: UIView {
         setupView()
         initConstraints()
     }
+    
+    func bind(newValue: String) {
+        value.text = newValue
+    }
 }
 
 extension DeviceInfoCell: CustomComponentProtocol {
-    
     func setupView() {
         backgroundColor = .whiteBackground
         layer.cornerRadius = 10

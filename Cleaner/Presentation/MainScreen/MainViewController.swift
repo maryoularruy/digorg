@@ -11,43 +11,44 @@ import Contacts
 final class MainViewController: UIViewController {
 
     @IBOutlet weak var deviceInfoLabel: UILabel!
-    @IBOutlet weak var phoneInfoStackView: UIStackView!
-    
-    var timer: Timer?
-    var speedTimer: Timer?
+    @IBOutlet weak var deviceInfoStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPhoneInfoSection()
+        setupDeviceInfoSection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         addGestureRecognizers()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    private func setupDeviceInfoSection() {
+        bindDeviceInfoStackView()
+        updateData()
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
     }
     
-    private func setupPhoneInfoSection() {
-        updateData()
-        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
-        speedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
+    private func bindDeviceInfoStackView() {
+        Title.allCases.forEach { title in
+            deviceInfoStackView.addArrangedSubview(DeviceInfoCell(cell: title))
+        }
     }
 
     @objc func updateData() {
         PhoneInfoService.shared.getFreeRAM()
         PhoneInfoService.shared.getBusyCPU()
         
-        (phoneInfoStackView.arrangedSubviews[0] as? DeviceInfoCell)?.bind(model: DeviceInfoCellModel(title: Title.available.rawValue, value: PhoneInfoService.shared.totalRAM))
+        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.totalRAM)
         
-        (phoneInfoStackView.arrangedSubviews[2] as? DeviceInfoCell)?.bind(model: DeviceInfoCellModel(title: Title.used.rawValue, value: PhoneInfoService.shared.busyCPU))
+        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.totalRAM)
+        
+        (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.busyCPU)
     }
     
     @objc func updateSpeed() {
-        (phoneInfoStackView.arrangedSubviews[1] as? DeviceInfoCell)?.bind(model: DeviceInfoCellModel(title: Title.download.rawValue, value: PhoneInfoService.shared.downloadSpeed))
+        (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.downloadSpeed)
     }
     
     private func checkAccessStatus() {
@@ -88,10 +89,10 @@ final class MainViewController: UIViewController {
 }
 
 extension MainViewController: MainViewControllerProtocol {
-    internal func addGestureRecognizers() {
+    func addGestureRecognizers() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhoneInfoScreen))
         deviceInfoLabel.addTapGestureRecognizer(action: openPhoneInfoScreen)
-        phoneInfoStackView.addGestureRecognizer(gesture)
+        deviceInfoStackView.addGestureRecognizer(gesture)
     }
     
     @objc private func openPhoneInfoScreen() {
