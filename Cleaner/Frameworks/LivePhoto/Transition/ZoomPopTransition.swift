@@ -199,7 +199,7 @@ class ZoomPopTransition: NSObject, ZoomTransition, UIViewControllerAnimatedTrans
             let fromView = transitionContext.fromView {
 
             transitionView = targetView.transitionView()
-			transitionView.cornerRadius = 10
+            transitionView.layer.cornerRadius = 10
             let currentFrame = sourceView.currentFrameWithoutTransform
             let targetFrame = containerView.convert(targetView.frame, from: targetView.superview)
 

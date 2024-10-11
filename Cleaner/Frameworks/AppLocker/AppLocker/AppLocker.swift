@@ -77,7 +77,7 @@ public class AppLocker: UIViewController {
         modalPresentationStyle = .fullScreen
         for pin in pinIndicators {
             pin.clipsToBounds = true
-            pin.cornerRadius = 7
+            pin.layer.cornerRadius = 7
         }
     }
     

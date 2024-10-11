@@ -11,9 +11,9 @@ extension UIView {
     enum AssociatedObjectKeys {
         static var tapGestureRecognizer = "MediaViewerAssociatedObjectKey_mediaViewer"
     }
-
+    
     typealias Action = (() -> Void)?
-
+    
     var tapGestureRecognizerAction: Action? {
         get {
             let tapGestureRecognizerActionInstance = objc_getAssociatedObject(
@@ -45,22 +45,17 @@ extension UIView {
             layer.shadowOffset = offset
             self.clipsToBounds = false
         }
-
+    
     public func addTapGestureRecognizer(action: (() -> Void)?) {
         self.isUserInteractionEnabled = true
         self.tapGestureRecognizerAction = action
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
         self.addGestureRecognizer(tapGestureRecognizer)
     }
-
+    
     @objc func handleTapGesture(sender: UITapGestureRecognizer) {
         if let action = self.tapGestureRecognizerAction {
             action?()
         }
-    }
-    
-    @IBInspectable var cornerRadius: CGFloat {
-        get { layer.cornerRadius }
-        set { layer.cornerRadius = newValue }
     }
 }
