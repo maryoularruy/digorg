@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CleanupOptionView" customModule="Cleaner" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Ix2-oE-Epw"/>
+                <outlet property="imageView" destination="KK9-Dh-CyJ" id="bgD-DY-56R"/>
                 <outlet property="infoButton" destination="j3w-J2-fL7" id="OGB-FA-a2d"/>
                 <outlet property="titleLabel" destination="u8u-0X-ruW" id="r80-Ii-2IQ"/>
             </connections>
@@ -32,18 +33,27 @@
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                 </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KK9-Dh-CyJ">
+                    <rect key="frame" x="253" y="0.0" width="140" height="97"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="140" id="TtS-ez-MeQ"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="u8u-0X-ruW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="59k-Sp-OiI"/>
+                <constraint firstItem="KK9-Dh-CyJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6pu-9R-7jz"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="KK9-Dh-CyJ" secondAttribute="trailing" id="HAF-TO-7J8"/>
                 <constraint firstItem="j3w-J2-fL7" firstAttribute="leading" secondItem="u8u-0X-ruW" secondAttribute="leading" id="eRx-9T-ATe"/>
                 <constraint firstItem="u8u-0X-ruW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="gVP-j2-HwR"/>
                 <constraint firstItem="j3w-J2-fL7" firstAttribute="top" secondItem="u8u-0X-ruW" secondAttribute="bottom" constant="11" id="sAD-qI-WmR"/>
                 <constraint firstItem="j3w-J2-fL7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="900" constant="16" id="wYz-cP-VwG"/>
+                <constraint firstAttribute="bottom" secondItem="KK9-Dh-CyJ" secondAttribute="bottom" id="xdA-u3-EP5"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="140" y="20"/>
+            <point key="canvasLocation" x="139.69465648854961" y="19.366197183098592"/>
         </view>
     </objects>
     <resources>

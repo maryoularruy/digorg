@@ -13,6 +13,7 @@ final class CleanupOptionView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabelSubtitleStyle!
     @IBOutlet weak var infoButton: UIButtonMainScreenStyle!
+    @IBOutlet weak var imageView: UIImageView!
     
     init() {
         super.init(frame: .zero)
@@ -26,6 +27,7 @@ final class CleanupOptionView: UIView {
     
     func bind(_ option: CleanupOption) {
         titleLabel.text = option.rawValue
+        imageView.setImage(UIImage(resource: option.image))
     }
     
     private func setup() {
