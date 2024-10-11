@@ -8,6 +8,24 @@
 import UIKit
 
 final class UIButtonMainScreenStyle: UIButton {
+    private lazy var myConfiguration: Configuration = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.titleAlignment = .center
+        configuration.title = " "
+        configuration.baseForegroundColor = .whiteText
+        configuration.image = UIImage(resource: .arrowForwardWhite)
+        configuration.imagePlacement = .trailing
+        configuration.imagePadding = -5
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 3, bottom: 10, trailing: 3)
+        configuration.cornerStyle = .capsule
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont.medium12
+            return outgoing
+        }
+        return configuration
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -18,19 +36,14 @@ final class UIButtonMainScreenStyle: UIButton {
         setup()
     }
     
+    func bind(text: String) {
+        setTitle(text, for: .normal)
+        setTitle(text, for: .selected)
+    }
+    
     private func setup() {
         backgroundColor = .blueButtonBackground
         layer.cornerRadius = 20
-        
-        var configuration = UIButton.Configuration.filled()
-        configuration.titleAlignment = .center
-        configuration.title = " "
-        configuration.baseForegroundColor = .whiteText
-        configuration.image = UIImage(resource: .arrowForwardWhite)
-        configuration.imagePlacement = .trailing
-        configuration.imagePadding = -5
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 3, bottom: 10, trailing: 3)
-        configuration.cornerStyle = .capsule
-        self.configuration = configuration
+        self.configuration = myConfiguration
     }
 }

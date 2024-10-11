@@ -39,9 +39,7 @@ final class StorageUsageView: UIView {
         freeStorageMemoryLabel.text = "55%"
         freeStorageMemoryLabel.font = .bold24
         
-        guard let buttonTitle = analyzeStorageButton.titleLabel else { return }
-        buttonTitle.text = "Analyze Storage"
-        buttonTitle.font = .medium12
+        analyzeStorageButton.bind(text: "Analyze Storage")
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 }
