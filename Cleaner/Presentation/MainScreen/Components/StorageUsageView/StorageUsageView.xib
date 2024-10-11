@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StorageUsageView" customModule="Cleaner" customModuleProvider="target">
+            <connections>
+                <outlet property="analyzeStorageButton" destination="eHI-Ki-6JT" id="tlh-ww-t7r"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="G3Z-we-SAh"/>
+                <outlet property="storageUsageLabel" destination="38r-k0-Yt5" id="Xvk-eP-noY"/>
+                <outlet property="usedMemoryLabel" destination="cZG-Bg-fQ1" id="SC8-eO-QXT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="124"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storage Usage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38r-k0-Yt5" customClass="UILabelSubtitleStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="141" y="19" width="232" height="21"/>
+                    <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZG-Bg-fQ1" customClass="UILabelSubheadline1Style" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="141" y="47" width="232" height="18.333333333333329"/>
+                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                    <color key="textColor" systemColor="systemGrayColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHI-Ki-6JT" customClass="UIButtonMainScreenStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="141" y="78.333333333333329" width="177" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="Z3y-Rb-l8d"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain">
+                        <attributedString key="attributedTitle">
+                            <fragment content="Analyze storage">
+                                <attributes>
+                                    <font key="NSFont" size="12" name="Poppins-Medium"/>
+                                    <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </buttonConfiguration>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" name="WhiteBackground"/>
+            <constraints>
+                <constraint firstItem="cZG-Bg-fQ1" firstAttribute="top" secondItem="38r-k0-Yt5" secondAttribute="bottom" constant="7" id="7N1-En-s9h"/>
+                <constraint firstItem="cZG-Bg-fQ1" firstAttribute="leading" secondItem="38r-k0-Yt5" secondAttribute="leading" id="Dbs-5c-m3u"/>
+                <constraint firstItem="38r-k0-Yt5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="19" id="LhW-8t-FGk"/>
+                <constraint firstItem="eHI-Ki-6JT" firstAttribute="leading" secondItem="38r-k0-Yt5" secondAttribute="leading" id="MAo-Bl-HH2"/>
+                <constraint firstItem="cZG-Bg-fQ1" firstAttribute="leading" secondItem="38r-k0-Yt5" secondAttribute="leading" id="OS7-mF-Nqc"/>
+                <constraint firstAttribute="trailing" secondItem="38r-k0-Yt5" secondAttribute="trailing" constant="20" id="Wxe-Ho-Ahj"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eHI-Ki-6JT" secondAttribute="trailing" constant="75" id="aPu-4I-XtQ"/>
+                <constraint firstItem="eHI-Ki-6JT" firstAttribute="top" secondItem="cZG-Bg-fQ1" secondAttribute="bottom" constant="13" id="c6k-yS-Byp"/>
+                <constraint firstItem="38r-k0-Yt5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="141" id="ct8-k0-MoM"/>
+                <constraint firstItem="cZG-Bg-fQ1" firstAttribute="trailing" secondItem="38r-k0-Yt5" secondAttribute="trailing" id="iOJ-Xo-URO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-28" y="35"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="WhiteBackground">
+            <color red="0.97647058823529409" green="0.9882352941176471" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

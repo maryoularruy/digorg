@@ -16,7 +16,7 @@ class DKPhotoGalleryScrollView: UIScrollView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.black
+        self.backgroundColor = UIColor.blackText
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
         self.alwaysBounceHorizontal = true

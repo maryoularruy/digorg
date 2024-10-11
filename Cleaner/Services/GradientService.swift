@@ -22,7 +22,7 @@ class GradientService {
         shapeLayer.lineWidth = 2.0
         shapeLayer.path = UIBezierPath(roundedRect: CGRect(x: 1, y: 1, width: button.bounds.width - 2, height: button.bounds.height - 2), cornerRadius: 16).cgPath
         shapeLayer.fillColor = nil
-        shapeLayer.strokeColor = UIColor.black.cgColor
+        shapeLayer.strokeColor = UIColor.blackText.cgColor
         
         gradientLayer.mask = shapeLayer
         button.layer.addSublayer(gradientLayer)

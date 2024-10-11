@@ -481,6 +481,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A50F58AE2CB6BB6C00AB3166 /* Poppins */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Poppins; sourceTree = "<group>"; };
 		A50F58B62CB6D39A00AB3166 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
+		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -741,6 +742,7 @@
 		75D3FC6C2A606C0600F351A3 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				A5C4CF792CB8AEA3002B3C41 /* Styles */,
 				FA99F2E42B3C381F00D4B239 /* Password */,
 				FA641DDD2B34564200F6A466 /* Calendar */,
 				FA5914082B31A24E00371911 /* Battery */,
@@ -1473,6 +1475,7 @@
 			fileSystemSynchronizedGroups = (
 				A50F58AE2CB6BB6C00AB3166 /* Poppins */,
 				A50F58B62CB6D39A00AB3166 /* Components */,
+				A5C4CF792CB8AEA3002B3C41 /* Styles */,
 			);
 			name = Cleaner;
 			packageProductDependencies = (

@@ -9,11 +9,14 @@ import UIKit
 
 extension UIColor {
     
-    static var black = UIColor(resource: .blackText)
-    static var grey = UIColor(resource: .greyText)
+    static var blackText = UIColor(resource: .blackText)
+    static var greyText = UIColor(resource: .greyText)
+    static var whiteText = UIColor(resource: .whiteText)
     
     static var greyBackground = UIColor(resource: .greyBackground)
     static var whiteBackground = UIColor(resource: .whiteBackground)
+    
+    static var blueButtonBackground = UIColor(resource: .blueButtonBackground)
     
     static var shadowColor = UIColor(resource: .shadow)
 }

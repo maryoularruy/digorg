@@ -50,7 +50,7 @@ DKPhotoGalleryContentDataSource, DKPhotoGalleryContentDelegate {
     
     @objc open var presentingFromImageView: UIImageView?
     @objc open var presentationIndex = 0
-    @objc open var leftBarButtonItemColor : UIColor = UIColor.white
+    @objc open var leftBarButtonItemColor : UIColor = UIColor.whiteText
     
     @objc open var singleTapMode = DKPhotoGallerySingleTapMode.toggleControlView
     
@@ -74,7 +74,7 @@ DKPhotoGalleryContentDataSource, DKPhotoGalleryContentDelegate {
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.black
+        self.view.backgroundColor = UIColor.blackText
         
         self.navigationBar.tintColor = UIColor.darkGray
         self.navigationBar.isTranslucent = true

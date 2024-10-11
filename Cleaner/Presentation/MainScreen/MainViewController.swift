@@ -12,6 +12,7 @@ final class MainViewController: UIViewController {
 
     @IBOutlet weak var deviceInfoLabel: UILabel!
     @IBOutlet weak var deviceInfoStackView: UIStackView!
+    @IBOutlet weak var storageUsageView: StorageUsageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ final class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         addGestureRecognizers()
+        storageUsageView.usedMemoryLabel.text = "45 / 234 GB"
     }
     
     private func setupDeviceInfoSection() {

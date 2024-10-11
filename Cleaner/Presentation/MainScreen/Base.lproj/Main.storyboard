@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="759"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lu2-o2-cXL">
-                                                <rect key="frame" x="0.0" y="7" width="303" height="28"/>
+                                                <rect key="frame" x="0.0" y="7" width="303" height="33.666666666666664"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Cleaner">
                                                         <attributes>
@@ -37,13 +38,13 @@
                                                 <color key="highlightedColor" name="BlackTextColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="80D-7X-N8u">
-                                                <rect key="frame" x="0.0" y="76.666666666666657" width="353" height="55"/>
+                                                <rect key="frame" x="0.0" y="85.666666666666657" width="353" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="55" id="xob-gZ-ibM"/>
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHM-bM-q0t">
-                                                <rect key="frame" x="0.0" y="51" width="353" height="17.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="56.666666666666671" width="353" height="21"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Device Info">
                                                         <attributes>
@@ -55,14 +56,24 @@
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQ5-mm-K5l" customClass="StorageUsageView" customModule="Cleaner" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="156.66666666666666" width="353" height="123.99999999999997"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="124" id="gbB-Au-elb"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" name="GreyBackground"/>
                                         <constraints>
                                             <constraint firstItem="lu2-o2-cXL" firstAttribute="top" secondItem="GIo-qk-VCV" secondAttribute="top" constant="7" id="4DB-PZ-OZV"/>
+                                            <constraint firstItem="TQ5-mm-K5l" firstAttribute="leading" secondItem="GIo-qk-VCV" secondAttribute="leading" id="Cmg-QI-ixz"/>
                                             <constraint firstItem="zHM-bM-q0t" firstAttribute="leading" secondItem="GIo-qk-VCV" secondAttribute="leading" id="JTG-d8-tnu"/>
                                             <constraint firstAttribute="trailing" secondItem="zHM-bM-q0t" secondAttribute="trailing" id="QBy-eH-DAq"/>
                                             <constraint firstItem="zHM-bM-q0t" firstAttribute="top" secondItem="lu2-o2-cXL" secondAttribute="bottom" constant="16" id="U8I-cT-5AE"/>
+                                            <constraint firstAttribute="trailing" secondItem="TQ5-mm-K5l" secondAttribute="trailing" id="W4x-gF-9E4"/>
                                             <constraint firstAttribute="trailing" secondItem="lu2-o2-cXL" secondAttribute="trailing" constant="50" id="WOL-Xo-JBw"/>
+                                            <constraint firstItem="TQ5-mm-K5l" firstAttribute="top" secondItem="80D-7X-N8u" secondAttribute="bottom" constant="16" id="ZAc-w1-LIU"/>
                                             <constraint firstAttribute="trailing" secondItem="80D-7X-N8u" secondAttribute="trailing" id="p14-7u-MwM"/>
                                             <constraint firstItem="80D-7X-N8u" firstAttribute="leading" secondItem="GIo-qk-VCV" secondAttribute="leading" id="s4z-ID-c5Y"/>
                                             <constraint firstItem="80D-7X-N8u" firstAttribute="top" secondItem="zHM-bM-q0t" secondAttribute="bottom" constant="8" id="tWl-fL-lpx"/>
@@ -96,6 +107,7 @@
                     <connections>
                         <outlet property="deviceInfoLabel" destination="zHM-bM-q0t" id="TaH-6d-JMX"/>
                         <outlet property="deviceInfoStackView" destination="80D-7X-N8u" id="hmM-Ge-llP"/>
+                        <outlet property="storageUsageView" destination="TQ5-mm-K5l" id="69h-7x-7y6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -130,5 +142,8 @@
         <namedColor name="GreyBackground">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
