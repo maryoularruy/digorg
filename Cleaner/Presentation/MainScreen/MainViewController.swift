@@ -63,8 +63,15 @@ final class MainViewController: UIViewController {
         CleanupOption.allCases.forEach { option in
             let view = CleanupOptionView()
             view.bind(option)
+            view.addTapGestureRecognizer(action: openPhotosCleanup)
             cleanupOptionsStackView.addArrangedSubview(view)
         }
+    }
+    
+    @objc private func openPhotosCleanup() {
+        let vc = StoryboardScene.Search.initialScene.instantiate()
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: false)
     }
     
     private func checkAccessStatus() {

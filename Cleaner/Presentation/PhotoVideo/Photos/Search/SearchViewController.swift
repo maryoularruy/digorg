@@ -31,6 +31,7 @@ class SearchViewController: UIViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+        mode = .duplicate
 //		animationView.animation = Animation.named("Search")
 //		animationView.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
 		switch mode {
