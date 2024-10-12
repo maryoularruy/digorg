@@ -7,10 +7,12 @@
 
 import UIKit
 import Photos
-import Foundation
 import Vision
 
 class MediaSevice {
+    static var defaultStartDate = "01 Jan 1970 00:00:00"
+    static var defaultEndDate = "01 Jan 2030 00:00:00"
+    
 	private var maxAcceptableDifferenceBetweenDates = 10
 	
 	func fetchScreenshots(
@@ -30,7 +32,7 @@ class MediaSevice {
 		handler(PHAsset.fetchAssets(in: albumsPhoto[0], options: options))
 	}
 	
-	public func loadScreenshotPhotos(from dateFrom: String = "01 Jan 1970 00:00:00", to dateTo: String = "01 Jan 2030 00:00:00",_ handler: @escaping ((_ assets: [PHAsset]) -> Void)) {
+	public func loadScreenshotPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping (([PHAsset]) -> ())) {
 		self.fetchScreenshots(from: dateFrom, to: dateTo) { photoInAlbum in
 			DispatchQueue.global(qos: .background).async{
 				var images: [PHAsset] = []
@@ -50,10 +52,8 @@ class MediaSevice {
 		}
 	}
 	
-	
-	
-	public func loadSimilarPhotos(from dateFrom: String = "01 Jan 1970 00:00:00", to dateTo: String = "01 Jan 2030 00:00:00", live: Bool, _ handler: @escaping ((_ assets: [PHAssetGroup]) -> Void)){
-			fetchPhotos(from: dateFrom, to: dateTo, live: live, { photoInAlbum in
+    public func loadSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, _ handler: @escaping (([PHAssetGroup]) -> ())) {
+        fetchPhotos(from: dateFrom, to: dateTo, live: live) { photoInAlbum in
 				DispatchQueue.global(qos: .background).async {
 					var images: [OSTuple<NSString, NSData>] = []
 					if photoInAlbum.count == 0{
@@ -62,7 +62,6 @@ class MediaSevice {
 						}
 						return
 					}
-					
 					
 					for i in 1...photoInAlbum.count {
 						if let image = photoInAlbum[i - 1].image, let data = image.jpegData(compressionQuality: 0.8){
@@ -113,10 +112,10 @@ class MediaSevice {
 						handler(similarPhotoGroups)
 					}
 				}
-			})
+			}
 		}
 
-	private func fetchPhotos(from dateFrom: String = "01 Jan 1970 00:00:00", to dateTo: String = "01 Jan 2030 00:00:00", live: Bool, _ handler: @escaping ((_ result: PHFetchResult<PHAsset>) -> Void)) {
+	private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
 		   let options = PHFetchOptions()
 		   let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
 		   options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -125,17 +124,14 @@ class MediaSevice {
 		   })
 	   }
 	
-    
-
     func getAssetsWithText(completion: @escaping ([PHAsset]) -> Void) {
         fetchPhotos(live: false) { fetchResult in
 
             
         }
-  
     }
     
-	public func loadSelfiePhotos(_ handler: @escaping ((_ assets: [PHAsset]) -> Void)) {
+	public func loadSelfiePhotos(_ handler: @escaping (([PHAsset]) -> ())) {
 		fetchSelfies({
 			photoInAlbum in
 			DispatchQueue.global(qos: .background).async {
@@ -156,7 +152,7 @@ class MediaSevice {
 		})
 	}
 	
-	private func fetchSelfies(_ handler: @escaping ((_ result: PHFetchResult<PHAsset>) -> Void)) {
+	private func fetchSelfies(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
 		let options = PHFetchOptions()
 		let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumSelfPortraits, options: options)
 		options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
@@ -166,7 +162,7 @@ class MediaSevice {
 		})
 	}
 	
-	private func fetchGIFs(_ handler: @escaping ((_ result: PHFetchResult<PHAsset>) -> Void)) {
+	private func fetchGIFs(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
 		let options = PHFetchOptions()
 		let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumAnimated, options: options)
 		options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
@@ -176,7 +172,7 @@ class MediaSevice {
 		})
 	}
 	
-	public func loadGifPhotos(_ handler: @escaping ((_ assets: [PHAsset]) -> Void)) {
+	public func loadGifPhotos(_ handler: @escaping (([PHAsset]) -> ())) {
 		fetchGIFs({
 			photoInAlbum in
 			DispatchQueue.global(qos: .background).async {
@@ -197,11 +193,11 @@ class MediaSevice {
 		})
 	}
 	
-	public func loadLivePhotos(from dateFrom: String = "01 Jan 1970 00:00:00", to dateTo: String = "01 Jan 2030 00:00:00",_ handler: @escaping ((_ assets: [PHAsset]) -> Void)){
+	public func loadLivePhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate,_ handler: @escaping (([PHAsset]) -> ())){
 		   fetchPhotos(from: dateFrom, to: dateTo, live: true) { photoInAlbum in
-			   DispatchQueue.global(qos: .background).async{
+			   DispatchQueue.global(qos: .background).async {
 				   var images: [PHAsset] = []
-				   if photoInAlbum.count == 0{
+				   if photoInAlbum.count == 0 {
 					   DispatchQueue.main.async {
 						   handler([])
 					   }
@@ -217,7 +213,7 @@ class MediaSevice {
 		   }
 	   }
 
-	public func loadVideos(from dateFrom: String = "01 Jan 1970 00:00:00", to dateTo: String = "01 Jan 2030 00:00:00", _ handler: @escaping ((_ assets: [PHAsset]) -> Void)){
+	public func loadVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping (([PHAsset]) -> ())){
 		fetchVideos(from: dateFrom, to: dateTo) { videoInAlbum in
 			DispatchQueue.global(qos: .background).async {
 				var images: [PHAsset] = []
@@ -237,7 +233,7 @@ class MediaSevice {
 		}
 	}
 	
-	private func fetchVideos(from dateFrom: String = "01 Jan 1970 00:00:00", to dateTo: String = "01 Jan 2030 00:00:00", _ handler: @escaping ((_ result: PHFetchResult<PHAsset>) -> Void)){
+	private func fetchVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ((PHFetchResult<PHAsset>) -> ())){
 		  let options = PHFetchOptions()
 		  let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: options)
 		  options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -246,7 +242,7 @@ class MediaSevice {
 		  })
 	  }
 
-	public func loadSimilarVideos(from dateFrom: String = "01 Jan 1970 00:00:00", to dateTo: String = "01 Jan 2030 00:00:00", _ handler: @escaping ((_ assets: [PHAssetGroup]) -> Void)){
+	public func loadSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping (([PHAssetGroup]) -> ())){
 			fetchVideos(from: dateFrom, to: dateTo) { videoInAlbum in
 				DispatchQueue.global(qos: .background).async {
 					var images: [OSTuple<NSString, NSData>] = []
