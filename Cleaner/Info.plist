@@ -18,5 +18,7 @@
 	<string>Give it</string>
 	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
 	<string>Give it</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string></string>
 </dict>
 </plist>
