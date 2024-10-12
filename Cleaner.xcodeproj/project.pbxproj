@@ -76,6 +76,7 @@
 		A50F58BE2CB6E4AA00AB3166 /* UIFont+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58BD2CB6E4AA00AB3166 /* UIFont+ext.swift */; };
 		A50F58C42CB7B43400AB3166 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58C32CB7B43400AB3166 /* UIColor.swift */; };
 		A576FAD52CB69C9700B018DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576FAD42CB69C9700B018DE /* ContentView.swift */; };
+		A5C4CFA02CBB3904002B3C41 /* DuplicateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5C4CF9F2CBB3904002B3C41 /* DuplicateTableViewCell.xib */; };
 		FA3987232B303A460096F335 /* AdBlockerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987222B303A460096F335 /* AdBlockerViewController.swift */; };
 		FA3987252B303A540096F335 /* AdBlocker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3987242B303A540096F335 /* AdBlocker.storyboard */; };
 		FA3987282B303DCC0096F335 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987272B303DCC0096F335 /* SettingsViewController.swift */; };
@@ -123,7 +124,6 @@
 		FA3987BD2B305D720096F335 /* AppKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987BB2B305D720096F335 /* AppKitExtension.swift */; };
 		FA3987BE2B305D720096F335 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987BC2B305D720096F335 /* UIKitExtension.swift */; };
 		FA3987C22B305F850096F335 /* DuplicateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987C02B305F850096F335 /* DuplicateTableViewCell.swift */; };
-		FA3987C32B305F850096F335 /* DuplicateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3987C12B305F850096F335 /* DuplicateTableViewCell.xib */; };
 		FA3987EB2B305FA50096F335 /* DKPhotoPreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987C52B305FA40096F335 /* DKPhotoPreviewFactory.swift */; };
 		FA3987EC2B305FA50096F335 /* DKPhotoGalleryTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987C72B305FA40096F335 /* DKPhotoGalleryTransitionController.swift */; };
 		FA3987ED2B305FA50096F335 /* DKPhotoGalleryInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987C82B305FA40096F335 /* DKPhotoGalleryInteractiveTransition.swift */; };
@@ -306,6 +306,7 @@
 		A50F58BD2CB6E4AA00AB3166 /* UIFont+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+ext.swift"; sourceTree = "<group>"; };
 		A50F58C32CB7B43400AB3166 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		A576FAD42CB69C9700B018DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A5C4CF9F2CBB3904002B3C41 /* DuplicateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DuplicateTableViewCell.xib; sourceTree = "<group>"; };
 		FA3987222B303A460096F335 /* AdBlockerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockerViewController.swift; sourceTree = "<group>"; };
 		FA3987242B303A540096F335 /* AdBlocker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdBlocker.storyboard; sourceTree = "<group>"; };
 		FA3987272B303DCC0096F335 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -362,7 +363,6 @@
 		FA3987BB2B305D720096F335 /* AppKitExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtension.swift; sourceTree = "<group>"; };
 		FA3987BC2B305D720096F335 /* UIKitExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
 		FA3987C02B305F850096F335 /* DuplicateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicateTableViewCell.swift; sourceTree = "<group>"; };
-		FA3987C12B305F850096F335 /* DuplicateTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DuplicateTableViewCell.xib; sourceTree = "<group>"; };
 		FA3987C52B305FA40096F335 /* DKPhotoPreviewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoPreviewFactory.swift; sourceTree = "<group>"; };
 		FA3987C72B305FA40096F335 /* DKPhotoGalleryTransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoGalleryTransitionController.swift; sourceTree = "<group>"; };
 		FA3987C82B305FA40096F335 /* DKPhotoGalleryInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoGalleryInteractiveTransition.swift; sourceTree = "<group>"; };
@@ -1040,8 +1040,8 @@
 		FA3987BF2B305F850096F335 /* DuplicatePhoto */ = {
 			isa = PBXGroup;
 			children = (
+				A5C4CF9F2CBB3904002B3C41 /* DuplicateTableViewCell.xib */,
 				FA3987C02B305F850096F335 /* DuplicateTableViewCell.swift */,
-				FA3987C12B305F850096F335 /* DuplicateTableViewCell.xib */,
 			);
 			path = DuplicatePhoto;
 			sourceTree = "<group>";
@@ -1572,6 +1572,7 @@
 				FA3987AE2B30599C0096F335 /* RegularAssets.storyboard in Resources */,
 				FA641DE12B34574300F6A466 /* CalendarList.storyboard in Resources */,
 				FACA30932B3E03230018FA5F /* AppLocker.xib in Resources */,
+				A5C4CFA02CBB3904002B3C41 /* DuplicateTableViewCell.xib in Resources */,
 				FA99F2D82B35C24C00D4B239 /* CalendarHeaderView.xib in Resources */,
 				75D3FC8F2A606FF500F351A3 /* SF-Pro-Display-Light.otf in Resources */,
 				752B10222AE6652800EC0BBA /* ActionView.xib in Resources */,
@@ -1596,7 +1597,6 @@
 				FA99F2E32B35CABE00D4B239 /* CalendarFooterView.xib in Resources */,
 				FA3988642B3060830096F335 /* PhotoCollectionViewCell.xib in Resources */,
 				75D3FC902A606FF500F351A3 /* SF-Pro-Display-Regular.otf in Resources */,
-				FA3987C32B305F850096F335 /* DuplicateTableViewCell.xib in Resources */,
 				7532F8602AE290C2007469EA /* ContactsMenu.storyboard in Resources */,
 				FA3987342B3049100096F335 /* PhotoVideoMenu.storyboard in Resources */,
 				7532F8682AE29750007469EA /* DuplicateContacts.storyboard in Resources */,
@@ -1940,7 +1940,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AQ8L7THA36;
+				DEVELOPMENT_TEAM = 9YK554KR89;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cleaner/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = Give;
@@ -1984,7 +1984,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AQ8L7THA36;
+				DEVELOPMENT_TEAM = 9YK554KR89;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cleaner/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = Give;

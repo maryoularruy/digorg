@@ -22,7 +22,7 @@ class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
 			if isChecked {
 				selectImageView.image = Asset.mainCPU.image
 			} else {
-				selectImageView.image = Asset.mainRAM.image
+//				selectImageView.image = Asset.mainRAM.image
 			}
 			selectImageView.isHidden = !isChecked
 		}

@@ -67,20 +67,20 @@ extension PhotoVideoMenuViewController: UITableViewDataSource, UITableViewDelega
             }
         }
         if indexPath.section == 0 && indexPath.row == 1 {
-            mediaService.loadSimilarPhotos(live: false, { assets in
+            mediaService.loadSimilarPhotos(live: false) { assets in
                 let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
                 vc.modalPresentationStyle = .fullScreen
                 vc.assets = assets
                 self.navigationController?.pushViewController(vc, animated: true)
-            })
+            }
         }
         if indexPath.section == 0 && indexPath.row == 2 {
-            mediaService.loadSimilarPhotos(live: false, { assets in
+            mediaService.loadSimilarPhotos(live: false) { assets in
                 let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
                 vc.modalPresentationStyle = .fullScreen
                 vc.assets = assets
                 self.navigationController?.pushViewController(vc, animated: true)
-            })
+            }
         }
         if indexPath.section == 0 && indexPath.row == 3 {
             mediaService.getAssetsWithText { assets in

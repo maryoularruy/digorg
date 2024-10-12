@@ -6,7 +6,6 @@
 //
 
 import Photos
-import Foundation
 import UIKit
 import CryptoKit
 
@@ -47,6 +46,7 @@ class GroupedAssetsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        
 		tableView.register(cellType: DuplicateTableViewCell.self)
 		
 		selectLabel.addTapGestureRecognizer { [weak self] in
@@ -64,6 +64,11 @@ class GroupedAssetsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         GradientService.shared.addGradientBackgroundToButton(button: deletionButton, colors: [#colorLiteral(red: 0.472941041, green: 0.5231513381, blue: 0.9458861947, alpha: 1), #colorLiteral(red: 0.6934512258, green: 0.5760011077, blue: 0.9499141574, alpha: 1)])
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
 	
 	func updatePlaceholder() {
@@ -158,10 +163,6 @@ extension GroupedAssetsViewController: UITableViewDataSource {
 		cell.assetsForDeletion = self.assetsForDeletion
 		return cell
 	}
-	
-	
 }
 
-extension GroupedAssetsViewController: UITableViewDelegate {
-	
-}
+extension GroupedAssetsViewController: UITableViewDelegate {}

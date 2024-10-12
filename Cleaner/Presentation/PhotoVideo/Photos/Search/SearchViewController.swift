@@ -9,8 +9,11 @@ import Lottie
 import UIKit
 import Photos
 
-class SearchViewController: UIViewController {
-	let mediaService = MediaSevice()
+final class SearchViewController: UIViewController {
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var searchLabel: UILabel!
+    
+	private let mediaService = MediaSevice()
 	var mode: Mode?
 	enum Mode {
 		case duplicate
@@ -23,10 +26,8 @@ class SearchViewController: UIViewController {
 		case video
 
 	}
-	@IBOutlet var titleLabel: UILabel!
-	@IBOutlet var searchLabel: UILabel!
-	var timer = Timer()
-	var counter = 0
+	private lazy var timer = Timer()
+	private lazy var counter = 0
 //	@IBOutlet var animationView: AnimationView!
 	
 	override func viewDidLoad() {
@@ -34,19 +35,22 @@ class SearchViewController: UIViewController {
         mode = .duplicate
 //		animationView.animation = Animation.named("Search")
 //		animationView.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
+        timer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { [weak self] _ in
+            self?.updateSearch()
+        })
+        
 		switch mode {
 			case .duplicate:
 				titleLabel.text = "Duplicate"
-				mediaService.loadSimilarPhotos(live: false, { assets in
+				mediaService.loadSimilarPhotos(live: false) { assets in
 					let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
 					vc.modalPresentationStyle = .fullScreen
 					vc.assets = assets
-					DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+					DispatchQueue.main.async {
 						self.navigationController?.pushViewController(vc, animated: true)
 						self.timer.invalidate()
 					}
-					
-				})
+				}
 			case .live:
 				titleLabel.text = "Live photos"
 				mediaService.loadLivePhotos { assets in
@@ -122,10 +126,6 @@ class SearchViewController: UIViewController {
 			case .none:
 				break
 		}
-		
-		self.timer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { _ in
-			self.updateSearch()
-		})
     }
 	
 	func setupMetadataForAssets(assets: [PHAsset], completion: @escaping ([MetadataAsset]) -> ()) {
@@ -138,7 +138,7 @@ class SearchViewController: UIViewController {
 		}
 	}
 	
-	func updateSearch() {
+	private func updateSearch() {
 		if counter == 0 {
 			searchLabel.text = "Search."
 			counter = 1

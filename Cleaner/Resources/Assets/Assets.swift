@@ -97,7 +97,6 @@ internal enum Asset {
   internal static let mainDownload = ImageAsset(name: "mainDownload")
   internal static let mainPasswords = ImageAsset(name: "mainPasswords")
   internal static let mainPhoto = ImageAsset(name: "mainPhoto")
-  internal static let mainRAM = ImageAsset(name: "mainRAM")
   internal static let mainSafari = ImageAsset(name: "mainSafari")
   internal static let mainSecret = ImageAsset(name: "mainSecret")
   internal static let mainSettings = ImageAsset(name: "mainSettings")

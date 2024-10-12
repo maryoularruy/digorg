@@ -7,7 +7,6 @@
 
 import Photos
 import UIKit
-import Foundation
 
 extension PHAsset: Differentiable { }
 
@@ -96,4 +95,3 @@ extension PHAsset {
 		return thumbnail
 	}
 }
-
