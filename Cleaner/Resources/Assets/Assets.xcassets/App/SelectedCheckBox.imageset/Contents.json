@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "SelectedCheckBox.pdf",
-      "idiom" : "universal"
+      "filename" : "SelectedCheckBox.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "SelectedCheckBox@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "SelectedCheckBox@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

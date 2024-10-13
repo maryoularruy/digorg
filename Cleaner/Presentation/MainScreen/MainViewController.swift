@@ -9,7 +9,6 @@ import UIKit
 import Contacts
 
 final class MainViewController: UIViewController {
-
     @IBOutlet weak var deviceInfoLabel: UILabel!
     @IBOutlet weak var deviceInfoStackView: UIStackView!
     @IBOutlet weak var storageUsageView: StorageUsageView!
@@ -17,8 +16,7 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDeviceInfoSection()
-        setupCleanupOptions()
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +29,61 @@ final class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         
         storageUsageView.circularProgressBarView.progressAnimation(0.65)
+    }
+    
+    private func checkAccessStatus() {
+        let store = CNContactStore()
+        store.requestAccess(for: .contacts) { [weak self] (granted, error) in
+            guard let self else { return }
+            if granted {
+                DispatchQueue.main.async {
+                    let vc = StoryboardScene.ContactsMenu.initialScene.instantiate()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.showPermissionAlert()
+                }
+            }
+        }
+    }
+    
+    private func showPermissionAlert() {
+        let alertController = UIAlertController(title: "You did not give access to 'Contacts'",
+                                                message: "We need access to the “Contacts”. Please go to the settings and allow access, then restart the app.",
+                                                preferredStyle: .alert)
+        let disallowAction = UIAlertAction(title: "Disallow", style: .cancel)
+        let settingsAction = UIAlertAction(title: "In settings", style: .default) { _ in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl) { _ in }
+            }
+        }
+        alertController.addAction(disallowAction)
+        alertController.addAction(settingsAction)
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension MainViewController: ViewControllerProtocol {
+    func setupUI() {
+        setupDeviceInfoSection()
+        setupCleanupOptions()
+    }
+    
+    func addGestureRecognizers() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhoneInfoScreen))
+        deviceInfoLabel.addTapGestureRecognizer(action: openPhoneInfoScreen)
+        deviceInfoStackView.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func openPhoneInfoScreen() {
+        let vc = StoryboardScene.PhoneInfo.initialScene.instantiate()
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupDeviceInfoSection() {
@@ -72,55 +125,5 @@ final class MainViewController: UIViewController {
         let vc = StoryboardScene.Search.initialScene.instantiate()
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: false)
-    }
-    
-    private func checkAccessStatus() {
-        let store = CNContactStore()
-        store.requestAccess(for: .contacts) { [weak self] (granted, error) in
-            guard let self else { return }
-            if granted {
-                DispatchQueue.main.async {
-                    let vc = StoryboardScene.ContactsMenu.initialScene.instantiate()
-                    vc.modalPresentationStyle = .fullScreen
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.showPermissionAlert()
-                }
-            }
-        }
-    }
-    
-    private func showPermissionAlert() {
-        let alertController = UIAlertController(title: "You did not give access to 'Contacts'",
-                                                message: "We need access to the “Contacts”. Please go to the settings and allow access, then restart the app.",
-                                                preferredStyle: .alert)
-        let disallowAction = UIAlertAction(title: "Disallow", style: .cancel)
-        let settingsAction = UIAlertAction(title: "In settings", style: .default) { _ in
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl) { _ in }
-            }
-        }
-        alertController.addAction(disallowAction)
-        alertController.addAction(settingsAction)
-        present(alertController, animated: true, completion: nil)
-    }
-}
-
-extension MainViewController: MainViewControllerProtocol {
-    func addGestureRecognizers() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhoneInfoScreen))
-        deviceInfoLabel.addTapGestureRecognizer(action: openPhoneInfoScreen)
-        deviceInfoStackView.addGestureRecognizer(gesture)
-    }
-    
-    @objc private func openPhoneInfoScreen() {
-        let vc = StoryboardScene.PhoneInfo.initialScene.instantiate()
-        vc.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: true)
     }
 }

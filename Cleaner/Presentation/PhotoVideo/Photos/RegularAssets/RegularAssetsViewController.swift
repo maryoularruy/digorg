@@ -8,7 +8,6 @@
 import SDWebImagePhotosPlugin
 import Photos
 import UIKit
-import Haneke
 
 class RegularAssetsViewController: UIViewController {
 	@IBOutlet var collectionView: UICollectionView!

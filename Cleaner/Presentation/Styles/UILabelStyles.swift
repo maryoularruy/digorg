@@ -52,3 +52,10 @@ final class UILabelSubhealine13sizeStyle: UILabelSubheadline11sizeStyle {
         textColor = .greyText
     }
 }
+
+final class UILabelSubhealine15sizeStyle: UILabelSubheadline11sizeStyle {
+    override func setup() {
+        font = UIFont.regular15 ?? UIFont.systemFont(ofSize: 15)
+        textColor = .blackText
+    }
+}

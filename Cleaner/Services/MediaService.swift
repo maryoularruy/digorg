@@ -5,7 +5,6 @@
 //  Created by Александр Пономарёв on 19.05.2022.
 //
 
-import UIKit
 import Photos
 import Vision
 
@@ -15,13 +14,13 @@ final class MediaSevice {
     
 	private var maxAcceptableDifferenceBetweenDates = 10
     
-    func loadSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup]) -> ()) {
+    func loadSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ()) {
         fetchPhotos(from: dateFrom, to: dateTo, live: live) { photoInAlbum in
             DispatchQueue.global(qos: .userInitiated).async {
                     var images: [OSTuple<NSString, NSData>] = []
                     if photoInAlbum.count == 0 {
-                        DispatchQueue.main.async{
-                            handler([])
+                        DispatchQueue.main.async {
+                            handler([], 0)
                         }
                         return
                     }
@@ -35,10 +34,13 @@ final class MediaSevice {
                     }
                     
                     let similarImageIdsAsTuples = OSImageHashing.sharedInstance().similarImages(with: OSImageHashingQuality.high, forImages: images)
-                    DispatchQueue.main.async{
+                    DispatchQueue.main.async {
                         var similarPhotosNumbers: [Int] = []
                         var similarPhotoGroups: [PHAssetGroup] = []
-                        guard similarImageIdsAsTuples.count >= 1 else { handler([]); return }
+                        guard similarImageIdsAsTuples.count >= 1 else {
+                            handler([], 0)
+                            return
+                        }
                         for i in 1...similarImageIdsAsTuples.count {
                             let tuple = similarImageIdsAsTuples[i - 1]
                             var groupAssets: [PHAsset] = []
@@ -72,7 +74,8 @@ final class MediaSevice {
                                 similarPhotoGroups.append(PHAssetGroup(name: "", assets: groupAssets))
                             }
                         }
-                        handler(similarPhotoGroups)
+                        let duplicatesCount = similarPhotoGroups.reduce(0) { $0 + $1.assets.count }
+                        handler(similarPhotoGroups, duplicatesCount)
                     }
                 }
             }
@@ -82,6 +85,7 @@ final class MediaSevice {
            let options = PHFetchOptions()
            let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+//        handler(PHAsset.fetchAssets(in: PHAssetCollection(), options: options))
            albumsPhoto.enumerateObjects { collection, index, object in
                handler(PHAsset.fetchAssets(in: collection, options: options))
            }

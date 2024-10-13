@@ -9,21 +9,23 @@ import Photos
 import UIKit
 import CryptoKit
 
-class GroupedAssetsViewController: UIViewController {
-	@IBOutlet var deletionButton: UIButton!
+final class GroupedAssetsViewController: UIViewController {
+    @IBOutlet weak var similarPhotoLabel: UILabelSubtitleStyle!
+    @IBOutlet weak var duplicatesCountLabel: UILabelSubhealine13sizeStyle!
+    @IBOutlet var deletionButton: UIButton!
 	@IBOutlet var arrowBackView: UIView!
-	@IBOutlet var placeholderLabel: UILabel!
 	@IBOutlet var selectLabel: UILabel!
 	@IBOutlet var tableView: UITableView!
-	var assets = [PHAssetGroup]()
-	var assetsForDeletion = Set<PHAsset>()
+	lazy var assetGroups = [PHAssetGroup]()
+    lazy var duplicatesCount: Int = 0
+	lazy var assetsForDeletion = Set<PHAsset>()
 	var assetsInput: [PHAssetGroup] {
-		get { return assets }
+		get { return assetGroups }
 		set {
-			let changeset = StagedChangeset(source: assets, target: newValue)
+			let changeset = StagedChangeset(source: assetGroups, target: newValue)
 			tableView.reload(using: changeset, with: .fade) { [weak self] data in
 				guard let self = self else { return }
-				self.assets = data
+				self.assetGroups = data
 			} completion: {
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [weak self] in
 					guard let self = self else { return }
@@ -46,6 +48,7 @@ class GroupedAssetsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        setupUI()
         
 		tableView.register(cellType: DuplicateTableViewCell.self)
 		
@@ -55,29 +58,7 @@ class GroupedAssetsViewController: UIViewController {
 			self.tableView.reloadData()
 		}
 		updatePlaceholder()
-		arrowBackView.addTapGestureRecognizer { [weak self] in
-			guard let self = self else { return }
-			let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-			self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-		}
-	}
-    
-    override func viewWillAppear(_ animated: Bool) {
-        GradientService.shared.addGradientBackgroundToButton(button: deletionButton, colors: [#colorLiteral(red: 0.472941041, green: 0.5231513381, blue: 0.9458861947, alpha: 1), #colorLiteral(red: 0.6934512258, green: 0.5760011077, blue: 0.9499141574, alpha: 1)])
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-	
-	func updatePlaceholder() {
-		if assets.isEmpty {
-			self.placeholderLabel.isHidden = false
-			self.deletionButton.isHidden = false
-			self.deletionButton.setTitle("On the photo cleanup", for: .normal)
-			self.selectLabel.isHidden = true
-		}
+        addGestureRecognizers()
 	}
 	
 	@IBAction func deletePhotos(_ sender: Any) {
@@ -116,14 +97,14 @@ class GroupedAssetsViewController: UIViewController {
 	}
 }
 
-extension GroupedAssetsViewController: UITableViewDataSource {
+extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return assets.count
+		return assetGroups.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCell(for: indexPath) as DuplicateTableViewCell
-		cell.setupData(assets: assets[indexPath.item].assets)
+		cell.setupData(assets: assetGroups[indexPath.item].assets)
 		cell.setupSelectMode(isON: selectMode)
 		cell.onTap = { [weak self] image, index in
 			guard let self = self else { return }
@@ -139,10 +120,10 @@ extension GroupedAssetsViewController: UITableViewDataSource {
 		}
 		cell.onTapWithSelectMode = { [weak self] index in
 			guard let self = self else { return }
-			if !self.assetsForDeletion.contains(self.assets[indexPath.item].assets[index]) {
-				self.assetsForDeletion.insert(self.assets[indexPath.item].assets[index])
+			if !self.assetsForDeletion.contains(self.assetGroups[indexPath.item].assets[index]) {
+				self.assetsForDeletion.insert(self.assetGroups[indexPath.item].assets[index])
 			} else {
-				self.assetsForDeletion.remove(self.assets[indexPath.item].assets[index])
+				self.assetsForDeletion.remove(self.assetGroups[indexPath.item].assets[index])
 			}
 			
 			if self.assetsForDeletion.isEmpty {
@@ -165,4 +146,25 @@ extension GroupedAssetsViewController: UITableViewDataSource {
 	}
 }
 
-extension GroupedAssetsViewController: UITableViewDelegate {}
+extension GroupedAssetsViewController: ViewControllerProtocol {
+    func addGestureRecognizers() {
+        arrowBackView.addTapGestureRecognizer { [weak self] in
+            guard let self = self else { return }
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+            self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        }
+    }
+    
+    func setupUI() {
+        similarPhotoLabel.text = "Similar Photo"
+        duplicatesCountLabel.text = "\(duplicatesCount) files"
+        updatePlaceholder()
+    }
+    
+    private func updatePlaceholder() {
+        if assetGroups.isEmpty {
+            self.deletionButton.isHidden = false
+            self.selectLabel.isHidden = true
+        }
+    }
+}

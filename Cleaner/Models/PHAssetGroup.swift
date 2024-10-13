@@ -6,9 +6,8 @@
 //
 
 import Photos
-import UIKit
 
-class PHAssetGroup: Differentiable {
+final class PHAssetGroup: Differentiable {
 	var name: String
 	var assets: [PHAsset]
 
@@ -40,4 +39,3 @@ struct MetadataAsset: Differentiable, Equatable {
 		return date
 	}
 }
-

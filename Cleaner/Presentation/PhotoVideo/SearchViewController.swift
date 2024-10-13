@@ -42,10 +42,11 @@ final class SearchViewController: UIViewController {
 		switch mode {
 			case .duplicate:
 				titleLabel.text = "Duplicate"
-				mediaService.loadSimilarPhotos(live: false) { assets in
+				mediaService.loadSimilarPhotos(live: false) { assetGroups, duplicatesCount in
 					let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
 					vc.modalPresentationStyle = .fullScreen
-					vc.assets = assets
+					vc.assetGroups = assetGroups
+                    vc.duplicatesCount = duplicatesCount
 					DispatchQueue.main.async {
 						self.navigationController?.pushViewController(vc, animated: true)
 						self.timer.invalidate()
@@ -104,7 +105,7 @@ final class SearchViewController: UIViewController {
 				mediaService.loadSimilarVideos { assets in
 					let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
 					vc.modalPresentationStyle = .fullScreen
-					vc.assets = assets
+					vc.assetGroups = assets
 					DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 						self.navigationController?.pushViewController(vc, animated: true)
 						self.timer.invalidate()
