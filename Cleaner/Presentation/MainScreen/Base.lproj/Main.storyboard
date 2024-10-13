@@ -58,7 +58,7 @@
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQ5-mm-K5l" customClass="StorageUsageView" customModule="Cleaner" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="156.66666666666666" width="353" height="123.99999999999997"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" name="WhiteBackground"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="124" id="gbB-Au-elb"/>
                                                 </constraints>
@@ -150,8 +150,8 @@
         <namedColor name="GreyBackground">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="WhiteBackground">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

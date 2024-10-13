@@ -38,7 +38,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHI-Ki-6JT" customClass="UIButtonMainScreenStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="141" y="78.333333333333329" width="177" height="32"/>
+                    <rect key="frame" x="141" y="78.333333333333329" width="232" height="32"/>
                     <color key="backgroundColor" name="BlueButtonBackground"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="Z3y-Rb-l8d"/>
@@ -78,7 +78,7 @@
                 <constraint firstItem="eHI-Ki-6JT" firstAttribute="leading" secondItem="38r-k0-Yt5" secondAttribute="leading" id="MAo-Bl-HH2"/>
                 <constraint firstItem="cZG-Bg-fQ1" firstAttribute="leading" secondItem="38r-k0-Yt5" secondAttribute="leading" id="OS7-mF-Nqc"/>
                 <constraint firstAttribute="trailing" secondItem="38r-k0-Yt5" secondAttribute="trailing" constant="20" id="Wxe-Ho-Ahj"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eHI-Ki-6JT" secondAttribute="trailing" constant="75" id="aPu-4I-XtQ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eHI-Ki-6JT" secondAttribute="trailing" constant="20" id="aPu-4I-XtQ"/>
                 <constraint firstItem="eHI-Ki-6JT" firstAttribute="top" secondItem="cZG-Bg-fQ1" secondAttribute="bottom" constant="13" id="c6k-yS-Byp"/>
                 <constraint firstItem="38r-k0-Yt5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="900" constant="141" id="ct8-k0-MoM"/>
                 <constraint firstItem="38r-k0-Yt5" firstAttribute="leading" secondItem="BJb-yV-J4M" secondAttribute="trailing" constant="25" id="fbo-Dc-wxr"/>
