@@ -53,6 +53,5 @@ class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     private func setupUI() {
         checkBox.isHidden = !isChecked
         layer.cornerRadius = 16.0
-        layer.masksToBounds = true
     }
 }

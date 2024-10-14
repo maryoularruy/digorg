@@ -50,13 +50,13 @@ class DuplicateTableViewCell: UITableViewCell, NibReusable {
 	}
 }
 
-extension DuplicateTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return assets.count
 	}
     
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell: PhotoCollectionViewCell = duplicateGroupCV.dequeueReusableCell(for: indexPath)
+		let cell: PhotoCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 //		let photosURL = assets[indexPath.row].sd_URLRepresentation
         cell.photoImageView.image = getAssetThumbnail(asset: assets[indexPath.item])
 		//cell.photoImageView.sd_setImage(with: photosURL as URL?, placeholderImage: nil, options: [], context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.all.rawValue])
@@ -77,9 +77,13 @@ extension DuplicateTableViewCell: UICollectionViewDelegate, UICollectionViewData
         let option = PHImageRequestOptions()
         var thumbnail = UIImage()
         option.isSynchronous = true
-        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 133, height: 133), contentMode: .default, options: option, resultHandler: { (result, info) -> () in
+        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 133, height: 133), contentMode: .aspectFill, options: option, resultHandler: { (result, info) -> () in
             thumbnail = result!
         })
         return thumbnail
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: 133, height: 133)
     }
 }

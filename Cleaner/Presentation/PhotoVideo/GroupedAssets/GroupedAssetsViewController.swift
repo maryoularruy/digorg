@@ -61,6 +61,11 @@ final class GroupedAssetsViewController: UIViewController {
         addGestureRecognizers()
 	}
 	
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
 	@IBAction func deletePhotos(_ sender: Any) {
 		if delete(assets: Array(assetsForDeletion)) {
 			self.deletionButton.isHidden = true
@@ -144,6 +149,10 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 		cell.assetsForDeletion = self.assetsForDeletion
 		return cell
 	}
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
 }
 
 extension GroupedAssetsViewController: ViewControllerProtocol {

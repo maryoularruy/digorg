@@ -4,48 +4,45 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="gTV-IL-0wX" customClass="PhotoCollectionViewCell" customModule="Cleaner" customModuleProvider="target">
-            <autoresizingMask key="autoresizingMask"/>
-            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lHe-dD-DRn" customClass="PhotoCollectionViewCell" customModule="Cleaner" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="266" height="250"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CsV-er-Rhh">
+                <rect key="frame" x="0.0" y="0.0" width="266" height="250"/>
+                <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F0e-8I-vKB"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F0e-8I-vKB">
+                        <rect key="frame" x="0.0" y="0.0" width="266" height="250"/>
+                    </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EmptyCheckBox" translatesAutoresizingMaskIntoConstraints="NO" id="xjG-rf-j4E">
-                        <rect key="frame" x="-34" y="-34" width="26" height="26"/>
+                        <rect key="frame" x="224" y="208" width="26" height="26"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="26" id="5WH-GE-ATV"/>
                             <constraint firstAttribute="height" constant="26" id="N13-uO-6Ls"/>
                         </constraints>
                     </imageView>
                 </subviews>
-            </view>
-            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="F0e-8I-vKB" secondAttribute="trailing" id="RXx-ZK-Zba"/>
-                <constraint firstItem="F0e-8I-vKB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="mCB-ob-0Jl"/>
-                <constraint firstAttribute="bottom" secondItem="F0e-8I-vKB" secondAttribute="bottom" id="nbu-mr-WV5"/>
-                <constraint firstAttribute="bottom" secondItem="xjG-rf-j4E" secondAttribute="bottom" constant="8" id="qF0-Gx-kfF"/>
-                <constraint firstItem="F0e-8I-vKB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="y3a-Ui-mrv"/>
-                <constraint firstAttribute="trailing" secondItem="xjG-rf-j4E" secondAttribute="trailing" constant="8" id="ykS-jl-VrO"/>
-            </constraints>
-            <size key="customSize" width="290" height="315"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                    <real key="value" value="10"/>
-                </userDefinedRuntimeAttribute>
-            </userDefinedRuntimeAttributes>
+                <constraints>
+                    <constraint firstItem="F0e-8I-vKB" firstAttribute="top" secondItem="CsV-er-Rhh" secondAttribute="top" id="EhQ-68-AXy"/>
+                    <constraint firstAttribute="trailing" secondItem="xjG-rf-j4E" secondAttribute="trailing" constant="16" id="Exd-q8-IUE"/>
+                    <constraint firstAttribute="bottom" secondItem="F0e-8I-vKB" secondAttribute="bottom" id="HSF-jr-oHh"/>
+                    <constraint firstAttribute="trailing" secondItem="F0e-8I-vKB" secondAttribute="trailing" id="Wkh-Td-aH2"/>
+                    <constraint firstAttribute="bottom" secondItem="xjG-rf-j4E" secondAttribute="bottom" constant="16" id="mLs-aa-vL7"/>
+                    <constraint firstItem="F0e-8I-vKB" firstAttribute="leading" secondItem="CsV-er-Rhh" secondAttribute="leading" id="unc-3v-c7q"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="266" height="250"/>
             <connections>
-                <outlet property="checkBox" destination="xjG-rf-j4E" id="cZi-N3-vfw"/>
-                <outlet property="photoImageView" destination="F0e-8I-vKB" id="6aA-Hw-lgC"/>
+                <outlet property="checkBox" destination="xjG-rf-j4E" id="6w9-F1-1IJ"/>
+                <outlet property="photoImageView" destination="F0e-8I-vKB" id="rRy-84-C97"/>
             </connections>
-            <point key="canvasLocation" x="343.47826086956525" y="72.65625"/>
+            <point key="canvasLocation" x="-149.27536231884059" y="57.589285714285708"/>
         </collectionViewCell>
     </objects>
     <resources>
