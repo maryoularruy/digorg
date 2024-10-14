@@ -162,6 +162,9 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
     }
     
     func setupUI() {
+        actionToolbar.toolbarButton.bind(text: "Delete 0 Items, 0 MB")
+        actionToolbar.toolbarButton.changeBackgroundColor(.paleBlueButtonBackground)
+        
         similarPhotoLabel.text = "Similar Photo"
         duplicatesCountLabel.text = "\(duplicatesCount) files"
         selectMode = false

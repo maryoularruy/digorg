@@ -80,6 +80,11 @@ final class UIButtonActionToolbarStyle: UIButton {
         setTitle(text, for: .selected)
     }
     
+    func changeBackgroundColor(_ color: UIColor) {
+        myConfiguration.baseBackgroundColor = color
+        configuration = myConfiguration
+    }
+    
     private func setup() {
         layer.cornerRadius = 34
         configuration = myConfiguration
