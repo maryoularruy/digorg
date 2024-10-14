@@ -14,8 +14,8 @@ final class GroupedAssetsViewController: UIViewController {
     @IBOutlet weak var duplicatesCountLabel: UILabelSubhealine13sizeStyle!
     @IBOutlet var deletionButton: UIButton!
 	@IBOutlet var arrowBackView: UIView!
-	@IBOutlet var selectLabel: UILabel!
-	@IBOutlet var tableView: UITableView!
+    @IBOutlet weak var selectModeButton: UIButtonSecondaryStyle!
+    @IBOutlet var tableView: UITableView!
 	lazy var assetGroups = [PHAssetGroup]()
     lazy var duplicatesCount: Int = 0
 	lazy var assetsForDeletion = Set<PHAsset>()
@@ -34,14 +34,15 @@ final class GroupedAssetsViewController: UIViewController {
 			}
 		}
 	}
-	var selectMode = false {
+	lazy var selectMode = false {
 		didSet {
-			if selectMode {
-				selectLabel.text = "Done"
+            if selectMode {
+                selectModeButton.bind(text: "Deselect")
 			} else {
-				selectLabel.text = "Select"
+                selectModeButton.bind(text: "Select")
 				assetsForDeletion.removeAll()
 				deletionButton.isHidden = true
+                tableView.reloadData()
 			}
 		}
 	}
@@ -49,24 +50,11 @@ final class GroupedAssetsViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         setupUI()
-        
 		tableView.register(cellType: DuplicateTableViewCell.self)
-		
-		selectLabel.addTapGestureRecognizer { [weak self] in
-			guard let self = self else { return }
-			self.selectMode.toggle()
-			self.tableView.reloadData()
-		}
-		updatePlaceholder()
         addGestureRecognizers()
 	}
-	
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
     
-	@IBAction func deletePhotos(_ sender: Any) {
+    @IBAction func deletePhotos(_ sender: Any) {
 		if delete(assets: Array(assetsForDeletion)) {
 			self.deletionButton.isHidden = true
 			self.assetsInput = self.assetsInput.map ( { group in
@@ -110,7 +98,7 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCell(for: indexPath) as DuplicateTableViewCell
 		cell.setupData(assets: assetGroups[indexPath.item].assets)
-		cell.setupSelectMode(isON: selectMode)
+        cell.selectMode = self.selectMode
 		cell.onTap = { [weak self] image, index in
 			guard let self = self else { return }
 			let gallery = DKPhotoGallery()
@@ -124,12 +112,13 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 			self.present(photoGallery: gallery)
 		}
 		cell.onTapWithSelectMode = { [weak self] index in
-			guard let self = self else { return }
+			guard let self else { return }
 			if !self.assetsForDeletion.contains(self.assetGroups[indexPath.item].assets[index]) {
 				self.assetsForDeletion.insert(self.assetGroups[indexPath.item].assets[index])
 			} else {
 				self.assetsForDeletion.remove(self.assetGroups[indexPath.item].assets[index])
 			}
+            cell.assetsForDeletion = self.assetsForDeletion
 			
 			if self.assetsForDeletion.isEmpty {
 				self.deletionButton.isHidden = true
@@ -146,7 +135,7 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 			self.deletionButton.setTitle("Delete \(self.assetsForDeletion.count) photos", for: .normal)
 			self.tableView.reloadData()
 		}
-		cell.assetsForDeletion = self.assetsForDeletion
+        cell.assetsForDeletion = self.assetsForDeletion
 		return cell
 	}
     
@@ -162,18 +151,25 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
             let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
             self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
         }
+        
+        selectModeButton.addTapGestureRecognizer { [weak self] in
+            guard let self = self else { return }
+            self.selectMode.toggle()
+            self.tableView.reloadData()
+        }
     }
     
     func setupUI() {
         similarPhotoLabel.text = "Similar Photo"
         duplicatesCountLabel.text = "\(duplicatesCount) files"
+        selectMode = false
         updatePlaceholder()
     }
     
     private func updatePlaceholder() {
         if assetGroups.isEmpty {
             self.deletionButton.isHidden = false
-            self.selectLabel.isHidden = true
+            self.selectModeButton.isHidden = true
         }
     }
 }

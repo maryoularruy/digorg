@@ -13,19 +13,14 @@ import UIKit
 class DuplicateTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet var duplicatesAmountLabel: UILabel!
     @IBOutlet weak var duplicateGroupCV: UICollectionView!
+    
     var onTap: (([PHAsset], Int) -> ())?
 	var onTapWithSelectMode: ((Int) -> ())?
-	var selectMode = false
-//    {
-//		didSet {
-//			if selectMode {
-//                
-//			} else {
-//                
-//			}
-//		}
-//	}
-	var onTapSelectAll: (([PHAsset]) -> ())?
+    var onTapSelectAll: (([PHAsset]) -> ())?
+    
+    lazy var selectMode = false {
+        didSet { duplicateGroupCV.reloadData() }
+    }
 	var assetsForDeletion = Set<PHAsset>()
     private lazy var assets = [PHAsset]()
 	
@@ -58,15 +53,23 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: PhotoCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 //		let photosURL = assets[indexPath.row].sd_URLRepresentation
+        //cell.photoImageView.sd_setImage(with: photosURL as URL?, placeholderImage: nil, options: [], context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.all.rawValue])
         cell.photoImageView.image = getAssetThumbnail(asset: assets[indexPath.item])
-		//cell.photoImageView.sd_setImage(with: photosURL as URL?, placeholderImage: nil, options: [], context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.all.rawValue])
-        cell.isChecked = assetsForDeletion.contains(assets[indexPath.item]) ? true : false
+        cell.isChecked = assetsForDeletion.contains(assets[indexPath.item])
 		cell.setupSelectMode(isON: selectMode)
-		cell.addTapGestureRecognizer {
+		cell.addTapGestureRecognizer { [weak self] in
+            guard let self else { return }
 			if self.selectMode {
+                cell.checkBox.isHidden = false
 				cell.isChecked.toggle()
+                if cell.isChecked {
+                    self.assetsForDeletion.insert(self.assets[indexPath.item])
+                } else {
+                    self.assetsForDeletion.remove(self.assets[indexPath.item])
+                }
 				self.onTapWithSelectMode?(indexPath.item)
 			} else {
+                cell.checkBox.isHidden = true
 				self.onTap?(self.assets, indexPath.item)
 			}
 		}

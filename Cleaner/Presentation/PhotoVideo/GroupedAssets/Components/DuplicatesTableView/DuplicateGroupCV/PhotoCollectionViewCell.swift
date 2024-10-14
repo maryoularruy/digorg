@@ -22,7 +22,6 @@ class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
 			} else {
                 checkBox.image = Asset.emptyCheckBox.image
 			}
-            checkBox.isHidden = !isChecked
 		}
 	}
 	
@@ -30,12 +29,6 @@ class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
 		super.awakeFromNib()
         setupUI()
 	}
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        photoImageView.image = nil
-        checkBox.image = nil
-    }
 	
 	func setupSelectMode(isON: Bool) {
         checkBox.isHidden = isON ? false : true
@@ -51,7 +44,6 @@ class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
 	}
     
     private func setupUI() {
-        checkBox.isHidden = !isChecked
         layer.cornerRadius = 16.0
     }
 }
