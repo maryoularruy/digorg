@@ -20,7 +20,13 @@ final class GroupedAssetsViewController: UIViewController {
     
     lazy var assetGroups = [PHAssetGroup]()
     lazy var duplicatesCount: Int = 0
-	lazy var assetsForDeletion = Set<PHAsset>()
+    lazy var assetsForDeletion = Set<PHAsset>() {
+        didSet {
+            actionToolbar.toolbarButton.changeBackgroundColor(assetsForDeletion.isEmpty ? .paleBlueButtonBackground : .blueButtonBackground)
+            actionToolbar.toolbarButton.bind(
+                text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(assetsForDeletion.isEmpty ? "0" : "?") MB")
+        }
+    }
 	var assetsInput: [PHAssetGroup] {
 		get { return assetGroups }
 		set {
@@ -162,9 +168,6 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
     }
     
     func setupUI() {
-        actionToolbar.toolbarButton.bind(text: "Delete 0 Items, 0 MB")
-        actionToolbar.toolbarButton.changeBackgroundColor(.paleBlueButtonBackground)
-        
         similarPhotoLabel.text = "Similar Photo"
         duplicatesCountLabel.text = "\(duplicatesCount) files"
         selectMode = false

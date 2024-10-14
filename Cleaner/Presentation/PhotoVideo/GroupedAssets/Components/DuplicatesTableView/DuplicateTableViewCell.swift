@@ -62,11 +62,6 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
 			if self.selectMode {
                 cell.checkBox.isHidden = false
 				cell.isChecked.toggle()
-                if cell.isChecked {
-                    self.assetsForDeletion.insert(self.assets[indexPath.item])
-                } else {
-                    self.assetsForDeletion.remove(self.assets[indexPath.item])
-                }
 				self.onTapWithSelectMode?(indexPath.item)
 			} else {
                 cell.checkBox.isHidden = true
