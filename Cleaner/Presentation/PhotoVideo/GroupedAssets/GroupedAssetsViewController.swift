@@ -16,7 +16,9 @@ final class GroupedAssetsViewController: UIViewController {
 	@IBOutlet var arrowBackView: UIView!
     @IBOutlet weak var selectModeButton: UIButtonSecondaryStyle!
     @IBOutlet var tableView: UITableView!
-	lazy var assetGroups = [PHAssetGroup]()
+    @IBOutlet weak var actionToolbar: ActionToolbar!
+    
+    lazy var assetGroups = [PHAssetGroup]()
     lazy var duplicatesCount: Int = 0
 	lazy var assetsForDeletion = Set<PHAsset>()
 	var assetsInput: [PHAssetGroup] {

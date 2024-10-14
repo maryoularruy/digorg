@@ -48,6 +48,44 @@ class UIButtonMainScreenStyle: UIButton {
     }
 }
 
+final class UIButtonActionToolbarStyle: UIButton {
+    private lazy var myConfiguration: Configuration = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.titleAlignment = .center
+        configuration.title = " "
+        configuration.baseBackgroundColor = .blueButtonBackground
+        configuration.baseForegroundColor = .whiteText
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 3, bottom: 1, trailing: 3)
+        configuration.cornerStyle = .capsule
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont.bold15
+            return outgoing
+        }
+        return configuration
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    func bind(text: String) {
+        setTitle(text, for: .normal)
+        setTitle(text, for: .selected)
+    }
+    
+    private func setup() {
+        layer.cornerRadius = 34
+        configuration = myConfiguration
+    }
+}
+
 final class UIButtonSecondaryStyle: UIButton {
     private lazy var myConfiguration: Configuration = {
         var configuration = UIButton.Configuration.filled()

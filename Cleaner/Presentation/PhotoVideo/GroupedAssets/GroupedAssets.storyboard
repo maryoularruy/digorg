@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,7 +34,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e6p-HG-smV">
-                                <rect key="frame" x="0.0" y="192" width="414" height="670"/>
+                                <rect key="frame" x="0.0" y="192" width="414" height="604"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="27x-6D-L5n" id="Kbd-f3-XkK"/>
@@ -77,29 +78,40 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHd-R4-dnf" customClass="ActionToolbar" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="796" width="414" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="oiO-k7-wts"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WX4-Ey-lrt"/>
                         <color key="backgroundColor" name="White"/>
                         <constraints>
                             <constraint firstItem="WX4-Ey-lrt" firstAttribute="trailing" secondItem="e6p-HG-smV" secondAttribute="trailing" id="0TR-dl-wdD"/>
-                            <constraint firstItem="WX4-Ey-lrt" firstAttribute="bottom" secondItem="e6p-HG-smV" secondAttribute="bottom" id="6j4-PF-dS3"/>
                             <constraint firstItem="N1k-U1-7FJ" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" id="B2d-jz-rTn"/>
                             <constraint firstItem="WX4-Ey-lrt" firstAttribute="trailing" secondItem="FSs-SI-AvE" secondAttribute="trailing" constant="24" id="Cd3-O0-cAd"/>
                             <constraint firstItem="pX6-gp-mlx" firstAttribute="centerY" secondItem="N1k-U1-7FJ" secondAttribute="centerY" id="E0p-4x-6is"/>
                             <constraint firstItem="WX4-Ey-lrt" firstAttribute="trailing" secondItem="pX6-gp-mlx" secondAttribute="trailing" constant="16" id="GYY-Rc-1HR"/>
                             <constraint firstItem="Lkk-Of-Ud7" firstAttribute="leading" secondItem="pzO-BD-2ZM" secondAttribute="leading" id="Glv-VR-80L"/>
+                            <constraint firstAttribute="bottom" secondItem="wHd-R4-dnf" secondAttribute="bottom" id="Pyh-Yv-jLa"/>
                             <constraint firstItem="WX4-Ey-lrt" firstAttribute="bottom" secondItem="FSs-SI-AvE" secondAttribute="bottom" constant="13" id="Qsq-Cw-m1C"/>
                             <constraint firstItem="N1k-U1-7FJ" firstAttribute="top" secondItem="WX4-Ey-lrt" secondAttribute="top" constant="5" id="SDx-kY-kDq"/>
+                            <constraint firstItem="wHd-R4-dnf" firstAttribute="top" secondItem="e6p-HG-smV" secondAttribute="bottom" id="SOC-3Y-imu"/>
                             <constraint firstItem="e6p-HG-smV" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" id="VTh-e5-z9R"/>
                             <constraint firstItem="Lkk-Of-Ud7" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" priority="900" constant="16" id="Vvu-uZ-Rhm"/>
+                            <constraint firstItem="wHd-R4-dnf" firstAttribute="trailing" secondItem="WX4-Ey-lrt" secondAttribute="trailing" id="WS5-nz-gUj"/>
                             <constraint firstItem="FSs-SI-AvE" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" constant="24" id="d8c-iR-gOq"/>
                             <constraint firstItem="Lkk-Of-Ud7" firstAttribute="top" secondItem="pzO-BD-2ZM" secondAttribute="bottom" constant="6" id="dxu-IW-mx9"/>
                             <constraint firstItem="pzO-BD-2ZM" firstAttribute="top" secondItem="N1k-U1-7FJ" secondAttribute="bottom" constant="16" id="nIx-at-JMm"/>
+                            <constraint firstItem="wHd-R4-dnf" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" id="qFj-C2-aUy"/>
                             <constraint firstItem="pzO-BD-2ZM" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" constant="16" id="tce-O3-b5u"/>
                             <constraint firstItem="e6p-HG-smV" firstAttribute="top" secondItem="Lkk-Of-Ud7" secondAttribute="bottom" constant="20" id="ybg-cS-FkJ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionToolbar" destination="wHd-R4-dnf" id="kr1-wC-uIh"/>
                         <outlet property="arrowBackView" destination="N1k-U1-7FJ" id="jCa-HU-AGQ"/>
                         <outlet property="deletionButton" destination="FSs-SI-AvE" id="6sm-2t-exZ"/>
                         <outlet property="duplicatesCountLabel" destination="Lkk-Of-Ud7" id="eDu-lD-Xek"/>
@@ -121,5 +133,8 @@
         <namedColor name="White">
             <color red="0.97647058823529409" green="0.97647058823529409" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
