@@ -247,62 +247,68 @@ final class MediaService {
 		  })
 	  }
 
-	public func loadSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping (([PHAssetGroup]) -> ())) {
-			fetchVideos(from: dateFrom, to: dateTo) { videoInAlbum in
+	public func loadSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAssetGroup], Int) -> ()) {
+			fetchVideos(from: dateFrom, to: dateTo) { videosInAlbum in
 				DispatchQueue.global(qos: .background).async {
-					var images: [OSTuple<NSString, NSData>] = []
-					if videoInAlbum.count == 0 {
+					var videos: [OSTuple<NSString, NSData>] = []
+					if videosInAlbum.count == 0 {
 						DispatchQueue.main.async{
-							handler([])
+                            handler([], 0)
 						}
 						return
 					}
-					for i in 1...videoInAlbum.count {
-						if let image = videoInAlbum[i - 1].image, let data = image.jpegData(compressionQuality: 0.8) {
-							let tuple = OSTuple<NSString, NSData>(first: "image\(i)" as NSString,
+                    
+					for i in 1...videosInAlbum.count {
+						if let image = videosInAlbum[i - 1].image, let data = image.jpegData(compressionQuality: 0.8) {
+							let tuple = OSTuple<NSString, NSData>(first: "video\(i)" as NSString,
 																  andSecond: data as NSData)
-							images.append(tuple)
+							videos.append(tuple)
 						}
 					}
-					let similarVideoIdsAsTuples = OSImageHashing.sharedInstance().similarImages(withProvider: .pHash, forImages: images)
+                    
+					let similarVideoIdsAsTuples = OSImageHashing.sharedInstance().similarImages(withProvider: .pHash, forImages: videos)
 					DispatchQueue.main.async {
 						var similarVideoNumbers: [Int] = []
 						var similarVideoGroups: [PHAssetGroup] = []
-						guard similarVideoIdsAsTuples.count >= 1 else { handler([]); return }
+                        guard similarVideoIdsAsTuples.count >= 1 else {
+                            handler([], 0)
+                            return
+                        }
 						for i in 1...similarVideoIdsAsTuples.count {
 							let tuple = similarVideoIdsAsTuples[i - 1]
 							var groupAssets: [PHAsset] = []
-							let n = (tuple.first! as String).removeImageAndToInt() - 1
-							let n2 = (tuple.second! as String).removeImageAndToInt() - 1
+							let n = (tuple.first! as String).removeVideoAndToInt() - 1
+							let n2 = (tuple.second! as String).removeVideoAndToInt() - 1
 							if abs(n2 - n) >= 10 { continue }
 							if !similarVideoNumbers.contains(n) {
 								similarVideoNumbers.append(n)
-								groupAssets.append(videoInAlbum[n])
+								groupAssets.append(videosInAlbum[n])
 							}
 							if !similarVideoNumbers.contains(n2) {
 								similarVideoNumbers.append(n2)
-								groupAssets.append(videoInAlbum[n2])
+								groupAssets.append(videosInAlbum[n2])
 							}
 							similarVideoIdsAsTuples.filter({$0.first != nil && $0.second != nil}).filter({ $0.first == tuple.first || $0.first == tuple.second || $0.second == tuple.second || $0.second == tuple.first }).forEach({ tuple in
-								let n = (tuple.first! as String).removeImageAndToInt() - 1
-								let n2 = (tuple.second! as String).removeImageAndToInt() - 1
+								let n = (tuple.first! as String).removeVideoAndToInt() - 1
+								let n2 = (tuple.second! as String).removeVideoAndToInt() - 1
 								if abs(n2 - n) >= 10 {
 									return
 								}
 								if !similarVideoNumbers.contains(n) {
 									similarVideoNumbers.append(n)
-									groupAssets.append(videoInAlbum[n])
+									groupAssets.append(videosInAlbum[n])
 								}
 								if !similarVideoNumbers.contains(n2) {
 									similarVideoNumbers.append(n2)
-									groupAssets.append(videoInAlbum[n2])
+									groupAssets.append(videosInAlbum[n2])
 								}
 							})
-							if groupAssets.count >= 1{
+							if groupAssets.count >= 1 {
 								similarVideoGroups.append(PHAssetGroup(name: "", assets: groupAssets))
 							}
 						}
-						handler(similarVideoGroups)
+                        let duplicatesCount = similarVideoGroups.reduce(0) { $0 + $1.assets.count }
+                        handler(similarVideoGroups, duplicatesCount)
 					}
 				}
 			}

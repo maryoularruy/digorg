@@ -17,6 +17,8 @@ extension String {
 	func removeImageAndToInt() -> Int {
 			Int(self.replacingOccurrences(of: "image", with: "")) ?? 0
 	}
+    
+    func removeVideoAndToInt() -> Int {
+            Int(self.replacingOccurrences(of: "video", with: "")) ?? 0
+    }
 }
-
-//extension String: Differentiable { }

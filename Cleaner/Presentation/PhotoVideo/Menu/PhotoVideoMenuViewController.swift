@@ -93,7 +93,7 @@ extension PhotoVideoMenuViewController: UITableViewDataSource, UITableViewDelega
         }
         
         if indexPath.section == 1 && indexPath.row == 0 {
-            mediaService.loadSimilarVideos { assets in
+            mediaService.loadSimilarVideos { assets, duplicatesCount in
                 let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
                 vc.modalPresentationStyle = .fullScreen
                 vc.assetGroups = assets
