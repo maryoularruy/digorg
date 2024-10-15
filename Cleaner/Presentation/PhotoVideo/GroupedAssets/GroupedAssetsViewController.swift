@@ -27,6 +27,7 @@ final class GroupedAssetsViewController: UIViewController {
                 text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(assetsForDeletion.isEmpty ? "0" : "?") MB")
         }
     }
+    
 	var assetsInput: [PHAssetGroup] {
 		get { return assetGroups }
 		set {
@@ -42,6 +43,7 @@ final class GroupedAssetsViewController: UIViewController {
 			}
 		}
 	}
+    
 	lazy var selectMode = false {
 		didSet {
             if selectMode {
@@ -66,7 +68,7 @@ final class GroupedAssetsViewController: UIViewController {
 		if delete(assets: Array(assetsForDeletion)) {
 			self.deletionButton.isHidden = true
 			self.assetsInput = self.assetsInput.map ( { group in
-				let tempGroup = group
+                var tempGroup = group
 				let notDeleted = tempGroup.assets.filter({ !assetsForDeletion.contains($0)})
 				tempGroup.assets = notDeleted
 				return tempGroup

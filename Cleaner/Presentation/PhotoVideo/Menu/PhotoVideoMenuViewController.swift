@@ -9,7 +9,7 @@ import UIKit
 
 class PhotoVideoMenuViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    let mediaService = MediaSevice()
+    let mediaService = MediaService()
     var menuOptions = [
         [
             ("Screenshots", Asset.screenshotsMenu.image),

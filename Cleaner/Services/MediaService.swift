@@ -8,7 +8,8 @@
 import Photos
 import Vision
 
-final class MediaSevice {
+final class MediaService {
+    static let shared = MediaService()
     static var defaultStartDate = "01 Jan 1970 00:00:00"
     static var defaultEndDate = "01 Jan 2030 00:00:00"
     

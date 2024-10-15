@@ -7,7 +7,7 @@
 
 import Photos
 
-final class PHAssetGroup: Differentiable {
+struct PHAssetGroup: Differentiable {
 	var name: String
 	var assets: [PHAsset]
 

@@ -20,4 +20,22 @@ enum CleanupOption: String, CaseIterable {
         case .calendar: .calendarCleanupIcon
         }
     }
+    
+    var mode: Mode? {
+        switch self {
+        case .photos: .duplicatePhotos
+        case .videos: .duplicateVideo
+        case .contacts: nil
+        case .calendar: nil
+        }
+    }
+    
+    var tag: Int {
+        switch self {
+        case .photos: 0
+        case .videos: 1
+        case .contacts: 2
+        case .calendar: 3
+        }
+    }
 }

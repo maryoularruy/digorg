@@ -75,6 +75,8 @@
 		A50F58BC2CB6D50400AB3166 /* UILabel+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58BB2CB6D50400AB3166 /* UILabel+ext.swift */; };
 		A50F58BE2CB6E4AA00AB3166 /* UIFont+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58BD2CB6E4AA00AB3166 /* UIFont+ext.swift */; };
 		A50F58C42CB7B43400AB3166 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58C32CB7B43400AB3166 /* UIColor.swift */; };
+		A53836AB2CBC68C2005BE39C /* CleanupOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53836A02CBC68C2005BE39C /* CleanupOption.swift */; };
+		A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53836CF2CBEC6DE005BE39C /* Mode.swift */; };
 		A576FAD52CB69C9700B018DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576FAD42CB69C9700B018DE /* ContentView.swift */; };
 		A5BC395B2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */; };
 		A5BC395C2CBC604E00153FD1 /* PhotoVideoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC395A2CBC604E00153FD1 /* PhotoVideoMenuViewController.swift */; };
@@ -301,6 +303,8 @@
 		A50F58BB2CB6D50400AB3166 /* UILabel+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ext.swift"; sourceTree = "<group>"; };
 		A50F58BD2CB6E4AA00AB3166 /* UIFont+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+ext.swift"; sourceTree = "<group>"; };
 		A50F58C32CB7B43400AB3166 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		A53836A02CBC68C2005BE39C /* CleanupOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupOption.swift; sourceTree = "<group>"; };
+		A53836CF2CBEC6DE005BE39C /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		A576FAD42CB69C9700B018DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleSubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		A5BC39582CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTitleSubtitleTableViewCell.xib; sourceTree = "<group>"; };
@@ -624,6 +628,8 @@
 				756866CE2ACD9ED0008DBF7C /* OnboardingModel.swift */,
 				756866D02AD1AE58008DBF7C /* CardModel.swift */,
 				FA53586A2B3C4D490026FDC2 /* Credentials.swift */,
+				A53836A02CBC68C2005BE39C /* CleanupOption.swift */,
+				A53836CF2CBEC6DE005BE39C /* Mode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1643,11 +1649,13 @@
 				FA3987232B303A460096F335 /* AdBlockerViewController.swift in Sources */,
 				FA5358702B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift in Sources */,
 				FA3987422B3054B90096F335 /* PHAssetGroup.swift in Sources */,
+				A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */,
 				FA3988562B30602A0096F335 /* ZoomingPlayerView.swift in Sources */,
 				FA3988512B30602A0096F335 /* UILabel.swift in Sources */,
 				FA641DFC2B357C7A00F6A466 /* NSImageView+SwiftyGif.swift in Sources */,
 				FA3987F92B305FA50096F335 /* DKPhotoImageUtility.swift in Sources */,
 				FA3988492B30602A0096F335 /* PHAsset.swift in Sources */,
+				A53836AB2CBC68C2005BE39C /* CleanupOption.swift in Sources */,
 				FA3988022B305FA50096F335 /* DKPhotoProgressIndicator.swift in Sources */,
 				FA3988422B30602A0096F335 /* RawRepresentable.swift in Sources */,
 				FA39883C2B30602A0096F335 /* TransitionUtilities.swift in Sources */,

@@ -13,6 +13,10 @@ final class MainViewController: UIViewController {
     @IBOutlet weak var deviceInfoStackView: UIStackView!
     @IBOutlet weak var storageUsageView: StorageUsageView!
     @IBOutlet weak var cleanupOptionsStackView: UIStackView!
+    @IBOutlet weak var photosCleanup: CleanupOptionView!
+    @IBOutlet weak var videosCleanup: CleanupOptionView!
+    @IBOutlet weak var contactsCleanup: CleanupOptionView!
+    @IBOutlet weak var calendarCleanup: CleanupOptionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,8 +98,10 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     private func bindDeviceInfoStackView() {
-        Title.allCases.forEach { title in
-            deviceInfoStackView.addArrangedSubview(DeviceInfoCell(cell: title))
+        if deviceInfoStackView.arrangedSubviews.isEmpty {
+            Title.allCases.forEach { title in
+                deviceInfoStackView.addArrangedSubview(DeviceInfoCell(cell: title))
+            }
         }
     }
 
@@ -113,17 +119,36 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     private func setupCleanupOptions() {
-        CleanupOption.allCases.forEach { option in
-            let view = CleanupOptionView()
-            view.bind(option)
-            view.addTapGestureRecognizer(action: openPhotosCleanup)
-            cleanupOptionsStackView.addArrangedSubview(view)
-        }
+        photosCleanup.bind(.photos)
+        photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
+        videosCleanup.bind(.videos)
+        videosCleanup.addTapGestureRecognizer(action: openVideosCleanup)
+        contactsCleanup.bind(.contacts)
+        contactsCleanup.addTapGestureRecognizer(action: openCalendarCleanup)
+        calendarCleanup.bind(.calendar)
+        calendarCleanup.addTapGestureRecognizer(action: openContactsCleanup)
     }
     
-    @objc private func openPhotosCleanup() {
+    private func openPhotosCleanup() {
+        navigationController?.pushViewController(createSearchVC(with: .photos), animated: false)
+    }
+    
+    private func openVideosCleanup() {
+        navigationController?.pushViewController(createSearchVC(with: .videos), animated: false)
+    }
+    
+    private func openContactsCleanup() {
+        navigationController?.pushViewController(createSearchVC(with: .contacts), animated: false)
+    }
+    
+    private func openCalendarCleanup() {
+        navigationController?.pushViewController(createSearchVC(with: .calendar), animated: false)
+    }
+    
+    private func createSearchVC(with cleanupOption: CleanupOption) -> SearchViewController {
         let vc = StoryboardScene.Search.initialScene.instantiate()
         vc.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: false)
+        vc.setCleanupOption(cleanupOption)
+        return vc
     }
 }

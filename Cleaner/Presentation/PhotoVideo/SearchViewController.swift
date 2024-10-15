@@ -13,43 +13,33 @@ final class SearchViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var searchLabel: UILabel!
     
-	private let mediaService = MediaSevice()
-	var mode: Mode?
-	enum Mode {
-		case duplicate
-		case live
-		case gif
-		case selfies
-		case screenshot
-	
-		case duplicateVideo
-		case video
-
-	}
+    private let mediaService = MediaService.shared
+    private var cleanupOption: CleanupOption?
+    
 	private lazy var timer = Timer()
 	private lazy var counter = 0
 //	@IBOutlet var animationView: AnimationView!
-	
+    
 	override func viewDidLoad() {
         super.viewDidLoad()
-        mode = .duplicate
 //		animationView.animation = Animation.named("Search")
 //		animationView.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
         timer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { [weak self] _ in
             self?.updateSearch()
         })
         
-		switch mode {
-			case .duplicate:
+        guard let cleanupOption else { return }
+		switch cleanupOption.mode {
+			case .duplicatePhotos:
 				titleLabel.text = "Duplicate"
 				mediaService.loadSimilarPhotos(live: false) { assetGroups, duplicatesCount in
 					let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
 					vc.modalPresentationStyle = .fullScreen
 					vc.assetGroups = assetGroups
                     vc.duplicatesCount = duplicatesCount
-					DispatchQueue.main.async {
-						self.navigationController?.pushViewController(vc, animated: true)
-						self.timer.invalidate()
+					DispatchQueue.main.async { [weak self] in
+						self?.navigationController?.pushViewController(vc, animated: true)
+						self?.timer.invalidate()
 					}
 				}
 			case .live:
@@ -138,6 +128,10 @@ final class SearchViewController: UIViewController {
 			completion(resultArray)
 		}
 	}
+    
+    func setCleanupOption(_ cleanupOption: CleanupOption?) {
+        self.cleanupOption = cleanupOption
+    }
 	
 	private func updateSearch() {
 		if counter == 0 {

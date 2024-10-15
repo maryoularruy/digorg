@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol CustomComponentProtocol {
-    func setupView()
-    func initConstraints()
-}
-
 enum Title: String, CaseIterable {
     case available = "Available", download = "Download", used = "Used"
     
@@ -24,7 +19,7 @@ enum Title: String, CaseIterable {
     }
 }
 
-class DeviceInfoCell: UIView {
+final class DeviceInfoCell: UIView {
     private lazy var title: UILabel = UILabel.subheadline()
     private lazy var value: UILabel = UILabel.subtitle()
     
@@ -46,16 +41,14 @@ class DeviceInfoCell: UIView {
     func bind(newValue: String) {
         value.text = newValue
     }
-}
-
-extension DeviceInfoCell: CustomComponentProtocol {
-    func setupView() {
+    
+    private func setupView() {
         backgroundColor = .whiteBackground
         layer.cornerRadius = 10
         addShadows()
     }
     
-    func initConstraints() {
+    private func initConstraints() {
         addSubview(title)
         addSubview(value)
         
