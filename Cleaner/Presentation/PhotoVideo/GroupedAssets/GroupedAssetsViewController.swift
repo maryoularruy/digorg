@@ -29,7 +29,7 @@ final class GroupedAssetsViewController: UIViewController {
     }
     
 	var assetsInput: [PHAssetGroup] {
-		get { return assetGroups }
+		get { assetGroups }
 		set {
 			let changeset = StagedChangeset(source: assetGroups, target: newValue)
 			tableView.reload(using: changeset, with: .fade) { [weak self] data in
@@ -170,7 +170,7 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
     }
     
     func setupUI() {
-        similarPhotoLabel.text = "Similar Photo"
+        similarPhotoLabel.text = "Similar \(assetGroups.first?.subtype == .smartAlbumVideos ? "videos" : "photos")"
         duplicatesCountLabel.text = "\(duplicatesCount) files"
         selectMode = false
         updatePlaceholder()

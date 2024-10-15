@@ -77,7 +77,7 @@ final class MediaService: MediaServiceProtocol {
                                 }
                             })
                             if groupAssets.count >= 2 {
-                                similarPhotoGroups.append(PHAssetGroup(name: "", assets: groupAssets))
+                                similarPhotoGroups.append(PHAssetGroup(name: "", assets: groupAssets, subtype: .smartAlbumUserLibrary))
                             }
                         }
                         let duplicatesCount = similarPhotoGroups.reduce(0) { $0 + $1.assets.count }
@@ -145,7 +145,7 @@ final class MediaService: MediaServiceProtocol {
 								}
 							})
 							if groupAssets.count >= 1 {
-								similarVideoGroups.append(PHAssetGroup(name: "", assets: groupAssets))
+                                similarVideoGroups.append(PHAssetGroup(name: "", assets: groupAssets, subtype: .smartAlbumVideos))
 							}
 						}
                         let duplicatesCount = similarVideoGroups.reduce(0) { $0 + $1.assets.count }

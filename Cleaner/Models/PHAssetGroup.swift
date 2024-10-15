@@ -10,10 +10,12 @@ import Photos
 struct PHAssetGroup: Differentiable {
 	var name: String
 	var assets: [PHAsset]
+    var subtype: PHAssetCollectionSubtype
 
-	init(name: String, assets: [PHAsset]) {
+    init(name: String, assets: [PHAsset], subtype: PHAssetCollectionSubtype) {
 		self.name = name
 		self.assets = assets
+        self.subtype = subtype
 	}
 	
 	var differenceIdentifier: String {
