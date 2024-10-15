@@ -8,7 +8,12 @@
 import Photos
 import Vision
 
-final class MediaService {
+protocol MediaServiceProtocol {
+    func loadSimilarPhotos(from dateFrom: String, to dateTo: String, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ())
+    func loadSimilarVideos(from dateFrom: String, to dateTo: String, handler: @escaping ([PHAssetGroup], Int) -> ())
+}
+
+final class MediaService: MediaServiceProtocol {
     static let shared = MediaService()
     static var defaultStartDate = "01 Jan 1970 00:00:00"
     static var defaultEndDate = "01 Jan 2030 00:00:00"
@@ -81,173 +86,9 @@ final class MediaService {
                 }
             }
         }
-    
-    private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
-           let options = PHFetchOptions()
-           let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
-           options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-//        handler(PHAsset.fetchAssets(in: PHAssetCollection(), options: options))
-           albumsPhoto.enumerateObjects { collection, index, object in
-               handler(PHAsset.fetchAssets(in: collection, options: options))
-           }
-       }
-	
-	func fetchScreenshots(
-		from dateFrom: String = "01-01-1970",
-		to dateTo: String = "01-01-2030",
-		handler: @escaping (PHFetchResult<PHAsset>) -> Void
-	) {
-		let options = PHFetchOptions()
-		let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(
-			with: .smartAlbum,
-			subtype: .smartAlbumScreenshots,
-			options: options
-		)
-		options.sortDescriptors = [
-			NSSortDescriptor(key: "creationDate", ascending: false)
-		]
-		handler(PHAsset.fetchAssets(in: albumsPhoto[0], options: options))
-	}
-	
-	public func loadScreenshotPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
-		self.fetchScreenshots(from: dateFrom, to: dateTo) { photoInAlbum in
-			DispatchQueue.global(qos: .background).async{
-				var images: [PHAsset] = []
-				if photoInAlbum.count == 0 {
-					DispatchQueue.main.async {
-						handler([])
-					}
-					return
-				}
-				for i in 1...photoInAlbum.count {
-					images.append(photoInAlbum[i - 1])
-				}
-				DispatchQueue.main.async {
-					handler(images)
-				}
-			}
-		}
-	}
-	
-    func getAssetsWithText(completion: @escaping ([PHAsset]) -> Void) {
-        fetchPhotos(live: false) { fetchResult in
 
-            
-        }
-    }
-    
-	public func loadSelfiePhotos(_ handler: @escaping (([PHAsset]) -> ())) {
-		fetchSelfies({
-			photoInAlbum in
-			DispatchQueue.global(qos: .background).async {
-				var images: [PHAsset] = []
-				if photoInAlbum.count == 0 {
-					DispatchQueue.main.async {
-						handler([])
-					}
-					return
-				}
-				for i in 1...photoInAlbum.count {
-					images.append(photoInAlbum[i - 1])
-				}
-				DispatchQueue.main.async {
-					handler(images)
-				}
-			}
-		})
-	}
-	
-    private func fetchSelfies(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
-		let options = PHFetchOptions()
-		let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumSelfPortraits, options: options)
-		options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
-		options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-		albumsPhoto.enumerateObjects({(collection, index, object) in
-			handler(PHAsset.fetchAssets(in: collection, options: options))
-		})
-	}
-	
-	private func fetchGIFs(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
-		let options = PHFetchOptions()
-		let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumAnimated, options: options)
-		options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
-		options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-		albumsPhoto.enumerateObjects({(collection, index, object) in
-			handler(PHAsset.fetchAssets(in: collection, options: options))
-		})
-	}
-	
-	public func loadGifPhotos(_ handler: @escaping ([PHAsset]) -> ()) {
-		fetchGIFs({
-			photoInAlbum in
-			DispatchQueue.global(qos: .background).async {
-				var images: [PHAsset] = []
-				if photoInAlbum.count == 0 {
-					DispatchQueue.main.async {
-						handler([])
-					}
-					return
-				}
-				for i in 1...photoInAlbum.count {
-					images.append(photoInAlbum[i - 1])
-				}
-				DispatchQueue.main.async {
-					handler(images)
-				}
-			}
-		})
-	}
-	
-	public func loadLivePhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate,_ handler: @escaping ([PHAsset]) -> ()) {
-		   fetchPhotos(from: dateFrom, to: dateTo, live: true) { photoInAlbum in
-			   DispatchQueue.global(qos: .background).async {
-				   var images: [PHAsset] = []
-				   if photoInAlbum.count == 0 {
-					   DispatchQueue.main.async {
-						   handler([])
-					   }
-					   return
-				   }
-				   for i in 1...photoInAlbum.count{
-					   images.append(photoInAlbum[i - 1])
-				   }
-				   DispatchQueue.main.async {
-					   handler(images)
-				   }
-			   }
-		   }
-	   }
 
-	public func loadVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
-		fetchVideos(from: dateFrom, to: dateTo) { videoInAlbum in
-			DispatchQueue.global(qos: .background).async {
-				var images: [PHAsset] = []
-				if videoInAlbum.count == 0 {
-					DispatchQueue.main.async {
-						handler([])
-					}
-					return
-				}
-				for i in 1...videoInAlbum.count {
-					images.append(videoInAlbum[i - 1])
-				}
-				DispatchQueue.main.async {
-					handler(images)
-				}
-			}
-		}
-	}
-	
-	private func fetchVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ((PHFetchResult<PHAsset>) -> ())){
-		  let options = PHFetchOptions()
-		  let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: options)
-		  options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-		  albumsPhoto.enumerateObjects({(collection, index, object) in
-			  handler(PHAsset.fetchAssets(in: collection, options: options))
-		  })
-	  }
-
-	public func loadSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAssetGroup], Int) -> ()) {
+	func loadSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAssetGroup], Int) -> ()) {
 			fetchVideos(from: dateFrom, to: dateTo) { videosInAlbum in
 				DispatchQueue.global(qos: .background).async {
 					var videos: [OSTuple<NSString, NSData>] = []
@@ -313,4 +154,168 @@ final class MediaService {
 				}
 			}
 		}
+    
+    private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
+           let options = PHFetchOptions()
+           let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
+           options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+//        handler(PHAsset.fetchAssets(in: PHAssetCollection(), options: options))
+           albumsPhoto.enumerateObjects { collection, index, object in
+               handler(PHAsset.fetchAssets(in: collection, options: options))
+           }
+       }
+    
+    private func fetchVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
+          let options = PHFetchOptions()
+          let albumVideos: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: options)
+          options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+          albumVideos.enumerateObjects{ collection, index, object in
+              handler(PHAsset.fetchAssets(in: collection, options: options))
+          }
+      }
+}
+
+extension MediaService {
+    func loadSelfiePhotos(_ handler: @escaping (([PHAsset]) -> ())) {
+        fetchSelfies({
+            photoInAlbum in
+            DispatchQueue.global(qos: .background).async {
+                var images: [PHAsset] = []
+                if photoInAlbum.count == 0 {
+                    DispatchQueue.main.async {
+                        handler([])
+                    }
+                    return
+                }
+                for i in 1...photoInAlbum.count {
+                    images.append(photoInAlbum[i - 1])
+                }
+                DispatchQueue.main.async {
+                    handler(images)
+                }
+            }
+        })
+    }
+    
+    private func fetchSelfies(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
+        let options = PHFetchOptions()
+        let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumSelfPortraits, options: options)
+        options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        albumsPhoto.enumerateObjects({(collection, index, object) in
+            handler(PHAsset.fetchAssets(in: collection, options: options))
+        })
+    }
+    
+    private func fetchGIFs(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
+        let options = PHFetchOptions()
+        let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumAnimated, options: options)
+        options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        albumsPhoto.enumerateObjects({(collection, index, object) in
+            handler(PHAsset.fetchAssets(in: collection, options: options))
+        })
+    }
+    
+    func loadGifPhotos(_ handler: @escaping ([PHAsset]) -> ()) {
+        fetchGIFs({
+            photoInAlbum in
+            DispatchQueue.global(qos: .background).async {
+                var images: [PHAsset] = []
+                if photoInAlbum.count == 0 {
+                    DispatchQueue.main.async {
+                        handler([])
+                    }
+                    return
+                }
+                for i in 1...photoInAlbum.count {
+                    images.append(photoInAlbum[i - 1])
+                }
+                DispatchQueue.main.async {
+                    handler(images)
+                }
+            }
+        })
+    }
+    
+    func loadLivePhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate,_ handler: @escaping ([PHAsset]) -> ()) {
+           fetchPhotos(from: dateFrom, to: dateTo, live: true) { photoInAlbum in
+               DispatchQueue.global(qos: .background).async {
+                   var images: [PHAsset] = []
+                   if photoInAlbum.count == 0 {
+                       DispatchQueue.main.async {
+                           handler([])
+                       }
+                       return
+                   }
+                   for i in 1...photoInAlbum.count{
+                       images.append(photoInAlbum[i - 1])
+                   }
+                   DispatchQueue.main.async {
+                       handler(images)
+                   }
+               }
+           }
+       }
+
+    func loadVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
+        fetchVideos(from: dateFrom, to: dateTo) { videoInAlbum in
+            DispatchQueue.global(qos: .background).async {
+                var images: [PHAsset] = []
+                if videoInAlbum.count == 0 {
+                    DispatchQueue.main.async {
+                        handler([])
+                    }
+                    return
+                }
+                for i in 1...videoInAlbum.count {
+                    images.append(videoInAlbum[i - 1])
+                }
+                DispatchQueue.main.async {
+                    handler(images)
+                }
+            }
+        }
+    }
+    
+    func loadScreenshotPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
+        self.fetchScreenshots(from: dateFrom, to: dateTo) { photoInAlbum in
+            DispatchQueue.global(qos: .background).async{
+                var images: [PHAsset] = []
+                if photoInAlbum.count == 0 {
+                    DispatchQueue.main.async {
+                        handler([])
+                    }
+                    return
+                }
+                for i in 1...photoInAlbum.count {
+                    images.append(photoInAlbum[i - 1])
+                }
+                DispatchQueue.main.async {
+                    handler(images)
+                }
+            }
+        }
+    }
+    
+    func getAssetsWithText(completion: @escaping ([PHAsset]) -> Void) {
+        fetchPhotos(live: false) { fetchResult in }
+    }
+    
+    func fetchScreenshots(
+        from dateFrom: String = "01-01-1970",
+        to dateTo: String = "01-01-2030",
+        handler: @escaping (PHFetchResult<PHAsset>) -> Void
+    ) {
+        let options = PHFetchOptions()
+        let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(
+            with: .smartAlbum,
+            subtype: .smartAlbumScreenshots,
+            options: options
+        )
+        options.sortDescriptors = [
+            NSSortDescriptor(key: "creationDate", ascending: false)
+        ]
+        handler(PHAsset.fetchAssets(in: albumsPhoto[0], options: options))
+    }
 }
