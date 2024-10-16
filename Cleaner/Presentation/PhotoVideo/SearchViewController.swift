@@ -5,7 +5,6 @@
 //  Created by Александр Пономарёв on 19.05.2022.
 //
 
-import Lottie
 import UIKit
 import Photos
 
@@ -18,12 +17,9 @@ final class SearchViewController: UIViewController {
     
 	private lazy var timer = Timer()
 	private lazy var counter = 0
-//	@IBOutlet var animationView: AnimationView!
     
 	override func viewDidLoad() {
         super.viewDidLoad()
-//		animationView.animation = Animation.named("Search")
-//		animationView.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
         timer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { [weak self] _ in
             self?.updateSearch()
         })

@@ -1,4 +1,5 @@
 {
+  "originHash" : "10b2ef5b868178549603320d6010f2cea0bf4fad2ee5bb0a5546e1194d91a762",
   "pins" : [
     {
       "identity" : "bottompopup",
@@ -16,15 +17,6 @@
       "state" : {
         "revision" : "b0cb4fdf23e51849cc2460bdc6de795c3bcca99d",
         "version" : "0.6.4"
-      }
-    },
-    {
-      "identity" : "gradientprogressbar",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/fxm90/GradientProgressBar",
-      "state" : {
-        "branch" : "main",
-        "revision" : "19871af9f6ae2bebd1d125c4faa0d1e5e9a561d5"
       }
     },
     {
@@ -51,15 +43,6 @@
       "state" : {
         "revision" : "c00b1ae9fa1ad8af4465bb6ca901f6943fc98eba",
         "version" : "6.5.16"
-      }
-    },
-    {
-      "identity" : "lottie-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/airbnb/lottie-ios",
-      "state" : {
-        "revision" : "45517c3cfec9469bbdd4f86e32393c28ae9df0bc",
-        "version" : "4.3.3"
       }
     },
     {
@@ -112,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "e278c13e46e8d20c895c221e922c6ac6b72aaca9",
-        "version" : "5.18.7"
+        "revision" : "8a1be70a625683bc04d6903e2935bf23f3c6d609",
+        "version" : "5.19.7"
       }
     },
     {
@@ -153,5 +136,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

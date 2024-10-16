@@ -31,13 +31,6 @@
                                 <color key="textColor" name="PrimaryTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRG-4R-bdh" customClass="AnimationView" customModule="Lottie">
-                                <rect key="frame" x="20" y="268" width="374" height="374"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="lRG-4R-bdh" secondAttribute="height" multiplier="1:1" id="Xtk-Wh-SLe"/>
-                                </constraints>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOr-jW-Mqd">
                                 <rect key="frame" x="156" y="662" width="102" height="30"/>
                                 <constraints>
@@ -52,14 +45,11 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="lRG-4R-bdh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="GhY-Ef-iLv"/>
-                            <constraint firstItem="MOr-jW-Mqd" firstAttribute="centerX" secondItem="lRG-4R-bdh" secondAttribute="centerX" id="OHd-eW-K0w"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="MOr-jW-Mqd" secondAttribute="bottom" constant="170" id="763-zL-yJY"/>
+                            <constraint firstItem="MOr-jW-Mqd" firstAttribute="centerX" secondItem="CZ7-Rx-Cq5" secondAttribute="centerX" id="HfO-VB-LHO"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CZ7-Rx-Cq5" secondAttribute="trailing" id="Xq4-hB-7SR"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="lRG-4R-bdh" secondAttribute="trailing" constant="20" id="Zgq-9q-ayg"/>
                             <constraint firstItem="CZ7-Rx-Cq5" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="h5Q-Ld-ZgH"/>
                             <constraint firstItem="CZ7-Rx-Cq5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="jj0-25-sAm"/>
-                            <constraint firstItem="lRG-4R-bdh" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="liB-fW-z1f"/>
-                            <constraint firstItem="MOr-jW-Mqd" firstAttribute="top" secondItem="lRG-4R-bdh" secondAttribute="bottom" constant="20" id="ljH-W2-KhY"/>
                             <constraint firstItem="CZ7-Rx-Cq5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="vuB-Kn-USn"/>
                         </constraints>
                     </view>

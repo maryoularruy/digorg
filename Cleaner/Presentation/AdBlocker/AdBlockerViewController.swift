@@ -24,8 +24,4 @@ class AdBlockerViewController: UIViewController {
             self.present(vc, animated: false)
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        GradientService.shared.addGradientBackgroundToButton(button: configureButton, colors: [#colorLiteral(red: 0.472941041, green: 0.5231513381, blue: 0.9458861947, alpha: 1), #colorLiteral(red: 0.6934512258, green: 0.5760011077, blue: 0.9499141574, alpha: 1)])
-    }
 }

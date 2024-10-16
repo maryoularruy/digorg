@@ -6,13 +6,11 @@
 //
 
 import UIKit
-import Lottie
 
 class ConnectionViewController: UIViewController {
     
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var testStatusLabel: UILabel!
-    @IBOutlet weak var speedAnimationView: LottieAnimationView!
     @IBOutlet weak var wifiInfoView: UIView!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var wifiLabel: UILabel!
@@ -23,11 +21,6 @@ class ConnectionViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupActions()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        GradientService.shared.addGradientBackgroundToButton(button: startButton, colors: [#colorLiteral(red: 0.472941041, green: 0.5231513381, blue: 0.9458861947, alpha: 1), #colorLiteral(red: 0.6934512258, green: 0.5760011077, blue: 0.9499141574, alpha: 1)])
     }
     
     private func setupActions() {

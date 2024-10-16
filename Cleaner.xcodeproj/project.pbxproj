@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7504C24C2AD44407005FB398 /* PhoneInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7504C24B2AD44407005FB398 /* PhoneInfoService.swift */; };
 		7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */ = {isa = PBXBuildFile; productRef = 7504C24E2AD5E99B005FB398 /* NetworkFlows */; };
-		7504C2522AD6F5A0005FB398 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7504C2512AD6F5A0005FB398 /* Lottie */; };
 		7504C2562AD6FCF5005FB398 /* WiFiProtectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7504C2552AD6FCF5005FB398 /* WiFiProtectionViewController.swift */; };
 		7504C2582AD7020D005FB398 /* WiFiProtection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7504C2572AD7020D005FB398 /* WiFiProtection.storyboard */; };
 		7504C25A2AD9C65A005FB398 /* ConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7504C2592AD9C65A005FB398 /* ConnectionViewController.swift */; };
@@ -18,7 +17,6 @@
 		752B10752AEABACD00EC0BBA /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B10742AEABACD00EC0BBA /* ActionView.swift */; };
 		752B10792AEAC18F00EC0BBA /* MergeSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 752B10782AEAC18F00EC0BBA /* MergeSectionCell.xib */; };
 		752B107B2AEAC19600EC0BBA /* MergeSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B107A2AEAC19600EC0BBA /* MergeSectionCell.swift */; };
-		7532F8482AE1A205007469EA /* GradientProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F8472AE1A205007469EA /* GradientProgressBar */; };
 		7532F84A2AE2749F007469EA /* SpeedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8492AE2749F007469EA /* SpeedTest.swift */; };
 		7532F8502AE2766B007469EA /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F84F2AE2766B007469EA /* Reachability */; };
 		7532F85D2AE290A6007469EA /* ContactsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F85C2AE290A6007469EA /* ContactsMenuViewController.swift */; };
@@ -77,7 +75,6 @@
 		A50F58C42CB7B43400AB3166 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58C32CB7B43400AB3166 /* UIColor.swift */; };
 		A53836AB2CBC68C2005BE39C /* CleanupOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53836A02CBC68C2005BE39C /* CleanupOption.swift */; };
 		A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53836CF2CBEC6DE005BE39C /* Mode.swift */; };
-		A576FAD52CB69C9700B018DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A576FAD42CB69C9700B018DE /* ContentView.swift */; };
 		A5BC395B2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */; };
 		A5BC395C2CBC604E00153FD1 /* PhotoVideoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC395A2CBC604E00153FD1 /* PhotoVideoMenuViewController.swift */; };
 		A5BC395D2CBC604E00153FD1 /* PhotoVideoMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BC39592CBC604E00153FD1 /* PhotoVideoMenu.storyboard */; };
@@ -121,7 +118,6 @@
 		FA3987B12B305A3A0096F335 /* SDWebImagePhotosPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */; };
 		FA3987B42B305B190096F335 /* BottomPopup in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B32B305B190096F335 /* BottomPopup */; };
 		FA3987B72B305C120096F335 /* Haneke in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B62B305C120096F335 /* Haneke */; };
-		FA3987B92B305C510096F335 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B82B305C510096F335 /* Lottie */; };
 		FA3987BD2B305D720096F335 /* AppKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987BB2B305D720096F335 /* AppKitExtension.swift */; };
 		FA3987BE2B305D720096F335 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987BC2B305D720096F335 /* UIKitExtension.swift */; };
 		FA3987EB2B305FA50096F335 /* DKPhotoPreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987C52B305FA40096F335 /* DKPhotoPreviewFactory.swift */; };
@@ -305,7 +301,6 @@
 		A50F58C32CB7B43400AB3166 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		A53836A02CBC68C2005BE39C /* CleanupOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupOption.swift; sourceTree = "<group>"; };
 		A53836CF2CBEC6DE005BE39C /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
-		A576FAD42CB69C9700B018DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleSubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		A5BC39582CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTitleSubtitleTableViewCell.xib; sourceTree = "<group>"; };
 		A5BC39592CBC604E00153FD1 /* PhotoVideoMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoVideoMenu.storyboard; sourceTree = "<group>"; };
@@ -488,7 +483,6 @@
 			files = (
 				FA3987B42B305B190096F335 /* BottomPopup in Frameworks */,
 				75D3FC6F2A606DBB00F351A3 /* SwiftyUserDefaults in Frameworks */,
-				7532F8482AE1A205007469EA /* GradientProgressBar in Frameworks */,
 				7532F8752AE30517007469EA /* SwiftyContacts in Frameworks */,
 				756DF0A92ADC6D0700CC187D /* InternetSpeed in Frameworks */,
 				FA3988682B3060A90096F335 /* Disk in Frameworks */,
@@ -501,8 +495,6 @@
 				7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */,
 				FA3987B72B305C120096F335 /* Haneke in Frameworks */,
 				FA3987B12B305A3A0096F335 /* SDWebImagePhotosPlugin in Frameworks */,
-				7504C2522AD6F5A0005FB398 /* Lottie in Frameworks */,
-				FA3987B92B305C510096F335 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -854,18 +846,9 @@
 			path = BaseConfiguration;
 			sourceTree = "<group>";
 		};
-		A576FAD32CB69C8D00B018DE /* BaseUIComponents */ = {
-			isa = PBXGroup;
-			children = (
-				A576FAD42CB69C9700B018DE /* ContentView.swift */,
-			);
-			path = BaseUIComponents;
-			sourceTree = "<group>";
-		};
 		A576FADA2CB6A9EE00B018DE /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				A576FAD32CB69C8D00B018DE /* BaseUIComponents */,
 				A576FACF2CB69A7700B018DE /* BaseConfiguration */,
 			);
 			path = Base;
@@ -1447,15 +1430,12 @@
 				75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */,
 				75D3FC712A606DD100F351A3 /* Reusable */,
 				7504C24E2AD5E99B005FB398 /* NetworkFlows */,
-				7504C2512AD6F5A0005FB398 /* Lottie */,
 				756DF0A82ADC6D0700CC187D /* InternetSpeed */,
-				7532F8472AE1A205007469EA /* GradientProgressBar */,
 				7532F84F2AE2766B007469EA /* Reachability */,
 				7532F8742AE30517007469EA /* SwiftyContacts */,
 				FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */,
 				FA3987B32B305B190096F335 /* BottomPopup */,
 				FA3987B62B305C120096F335 /* Haneke */,
-				FA3987B82B305C510096F335 /* Lottie */,
 				FA3988672B3060A90096F335 /* Disk */,
 				FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */,
 				FA5358662B3C4C170026FDC2 /* Realm */,
@@ -1495,9 +1475,7 @@
 				75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
 				75D3FC702A606DD100F351A3 /* XCRemoteSwiftPackageReference "Reusable" */,
 				7504C24D2AD5E99B005FB398 /* XCRemoteSwiftPackageReference "NetworkFlows" */,
-				7504C2502AD6F5A0005FB398 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				756DF0A72ADC6D0700CC187D /* XCRemoteSwiftPackageReference "InternetSpeed" */,
-				7532F8462AE1A205007469EA /* XCRemoteSwiftPackageReference "GradientProgressBar" */,
 				7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */,
 				7532F8732AE30517007469EA /* XCRemoteSwiftPackageReference "SwiftyContacts" */,
 				FA3987AF2B305A3A0096F335 /* XCRemoteSwiftPackageReference "SDWebImagePhotosPlugin" */,
@@ -1672,7 +1650,6 @@
 				FA3987F32B305FA50096F335 /* DKPhotoGalleryItem.swift in Sources */,
 				FA3987582B3055510096F335 /* StagedChangeset.swift in Sources */,
 				FA641DF82B357C7A00F6A466 /* NSImage+SwiftyGif.swift in Sources */,
-				A576FAD52CB69C9700B018DE /* ContentView.swift in Sources */,
 				FA3988702B3080B50096F335 /* PrivateMenuViewController.swift in Sources */,
 				FA3988032B305FA50096F335 /* DKPhotoGalleryScrollView.swift in Sources */,
 				756866D42AD1B9FE008DBF7C /* TutorialViewController.swift in Sources */,
@@ -2013,22 +1990,6 @@
 				kind = branch;
 			};
 		};
-		7504C2502AD6F5A0005FB398 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		7532F8462AE1A205007469EA /* XCRemoteSwiftPackageReference "GradientProgressBar" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/fxm90/GradientProgressBar";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
@@ -2133,16 +2094,6 @@
 			package = 7504C24D2AD5E99B005FB398 /* XCRemoteSwiftPackageReference "NetworkFlows" */;
 			productName = NetworkFlows;
 		};
-		7504C2512AD6F5A0005FB398 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7504C2502AD6F5A0005FB398 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
-		};
-		7532F8472AE1A205007469EA /* GradientProgressBar */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7532F8462AE1A205007469EA /* XCRemoteSwiftPackageReference "GradientProgressBar" */;
-			productName = GradientProgressBar;
-		};
 		7532F84F2AE2766B007469EA /* Reachability */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */;
@@ -2182,11 +2133,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */;
 			productName = Haneke;
-		};
-		FA3987B82B305C510096F335 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7504C2502AD6F5A0005FB398 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
 		};
 		FA3988672B3060A90096F335 /* Disk */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -155,14 +155,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ye-lU-qly" customClass="LottieAnimationView" customModule="Lottie">
-                                                <rect key="frame" x="98" y="336.33333333333331" width="197" height="196.99999999999994"/>
-                                                <color key="backgroundColor" systemColor="systemFillColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="197" id="AMm-Cw-hy2"/>
-                                                    <constraint firstAttribute="height" constant="197" id="GmG-ww-3rv"/>
-                                                </constraints>
-                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U3g-ny-hDF">
                                                 <rect key="frame" x="24" y="637.33333333333337" width="345" height="56"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -308,15 +300,13 @@
                                             <constraint firstAttribute="trailing" secondItem="sY5-48-twr" secondAttribute="trailing" constant="24" id="4mZ-jN-i63"/>
                                             <constraint firstItem="U3g-ny-hDF" firstAttribute="leading" secondItem="EPZ-c1-nUQ" secondAttribute="leading" constant="24" id="6Ah-ZQ-RJo"/>
                                             <constraint firstItem="SUg-q7-WsM" firstAttribute="leading" secondItem="EPZ-c1-nUQ" secondAttribute="leading" constant="16" id="78l-jL-9Uy"/>
+                                            <constraint firstAttribute="height" constant="725.33333333333337" id="7nw-TK-Crz"/>
                                             <constraint firstItem="IMa-Bs-Omb" firstAttribute="top" secondItem="Sty-yC-Uz5" secondAttribute="bottom" constant="8" id="ATE-68-5fD"/>
-                                            <constraint firstItem="IMa-Bs-Omb" firstAttribute="top" secondItem="3Ye-lU-qly" secondAttribute="bottom" constant="24" id="BNl-57-V6M"/>
                                             <constraint firstItem="SUg-q7-WsM" firstAttribute="top" secondItem="EPZ-c1-nUQ" secondAttribute="top" constant="3" id="CJM-dV-C2U"/>
                                             <constraint firstItem="IMa-Bs-Omb" firstAttribute="leading" secondItem="EPZ-c1-nUQ" secondAttribute="leading" constant="24" id="EPG-yr-kI0"/>
                                             <constraint firstAttribute="trailing" secondItem="IMa-Bs-Omb" secondAttribute="trailing" constant="24" id="ISU-dH-5n0"/>
                                             <constraint firstAttribute="bottom" secondItem="U3g-ny-hDF" secondAttribute="bottom" constant="32" id="Jdj-sM-VgN"/>
                                             <constraint firstItem="U3g-ny-hDF" firstAttribute="top" secondItem="IMa-Bs-Omb" secondAttribute="bottom" constant="24" id="PyD-6X-2x8"/>
-                                            <constraint firstItem="3Ye-lU-qly" firstAttribute="centerX" secondItem="EPZ-c1-nUQ" secondAttribute="centerX" id="RtX-4a-bT7"/>
-                                            <constraint firstItem="3Ye-lU-qly" firstAttribute="centerX" secondItem="EPZ-c1-nUQ" secondAttribute="centerX" id="XFx-gB-6CV"/>
                                             <constraint firstItem="MSh-1H-Jog" firstAttribute="top" secondItem="21N-Nr-MaT" secondAttribute="bottom" constant="40" id="aPF-PF-uMY"/>
                                             <constraint firstItem="Sty-yC-Uz5" firstAttribute="leading" secondItem="EPZ-c1-nUQ" secondAttribute="leading" constant="24" id="cks-Wq-kwa"/>
                                             <constraint firstItem="21N-Nr-MaT" firstAttribute="top" secondItem="SUg-q7-WsM" secondAttribute="bottom" constant="2" id="ghz-qG-N1s"/>
@@ -326,7 +316,6 @@
                                             <constraint firstAttribute="trailing" secondItem="21N-Nr-MaT" secondAttribute="trailing" constant="16" id="nPy-Va-e0p"/>
                                             <constraint firstItem="sY5-48-twr" firstAttribute="top" secondItem="2n1-eZ-jyI" secondAttribute="bottom" constant="4" id="q4f-3d-aJw"/>
                                             <constraint firstItem="52i-nM-zD2" firstAttribute="top" secondItem="sY5-48-twr" secondAttribute="bottom" constant="56" id="qt2-Rn-ewS"/>
-                                            <constraint firstItem="3Ye-lU-qly" firstAttribute="top" secondItem="52i-nM-zD2" secondAttribute="bottom" constant="8" id="ryI-fh-tsT"/>
                                             <constraint firstAttribute="trailing" secondItem="U3g-ny-hDF" secondAttribute="trailing" constant="24" id="uDn-du-IW8"/>
                                             <constraint firstItem="21N-Nr-MaT" firstAttribute="leading" secondItem="EPZ-c1-nUQ" secondAttribute="leading" constant="16" id="vhd-6f-T9Z"/>
                                             <constraint firstItem="2n1-eZ-jyI" firstAttribute="leading" secondItem="EPZ-c1-nUQ" secondAttribute="leading" constant="24" id="wtp-AR-PAW"/>
@@ -358,7 +347,6 @@
                     <connections>
                         <outlet property="backView" destination="lhf-Y7-M9n" id="RSu-vO-Yws"/>
                         <outlet property="connectStatusLabel" destination="2n1-eZ-jyI" id="01R-If-qGD"/>
-                        <outlet property="speedAnimationView" destination="3Ye-lU-qly" id="Hyg-Lg-hde"/>
                         <outlet property="startButton" destination="U3g-ny-hDF" id="9PR-6g-pEN"/>
                         <outlet property="testStatusLabel" destination="Sty-yC-Uz5" id="kag-BD-UlO"/>
                         <outlet property="typeLabel" destination="HiW-uK-bxb" id="JjI-C4-j3X"/>
@@ -378,7 +366,7 @@
         <image name="upload" width="32" height="32"/>
         <image name="wifiConnection" width="32" height="32"/>
         <namedColor name="Blue">
-            <color red="0.31000000238418579" green="0.44299998879432678" blue="0.83899998664855957" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.33725490196078434" green="0.4392156862745098" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="Cards">
             <color red="0.94499999284744263" green="0.9570000171661377" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -387,13 +375,10 @@
             <color red="0.054999999701976776" green="0.016000000759959221" blue="0.11400000005960464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="White">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.97647058823529409" green="0.97647058823529409" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemFillColor">
-            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
