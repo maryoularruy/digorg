@@ -41,26 +41,6 @@
                                     <outlet property="delegate" destination="27x-6D-L5n" id="nRr-RS-Gle"/>
                                 </connections>
                             </tableView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSs-SI-AvE">
-                                <rect key="frame" x="24" y="793" width="366" height="56"/>
-                                <color key="backgroundColor" name="White"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="Oq8-01-jbh"/>
-                                </constraints>
-                                <color key="tintColor" name="PrimaryWhiteColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button">
-                                    <fontDescription key="titleFontDescription" name="Inter-Medium" family="Inter" pointSize="18"/>
-                                </buttonConfiguration>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="deletePhotos:" destination="27x-6D-L5n" eventType="touchUpInside" id="na1-j8-1CW"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzO-BD-2ZM" customClass="UILabelSubtitleStyle" customModule="Cleaner" customModuleProvider="target">
                                 <rect key="frame" x="16" y="124" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -91,18 +71,15 @@
                         <constraints>
                             <constraint firstItem="WX4-Ey-lrt" firstAttribute="trailing" secondItem="e6p-HG-smV" secondAttribute="trailing" id="0TR-dl-wdD"/>
                             <constraint firstItem="N1k-U1-7FJ" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" id="B2d-jz-rTn"/>
-                            <constraint firstItem="WX4-Ey-lrt" firstAttribute="trailing" secondItem="FSs-SI-AvE" secondAttribute="trailing" constant="24" id="Cd3-O0-cAd"/>
                             <constraint firstItem="pX6-gp-mlx" firstAttribute="centerY" secondItem="N1k-U1-7FJ" secondAttribute="centerY" id="E0p-4x-6is"/>
                             <constraint firstItem="WX4-Ey-lrt" firstAttribute="trailing" secondItem="pX6-gp-mlx" secondAttribute="trailing" constant="16" id="GYY-Rc-1HR"/>
                             <constraint firstItem="Lkk-Of-Ud7" firstAttribute="leading" secondItem="pzO-BD-2ZM" secondAttribute="leading" id="Glv-VR-80L"/>
                             <constraint firstAttribute="bottom" secondItem="wHd-R4-dnf" secondAttribute="bottom" id="Pyh-Yv-jLa"/>
-                            <constraint firstItem="WX4-Ey-lrt" firstAttribute="bottom" secondItem="FSs-SI-AvE" secondAttribute="bottom" constant="13" id="Qsq-Cw-m1C"/>
                             <constraint firstItem="N1k-U1-7FJ" firstAttribute="top" secondItem="WX4-Ey-lrt" secondAttribute="top" constant="5" id="SDx-kY-kDq"/>
                             <constraint firstItem="wHd-R4-dnf" firstAttribute="top" secondItem="e6p-HG-smV" secondAttribute="bottom" id="SOC-3Y-imu"/>
                             <constraint firstItem="e6p-HG-smV" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" id="VTh-e5-z9R"/>
                             <constraint firstItem="Lkk-Of-Ud7" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" priority="900" constant="16" id="Vvu-uZ-Rhm"/>
                             <constraint firstItem="wHd-R4-dnf" firstAttribute="trailing" secondItem="WX4-Ey-lrt" secondAttribute="trailing" id="WS5-nz-gUj"/>
-                            <constraint firstItem="FSs-SI-AvE" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" constant="24" id="d8c-iR-gOq"/>
                             <constraint firstItem="Lkk-Of-Ud7" firstAttribute="top" secondItem="pzO-BD-2ZM" secondAttribute="bottom" constant="6" id="dxu-IW-mx9"/>
                             <constraint firstItem="pzO-BD-2ZM" firstAttribute="top" secondItem="N1k-U1-7FJ" secondAttribute="bottom" constant="16" id="nIx-at-JMm"/>
                             <constraint firstItem="wHd-R4-dnf" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" id="qFj-C2-aUy"/>
@@ -113,7 +90,6 @@
                     <connections>
                         <outlet property="actionToolbar" destination="wHd-R4-dnf" id="kr1-wC-uIh"/>
                         <outlet property="arrowBackView" destination="N1k-U1-7FJ" id="jCa-HU-AGQ"/>
-                        <outlet property="deletionButton" destination="FSs-SI-AvE" id="6sm-2t-exZ"/>
                         <outlet property="duplicatesCountLabel" destination="Lkk-Of-Ud7" id="eDu-lD-Xek"/>
                         <outlet property="selectModeButton" destination="pX6-gp-mlx" id="bvQ-Ov-08F"/>
                         <outlet property="similarPhotoLabel" destination="pzO-BD-2ZM" id="CJo-rO-JMQ"/>
@@ -127,9 +103,6 @@
     </scenes>
     <resources>
         <image name="ArrowBackIcon" width="64" height="64"/>
-        <namedColor name="PrimaryWhiteColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="White">
             <color red="0.97647058823529409" green="0.97647058823529409" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

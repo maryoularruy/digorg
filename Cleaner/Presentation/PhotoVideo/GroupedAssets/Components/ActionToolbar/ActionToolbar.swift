@@ -7,11 +7,16 @@
 
 import UIKit
 
+protocol ActionToolbarDelegate {
+    func removeItems()
+}
+
 final class ActionToolbar: UIView {
     private lazy var nibName = "ActionToolbar"
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var toolbarButton: UIButtonActionToolbarStyle!
+    var delegate: ActionToolbarDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,6 +27,9 @@ final class ActionToolbar: UIView {
         super.init(coder: coder)
         setup()
     }
+    @IBAction func tapOnToolbarButton(_ sender: Any) {
+        delegate?.removeItems()
+    }
     
     private func setup() {
         Bundle.main.loadNibNamed(nibName, owner: self)
@@ -29,8 +37,6 @@ final class ActionToolbar: UIView {
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         addSubview(contentView)
         contentView.frame = bounds
-        
-        toolbarButton.bind(text: "Delete 33 items, 120 MB")
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 }

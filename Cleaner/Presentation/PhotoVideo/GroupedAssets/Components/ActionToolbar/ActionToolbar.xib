@@ -27,6 +27,9 @@
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <connections>
+                        <action selector="tapOnToolbarButton:" destination="-1" eventType="touchUpInside" id="OXw-zh-kUP"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

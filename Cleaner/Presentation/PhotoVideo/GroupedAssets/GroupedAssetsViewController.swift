@@ -12,7 +12,6 @@ import CryptoKit
 final class GroupedAssetsViewController: UIViewController {
     @IBOutlet weak var similarPhotoLabel: UILabelSubtitleStyle!
     @IBOutlet weak var duplicatesCountLabel: UILabelSubhealine13sizeStyle!
-    @IBOutlet var deletionButton: UIButton!
 	@IBOutlet var arrowBackView: UIView!
     @IBOutlet weak var selectModeButton: UIButtonSecondaryStyle!
     @IBOutlet var tableView: UITableView!
@@ -51,7 +50,6 @@ final class GroupedAssetsViewController: UIViewController {
 			} else {
                 selectModeButton.bind(text: "Select")
 				assetsForDeletion.removeAll()
-				deletionButton.isHidden = true
                 tableView.reloadData()
 			}
 		}
@@ -59,44 +57,10 @@ final class GroupedAssetsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        actionToolbar.delegate = self
         setupUI()
 		tableView.register(cellType: DuplicateTableViewCell.self)
         addGestureRecognizers()
-	}
-    
-    @IBAction func deletePhotos(_ sender: Any) {
-		if delete(assets: Array(assetsForDeletion)) {
-			self.deletionButton.isHidden = true
-			self.assetsInput = self.assetsInput.map ( { group in
-                var tempGroup = group
-				let notDeleted = tempGroup.assets.filter({ !assetsForDeletion.contains($0)})
-				tempGroup.assets = notDeleted
-				return tempGroup
-			})
-			self.assetsInput = self.assetsInput.filter({ $0.assets.count != 0 })
-			self.assetsForDeletion.removeAll()
-			self.selectMode = false
-			
-			updatePlaceholder()
-		}
-	}
-	
-	func delete(assets: [PHAsset]) -> Bool {
-		let semaphore = DispatchSemaphore(value: 0)
-		var result = false
-		PHPhotoLibrary.shared().performChanges({
-			PHAssetChangeRequest.deleteAssets(assets as NSArray)}, completionHandler: { success, _ in
-				if success {
-					result = true
-				}
-			semaphore.signal()
-		})
-		let semaphoreResult = semaphore.wait(timeout: .distantFuture)
-		if semaphoreResult == .success {
-			return result
-		} else {
-			return false
-		}
 	}
 }
 
@@ -129,20 +93,11 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 				self.assetsForDeletion.remove(self.assetGroups[indexPath.item].assets[index])
 			}
             cell.assetsForDeletion = self.assetsForDeletion
-			
-			if self.assetsForDeletion.isEmpty {
-				self.deletionButton.isHidden = true
-			} else {
-				self.deletionButton.isHidden = false
-				self.deletionButton.setTitle("Delete \(self.assetsForDeletion.count) photos", for: .normal)
-			}
 		}
 		cell.onTapSelectAll = { [weak self] assets in
 			guard let self = self else { return }
 			self.selectMode = true
 			self.assetsForDeletion.insert(assets) //= Set(assets)
-			self.deletionButton.isHidden = false
-			self.deletionButton.setTitle("Delete \(self.assetsForDeletion.count) photos", for: .normal)
 			self.tableView.reloadData()
 		}
         cell.assetsForDeletion = self.assetsForDeletion
@@ -157,15 +112,15 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 extension GroupedAssetsViewController: ViewControllerProtocol {
     func addGestureRecognizers() {
         arrowBackView.addTapGestureRecognizer { [weak self] in
-            guard let self = self else { return }
-            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-            self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+            guard let self else { return }
+            let viewControllers: [UIViewController] = navigationController!.viewControllers as [UIViewController]
+            navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
         }
         
         selectModeButton.addTapGestureRecognizer { [weak self] in
-            guard let self = self else { return }
-            self.selectMode.toggle()
-            self.tableView.reloadData()
+            guard let self else { return }
+            selectMode.toggle()
+            tableView.reloadData()
         }
     }
     
@@ -178,8 +133,47 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
     
     private func updatePlaceholder() {
         if assetGroups.isEmpty {
-            self.deletionButton.isHidden = false
             self.selectModeButton.isHidden = true
+        }
+    }
+}
+
+extension GroupedAssetsViewController: ActionToolbarDelegate {
+    func removeItems() {
+        deletePhotos()
+    }
+    
+    private func deletePhotos() {
+        if delete(assets: Array(assetsForDeletion)) {
+            self.assetsInput = self.assetsInput.map ( { group in
+                var tempGroup = group
+                let notDeleted = tempGroup.assets.filter({ !assetsForDeletion.contains($0)})
+                tempGroup.assets = notDeleted
+                return tempGroup
+            })
+            self.assetsInput = self.assetsInput.filter({ $0.assets.count != 0 })
+            self.assetsForDeletion.removeAll()
+            self.selectMode = false
+            
+            updatePlaceholder()
+        }
+    }
+    
+    private func delete(assets: [PHAsset]) -> Bool {
+        let semaphore = DispatchSemaphore(value: 0)
+        var result = false
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.deleteAssets(assets as NSArray)}, completionHandler: { success, _ in
+                if success {
+                    result = true
+                }
+            semaphore.signal()
+        })
+        let semaphoreResult = semaphore.wait(timeout: .distantFuture)
+        if semaphoreResult == .success {
+            return result
+        } else {
+            return false
         }
     }
 }
