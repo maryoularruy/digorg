@@ -96,6 +96,7 @@ final class SearchViewController: UIViewController {
 					let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
 					vc.modalPresentationStyle = .fullScreen
 					vc.assetGroups = assets
+                    vc.duplicatesCount = duplicatesCount
 					DispatchQueue.main.async {
 						self.navigationController?.pushViewController(vc, animated: true)
 						self.timer.invalidate()
