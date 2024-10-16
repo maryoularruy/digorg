@@ -68,7 +68,6 @@
 		75D3FC9B2A618F5100F351A3 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC9A2A618F5100F351A3 /* KeyboardLayoutConstraint.swift */; };
 		75FC42202AD2A0AC008F3E3A /* TutorialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC421F2AD2A0AC008F3E3A /* TutorialCell.swift */; };
 		75FC42222AD2A0C5008F3E3A /* TutorialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */; };
-		75FC42262AD31061008F3E3A /* GradientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC42252AD31061008F3E3A /* GradientService.swift */; };
 		A50F58B52CB6D10100AB3166 /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */; };
 		A50F58BC2CB6D50400AB3166 /* UILabel+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58BB2CB6D50400AB3166 /* UILabel+ext.swift */; };
 		A50F58BE2CB6E4AA00AB3166 /* UIFont+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58BD2CB6E4AA00AB3166 /* UIFont+ext.swift */; };
@@ -294,7 +293,6 @@
 		75D3FC9A2A618F5100F351A3 /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		75FC421F2AD2A0AC008F3E3A /* TutorialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialCell.swift; sourceTree = "<group>"; };
 		75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialCell.xib; sourceTree = "<group>"; };
-		75FC42252AD31061008F3E3A /* GradientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientService.swift; sourceTree = "<group>"; };
 		A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		A50F58BB2CB6D50400AB3166 /* UILabel+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ext.swift"; sourceTree = "<group>"; };
 		A50F58BD2CB6E4AA00AB3166 /* UIFont+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+ext.swift"; sourceTree = "<group>"; };
@@ -828,7 +826,6 @@
 			isa = PBXGroup;
 			children = (
 				FA39873F2B3054930096F335 /* MediaService.swift */,
-				75FC42252AD31061008F3E3A /* GradientService.swift */,
 				7504C24B2AD44407005FB398 /* PhoneInfoService.swift */,
 				7532F8492AE2749F007469EA /* SpeedTest.swift */,
 				7532F8712AE304B5007469EA /* ContactService.swift */,
@@ -1657,7 +1654,6 @@
 				75D3FC5E2A606BA100F351A3 /* Storyboards.swift in Sources */,
 				FA641DE32B34575300F6A466 /* CalendarListViewController.swift in Sources */,
 				756866D92AD1D398008DBF7C /* PhoneInfoViewController.swift in Sources */,
-				75FC42262AD31061008F3E3A /* GradientService.swift in Sources */,
 				FA3987FC2B305FA50096F335 /* DKPhotoWebVC.swift in Sources */,
 				7532F8662AE29735007469EA /* IncompliteContactsViewController.swift in Sources */,
 				FACA30852B3C9E6F0018FA5F /* EditPasswordViewController.swift in Sources */,

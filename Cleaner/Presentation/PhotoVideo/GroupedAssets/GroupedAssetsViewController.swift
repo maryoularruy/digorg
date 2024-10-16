@@ -32,13 +32,13 @@ final class GroupedAssetsViewController: UIViewController {
 		set {
 			let changeset = StagedChangeset(source: assetGroups, target: newValue)
 			tableView.reload(using: changeset, with: .fade) { [weak self] data in
-				guard let self = self else { return }
-				self.assetGroups = data
+				guard let self else { return }
+				assetGroups = data
 			} completion: {
-				DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [weak self] in
-					guard let self = self else { return }
-					self.tableView.reloadData()
-				})
+				DispatchQueue.main.async { [weak self] in
+					guard let self else { return }
+					tableView.reloadData()
+				}
 			}
 		}
 	}
@@ -55,13 +55,14 @@ final class GroupedAssetsViewController: UIViewController {
 		}
 	}
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         actionToolbar.delegate = self
         setupUI()
-		tableView.register(cellType: DuplicateTableViewCell.self)
+        tableView.register(cellType: DuplicateTableViewCell.self)
         addGestureRecognizers()
-	}
+    }
+
 }
 
 extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -145,16 +146,16 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
     
     private func deletePhotos() {
         if delete(assets: Array(assetsForDeletion)) {
-            self.assetsInput = self.assetsInput.map ( { group in
+            assetsInput = assetsInput.map { group in
                 var tempGroup = group
-                let notDeleted = tempGroup.assets.filter({ !assetsForDeletion.contains($0)})
+                let notDeleted = tempGroup.assets.filter { !assetsForDeletion.contains($0) }
                 tempGroup.assets = notDeleted
                 return tempGroup
-            })
-            self.assetsInput = self.assetsInput.filter({ $0.assets.count != 0 })
-            self.assetsForDeletion.removeAll()
-            self.selectMode = false
-            
+            }
+            assetsInput = assetsInput.filter { $0.assets.count != 0 }
+            assetsForDeletion.removeAll()
+            selectMode = false
+            refreshSimilarItems()
             updatePlaceholder()
         }
     }
@@ -170,10 +171,25 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
             semaphore.signal()
         })
         let semaphoreResult = semaphore.wait(timeout: .distantFuture)
-        if semaphoreResult == .success {
-            return result
+        return semaphoreResult == .success ? result : false
+    }
+    
+    @objc func refreshSimilarItems() {
+        if assetGroups.first?.subtype == .smartAlbumVideos {
+            MediaService.shared.loadSimilarVideos { [weak self] assetGroups, duplicatesCount in
+                self?.refreshUI(assetGroups: assetGroups, duplicatesCount: duplicatesCount)
+            }
         } else {
-            return false
+            MediaService.shared.loadSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
+                self?.refreshUI(assetGroups: assetGroups, duplicatesCount: duplicatesCount)
+            }
         }
+    }
+    
+    private func refreshUI(assetGroups: [PHAssetGroup], duplicatesCount: Int) {
+        self.assetGroups = assetGroups
+        self.duplicatesCount = duplicatesCount
+        setupUI()
+        tableView.reloadData()
     }
 }

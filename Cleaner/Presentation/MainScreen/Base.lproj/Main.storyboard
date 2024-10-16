@@ -21,11 +21,11 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rak-Vk-SnI">
                                 <rect key="frame" x="20" y="59" width="353" height="759"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIo-qk-VCV" customClass="ContentView" customModule="Cleaner" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIo-qk-VCV">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="759"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lu2-o2-cXL">
-                                                <rect key="frame" x="0.0" y="7" width="303" height="33.666666666666664"/>
+                                                <rect key="frame" x="0.0" y="7" width="98" height="33.666666666666664"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Cleaner">
                                                         <attributes>
@@ -97,7 +97,7 @@
                                             <constraint firstAttribute="trailing" secondItem="zHM-bM-q0t" secondAttribute="trailing" id="QBy-eH-DAq"/>
                                             <constraint firstItem="zHM-bM-q0t" firstAttribute="top" secondItem="lu2-o2-cXL" secondAttribute="bottom" constant="16" id="U8I-cT-5AE"/>
                                             <constraint firstAttribute="trailing" secondItem="TQ5-mm-K5l" secondAttribute="trailing" id="W4x-gF-9E4"/>
-                                            <constraint firstAttribute="trailing" secondItem="lu2-o2-cXL" secondAttribute="trailing" constant="50" id="WOL-Xo-JBw"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lu2-o2-cXL" secondAttribute="trailing" constant="20" symbolic="YES" id="WOL-Xo-JBw"/>
                                             <constraint firstItem="TQ5-mm-K5l" firstAttribute="top" secondItem="80D-7X-N8u" secondAttribute="bottom" constant="16" id="ZAc-w1-LIU"/>
                                             <constraint firstAttribute="trailing" secondItem="80D-7X-N8u" secondAttribute="trailing" id="p14-7u-MwM"/>
                                             <constraint firstItem="80D-7X-N8u" firstAttribute="leading" secondItem="GIo-qk-VCV" secondAttribute="leading" id="s4z-ID-c5Y"/>
