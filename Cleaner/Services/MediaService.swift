@@ -80,6 +80,10 @@ final class MediaService: MediaServiceProtocol {
                                 similarPhotoGroups.append(PHAssetGroup(name: "", assets: groupAssets, subtype: .smartAlbumUserLibrary))
                             }
                         }
+                        for index in similarPhotoGroups.indices {
+                            similarPhotoGroups[index].assets = similarPhotoGroups[index].assets.filter { !$0.isVideo }
+                        }
+                        similarPhotoGroups.removeAll { group in group.assets.isEmpty }
                         let duplicatesCount = similarPhotoGroups.reduce(0) { $0 + $1.assets.count }
                         handler(similarPhotoGroups, duplicatesCount)
                     }
@@ -100,7 +104,7 @@ final class MediaService: MediaServiceProtocol {
 					}
                     
 					for i in 1...videosInAlbum.count {
-						if let image = videosInAlbum[i - 1].image, let data = image.jpegData(compressionQuality: 0.8) {
+						if let videoThumbnail = videosInAlbum[i - 1].image, let data = videoThumbnail.jpegData(compressionQuality: 0.8) {
 							let tuple = OSTuple<NSString, NSData>(first: "video\(i)" as NSString,
 																  andSecond: data as NSData)
 							videos.append(tuple)
@@ -129,7 +133,7 @@ final class MediaService: MediaServiceProtocol {
 								similarVideoNumbers.append(n2)
 								groupAssets.append(videosInAlbum[n2])
 							}
-							similarVideoIdsAsTuples.filter({$0.first != nil && $0.second != nil}).filter({ $0.first == tuple.first || $0.first == tuple.second || $0.second == tuple.second || $0.second == tuple.first }).forEach({ tuple in
+							similarVideoIdsAsTuples.filter{$0.first != nil && $0.second != nil}.filter({ $0.first == tuple.first || $0.first == tuple.second || $0.second == tuple.second || $0.second == tuple.first }).forEach { tuple in
 								let n = (tuple.first! as String).removeVideoAndToInt() - 1
 								let n2 = (tuple.second! as String).removeVideoAndToInt() - 1
 								if abs(n2 - n) >= 10 {
@@ -143,11 +147,15 @@ final class MediaService: MediaServiceProtocol {
 									similarVideoNumbers.append(n2)
 									groupAssets.append(videosInAlbum[n2])
 								}
-							})
+							}
 							if groupAssets.count >= 1 {
                                 similarVideoGroups.append(PHAssetGroup(name: "", assets: groupAssets, subtype: .smartAlbumVideos))
 							}
 						}
+                        for index in similarVideoGroups.indices {
+                            similarVideoGroups[index].assets = similarVideoGroups[index].assets.filter { $0.isVideo }
+                        }
+                        similarVideoGroups.removeAll { group in group.assets.isEmpty }
                         let duplicatesCount = similarVideoGroups.reduce(0) { $0 + $1.assets.count }
                         handler(similarVideoGroups, duplicatesCount)
 					}
