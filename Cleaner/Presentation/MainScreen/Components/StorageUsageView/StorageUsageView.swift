@@ -11,9 +11,9 @@ final class StorageUsageView: UIView {
     private lazy var nibName = "StorageUsageView"
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var storageUsageLabel: UILabelSubtitleStyle!
+    @IBOutlet weak var storageUsageLabel: Semibold15LabelStyle!
     @IBOutlet weak var circularProgressBarView: CircularProgressBarView!
-    @IBOutlet weak var freeStorageMemoryLabel: UILabelSubtitleStyle!
+    @IBOutlet weak var freeStorageMemoryLabel: Semibold24LabelStyle!
     @IBOutlet weak var analyzeStorageButton: UIButtonMainScreenStyle!
     @IBOutlet weak var usedMemoryLabel: UILabelSubhealine13sizeStyle!
     

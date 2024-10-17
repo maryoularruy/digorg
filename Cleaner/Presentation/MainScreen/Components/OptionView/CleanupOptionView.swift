@@ -11,7 +11,7 @@ final class CleanupOptionView: UIView {
     private lazy var nibName = "CleanupOptionView"
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var titleLabel: UILabelSubtitleStyle!
+    @IBOutlet weak var titleLabel: Semibold15LabelStyle!
     @IBOutlet weak var infoButton: UIButtonMainScreenStyle!
     @IBOutlet weak var imageView: UIImageView!
     

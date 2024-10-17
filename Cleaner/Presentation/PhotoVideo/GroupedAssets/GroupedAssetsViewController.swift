@@ -10,7 +10,7 @@ import UIKit
 import CryptoKit
 
 final class GroupedAssetsViewController: UIViewController {
-    @IBOutlet weak var similarPhotoLabel: UILabelSubtitleStyle!
+    @IBOutlet weak var similarPhotoLabel: Semibold24LabelStyle!
     @IBOutlet weak var duplicatesCountLabel: UILabelSubhealine13sizeStyle!
 	@IBOutlet var arrowBackView: UIView!
     @IBOutlet weak var selectModeButton: UIButtonSecondaryStyle!
