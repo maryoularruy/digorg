@@ -8,14 +8,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="SF-Pro-Display-Regular.otf">
-            <string>SFProDisplay-Regular</string>
-        </array>
-        <array key="SF-Pro-Display-Semibold.otf">
-            <string>SFProDisplay-Semibold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Contacts Menu View Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -58,145 +50,24 @@
                                 <color key="textColor" name="Black"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aGD-d7-Yx2">
-                                <rect key="frame" x="16" y="244" width="361" height="73"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duplicateContacts" translatesAutoresizingMaskIntoConstraints="NO" id="d4h-Qe-q6n">
-                                        <rect key="frame" x="8" y="24.666666666666671" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="5z6-3I-fhN"/>
-                                            <constraint firstAttribute="height" constant="24" id="tHX-gi-0lr"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowForwardBlack" translatesAutoresizingMaskIntoConstraints="NO" id="vCM-t7-XYL">
-                                        <rect key="frame" x="334" y="25" width="23" height="23"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="23" id="8n7-iL-0xR"/>
-                                            <constraint firstAttribute="height" constant="23" id="xlp-lL-llV"/>
-                                        </constraints>
-                                    </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OoP-Jc-3hu">
-                                        <rect key="frame" x="48" y="18.666666666666671" width="140" height="36"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duplicate Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5p-Br-Avf">
-                                                <rect key="frame" x="0.0" y="0.0" width="140" height="18"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                <color key="textColor" name="Dark"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19 contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJg-O3-9e8">
-                                                <rect key="frame" x="0.0" y="17.999999999999996" width="140" height="18.000000000000004"/>
-                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="15"/>
-                                                <color key="textColor" red="0.54117647059999996" green="0.56078431370000004" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" name="White"/>
-                                <constraints>
-                                    <constraint firstItem="d4h-Qe-q6n" firstAttribute="centerY" secondItem="aGD-d7-Yx2" secondAttribute="centerY" id="3WB-Hx-jfV"/>
-                                    <constraint firstItem="vCM-t7-XYL" firstAttribute="centerY" secondItem="aGD-d7-Yx2" secondAttribute="centerY" id="3mi-hp-qnI"/>
-                                    <constraint firstItem="OoP-Jc-3hu" firstAttribute="centerY" secondItem="aGD-d7-Yx2" secondAttribute="centerY" id="Ax5-C8-xLc"/>
-                                    <constraint firstAttribute="height" constant="73" id="KVr-vs-Q5g"/>
-                                    <constraint firstAttribute="trailing" secondItem="vCM-t7-XYL" secondAttribute="trailing" constant="4" id="PXO-sf-ZRk"/>
-                                    <constraint firstItem="d4h-Qe-q6n" firstAttribute="leading" secondItem="aGD-d7-Yx2" secondAttribute="leading" constant="8" id="VU1-zR-5bg"/>
-                                    <constraint firstItem="OoP-Jc-3hu" firstAttribute="leading" secondItem="d4h-Qe-q6n" secondAttribute="trailing" constant="16" id="viU-S4-7kq"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="0.0" height="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                        <real key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" red="0.9137254901960784" green="0.93725490196078431" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7dB-lC-odm">
-                                <rect key="frame" x="24" y="329" width="345" height="68"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="incompleteContacts" translatesAutoresizingMaskIntoConstraints="NO" id="oPU-Hh-sRg">
-                                        <rect key="frame" x="8" y="18" width="32" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="Idt-IE-kmF"/>
-                                            <constraint firstAttribute="height" constant="32" id="Ygk-NX-A2R"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowForwardBlack" translatesAutoresizingMaskIntoConstraints="NO" id="d02-ol-69P">
-                                        <rect key="frame" x="318" y="22.666666666666671" width="23" height="23"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="23" id="1V5-0o-VZK"/>
-                                            <constraint firstAttribute="width" constant="23" id="v23-Ma-gWA"/>
-                                        </constraints>
-                                    </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3Kp-Lf-2rc">
-                                        <rect key="frame" x="48" y="17.333333333333325" width="147" height="33.666666666666657"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incomplete Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C30-3a-PQf">
-                                                <rect key="frame" x="0.0" y="0.0" width="147" height="19.333333333333332"/>
-                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
-                                                <color key="textColor" name="Dark"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Name ・ No Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7g-ME-Bfe">
-                                                <rect key="frame" x="0.0" y="19.333333333333343" width="147" height="14.333333333333336"/>
-                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
-                                                <color key="textColor" name="Dark"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" name="Cards"/>
-                                <constraints>
-                                    <constraint firstItem="oPU-Hh-sRg" firstAttribute="centerY" secondItem="7dB-lC-odm" secondAttribute="centerY" id="LGJ-AF-Puz"/>
-                                    <constraint firstItem="d02-ol-69P" firstAttribute="centerY" secondItem="7dB-lC-odm" secondAttribute="centerY" id="LZo-Nf-sGw"/>
-                                    <constraint firstItem="3Kp-Lf-2rc" firstAttribute="leading" secondItem="oPU-Hh-sRg" secondAttribute="trailing" constant="8" id="UGN-gx-RLb"/>
-                                    <constraint firstAttribute="trailing" secondItem="d02-ol-69P" secondAttribute="trailing" constant="4" id="UHB-OE-u9Q"/>
-                                    <constraint firstAttribute="height" constant="68" id="f2e-9R-YaI"/>
-                                    <constraint firstItem="oPU-Hh-sRg" firstAttribute="leading" secondItem="7dB-lC-odm" secondAttribute="leading" constant="8" id="hfb-l3-m50"/>
-                                    <constraint firstItem="3Kp-Lf-2rc" firstAttribute="centerY" secondItem="7dB-lC-odm" secondAttribute="centerY" id="ndR-uN-PVe"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
                         <constraints>
-                            <constraint firstItem="7dB-lC-odm" firstAttribute="top" secondItem="aGD-d7-Yx2" secondAttribute="bottom" constant="12" id="65r-7e-5G2"/>
                             <constraint firstItem="zfS-tA-C00" firstAttribute="top" secondItem="Xgv-fN-Es0" secondAttribute="bottom" constant="14" id="9Dy-6G-Ue6"/>
                             <constraint firstItem="QqF-JI-24z" firstAttribute="top" secondItem="xE2-SA-ps9" secondAttribute="bottom" constant="20" id="GLF-tt-biz"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aGD-d7-Yx2" secondAttribute="trailing" constant="16" id="K60-5U-2vC"/>
                             <constraint firstItem="Xgv-fN-Es0" firstAttribute="leading" secondItem="QqF-JI-24z" secondAttribute="leading" id="QrA-Sv-0Nm"/>
                             <constraint firstItem="Xgv-fN-Es0" firstAttribute="top" secondItem="QqF-JI-24z" secondAttribute="bottom" constant="6" id="RWK-BZ-Tvh"/>
                             <constraint firstItem="zfS-tA-C00" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="XPd-If-rWf"/>
                             <constraint firstItem="zfS-tA-C00" firstAttribute="leading" secondItem="QqF-JI-24z" secondAttribute="leading" id="cNS-be-2JB"/>
                             <constraint firstItem="Xgv-fN-Es0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="fVy-fm-tDE"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7dB-lC-odm" secondAttribute="trailing" constant="24" id="mDu-s2-9qr"/>
-                            <constraint firstItem="7dB-lC-odm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="mH4-PM-UAk"/>
                             <constraint firstItem="xE2-SA-ps9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="oSR-wJ-59J"/>
-                            <constraint firstItem="aGD-d7-Yx2" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="16" id="q2a-M0-4sv"/>
                             <constraint firstItem="QqF-JI-24z" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="tT2-GR-rYN"/>
                             <constraint firstItem="xE2-SA-ps9" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="yW8-hy-xDM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="arrowBackView" destination="xE2-SA-ps9" id="YMh-La-0Yu"/>
-                        <outlet property="duplicateView" destination="aGD-d7-Yx2" id="6vO-gc-pOw"/>
-                        <outlet property="incompleteView" destination="7dB-lC-odm" id="VET-eG-syQ"/>
                         <outlet property="unresolvedContactsCount" destination="Xgv-fN-Es0" id="Sf7-NG-FyH"/>
                     </connections>
                 </viewController>
@@ -207,14 +78,8 @@
     </scenes>
     <resources>
         <image name="ArrowBackIcon" width="64" height="64"/>
-        <image name="arrowForwardBlack" width="23" height="23"/>
-        <image name="duplicateContacts" width="32" height="32"/>
-        <image name="incompleteContacts" width="32" height="32"/>
         <namedColor name="Black">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="Cards">
-            <color red="0.94499999284744263" green="0.9570000171661377" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Dark">
             <color red="0.054999999701976776" green="0.016000000759959221" blue="0.11400000005960464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

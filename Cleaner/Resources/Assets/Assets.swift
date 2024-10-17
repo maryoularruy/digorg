@@ -135,8 +135,6 @@ internal enum Asset {
   internal static let shareApp = ImageAsset(name: "shareApp")
   internal static let bigDuplicateContacts = ImageAsset(name: "bigDuplicateContacts")
   internal static let bigIncompleteContacts = ImageAsset(name: "bigIncompleteContacts")
-  internal static let duplicateContacts = ImageAsset(name: "duplicateContacts")
-  internal static let incompleteContacts = ImageAsset(name: "incompleteContacts")
   internal static let splash = ImageAsset(name: "splash")
   internal static let splashBG = ImageAsset(name: "splashBG")
   internal static let device1whats = ImageAsset(name: "Device 1whats")

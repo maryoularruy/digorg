@@ -25,11 +25,6 @@ final class UILabelSubtitleStyle: UILabel {
 }
 
 class UILabelSubheadline11sizeStyle: UILabel {
-    let attributes: [NSAttributedString.Key: Any] = [
-        .foregroundColor: UIColor.greyText,
-        .font: UIFont.regular11 ?? UIFont.systemFont(ofSize: 13)
-    ]
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
