@@ -78,12 +78,21 @@ extension MainViewController: ViewControllerProtocol {
     func setupUI() {
         setupDeviceInfoSection()
         setupCleanupOptions()
+        bindDeviceInfoStackView()
+        photosCleanup.bind(.photos)
+        videosCleanup.bind(.videos)
+        contactsCleanup.bind(.contacts)
+        calendarCleanup.bind(.calendar)
     }
     
     func addGestureRecognizers() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhoneInfoScreen))
         deviceInfoLabel.addTapGestureRecognizer(action: openPhoneInfoScreen)
         deviceInfoStackView.addGestureRecognizer(gesture)
+        photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
+        videosCleanup.addTapGestureRecognizer(action: openVideosCleanup)
+        contactsCleanup.addTapGestureRecognizer(action: openCalendarCleanup)
+        calendarCleanup.addTapGestureRecognizer(action: openContactsCleanup)
     }
     
     @objc private func openPhoneInfoScreen() {
@@ -121,14 +130,6 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     private func setupCleanupOptions() {
-        photosCleanup.bind(.photos)
-        photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
-        videosCleanup.bind(.videos)
-        videosCleanup.addTapGestureRecognizer(action: openVideosCleanup)
-        contactsCleanup.bind(.contacts)
-        contactsCleanup.addTapGestureRecognizer(action: openCalendarCleanup)
-        calendarCleanup.bind(.calendar)
-        calendarCleanup.addTapGestureRecognizer(action: openContactsCleanup)
         updatePhotosCleanupOption()
         updateVideosCleanupOption()
     }
