@@ -18,15 +18,17 @@ final class MainViewController: UIViewController {
     @IBOutlet weak var contactsCleanup: CleanupOptionView!
     @IBOutlet weak var calendarCleanup: CleanupOptionView!
     
+    private lazy var mediaService = MediaService.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        addGestureRecognizers()
+        storageUsageView.usedMemoryLabel.text = "45 / 234 GB"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        addGestureRecognizers()
-        storageUsageView.usedMemoryLabel.text = "45 / 234 GB"
+        setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -127,6 +129,28 @@ extension MainViewController: ViewControllerProtocol {
         contactsCleanup.addTapGestureRecognizer(action: openCalendarCleanup)
         calendarCleanup.bind(.calendar)
         calendarCleanup.addTapGestureRecognizer(action: openContactsCleanup)
+        updatePhotosCleanupOption()
+        updateVideosCleanupOption()
+    }
+    
+    private func updatePhotosCleanupOption() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.mediaService.loadSimilarPhotos(live: false) { _, duplicatesCount in
+                DispatchQueue.main.async {
+                    self?.photosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
+                }
+            }
+        }
+    }
+    
+    private func updateVideosCleanupOption() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.mediaService.loadSimilarVideos { _, duplicatesCount in
+                DispatchQueue.main.async {
+                    self?.videosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
+                }
+            }
+        }
     }
     
     private func openPhotosCleanup() {
