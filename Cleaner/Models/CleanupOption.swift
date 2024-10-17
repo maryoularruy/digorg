@@ -24,18 +24,18 @@ enum CleanupOption: String, CaseIterable {
     var mode: Mode? {
         switch self {
         case .photos: .duplicatePhotos
-        case .videos: .duplicateVideo
+        case .videos: .duplicateVideos
         case .contacts: nil
         case .calendar: nil
         }
     }
     
-    var tag: Int {
+    func getPossibleModes() -> [Mode] {
         switch self {
-        case .photos: 0
-        case .videos: 1
-        case .contacts: 2
-        case .calendar: 3
+        case .photos: [.duplicatePhotos]
+        case .videos: [.duplicateVideos]
+        case .contacts: [.duplicateContacts, .imcompleteContacts]
+        case .calendar: []
         }
     }
 }

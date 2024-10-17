@@ -12,6 +12,9 @@ enum Mode {
     case selfies
     case screenshot
 
-    case duplicateVideo
+    case duplicateVideos
     case video
+    
+    case duplicateContacts
+    case imcompleteContacts
 }

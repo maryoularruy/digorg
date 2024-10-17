@@ -86,7 +86,7 @@ final class SearchViewController: UIViewController {
 						self.timer.invalidate()
 					}
 				}
-			case .duplicateVideo:
+			case .duplicateVideos:
 				titleLabel.text = "Duplicate videos"
 				mediaService.loadSimilarVideos { assets, duplicatesCount in
 					let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
@@ -111,9 +111,10 @@ final class SearchViewController: UIViewController {
 //						}
 //					}
 //				}
-			case .none:
-				break
-		}
+        case .some(.duplicateContacts): break
+        case .some(.imcompleteContacts): break
+        case .none: break
+        }
     }
 	
 	func setupMetadataForAssets(assets: [PHAsset], completion: @escaping ([MetadataAsset]) -> ()) {

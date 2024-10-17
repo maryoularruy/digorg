@@ -91,8 +91,8 @@ extension MainViewController: ViewControllerProtocol {
         deviceInfoStackView.addGestureRecognizer(gesture)
         photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
         videosCleanup.addTapGestureRecognizer(action: openVideosCleanup)
-        contactsCleanup.addTapGestureRecognizer(action: openCalendarCleanup)
-        calendarCleanup.addTapGestureRecognizer(action: openContactsCleanup)
+        contactsCleanup.addTapGestureRecognizer(action: openContactsCleanup)
+        calendarCleanup.addTapGestureRecognizer(action: openCalendarCleanup)
     }
     
     @objc private func openPhoneInfoScreen() {
@@ -162,7 +162,9 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     private func openContactsCleanup() {
-        navigationController?.pushViewController(createSearchVC(with: .contacts), animated: false)
+        let vc = StoryboardScene.ContactsMenu.initialScene.instantiate()
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: false)
     }
     
     private func openCalendarCleanup() {
