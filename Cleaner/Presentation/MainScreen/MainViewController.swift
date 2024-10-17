@@ -18,17 +18,14 @@ final class MainViewController: UIViewController {
     @IBOutlet weak var contactsCleanup: CleanupOptionView!
     @IBOutlet weak var calendarCleanup: CleanupOptionView!
     
-    private lazy var mediaService = MediaService.shared
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        addGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupCleanupOptions()
+        addGestureRecognizers()
         storageUsageView.usedMemoryLabel.text = "45 / 234 GB"
     }
     
@@ -78,21 +75,13 @@ final class MainViewController: UIViewController {
 extension MainViewController: ViewControllerProtocol {
     func setupUI() {
         setupDeviceInfoSection()
-        bindDeviceInfoStackView()
-        photosCleanup.bind(.photos)
-        videosCleanup.bind(.videos)
-        contactsCleanup.bind(.contacts)
-        calendarCleanup.bind(.calendar)
+        setupCleanupOptions()
     }
     
     func addGestureRecognizers() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhoneInfoScreen))
         deviceInfoLabel.addTapGestureRecognizer(action: openPhoneInfoScreen)
         deviceInfoStackView.addGestureRecognizer(gesture)
-        photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
-        videosCleanup.addTapGestureRecognizer(action: openVideosCleanup)
-        contactsCleanup.addTapGestureRecognizer(action: openCalendarCleanup)
-        calendarCleanup.addTapGestureRecognizer(action: openContactsCleanup)
     }
     
     @objc private func openPhoneInfoScreen() {
@@ -102,6 +91,7 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     private func setupDeviceInfoSection() {
+        bindDeviceInfoStackView()
         updateData()
         Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
@@ -129,28 +119,14 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     private func setupCleanupOptions() {
-        updatePhotosCleanupOption()
-        updateVideosCleanupOption()
-    }
-    
-    private func updatePhotosCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.mediaService.loadSimilarPhotos(live: false) { _, duplicatesCount in
-                DispatchQueue.main.async {
-                    self?.photosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
-                }
-            }
-        }
-    }
-    
-    private func updateVideosCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.mediaService.loadSimilarVideos { _, duplicatesCount in
-                DispatchQueue.main.async {
-                    self?.videosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
-                }
-            }
-        }
+        photosCleanup.bind(.photos)
+        photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
+        videosCleanup.bind(.videos)
+        videosCleanup.addTapGestureRecognizer(action: openVideosCleanup)
+        contactsCleanup.bind(.contacts)
+        contactsCleanup.addTapGestureRecognizer(action: openCalendarCleanup)
+        calendarCleanup.bind(.calendar)
+        calendarCleanup.addTapGestureRecognizer(action: openContactsCleanup)
     }
     
     private func openPhotosCleanup() {

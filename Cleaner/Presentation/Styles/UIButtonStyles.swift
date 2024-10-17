@@ -16,7 +16,7 @@ class UIButtonMainScreenStyle: UIButton {
         configuration.image = UIImage(resource: .arrowForwardWhite)
         configuration.imagePlacement = .trailing
         configuration.imagePadding = -5
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 12, bottom: 3, trailing: 4)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 3, bottom: 10, trailing: 3)
         configuration.cornerStyle = .capsule
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
             var outgoing = incoming
@@ -39,11 +39,6 @@ class UIButtonMainScreenStyle: UIButton {
     func bind(text: String) {
         setTitle(text, for: .normal)
         setTitle(text, for: .selected)
-    }
-    
-    func bind(duplicatesCount: Int) {
-        myConfiguration.title = "\(duplicatesCount) files / ? MB "
-        configuration = myConfiguration
     }
     
     private func setup() {

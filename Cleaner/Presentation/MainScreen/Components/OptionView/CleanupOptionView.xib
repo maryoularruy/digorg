@@ -23,13 +23,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8u-0X-ruW" customClass="UILabelSubtitleStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="16" y="18" width="42" height="20.333333333333329"/>
+                    <rect key="frame" x="16" y="18" width="42" height="44"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3w-J2-fL7" customClass="UIButtonMainScreenStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="16" y="49.333333333333329" width="75" height="34.333333333333329"/>
+                    <rect key="frame" x="16" y="62" width="75" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="wDf-HF-a9B"/>
+                    </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                 </button>
@@ -43,13 +46,13 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" name="WhiteBackground"/>
             <constraints>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="j3w-J2-fL7" secondAttribute="bottom" constant="3" id="3hs-O4-n8V"/>
+                <constraint firstAttribute="bottom" secondItem="j3w-J2-fL7" secondAttribute="bottom" constant="3" id="3hs-O4-n8V"/>
                 <constraint firstItem="u8u-0X-ruW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="59k-Sp-OiI"/>
                 <constraint firstItem="KK9-Dh-CyJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6pu-9R-7jz"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="KK9-Dh-CyJ" secondAttribute="trailing" id="HAF-TO-7J8"/>
                 <constraint firstItem="j3w-J2-fL7" firstAttribute="leading" secondItem="u8u-0X-ruW" secondAttribute="leading" id="eRx-9T-ATe"/>
                 <constraint firstItem="u8u-0X-ruW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="gVP-j2-HwR"/>
-                <constraint firstItem="j3w-J2-fL7" firstAttribute="top" secondItem="u8u-0X-ruW" secondAttribute="bottom" constant="11" id="sAD-qI-WmR"/>
+                <constraint firstItem="j3w-J2-fL7" firstAttribute="top" secondItem="u8u-0X-ruW" secondAttribute="bottom" id="sAD-qI-WmR"/>
                 <constraint firstItem="j3w-J2-fL7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="900" constant="16" id="wYz-cP-VwG"/>
                 <constraint firstAttribute="bottom" secondItem="KK9-Dh-CyJ" secondAttribute="bottom" id="xdA-u3-EP5"/>
             </constraints>
