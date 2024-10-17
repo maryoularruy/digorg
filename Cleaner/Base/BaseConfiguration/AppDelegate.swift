@@ -6,7 +6,6 @@
 //
 
 import IQKeyboardManagerSwift
-import SwiftyUserDefaults
 import UIKit
 
 @UIApplicationMain
