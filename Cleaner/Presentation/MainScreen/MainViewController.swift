@@ -22,13 +22,14 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         addGestureRecognizers()
         storageUsageView.usedMemoryLabel.text = "45 / 234 GB"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupUI()
+        setupCleanupOptions()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,9 +77,8 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: ViewControllerProtocol {
     func setupUI() {
-        setupDeviceInfoSection()
-        setupCleanupOptions()
         bindDeviceInfoStackView()
+        setupDeviceInfoSection()
         photosCleanup.bind(.photos)
         videosCleanup.bind(.videos)
         contactsCleanup.bind(.contacts)
@@ -102,7 +102,6 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     private func setupDeviceInfoSection() {
-        bindDeviceInfoStackView()
         updateData()
         Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
