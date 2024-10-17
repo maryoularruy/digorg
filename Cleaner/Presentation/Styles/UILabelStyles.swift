@@ -40,6 +40,10 @@ class UILabelSubheadline11sizeStyle: UILabel {
         setup()
     }
     
+    func bind(text: String) {
+        self.text = text
+    }
+    
     fileprivate func setup() {
         font = UIFont.regular11 ?? UIFont.systemFont(ofSize: 11)
         textColor = .greyText

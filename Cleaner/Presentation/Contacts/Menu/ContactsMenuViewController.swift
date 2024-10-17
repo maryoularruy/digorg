@@ -9,14 +9,21 @@ import UIKit
 import Contacts
 
 final class ContactsMenuViewController: UIViewController {
+    @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var incompleteView: UIView!
     @IBOutlet weak var duplicateView: UIView!
+    @IBOutlet weak var unresolvedContactsCount: UILabelSubhealine13sizeStyle!
     
     private lazy var contactStore = CNContactStore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         checkPermissionStatus()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupUI()
     }
     
     private func checkAccessStatus() {
@@ -55,9 +62,14 @@ final class ContactsMenuViewController: UIViewController {
 }
 
 extension ContactsMenuViewController: ViewControllerProtocol {
-    func setupUI() {}
+    func setupUI() {
+        unresolvedContactsCount.bind(text: "50 contacts")
+    }
     
     func addGestureRecognizers() {
+        arrowBackView.addTapGestureRecognizer { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
         incompleteView.addTapGestureRecognizer {
             let vc = StoryboardScene.IncompliteContacts.initialScene.instantiate()
             vc.modalPresentationStyle = .fullScreen
