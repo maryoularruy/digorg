@@ -27,17 +27,35 @@
                         <constraint firstAttribute="height" constant="24" id="yhm-Us-BC5"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGg-fc-GdF">
-                    <rect key="frame" x="100" y="10" width="42" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGg-fc-GdF" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="56" y="16" width="49" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pV4-O0-G2L" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="56" y="45" width="51.333333333333343" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TM2-mF-bEL">
+                    <rect key="frame" x="363" y="26.666666666666671" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="6as-xK-nUw"/>
+                        <constraint firstAttribute="width" constant="20" id="UBX-xa-fh7"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" name="WhiteBackground"/>
             <constraints>
+                <constraint firstItem="lGg-fc-GdF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="4xi-yb-y7q"/>
+                <constraint firstAttribute="trailing" secondItem="TM2-mF-bEL" secondAttribute="trailing" constant="10" id="IWE-fS-cLK"/>
+                <constraint firstItem="lGg-fc-GdF" firstAttribute="leading" secondItem="cVG-kh-alZ" secondAttribute="trailing" constant="16" id="KrP-Eu-62X"/>
+                <constraint firstItem="pV4-O0-G2L" firstAttribute="leading" secondItem="lGg-fc-GdF" secondAttribute="leading" id="OUL-jb-2yq"/>
+                <constraint firstItem="pV4-O0-G2L" firstAttribute="top" secondItem="lGg-fc-GdF" secondAttribute="bottom" constant="8" id="OkT-7j-B5z"/>
+                <constraint firstItem="TM2-mF-bEL" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="arT-J8-W0t"/>
                 <constraint firstItem="cVG-kh-alZ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="e8M-eL-u6J"/>
                 <constraint firstItem="cVG-kh-alZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="reS-ZC-r4B"/>
             </constraints>

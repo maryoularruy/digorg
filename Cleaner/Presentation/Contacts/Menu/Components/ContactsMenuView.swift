@@ -10,7 +10,7 @@ import UIKit
 final class ContactsMenuView: UIView {
     private lazy var nibName = "ContactMenuView"
     
-    enum CellType: String {
+    enum ContactsInfoType: String {
         case duplicateNames = "Duplicate Names"
         case dublicateNumbers = "Duplicate Numbers"
         case noNameContacts = "No name"
@@ -39,7 +39,7 @@ final class ContactsMenuView: UIView {
         setup()
     }
     
-    func bind(type: CellType) {
+    func bind(type: ContactsInfoType) {
         iconImageView.image = type.icon
     }
     
