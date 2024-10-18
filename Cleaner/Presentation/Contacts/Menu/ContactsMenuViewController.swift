@@ -10,7 +10,7 @@ import Contacts
 
 final class ContactsMenuViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
-    @IBOutlet weak var unresolvedContactsCount: UILabelSubhealine13sizeStyle!
+    @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var duplicateNamesView: ContactsMenuView!
     @IBOutlet weak var duplicateNumbersView: ContactsMenuView!
     @IBOutlet weak var noNameView: ContactsMenuView!

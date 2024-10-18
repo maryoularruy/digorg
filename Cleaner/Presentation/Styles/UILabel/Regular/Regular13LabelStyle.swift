@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class UILabelSubhealine13sizeStyle: Regular11LabelStyle {
+final class Regular13LabelStyle: Regular11LabelStyle {
     override func setup() {
         font = UIFont.regular13 ?? UIFont.systemFont(ofSize: 13)
         textColor = .greyText
