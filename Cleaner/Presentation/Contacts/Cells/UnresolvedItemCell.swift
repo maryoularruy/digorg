@@ -22,9 +22,7 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        content.addTapGestureRecognizer { [weak self] in
-            self?.delegate?.tapOnCell()
-        }
+        setup()
     }
     
     @IBAction func tapOnCheckBox(_ sender: Any) {
@@ -34,5 +32,13 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     func bind() {
         name.text = "Laial"
         number.text = "+23802403903"
+    }
+    
+    private func setup() {
+        number.setGreyTextColor()
+        
+        content.addTapGestureRecognizer { [weak self] in
+            self?.delegate?.tapOnCell()
+        }
     }
 }

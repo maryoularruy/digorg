@@ -12,4 +12,8 @@ final class Regular15LabelStyle: Regular11LabelStyle {
         font = UIFont.regular15 ?? UIFont.systemFont(ofSize: 15)
         textColor = .blackText
     }
+    
+    func setGreyTextColor() {
+        textColor = .greyText
+    }
 }
