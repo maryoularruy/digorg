@@ -472,6 +472,7 @@
 		A50F58B62CB6D39A00AB3166 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A53836B62CBC6925005BE39C /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A55234102CC16D2900CBE265 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
+		A55235992CC2AB9100CBE265 /* Cells */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Cells; sourceTree = "<group>"; };
 		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -539,6 +540,7 @@
 		7532F85B2AE28B47007469EA /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				A55235992CC2AB9100CBE265 /* Cells */,
 				7532F8622AE29711007469EA /* IncompliteContacts */,
 				7532F8612AE29707007469EA /* DuplicateContacts */,
 				7532F85E2AE290AD007469EA /* Menu */,
@@ -1415,6 +1417,7 @@
 				A50F58B62CB6D39A00AB3166 /* Components */,
 				A53836B62CBC6925005BE39C /* Components */,
 				A55234102CC16D2900CBE265 /* Components */,
+				A55235992CC2AB9100CBE265 /* Cells */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
 			);
 			name = Cleaner;
