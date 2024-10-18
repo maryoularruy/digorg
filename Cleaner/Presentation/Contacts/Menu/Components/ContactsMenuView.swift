@@ -28,6 +28,8 @@ final class ContactsMenuView: UIView {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var titleLabel: Semibold15LabelStyle!
+    @IBOutlet weak var unresolvedItemsCount: Regular15LabelStyle!
     
     init() {
         super.init(frame: .zero)

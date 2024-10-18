@@ -10,8 +10,6 @@ import Contacts
 
 final class ContactsMenuViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
-    @IBOutlet weak var incompleteView: UIView!
-    @IBOutlet weak var duplicateView: UIView!
     @IBOutlet weak var unresolvedContactsCount: UILabelSubhealine13sizeStyle!
     
     private lazy var contactStore = CNContactStore()
@@ -70,16 +68,16 @@ extension ContactsMenuViewController: ViewControllerProtocol {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
-        incompleteView.addTapGestureRecognizer {
-            let vc = StoryboardScene.IncompliteContacts.initialScene.instantiate()
-            vc.modalPresentationStyle = .fullScreen
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        duplicateView.addTapGestureRecognizer {
-            let vc = StoryboardScene.DuplicateContacts.initialScene.instantiate()
-            vc.modalPresentationStyle = .fullScreen
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+//        incompleteView.addTapGestureRecognizer {
+//            let vc = StoryboardScene.IncompliteContacts.initialScene.instantiate()
+//            vc.modalPresentationStyle = .fullScreen
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
+//        duplicateView.addTapGestureRecognizer {
+//            let vc = StoryboardScene.DuplicateContacts.initialScene.instantiate()
+//            vc.modalPresentationStyle = .fullScreen
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
     }
     
     private func checkPermissionStatus() {

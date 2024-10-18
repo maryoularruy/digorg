@@ -13,6 +13,8 @@
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="hLh-jl-ckJ"/>
                 <outlet property="iconImageView" destination="cVG-kh-alZ" id="HVD-BQ-aGh"/>
+                <outlet property="titleLabel" destination="lGg-fc-GdF" id="0WJ-ZD-l9A"/>
+                <outlet property="unresolvedItemsCount" destination="pV4-O0-G2L" id="CkI-zK-jCe"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
