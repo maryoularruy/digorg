@@ -75,16 +75,8 @@ extension ContactsMenuViewController: ViewControllerProtocol {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
-//        incompleteView.addTapGestureRecognizer {
-//            let vc = StoryboardScene.IncompliteContacts.initialScene.instantiate()
-//            vc.modalPresentationStyle = .fullScreen
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
-//        duplicateView.addTapGestureRecognizer {
-//            let vc = StoryboardScene.DuplicateContacts.initialScene.instantiate()
-//            vc.modalPresentationStyle = .fullScreen
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
+        [duplicateNamesView, duplicateNumbersView,
+         noNameView, noNumberView].forEach { $0.delegate = self }
     }
     
     private func checkPermissionStatus() {
@@ -96,5 +88,22 @@ extension ContactsMenuViewController: ViewControllerProtocol {
                 DispatchQueue.main.async { self.showPermissionAlert() }
             }
         }
+    }
+}
+
+extension ContactsMenuViewController: ContactsMenuViewProtocol {
+    func tapOnCell(type: ContactsInfoType) {
+        let vc: UIViewController = switch type {
+        case .duplicateNames:
+            StoryboardScene.DuplicateContacts.initialScene.instantiate()
+        case .dublicateNumbers:
+            StoryboardScene.DuplicateContacts.initialScene.instantiate()
+        case .noNameContacts:
+            StoryboardScene.IncompliteContacts.initialScene.instantiate()
+        case .noNumberContacts:
+            StoryboardScene.IncompliteContacts.initialScene.instantiate()
+        }
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
