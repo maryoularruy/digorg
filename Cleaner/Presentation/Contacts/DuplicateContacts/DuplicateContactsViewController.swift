@@ -121,6 +121,20 @@ extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         70
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        6
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UnresolvedItemCellHeader()
+        header.unresolvedItemsInSection.bind(text: "pnetiayk")
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        34
+    }
 }
 
 extension DuplicateContactsViewController: UnresolvedItemCellProtocol {

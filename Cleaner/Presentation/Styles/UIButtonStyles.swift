@@ -128,6 +128,11 @@ final class UIButtonSecondaryStyle: UIButton {
         setTitle(text, for: .selected)
     }
     
+    func setTransparentBackground() {
+        myConfiguration.baseBackgroundColor = .clear
+        configuration = myConfiguration
+    }
+    
     private func setup() {
         layer.cornerRadius = 20
         configuration = myConfiguration
