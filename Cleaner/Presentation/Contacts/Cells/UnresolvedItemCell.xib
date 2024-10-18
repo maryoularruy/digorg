@@ -4,76 +4,62 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UnresolvedItemCell" customModule="Cleaner" customModuleProvider="target">
-            <connections>
-                <outlet property="content" destination="Xm3-ps-W2G" id="JCz-H2-EO4"/>
-                <outlet property="contentView" destination="Xm3-ps-W2G" id="Ja5-d4-vTD"/>
-                <outlet property="name" destination="9ZS-at-Znr" id="JdC-2A-Xfd"/>
-                <outlet property="number" destination="vXm-zs-7WD" id="mBC-uh-SbW"/>
-                <outlet property="view" destination="iN0-l3-epB" id="C1r-OK-BI7"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UnresolvedItemCell" customModule="Cleaner" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="393" height="285"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xm3-ps-W2G">
-                    <rect key="frame" x="16" y="16" width="361" height="285"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZS-at-Znr" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="115.66666666666666" width="41.333333333333336" height="20.333333333333343"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXm-zs-7WD" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="135.33333333333334" width="52" height="20.333333333333343"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRs-Wh-Dbo">
-                            <rect key="frame" x="311" y="122.66666666666666" width="50" height="40"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="EmptyCheckBoxBlue"/>
-                            <connections>
-                                <action selector="tapOnCheckBox:" destination="-1" eventType="touchUpInside" id="LrV-ZM-kYf"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstItem="vXm-zs-7WD" firstAttribute="leading" secondItem="Xm3-ps-W2G" secondAttribute="leading" id="AMU-8m-Sgi"/>
-                        <constraint firstItem="gRs-Wh-Dbo" firstAttribute="bottom" secondItem="vXm-zs-7WD" secondAttribute="bottom" constant="7" id="IEQ-g8-SFC"/>
-                        <constraint firstAttribute="trailing" secondItem="gRs-Wh-Dbo" secondAttribute="trailing" id="ajF-aR-cku"/>
-                        <constraint firstItem="9ZS-at-Znr" firstAttribute="leading" secondItem="Xm3-ps-W2G" secondAttribute="leading" id="f0U-lE-9JK"/>
-                        <constraint firstItem="gRs-Wh-Dbo" firstAttribute="centerY" secondItem="Xm3-ps-W2G" secondAttribute="centerY" id="lJo-Xu-OqI"/>
-                        <constraint firstItem="gRs-Wh-Dbo" firstAttribute="top" secondItem="9ZS-at-Znr" secondAttribute="top" constant="7" id="rbP-5E-ZPa"/>
-                    </constraints>
-                </view>
-            </subviews>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <constraints>
-                <constraint firstItem="Xm3-ps-W2G" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" constant="16" id="2Y2-kZ-wbx"/>
-                <constraint firstAttribute="trailing" secondItem="Xm3-ps-W2G" secondAttribute="trailing" constant="16" id="FBo-rO-yZE"/>
-                <constraint firstItem="Xm3-ps-W2G" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="OCR-14-XLI"/>
-                <constraint firstItem="Xm3-ps-W2G" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="llX-68-fz4"/>
-            </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="38.931297709923662" y="96.126760563380287"/>
-        </view>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="kZQ-A2-x6r" customClass="UnresolvedItemCell" customModule="Cleaner" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kZQ-A2-x6r" id="RGT-M5-Oba">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKi-6K-C5g">
+                        <rect key="frame" x="327" y="15" width="50" height="40"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="EmptyCheckBoxBlue"/>
+                        <connections>
+                            <action selector="tapOnCheckBox:" destination="-1" eventType="touchUpInside" id="x0W-Uo-fDy"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ui7-rL-AY1" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                        <rect key="frame" x="16.000000000000004" y="14.999999999999998" width="41.333333333333343" height="20.333333333333329"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuU-83-qxI" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                        <rect key="frame" x="16" y="34.666666666666664" width="52" height="20.333333333333336"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="UKi-6K-C5g" secondAttribute="trailing" constant="16" id="2bY-Ro-0k2"/>
+                    <constraint firstItem="UKi-6K-C5g" firstAttribute="bottom" secondItem="ZuU-83-qxI" secondAttribute="bottom" id="Avw-6T-XP6"/>
+                    <constraint firstItem="ZuU-83-qxI" firstAttribute="leading" secondItem="RGT-M5-Oba" secondAttribute="leading" constant="16" id="PwP-cu-iAC"/>
+                    <constraint firstItem="UKi-6K-C5g" firstAttribute="centerY" secondItem="RGT-M5-Oba" secondAttribute="centerY" id="Rnh-dm-Ser"/>
+                    <constraint firstItem="ui7-rL-AY1" firstAttribute="leading" secondItem="RGT-M5-Oba" secondAttribute="leading" constant="16" id="ijU-sH-Gf6"/>
+                    <constraint firstItem="UKi-6K-C5g" firstAttribute="top" secondItem="ui7-rL-AY1" secondAttribute="top" id="wzJ-va-OdW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" name="WhiteBackground"/>
+            <connections>
+                <outlet property="content" destination="RGT-M5-Oba" id="qmp-9h-YqV"/>
+                <outlet property="name" destination="ui7-rL-AY1" id="peh-by-fvV"/>
+                <outlet property="number" destination="ZuU-83-qxI" id="IOJ-Cd-ax0"/>
+            </connections>
+            <point key="canvasLocation" x="17.557251908396946" y="-150"/>
+        </tableViewCell>
     </objects>
     <resources>
         <image name="EmptyCheckBoxBlue" width="26" height="26"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="WhiteBackground">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

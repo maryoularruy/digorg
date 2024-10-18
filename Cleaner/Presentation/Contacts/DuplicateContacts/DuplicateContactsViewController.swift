@@ -55,6 +55,8 @@ class DuplicateContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         unresolvedContactsCount.bind(text: "? contacts")
+        unresolvedContactsTableView.register(cellType: UnresolvedItemCell.self)
+//        unresolvedContactsTableView.cell = self
         
         reloadData()
         setupCollectionView()
@@ -106,11 +108,28 @@ class DuplicateContactsViewController: UIViewController {
 
 extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
+        cell.delegate = self
+        cell.bind()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        70
+    }
+}
+
+extension DuplicateContactsViewController: UnresolvedItemCellProtocol {
+    func tapOnCheckBox() {
+        
+    }
+    
+    func tapOnCell() {
+        
     }
 }
 

@@ -6,14 +6,14 @@
 //
 
 import UIKit
+import Reusable
 
 protocol UnresolvedItemCellProtocol: AnyObject {
     func tapOnCheckBox()
     func tapOnCell()
 }
 
-class UnresolvedItemCell: UITableViewCell {
-    @IBOutlet var view: UIView!
+final class UnresolvedItemCell: UITableViewCell, NibReusable {
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var name: Semibold15LabelStyle!
     @IBOutlet weak var number: Regular15LabelStyle!
@@ -29,5 +29,10 @@ class UnresolvedItemCell: UITableViewCell {
     
     @IBAction func tapOnCheckBox(_ sender: Any) {
         delegate?.tapOnCheckBox()
+    }
+    
+    func bind() {
+        name.text = "Laial"
+        number.text = "+23802403903"
     }
 }

@@ -62,7 +62,6 @@ final class GroupedAssetsViewController: UIViewController {
         tableView.register(cellType: DuplicateTableViewCell.self)
         addGestureRecognizers()
     }
-
 }
 
 extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSource {

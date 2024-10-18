@@ -39,7 +39,7 @@
                                 <color key="textColor" name="Dark"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xgv-fN-Es0" customClass="UILabelSubhealine13sizeStyle" customModule="Cleaner" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xgv-fN-Es0" customClass="Regular13LabelStyle" customModule="Cleaner" customModuleProvider="target">
                                 <rect key="frame" x="16" y="167.66666666666666" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.54117647058823526" green="0.5607843137254902" blue="0.58039215686274503" alpha="1" colorSpace="calibratedRGB"/>
