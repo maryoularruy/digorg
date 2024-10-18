@@ -39,7 +39,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TM2-mF-bEL">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowForwardGrey" translatesAutoresizingMaskIntoConstraints="NO" id="TM2-mF-bEL">
                     <rect key="frame" x="363" y="26.666666666666671" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="6as-xK-nUw"/>
@@ -64,6 +64,7 @@
         </view>
     </objects>
     <resources>
+        <image name="arrowForwardGrey" width="20" height="20"/>
         <namedColor name="WhiteBackground">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
