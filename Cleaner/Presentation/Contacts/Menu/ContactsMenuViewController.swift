@@ -65,6 +65,10 @@ final class ContactsMenuViewController: UIViewController {
 extension ContactsMenuViewController: ViewControllerProtocol {
     func setupUI() {
         unresolvedContactsCount.bind(text: "50 contacts")
+        duplicateNamesView.bind(type: .duplicateNames)
+        duplicateNumbersView.bind(type: .dublicateNumbers)
+        noNameView.bind(type: .noNameContacts)
+        noNumberView.bind(type: .noNumberContacts)
     }
     
     func addGestureRecognizers() {

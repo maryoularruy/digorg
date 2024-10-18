@@ -43,6 +43,7 @@ final class ContactsMenuView: UIView {
     
     func bind(type: ContactsInfoType) {
         iconImageView.image = type.icon
+        titleLabel.text = type.rawValue
     }
     
     private func setup() {
