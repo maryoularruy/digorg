@@ -8,7 +8,7 @@
 import UIKit
 
 final class ContactsMenuView: UIView {
-    private lazy var nibName = "ContactMenuView"
+    private lazy var nibName = "ContactsMenuView"
     
     enum ContactsInfoType: String {
         case duplicateNames = "Duplicate Names"
@@ -48,6 +48,7 @@ final class ContactsMenuView: UIView {
     private func setup() {
         Bundle.main.loadNibNamed(nibName, owner: self)
         layer.cornerRadius = 20
+        backgroundColor = .red
         addShadows()
         addSubview(contentView)
         contentView.frame = bounds

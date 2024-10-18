@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,41 +34,99 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Cleanup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqF-JI-24z" customClass="Semibold24LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="139" width="188" height="28.666666666666657"/>
+                                <rect key="frame" x="16" y="133" width="188" height="28.666666666666657"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="textColor" name="Dark"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xgv-fN-Es0" customClass="UILabelSubhealine13sizeStyle" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="173.66666666666666" width="0.0" height="0.0"/>
+                                <rect key="frame" x="16" y="167.66666666666666" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.54117647058823526" green="0.5607843137254902" blue="0.58039215686274503" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duplicate data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfS-tA-C00" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="187.66666666666666" width="87.666666666666671" height="15.666666666666657"/>
+                                <rect key="frame" x="16" y="181.66666666666666" width="87.666666666666671" height="15.666666666666657"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" name="Black"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iDs-tR-tyo" customClass="ContactsMenuView" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="16" y="213.33333333333334" width="361" height="73.000000000000028"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73" id="jlK-DY-s9Z"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Dr-g8-nCZ" customClass="ContactsMenuView" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="16" y="302.33333333333331" width="361" height="73"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="73" id="6H5-zK-egk"/>
+                                    <constraint firstAttribute="height" constant="73" id="A1s-UT-dKZ"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incomplete information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ttm-TH-91Y" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="16" y="401.33333333333331" width="140" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" name="Black"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Zm-QJ-Gta" customClass="ContactsMenuView" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="16" y="433.33333333333331" width="361" height="73"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="73" id="0vT-Iu-Su8"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="73" id="1u0-wN-Jyr"/>
+                                    <constraint firstAttribute="height" constant="73" id="Li9-SD-xtC"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mya-V4-7ur" customClass="ContactsMenuView" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="16" y="522.33333333333337" width="361" height="73"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73" id="6y3-9g-e3s"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="73" id="98f-nj-0hZ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="73" id="9AX-vu-nAe"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="73" id="atB-Ui-vZq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
                         <constraints>
+                            <constraint firstItem="Mya-V4-7ur" firstAttribute="top" secondItem="5Zm-QJ-Gta" secondAttribute="bottom" constant="16" id="0mc-kz-m8R"/>
+                            <constraint firstItem="iDs-tR-tyo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="3Uj-s4-tKy"/>
                             <constraint firstItem="zfS-tA-C00" firstAttribute="top" secondItem="Xgv-fN-Es0" secondAttribute="bottom" constant="14" id="9Dy-6G-Ue6"/>
-                            <constraint firstItem="QqF-JI-24z" firstAttribute="top" secondItem="xE2-SA-ps9" secondAttribute="bottom" constant="20" id="GLF-tt-biz"/>
+                            <constraint firstItem="QqF-JI-24z" firstAttribute="top" secondItem="xE2-SA-ps9" secondAttribute="bottom" constant="14" id="GLF-tt-biz"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="iDs-tR-tyo" secondAttribute="trailing" constant="16" id="Gi2-uS-AMc"/>
+                            <constraint firstItem="Mya-V4-7ur" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Nbz-ln-KFR"/>
                             <constraint firstItem="Xgv-fN-Es0" firstAttribute="leading" secondItem="QqF-JI-24z" secondAttribute="leading" id="QrA-Sv-0Nm"/>
                             <constraint firstItem="Xgv-fN-Es0" firstAttribute="top" secondItem="QqF-JI-24z" secondAttribute="bottom" constant="6" id="RWK-BZ-Tvh"/>
                             <constraint firstItem="zfS-tA-C00" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="XPd-If-rWf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5Zm-QJ-Gta" secondAttribute="trailing" constant="16" id="a7y-UW-tVQ"/>
                             <constraint firstItem="zfS-tA-C00" firstAttribute="leading" secondItem="QqF-JI-24z" secondAttribute="leading" id="cNS-be-2JB"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0Dr-g8-nCZ" secondAttribute="trailing" constant="16" id="cuY-bs-iRJ"/>
+                            <constraint firstItem="Ttm-TH-91Y" firstAttribute="top" secondItem="0Dr-g8-nCZ" secondAttribute="bottom" constant="26" id="cv9-c9-6Se"/>
+                            <constraint firstItem="0Dr-g8-nCZ" firstAttribute="top" secondItem="iDs-tR-tyo" secondAttribute="bottom" constant="16" id="dJ9-eL-zqV"/>
+                            <constraint firstItem="0Dr-g8-nCZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="dxY-ic-RSe"/>
                             <constraint firstItem="Xgv-fN-Es0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="fVy-fm-tDE"/>
                             <constraint firstItem="xE2-SA-ps9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="oSR-wJ-59J"/>
+                            <constraint firstItem="5Zm-QJ-Gta" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="16" id="qIv-d8-IVd"/>
+                            <constraint firstItem="5Zm-QJ-Gta" firstAttribute="top" secondItem="Ttm-TH-91Y" secondAttribute="bottom" constant="16" id="t6y-mq-Sc2"/>
                             <constraint firstItem="QqF-JI-24z" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="tT2-GR-rYN"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Mya-V4-7ur" secondAttribute="trailing" constant="16" id="u5n-L5-aDw"/>
+                            <constraint firstItem="iDs-tR-tyo" firstAttribute="top" secondItem="zfS-tA-C00" secondAttribute="bottom" constant="16" id="vHd-mU-VwP"/>
+                            <constraint firstItem="Ttm-TH-91Y" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="wQj-VX-vJP"/>
                             <constraint firstItem="xE2-SA-ps9" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="yW8-hy-xDM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="arrowBackView" destination="xE2-SA-ps9" id="YMh-La-0Yu"/>
+                        <outlet property="duplicateNamesView" destination="iDs-tR-tyo" id="2Yk-nJ-1oj"/>
+                        <outlet property="duplicateNumbersView" destination="0Dr-g8-nCZ" id="yTd-s1-l1Q"/>
+                        <outlet property="noNameView" destination="5Zm-QJ-Gta" id="3HI-n3-ktM"/>
+                        <outlet property="noNumberView" destination="Mya-V4-7ur" id="BTo-yG-oYT"/>
                         <outlet property="unresolvedContactsCount" destination="Xgv-fN-Es0" id="Sf7-NG-FyH"/>
                     </connections>
                 </viewController>
@@ -87,5 +146,8 @@
         <namedColor name="White">
             <color red="0.97647058823529409" green="0.97647058823529409" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
