@@ -56,12 +56,13 @@ class DuplicateContactsViewController: UIViewController {
         super.viewDidLoad()
         unresolvedContactsCount.bind(text: "? contacts")
         unresolvedContactsTableView.register(cellType: UnresolvedItemCell.self)
-//        unresolvedContactsTableView.cell = self
+        addGestureRecognizers()
         
         reloadData()
         setupCollectionView()
         setupActions()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -144,6 +145,16 @@ extension DuplicateContactsViewController: UnresolvedItemCellProtocol {
     
     func tapOnCell() {
         
+    }
+}
+
+extension DuplicateContactsViewController: ViewControllerProtocol {
+    func setupUI() {}
+    
+    func addGestureRecognizers() {
+        arrowBackButton.addTapGestureRecognizer { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
 }
 
