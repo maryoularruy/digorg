@@ -18,10 +18,10 @@ class SelectionButtonStyle: UIButton {
     lazy var myConfiguration: Configuration = {
         var configuration = UIButton.Configuration.filled()
         configuration.titleAlignment = .center
-        configuration.title = " "
+        configuration.title = SelectionButtonText.selectAll.rawValue
         configuration.baseBackgroundColor = .whiteBackground
         configuration.baseForegroundColor = .blueButtonBackground
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 3, bottom: 1, trailing: 3)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
         configuration.cornerStyle = .capsule
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
             var outgoing = incoming
@@ -47,8 +47,6 @@ class SelectionButtonStyle: UIButton {
     }
     
     func setup() {
-        layer.cornerRadius = 20
         configuration = myConfiguration
-        addShadows()
-    }
+        addShadow()
 }

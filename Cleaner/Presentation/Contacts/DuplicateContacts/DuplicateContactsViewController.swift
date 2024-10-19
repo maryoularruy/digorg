@@ -69,7 +69,10 @@ class DuplicateContactsViewController: UIViewController {
         reloadData()
     }
     
-    @IBAction func tapOnSelectAllButton(_ sender: Any) {}
+    @IBAction func tapOnSelectAllButton(_ sender: Any) {
+        
+    }
+    
     private func setupCollectionView() {
 //        collectionView.delegate = self
 //        collectionView.dataSource = self
