@@ -104,10 +104,10 @@ class IncompliteContactsViewController: UIViewController {
     }
     
     private func reloadData() {
-        ContactManager.loadContacts({ contacts in
-            self.contacts = contacts.filter({ $0.givenName.isEmpty || $0.phoneNumbers.count == 0})
+        ContactManager.loadContacts { contacts in
+            self.contacts = contacts.filter { $0.givenName.isEmpty || $0.phoneNumbers.count == 0}
             self.collectionView.reloadData()
-        })
+        }
     }
     
     private func presentContact(contact: CNContact) {

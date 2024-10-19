@@ -7,6 +7,7 @@
 
 import UIKit
 import Reusable
+import Contacts
 
 protocol UnresolvedItemCellProtocol: AnyObject {
     func tapOnCheckBox()
@@ -29,9 +30,9 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         delegate?.tapOnCheckBox()
     }
     
-    func bind() {
-        name.text = "Laial"
-        number.text = "+23802403903"
+    func bind(contact: CNContact) {
+        name.text = contact.givenName
+        number.text = String(describing: contact.phoneNumbers.first)
     }
     
     private func setup() {

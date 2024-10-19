@@ -49,4 +49,5 @@ class SelectionButtonStyle: UIButton {
     func setup() {
         configuration = myConfiguration
         addShadow()
+    }
 }

@@ -80,6 +80,7 @@
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="x5d-Ne-Os9" id="1YX-Eh-dwD"/>
+                        <outlet property="selectionButton" destination="3ue-yE-53G" id="h2u-6f-jLX"/>
                         <outlet property="unresolvedContactsCount" destination="odr-cq-nVd" id="fsn-2v-vqd"/>
                         <outlet property="unresolvedContactsTableView" destination="xge-Oo-nOS" id="2A4-yV-x3P"/>
                     </connections>

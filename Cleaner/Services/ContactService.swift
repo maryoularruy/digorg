@@ -5,11 +5,11 @@
 //  Created by Максим Лебедев on 03.06.2022.
 //
 
-
 import Foundation
 import SwiftyContacts
 import SwiftyUserDefaults
 import Contacts
+import OSLog
 
 class CNContactSection {
     let name: String
@@ -21,7 +21,9 @@ class CNContactSection {
     }
 }
 
-class ContactManager{
+final class ContactManager {
+    private static var logger = Logger()
+    
 //    public static func loadSecretContacts(_ handler: @escaping ((_ contacts: [CNContact]) -> Void)){
 //        checkStatus {
 //            fetchContacts(completionHandler: { (result) in
@@ -37,18 +39,70 @@ class ContactManager{
 //        }
 //    }
     
-    public static func loadContacts(_ handler: @escaping ((_ contacts: [CNContact]) -> Void)){
+    static func loadContacts(handler: @escaping (([CNContact]) -> ())) {
         checkStatus {
-            fetchContacts({ (result) in
+            fetchContacts { result in
                 switch result {
-                case .success(let contacts):
-                    handler(contacts)
-                    // Do your thing here with [CNContacts] array
-                    break
-                case .failure:
-                    break
+                case .success(let contacts): handler(contacts)
+                case .failure: break
                 }
-            })
+            }
+        }
+    }
+    
+    static func findDuplicateContacts(contacts: [CNContact]) -> [[CNContact]] {
+        var duplicates = [[CNContact]]()
+        var checkedContacts = Set<CNContact>()
+        
+        for i in 0..<contacts.count {
+            if checkedContacts.contains(contacts[i]) {
+                continue
+            }
+            
+            var group = [CNContact]()
+            group.append(contacts[i])
+            
+            for j in i+1..<contacts.count {
+                if checkedContacts.contains(contacts[j]) {
+                    continue
+                }
+                
+                if (contacts[i].givenName + " " + contacts[i].familyName == contacts[j].givenName + " " + contacts[j].familyName) ||
+                    (!contacts[i].phoneNumbers.isEmpty && (contacts[i].phoneNumbers.first?.value.stringValue == contacts[j].phoneNumbers.first?.value.stringValue)) ||
+                    (!contacts[i].emailAddresses.isEmpty && (contacts[i].emailAddresses.first?.value == contacts[j].emailAddresses.first?.value)) {
+                    group.append(contacts[j])
+                    checkedContacts.insert(contacts[j])
+                }
+            }
+            
+            if group.count > 1 {
+                duplicates.append(group)
+            }
+            
+            checkedContacts.insert(contacts[i])
+        }
+        return duplicates
+    }
+    
+    private static func checkStatus(handler: @escaping () -> ()) {
+        if authorizationStatus() == .authorized {
+            handler()
+        } else {
+            requestContactAccess {
+                handler()
+            }
+        }
+    }
+    
+    private static func requestContactAccess(handler: @escaping () -> ()) {
+        requestAccess { response in
+            switch response {
+            case .success(_):
+                handler()
+                logger.info("Contacts Access Granted")
+            case .failure(let error):
+                logger.warning("Contacts Access Denied: \(error.localizedDescription)")
+            }
         }
     }
     
@@ -98,66 +152,6 @@ class ContactManager{
             }
         }
         return sections
-    }
-    
-    private static func checkStatus(_ handler: @escaping (() -> Void)){
-        let status = authorizationStatus()
-        if status == .authorized{
-            handler()
-        }
-        else{
-            requestContactAccess {
-                handler()
-            }
-        }
-    }
-    
-    private static func requestContactAccess(_ handler: @escaping (() -> Void)){
-        requestAccess { (response) in
-            switch response {
-            case .success(let success):
-                if success {
-                    handler()
-                    print("Contacts Acess Granted")
-                } else {
-                    print("Contacts Acess Denied")
-                }
-            case .failure(let error):
-                print("Contacts Acess Denied")
-            }
-        }
-    }
-    
-    public static func findDuplicateContacts(contacts: [CNContact]) -> [[CNContact]] {
-        var duplicates = [[CNContact]]()
-        var checkedContacts = Set<CNContact>()
-        
-        for i in 0..<contacts.count {
-            if checkedContacts.contains(contacts[i]) {
-                continue
-            }
-            
-            var group = [CNContact]()
-            group.append(contacts[i])
-            
-            for j in i+1..<contacts.count {
-                if checkedContacts.contains(contacts[j]) {
-                    continue
-                }
-                
-                if (contacts[i].givenName + " " + contacts[i].familyName == contacts[j].givenName + " " + contacts[j].familyName) || (!contacts[i].phoneNumbers.isEmpty && (contacts[i].phoneNumbers.first?.value.stringValue == contacts[j].phoneNumbers.first?.value.stringValue)) || (!contacts[i].emailAddresses.isEmpty && (contacts[i].emailAddresses.first?.value == contacts[j].emailAddresses.first?.value)) {
-                    group.append(contacts[j])
-                    checkedContacts.insert(contacts[j])
-                }
-            }
-            
-            if group.count > 1 {
-                duplicates.append(group)
-            }
-            
-            checkedContacts.insert(contacts[i])
-        }
-        return duplicates
     }
     
     public static func delete(_ contact: CNContact, _ handler: @escaping ((_ success: Bool) -> Void)){

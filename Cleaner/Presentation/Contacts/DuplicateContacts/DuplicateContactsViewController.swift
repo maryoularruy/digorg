@@ -13,6 +13,7 @@ class DuplicateContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
+    @IBOutlet weak var selectionButton: SelectionButtonStyle!
     //    @IBOutlet weak var blockView: UIView!
 //    @IBOutlet weak var deleteButton: UIButton!
 //    @IBOutlet weak var collectionView: UICollectionView!
@@ -22,8 +23,20 @@ class DuplicateContactsViewController: UIViewController {
 //    @IBOutlet weak var selectedCounterLabel: UILabel!
 //    @IBOutlet weak var noContactsStackView: UIStackView!
     
-    private var sections = [[CNContact]]() {
-        didSet{
+    private lazy var selectMode = false {
+        didSet {
+            if selectMode {
+                selectionButton.bind(text: .deselectAll)
+            } else {
+                selectionButton.bind(text: .selectAll)
+//                assetsForDeletion.removeAll()
+                unresolvedContactsTableView.reloadData()
+            }
+        }
+    }
+    
+    private lazy var sections = [[CNContact]]() {
+        didSet {
             if sections.isEmpty {
 //                noContactsStackView.isHidden = false
 //                selectView.isHidden = true
@@ -34,7 +47,7 @@ class DuplicateContactsViewController: UIViewController {
         }
     }
     
-    private var contactsForMerge = Set<[CNContact]>() {
+    private lazy var contactsForMerge = Set<[CNContact]>() {
         didSet {
 //            selectedCounterLabel.text = "Selected: \(contactsForMerge.count)"
             if contactsForMerge == Set(sections) {
@@ -54,12 +67,11 @@ class DuplicateContactsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        unresolvedContactsCount.bind(text: "? contacts")
-        unresolvedContactsTableView.register(cellType: UnresolvedItemCell.self)
         addGestureRecognizers()
         
         reloadData()
-        setupCollectionView()
+//        setupCollectionView()
+        setupUnresolvedContactsTableView()
         setupActions()
     }
     
@@ -70,7 +82,12 @@ class DuplicateContactsViewController: UIViewController {
     }
     
     @IBAction func tapOnSelectAllButton(_ sender: Any) {
-        
+        selectMode.toggle()
+    }
+    
+    private func setupUnresolvedContactsTableView() {
+        unresolvedContactsCount.bind(text: "? contacts")
+        unresolvedContactsTableView.register(cellType: UnresolvedItemCell.self)
     }
     
     private func setupCollectionView() {
@@ -80,12 +97,12 @@ class DuplicateContactsViewController: UIViewController {
     }
     
     private func reloadData() {
-        ContactManager.loadContacts({ contacts in
-            self.sections = ContactManager.findDuplicateContacts(contacts: contacts)
+        ContactManager.loadContacts { [weak self] contacts in
+            self?.sections = ContactManager.findDuplicateContacts(contacts: contacts)
 //            print("SECTIO",self.contacts)
 //            self.contacts = [contacts[5], contacts[6], contacts[7]]
 //            self.collectionView.reloadData()
-        })
+        }
     }
     
     private func setupActions() {
@@ -112,13 +129,13 @@ class DuplicateContactsViewController: UIViewController {
 
 extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        sections.reduce(0) { $0 + $1.count }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
         cell.delegate = self
-        cell.bind()
+        cell.bind(contact: sections[indexPath.section][indexPath.row])
         return cell
     }
     
@@ -127,7 +144,7 @@ extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        6
+        sections.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
