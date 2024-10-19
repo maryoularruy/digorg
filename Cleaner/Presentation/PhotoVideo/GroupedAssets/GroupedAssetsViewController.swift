@@ -13,7 +13,7 @@ final class GroupedAssetsViewController: UIViewController {
     @IBOutlet weak var similarPhotoLabel: Semibold24LabelStyle!
     @IBOutlet weak var duplicatesCountLabel: Regular13LabelStyle!
 	@IBOutlet var arrowBackView: UIView!
-    @IBOutlet weak var selectModeButton: UIButtonSecondaryStyle!
+    @IBOutlet weak var selectModeButton: SelectionButtonStyle!
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var actionToolbar: ActionToolbar!
     
@@ -46,9 +46,9 @@ final class GroupedAssetsViewController: UIViewController {
 	lazy var selectMode = false {
 		didSet {
             if selectMode {
-                selectModeButton.bind(text: "Deselect")
+                selectModeButton.bind(text: .deselect)
 			} else {
-                selectModeButton.bind(text: "Select")
+                selectModeButton.bind(text: .select)
 				assetsForDeletion.removeAll()
                 tableView.reloadData()
 			}

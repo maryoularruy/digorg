@@ -15,7 +15,7 @@ final class ActionToolbar: UIView {
     private lazy var nibName = "ActionToolbar"
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var toolbarButton: UIButtonActionToolbarStyle!
+    @IBOutlet weak var toolbarButton: ActionToolbarButtonStyle!
     var delegate: ActionToolbarDelegate?
     
     override init(frame: CGRect) {

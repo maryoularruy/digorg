@@ -12,7 +12,7 @@ final class CleanupOptionView: UIView {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var titleLabel: Semibold15LabelStyle!
-    @IBOutlet weak var infoButton: UIButtonMainScreenStyle!
+    @IBOutlet weak var infoButton: Medium12ButtonStyle!
     @IBOutlet weak var imageView: UIImageView!
     
     init() {

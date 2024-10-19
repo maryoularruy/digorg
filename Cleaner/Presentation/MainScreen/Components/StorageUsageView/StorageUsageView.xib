@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -26,19 +25,19 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storage Usage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38r-k0-Yt5" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="141" y="19" width="232" height="21"/>
+                    <rect key="frame" x="141" y="19" width="232" height="17.666666666666671"/>
                     <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZG-Bg-fQ1" customClass="UILabelSubhealine13sizeStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="141" y="47" width="232" height="18.333333333333329"/>
+                    <rect key="frame" x="141" y="43.666666666666664" width="232" height="15.333333333333336"/>
                     <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                     <color key="textColor" systemColor="systemGrayColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHI-Ki-6JT" customClass="UIButtonMainScreenStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="141" y="78.333333333333329" width="232" height="32"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHI-Ki-6JT" customClass="Medium12ButtonStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="141" y="72" width="232" height="32"/>
                     <color key="backgroundColor" name="BlueButtonBackground"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="Z3y-Rb-l8d"/>
