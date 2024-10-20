@@ -133,8 +133,15 @@ extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.clipsToBounds = false
         let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
         cell.delegate = self
+        if indexPath.row == 0 {
+            cell.setupFirstCellInSection()
+        } else if indexPath.row == sections[indexPath.section].count - 1 {
+            cell.setupLastCellInSection()
+        }
+        
         cell.bind(contact: sections[indexPath.section][indexPath.row])
         return cell
     }
@@ -183,11 +190,11 @@ extension DuplicateContactsViewController: ViewControllerProtocol {
 //        return sections.count
 //    }
 //    
-////    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//////        let cell = self.collectionView.dequeueReusableCell(for: indexPath) as MergeSectionCell
-//////        cell.setupData(data: sections[indexPath.row])
-//////        return cell
-////    }
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = self.collectionView.dequeueReusableCell(for: indexPath) as MergeSectionCell
+////        cell.setupData(data: sections[indexPath.row])
+//        return cell
+//    }
 //}
 //
 //extension DuplicateContactsViewController: UICollectionViewDelegateFlowLayout {
@@ -209,4 +216,5 @@ extension DuplicateContactsViewController: ViewControllerProtocol {
 //        return UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
 //        
 //    }
+//    
 //}

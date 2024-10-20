@@ -40,6 +40,16 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         number.text = numbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
     }
     
+    func setupFirstCellInSection() {
+        content.layer.cornerRadius = 20
+        content.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
+    
+    func setupLastCellInSection() {
+        content.layer.cornerRadius = 20
+        content.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+    }
+    
     private func setup() {
         number.setGreyTextColor()
         
