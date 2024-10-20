@@ -17,15 +17,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKi-6K-C5g">
-                        <rect key="frame" x="326" y="15" width="51" height="40"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <state key="normal" image="EmptyCheckBoxBlue"/>
-                        <buttonConfiguration key="configuration" style="plain" image="EmptyCheckBoxBlue"/>
-                        <connections>
-                            <action selector="tapOnCheckBox:" destination="-1" eventType="touchUpInside" id="x0W-Uo-fDy"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ui7-rL-AY1" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
                         <rect key="frame" x="16" y="14.999999999999998" width="300" height="20.333333333333329"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -42,23 +33,24 @@
                         <nil key="highlightedColor"/>
                         <lineBreakStrategy key="lineBreakStrategy" pushOut="YES" hangulWordPriority="YES"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EmptyCheckBoxBlue" translatesAutoresizingMaskIntoConstraints="NO" id="Rdo-5C-qe3">
+                        <rect key="frame" x="351" y="22" width="26" height="26"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" name="WhiteBackground"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="UKi-6K-C5g" secondAttribute="trailing" constant="16" id="2bY-Ro-0k2"/>
                     <constraint firstItem="ui7-rL-AY1" firstAttribute="top" secondItem="RGT-M5-Oba" secondAttribute="top" constant="15" id="HF3-mO-oER"/>
-                    <constraint firstItem="UKi-6K-C5g" firstAttribute="leading" secondItem="ui7-rL-AY1" secondAttribute="trailing" constant="10" id="IjF-wD-dah"/>
+                    <constraint firstAttribute="trailing" secondItem="Rdo-5C-qe3" secondAttribute="trailing" constant="16" id="PTm-ci-rTl"/>
                     <constraint firstItem="ZuU-83-qxI" firstAttribute="leading" secondItem="RGT-M5-Oba" secondAttribute="leading" constant="16" id="PwP-cu-iAC"/>
-                    <constraint firstItem="UKi-6K-C5g" firstAttribute="centerY" secondItem="RGT-M5-Oba" secondAttribute="centerY" id="Rnh-dm-Ser"/>
                     <constraint firstItem="ZuU-83-qxI" firstAttribute="top" secondItem="ui7-rL-AY1" secondAttribute="bottom" constant="5" id="a1s-dZ-Sfe"/>
                     <constraint firstItem="ui7-rL-AY1" firstAttribute="leading" secondItem="RGT-M5-Oba" secondAttribute="leading" constant="16" id="ijU-sH-Gf6"/>
-                    <constraint firstItem="UKi-6K-C5g" firstAttribute="leading" secondItem="ZuU-83-qxI" secondAttribute="trailing" constant="10" id="j85-1n-Hhf"/>
+                    <constraint firstItem="Rdo-5C-qe3" firstAttribute="centerY" secondItem="RGT-M5-Oba" secondAttribute="centerY" id="js9-Wi-cOd"/>
                     <constraint firstItem="ZuU-83-qxI" firstAttribute="width" secondItem="ui7-rL-AY1" secondAttribute="width" priority="900" id="klD-wh-HCf"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" name="WhiteBackground"/>
             <connections>
-                <outlet property="checkBoxButton" destination="UKi-6K-C5g" id="LzL-WM-UHU"/>
+                <outlet property="checkBoxButton" destination="Rdo-5C-qe3" id="nwY-dT-YdP"/>
                 <outlet property="content" destination="RGT-M5-Oba" id="qmp-9h-YqV"/>
                 <outlet property="name" destination="ui7-rL-AY1" id="peh-by-fvV"/>
                 <outlet property="number" destination="ZuU-83-qxI" id="IOJ-Cd-ax0"/>

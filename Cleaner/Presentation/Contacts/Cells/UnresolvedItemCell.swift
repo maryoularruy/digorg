@@ -18,7 +18,7 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var name: Semibold15LabelStyle!
     @IBOutlet weak var number: Regular15LabelStyle!
-    @IBOutlet weak var checkBoxButton: UIButton!
+    @IBOutlet weak var checkBoxButton: UIImageView!
     
     weak var delegate: UnresolvedItemCellProtocol?
     
@@ -27,10 +27,6 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
-    }
-    
-    @IBAction func tapOnCheckBox(_ sender: Any) {
-        delegate?.tapOnCheckBox(position)
     }
     
     func bind(contact: CNContact, _ position: (Int, Int)) {
@@ -56,6 +52,11 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     
     private func setup() {
         number.setGreyTextColor()
+        
+        checkBoxButton.addTapGestureRecognizer { [weak self] in
+            guard let self else { return }
+            delegate?.tapOnCheckBox(position)
+        }
         
         content.addTapGestureRecognizer { [weak self] in
             guard let self else { return }

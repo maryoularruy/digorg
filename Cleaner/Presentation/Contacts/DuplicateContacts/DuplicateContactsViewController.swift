@@ -16,11 +16,8 @@ class DuplicateContactsViewController: UIViewController {
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     //    @IBOutlet weak var blockView: UIView!
 //    @IBOutlet weak var deleteButton: UIButton!
-//    @IBOutlet weak var collectionView: UICollectionView!
 //    @IBOutlet weak var checkBoxImage: UIImageView!
-//    @IBOutlet weak var selectAllStackView: UIStackView!
 //    @IBOutlet weak var selectView: UIView!
-//    @IBOutlet weak var selectedCounterLabel: UILabel!
 //    @IBOutlet weak var noContactsStackView: UIStackView!
     
     private lazy var selectMode = false {
@@ -49,40 +46,21 @@ class DuplicateContactsViewController: UIViewController {
     
     private lazy var contactsForMerge = Set<[CNContact]>() {
         didSet {
-//            selectedCounterLabel.text = "Selected: \(contactsForMerge.count)"
-            if contactsForMerge == Set(sections) {
-//                checkBoxImage.image = Asset.selectedCheckBox.image
-                
-            } else {
-//                checkBoxImage.image = Asset.emptyCheckBox.image
-            }
-            if contactsForMerge.isEmpty {
-//                selectionButton.bind(text: .selectAll)
-                unresolvedContactsTableView.reloadData()
-//                blockView.isHidden = false
-//                deleteButton.isUserInteractionEnabled = false
-//            } else {
-                selectionButton.bind(text: .deselectAll)
-//                blockView.isHidden = true
-//                deleteButton.isUserInteractionEnabled = true
-            }
+            unresolvedContactsCount.text = "\(sections.count) contact\(sections.count == 1 ? "" : "s")"
+            unresolvedContactsTableView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addGestureRecognizers()
-        
-        reloadData()
-//        setupCollectionView()
-        setupUnresolvedContactsTableView()
-        setupActions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
         reloadData()
+        setupUnresolvedContactsTableView()
     }
     
     @IBAction func tapOnSelectAllButton(_ sender: Any) {
@@ -90,14 +68,8 @@ class DuplicateContactsViewController: UIViewController {
     }
     
     private func setupUnresolvedContactsTableView() {
-        unresolvedContactsCount.bind(text: "? contacts")
+        unresolvedContactsCount.bind(text: "\(sections.count) contact\(sections.count == 1 ? "" : "s")")
         unresolvedContactsTableView.register(cellType: UnresolvedItemCell.self)
-    }
-    
-    private func setupCollectionView() {
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
-//        collectionView.register(cellType: MergeSectionCell.self)
     }
     
     private func reloadData() {
@@ -107,13 +79,6 @@ class DuplicateContactsViewController: UIViewController {
 //            self.contacts = [contacts[5], contacts[6], contacts[7]]
 //            self.collectionView.reloadData()
         }
-    }
-    
-    private func setupActions() {
-//        selectAllStackView.addTapGestureRecognizer {
-//            
-//            self.collectionView.reloadData()
-//        }
     }
     
     private func presentContact(contact: CNContact) {
@@ -146,7 +111,7 @@ extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataS
             cell.setupLastCellInSection()
         }
         
-//        cell.checkBoxButton.image
+        cell.checkBoxButton.image = contactsForMerge.contains(sections[indexPath.section]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         
         cell.bind(contact: sections[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
         return cell
@@ -195,37 +160,3 @@ extension DuplicateContactsViewController: ViewControllerProtocol {
         }
     }
 }
-
-//extension DuplicateContactsViewController: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return sections.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = self.collectionView.dequeueReusableCell(for: indexPath) as MergeSectionCell
-////        cell.setupData(data: sections[indexPath.row])
-//        return cell
-//    }
-//}
-//
-//extension DuplicateContactsViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        var height = 0.0
-//        if sections[indexPath.row].count < 3 {
-//            height = 350
-//        } else {
-//            height = 440
-//        }
-//        return CGSize(width: collectionView.frame.width, height: height)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 16
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-//        
-//    }
-//    
-//}
