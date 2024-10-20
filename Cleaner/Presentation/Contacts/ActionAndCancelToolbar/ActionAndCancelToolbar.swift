@@ -1,22 +1,23 @@
 //
-//  ActionToolbar.swift
+//  ActionAndCancelToolbar.swift
 //  Cleaner
 //
-//  Created by Elena Sedunova on 14.10.2024.
+//  Created by Elena Sedunova on 21.10.2024.
 //
 
 import UIKit
 
-protocol ActionToolbarDelegate {
-    func removeItems()
+protocol ActionAndCancelToolbarProtocol: AnyObject {
+    func tapOnAction()
+    func tapOnCancel()
 }
 
-final class ActionToolbar: UIView {
-    private lazy var nibName = "ActionToolbar"
-    
+final class ActionAndCancelToolbar: UIView {
+    private lazy var nibName = "ActionAndCancelToolbar"
+
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var toolbarButton: ActionToolbarButtonStyle!
-    var delegate: ActionToolbarDelegate?
+    @IBOutlet weak var actionButton: ActionToolbarButtonStyle!
+    weak var delegate: ActionAndCancelToolbarProtocol?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,8 +29,12 @@ final class ActionToolbar: UIView {
         setup()
     }
     
-    @IBAction func tapOnToolbarButton(_ sender: Any) {
-        delegate?.removeItems()
+    @IBAction func tapOnAction(_ sender: Any) {
+        delegate?.tapOnAction()
+    }
+    
+    @IBAction func tapOnCancel(_ sender: Any) {
+        delegate?.tapOnCancel()
     }
     
     private func setup() {
