@@ -110,7 +110,7 @@ public class AppLocker: UIViewController {
         pinView?.isNeedClear = !isNeedClear
         
         UIView.animate(withDuration: ALConstants.duration, animations: {
-            pinView?.backgroundColor = isNeedClear ? Asset.greyBackgroundColor.color : .blue
+            pinView?.backgroundColor = isNeedClear ? .greyBackground : .blue
         }) { _ in
             isNeedClear ? self.pin = String(self.pin.dropLast()) : self.pincodeChecker(tag ?? 0)
         }
@@ -197,7 +197,7 @@ public class AppLocker: UIViewController {
     private func incorrectPinAnimation() {
         pinIndicators.forEach { view in
             view.shake(delegate: self)
-            view.backgroundColor = Asset.greyBackgroundColor.color
+            view.backgroundColor = .greyBackground
         }
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
@@ -207,7 +207,7 @@ public class AppLocker: UIViewController {
         pinIndicators.forEach { view in
             view.isNeedClear = false
             UIView.animate(withDuration: ALConstants.duration, animations: {
-                view.backgroundColor = Asset.greyBackgroundColor.color
+                view.backgroundColor = .greyBackground
             })
         }
     }
