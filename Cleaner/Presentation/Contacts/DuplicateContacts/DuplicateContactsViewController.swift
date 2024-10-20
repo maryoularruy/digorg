@@ -149,7 +149,7 @@ extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UnresolvedItemCellHeader()
-        header.unresolvedItemsInSection.bind(text: "pnetiayk")
+        header.unresolvedItemsInSection.bind(text: "? duplicates")
         return header
     }
     

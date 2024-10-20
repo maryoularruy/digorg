@@ -31,8 +31,14 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     }
     
     func bind(contact: CNContact) {
-        name.text = contact.givenName
-        number.text = String(describing: contact.phoneNumbers.first)
+        name.text = "\(contact.givenName) \(contact.familyName)"
+        
+        var numbers: [String] = []
+        contact.phoneNumbers.forEach { number in
+            numbers.append(number.value.stringValue)
+//            numbers.append("+ 2742 (524) 233")
+        }
+        number.text = numbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
     }
     
     private func setup() {
