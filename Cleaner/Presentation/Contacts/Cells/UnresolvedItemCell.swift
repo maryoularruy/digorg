@@ -36,7 +36,6 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         var numbers: [String] = []
         contact.phoneNumbers.forEach { number in
             numbers.append(number.value.stringValue)
-//            numbers.append("+ 2742 (524) 233")
         }
         number.text = numbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
     }

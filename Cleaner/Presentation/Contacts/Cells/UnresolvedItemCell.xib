@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKi-6K-C5g">
-                        <rect key="frame" x="327" y="15" width="50" height="40"/>
+                        <rect key="frame" x="326" y="15" width="51" height="40"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="EmptyCheckBoxBlue"/>
                         <connections>
@@ -26,26 +26,33 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ui7-rL-AY1" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                        <rect key="frame" x="16.000000000000004" y="14.999999999999998" width="41.333333333333343" height="20.333333333333329"/>
+                        <rect key="frame" x="16" y="14.999999999999998" width="300" height="20.333333333333329"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuU-83-qxI" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                        <rect key="frame" x="16" y="34.666666666666664" width="52" height="20.333333333333336"/>
+                        <rect key="frame" x="16" y="40.333333333333336" width="300" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" priority="900" constant="300" id="Lt2-SF-NKV"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
+                        <lineBreakStrategy key="lineBreakStrategy" pushOut="YES" hangulWordPriority="YES"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" name="WhiteBackground"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="UKi-6K-C5g" secondAttribute="trailing" constant="16" id="2bY-Ro-0k2"/>
-                    <constraint firstItem="UKi-6K-C5g" firstAttribute="bottom" secondItem="ZuU-83-qxI" secondAttribute="bottom" id="Avw-6T-XP6"/>
+                    <constraint firstItem="ui7-rL-AY1" firstAttribute="top" secondItem="RGT-M5-Oba" secondAttribute="top" constant="15" id="HF3-mO-oER"/>
+                    <constraint firstItem="UKi-6K-C5g" firstAttribute="leading" secondItem="ui7-rL-AY1" secondAttribute="trailing" constant="10" id="IjF-wD-dah"/>
                     <constraint firstItem="ZuU-83-qxI" firstAttribute="leading" secondItem="RGT-M5-Oba" secondAttribute="leading" constant="16" id="PwP-cu-iAC"/>
                     <constraint firstItem="UKi-6K-C5g" firstAttribute="centerY" secondItem="RGT-M5-Oba" secondAttribute="centerY" id="Rnh-dm-Ser"/>
+                    <constraint firstItem="ZuU-83-qxI" firstAttribute="top" secondItem="ui7-rL-AY1" secondAttribute="bottom" constant="5" id="a1s-dZ-Sfe"/>
                     <constraint firstItem="ui7-rL-AY1" firstAttribute="leading" secondItem="RGT-M5-Oba" secondAttribute="leading" constant="16" id="ijU-sH-Gf6"/>
-                    <constraint firstItem="UKi-6K-C5g" firstAttribute="top" secondItem="ui7-rL-AY1" secondAttribute="top" id="wzJ-va-OdW"/>
+                    <constraint firstItem="UKi-6K-C5g" firstAttribute="leading" secondItem="ZuU-83-qxI" secondAttribute="trailing" constant="10" id="j85-1n-Hhf"/>
+                    <constraint firstItem="ZuU-83-qxI" firstAttribute="width" secondItem="ui7-rL-AY1" secondAttribute="width" priority="900" id="klD-wh-HCf"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" name="WhiteBackground"/>
