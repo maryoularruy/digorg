@@ -47,7 +47,7 @@ final class Medium12ButtonStyle: UIButton {
     }
     
     private func setup() {
-        backgroundColor = .blueButtonBackground
+        backgroundColor = .blue
         layer.cornerRadius = 20
         configuration = myConfiguration
     }

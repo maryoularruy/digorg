@@ -13,7 +13,7 @@ final class CancelButtonStyle: UIButton {
         configuration.titleAlignment = .center
         configuration.title = "Cancel"
         configuration.baseBackgroundColor = .whiteBackground
-        configuration.baseForegroundColor = .blueButtonBackground
+        configuration.baseForegroundColor = .blue
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 3, bottom: 1, trailing: 3)
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
             var outgoing = incoming
