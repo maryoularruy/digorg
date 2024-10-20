@@ -10,16 +10,19 @@ import Reusable
 import Contacts
 
 protocol UnresolvedItemCellProtocol: AnyObject {
-    func tapOnCheckBox()
-    func tapOnCell()
+    func tapOnCheckBox(_ position: (Int, Int))
+    func tapOnCell(_ position: (Int, Int))
 }
 
 final class UnresolvedItemCell: UITableViewCell, NibReusable {
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var name: Semibold15LabelStyle!
     @IBOutlet weak var number: Regular15LabelStyle!
+    @IBOutlet weak var checkBoxButton: UIButton!
     
     weak var delegate: UnresolvedItemCellProtocol?
+    
+    private lazy var position: (Int, Int) = (0, 0)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,10 +30,11 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     }
     
     @IBAction func tapOnCheckBox(_ sender: Any) {
-        delegate?.tapOnCheckBox()
+        delegate?.tapOnCheckBox(position)
     }
     
-    func bind(contact: CNContact) {
+    func bind(contact: CNContact, _ position: (Int, Int)) {
+        self.position = position
         name.text = "\(contact.givenName) \(contact.familyName)"
         
         var numbers: [String] = []
@@ -54,7 +58,8 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         number.setGreyTextColor()
         
         content.addTapGestureRecognizer { [weak self] in
-            self?.delegate?.tapOnCell()
+            guard let self else { return }
+            delegate?.tapOnCell(position)
         }
     }
 }

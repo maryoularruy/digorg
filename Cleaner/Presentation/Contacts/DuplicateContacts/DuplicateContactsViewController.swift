@@ -52,13 +52,17 @@ class DuplicateContactsViewController: UIViewController {
 //            selectedCounterLabel.text = "Selected: \(contactsForMerge.count)"
             if contactsForMerge == Set(sections) {
 //                checkBoxImage.image = Asset.selectedCheckBox.image
+                
             } else {
 //                checkBoxImage.image = Asset.emptyCheckBox.image
             }
             if contactsForMerge.isEmpty {
+//                selectionButton.bind(text: .selectAll)
+                unresolvedContactsTableView.reloadData()
 //                blockView.isHidden = false
 //                deleteButton.isUserInteractionEnabled = false
-            } else {
+//            } else {
+                selectionButton.bind(text: .deselectAll)
 //                blockView.isHidden = true
 //                deleteButton.isUserInteractionEnabled = true
             }
@@ -142,7 +146,9 @@ extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataS
             cell.setupLastCellInSection()
         }
         
-        cell.bind(contact: sections[indexPath.section][indexPath.row])
+//        cell.checkBoxButton.image
+        
+        cell.bind(contact: sections[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
         return cell
     }
     
@@ -166,11 +172,16 @@ extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataS
 }
 
 extension DuplicateContactsViewController: UnresolvedItemCellProtocol {
-    func tapOnCheckBox() {
-        
+    func tapOnCheckBox(_ position: (Int, Int)) {
+        let duplicateContacts = sections[position.0]
+        if contactsForMerge.contains(duplicateContacts) {
+            contactsForMerge.remove(duplicateContacts)
+        } else {
+            contactsForMerge.insert(duplicateContacts)
+        }
     }
     
-    func tapOnCell() {
+    func tapOnCell(_ position: (Int, Int)) {
         
     }
 }

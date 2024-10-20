@@ -19,7 +19,8 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKi-6K-C5g">
                         <rect key="frame" x="326" y="15" width="51" height="40"/>
-                        <state key="normal" title="Button"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="EmptyCheckBoxBlue"/>
                         <buttonConfiguration key="configuration" style="plain" image="EmptyCheckBoxBlue"/>
                         <connections>
                             <action selector="tapOnCheckBox:" destination="-1" eventType="touchUpInside" id="x0W-Uo-fDy"/>
@@ -57,6 +58,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" name="WhiteBackground"/>
             <connections>
+                <outlet property="checkBoxButton" destination="UKi-6K-C5g" id="LzL-WM-UHU"/>
                 <outlet property="content" destination="RGT-M5-Oba" id="qmp-9h-YqV"/>
                 <outlet property="name" destination="ui7-rL-AY1" id="peh-by-fvV"/>
                 <outlet property="number" destination="ZuU-83-qxI" id="IOJ-Cd-ax0"/>
