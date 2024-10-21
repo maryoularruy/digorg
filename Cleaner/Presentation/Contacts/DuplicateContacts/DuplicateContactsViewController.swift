@@ -24,10 +24,11 @@ class DuplicateContactsViewController: UIViewController {
     private lazy var selectMode = false {
         didSet {
             if selectMode {
+                contactsForMerge.insert(sections)
                 selectionButton.bind(text: .deselectAll)
             } else {
+                sections.forEach { contactsForMerge.remove($0) }
                 selectionButton.bind(text: .selectAll)
-//                assetsForDeletion.removeAll()
                 unresolvedContactsTableView.reloadData()
             }
         }
@@ -56,6 +57,8 @@ class DuplicateContactsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+       
         addGestureRecognizers()
     }
     
@@ -130,7 +133,7 @@ extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UnresolvedItemCellHeader()
-        header.unresolvedItemsInSection.bind(text: "? duplicates")
+        header.unresolvedItemsInSection.bind(text: "\(sections[section].count) duplicates")
         return header
     }
     
@@ -147,6 +150,10 @@ extension DuplicateContactsViewController: UnresolvedItemCellProtocol {
         } else {
             contactsForMerge.insert(duplicateContacts)
         }
+        
+        if contactsForMerge.count == sections.count {
+            tapOnSelectAllButton(self)
+        }
     }
     
     func tapOnCell(_ position: (Int, Int)) {
@@ -155,11 +162,24 @@ extension DuplicateContactsViewController: UnresolvedItemCellProtocol {
 }
 
 extension DuplicateContactsViewController: ViewControllerProtocol {
-    func setupUI() {}
+    func setupUI() {
+        toolbar.delegate = self
+    }
     
     func addGestureRecognizers() {
         arrowBackButton.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+    }
+}
+
+extension DuplicateContactsViewController: ActionAndCancelToolbarProtocol {
+    func tapOnAction() {
+        
+    }
+    
+    func tapOnCancel() {
+        selectMode = false
+        reloadData()
     }
 }
