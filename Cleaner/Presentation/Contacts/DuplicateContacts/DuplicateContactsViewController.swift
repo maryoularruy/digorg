@@ -175,7 +175,13 @@ extension DuplicateContactsViewController: ViewControllerProtocol {
 
 extension DuplicateContactsViewController: ActionAndCancelToolbarProtocol {
     func tapOnAction() {
-        
+        guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
+        vc.height = 238
+        vc.actionButtonText = "Merge Contacts (\(sections.count))"
+        vc.type = .contactMerge
+        DispatchQueue.main.async { [weak self] in
+            self?.present(vc, animated: true, completion: nil)
+        }
     }
     
     func tapOnCancel() {

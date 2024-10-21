@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Confirm Action View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController restorationIdentifier="ConfirmActionViewController" storyboardIdentifier="ConfirmActionViewController" definesPresentationContext="YES" modalPresentationStyle="overCurrentContext" id="Y6W-OH-hqX" customClass="ConfirmActionViewController" customModule="Cleaner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="238"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZS-dM-p5Q" customClass="ActionAndCancelToolbar" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="78" width="393" height="160"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="b4d-jr-j6i"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EY-p3-Cg8" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="175.66666666666666" y="26" width="42" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9f3-es-P1e" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="175.66666666666666" y="56.333333333333343" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" name="WhiteBackground"/>
+                        <constraints>
+                            <constraint firstItem="CZS-dM-p5Q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="9iI-L2-PIr"/>
+                            <constraint firstItem="5EY-p3-Cg8" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Axn-yI-rGx"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CZS-dM-p5Q" secondAttribute="trailing" id="D8z-gM-vwM"/>
+                            <constraint firstItem="9f3-es-P1e" firstAttribute="top" secondItem="5EY-p3-Cg8" secondAttribute="bottom" constant="10" id="IOM-BM-XxJ"/>
+                            <constraint firstItem="9f3-es-P1e" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Z2r-By-CeA"/>
+                            <constraint firstAttribute="bottom" secondItem="CZS-dM-p5Q" secondAttribute="bottom" id="j7s-gI-qyE"/>
+                            <constraint firstItem="5EY-p3-Cg8" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="26" id="ubM-8O-4Zl"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="393" height="150"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="393" height="238"/>
+                    <connections>
+                        <outlet property="primaryLabel" destination="5EY-p3-Cg8" id="UZ5-Cv-sqo"/>
+                        <outlet property="secondaryLabel" destination="9f3-es-P1e" id="qla-yB-brf"/>
+                        <outlet property="toolbar" destination="CZS-dM-p5Q" id="Yqm-lN-MUm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9.9236641221374047" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="WhiteBackground">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
