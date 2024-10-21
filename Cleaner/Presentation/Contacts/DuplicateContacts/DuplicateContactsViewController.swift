@@ -14,8 +14,9 @@ class DuplicateContactsViewController: UIViewController {
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
+    @IBOutlet weak var toolbar: ActionAndCancelToolbar!
     //    @IBOutlet weak var blockView: UIView!
-//    @IBOutlet weak var deleteButton: UIButton!
+    //    @IBOutlet weak var deleteButton: UIButton!
 //    @IBOutlet weak var checkBoxImage: UIImageView!
 //    @IBOutlet weak var selectView: UIView!
 //    @IBOutlet weak var noContactsStackView: UIStackView!
@@ -48,6 +49,8 @@ class DuplicateContactsViewController: UIViewController {
         didSet {
             unresolvedContactsCount.text = "\(sections.count) contact\(sections.count == 1 ? "" : "s")"
             unresolvedContactsTableView.reloadData()
+            toolbar.isHidden = contactsForMerge.isEmpty
+            toolbar.actionButton.bind(text: "Merge Contacts (\(sections.count))")
         }
     }
     

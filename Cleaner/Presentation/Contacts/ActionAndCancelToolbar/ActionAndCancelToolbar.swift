@@ -44,5 +44,6 @@ final class ActionAndCancelToolbar: UIView {
         addSubview(contentView)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        addShadows()
     }
 }

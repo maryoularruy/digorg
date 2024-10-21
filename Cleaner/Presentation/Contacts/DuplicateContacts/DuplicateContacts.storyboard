@@ -60,12 +60,20 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="Ivb-6x-syi"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adP-Ie-DuI" customClass="ActionAndCancelToolbar" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="692" width="393" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="gIp-pw-qww"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="WhiteBackground"/>
                         <constraints>
                             <constraint firstItem="3ue-yE-53G" firstAttribute="centerY" secondItem="x5d-Ne-Os9" secondAttribute="centerY" id="2TC-gx-usW"/>
                             <constraint firstItem="ClE-fA-3z3" firstAttribute="top" secondItem="x5d-Ne-Os9" secondAttribute="bottom" constant="14" id="4lj-tW-AM6"/>
+                            <constraint firstItem="adP-Ie-DuI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="86I-37-cJU"/>
+                            <constraint firstItem="adP-Ie-DuI" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="HSd-c0-WgL"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xge-Oo-nOS" secondAttribute="trailing" constant="16" id="Lhl-R4-izF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3ue-yE-53G" secondAttribute="trailing" constant="16" id="RLk-wK-ESX"/>
                             <constraint firstItem="xge-Oo-nOS" firstAttribute="top" secondItem="odr-cq-nVd" secondAttribute="bottom" constant="14" id="ROA-Fp-smE"/>
@@ -74,6 +82,7 @@
                             <constraint firstItem="ClE-fA-3z3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Y68-vo-QZ1"/>
                             <constraint firstItem="odr-cq-nVd" firstAttribute="top" secondItem="ClE-fA-3z3" secondAttribute="bottom" constant="6" id="e8K-ek-xtf"/>
                             <constraint firstItem="x5d-Ne-Os9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="iLQ-OU-CjO"/>
+                            <constraint firstAttribute="bottom" secondItem="adP-Ie-DuI" secondAttribute="bottom" id="tYP-l7-KfZ"/>
                             <constraint firstItem="xge-Oo-nOS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="wZQ-Pv-dwi"/>
                             <constraint firstItem="x5d-Ne-Os9" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="yk1-Vh-Dzd"/>
                         </constraints>
@@ -81,6 +90,7 @@
                     <connections>
                         <outlet property="arrowBackButton" destination="x5d-Ne-Os9" id="1YX-Eh-dwD"/>
                         <outlet property="selectionButton" destination="3ue-yE-53G" id="h2u-6f-jLX"/>
+                        <outlet property="toolbar" destination="adP-Ie-DuI" id="1XC-GR-BLh"/>
                         <outlet property="unresolvedContactsCount" destination="odr-cq-nVd" id="fsn-2v-vqd"/>
                         <outlet property="unresolvedContactsTableView" destination="xge-Oo-nOS" id="2A4-yV-x3P"/>
                     </connections>

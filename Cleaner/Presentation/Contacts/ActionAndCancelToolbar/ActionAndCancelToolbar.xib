@@ -21,7 +21,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ueh-bI-2V1" customClass="ActionToolbarButtonStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="16" y="20" width="361" height="35"/>
+                    <rect key="frame" x="16" y="20" width="361" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="dY4-OE-2xi"/>
+                    </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                     <connections>
@@ -29,7 +32,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zre-UL-xC0" customClass="CancelButtonStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="16" y="63" width="361" height="35"/>
+                    <rect key="frame" x="16" y="78" width="361" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="m9c-U9-Tdm"/>
+                    </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
                     <connections>
@@ -38,7 +44,7 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" name="WhitestBackground"/>
+            <color key="backgroundColor" name="WhiteBackground"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zre-UL-xC0" secondAttribute="trailing" constant="16" id="2Lz-OL-AiJ"/>
                 <constraint firstAttribute="trailing" secondItem="Ueh-bI-2V1" secondAttribute="trailing" constant="16" id="E4J-uc-6Gj"/>
@@ -52,8 +58,8 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="WhitestBackground">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="WhiteBackground">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
