@@ -23,6 +23,7 @@ class CNContactSection {
 
 final class ContactManager {
     private static var logger = Logger()
+    private static var store = CNContactStore()
     
 //    public static func loadSecretContacts(_ handler: @escaping ((_ contacts: [CNContact]) -> Void)){
 //        checkStatus {
@@ -180,13 +181,22 @@ final class ContactManager {
         var bestContact: CNContact?
         var bestValue: Int = 0
         for contact in contacts {
-            if contact.getPrice() > bestValue {
-                bestValue = contact.getPrice()
+            if contact.calcRating() > bestValue {
+                bestValue = contact.calcRating()
                 bestContact = contact
             }
         }
         
         let deleteContacts = contacts.filter { $0 != bestContact! }
+        guard let bestContact = bestContact?.mutableCopy() as? CNMutableContact else { return }
+        deleteContacts.forEach { bestContact.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
+
+        do {
+            try updateContact(bestContact)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
         for contact in deleteContacts {
             deleteContact(contact.mutableCopy() as! CNMutableContact) { _ in }
         }
@@ -235,14 +245,5 @@ final class ContactManager {
         }
         print(incompleted)
         return [CNContactSection(name: "Incomplete Contacts", contacts: incompleted)]
-    }
-}
-extension CNContact{
-    func getPrice() -> Int {
-        emailAddresses.count +
-        phoneNumbers.count +
-        (givenName.isEmpty ? 0 : 1) +
-        (familyName.isEmpty ? 0 : 1) +
-        (middleName.isEmpty ? 0 : 1)
     }
 }

@@ -9,12 +9,8 @@
 		<string>Poppins-Medium.ttf</string>
 		<string>Poppins-Regular.ttf</string>
 	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>whatsapp</string>
-		<string>telegram</string>
-		<string>viber</string>
-	</array>
+	<key>NSContactsUsageDescription</key>
+	<string>This app needs acess contacts</string>
 	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>Give it</string>
 	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>

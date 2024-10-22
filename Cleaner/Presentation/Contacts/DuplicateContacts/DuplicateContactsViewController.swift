@@ -186,9 +186,13 @@ extension DuplicateContactsViewController: ActionAndCancelToolbarProtocol, Botto
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
             contactsForMerge.forEach { ContactManager.combine($0) { [weak self] result in
+                guard let self else { return }
                 switch result {
                 case true:
-                    self?.reloadData()
+                    reloadData()
+                    setupUnresolvedContactsTableView()
+                    toolbar.isHidden = true
+                    unresolvedContactsTableView.reloadData()
                 case false:
                     break
                 }

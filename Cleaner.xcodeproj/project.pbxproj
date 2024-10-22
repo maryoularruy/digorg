@@ -77,6 +77,7 @@
 		A552341C2CC17F2000CBE265 /* UILabel+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552341B2CC17F2000CBE265 /* UILabel+ext.swift */; };
 		A55235982CC27B9300CBE265 /* ContactsInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55235972CC27B9300CBE265 /* ContactsInfoType.swift */; };
 		A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */; };
+		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
 		A5BC395B2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */; };
 		A5BC395C2CBC604E00153FD1 /* PhotoVideoMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC395A2CBC604E00153FD1 /* PhotoVideoMenuViewController.swift */; };
 		A5BC395D2CBC604E00153FD1 /* PhotoVideoMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BC39592CBC604E00153FD1 /* PhotoVideoMenu.storyboard */; };
@@ -303,6 +304,7 @@
 		A552341B2CC17F2000CBE265 /* UILabel+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ext.swift"; sourceTree = "<group>"; };
 		A55235972CC27B9300CBE265 /* ContactsInfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsInfoType.swift; sourceTree = "<group>"; };
 		A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
+		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
 		A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleSubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		A5BC39582CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTitleSubtitleTableViewCell.xib; sourceTree = "<group>"; };
 		A5BC39592CBC604E00153FD1 /* PhotoVideoMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoVideoMenu.storyboard; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 				A50F58BD2CB6E4AA00AB3166 /* UIFont+ext.swift */,
 				A55234172CC177D000CBE265 /* UIImage+ext.swift */,
 				A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */,
+				A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1579,6 +1582,7 @@
 				75D3FC682A606BA100F351A3 /* Fonts.swift in Sources */,
 				FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */,
 				FA39883D2B30602A0096F335 /* ZoomTransitionController.swift in Sources */,
+				A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */,
 				FA3987F62B305FA50096F335 /* DKPhotoBasePreviewVC.swift in Sources */,
 				FA3987402B3054930096F335 /* MediaService.swift in Sources */,
 				75D3FC822A606E6F00F351A3 /* Extension+Int.swift in Sources */,
