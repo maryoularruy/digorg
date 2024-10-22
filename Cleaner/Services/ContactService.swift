@@ -176,24 +176,23 @@ final class ContactManager {
         }
     }
     
-    public static func combine(_ contacts: [CNContact], _ handler: @escaping ((_ success: Bool) -> Void)){
+    public static func combine(_ contacts: [CNContact], completion: @escaping ((Bool) -> ())){
         var bestContact: CNContact?
         var bestValue: Int = 0
-        for contact in contacts{
-            if contact.getPrice() > bestValue{
+        for contact in contacts {
+            if contact.getPrice() > bestValue {
                 bestValue = contact.getPrice()
                 bestContact = contact
             }
         }
-        let deleteContacts = contacts.filter({ $0 != bestContact! })
-        for contact in deleteContacts{
-            deleteContact(contact.mutableCopy() as! CNMutableContact, {
-                (result) in
-            })
+        
+        let deleteContacts = contacts.filter { $0 != bestContact! }
+        for contact in deleteContacts {
+            deleteContact(contact.mutableCopy() as! CNMutableContact) { _ in }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-            handler(true)
-        })
+        DispatchQueue.main.async {
+            completion(true)
+        }
     }
     
     public static func loadIncompletedByName(_ contacts: [CNContact]) -> [CNContactSection]{
@@ -239,7 +238,11 @@ final class ContactManager {
     }
 }
 extension CNContact{
-    func getPrice() -> Int{
-        return self.emailAddresses.count + self.phoneNumbers.count + (self.givenName.isEmpty ? 0 : 1) + (self.familyName.isEmpty ? 0 : 1) + (self.middleName.isEmpty ? 0 : 1)
+    func getPrice() -> Int {
+        emailAddresses.count +
+        phoneNumbers.count +
+        (givenName.isEmpty ? 0 : 1) +
+        (familyName.isEmpty ? 0 : 1) +
+        (middleName.isEmpty ? 0 : 1)
     }
 }

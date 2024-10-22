@@ -8,6 +8,7 @@
 import UIKit
 import Contacts
 import ContactsUI
+import BottomPopup
 
 class DuplicateContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
@@ -15,11 +16,6 @@ class DuplicateContactsViewController: UIViewController {
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var toolbar: ActionAndCancelToolbar!
-    //    @IBOutlet weak var blockView: UIView!
-    //    @IBOutlet weak var deleteButton: UIButton!
-//    @IBOutlet weak var checkBoxImage: UIImageView!
-//    @IBOutlet weak var selectView: UIView!
-//    @IBOutlet weak var noContactsStackView: UIStackView!
     
     private lazy var selectMode = false {
         didSet {
@@ -81,9 +77,6 @@ class DuplicateContactsViewController: UIViewController {
     private func reloadData() {
         ContactManager.loadContacts { [weak self] contacts in
             self?.sections = ContactManager.findDuplicateContacts(contacts: contacts)
-//            print("SECTIO",self.contacts)
-//            self.contacts = [contacts[5], contacts[6], contacts[7]]
-//            self.collectionView.reloadData()
         }
     }
     
@@ -157,7 +150,7 @@ extension DuplicateContactsViewController: UnresolvedItemCellProtocol {
     }
     
     func tapOnCell(_ position: (Int, Int)) {
-        
+        presentContact(contact: sections[position.0][position.1])
     }
 }
 
@@ -173,19 +166,33 @@ extension DuplicateContactsViewController: ViewControllerProtocol {
     }
 }
 
-extension DuplicateContactsViewController: ActionAndCancelToolbarProtocol {
+extension DuplicateContactsViewController: ActionAndCancelToolbarProtocol, BottomPopupDelegate {
     func tapOnAction() {
         guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
+        vc.popupDelegate = self
         vc.height = 238
         vc.actionButtonText = "Merge Contacts (\(sections.count))"
         vc.type = .contactMerge
         DispatchQueue.main.async { [weak self] in
-            self?.present(vc, animated: true, completion: nil)
+            self?.present(vc, animated: true)
         }
     }
     
     func tapOnCancel() {
         selectMode = false
         reloadData()
+    }
+    
+    func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
+        if newValue == 100 {
+            contactsForMerge.forEach { ContactManager.combine($0) { [weak self] result in
+                switch result {
+                case true:
+                    self?.reloadData()
+                case false:
+                    break
+                }
+            }}
+        }
     }
 }

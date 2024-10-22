@@ -42,6 +42,7 @@ final class ConfirmActionViewController: BottomPopupViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        toolbar.delegate = self
         guard let type else { return }
         primaryLabel.bind(text: type.title)
         secondaryLabel.bind(text: type.subtitle)
@@ -53,4 +54,15 @@ final class ConfirmActionViewController: BottomPopupViewController {
     override var popupPresentDuration: Double { presentDuration ?? 0.2 }
     override var popupDismissDuration: Double { dismissDuration ?? 0.2 }
     override var popupShouldDismissInteractivelty: Bool { shouldDismissInteractivelty ?? true }
+}
+
+extension ConfirmActionViewController: ActionAndCancelToolbarProtocol {
+    func tapOnAction() {
+        popupDelegate?.bottomPopupDismissInteractionPercentChanged(from: 0, to: 100)
+        dismiss(animated: true)
+    }
+    
+    func tapOnCancel() {
+        dismiss(animated: true)
+    }
 }
