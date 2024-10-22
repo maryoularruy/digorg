@@ -13,7 +13,7 @@ final class ActionToolbarButtonStyle: UIButton {
         configuration.titleAlignment = .center
         configuration.title = " "
         configuration.baseBackgroundColor = .blue
-        configuration.baseForegroundColor = .whiteText
+        configuration.baseForegroundColor = .white
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 3, bottom: 1, trailing: 3)
         configuration.cornerStyle = .capsule
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in

@@ -50,7 +50,7 @@ DKPhotoGalleryContentDataSource, DKPhotoGalleryContentDelegate {
     
     @objc open var presentingFromImageView: UIImageView?
     @objc open var presentationIndex = 0
-    @objc open var leftBarButtonItemColor : UIColor = UIColor.whiteText
+    @objc open var leftBarButtonItemColor : UIColor = .white
     
     @objc open var singleTapMode = DKPhotoGallerySingleTapMode.toggleControlView
     

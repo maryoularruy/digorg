@@ -78,8 +78,6 @@ internal enum Asset {
   internal static let image31 = ImageAsset(name: "image 31")
   internal static let image32 = ImageAsset(name: "image 32")
   internal static let black = ColorAsset(name: "Black")
-  internal static let red = ColorAsset(name: "Red")
-  internal static let white = ColorAsset(name: "White")
   internal static let download = ImageAsset(name: "download")
   internal static let upload = ImageAsset(name: "upload")
   internal static let wifiConnection = ImageAsset(name: "wifiConnection")

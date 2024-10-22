@@ -12,7 +12,7 @@ final class Medium12ButtonStyle: UIButton {
         var configuration = UIButton.Configuration.filled()
         configuration.titleAlignment = .center
         configuration.title = " "
-        configuration.baseForegroundColor = .whiteText
+        configuration.baseForegroundColor = .white
         configuration.image = UIImage(resource: .arrowForwardWhite)
         configuration.imagePlacement = .trailing
         configuration.imagePadding = -5

@@ -19,7 +19,7 @@ class SelectionButtonStyle: UIButton {
         var configuration = UIButton.Configuration.filled()
         configuration.titleAlignment = .center
         configuration.title = SelectionButtonText.selectAll.rawValue
-        configuration.baseBackgroundColor = .whiteBackground
+        configuration.baseBackgroundColor = .white
         configuration.baseForegroundColor = .blue
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
         configuration.cornerStyle = .capsule
