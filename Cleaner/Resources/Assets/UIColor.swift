@@ -14,8 +14,7 @@ extension UIColor {
     static var blackText = UIColor(resource: .blackText)
     static var greyText = UIColor(resource: .greyText)
     
-    static var greyBackground = UIColor(resource: .greyBackground)
-    static var whitesBackground = UIColor(resource: .whitestBackground)
+    static var whiteBackground = UIColor(resource: .whiteBackground)
     
     static var paleBlueButtonBackground = UIColor(resource: .paleBlueBackground)
     

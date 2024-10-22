@@ -54,7 +54,6 @@ class DuplicateContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-       
         addGestureRecognizers()
     }
     
@@ -189,12 +188,20 @@ extension DuplicateContactsViewController: ActionAndCancelToolbarProtocol, Botto
                 guard let self else { return }
                 switch result {
                 case true:
-                    reloadData()
-                    setupUnresolvedContactsTableView()
-                    toolbar.isHidden = true
-                    unresolvedContactsTableView.reloadData()
-                case false:
-                    break
+                    let successView = SuccessView(frame: SuccessView.myFrame)
+                    successView.center = view.center
+                    view.addSubview(successView)
+                    view.setHidden {
+                        successView.removeFromSuperview()
+                    }
+                    DispatchQueue.global(qos: .userInitiated).sync { [weak self] in
+                        guard let self else { return }
+                        reloadData()
+                        setupUnresolvedContactsTableView()
+                        toolbar.isHidden = true
+                        unresolvedContactsTableView.reloadData()
+                    }
+                case false: break
                 }
             }}
         }

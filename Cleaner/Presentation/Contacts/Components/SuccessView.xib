@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SuccessView" customModule="Cleaner" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="h6m-wa-1E8"/>
+                <outlet property="title" destination="Jou-2S-nNF" id="k57-gj-cHl"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="176" height="182"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Stars/Stars" translatesAutoresizingMaskIntoConstraints="NO" id="yuv-PC-J6M">
+                    <rect key="frame" x="33" y="20" width="110" height="110"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="Uza-kB-6B9"/>
+                        <constraint firstAttribute="width" constant="110" id="zd1-L8-bCI"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jou-2S-nNF" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="146" width="176" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" name="White"/>
+            <constraints>
+                <constraint firstItem="yuv-PC-J6M" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Ujc-dx-VkB"/>
+                <constraint firstItem="Jou-2S-nNF" firstAttribute="top" secondItem="yuv-PC-J6M" secondAttribute="bottom" constant="16" id="g2z-X0-GO3"/>
+                <constraint firstItem="yuv-PC-J6M" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="muS-V5-4EF"/>
+                <constraint firstAttribute="trailing" secondItem="Jou-2S-nNF" secondAttribute="trailing" id="pDF-cU-cAH"/>
+                <constraint firstItem="Jou-2S-nNF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qb2-ni-jGf"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-4.5801526717557248" y="20.422535211267608"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Stars/Stars" width="110" height="108"/>
+        <namedColor name="White">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

@@ -46,6 +46,17 @@ extension UIView {
             self.clipsToBounds = false
         }
     
+    func setHidden(completion: @escaping (() -> Void)) {
+        alpha = 1
+        UIView.animate(withDuration: 0.5, delay: 0.1,
+                       options: .curveEaseOut, animations: { [weak self] in
+            self?.alpha = 0
+        }, completion: { [weak self] _ in
+            self?.alpha = 1.0
+            completion()
+        })
+    }
+    
     public func addTapGestureRecognizer(action: (() -> Void)?) {
         self.isUserInteractionEnabled = true
         self.tapGestureRecognizerAction = action

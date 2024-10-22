@@ -479,6 +479,7 @@
 		A55235992CC2AB9100CBE265 /* Cells */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Cells; sourceTree = "<group>"; };
 		A55235A02CC2E5F600CBE265 /* Header */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Header; sourceTree = "<group>"; };
 		A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ActionAndCancelToolbar; sourceTree = "<group>"; };
+		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -546,6 +547,7 @@
 		7532F85B2AE28B47007469EA /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */,
 				A55235A02CC2E5F600CBE265 /* Header */,
 				A55235992CC2AB9100CBE265 /* Cells */,
@@ -1430,6 +1432,7 @@
 				A55235992CC2AB9100CBE265 /* Cells */,
 				A55235A02CC2E5F600CBE265 /* Header */,
 				A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */,
+				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
 			);
 			name = Cleaner;
