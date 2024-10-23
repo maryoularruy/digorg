@@ -57,11 +57,11 @@ extension UIView {
         })
     }
     
-    func showEmptyState(type: EmptyStateType) {
+    func createEmptyState(type: EmptyStateType) -> EmptyStateView {
         let emptyStateView = EmptyStateView(frame: EmptyStateView.myFrame)
         emptyStateView.center = center
         emptyStateView.bind(type: type)
-        addSubview(emptyStateView)
+        return emptyStateView
     }
     
     public func addTapGestureRecognizer(action: (() -> Void)?) {

@@ -34,6 +34,7 @@ class DuplicateContactsViewController: UIViewController {
     private lazy var sections = [[CNContact]]() {
         didSet {
             if sections.isEmpty { setupEmptyState() }
+            else { hideEmptyState() }
         }
     }
     
@@ -45,6 +46,8 @@ class DuplicateContactsViewController: UIViewController {
             toolbar.actionButton.bind(text: "Merge Contacts (\(sections.count))")
         }
     }
+    
+    private weak var emptyStateView: EmptyStateView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -210,9 +213,16 @@ extension DuplicateContactsViewController: ActionToolbarDelegate {
     
     private func setupEmptyState() {
         selectionButton.isEnabled = false
-        view.showEmptyState(type: .noDuplicateNames)
+        emptyStateView = view.createEmptyState(type: .noDuplicateNames)
         emptyStateToolbar.toolbarButton.bind(text: "Back")
         emptyStateToolbar.delegate = self
         emptyStateToolbar.isHidden = false
+    }
+    
+    private func hideEmptyState() {
+        selectionButton.isEnabled = true
+        emptyStateToolbar.delegate = nil
+        emptyStateToolbar.isHidden = true
+        emptyStateView = nil
     }
 }
