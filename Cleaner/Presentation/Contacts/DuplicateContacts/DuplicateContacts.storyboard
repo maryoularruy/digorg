@@ -60,6 +60,12 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="Ivb-6x-syi"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CbR-7W-sDH" customClass="ActionToolbar" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="752" width="393" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Pqp-7e-qb1"/>
+                                </constraints>
+                            </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adP-Ie-DuI" customClass="ActionAndCancelToolbar" customModule="Cleaner" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="692" width="393" height="160"/>
                                 <constraints>
@@ -74,12 +80,15 @@
                             <constraint firstItem="ClE-fA-3z3" firstAttribute="top" secondItem="x5d-Ne-Os9" secondAttribute="bottom" constant="14" id="4lj-tW-AM6"/>
                             <constraint firstItem="adP-Ie-DuI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="86I-37-cJU"/>
                             <constraint firstItem="adP-Ie-DuI" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="HSd-c0-WgL"/>
+                            <constraint firstItem="CbR-7W-sDH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="JhQ-Ui-ICW"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xge-Oo-nOS" secondAttribute="trailing" constant="16" id="Lhl-R4-izF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3ue-yE-53G" secondAttribute="trailing" constant="16" id="RLk-wK-ESX"/>
                             <constraint firstItem="xge-Oo-nOS" firstAttribute="top" secondItem="odr-cq-nVd" secondAttribute="bottom" constant="14" id="ROA-Fp-smE"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="xge-Oo-nOS" secondAttribute="bottom" constant="56" id="Sot-uf-bRC"/>
                             <constraint firstItem="odr-cq-nVd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="TnW-JD-dnk"/>
+                            <constraint firstAttribute="bottom" secondItem="CbR-7W-sDH" secondAttribute="bottom" id="UnR-nY-Dic"/>
                             <constraint firstItem="ClE-fA-3z3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Y68-vo-QZ1"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CbR-7W-sDH" secondAttribute="trailing" id="a0K-Uy-wu3"/>
                             <constraint firstItem="odr-cq-nVd" firstAttribute="top" secondItem="ClE-fA-3z3" secondAttribute="bottom" constant="6" id="e8K-ek-xtf"/>
                             <constraint firstItem="x5d-Ne-Os9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="iLQ-OU-CjO"/>
                             <constraint firstAttribute="bottom" secondItem="adP-Ie-DuI" secondAttribute="bottom" id="tYP-l7-KfZ"/>
@@ -89,6 +98,7 @@
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="x5d-Ne-Os9" id="1YX-Eh-dwD"/>
+                        <outlet property="emptyStateToolbar" destination="CbR-7W-sDH" id="4hl-32-Kh1"/>
                         <outlet property="selectionButton" destination="3ue-yE-53G" id="h2u-6f-jLX"/>
                         <outlet property="toolbar" destination="adP-Ie-DuI" id="1XC-GR-BLh"/>
                         <outlet property="unresolvedContactsCount" destination="odr-cq-nVd" id="fsn-2v-vqd"/>
@@ -103,7 +113,7 @@
     <resources>
         <image name="ArrowBackIcon" width="64" height="64"/>
         <namedColor name="WhiteBackground">
-            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

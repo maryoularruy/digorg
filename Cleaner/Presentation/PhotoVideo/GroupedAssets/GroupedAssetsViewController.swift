@@ -139,7 +139,7 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
 }
 
 extension GroupedAssetsViewController: ActionToolbarDelegate {
-    func removeItems() {
+    func tapOnActionButton() {
         deletePhotos()
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ActionToolbarDelegate {
-    func removeItems()
+    func tapOnActionButton()
 }
 
 final class ActionToolbar: UIView {
@@ -29,7 +29,7 @@ final class ActionToolbar: UIView {
     }
     
     @IBAction func tapOnToolbarButton(_ sender: Any) {
-        delegate?.removeItems()
+        delegate?.tapOnActionButton()
     }
     
     private func setup() {

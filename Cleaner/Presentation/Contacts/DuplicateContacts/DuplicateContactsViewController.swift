@@ -16,6 +16,7 @@ class DuplicateContactsViewController: UIViewController {
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var toolbar: ActionAndCancelToolbar!
+    @IBOutlet weak var emptyStateToolbar: ActionToolbar!
     
     private lazy var selectMode = false {
         didSet {
@@ -32,13 +33,7 @@ class DuplicateContactsViewController: UIViewController {
     
     private lazy var sections = [[CNContact]]() {
         didSet {
-            if sections.isEmpty {
-//                noContactsStackView.isHidden = false
-//                selectView.isHidden = true
-            } else {
-//                noContactsStackView.isHidden = true
-//                selectView.isHidden = false
-            }
+            if sections.isEmpty { setupEmptyState() }
         }
     }
     
@@ -205,5 +200,19 @@ extension DuplicateContactsViewController: ActionAndCancelToolbarProtocol, Botto
                 }
             }}
         }
+    }
+}
+
+extension DuplicateContactsViewController: ActionToolbarDelegate {
+    func tapOnActionButton() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func setupEmptyState() {
+        selectionButton.isEnabled = false
+        view.showEmptyState(type: .noDuplicateNames)
+        emptyStateToolbar.toolbarButton.bind(text: "Back")
+        emptyStateToolbar.delegate = self
+        emptyStateToolbar.isHidden = false
     }
 }
