@@ -20,16 +20,29 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     @IBOutlet weak var secondLabel: Regular15LabelStyle!
     @IBOutlet weak var checkBoxButton: UIImageView!
     
+    enum UnresolvedItemCellType {
+        case grouped, single
+        
+        var insets: UIEdgeInsets {
+            switch self {
+            case .grouped: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            case .single: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+            }
+        }
+    }
+    
     weak var delegate: UnresolvedItemCellProtocol?
     
     private lazy var position: (Int, Int) = (0, 0)
+    private lazy var type: UnresolvedItemCellType? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
     }
     
-    func bind(contact: CNContact, _ position: (Int, Int)) {
+    func bind(contact: CNContact, _ position: (Int, Int), type: UnresolvedItemCellType = .grouped) {
+        self.type = type
         self.position = position
         firstLabel.text = "\(contact.givenName) \(contact.familyName)"
         
@@ -40,7 +53,8 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         secondLabel.text = numbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
     }
     
-    func bind(contact: CNContact) {
+    func bind(contact: CNContact, type: UnresolvedItemCellType = .single) {
+        self.type = type
         firstLabel.text = contact.phoneNumbers.map { $0.value.stringValue }.joined(separator: ", ")
         secondLabel.text = "No name"
     }
@@ -64,7 +78,7 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        content.frame = content.frame.inset(by: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0))
+        content.frame = content.frame.inset(by: type?.insets ?? UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
     }
     
     private func setup() {
