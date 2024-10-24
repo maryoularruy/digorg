@@ -114,7 +114,7 @@ extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        70
+        86
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

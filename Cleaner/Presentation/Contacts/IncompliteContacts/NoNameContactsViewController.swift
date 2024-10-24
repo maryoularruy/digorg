@@ -12,8 +12,9 @@ import ContactsUI
 class NoNameContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
+    @IBOutlet weak var unresolvedContactsTableView: UITableView!
     //    @IBOutlet weak var backView: UIView!
-//    @IBOutlet weak var collectionView: UICollectionView!
+    //    @IBOutlet weak var collectionView: UICollectionView!
 //    @IBOutlet weak var noContactsStackView: UIStackView!
 //    @IBOutlet weak var checkBoxImage: UIImageView!
 //    @IBOutlet weak var selectAllStackView: UIStackView!
@@ -25,6 +26,7 @@ class NoNameContactsViewController: UIViewController {
     private var contacts: [CNContact] = [] {
         didSet {
             unresolvedContactsCount.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+            unresolvedContactsTableView.reloadData()
             if contacts.isEmpty {
 //                noContactsStackView.isHidden = false
 //                selectView.isHidden = true
@@ -37,6 +39,7 @@ class NoNameContactsViewController: UIViewController {
     
     private var contactsForDeletion = Set<CNContact>() {
         didSet {
+            unresolvedContactsTableView.reloadData()
 //            selectedCounterLabel.text = "Selected: \(contactsForDeletion.count)"
 //            if contactsForDeletion.count == contacts.count {
 //                checkBoxImage.image = Asset.selectedCheckBox.image
@@ -57,7 +60,6 @@ class NoNameContactsViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         addGestureRecognizers()
-//        setupCollectionView()
 //        backView.addTapGestureRecognizer {
 //            self.navigationController?.popViewController(animated: true)
 //        }
@@ -95,18 +97,16 @@ class NoNameContactsViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
         reloadData()
+        setupUnresolvedContactsTableView()
     }
     
-    private func setupCollectionView() {
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
-//        collectionView.register(cellType: IncompleteCell.self)
+    private func setupUnresolvedContactsTableView() {
+        unresolvedContactsTableView.register(cellType: UnresolvedItemCell.self)
     }
     
     private func reloadData() {
         ContactManager.loadContacts { contacts in
-            self.contacts = contacts.filter { $0.givenName.isEmpty || $0.phoneNumbers.count == 0}
-//            self.collectionView.reloadData()
+            self.contacts = contacts.filter { $0.givenName.isEmpty || $0.phoneNumbers.count == 0 }
         }
     }
     
@@ -137,11 +137,25 @@ extension NoNameContactsViewController: ViewControllerProtocol {
     }
 }
 
+extension NoNameContactsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        contacts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
+        cell.bind(contact: contacts[indexPath.row])
+        cell.setupCell()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        //72 height of the cell + 8 top&bottom insets
+        88
+    }
+}
+
 //extension NoNameContactsViewController: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return contacts.count
-//    }
-//    
 //    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 //        let cell = self.collectionView.dequeueReusableCell(for: indexPath) as IncompleteCell
 //        let contact = contacts[indexPath.row]
@@ -173,26 +187,3 @@ extension NoNameContactsViewController: ViewControllerProtocol {
 //        return cell
 //    }
 //}
-
-//extension NoNameContactsViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        
-//        return CGSize(width: collectionView.frame.width, height: 60)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 12
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
-//        
-//    }
-//}
-//
-//extension IncompliteContactsViewController: CNContactPickerDelegate {
-//    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
-//        reloadData()
-//    }
-//}
-//

@@ -4,8 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -44,21 +44,35 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aVN-B7-2Xg">
+                                <rect key="frame" x="16" y="197" width="361" height="621"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="0wf-hi-AIY"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="Qxm-gc-vc8"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="White"/>
                         <constraints>
                             <constraint firstItem="9AN-ch-2Go" firstAttribute="top" secondItem="dNc-GL-W2F" secondAttribute="bottom" constant="6" id="FBz-cH-bHP"/>
                             <constraint firstItem="aCM-Ln-Ad1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="GeU-fz-Wma"/>
+                            <constraint firstItem="aVN-B7-2Xg" firstAttribute="top" secondItem="9AN-ch-2Go" secondAttribute="bottom" constant="16" id="HTz-pA-Nzk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="aVN-B7-2Xg" secondAttribute="bottom" id="RlV-kz-5x7"/>
                             <constraint firstItem="aCM-Ln-Ad1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="XQL-XF-OHZ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aVN-B7-2Xg" secondAttribute="trailing" constant="16" id="b3a-5e-l2Z"/>
                             <constraint firstItem="dNc-GL-W2F" firstAttribute="top" secondItem="aCM-Ln-Ad1" secondAttribute="bottom" constant="14" id="jey-1p-bDN"/>
                             <constraint firstItem="dNc-GL-W2F" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="p6u-RZ-wA2"/>
+                            <constraint firstItem="aVN-B7-2Xg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="uDY-5f-SB6"/>
                             <constraint firstItem="9AN-ch-2Go" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="uil-tk-EPw"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="aCM-Ln-Ad1" id="93S-9d-2PK"/>
                         <outlet property="unresolvedContactsCount" destination="9AN-ch-2Go" id="FL9-R0-Twc"/>
+                        <outlet property="unresolvedContactsTableView" destination="aVN-B7-2Xg" id="jRr-2o-ci4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -68,8 +82,8 @@
     </scenes>
     <resources>
         <image name="ArrowBackIcon" width="64" height="64"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="White">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>

@@ -40,6 +40,11 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         number.text = numbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
     }
     
+    func bind(contact: CNContact) {
+        name.text = contact.phoneNumbers.map { $0.value.stringValue }.joined(separator: ", ")
+        number.text = "No name"
+    }
+    
     func setupFirstCellInSection() {
         content.layer.cornerRadius = 20
         content.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -48,6 +53,18 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     func setupLastCellInSection() {
         content.layer.cornerRadius = 20
         content.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+    }
+    
+    func setupCell() {
+        clipsToBounds = false
+        content.layer.cornerRadius = 20
+        content.backgroundColor = .white
+        addShadows()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        content.frame = content.frame.inset(by: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0))
     }
     
     private func setup() {
