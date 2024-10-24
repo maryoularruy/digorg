@@ -184,7 +184,7 @@ extension DuplicateContactsViewController: ActionAndCancelToolbarProtocol, Botto
                     let successView = SuccessView(frame: SuccessView.myFrame)
                     successView.center = view.center
                     view.addSubview(successView)
-                    view.setHidden {
+                    successView.setHidden {
                         successView.removeFromSuperview()
                     }
                     DispatchQueue.global(qos: .userInitiated).sync { [weak self] in

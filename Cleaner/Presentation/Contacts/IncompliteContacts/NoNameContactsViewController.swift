@@ -131,7 +131,7 @@ extension NoNameContactsViewController: ActionToolbarDelegate {
         if contacts.isEmpty {
             navigationController?.popViewController(animated: true)
         } else {
-            ContactManager.delete(contactsForDeletion)
+            ContactManager.delete(Array(contactsForDeletion))
             contactsForDeletion.removeAll()
             reloadData()
         }

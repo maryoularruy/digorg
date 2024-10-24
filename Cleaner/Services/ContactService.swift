@@ -103,10 +103,7 @@ final class ContactManager {
         } catch {
             print(error.localizedDescription)
         }
-        
-        for contact in deleteContacts {
-            deleteContact(contact.mutableCopy() as! CNMutableContact) { _ in }
-        }
+        delete(deleteContacts)
         DispatchQueue.main.async {
             completion(true)
         }
@@ -121,7 +118,7 @@ final class ContactManager {
         }
     }
     
-    static func delete(_ contacts: Set<CNContact>) {
+    static func delete(_ contacts: [CNContact]) {
         contacts.forEach { delete($0) }
     }
     

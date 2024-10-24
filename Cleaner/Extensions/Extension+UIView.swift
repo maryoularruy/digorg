@@ -48,13 +48,10 @@ extension UIView {
     
     func setHidden(completion: @escaping (() -> Void)) {
         alpha = 1
-        UIView.animate(withDuration: 0.5, delay: 0.1,
+        UIView.animate(withDuration: 0.7, delay: 0.1,
                        options: .curveEaseOut, animations: { [weak self] in
             self?.alpha = 0
-        }, completion: { [weak self] _ in
-            self?.alpha = 1.0
-            completion()
-        })
+        }, completion: { _ in completion() })
     }
     
     func createEmptyState(type: EmptyStateType) -> EmptyStateView {
