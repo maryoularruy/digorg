@@ -144,7 +144,11 @@ extension NoNameContactsViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
-        cell.bind(contact: contacts[indexPath.row])
+        cell.delegate = self
+        cell.bind(contact: contacts[indexPath.row], indexPath.row)
+        
+        cell.checkBoxButton.image = contactsForDeletion.contains(contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
+        
         cell.setupCell()
         return cell
     }
@@ -152,6 +156,25 @@ extension NoNameContactsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //72 height of the cell + 8 top&bottom insets
         88
+    }
+}
+
+extension NoNameContactsViewController: UnresolvedItemCellProtocol {
+    func tapOnCheckBox(_ position: (Int, Int)) {
+        let contact = contacts[position.1]
+        if contactsForDeletion.contains(contact) {
+            contactsForDeletion.remove(contact)
+        } else {
+            contactsForDeletion.insert(contact)
+        }
+        
+//        if contactsForMerge.count == sections.count {
+//            tapOnSelectAllButton(self)
+//        }
+    }
+    
+    func tapOnCell(_ position: (Int, Int)) {
+        presentContact(contact: contacts[position.1])
     }
 }
 
