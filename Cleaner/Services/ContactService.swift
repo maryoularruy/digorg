@@ -202,25 +202,25 @@ final class ContactManager {
         return sections
     }
     
-    public static func delete(_ contact: CNContact, _ handler: @escaping ((_ success: Bool) -> Void)){
-        deleteContact(contact.mutableCopy() as! CNMutableContact, {
-            (result) in
-            switch result{
-            case .success(let bool):
-                handler(bool)
+    static func delete(_ contact: CNContact, completion: @escaping ((Bool) -> ())) {
+        deleteContact(contact.mutableCopy() as! CNMutableContact) {
+            result in
+            switch result {
+            case .success(_):
+                completion(true)
                 break
             case .failure:
-                handler(false)
+                completion(false)
                 break
             }
-        })
+        }
     }
     
-    public static func deleteArray(_ contacts: Set<CNContact>){
-        for contact in contacts{
-            deleteContact(contact.mutableCopy() as! CNMutableContact, {
-                (result) in
-            })
+    static func delete(_ contacts: Set<CNContact>) {
+        for contact in contacts {
+            deleteContact(contact.mutableCopy() as! CNMutableContact) {
+                result in
+            }
         }
     }
     
