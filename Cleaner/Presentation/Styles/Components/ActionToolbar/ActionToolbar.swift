@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ActionToolbarDelegate {
+protocol ActionToolbarDelegate: AnyObject {
     func tapOnActionButton()
 }
 
@@ -16,7 +16,7 @@ final class ActionToolbar: UIView {
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var toolbarButton: ActionToolbarButtonStyle!
-    var delegate: ActionToolbarDelegate?
+    weak var delegate: ActionToolbarDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
