@@ -41,8 +41,87 @@ final class ContactManager {
 //            })
 //        }
 //    }
+
+    static func loadDuplicatedByName(completion: @escaping ([[CNContact]]) -> ()) {
+        loadContacts { contacts in
+            var duplicates = [[CNContact]]()
+            var checkedContacts = Set<CNContact>()
+            
+            for i in 0..<contacts.count {
+                if checkedContacts.contains(contacts[i]) || contacts[i].givenName.isEmpty && contacts[i].familyName.isEmpty {
+                    continue
+                }
+                
+                var group = [CNContact]()
+                group.append(contacts[i])
+                
+                for j in i+1..<contacts.count {
+                    if checkedContacts.contains(contacts[j]) {
+                        continue
+                    }
+                    
+                    if (contacts[i].givenName + " " + contacts[i].familyName == contacts[j].givenName + " " + contacts[j].familyName) ||
+                        (!contacts[i].phoneNumbers.isEmpty && (contacts[i].phoneNumbers.first?.value.stringValue == contacts[j].phoneNumbers.first?.value.stringValue)) ||
+                        (!contacts[i].emailAddresses.isEmpty && (contacts[i].emailAddresses.first?.value == contacts[j].emailAddresses.first?.value)) {
+                        group.append(contacts[j])
+                        checkedContacts.insert(contacts[j])
+                    }
+                }
+                
+                if group.count > 1 {
+                    duplicates.append(group)
+                }
+                
+                checkedContacts.insert(contacts[i])
+            }
+            completion(duplicates)
+        }
+    }
     
-    static func loadContacts(handler: @escaping (([CNContact]) -> ())) {
+    static func loadIncompletedByName(completion: @escaping ([CNContact]) -> ()) {
+        loadContacts { contacts in
+            completion(contacts.filter { $0.givenName.isEmpty && $0.familyName.isEmpty && !$0.phoneNumbers.isEmpty })
+        }
+    }
+    
+    static func merge(_ contacts: [CNContact], completion: @escaping ((Bool) -> ())) {
+        var bestContact: CNContact?
+        var bestValue: Int = 0
+        for contact in contacts {
+            if contact.calcRating() > bestValue {
+                bestValue = contact.calcRating()
+                bestContact = contact
+            }
+        }
+        
+        let deleteContacts = contacts.filter { $0 != bestContact! }
+        guard let bestContact = bestContact?.mutableCopy() as? CNMutableContact else { return }
+        deleteContacts.forEach { bestContact.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
+
+        do {
+            try updateContact(bestContact)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        for contact in deleteContacts {
+            deleteContact(contact.mutableCopy() as! CNMutableContact) { _ in }
+        }
+        DispatchQueue.main.async {
+            completion(true)
+        }
+    }
+    
+    static func findContact(contact: CNContact) -> CNContact? {
+        do {
+            return try store.unifiedContact(withIdentifier: contact.identifier, keysToFetch: [defaultDescriptor])
+        } catch {
+            logger.error("Failed to get contact from CNContactStore: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    private static func loadContacts(handler: @escaping (([CNContact]) -> ())) {
         checkStatus {
             fetchContacts { result in
                 switch result {
@@ -51,40 +130,6 @@ final class ContactManager {
                 }
             }
         }
-    }
-    
-    static func findDuplicateContacts(contacts: [CNContact]) -> [[CNContact]] {
-        var duplicates = [[CNContact]]()
-        var checkedContacts = Set<CNContact>()
-        
-        for i in 0..<contacts.count {
-            if checkedContacts.contains(contacts[i]) {
-                continue
-            }
-            
-            var group = [CNContact]()
-            group.append(contacts[i])
-            
-            for j in i+1..<contacts.count {
-                if checkedContacts.contains(contacts[j]) {
-                    continue
-                }
-                
-                if (contacts[i].givenName + " " + contacts[i].familyName == contacts[j].givenName + " " + contacts[j].familyName) ||
-                    (!contacts[i].phoneNumbers.isEmpty && (contacts[i].phoneNumbers.first?.value.stringValue == contacts[j].phoneNumbers.first?.value.stringValue)) ||
-                    (!contacts[i].emailAddresses.isEmpty && (contacts[i].emailAddresses.first?.value == contacts[j].emailAddresses.first?.value)) {
-                    group.append(contacts[j])
-                    checkedContacts.insert(contacts[j])
-                }
-            }
-            
-            if group.count > 1 {
-                duplicates.append(group)
-            }
-            
-            checkedContacts.insert(contacts[i])
-        }
-        return duplicates
     }
     
     private static func checkStatus(handler: @escaping () -> ()) {
@@ -179,40 +224,6 @@ final class ContactManager {
         }
     }
     
-    public static func combine(_ contacts: [CNContact], completion: @escaping ((Bool) -> ())){
-        var bestContact: CNContact?
-        var bestValue: Int = 0
-        for contact in contacts {
-            if contact.calcRating() > bestValue {
-                bestValue = contact.calcRating()
-                bestContact = contact
-            }
-        }
-        
-        let deleteContacts = contacts.filter { $0 != bestContact! }
-        guard let bestContact = bestContact?.mutableCopy() as? CNMutableContact else { return }
-        deleteContacts.forEach { bestContact.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
-
-        do {
-            try updateContact(bestContact)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        for contact in deleteContacts {
-            deleteContact(contact.mutableCopy() as! CNMutableContact) { _ in }
-        }
-        DispatchQueue.main.async {
-            completion(true)
-        }
-    }
-    
-    public static func loadIncompletedByName(completion: @escaping ([CNContact]) -> ()) {
-        loadContacts { contacts in
-            completion(contacts.filter { $0.givenName.isEmpty && $0.familyName.isEmpty && !$0.phoneNumbers.isEmpty })
-        }
-    }
-    
     public static func loadIncompletedByPhone(_ contacts: [CNContact]) -> [CNContactSection]{
         var sections: [CNContactSection] = []
         var incompleted: [CNContact] = []
@@ -243,14 +254,5 @@ final class ContactManager {
         }
         print(incompleted)
         return [CNContactSection(name: "Incomplete Contacts", contacts: incompleted)]
-    }
-    
-    static func findContact(contact: CNContact) -> CNContact? {
-        do {
-            return try store.unifiedContact(withIdentifier: contact.identifier, keysToFetch: [defaultDescriptor])
-        } catch {
-            logger.error("Failed to get contact from CNContactStore: \(error.localizedDescription)")
-            return nil
-        }
     }
 }
