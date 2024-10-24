@@ -207,14 +207,10 @@ final class ContactManager {
         }
     }
     
-    public static func loadIncompletedByName(_ contacts: [CNContact]) -> [CNContactSection]{
-        var incompleted: [CNContact] = []
-        for contact in contacts{
-            if contact.givenName.isEmpty{
-                incompleted.append(contact)
-            }
+    public static func loadIncompletedByName(completion: @escaping ([CNContact]) -> ()) {
+        loadContacts { contacts in
+            completion(contacts.filter { $0.givenName.isEmpty && $0.familyName.isEmpty && !$0.phoneNumbers.isEmpty })
         }
-        return [CNContactSection(name: "Incomplete Contacts", contacts: incompleted)]
     }
     
     public static func loadIncompletedByPhone(_ contacts: [CNContact]) -> [CNContactSection]{

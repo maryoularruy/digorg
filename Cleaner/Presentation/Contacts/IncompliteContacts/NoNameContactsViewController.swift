@@ -105,8 +105,8 @@ class NoNameContactsViewController: UIViewController {
     }
     
     private func reloadData() {
-        ContactManager.loadContacts { contacts in
-            self.contacts = contacts.filter { $0.givenName.isEmpty || $0.phoneNumbers.count == 0 }
+        ContactManager.loadIncompletedByName { contacts in
+            self.contacts = contacts
         }
     }
     
