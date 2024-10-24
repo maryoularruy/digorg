@@ -121,6 +121,18 @@ final class ContactManager {
         }
     }
     
+    static func delete(_ contacts: Set<CNContact>) {
+        contacts.forEach { delete($0) }
+    }
+    
+    static func delete(_ contact: CNContact) {
+        let request = CNSaveRequest()
+        request.delete(contact.mutableCopy() as! CNMutableContact)
+        do {
+            try store.execute(request)
+        } catch {}
+    }
+    
     private static func loadContacts(handler: @escaping (([CNContact]) -> ())) {
         checkStatus {
             fetchContacts { result in
@@ -201,29 +213,7 @@ final class ContactManager {
         }
         return sections
     }
-    
-    static func delete(_ contact: CNContact, completion: @escaping ((Bool) -> ())) {
-        deleteContact(contact.mutableCopy() as! CNMutableContact) {
-            result in
-            switch result {
-            case .success(_):
-                completion(true)
-                break
-            case .failure:
-                completion(false)
-                break
-            }
-        }
-    }
-    
-    static func delete(_ contacts: Set<CNContact>) {
-        for contact in contacts {
-            deleteContact(contact.mutableCopy() as! CNMutableContact) {
-                result in
-            }
-        }
-    }
-    
+
     public static func loadIncompletedByPhone(_ contacts: [CNContact]) -> [CNContactSection]{
         var sections: [CNContactSection] = []
         var incompleted: [CNContact] = []
