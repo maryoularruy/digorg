@@ -18,7 +18,6 @@ class SelectionButtonStyle: UIButton {
     lazy var myConfiguration: Configuration = {
         var configuration = UIButton.Configuration.filled()
         configuration.titleAlignment = .center
-        configuration.title = SelectionButtonText.selectAll.rawValue
         configuration.baseBackgroundColor = .white
         configuration.baseForegroundColor = .blue
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
@@ -42,8 +41,8 @@ class SelectionButtonStyle: UIButton {
     }
     
     func bind(text: SelectionButtonText) {
-        setTitle(text.rawValue, for: .normal)
-        setTitle(text.rawValue, for: .selected)
+        myConfiguration.title = text.rawValue
+        configuration = myConfiguration
     }
     
     func setup() {

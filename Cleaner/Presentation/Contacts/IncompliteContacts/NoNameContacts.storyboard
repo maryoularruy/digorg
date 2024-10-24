@@ -17,6 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZN-Nh-GEq" customClass="SelectionButtonStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="282" y="74" width="95" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Select All"/>
+                                <connections>
+                                    <action selector="tapOnSelectionButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="X2a-PP-GCG"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCM-Ln-Ad1">
                                 <rect key="frame" x="0.0" y="64" width="55" height="55"/>
                                 <subviews>
@@ -73,6 +81,8 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aVN-B7-2Xg" secondAttribute="trailing" constant="16" id="b3a-5e-l2Z"/>
                             <constraint firstItem="e2C-bU-SO8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="dzA-ZP-IVu"/>
                             <constraint firstItem="dNc-GL-W2F" firstAttribute="top" secondItem="aCM-Ln-Ad1" secondAttribute="bottom" constant="14" id="jey-1p-bDN"/>
+                            <constraint firstAttribute="trailing" secondItem="NZN-Nh-GEq" secondAttribute="trailing" constant="16" id="kX3-6K-VPh"/>
+                            <constraint firstItem="NZN-Nh-GEq" firstAttribute="centerY" secondItem="aCM-Ln-Ad1" secondAttribute="centerY" id="nnm-ji-3Hu"/>
                             <constraint firstItem="dNc-GL-W2F" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="p6u-RZ-wA2"/>
                             <constraint firstItem="aVN-B7-2Xg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="uDY-5f-SB6"/>
                             <constraint firstItem="9AN-ch-2Go" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="uil-tk-EPw"/>
@@ -80,6 +90,7 @@
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="aCM-Ln-Ad1" id="93S-9d-2PK"/>
+                        <outlet property="selectionButton" destination="NZN-Nh-GEq" id="fHK-jY-p2p"/>
                         <outlet property="toolbar" destination="e2C-bU-SO8" id="Syv-Aj-F9h"/>
                         <outlet property="unresolvedContactsCount" destination="9AN-ch-2Go" id="FL9-R0-Twc"/>
                         <outlet property="unresolvedContactsTableView" destination="aVN-B7-2Xg" id="jRr-2o-ci4"/>

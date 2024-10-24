@@ -14,6 +14,7 @@ class NoNameContactsViewController: UIViewController {
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
     @IBOutlet weak var toolbar: ActionToolbar!
+    @IBOutlet weak var selectionButton: SelectionButtonStyle!
     
     private var contacts: [CNContact] = [] {
         didSet {
@@ -22,6 +23,7 @@ class NoNameContactsViewController: UIViewController {
             if contacts.isEmpty {
                 setupEmptyState()
             } else {
+                selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
                 toolbar.toolbarButton.bind(text: "Delete")
                 toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
             }
@@ -30,6 +32,7 @@ class NoNameContactsViewController: UIViewController {
     
     private var contactsForDeletion = Set<CNContact>() {
         didSet {
+            selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
             toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
             unresolvedContactsTableView.reloadData()
         }
@@ -46,6 +49,14 @@ class NoNameContactsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         reloadData()
         setupUnresolvedContactsTableView()
+    }
+    
+    @IBAction func tapOnSelectionButton(_ sender: Any) {
+        if contactsForDeletion.count == contacts.count {
+            contactsForDeletion.removeAll()
+        } else {
+            contactsForDeletion.insert(contacts)
+        }
     }
     
     private func setupUnresolvedContactsTableView() {
@@ -68,6 +79,8 @@ class NoNameContactsViewController: UIViewController {
     }
     
     private func setupEmptyState() {
+        selectionButton.isEnabled = false
+        selectionButton.bind(text: .selectAll)
         toolbar.toolbarButton.bind(text: "Back")
         toolbar.toolbarButton.isClickable = true
     }
@@ -115,10 +128,6 @@ extension NoNameContactsViewController: UnresolvedItemCellProtocol {
         } else {
             contactsForDeletion.insert(contact)
         }
-        
-//        if contactsForMerge.count == sections.count {
-//            tapOnSelectAllButton(self)
-//        }
     }
     
     func tapOnCell(_ position: (Int, Int)) {
