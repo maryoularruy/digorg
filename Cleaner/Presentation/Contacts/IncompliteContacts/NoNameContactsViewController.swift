@@ -13,46 +13,25 @@ class NoNameContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
-    //    @IBOutlet weak var backView: UIView!
-    //    @IBOutlet weak var collectionView: UICollectionView!
-//    @IBOutlet weak var noContactsStackView: UIStackView!
-//    @IBOutlet weak var checkBoxImage: UIImageView!
-//    @IBOutlet weak var selectAllStackView: UIStackView!
-//    @IBOutlet weak var selectedCounterLabel: UILabel!
-//    @IBOutlet weak var selectView: UIView!
-//    @IBOutlet weak var blockView: UIView!
-//    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var toolbar: ActionToolbar!
     
     private var contacts: [CNContact] = [] {
         didSet {
             unresolvedContactsCount.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
             unresolvedContactsTableView.reloadData()
             if contacts.isEmpty {
-//                noContactsStackView.isHidden = false
-//                selectView.isHidden = true
+                setupEmptyState()
             } else {
-//                noContactsStackView.isHidden = true
-//                selectView.isHidden = false
+                toolbar.toolbarButton.bind(text: "Delete")
+                toolbar.toolbarButton.isEnabled = !contactsForDeletion.isEmpty
             }
         }
     }
     
     private var contactsForDeletion = Set<CNContact>() {
         didSet {
+            toolbar.toolbarButton.isEnabled = !contactsForDeletion.isEmpty
             unresolvedContactsTableView.reloadData()
-//            selectedCounterLabel.text = "Selected: \(contactsForDeletion.count)"
-//            if contactsForDeletion.count == contacts.count {
-//                checkBoxImage.image = Asset.selectedCheckBox.image
-//            } else {
-//                checkBoxImage.image = Asset.emptyCheckBox.image
-//            }
-//            if contactsForDeletion.isEmpty {
-//                blockView.isHidden = false
-//                deleteButton.isUserInteractionEnabled = false
-//            } else {
-//                blockView.isHidden = true
-//                deleteButton.isUserInteractionEnabled = true
-//            }
         }
     }
     
@@ -60,37 +39,6 @@ class NoNameContactsViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         addGestureRecognizers()
-//        backView.addTapGestureRecognizer {
-//            self.navigationController?.popViewController(animated: true)
-//        }
-//        selectAllStackView.addTapGestureRecognizer {
-//            if self.contactsForDeletion.count != self.contacts.count {
-//                for cont in self.contacts {
-//                    if !self.contactsForDeletion.contains(cont) {
-//                        self.contactsForDeletion.insert(cont)
-//                    }
-//                }
-//            } else {
-//                self.contactsForDeletion.removeAll()
-//            }
-//            self.collectionView.reloadData()
-//        }
-//        deleteButton.addTapGestureRecognizer {
-//            let deleteAlert = UIAlertController(title: "", message: "Contacts will be deleted from your Contacts", preferredStyle: UIAlertController.Style.actionSheet)
-//            
-//            let unfollowAction = UIAlertAction(title: "Delete Contacts: \(self.contactsForDeletion.count)", style: .destructive) { (action: UIAlertAction) in
-//                ContactManager.deleteArray(self.contactsForDeletion)
-//                self.contacts = self.contacts.filter({ !self.contactsForDeletion.contains($0) })
-//                self.collectionView.reloadData()
-//                self.blockView.isHidden = false
-//            }
-//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//            
-//            deleteAlert.addAction(unfollowAction)
-//            deleteAlert.addAction(cancelAction)
-//            self.present(deleteAlert, animated: true, completion: nil)
-//            
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,11 +66,16 @@ class NoNameContactsViewController: UIViewController {
             navigationController?.pushViewController(contactVC, animated: true)
         }
     }
+    
+    private func setupEmptyState() {
+        toolbar.toolbarButton.bind(text: "Back")
+        toolbar.toolbarButton.isEnabled = true
+    }
 }
 
 extension NoNameContactsViewController: ViewControllerProtocol {
     func setupUI() {
-         
+        toolbar.delegate = self
     }
     
     func addGestureRecognizers() {
@@ -173,35 +126,14 @@ extension NoNameContactsViewController: UnresolvedItemCellProtocol {
     }
 }
 
-//extension NoNameContactsViewController: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = self.collectionView.dequeueReusableCell(for: indexPath) as IncompleteCell
-//        let contact = contacts[indexPath.row]
-//        if !(contact.givenName.isEmpty && contact.familyName.isEmpty){
-//            cell.infoLabel.text = contact.givenName + " " + contact.familyName
-//        } else {
-//            cell.infoLabel.text = contact.phoneNumbers.first?.value.stringValue
-//        }
-//        
-//        if self.contactsForDeletion.contains(contact) {
-//            cell.isChecked = true
-//        } else {
-//            cell.isChecked = false
-//        }
-//        
-//        cell.cardView.addTapGestureRecognizer {
-//            self.presentContact(contact: contact)
-//        }
-//        
-//        cell.statusImage.addTapGestureRecognizer {
-//            if self.contactsForDeletion.contains(contact) {
-//                self.contactsForDeletion.remove(contact)
-//            } else {
-//                self.contactsForDeletion.insert(contact)
-//            }
-//            self.collectionView.reloadData()
-//        }
-//        
-//        return cell
-//    }
-//}
+extension NoNameContactsViewController: ActionToolbarDelegate {
+    func tapOnActionButton() {
+        if contacts.isEmpty {
+            navigationController?.popViewController(animated: true)
+        } else {
+            ContactManager.deleteArray(contactsForDeletion)
+            contactsForDeletion.removeAll()
+            reloadData()
+        }
+    }
+}

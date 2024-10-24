@@ -53,16 +53,25 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="Qxm-gc-vc8"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2C-bU-SO8" customClass="ActionToolbar" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="752" width="393" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="jc6-kB-f8M"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="e2C-bU-SO8" secondAttribute="trailing" id="EHd-sy-P5m"/>
                             <constraint firstItem="9AN-ch-2Go" firstAttribute="top" secondItem="dNc-GL-W2F" secondAttribute="bottom" constant="6" id="FBz-cH-bHP"/>
                             <constraint firstItem="aCM-Ln-Ad1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="GeU-fz-Wma"/>
                             <constraint firstItem="aVN-B7-2Xg" firstAttribute="top" secondItem="9AN-ch-2Go" secondAttribute="bottom" constant="16" id="HTz-pA-Nzk"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="aVN-B7-2Xg" secondAttribute="bottom" id="RlV-kz-5x7"/>
                             <constraint firstItem="aCM-Ln-Ad1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="XQL-XF-OHZ"/>
+                            <constraint firstAttribute="bottom" secondItem="e2C-bU-SO8" secondAttribute="bottom" id="Z0Q-UW-8Fi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aVN-B7-2Xg" secondAttribute="trailing" constant="16" id="b3a-5e-l2Z"/>
+                            <constraint firstItem="e2C-bU-SO8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="dzA-ZP-IVu"/>
                             <constraint firstItem="dNc-GL-W2F" firstAttribute="top" secondItem="aCM-Ln-Ad1" secondAttribute="bottom" constant="14" id="jey-1p-bDN"/>
                             <constraint firstItem="dNc-GL-W2F" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="p6u-RZ-wA2"/>
                             <constraint firstItem="aVN-B7-2Xg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="uDY-5f-SB6"/>
@@ -71,6 +80,7 @@
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="aCM-Ln-Ad1" id="93S-9d-2PK"/>
+                        <outlet property="toolbar" destination="e2C-bU-SO8" id="Syv-Aj-F9h"/>
                         <outlet property="unresolvedContactsCount" destination="9AN-ch-2Go" id="FL9-R0-Twc"/>
                         <outlet property="unresolvedContactsTableView" destination="aVN-B7-2Xg" id="jRr-2o-ci4"/>
                     </connections>
