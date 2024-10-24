@@ -23,6 +23,14 @@ final class ActionToolbarButtonStyle: UIButton {
         }
         return configuration
     }()
+
+    lazy var isClickable: Bool = true {
+        didSet {
+            isUserInteractionEnabled = isClickable
+            myConfiguration.baseBackgroundColor = isClickable ? .blue : .paleBlueButtonBackground
+            configuration = myConfiguration
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,8 +43,8 @@ final class ActionToolbarButtonStyle: UIButton {
     }
     
     func bind(text: String) {
-        setTitle(text, for: .normal)
-        setTitle(text, for: .selected)
+        myConfiguration.title = text
+        configuration = myConfiguration
     }
     
     func changeBackgroundColor(_ color: UIColor) {

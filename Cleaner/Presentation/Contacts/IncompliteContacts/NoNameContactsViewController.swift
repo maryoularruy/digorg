@@ -23,14 +23,14 @@ class NoNameContactsViewController: UIViewController {
                 setupEmptyState()
             } else {
                 toolbar.toolbarButton.bind(text: "Delete")
-                toolbar.toolbarButton.isEnabled = !contactsForDeletion.isEmpty
+                toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
             }
         }
     }
     
     private var contactsForDeletion = Set<CNContact>() {
         didSet {
-            toolbar.toolbarButton.isEnabled = !contactsForDeletion.isEmpty
+            toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
             unresolvedContactsTableView.reloadData()
         }
     }
@@ -69,7 +69,7 @@ class NoNameContactsViewController: UIViewController {
     
     private func setupEmptyState() {
         toolbar.toolbarButton.bind(text: "Back")
-        toolbar.toolbarButton.isEnabled = true
+        toolbar.toolbarButton.isClickable = true
     }
 }
 
