@@ -52,8 +52,8 @@
             <connections>
                 <outlet property="checkBoxButton" destination="Rdo-5C-qe3" id="nwY-dT-YdP"/>
                 <outlet property="content" destination="RGT-M5-Oba" id="qmp-9h-YqV"/>
-                <outlet property="name" destination="ui7-rL-AY1" id="peh-by-fvV"/>
-                <outlet property="number" destination="ZuU-83-qxI" id="IOJ-Cd-ax0"/>
+                <outlet property="firstLabel" destination="ui7-rL-AY1" id="peh-by-fvV"/>
+                <outlet property="secondLabel" destination="ZuU-83-qxI" id="IOJ-Cd-ax0"/>
             </connections>
             <point key="canvasLocation" x="17.557251908396946" y="-150"/>
         </tableViewCell>

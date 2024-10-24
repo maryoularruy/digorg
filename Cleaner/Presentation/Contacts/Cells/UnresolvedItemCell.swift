@@ -16,8 +16,8 @@ protocol UnresolvedItemCellProtocol: AnyObject {
 
 final class UnresolvedItemCell: UITableViewCell, NibReusable {
     @IBOutlet weak var content: UIView!
-    @IBOutlet weak var name: Semibold15LabelStyle!
-    @IBOutlet weak var number: Regular15LabelStyle!
+    @IBOutlet weak var firstLabel: Semibold15LabelStyle!
+    @IBOutlet weak var secondLabel: Regular15LabelStyle!
     @IBOutlet weak var checkBoxButton: UIImageView!
     
     weak var delegate: UnresolvedItemCellProtocol?
@@ -31,18 +31,18 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     
     func bind(contact: CNContact, _ position: (Int, Int)) {
         self.position = position
-        name.text = "\(contact.givenName) \(contact.familyName)"
+        firstLabel.text = "\(contact.givenName) \(contact.familyName)"
         
         var numbers: [String] = []
         contact.phoneNumbers.forEach { number in
             numbers.append(number.value.stringValue)
         }
-        number.text = numbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
+        secondLabel.text = numbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
     }
     
     func bind(contact: CNContact) {
-        name.text = contact.phoneNumbers.map { $0.value.stringValue }.joined(separator: ", ")
-        number.text = "No name"
+        firstLabel.text = contact.phoneNumbers.map { $0.value.stringValue }.joined(separator: ", ")
+        secondLabel.text = "No name"
     }
     
     func setupFirstCellInSection() {
@@ -68,7 +68,7 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     }
     
     private func setup() {
-        number.setGreyTextColor()
+        secondLabel.setGreyTextColor()
         
         checkBoxButton.addTapGestureRecognizer { [weak self] in
             guard let self else { return }
