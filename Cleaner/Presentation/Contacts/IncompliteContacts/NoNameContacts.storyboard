@@ -38,18 +38,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9AN-ch-2Go" customClass="Regular13LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="16" y="160" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="9AN-ch-2Go" firstAttribute="top" secondItem="dNc-GL-W2F" secondAttribute="bottom" constant="6" id="FBz-cH-bHP"/>
                             <constraint firstItem="aCM-Ln-Ad1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="GeU-fz-Wma"/>
                             <constraint firstItem="aCM-Ln-Ad1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="XQL-XF-OHZ"/>
                             <constraint firstItem="dNc-GL-W2F" firstAttribute="top" secondItem="aCM-Ln-Ad1" secondAttribute="bottom" constant="14" id="jey-1p-bDN"/>
                             <constraint firstItem="dNc-GL-W2F" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="p6u-RZ-wA2"/>
+                            <constraint firstItem="9AN-ch-2Go" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="uil-tk-EPw"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="aCM-Ln-Ad1" id="93S-9d-2PK"/>
+                        <outlet property="unresolvedContactsCount" destination="9AN-ch-2Go" id="FL9-R0-Twc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

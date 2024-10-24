@@ -11,6 +11,7 @@ import ContactsUI
 
 class NoNameContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
+    @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     //    @IBOutlet weak var backView: UIView!
 //    @IBOutlet weak var collectionView: UICollectionView!
 //    @IBOutlet weak var noContactsStackView: UIStackView!
@@ -22,7 +23,8 @@ class NoNameContactsViewController: UIViewController {
 //    @IBOutlet weak var deleteButton: UIButton!
     
     private var contacts: [CNContact] = [] {
-        didSet{
+        didSet {
+            unresolvedContactsCount.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
             if contacts.isEmpty {
 //                noContactsStackView.isHidden = false
 //                selectView.isHidden = true
