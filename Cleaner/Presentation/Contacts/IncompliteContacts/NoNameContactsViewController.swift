@@ -9,7 +9,7 @@ import UIKit
 import Contacts
 import ContactsUI
 
-class IncompliteContactsViewController: UIViewController {
+class NoNameContactsViewController: UIViewController {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var noContactsStackView: UIStackView!
@@ -125,7 +125,7 @@ class IncompliteContactsViewController: UIViewController {
     }
 }
 
-extension IncompliteContactsViewController: UICollectionViewDataSource {
+extension NoNameContactsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contacts.count
     }
@@ -162,7 +162,7 @@ extension IncompliteContactsViewController: UICollectionViewDataSource {
     }
 }
 
-extension IncompliteContactsViewController: UICollectionViewDelegateFlowLayout {
+extension NoNameContactsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: collectionView.frame.width, height: 60)

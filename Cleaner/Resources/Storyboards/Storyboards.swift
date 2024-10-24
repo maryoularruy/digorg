@@ -53,11 +53,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<GroupedAssetsViewController>(storyboard: GroupedAssets.self)
   }
-  internal enum IncompliteContacts: StoryboardType {
-    internal static let storyboardName = "IncompliteContacts"
-
-    internal static let initialScene = InitialSceneType<IncompliteContactsViewController>(storyboard: IncompliteContacts.self)
-  }
   internal enum LaunchScreen: StoryboardType {
     internal static let storyboardName = "LaunchScreen"
 
@@ -72,6 +67,11 @@ internal enum StoryboardScene {
     internal static let storyboardName = "MainBattery"
 
     internal static let initialScene = InitialSceneType<MainBatteryViewController>(storyboard: MainBattery.self)
+  }
+  internal enum NoNameContacts: StoryboardType {
+    internal static let storyboardName = "NoNameContacts"
+
+    internal static let initialScene = InitialSceneType<NoNameContactsViewController>(storyboard: NoNameContacts.self)
   }
   internal enum PasswordCreation: StoryboardType {
     internal static let storyboardName = "PasswordCreation"

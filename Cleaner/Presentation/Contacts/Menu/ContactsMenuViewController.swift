@@ -99,9 +99,9 @@ extension ContactsMenuViewController: ContactsMenuViewProtocol {
         case .dublicateNumbers:
             StoryboardScene.DuplicateContacts.initialScene.instantiate()
         case .noNameContacts:
-            StoryboardScene.IncompliteContacts.initialScene.instantiate()
+            StoryboardScene.NoNameContacts.initialScene.instantiate()
         case .noNumberContacts:
-            StoryboardScene.IncompliteContacts.initialScene.instantiate()
+            StoryboardScene.NoNameContacts.initialScene.instantiate()
         }
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
