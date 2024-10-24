@@ -111,16 +111,11 @@ class NoNameContactsViewController: UIViewController {
     }
     
     private func presentContact(contact: CNContact) {
-        do {
-            let store = CNContactStore()
-            let descriptor = CNContactViewController.descriptorForRequiredKeys()
-            let editContact = try store.unifiedContact(withIdentifier: contact.identifier, keysToFetch: [descriptor])
-            let contactVC = CNContactViewController(for: editContact)
-            contactVC.allowsEditing = true // Set to true if you want to allow editing
+        if let contact = ContactManager.findContact(contact: contact) {
+            let contactVC = CNContactViewController(for: contact)
+            contactVC.allowsEditing = true
             navigationController?.setNavigationBarHidden(false, animated: false)
             navigationController?.pushViewController(contactVC, animated: true)
-        } catch {
-            print(error)
         }
     }
 }

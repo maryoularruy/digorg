@@ -9,6 +9,7 @@ import Foundation
 import SwiftyContacts
 import SwiftyUserDefaults
 import Contacts
+import ContactsUI
 import OSLog
 
 class CNContactSection {
@@ -24,6 +25,7 @@ class CNContactSection {
 final class ContactManager {
     private static var logger = Logger()
     private static var store = CNContactStore()
+    private static var defaultDescriptor = CNContactViewController.descriptorForRequiredKeys()
     
 //    public static func loadSecretContacts(_ handler: @escaping ((_ contacts: [CNContact]) -> Void)){
 //        checkStatus {
@@ -245,5 +247,14 @@ final class ContactManager {
         }
         print(incompleted)
         return [CNContactSection(name: "Incomplete Contacts", contacts: incompleted)]
+    }
+    
+    static func findContact(contact: CNContact) -> CNContact? {
+        do {
+            return try store.unifiedContact(withIdentifier: contact.identifier, keysToFetch: [defaultDescriptor])
+        } catch {
+            logger.error("Failed to get contact from CNContactStore: \(error.localizedDescription)")
+            return nil
+        }
     }
 }
