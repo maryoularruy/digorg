@@ -19,6 +19,7 @@ class NoNameContactsViewController: UIViewController {
     private var contacts: [CNContact] = [] {
         didSet {
             unresolvedContactsCount.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+            selectionButton.isClickable = !contacts.isEmpty
             unresolvedContactsTableView.reloadData()
             if contacts.isEmpty {
                 setupEmptyState()
@@ -79,7 +80,6 @@ class NoNameContactsViewController: UIViewController {
     }
     
     private func setupEmptyState() {
-        selectionButton.isEnabled = false
         selectionButton.bind(text: .selectAll)
         toolbar.toolbarButton.bind(text: "Back")
         toolbar.toolbarButton.isClickable = true

@@ -30,6 +30,13 @@ class SelectionButtonStyle: UIButton {
         return configuration
     }()
     
+    lazy var isClickable: Bool = true {
+        didSet {
+            isUserInteractionEnabled = isClickable
+            layer.opacity = isClickable ? 1.0 : 0.5
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
