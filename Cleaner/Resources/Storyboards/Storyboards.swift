@@ -1,17 +1,7 @@
-// swiftlint:disable all
-// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
-
-// swiftlint:disable sorted_imports
-import Foundation
 import UIKit
-
-// swiftlint:disable superfluous_disable_command
-// swiftlint:disable file_length implicit_return
 
 // MARK: - Storyboard Scenes
 
-// swiftlint:disable explicit_type_interface identifier_name line_length prefer_self_in_static_references
-// swiftlint:disable type_body_length type_name
 internal enum StoryboardScene {
   internal enum AdBlocker: StoryboardType {
     internal static let storyboardName = "AdBlocker"
@@ -155,8 +145,6 @@ internal enum StoryboardScene {
     internal static let initialScene = InitialSceneType<WiFiProtectionViewController>(storyboard: WiFiProtection.self)
   }
 }
-// swiftlint:enable explicit_type_interface identifier_name line_length prefer_self_in_static_references
-// swiftlint:enable type_body_length type_name
 
 // MARK: - Implementation Details
 
@@ -208,7 +196,6 @@ internal struct InitialSceneType<T: UIViewController> {
   }
 }
 
-// swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
     #if SWIFT_PACKAGE
@@ -218,4 +205,3 @@ private final class BundleToken {
     #endif
   }()
 }
-// swiftlint:enable convenience_type
