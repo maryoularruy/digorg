@@ -11,19 +11,30 @@ final class NoNumberContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
+    @IBOutlet weak var toolbar: ActionToolbar!
     
     private var contacts: [CNContact] = [] {
         didSet {
             unresolvedContactsCount.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
             unresolvedContactsTableView.reloadData()
+            if contacts.isEmpty {
+                setupEmptyState()
+            } else {
+                toolbar.toolbarButton.bind(text: "Delete")
+                toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
+                emptyStateView = nil
+            }
         }
     }
     
     private var contactsForDeletion = Set<CNContact>() {
         didSet {
+            toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
             unresolvedContactsTableView.reloadData()
         }
     }
+    
+    private lazy var emptyStateView: EmptyStateView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +65,21 @@ final class NoNumberContactsViewController: UIViewController {
             navigationController?.pushViewController(contactVC, animated: true)
         }
     }
+    
+    private func setupEmptyState() {
+        toolbar.toolbarButton.bind(text: "Back")
+        toolbar.toolbarButton.isClickable = true
+        emptyStateView = view.createEmptyState(type: .noNameContacts)
+        if let emptyStateView {
+            view.addSubview(emptyStateView)
+        }
+    }
 }
 
 extension NoNumberContactsViewController: ViewControllerProtocol {
-    func setupUI() {}
+    func setupUI() {
+        toolbar.delegate = self
+    }
     
     func addGestureRecognizers() {
         arrowBackButton.addTapGestureRecognizer { [weak self] in
@@ -101,5 +123,17 @@ extension NoNumberContactsViewController: UnresolvedItemCellProtocol {
     
     func tapOnCell(_ position: (Int, Int)) {
         presentContact(contact: contacts[position.1])
+    }
+}
+
+extension NoNumberContactsViewController: ActionToolbarDelegate {
+    func tapOnActionButton() {
+        if contacts.isEmpty {
+            navigationController?.popViewController(animated: true)
+        } else {
+            ContactManager.delete(Array(contactsForDeletion))
+            contactsForDeletion.removeAll()
+            reloadData()
+        }
     }
 }
