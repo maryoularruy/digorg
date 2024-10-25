@@ -26,7 +26,7 @@ enum EmptyStateType {
 }
 
 final class EmptyStateView: UIView {
-    static var myFrame = CGRect(origin: .zero, size: CGSize(width: 170, height: 170))
+    static var myFrame = CGRect(origin: .zero, size: CGSize(width: 290, height: 170))
     private var nibName = "EmptyStateView"
     
     @IBOutlet var contentView: UIView!
