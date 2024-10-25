@@ -30,7 +30,7 @@ final class NoNumberContactsViewController: UIViewController {
     }
     
     private func reloadData() {
-        ContactManager.loadIncompletedByName { contacts in
+        ContactManager.loadIncompletedByNumber { contacts in
             self.contacts = contacts
         }
     }

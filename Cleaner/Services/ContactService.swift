@@ -84,6 +84,12 @@ final class ContactManager {
         }
     }
     
+    static func loadIncompletedByNumber(completion: @escaping ([CNContact]) -> ()) {
+        loadContacts { contacts in
+            completion(contacts.filter { $0.phoneNumbers.isEmpty })
+        }
+    }
+    
     static func merge(_ contacts: [CNContact], completion: @escaping ((Bool) -> ())) {
         var bestContact: CNContact?
         var bestValue: Int = 0
@@ -209,37 +215,5 @@ final class ContactManager {
             }
         }
         return sections
-    }
-
-    public static func loadIncompletedByPhone(_ contacts: [CNContact]) -> [CNContactSection]{
-        var sections: [CNContactSection] = []
-        var incompleted: [CNContact] = []
-        
-        for contact in contacts{
-            if contact.phoneNumbers.count == 0{
-                incompleted.append(contact)
-            }
-        }
-        var chars = Array(Set(incompleted.compactMap({ ($0.givenName.lowercased()).first })))
-        chars.sort()
-        
-//        for char in chars.map(String.init) {
-            sections.append(CNContactSection(name: "Incomplete Contacts", contacts: incompleted.sorted(by: { $0.givenName < $1.givenName })
-//                                                .filter {
-//                $0.givenName.lowercased() != "" ? $0.givenName.lowercased().hasPrefix(char.lowercased()) : ($0.givenName.lowercased()).hasPrefix(char.lowercased())
-            ))
-//        }
-        return sections
-    }
-    
-    public static func loadIncompletedByNumberAndMail(_ contacts: [CNContact]) -> [CNContactSection]{
-        var incompleted: [CNContact] = []
-        for contact in contacts{
-            if contact.emailAddresses.count == 0 && contact.phoneNumbers.count == 0{
-                incompleted.append(contact)
-            }
-        }
-        print(incompleted)
-        return [CNContactSection(name: "Incomplete Contacts", contacts: incompleted)]
     }
 }
