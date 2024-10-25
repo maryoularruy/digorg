@@ -1,5 +1,5 @@
 //
-//  DuplicateContactsViewController.swift
+//  DuplicateNameContactsViewController.swift
 //  Cleaner
 //
 //  Created by Максим Лебедев on 20.10.2023.
@@ -10,7 +10,7 @@ import Contacts
 import ContactsUI
 import BottomPopup
 
-class DuplicateContactsViewController: UIViewController {
+class DuplicateNameContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
@@ -87,7 +87,7 @@ class DuplicateContactsViewController: UIViewController {
     }
 }
 
-extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataSource {
+extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         sections.reduce(0) { $0 + $1.count }
     }
@@ -127,7 +127,7 @@ extension DuplicateContactsViewController: UITableViewDelegate, UITableViewDataS
     }
 }
 
-extension DuplicateContactsViewController: UnresolvedItemCellProtocol {
+extension DuplicateNameContactsViewController: UnresolvedItemCellProtocol {
     func tapOnCheckBox(_ position: (Int, Int)) {
         let duplicateContacts = sections[position.0]
         if contactsForMerge.contains(duplicateContacts) {
@@ -146,7 +146,7 @@ extension DuplicateContactsViewController: UnresolvedItemCellProtocol {
     }
 }
 
-extension DuplicateContactsViewController: ViewControllerProtocol {
+extension DuplicateNameContactsViewController: ViewControllerProtocol {
     func setupUI() {
         toolbar.delegate = self
     }
@@ -158,7 +158,7 @@ extension DuplicateContactsViewController: ViewControllerProtocol {
     }
 }
 
-extension DuplicateContactsViewController: ActionAndCancelToolbarProtocol, BottomPopupDelegate {
+extension DuplicateNameContactsViewController: ActionAndCancelToolbarProtocol, BottomPopupDelegate {
     func tapOnAction() {
         guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
         vc.popupDelegate = self
@@ -201,7 +201,7 @@ extension DuplicateContactsViewController: ActionAndCancelToolbarProtocol, Botto
     }
 }
 
-extension DuplicateContactsViewController: ActionToolbarDelegate {
+extension DuplicateNameContactsViewController: ActionToolbarDelegate {
     func tapOnActionButton() {
         navigationController?.popViewController(animated: true)
     }

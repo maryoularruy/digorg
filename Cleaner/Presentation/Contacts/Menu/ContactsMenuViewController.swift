@@ -95,9 +95,9 @@ extension ContactsMenuViewController: ContactsMenuViewProtocol {
     func tapOnCell(type: ContactsInfoType) {
         let vc: UIViewController = switch type {
         case .duplicateNames:
-            StoryboardScene.DuplicateContacts.initialScene.instantiate()
+            StoryboardScene.DuplicateNameContacts.initialScene.instantiate()
         case .dublicateNumbers:
-            StoryboardScene.DuplicateContacts.initialScene.instantiate()
+            StoryboardScene.DuplicateNameContacts.initialScene.instantiate()
         case .noNameContacts:
             StoryboardScene.NoNameContacts.initialScene.instantiate()
         case .noNumberContacts:

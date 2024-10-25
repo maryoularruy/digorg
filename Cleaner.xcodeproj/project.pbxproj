@@ -21,8 +21,8 @@
 		7532F8602AE290C2007469EA /* ContactsMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F85F2AE290C2007469EA /* ContactsMenu.storyboard */; };
 		7532F8642AE2972C007469EA /* NoNameContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F8632AE2972C007469EA /* NoNameContacts.storyboard */; };
 		7532F8662AE29735007469EA /* NoNameContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8652AE29735007469EA /* NoNameContactsViewController.swift */; };
-		7532F8682AE29750007469EA /* DuplicateContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F8672AE29750007469EA /* DuplicateContacts.storyboard */; };
-		7532F86A2AE29758007469EA /* DuplicateContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8692AE29758007469EA /* DuplicateContactsViewController.swift */; };
+		7532F8682AE29750007469EA /* DuplicateNameContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F8672AE29750007469EA /* DuplicateNameContacts.storyboard */; };
+		7532F86A2AE29758007469EA /* DuplicateNameContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8692AE29758007469EA /* DuplicateNameContactsViewController.swift */; };
 		7532F8722AE304B5007469EA /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8712AE304B5007469EA /* ContactService.swift */; };
 		7532F8752AE30517007469EA /* SwiftyContacts in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F8742AE30517007469EA /* SwiftyContacts */; };
 		756866C42ACC0879008DBF7C /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866C32ACC0879008DBF7C /* StoriesViewController.swift */; };
@@ -246,8 +246,8 @@
 		7532F85F2AE290C2007469EA /* ContactsMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactsMenu.storyboard; sourceTree = "<group>"; };
 		7532F8632AE2972C007469EA /* NoNameContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NoNameContacts.storyboard; sourceTree = "<group>"; };
 		7532F8652AE29735007469EA /* NoNameContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNameContactsViewController.swift; sourceTree = "<group>"; };
-		7532F8672AE29750007469EA /* DuplicateContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DuplicateContacts.storyboard; sourceTree = "<group>"; };
-		7532F8692AE29758007469EA /* DuplicateContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateContactsViewController.swift; sourceTree = "<group>"; };
+		7532F8672AE29750007469EA /* DuplicateNameContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DuplicateNameContacts.storyboard; sourceTree = "<group>"; };
+		7532F8692AE29758007469EA /* DuplicateNameContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateNameContactsViewController.swift; sourceTree = "<group>"; };
 		7532F8712AE304B5007469EA /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		756866C32ACC0879008DBF7C /* StoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewController.swift; sourceTree = "<group>"; };
 		756866C52ACC0884008DBF7C /* Stories.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Stories.storyboard; sourceTree = "<group>"; };
@@ -527,7 +527,7 @@
 				A55235A02CC2E5F600CBE265 /* Header */,
 				A55235992CC2AB9100CBE265 /* Cells */,
 				7532F8622AE29711007469EA /* IncompliteContacts */,
-				7532F8612AE29707007469EA /* DuplicateContacts */,
+				7532F8612AE29707007469EA /* DuplicateNameContacts */,
 				7532F85E2AE290AD007469EA /* Menu */,
 			);
 			path = Contacts;
@@ -543,13 +543,13 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
-		7532F8612AE29707007469EA /* DuplicateContacts */ = {
+		7532F8612AE29707007469EA /* DuplicateNameContacts */ = {
 			isa = PBXGroup;
 			children = (
-				7532F8672AE29750007469EA /* DuplicateContacts.storyboard */,
-				7532F8692AE29758007469EA /* DuplicateContactsViewController.swift */,
+				7532F8672AE29750007469EA /* DuplicateNameContacts.storyboard */,
+				7532F8692AE29758007469EA /* DuplicateNameContactsViewController.swift */,
 			);
-			path = DuplicateContacts;
+			path = DuplicateNameContacts;
 			sourceTree = "<group>";
 		};
 		7532F8622AE29711007469EA /* IncompliteContacts */ = {
@@ -1512,7 +1512,7 @@
 				FA99F2E32B35CABE00D4B239 /* CalendarFooterView.xib in Resources */,
 				75D3FC902A606FF500F351A3 /* SF-Pro-Display-Regular.otf in Resources */,
 				7532F8602AE290C2007469EA /* ContactsMenu.storyboard in Resources */,
-				7532F8682AE29750007469EA /* DuplicateContacts.storyboard in Resources */,
+				7532F8682AE29750007469EA /* DuplicateNameContacts.storyboard in Resources */,
 				75D3FC3E2A6069AF00F351A3 /* Main.storyboard in Resources */,
 				7504C25C2AD9C66D005FB398 /* Connection.storyboard in Resources */,
 				75D3FC952A606FF500F351A3 /* SF-Pro-Display-Ultralight.otf in Resources */,
@@ -1557,7 +1557,7 @@
 				FA3988482B30602A0096F335 /* UICollectionView.swift in Sources */,
 				756866CF2ACD9ED0008DBF7C /* OnboardingModel.swift in Sources */,
 				FA3988462B30602A0096F335 /* NSObject.swift in Sources */,
-				7532F86A2AE29758007469EA /* DuplicateContactsViewController.swift in Sources */,
+				7532F86A2AE29758007469EA /* DuplicateNameContactsViewController.swift in Sources */,
 				75D3FC842A606E6F00F351A3 /* Extension+UIView.swift in Sources */,
 				FA641DF72B357C7A00F6A466 /* UIImageView+SwiftyGif.swift in Sources */,
 				FA39884E2B30602A0096F335 /* Combine.swift in Sources */,

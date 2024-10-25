@@ -38,10 +38,10 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<DetailedPasswordViewController>(storyboard: DetailedPassword.self)
   }
-  internal enum DuplicateContacts: StoryboardType {
-    internal static let storyboardName = "DuplicateContacts"
+  internal enum DuplicateNameContacts: StoryboardType {
+    internal static let storyboardName = "DuplicateNameContacts"
 
-    internal static let initialScene = InitialSceneType<DuplicateContactsViewController>(storyboard: DuplicateContacts.self)
+    internal static let initialScene = InitialSceneType<DuplicateNameContactsViewController>(storyboard: DuplicateNameContacts.self)
   }
   internal enum EditPassword: StoryboardType {
     internal static let storyboardName = "EditPassword"
