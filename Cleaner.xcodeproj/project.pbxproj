@@ -15,8 +15,6 @@
 		7504C25C2AD9C66D005FB398 /* Connection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7504C25B2AD9C66D005FB398 /* Connection.storyboard */; };
 		752B10222AE6652800EC0BBA /* ActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 752B10212AE6652800EC0BBA /* ActionView.xib */; };
 		752B10752AEABACD00EC0BBA /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B10742AEABACD00EC0BBA /* ActionView.swift */; };
-		752B10792AEAC18F00EC0BBA /* MergeSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 752B10782AEAC18F00EC0BBA /* MergeSectionCell.xib */; };
-		752B107B2AEAC19600EC0BBA /* MergeSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B107A2AEAC19600EC0BBA /* MergeSectionCell.swift */; };
 		7532F84A2AE2749F007469EA /* SpeedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8492AE2749F007469EA /* SpeedTest.swift */; };
 		7532F8502AE2766B007469EA /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F84F2AE2766B007469EA /* Reachability */; };
 		7532F85D2AE290A6007469EA /* ContactsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F85C2AE290A6007469EA /* ContactsMenuViewController.swift */; };
@@ -25,8 +23,6 @@
 		7532F8662AE29735007469EA /* NoNameContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8652AE29735007469EA /* NoNameContactsViewController.swift */; };
 		7532F8682AE29750007469EA /* DuplicateContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F8672AE29750007469EA /* DuplicateContacts.storyboard */; };
 		7532F86A2AE29758007469EA /* DuplicateContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8692AE29758007469EA /* DuplicateContactsViewController.swift */; };
-		7532F86E2AE2FA2A007469EA /* IncompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7532F86D2AE2FA2A007469EA /* IncompleteCell.xib */; };
-		7532F8702AE2FA48007469EA /* IncompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F86F2AE2FA48007469EA /* IncompleteCell.swift */; };
 		7532F8722AE304B5007469EA /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8712AE304B5007469EA /* ContactService.swift */; };
 		7532F8752AE30517007469EA /* SwiftyContacts in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F8742AE30517007469EA /* SwiftyContacts */; };
 		756866C42ACC0879008DBF7C /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866C32ACC0879008DBF7C /* StoriesViewController.swift */; };
@@ -245,8 +241,6 @@
 		7504C25B2AD9C66D005FB398 /* Connection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connection.storyboard; sourceTree = "<group>"; };
 		752B10212AE6652800EC0BBA /* ActionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionView.xib; sourceTree = "<group>"; };
 		752B10742AEABACD00EC0BBA /* ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionView.swift; sourceTree = "<group>"; };
-		752B10782AEAC18F00EC0BBA /* MergeSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MergeSectionCell.xib; sourceTree = "<group>"; };
-		752B107A2AEAC19600EC0BBA /* MergeSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeSectionCell.swift; sourceTree = "<group>"; };
 		7532F8492AE2749F007469EA /* SpeedTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTest.swift; sourceTree = "<group>"; };
 		7532F85C2AE290A6007469EA /* ContactsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMenuViewController.swift; sourceTree = "<group>"; };
 		7532F85F2AE290C2007469EA /* ContactsMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactsMenu.storyboard; sourceTree = "<group>"; };
@@ -254,8 +248,6 @@
 		7532F8652AE29735007469EA /* NoNameContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNameContactsViewController.swift; sourceTree = "<group>"; };
 		7532F8672AE29750007469EA /* DuplicateContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DuplicateContacts.storyboard; sourceTree = "<group>"; };
 		7532F8692AE29758007469EA /* DuplicateContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateContactsViewController.swift; sourceTree = "<group>"; };
-		7532F86D2AE2FA2A007469EA /* IncompleteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncompleteCell.xib; sourceTree = "<group>"; };
-		7532F86F2AE2FA48007469EA /* IncompleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncompleteCell.swift; sourceTree = "<group>"; };
 		7532F8712AE304B5007469EA /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		756866C32ACC0879008DBF7C /* StoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewController.swift; sourceTree = "<group>"; };
 		756866C52ACC0884008DBF7C /* Stories.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Stories.storyboard; sourceTree = "<group>"; };
@@ -527,23 +519,6 @@
 			path = WiFiProtection;
 			sourceTree = "<group>";
 		};
-		752B10762AEAC07C00EC0BBA /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				752B10772AEAC16700EC0BBA /* MergeSectionCell */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		752B10772AEAC16700EC0BBA /* MergeSectionCell */ = {
-			isa = PBXGroup;
-			children = (
-				752B10782AEAC18F00EC0BBA /* MergeSectionCell.xib */,
-				752B107A2AEAC19600EC0BBA /* MergeSectionCell.swift */,
-			);
-			path = MergeSectionCell;
-			sourceTree = "<group>";
-		};
 		7532F85B2AE28B47007469EA /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,7 +546,6 @@
 		7532F8612AE29707007469EA /* DuplicateContacts */ = {
 			isa = PBXGroup;
 			children = (
-				752B10762AEAC07C00EC0BBA /* Cells */,
 				7532F8672AE29750007469EA /* DuplicateContacts.storyboard */,
 				7532F8692AE29758007469EA /* DuplicateContactsViewController.swift */,
 			);
@@ -581,20 +555,10 @@
 		7532F8622AE29711007469EA /* IncompliteContacts */ = {
 			isa = PBXGroup;
 			children = (
-				7532F86C2AE2FA12007469EA /* Cell */,
 				7532F8632AE2972C007469EA /* NoNameContacts.storyboard */,
 				7532F8652AE29735007469EA /* NoNameContactsViewController.swift */,
 			);
 			path = IncompliteContacts;
-			sourceTree = "<group>";
-		};
-		7532F86C2AE2FA12007469EA /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				7532F86D2AE2FA2A007469EA /* IncompleteCell.xib */,
-				7532F86F2AE2FA48007469EA /* IncompleteCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		7532F8782AE664DF007469EA /* ActionView */ = {
@@ -1510,7 +1474,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				752B10792AEAC18F00EC0BBA /* MergeSectionCell.xib in Resources */,
 				FA3988052B305FA50096F335 /* Images.xcassets in Resources */,
 				75D3FC922A606FF500F351A3 /* SF-Pro-Display-Medium.otf in Resources */,
 				FA99F2E92B3C38B700D4B239 /* PasswordList.storyboard in Resources */,
@@ -1518,7 +1481,6 @@
 				75D3FC8E2A606FF500F351A3 /* SF-Pro-Display-Thin.otf in Resources */,
 				FA3987A52B30599C0096F335 /* Search.storyboard in Resources */,
 				FA99F2EE2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.xib in Resources */,
-				7532F86E2AE2FA2A007469EA /* IncompleteCell.xib in Resources */,
 				FA99F2DF2B35C6AF00D4B239 /* CalendarTableViewCell.xib in Resources */,
 				75D3FC942A606FF500F351A3 /* SF-Pro-Display-Semibold.otf in Resources */,
 				756866DB2AD1D3A3008DBF7C /* PhoneInfo.storyboard in Resources */,
@@ -1576,7 +1538,6 @@
 				75D3FC812A606E6F00F351A3 /* Extension+String.swift in Sources */,
 				FA39877C2B3055930096F335 /* OSAHash.m in Sources */,
 				75D3FC992A6071B100F351A3 /* Assets.swift in Sources */,
-				7532F8702AE2FA48007469EA /* IncompleteCell.swift in Sources */,
 				752B10752AEABACD00EC0BBA /* ActionView.swift in Sources */,
 				FA3988502B30602A0096F335 /* UIFont.swift in Sources */,
 				FA3988062B305FA50096F335 /* DKPhotoGalleryResource.swift in Sources */,
@@ -1607,7 +1568,6 @@
 				FA39884F2B30602A0096F335 /* ReversibleFetchResult.swift in Sources */,
 				FA39884D2B30602A0096F335 /* UIViewController.swift in Sources */,
 				FA59140F2B31A2A400371911 /* MainBatteryViewController.swift in Sources */,
-				752B107B2AEAC19600EC0BBA /* MergeSectionCell.swift in Sources */,
 				FA3987572B3055510096F335 /* ElementPath.swift in Sources */,
 				FA3988542B30602A0096F335 /* VideoController.swift in Sources */,
 				FA39875A2B3055510096F335 /* AnyDifferentiable.swift in Sources */,
