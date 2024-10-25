@@ -44,14 +44,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hTh-ba-8lv">
+                                <rect key="frame" x="16" y="197" width="361" height="621"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="QQy-gi-LqX"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="zqN-Uf-cmd"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hTh-ba-8lv" secondAttribute="trailing" constant="16" id="8NL-8q-TKP"/>
+                            <constraint firstItem="hTh-ba-8lv" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="9vk-8a-CFx"/>
                             <constraint firstItem="PLp-GV-qcd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="HqF-9B-ogM"/>
                             <constraint firstItem="pSB-ON-Evf" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="Iur-he-MaC"/>
                             <constraint firstItem="pSB-ON-Evf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="KUC-c6-gCu"/>
                             <constraint firstItem="XVe-AF-h1v" firstAttribute="top" secondItem="pSB-ON-Evf" secondAttribute="bottom" constant="14" id="LJe-pu-Q9I"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hTh-ba-8lv" secondAttribute="bottom" id="N2C-VM-EpB"/>
+                            <constraint firstItem="hTh-ba-8lv" firstAttribute="top" secondItem="PLp-GV-qcd" secondAttribute="bottom" constant="16" id="TpH-1O-cwE"/>
                             <constraint firstItem="XVe-AF-h1v" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="dOp-bT-pcw"/>
                             <constraint firstItem="PLp-GV-qcd" firstAttribute="top" secondItem="XVe-AF-h1v" secondAttribute="bottom" constant="6" id="zvO-Yi-Twi"/>
                         </constraints>
@@ -59,6 +72,7 @@
                     <connections>
                         <outlet property="arrowBackButton" destination="pSB-ON-Evf" id="BDs-QF-wqc"/>
                         <outlet property="unresolvedContactsCount" destination="PLp-GV-qcd" id="7Og-1U-9rr"/>
+                        <outlet property="unresolvedContactsTableView" destination="hTh-ba-8lv" id="HuG-kV-ME1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

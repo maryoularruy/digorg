@@ -5,8 +5,6 @@
 //  Created by Максим Лебедев on 20.10.2023.
 //
 
-import UIKit
-import Contacts
 import ContactsUI
 
 final class NoNameContactsViewController: UIViewController {
@@ -113,7 +111,7 @@ extension NoNameContactsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
         cell.delegate = self
-        cell.bind(contact: contacts[indexPath.row], indexPath.row)
+        cell.bindNoName(contact: contacts[indexPath.row], indexPath.row)
         
         cell.checkBoxButton.image = contactsForDeletion.contains(contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         

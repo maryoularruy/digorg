@@ -53,11 +53,18 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         secondLabel.text = numbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
     }
     
-    func bind(contact: CNContact, _ position: Int, type: UnresolvedItemCellType = .single) {
+    func bindNoName(contact: CNContact, _ position: Int, type: UnresolvedItemCellType = .single) {
         self.type = type
         self.position = (0, position)
         firstLabel.text = contact.phoneNumbers.map { $0.value.stringValue }.joined(separator: ", ")
         secondLabel.text = "No name"
+    }
+    
+    func bindNoNumber(contact: CNContact, _ position: Int, type: UnresolvedItemCellType = .single) {
+        self.type = type
+        self.position = (0, position)
+        firstLabel.text = "\(contact.givenName) \(contact.familyName)"
+        secondLabel.text = "No phone number"
     }
     
     func setupFirstCellInSection() {
