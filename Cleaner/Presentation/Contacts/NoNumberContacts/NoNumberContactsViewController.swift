@@ -62,6 +62,7 @@ final class NoNumberContactsViewController: UIViewController {
         if let contact = ContactManager.findContact(contact: contact) {
             let contactVC = CNContactViewController(for: contact)
             contactVC.allowsEditing = true
+            navigationController?.setNavigationBarHidden(false, animated: false)
             navigationController?.pushViewController(contactVC, animated: true)
         }
     }
