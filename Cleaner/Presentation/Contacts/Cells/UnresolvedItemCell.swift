@@ -26,7 +26,7 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         var insets: UIEdgeInsets {
             switch self {
             case .grouped: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            case .single: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+            case .single: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
             }
         }
     }
@@ -77,12 +77,7 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         content.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
     
-    func setupCell() {
-        clipsToBounds = false
-        content.layer.cornerRadius = 20
-        content.backgroundColor = .white
-        addShadows()
-    }
+    func setupMiddleCellInSection() {}
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -90,7 +85,10 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     }
     
     private func setup() {
+        clipsToBounds = false
+        content.layer.cornerRadius = 20
         secondLabel.setGreyTextColor()
+        addShadows()
         
         checkBoxButton.addTapGestureRecognizer { [weak self] in
             guard let self else { return }

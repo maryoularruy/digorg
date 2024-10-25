@@ -115,7 +115,8 @@ extension NoNameContactsViewController: UITableViewDelegate, UITableViewDataSour
         
         cell.checkBoxButton.image = contactsForDeletion.contains(contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         
-        cell.setupCell()
+        cell.content.backgroundColor = contactsForDeletion.contains(contacts[indexPath.row]) ? .lightBlueBackground : .white
+        
         return cell
     }
     
