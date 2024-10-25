@@ -526,7 +526,7 @@
 				A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */,
 				A55235A02CC2E5F600CBE265 /* Header */,
 				A55235992CC2AB9100CBE265 /* Cells */,
-				7532F8622AE29711007469EA /* IncompliteContacts */,
+				7532F8622AE29711007469EA /* NoNameContacts */,
 				7532F8612AE29707007469EA /* DuplicateNameContacts */,
 				7532F85E2AE290AD007469EA /* Menu */,
 			);
@@ -552,13 +552,13 @@
 			path = DuplicateNameContacts;
 			sourceTree = "<group>";
 		};
-		7532F8622AE29711007469EA /* IncompliteContacts */ = {
+		7532F8622AE29711007469EA /* NoNameContacts */ = {
 			isa = PBXGroup;
 			children = (
 				7532F8632AE2972C007469EA /* NoNameContacts.storyboard */,
 				7532F8652AE29735007469EA /* NoNameContactsViewController.swift */,
 			);
-			path = IncompliteContacts;
+			path = NoNameContacts;
 			sourceTree = "<group>";
 		};
 		7532F8782AE664DF007469EA /* ActionView */ = {

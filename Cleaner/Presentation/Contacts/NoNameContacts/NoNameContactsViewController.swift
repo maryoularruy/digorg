@@ -9,7 +9,7 @@ import UIKit
 import Contacts
 import ContactsUI
 
-class NoNameContactsViewController: UIViewController {
+final class NoNameContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
