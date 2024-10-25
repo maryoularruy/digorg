@@ -101,7 +101,7 @@ extension ContactsMenuViewController: ContactsMenuViewProtocol {
         case .noNameContacts:
             StoryboardScene.NoNameContacts.initialScene.instantiate()
         case .noNumberContacts:
-            StoryboardScene.NoNameContacts.initialScene.instantiate()
+            StoryboardScene.NoNumberContacts.initialScene.instantiate()
         }
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)

@@ -68,6 +68,8 @@
 		A50F58C42CB7B43400AB3166 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58C32CB7B43400AB3166 /* UIColor.swift */; };
 		A53836AB2CBC68C2005BE39C /* CleanupOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53836A02CBC68C2005BE39C /* CleanupOption.swift */; };
 		A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53836CF2CBEC6DE005BE39C /* Mode.swift */; };
+		A53ED8E72CCBEA6700565625 /* NoNumberContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A53ED8E62CCBEA6700565625 /* NoNumberContacts.storyboard */; };
+		A53ED8E92CCBEA7200565625 /* NoNumberContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53ED8E82CCBEA7200565625 /* NoNumberContactsViewController.swift */; };
 		A552341C2CC17F2000CBE265 /* UILabel+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552341B2CC17F2000CBE265 /* UILabel+ext.swift */; };
 		A55235982CC27B9300CBE265 /* ContactsInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55235972CC27B9300CBE265 /* ContactsInfoType.swift */; };
 		A55CA2612CC904780026D434 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2602CC904780026D434 /* UIImage.swift */; };
@@ -291,6 +293,8 @@
 		A50F58C32CB7B43400AB3166 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		A53836A02CBC68C2005BE39C /* CleanupOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupOption.swift; sourceTree = "<group>"; };
 		A53836CF2CBEC6DE005BE39C /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
+		A53ED8E62CCBEA6700565625 /* NoNumberContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NoNumberContacts.storyboard; sourceTree = "<group>"; };
+		A53ED8E82CCBEA7200565625 /* NoNumberContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNumberContactsViewController.swift; sourceTree = "<group>"; };
 		A552341B2CC17F2000CBE265 /* UILabel+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ext.swift"; sourceTree = "<group>"; };
 		A55235972CC27B9300CBE265 /* ContactsInfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsInfoType.swift; sourceTree = "<group>"; };
 		A55CA2602CC904780026D434 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -522,6 +526,7 @@
 		7532F85B2AE28B47007469EA /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				A53ED8E52CCBEA5000565625 /* NoNumberContacts */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */,
 				A55235A02CC2E5F600CBE265 /* Header */,
@@ -815,6 +820,15 @@
 				FA53586C2B3C4D6A0026FDC2 /* DBService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		A53ED8E52CCBEA5000565625 /* NoNumberContacts */ = {
+			isa = PBXGroup;
+			children = (
+				A53ED8E62CCBEA6700565625 /* NoNumberContacts.storyboard */,
+				A53ED8E82CCBEA7200565625 /* NoNumberContactsViewController.swift */,
+			);
+			path = NoNumberContacts;
 			sourceTree = "<group>";
 		};
 		A576FACF2CB69A7700B018DE /* BaseConfiguration */ = {
@@ -1493,6 +1507,7 @@
 				75D3FC8F2A606FF500F351A3 /* SF-Pro-Display-Light.otf in Resources */,
 				752B10222AE6652800EC0BBA /* ActionView.xib in Resources */,
 				FA59141C2B31B8EE00371911 /* BatteryFirstCollectionViewCell.xib in Resources */,
+				A53ED8E72CCBEA6700565625 /* NoNumberContacts.storyboard in Resources */,
 				FA39886E2B3080950096F335 /* PrivateMenu.storyboard in Resources */,
 				75FC42222AD2A0C5008F3E3A /* TutorialCell.xib in Resources */,
 				7504C2582AD7020D005FB398 /* WiFiProtection.storyboard in Resources */,
@@ -1636,6 +1651,7 @@
 				FA99F2F12B3C3F8000D4B239 /* PasswordCreationViewController.swift in Sources */,
 				FA3987EC2B305FA50096F335 /* DKPhotoGalleryTransitionController.swift in Sources */,
 				FA39883F2B30602A0096F335 /* ZoomPushTransition.swift in Sources */,
+				A53ED8E92CCBEA7200565625 /* NoNumberContactsViewController.swift in Sources */,
 				FA3987AD2B30599C0096F335 /* RegularAssetsViewController+Transition.swift in Sources */,
 				75D3FC602A606BA100F351A3 /* Keys.swift in Sources */,
 				FA3988452B30602A0096F335 /* Result.swift in Sources */,
