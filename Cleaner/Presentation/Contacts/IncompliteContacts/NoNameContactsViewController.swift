@@ -27,6 +27,7 @@ class NoNameContactsViewController: UIViewController {
                 selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
                 toolbar.toolbarButton.bind(text: "Delete")
                 toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
+                emptyStateView = nil
             }
         }
     }
@@ -38,6 +39,8 @@ class NoNameContactsViewController: UIViewController {
             unresolvedContactsTableView.reloadData()
         }
     }
+    
+    private lazy var emptyStateView: EmptyStateView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +86,10 @@ class NoNameContactsViewController: UIViewController {
         selectionButton.bind(text: .selectAll)
         toolbar.toolbarButton.bind(text: "Back")
         toolbar.toolbarButton.isClickable = true
+        emptyStateView = view.createEmptyState(type: .noNameContacts)
+        if let emptyStateView {
+            view.addSubview(emptyStateView)
+        }
     }
 }
 

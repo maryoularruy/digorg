@@ -47,7 +47,7 @@ class DuplicateContactsViewController: UIViewController {
         }
     }
     
-    private weak var emptyStateView: EmptyStateView?
+    private lazy var emptyStateView: EmptyStateView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -209,6 +209,9 @@ extension DuplicateContactsViewController: ActionToolbarDelegate {
     private func setupEmptyState() {
         selectionButton.isEnabled = false
         emptyStateView = view.createEmptyState(type: .noDuplicateNames)
+        if let emptyStateView {
+            view.addSubview(emptyStateView)
+        }
         emptyStateToolbar.toolbarButton.bind(text: "Back")
         emptyStateToolbar.delegate = self
         emptyStateToolbar.isHidden = false

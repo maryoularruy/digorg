@@ -8,17 +8,19 @@
 import UIKit
 
 enum EmptyStateType {
-    case noDuplicateNames
+    case noDuplicateNames, noNameContacts
     
     var title: String {
         switch self {
         case .noDuplicateNames: "No Duplicate Names"
+        case .noNameContacts: "No contacts with the missing names"
         }
     }
     
     var icon: UIImage {
         switch self {
         case .noDuplicateNames: .people
+        case .noNameContacts: .people
         }
     }
 }
