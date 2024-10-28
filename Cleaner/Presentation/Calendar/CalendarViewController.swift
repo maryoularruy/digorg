@@ -13,14 +13,15 @@ final class CalendarViewController: UIViewController {
     @IBOutlet weak var unresolvedEventsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedEventsTableView: UITableView!
 
-    private lazy var events: [Event] = [] {
+    private lazy var eventGroups: [EKEventGroup] = [] {
         didSet {
-            unresolvedEventsCount.bind(text: "\(events.count) event\(events.count == 1 ? "" : "s")")
+            let eventsCount = eventGroups.reduce(0) { $0 + $1.events.count }
+            unresolvedEventsCount.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
             unresolvedEventsTableView.reloadData()
         }
     }
     
-    private lazy var eventsForDeletion = [Event]() {
+    private lazy var eventsForDeletion = Set<EKEvent>() {
         didSet {
             unresolvedEventsTableView.reloadData()
         }
@@ -51,51 +52,26 @@ final class CalendarViewController: UIViewController {
     }
     
     private func fetchEvents() {
-        CalendarService.shared.fetchEvents { events in
-            events.forEach { event in
-                self.events.append(Event(title: event.title, year: self.calendarComponent(event.startDate, .year), isSelected: false, id: event.eventIdentifier, calendar: event.calendar.title, formattedDate: self.formattedDate(event.startDate)))
-            }
-            self.showPlaceholder()
-            // self.tableView.reloadData()
+        CalendarService.shared.fetchEvents { [weak self] events in
+            self?.eventGroups = events
         }
     }
     
-    @IBAction func deleteEvents(_ sender: Any) {
-        let selectedEvents = events.filter { $0.isSelected }
-
-        deleteEventsFromCalendar(selectedEvents)
-
-        events = events.filter { !$0.isSelected }
-     //   tableView.reloadData()
-        
-        showPlaceholder()
-    }
-    
-    func showPlaceholder() {
-        if events.isEmpty {
-//            placeholderView.isHidden = false
-//            selectAllLabel.isHidden = true
-//            selectAllStackView.isHidden = true
-//            deleteButton.isHidden = true
-//            selectedCounterLabel.isHidden = true
-        }
-    }
-    
-    private func deleteEventsFromCalendar(_ events: [Event]) {
-         let eventStore = EKEventStore()
-
-         for event in events {
-             if let calendarEvent = eventStore.event(withIdentifier: event.id) {
-                 do {
-                     print("removed:", event.id)
-                     try eventStore.remove(calendarEvent, span: .thisEvent)
-                 } catch {
-                     print("Error removing event from calendar: \(error.localizedDescription)")
-                     // Handle error if needed
-                 }
-             }
-         }
-     }
+//    private func deleteEventsFromCalendar(_ events: [Event]) {
+//         let eventStore = EKEventStore()
+//
+//         for event in events {
+//             if let calendarEvent = eventStore.event(withIdentifier: event.id) {
+//                 do {
+//                     print("removed:", event.id)
+//                     try eventStore.remove(calendarEvent, span: .thisEvent)
+//                 } catch {
+//                     print("Error removing event from calendar: \(error.localizedDescription)")
+//                     // Handle error if needed
+//                 }
+//             }
+//         }
+//     }
     
     func calendarComponent(_ date: Date, _ component: Calendar.Component) -> Int {
         return Calendar.current.component(component, from: date)
@@ -105,21 +81,6 @@ final class CalendarViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMMM yyyy"
         return dateFormatter.string(from: date)
-    }
-    
-    func selectSection(section: Int) {
-        let selectedEventsInSection = events.filter { $0.year == sortedUniqueYears()[section] }
-        let allSelectedInSection = selectedEventsInSection.allSatisfy { $0.isSelected }
-
-        for index in selectedEventsInSection.indices {
-            let eventIndex = events.firstIndex(of: selectedEventsInSection[index])!
-            events[eventIndex].isSelected = !allSelectedInSection
-        }
-    }
-    
-    private func sortedUniqueYears() -> [Int] {
-        let uniqueYears = Array(Set(events.map { $0.year })).sorted(by: <)
-        return uniqueYears
     }
 }
 
@@ -135,32 +96,20 @@ extension CalendarViewController: ViewControllerProtocol {
 
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        sortedUniqueYears().count
+        eventGroups.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let year = sortedUniqueYears()[section]
-        return events.filter { $0.year == year }.count
+        eventGroups[section].events.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
         cell.delegate = self
         
-        let year = sortedUniqueYears()[indexPath.section]
-        let eventsForYear = events.filter { $0.year == year }
-        let event = eventsForYear[indexPath.row]
+        cell.bind(event: eventGroups[indexPath.section].events[indexPath.row], (indexPath.section, indexPath.row))
         
-        cell.bind(event: event, (indexPath.section, indexPath.row))
-        
-        cell.content.backgroundColor = eventsForDeletion.contains(events[indexPath.row]) ? .lightBlueBackground : .white
-        
-//        cell.titleLabel?.text = event.title
-//        cell.calendarLabel.text = event.calendar
-//        cell.dateLabel.text = event.formattedDate
-//        
-//        let checkmarkImage = event.isSelected ? Asset.selectedCheckBox.image : Asset.emptyCheckBox.image
-//        cell.checkMarkImageView?.image = checkmarkImage
+        cell.content.backgroundColor = eventsForDeletion.contains(eventGroups[indexPath.section].events[indexPath.row]) ? .lightBlueBackground : .white
         
         return cell
     }
@@ -172,10 +121,8 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UnresolvedItemCellHeader()
-        header.firstLabel.bind(text: "\(sortedUniqueYears()[section])")
-        let year = sortedUniqueYears()[section]
-        let eventsForYear = events.filter { $0.year == year }.count
-        header.secondLabel.bind(text: "\(eventsForYear) event\(eventsForYear == 1 ? "" : "s")")
+        header.firstLabel.bind(text: "\(eventGroups[section].year)")
+        header.secondLabel.bind(text: "\(eventGroups[section].events.count) event\(eventGroups[section].events.count == 1 ? "" : "s")")
         header.secondLabel.isHidden = false
         return header
     }

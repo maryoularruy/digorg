@@ -1,9 +1,8 @@
 //
 //  Extension+UIViewController.swift
-//  EmpireVPN
+//  Cleaner
 //
 //  Created by Александр Пономарёв on 19.09.2020.
-//  Copyright © 2020 Anchorfree Inc. All rights reserved.
 //
 
 import UIKit
@@ -61,5 +60,4 @@ extension UINavigationController {
         statusBarView.backgroundColor = backgroundColor
         view.addSubview(statusBarView)
     }
-
 }

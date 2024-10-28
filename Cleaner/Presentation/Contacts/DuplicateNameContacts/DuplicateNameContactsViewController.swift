@@ -8,7 +8,7 @@
 import ContactsUI
 import BottomPopup
 
-class DuplicateNameContactsViewController: UIViewController {
+final class DuplicateNameContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedContactsTableView: UITableView!

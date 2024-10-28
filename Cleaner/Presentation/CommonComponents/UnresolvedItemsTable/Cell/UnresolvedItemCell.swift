@@ -8,6 +8,7 @@
 import UIKit
 import Reusable
 import Contacts
+import EventKit
 
 protocol UnresolvedItemCellProtocol: AnyObject {
     func tapOnCheckBox(_ position: (Int, Int))
@@ -69,11 +70,11 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     }
     
 //    MARK: -Calendar bindings
-    func bind(event: Event, _ position: (Int, Int), type: UnresolvedItemCellType = .single) {
+    func bind(event: EKEvent, _ position: (Int, Int), type: UnresolvedItemCellType = .single) {
         self.type = type
         self.position = position
         firstLabel.text = event.title
-        secondLabel.text = event.formattedDate
+        secondLabel.text = String(describing: event.startDate)
     }
     
 //    MARK: -Setup cell's UI

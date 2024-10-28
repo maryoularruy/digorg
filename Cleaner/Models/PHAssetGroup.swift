@@ -11,25 +11,19 @@ struct PHAssetGroup: Differentiable {
 	var name: String
 	var assets: [PHAsset]
     var subtype: PHAssetCollectionSubtype
-
-    init(name: String, assets: [PHAsset], subtype: PHAssetCollectionSubtype) {
-		self.name = name
-		self.assets = assets
-        self.subtype = subtype
-	}
 	
 	var differenceIdentifier: String {
-		return name
+		name
 	}
 	
 	func isContentEqual(to source: PHAssetGroup) -> Bool {
-		return source.name == name
+		source.name == name
 	}
 }
 
 struct MetadataAsset: Differentiable, Equatable {
 	func isContentEqual(to source: MetadataAsset) -> Bool {
-		return date == source.date
+		date == source.date
 	}
 	
 	var asset: PHAsset
@@ -38,6 +32,6 @@ struct MetadataAsset: Differentiable, Equatable {
 	var date: Date
 	
 	var differenceIdentifier: Date {
-		return date
+		date
 	}
 }
