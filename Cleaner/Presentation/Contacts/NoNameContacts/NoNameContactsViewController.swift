@@ -6,6 +6,7 @@
 //
 
 import ContactsUI
+import BottomPopup
 
 final class NoNameContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
@@ -142,11 +143,24 @@ extension NoNameContactsViewController: UnresolvedItemCellProtocol {
     }
 }
 
-extension NoNameContactsViewController: ActionToolbarDelegate {
+extension NoNameContactsViewController: ActionToolbarDelegate, BottomPopupDelegate {
     func tapOnActionButton() {
         if contacts.isEmpty {
             navigationController?.popViewController(animated: true)
         } else {
+            guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
+            vc.popupDelegate = self
+            vc.height = 238
+            vc.actionButtonText = "Delete Selected (\(contactsForDeletion.count))"
+            vc.type = .deleteContacts
+            DispatchQueue.main.async { [weak self] in
+                self?.present(vc, animated: true)
+            }
+        }
+    }
+    
+    func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
+        if newValue == 100 {
             ContactManager.delete(Array(contactsForDeletion))
             contactsForDeletion.removeAll()
             reloadData()

@@ -9,17 +9,19 @@ import UIKit
 import BottomPopup
 
 enum ConfirmActionType {
-    case contactMerge
+    case mergeContacts, deleteContacts
     
     var title: String {
         switch self {
-        case .contactMerge: "Merge selected contacts?"
+        case .mergeContacts: "Merge selected contacts?"
+        case .deleteContacts: "Delete selected contacts?"
         }
     }
     
     var subtitle: String {
         switch self {
-        case .contactMerge: "This action cannot be restored"
+        case .mergeContacts: "This action cannot be restored"
+        case .deleteContacts: "This action cannot be restored"
         }
     }
 }
@@ -56,7 +58,7 @@ final class ConfirmActionViewController: BottomPopupViewController {
     override var popupShouldDismissInteractivelty: Bool { shouldDismissInteractivelty ?? true }
 }
 
-extension ConfirmActionViewController: ActionAndCancelToolbarProtocol {
+extension ConfirmActionViewController: ActionAndCancelToolbarDelegate {
     func tapOnAction() {
         popupDelegate?.bottomPopupDismissInteractionPercentChanged(from: 0, to: 100)
         dismiss(animated: true)

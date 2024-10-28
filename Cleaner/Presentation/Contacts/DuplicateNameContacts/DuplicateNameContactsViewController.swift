@@ -5,8 +5,6 @@
 //  Created by Максим Лебедев on 20.10.2023.
 //
 
-import UIKit
-import Contacts
 import ContactsUI
 import BottomPopup
 
@@ -158,13 +156,13 @@ extension DuplicateNameContactsViewController: ViewControllerProtocol {
     }
 }
 
-extension DuplicateNameContactsViewController: ActionAndCancelToolbarProtocol, BottomPopupDelegate {
+extension DuplicateNameContactsViewController: ActionAndCancelToolbarDelegate, BottomPopupDelegate {
     func tapOnAction() {
         guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
         vc.popupDelegate = self
         vc.height = 238
         vc.actionButtonText = "Merge Contacts (\(sections.count))"
-        vc.type = .contactMerge
+        vc.type = .mergeContacts
         DispatchQueue.main.async { [weak self] in
             self?.present(vc, animated: true)
         }

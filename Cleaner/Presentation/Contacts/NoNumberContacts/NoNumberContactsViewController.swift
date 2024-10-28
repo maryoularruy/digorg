@@ -6,6 +6,7 @@
 //
 
 import ContactsUI
+import BottomPopup
 
 final class NoNumberContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
@@ -45,6 +46,7 @@ final class NoNumberContactsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
         reloadData()
         setupUnresolvedContactsTableView()
     }
@@ -128,11 +130,24 @@ extension NoNumberContactsViewController: UnresolvedItemCellProtocol {
     }
 }
 
-extension NoNumberContactsViewController: ActionToolbarDelegate {
+extension NoNumberContactsViewController: ActionToolbarDelegate, BottomPopupDelegate {
     func tapOnActionButton() {
         if contacts.isEmpty {
             navigationController?.popViewController(animated: true)
         } else {
+            guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
+            vc.popupDelegate = self
+            vc.height = 238
+            vc.actionButtonText = "Delete Selected (\(contactsForDeletion.count))"
+            vc.type = .deleteContacts
+            DispatchQueue.main.async { [weak self] in
+                self?.present(vc, animated: true)
+            }
+        }
+    }
+    
+    func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
+        if newValue == 100 {
             ContactManager.delete(Array(contactsForDeletion))
             contactsForDeletion.removeAll()
             reloadData()

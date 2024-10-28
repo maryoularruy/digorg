@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ActionAndCancelToolbarProtocol: AnyObject {
+protocol ActionAndCancelToolbarDelegate: AnyObject {
     func tapOnAction()
     func tapOnCancel()
 }
@@ -17,7 +17,7 @@ final class ActionAndCancelToolbar: UIView {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var actionButton: ActionToolbarButtonStyle!
-    weak var delegate: ActionAndCancelToolbarProtocol?
+    weak var delegate: ActionAndCancelToolbarDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
