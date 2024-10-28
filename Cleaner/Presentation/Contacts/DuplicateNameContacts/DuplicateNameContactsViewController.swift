@@ -116,7 +116,7 @@ extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UnresolvedItemCellHeader()
-        header.unresolvedItemsInSection.bind(text: "\(sections[section].count) duplicates")
+        header.firstLabel.bind(text: "\(sections[section].count) duplicates")
         return header
     }
     

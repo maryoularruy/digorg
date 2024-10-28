@@ -217,7 +217,6 @@
 		FA99F2D62B35C24000D4B239 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99F2D52B35C24000D4B239 /* CalendarHeaderView.swift */; };
 		FA99F2D82B35C24C00D4B239 /* CalendarHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA99F2D72B35C24C00D4B239 /* CalendarHeaderView.xib */; };
 		FA99F2DE2B35C6AF00D4B239 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99F2DC2B35C6AF00D4B239 /* CalendarTableViewCell.swift */; };
-		FA99F2DF2B35C6AF00D4B239 /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA99F2DD2B35C6AF00D4B239 /* CalendarTableViewCell.xib */; };
 		FA99F2E12B35CAB000D4B239 /* CalendarFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99F2E02B35CAB000D4B239 /* CalendarFooterView.swift */; };
 		FA99F2E32B35CABE00D4B239 /* CalendarFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA99F2E22B35CABE00D4B239 /* CalendarFooterView.xib */; };
 		FA99F2E62B3C389F00D4B239 /* PasswordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99F2E52B3C389F00D4B239 /* PasswordListViewController.swift */; };
@@ -451,7 +450,6 @@
 		FA99F2D52B35C24000D4B239 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 		FA99F2D72B35C24C00D4B239 /* CalendarHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarHeaderView.xib; sourceTree = "<group>"; };
 		FA99F2DC2B35C6AF00D4B239 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
-		FA99F2DD2B35C6AF00D4B239 /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
 		FA99F2E02B35CAB000D4B239 /* CalendarFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFooterView.swift; sourceTree = "<group>"; };
 		FA99F2E22B35CABE00D4B239 /* CalendarFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarFooterView.xib; sourceTree = "<group>"; };
 		FA99F2E52B3C389F00D4B239 /* PasswordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListViewController.swift; sourceTree = "<group>"; };
@@ -472,7 +470,6 @@
 		A50F58B62CB6D39A00AB3166 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A53836B62CBC6925005BE39C /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A55234102CC16D2900CBE265 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
-		A55235A02CC2E5F600CBE265 /* Header */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Header; sourceTree = "<group>"; };
 		A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ActionAndCancelToolbar; sourceTree = "<group>"; };
 		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
@@ -528,7 +525,6 @@
 				A53ED8E52CCBEA5000565625 /* NoNumberContacts */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */,
-				A55235A02CC2E5F600CBE265 /* Header */,
 				7532F8622AE29711007469EA /* NoNameContacts */,
 				7532F8612AE29707007469EA /* DuplicateNameContacts */,
 				7532F85E2AE290AD007469EA /* Menu */,
@@ -1305,7 +1301,6 @@
 			isa = PBXGroup;
 			children = (
 				FA99F2DC2B35C6AF00D4B239 /* CalendarTableViewCell.swift */,
-				FA99F2DD2B35C6AF00D4B239 /* CalendarTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1405,7 +1400,6 @@
 				A50F58B62CB6D39A00AB3166 /* Components */,
 				A53836B62CBC6925005BE39C /* Components */,
 				A55234102CC16D2900CBE265 /* Components */,
-				A55235A02CC2E5F600CBE265 /* Header */,
 				A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
@@ -1492,7 +1486,6 @@
 				75D3FC8E2A606FF500F351A3 /* SF-Pro-Display-Thin.otf in Resources */,
 				FA3987A52B30599C0096F335 /* Search.storyboard in Resources */,
 				FA99F2EE2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.xib in Resources */,
-				FA99F2DF2B35C6AF00D4B239 /* CalendarTableViewCell.xib in Resources */,
 				75D3FC942A606FF500F351A3 /* SF-Pro-Display-Semibold.otf in Resources */,
 				756866DB2AD1D3A3008DBF7C /* PhoneInfo.storyboard in Resources */,
 				FA3987AE2B30599C0096F335 /* RegularAssets.storyboard in Resources */,

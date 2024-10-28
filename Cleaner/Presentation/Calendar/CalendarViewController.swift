@@ -12,14 +12,10 @@ final class CalendarViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var unresolvedEventsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedEventsTableView: UITableView!
-    //    
-//    @IBOutlet weak var selectAllLabel: UILabel!
-//    @IBOutlet weak var checkMarkImage: UIImageView!
-//    @IBOutlet weak var deleteButton: UIButton!
-    var events: [Event] = [] {
+
+    private lazy var events: [Event] = [] {
         didSet {
             unresolvedEventsCount.bind(text: "\(events.count) event\(events.count == 1 ? "" : "s")")
-            updateSelectedCountLabel()
             unresolvedEventsTableView.reloadData()
         }
     }
@@ -29,47 +25,11 @@ final class CalendarViewController: UIViewController {
             unresolvedEventsTableView.reloadData()
         }
     }
-//    @IBOutlet weak var selectAllStackView: UIStackView!
-//    @IBOutlet weak var selectedCounterLabel: UILabel!
-//    @IBOutlet weak var backView: UIView!
-//    @IBOutlet weak var placeholderView: UIView!
-//    @IBOutlet weak var deleteLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         addGestureRecognizers()
-//        fetchEvents()/////
-//        tableView.register(cellType: ImageTitleSubtitleTableViewCell.self)
-//        CalendarService.shared.requestAccess { granted in
-//             if granted {
-//                 self.fetchEvents()
-//             } else {
-//                 
-//             }
-//        }
-//        self.tableView.register(cellType: CalendarTableViewCell.self)
-//        registerCustomHeaderView()
-//        
-//        let dummyViewHeight = CGFloat(40)
-//        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
-//        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
-//        self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: +dummyViewHeight, right: 0)
-//        
-//        backView.addTapGestureRecognizer {
-//            self.navigationController?.popViewController(animated: true)
-//        }
-//        
-//        selectAllStackView.addTapGestureRecognizer {
-//            let allSelected = self.events.allSatisfy { $0.isSelected }
-//            for index in self.events.indices {
-//                self.events[index].isSelected = !allSelected
-//            }
-//        }
-        
-   //     if events.allSatisfy({ $0.isSelected == false }) {
-  //          deleteButton.setBackgroundImage(Asset.notActiveButtonBG.image, for: .normal)
- //       }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,18 +41,6 @@ final class CalendarViewController: UIViewController {
     
     private func setupUnresolvedEventsTableView() {
         unresolvedEventsTableView.register(cellType: UnresolvedItemCell.self)
-    }
-    
-    private func updateSelectedCountLabel() {
-//        let selectedCount = events.filter { $0.isSelected }.count
-//        selectedCounterLabel.text = "Selected: \(selectedCount)"
-//        if selectedCount == events.count {
-//            selectAllLabel.text = "Deselect all"
-//            checkMarkImage.image = Asset.selectedCheckBox.image
-//        } else {
-//            selectAllLabel.text = "Select all"
-//            checkMarkImage.image = Asset.emptyCheckBox.image
-//        }
     }
     
     private func reloadData() {
@@ -159,17 +107,6 @@ final class CalendarViewController: UIViewController {
         return dateFormatter.string(from: date)
     }
     
-    func registerCustomHeaderView() {
-//        tableView.register(
-//            UINib(nibName: "CalendarHeaderView", bundle: nil),
-//            forHeaderFooterViewReuseIdentifier: "CalendarHeaderView"
-//        )
-//        tableView.register(
-//            UINib(nibName: "CalendarFooterView", bundle: nil),
-//            forHeaderFooterViewReuseIdentifier: "CalendarFooterView"
-//        )
-      }
-    
     func selectSection(section: Int) {
         let selectedEventsInSection = events.filter { $0.year == sortedUniqueYears()[section] }
         let allSelectedInSection = selectedEventsInSection.allSatisfy { $0.isSelected }
@@ -197,14 +134,13 @@ extension CalendarViewController: ViewControllerProtocol {
 }
 
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return sortedUniqueYears().count
-//    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        sortedUniqueYears().count
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let year = sortedUniqueYears()[section]
-//        return events.filter { $0.year == year }.count
-        events.count
+        let year = sortedUniqueYears()[section]
+        return events.filter { $0.year == year }.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -234,38 +170,19 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
         88
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CalendarHeaderView") as? CalendarHeaderView
-//        headerView?.section = section
-//        let year = sortedUniqueYears()[section]
-//        let eventsForYear = events.filter { $0.year == year }
-//        headerView?.events = self.events.filter { $0.year == year }
-//        let eventCount = eventsForYear.count
-//        headerView?.yearLabel.text = "\(year): \(eventCount)"
-//        headerView?.checkboxImageView.addTapGestureRecognizer {
-//            self.selectSection(section: section)
-//            headerView?.events = self.events.filter { $0.year == year }
-//            headerView?.select()
-//        }
-//        headerView?.setup()
-//        return headerView
-//    }
-//    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CalendarFooterView") as? CalendarFooterView
-//        return headerView
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UnresolvedItemCellHeader()
+        header.firstLabel.bind(text: "\(sortedUniqueYears()[section])")
+        let year = sortedUniqueYears()[section]
+        let eventsForYear = events.filter { $0.year == year }.count
+        header.secondLabel.bind(text: "\(eventsForYear) event\(eventsForYear == 1 ? "" : "s")")
+        header.secondLabel.isHidden = false
+        return header
+    }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let selectedIndex = indexForEvent(at: indexPath)
-//        events[selectedIndex].isSelected.toggle()
-//    }
-    
-//    func indexForEvent(at indexPath: IndexPath) -> Int {
-//        let rowsInPreviousSections = indexPath.section > 0 ? (0..<indexPath.section).reduce(0) { $0 + tableView.numberOfRows(inSection: $1) } : 0
-//        let index = rowsInPreviousSections + indexPath.row
-//        return index
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        34
+    }
 }
 
 extension CalendarViewController: UnresolvedItemCellProtocol {

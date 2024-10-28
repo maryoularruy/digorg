@@ -5,20 +5,7 @@
 //  Created by Alex on 22.12.2023.
 //
 
-import Reusable
-import UIKit
-
-class CalendarTableViewCell: UITableViewCell, NibReusable {
-    @IBOutlet weak var checkMarkImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var calendarLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-}
+import Foundation
 
 struct Event: Equatable {
     var title: String

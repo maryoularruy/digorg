@@ -11,7 +11,8 @@ final class UnresolvedItemCellHeader: UIView {
     private let nibName = "UnresolvedItemCellHeader"
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var unresolvedItemsInSection: Regular15LabelStyle!
+    @IBOutlet weak var firstLabel: Regular15LabelStyle!
+    @IBOutlet weak var secondLabel: Regular15LabelStyle!
     @IBOutlet weak var selectAllButton: SelectionTransparentButtonStyle!
     
     override init(frame: CGRect) {
@@ -26,6 +27,7 @@ final class UnresolvedItemCellHeader: UIView {
     
     private func setup() {
         Bundle.main.loadNibNamed(nibName, owner: self)
+        secondLabel.setGreyTextColor()
         addSubview(contentView)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]

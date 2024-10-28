@@ -11,8 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UnresolvedItemCellHeader" customModule="Cleaner" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="2q2-CS-a0x"/>
+                <outlet property="firstLabel" destination="QTf-kn-mGo" id="gvV-lP-Q1p"/>
+                <outlet property="secondLabel" destination="4gd-nR-eVw" id="rE6-Ty-jhC"/>
                 <outlet property="selectAllButton" destination="NsW-ON-Fmq" id="idh-Cp-VQe"/>
-                <outlet property="unresolvedItemsInSection" destination="QTf-kn-mGo" id="gvV-lP-Q1p"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,13 +32,21 @@
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                 </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gd-nR-eVw" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="50" y="0.0" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="QTf-kn-mGo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1Sc-Zq-giY"/>
+                <constraint firstItem="4gd-nR-eVw" firstAttribute="leading" secondItem="QTf-kn-mGo" secondAttribute="trailing" constant="8" id="BKW-PR-zg7"/>
                 <constraint firstItem="NsW-ON-Fmq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LOf-xx-iwY"/>
                 <constraint firstAttribute="trailing" secondItem="NsW-ON-Fmq" secondAttribute="trailing" id="YzS-Wz-PZd"/>
+                <constraint firstItem="4gd-nR-eVw" firstAttribute="centerY" secondItem="QTf-kn-mGo" secondAttribute="centerY" id="ZAH-Yz-2Y7"/>
                 <constraint firstItem="QTf-kn-mGo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dfl-KI-5g9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

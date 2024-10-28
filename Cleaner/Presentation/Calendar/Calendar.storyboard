@@ -4,8 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -45,7 +45,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9gt-HG-bbw">
-                                <rect key="frame" x="16" y="197" width="361" height="621"/>
+                                <rect key="frame" x="16" y="181" width="361" height="637"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -55,7 +55,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="White"/>
                         <constraints>
                             <constraint firstItem="a4u-lf-rmw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="Hsk-yf-e2i"/>
                             <constraint firstItem="9gt-HG-bbw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="MKA-go-aXn"/>
@@ -65,7 +65,7 @@
                             <constraint firstItem="a4u-lf-rmw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="StY-y7-ShJ"/>
                             <constraint firstItem="SGM-jc-cII" firstAttribute="top" secondItem="76u-j9-agc" secondAttribute="bottom" constant="6" id="T68-uN-lMh"/>
                             <constraint firstItem="76u-j9-agc" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="16" id="agN-zD-QdB"/>
-                            <constraint firstItem="9gt-HG-bbw" firstAttribute="top" secondItem="SGM-jc-cII" secondAttribute="bottom" constant="16" id="asa-Ne-emy"/>
+                            <constraint firstItem="9gt-HG-bbw" firstAttribute="top" secondItem="SGM-jc-cII" secondAttribute="bottom" id="asa-Ne-emy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9gt-HG-bbw" secondAttribute="trailing" constant="16" id="gC6-Rg-FRQ"/>
                         </constraints>
                     </view>
@@ -82,8 +82,8 @@
     </scenes>
     <resources>
         <image name="ArrowBackIcon" width="64" height="64"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="White">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>
