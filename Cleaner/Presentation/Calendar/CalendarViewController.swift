@@ -9,51 +9,57 @@ import EventKit
 import UIKit
 
 final class CalendarViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var selectAllLabel: UILabel!
-    @IBOutlet weak var checkMarkImage: UIImageView!
-    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var arrowBackButton: UIView!
+    @IBOutlet weak var unresolvedEventsCount: Regular13LabelStyle!
+    //    @IBOutlet weak var tableView: UITableView!
+//    
+//    @IBOutlet weak var selectAllLabel: UILabel!
+//    @IBOutlet weak var checkMarkImage: UIImageView!
+//    @IBOutlet weak var deleteButton: UIButton!
     var events: [Event] = [] {
         didSet {
+            unresolvedEventsCount.bind(text: "\(events.count) event\(events.count == 1 ? "" : "s")")
             updateSelectedCountLabel()
-            tableView.reloadData()
+//            tableView.reloadData()
         }
     }
-    @IBOutlet weak var selectAllStackView: UIStackView!
-    @IBOutlet weak var selectedCounterLabel: UILabel!
-    @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var placeholderView: UIView!
-    @IBOutlet weak var deleteLabel: UILabel!
+//    @IBOutlet weak var selectAllStackView: UIStackView!
+//    @IBOutlet weak var selectedCounterLabel: UILabel!
+//    @IBOutlet weak var backView: UIView!
+//    @IBOutlet weak var placeholderView: UIView!
+//    @IBOutlet weak var deleteLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(cellType: ImageTitleSubtitleTableViewCell.self)
-        CalendarService.shared.requestAccess { granted in
-             if granted {
-                 self.fetchEvents()
-             } else {
-                 
-             }
-        }
-        self.tableView.register(cellType: CalendarTableViewCell.self)
-        registerCustomHeaderView()
-        
-        let dummyViewHeight = CGFloat(40)
-        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
-        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
-        self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: +dummyViewHeight, right: 0)
-        
-        backView.addTapGestureRecognizer {
-            self.navigationController?.popViewController(animated: true)
-        }
-        
-        selectAllStackView.addTapGestureRecognizer {
-            let allSelected = self.events.allSatisfy { $0.isSelected }
-            for index in self.events.indices {
-                self.events[index].isSelected = !allSelected
-            }
-        }
+        setupUI()
+        addGestureRecognizers()
+//        fetchEvents()/////
+//        tableView.register(cellType: ImageTitleSubtitleTableViewCell.self)
+//        CalendarService.shared.requestAccess { granted in
+//             if granted {
+//                 self.fetchEvents()
+//             } else {
+//                 
+//             }
+//        }
+//        self.tableView.register(cellType: CalendarTableViewCell.self)
+//        registerCustomHeaderView()
+//        
+//        let dummyViewHeight = CGFloat(40)
+//        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
+//        self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
+//        self.tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: +dummyViewHeight, right: 0)
+//        
+//        backView.addTapGestureRecognizer {
+//            self.navigationController?.popViewController(animated: true)
+//        }
+//        
+//        selectAllStackView.addTapGestureRecognizer {
+//            let allSelected = self.events.allSatisfy { $0.isSelected }
+//            for index in self.events.indices {
+//                self.events[index].isSelected = !allSelected
+//            }
+//        }
         
    //     if events.allSatisfy({ $0.isSelected == false }) {
   //          deleteButton.setBackgroundImage(Asset.notActiveButtonBG.image, for: .normal)
@@ -61,18 +67,18 @@ final class CalendarViewController: UIViewController {
     }
     
     private func updateSelectedCountLabel() {
-        let selectedCount = events.filter { $0.isSelected }.count
-        selectedCounterLabel.text = "Selected: \(selectedCount)"
-        if selectedCount == events.count {
-            selectAllLabel.text = "Deselect all"
-            checkMarkImage.image = Asset.selectedCheckBox.image
-        } else {
-            selectAllLabel.text = "Select all"
-            checkMarkImage.image = Asset.emptyCheckBox.image
-        }
+//        let selectedCount = events.filter { $0.isSelected }.count
+//        selectedCounterLabel.text = "Selected: \(selectedCount)"
+//        if selectedCount == events.count {
+//            selectAllLabel.text = "Deselect all"
+//            checkMarkImage.image = Asset.selectedCheckBox.image
+//        } else {
+//            selectAllLabel.text = "Select all"
+//            checkMarkImage.image = Asset.emptyCheckBox.image
+//        }
     }
     
-    func fetchEvents() {
+    private func fetchEvents() {
         CalendarService.shared.fetchEvents { events in
             events.forEach { event in
                 self.events.append(Event(title: event.title, year: self.calendarComponent(event.startDate, .year), isSelected: false, id: event.eventIdentifier, calendar: event.calendar.title, formattedDate: self.formattedDate(event.startDate)))
@@ -95,11 +101,11 @@ final class CalendarViewController: UIViewController {
     
     func showPlaceholder() {
         if events.isEmpty {
-            placeholderView.isHidden = false
-            selectAllLabel.isHidden = true
-            selectAllStackView.isHidden = true
-            deleteButton.isHidden = true
-            selectedCounterLabel.isHidden = true
+//            placeholderView.isHidden = false
+//            selectAllLabel.isHidden = true
+//            selectAllStackView.isHidden = true
+//            deleteButton.isHidden = true
+//            selectedCounterLabel.isHidden = true
         }
     }
     
@@ -130,14 +136,14 @@ final class CalendarViewController: UIViewController {
     }
     
     func registerCustomHeaderView() {
-        tableView.register(
-            UINib(nibName: "CalendarHeaderView", bundle: nil),
-            forHeaderFooterViewReuseIdentifier: "CalendarHeaderView"
-        )
-        tableView.register(
-            UINib(nibName: "CalendarFooterView", bundle: nil),
-            forHeaderFooterViewReuseIdentifier: "CalendarFooterView"
-        )
+//        tableView.register(
+//            UINib(nibName: "CalendarHeaderView", bundle: nil),
+//            forHeaderFooterViewReuseIdentifier: "CalendarHeaderView"
+//        )
+//        tableView.register(
+//            UINib(nibName: "CalendarFooterView", bundle: nil),
+//            forHeaderFooterViewReuseIdentifier: "CalendarFooterView"
+//        )
       }
     
     func selectSection(section: Int) {
@@ -153,6 +159,16 @@ final class CalendarViewController: UIViewController {
     private func sortedUniqueYears() -> [Int] {
         let uniqueYears = Array(Set(events.map { $0.year })).sorted(by: <)
         return uniqueYears
+    }
+}
+
+extension CalendarViewController: ViewControllerProtocol {
+    func setupUI() {}
+    
+    func addGestureRecognizers() {
+        arrowBackButton.addTapGestureRecognizer { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
 }
 
@@ -206,14 +222,14 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedIndex = indexForEvent(at: indexPath)
-        events[selectedIndex].isSelected.toggle()
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let selectedIndex = indexForEvent(at: indexPath)
+//        events[selectedIndex].isSelected.toggle()
+//    }
     
-    func indexForEvent(at indexPath: IndexPath) -> Int {
-        let rowsInPreviousSections = indexPath.section > 0 ? (0..<indexPath.section).reduce(0) { $0 + tableView.numberOfRows(inSection: $1) } : 0
-        let index = rowsInPreviousSections + indexPath.row
-        return index
-    }
+//    func indexForEvent(at indexPath: IndexPath) -> Int {
+//        let rowsInPreviousSections = indexPath.section > 0 ? (0..<indexPath.section).reduce(0) { $0 + tableView.numberOfRows(inSection: $1) } : 0
+//        let index = rowsInPreviousSections + indexPath.row
+//        return index
+//    }
 }
