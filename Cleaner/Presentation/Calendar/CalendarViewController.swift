@@ -1,5 +1,5 @@
 //
-//  CalendarListViewController.swift
+//  CalendarViewController.swift
 //  Cleaner
 //
 //  Created by Alex on 21.12.2023.
@@ -8,7 +8,7 @@
 import EventKit
 import UIKit
 
-class CalendarListViewController: UIViewController {
+final class CalendarViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var selectAllLabel: UILabel!
@@ -74,18 +74,11 @@ class CalendarListViewController: UIViewController {
     
     func fetchEvents() {
         CalendarService.shared.fetchEvents { events in
-            if let events = events {
-                for event in events {
-                    if event.calendar.allowsContentModifications {
-                        self.events.append(Event(title: event.title, year: self.calendarComponent(event.startDate, .year), isSelected: false, id: event.eventIdentifier, calendar: event.calendar.title, formattedDate: self.formattedDate(event.startDate)))
-                    }
-                }
-                self.showPlaceholder()
-               // self.tableView.reloadData()
-            } else {
-                self.showPlaceholder()
-                // Handle error
+            events.forEach { event in
+                self.events.append(Event(title: event.title, year: self.calendarComponent(event.startDate, .year), isSelected: false, id: event.eventIdentifier, calendar: event.calendar.title, formattedDate: self.formattedDate(event.startDate)))
             }
+            self.showPlaceholder()
+            // self.tableView.reloadData()
         }
     }
     
@@ -163,7 +156,7 @@ class CalendarListViewController: UIViewController {
     }
 }
 
-extension CalendarListViewController: UITableViewDataSource, UITableViewDelegate {
+extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sortedUniqueYears().count
     }

@@ -206,8 +206,8 @@
 		FA5914242B31BCFA00371911 /* ImageTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5914222B31BCFA00371911 /* ImageTitleTableViewCell.swift */; };
 		FA5914252B31BCFA00371911 /* ImageTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5914232B31BCFA00371911 /* ImageTitleTableViewCell.xib */; };
 		FA641DDF2B3456DC00F6A466 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DDE2B3456DC00F6A466 /* CalendarService.swift */; };
-		FA641DE12B34574300F6A466 /* CalendarList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA641DE02B34574300F6A466 /* CalendarList.storyboard */; };
-		FA641DE32B34575300F6A466 /* CalendarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DE22B34575300F6A466 /* CalendarListViewController.swift */; };
+		FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA641DE02B34574300F6A466 /* Calendar.storyboard */; };
+		FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DE22B34575300F6A466 /* CalendarViewController.swift */; };
 		FA641DF72B357C7A00F6A466 /* UIImageView+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */; };
 		FA641DF82B357C7A00F6A466 /* NSImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF12B357C7A00F6A466 /* NSImage+SwiftyGif.swift */; };
 		FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */; };
@@ -439,8 +439,8 @@
 		FA5914222B31BCFA00371911 /* ImageTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleTableViewCell.swift; sourceTree = "<group>"; };
 		FA5914232B31BCFA00371911 /* ImageTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTitleTableViewCell.xib; sourceTree = "<group>"; };
 		FA641DDE2B3456DC00F6A466 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
-		FA641DE02B34574300F6A466 /* CalendarList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CalendarList.storyboard; sourceTree = "<group>"; };
-		FA641DE22B34575300F6A466 /* CalendarListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarListViewController.swift; sourceTree = "<group>"; };
+		FA641DE02B34574300F6A466 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
+		FA641DE22B34575300F6A466 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+SwiftyGif.swift"; sourceTree = "<group>"; };
 		FA641DF12B357C7A00F6A466 /* NSImage+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+SwiftyGif.swift"; sourceTree = "<group>"; };
 		FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjcAssociatedWeakObject.swift; sourceTree = "<group>"; };
@@ -1274,8 +1274,8 @@
 				FA99F2DB2B35C69A00D4B239 /* Footer */,
 				FA99F2DA2B35C69500D4B239 /* Cell */,
 				FA99F2D92B35C68C00D4B239 /* Header */,
-				FA641DE02B34574300F6A466 /* CalendarList.storyboard */,
-				FA641DE22B34575300F6A466 /* CalendarListViewController.swift */,
+				FA641DE02B34574300F6A466 /* Calendar.storyboard */,
+				FA641DE22B34575300F6A466 /* CalendarViewController.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -1499,7 +1499,7 @@
 				75D3FC942A606FF500F351A3 /* SF-Pro-Display-Semibold.otf in Resources */,
 				756866DB2AD1D3A3008DBF7C /* PhoneInfo.storyboard in Resources */,
 				FA3987AE2B30599C0096F335 /* RegularAssets.storyboard in Resources */,
-				FA641DE12B34574300F6A466 /* CalendarList.storyboard in Resources */,
+				FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */,
 				FACA30932B3E03230018FA5F /* AppLocker.xib in Resources */,
 				A5BC395D2CBC604E00153FD1 /* PhotoVideoMenu.storyboard in Resources */,
 				A5BC395E2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.xib in Resources */,
@@ -1640,7 +1640,7 @@
 				A552341C2CC17F2000CBE265 /* UILabel+ext.swift in Sources */,
 				A50F58B52CB6D10100AB3166 /* ViewControllerProtocol.swift in Sources */,
 				75D3FC5E2A606BA100F351A3 /* Storyboards.swift in Sources */,
-				FA641DE32B34575300F6A466 /* CalendarListViewController.swift in Sources */,
+				FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */,
 				756866D92AD1D398008DBF7C /* PhoneInfoViewController.swift in Sources */,
 				FA3987FC2B305FA50096F335 /* DKPhotoWebVC.swift in Sources */,
 				7532F8662AE29735007469EA /* NoNameContactsViewController.swift in Sources */,

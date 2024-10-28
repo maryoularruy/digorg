@@ -168,7 +168,9 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     private func openCalendarCleanup() {
-        navigationController?.pushViewController(createSearchVC(with: .calendar), animated: false)
+        let vc = StoryboardScene.Calendar.initialScene.instantiate()
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: false)
     }
     
     private func createSearchVC(with cleanupOption: CleanupOption) -> SearchViewController {

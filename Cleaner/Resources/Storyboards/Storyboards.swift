@@ -8,10 +8,10 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<AdBlockerViewController>(storyboard: AdBlocker.self)
   }
-  internal enum CalendarList: StoryboardType {
-    internal static let storyboardName = "CalendarList"
+  internal enum Calendar: StoryboardType {
+    internal static let storyboardName = "Calendar"
 
-    internal static let initialScene = InitialSceneType<CalendarListViewController>(storyboard: CalendarList.self)
+    internal static let initialScene = InitialSceneType<CalendarViewController>(storyboard: Calendar.self)
   }
   internal enum Connection: StoryboardType {
     internal static let storyboardName = "Connection"

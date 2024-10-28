@@ -6,11 +6,12 @@
 //
 
 import EventKit
-import Foundation
 
-class CalendarService {
+final class CalendarService {
     static let shared = CalendarService()
+    
     private let eventStore = EKEventStore()
+    private lazy var twoYears = TimeInterval(63113852)
 
     func requestAccess(completion: @escaping (Bool) -> Void) {
         if #available(iOS 17.0, *) {
@@ -28,13 +29,10 @@ class CalendarService {
         }
     }
 
-    func fetchEvents(completion: @escaping ([EKEvent]?) -> Void) {
-        let calendars = eventStore.calendars(for: .event)
-
-        let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date().addingTimeInterval(2 * 365 * 24 * 60 * 60), calendars: calendars)
-
-        let events = eventStore.events(matching: predicate)
-
-        completion(events)
+    func fetchEvents(completion: @escaping ([EKEvent]) -> Void) {
+        completion(eventStore.events(matching: eventStore
+            .predicateForEvents(withStart: Date(timeIntervalSinceNow: -twoYears),
+                                end: Date(timeIntervalSinceNow: twoYears),
+                                calendars: eventStore.calendars(for: .event).filter { $0.allowsContentModifications } )))
     }
 }
