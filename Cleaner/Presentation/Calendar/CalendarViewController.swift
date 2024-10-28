@@ -11,8 +11,8 @@ import UIKit
 final class CalendarViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var unresolvedEventsCount: Regular13LabelStyle!
-    //    @IBOutlet weak var tableView: UITableView!
-//    
+    @IBOutlet weak var unresolvedEventsTableView: UITableView!
+    //    
 //    @IBOutlet weak var selectAllLabel: UILabel!
 //    @IBOutlet weak var checkMarkImage: UIImageView!
 //    @IBOutlet weak var deleteButton: UIButton!
@@ -20,7 +20,13 @@ final class CalendarViewController: UIViewController {
         didSet {
             unresolvedEventsCount.bind(text: "\(events.count) event\(events.count == 1 ? "" : "s")")
             updateSelectedCountLabel()
-//            tableView.reloadData()
+            unresolvedEventsTableView.reloadData()
+        }
+    }
+    
+    private lazy var eventsForDeletion = [Event]() {
+        didSet {
+            unresolvedEventsTableView.reloadData()
         }
     }
 //    @IBOutlet weak var selectAllStackView: UIStackView!
@@ -66,6 +72,17 @@ final class CalendarViewController: UIViewController {
  //       }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        reloadData()
+        setupUnresolvedEventsTableView()
+    }
+    
+    private func setupUnresolvedEventsTableView() {
+        unresolvedEventsTableView.register(cellType: UnresolvedItemCell.self)
+    }
+    
     private func updateSelectedCountLabel() {
 //        let selectedCount = events.filter { $0.isSelected }.count
 //        selectedCounterLabel.text = "Selected: \(selectedCount)"
@@ -76,6 +93,13 @@ final class CalendarViewController: UIViewController {
 //            selectAllLabel.text = "Select all"
 //            checkMarkImage.image = Asset.emptyCheckBox.image
 //        }
+    }
+    
+    private func reloadData() {
+        CalendarService.shared.requestAccess { [weak self] granted in
+            if granted { self?.fetchEvents() }
+            else { }
+        }
     }
     
     private func fetchEvents() {
@@ -173,54 +197,64 @@ extension CalendarViewController: ViewControllerProtocol {
 }
 
 extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sortedUniqueYears().count
-    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return sortedUniqueYears().count
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let year = sortedUniqueYears()[section]
-        return events.filter { $0.year == year }.count
+//        let year = sortedUniqueYears()[section]
+//        return events.filter { $0.year == year }.count
+        events.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: CalendarTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.selectionStyle = .none
+        let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
+        cell.delegate = self
         
         let year = sortedUniqueYears()[indexPath.section]
         let eventsForYear = events.filter { $0.year == year }
         let event = eventsForYear[indexPath.row]
         
-        cell.titleLabel?.text = event.title
-        cell.calendarLabel.text = event.calendar
-        cell.dateLabel.text = event.formattedDate
+        cell.bind(event: event, (indexPath.section, indexPath.row))
         
-        let checkmarkImage = event.isSelected ? Asset.selectedCheckBox.image : Asset.emptyCheckBox.image
-        cell.checkMarkImageView?.image = checkmarkImage
+        cell.content.backgroundColor = eventsForDeletion.contains(events[indexPath.row]) ? .lightBlueBackground : .white
+        
+//        cell.titleLabel?.text = event.title
+//        cell.calendarLabel.text = event.calendar
+//        cell.dateLabel.text = event.formattedDate
+//        
+//        let checkmarkImage = event.isSelected ? Asset.selectedCheckBox.image : Asset.emptyCheckBox.image
+//        cell.checkMarkImageView?.image = checkmarkImage
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CalendarHeaderView") as? CalendarHeaderView
-        headerView?.section = section
-        let year = sortedUniqueYears()[section]
-        let eventsForYear = events.filter { $0.year == year }
-        headerView?.events = self.events.filter { $0.year == year }
-        let eventCount = eventsForYear.count
-        headerView?.yearLabel.text = "\(year): \(eventCount)"
-        headerView?.checkboxImageView.addTapGestureRecognizer {
-            self.selectSection(section: section)
-            headerView?.events = self.events.filter { $0.year == year }
-            headerView?.select()
-        }
-        headerView?.setup()
-        return headerView
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        //72 height of the cell + 8 top&bottom insets
+        88
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CalendarFooterView") as? CalendarFooterView
-        return headerView
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CalendarHeaderView") as? CalendarHeaderView
+//        headerView?.section = section
+//        let year = sortedUniqueYears()[section]
+//        let eventsForYear = events.filter { $0.year == year }
+//        headerView?.events = self.events.filter { $0.year == year }
+//        let eventCount = eventsForYear.count
+//        headerView?.yearLabel.text = "\(year): \(eventCount)"
+//        headerView?.checkboxImageView.addTapGestureRecognizer {
+//            self.selectSection(section: section)
+//            headerView?.events = self.events.filter { $0.year == year }
+//            headerView?.select()
+//        }
+//        headerView?.setup()
+//        return headerView
+//    }
+//    
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CalendarFooterView") as? CalendarFooterView
+//        return headerView
+//    }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let selectedIndex = indexForEvent(at: indexPath)
@@ -232,4 +266,14 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
 //        let index = rowsInPreviousSections + indexPath.row
 //        return index
 //    }
+}
+
+extension CalendarViewController: UnresolvedItemCellProtocol {
+    func tapOnCheckBox(_ position: (Int, Int)) {
+         
+    }
+    
+    func tapOnCell(_ position: (Int, Int)) {
+         
+    }
 }

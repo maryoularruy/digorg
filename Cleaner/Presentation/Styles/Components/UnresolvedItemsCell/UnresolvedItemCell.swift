@@ -41,6 +41,7 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         setup()
     }
     
+    //MARK: -Contact bindings
     func bind(contact: CNContact, _ position: (Int, Int), type: UnresolvedItemCellType = .grouped) {
         self.type = type
         self.position = position
@@ -67,6 +68,15 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         secondLabel.text = "No phone number"
     }
     
+//    MARK: -Calendar bindings
+    func bind(event: Event, _ position: (Int, Int), type: UnresolvedItemCellType = .single) {
+        self.type = type
+        self.position = position
+        firstLabel.text = event.title
+        secondLabel.text = event.formattedDate
+    }
+    
+//    MARK: -Setup cell's UI
     func setupFirstCellInSection() {
         content.layer.cornerRadius = 20
         content.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

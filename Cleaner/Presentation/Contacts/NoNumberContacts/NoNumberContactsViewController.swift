@@ -31,7 +31,7 @@ final class NoNumberContactsViewController: UIViewController {
         }
     }
     
-    private var contactsForDeletion = Set<CNContact>() {
+    private lazy var contactsForDeletion = Set<CNContact>() {
         didSet {
             selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
             toolbar.toolbarButton.bind(text: "Delete\(contactsForDeletion.isEmpty ? "" : " Selected (\(contactsForDeletion.count))")")

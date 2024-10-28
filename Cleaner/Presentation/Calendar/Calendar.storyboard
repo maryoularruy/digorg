@@ -44,21 +44,35 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9gt-HG-bbw">
+                                <rect key="frame" x="16" y="197" width="361" height="621"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="fTQ-Hw-Peg"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="hc1-No-QtC"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="a4u-lf-rmw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="Hsk-yf-e2i"/>
+                            <constraint firstItem="9gt-HG-bbw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="MKA-go-aXn"/>
                             <constraint firstItem="76u-j9-agc" firstAttribute="top" secondItem="a4u-lf-rmw" secondAttribute="bottom" constant="14" id="NbU-ve-Zm1"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="9gt-HG-bbw" secondAttribute="bottom" id="RKz-A5-DSa"/>
                             <constraint firstItem="SGM-jc-cII" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="SiO-kK-mlk"/>
                             <constraint firstItem="a4u-lf-rmw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="StY-y7-ShJ"/>
                             <constraint firstItem="SGM-jc-cII" firstAttribute="top" secondItem="76u-j9-agc" secondAttribute="bottom" constant="6" id="T68-uN-lMh"/>
                             <constraint firstItem="76u-j9-agc" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="16" id="agN-zD-QdB"/>
+                            <constraint firstItem="9gt-HG-bbw" firstAttribute="top" secondItem="SGM-jc-cII" secondAttribute="bottom" constant="16" id="asa-Ne-emy"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9gt-HG-bbw" secondAttribute="trailing" constant="16" id="gC6-Rg-FRQ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="a4u-lf-rmw" id="cFg-Hx-fU0"/>
                         <outlet property="unresolvedEventsCount" destination="SGM-jc-cII" id="pWN-79-ZmB"/>
+                        <outlet property="unresolvedEventsTableView" destination="9gt-HG-bbw" id="uGE-uF-CHO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
