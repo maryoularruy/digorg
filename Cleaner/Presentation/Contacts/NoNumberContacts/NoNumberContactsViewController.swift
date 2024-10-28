@@ -10,6 +10,7 @@ import BottomPopup
 
 final class NoNumberContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
+    @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
     @IBOutlet weak var toolbar: ActionToolbar!
@@ -17,10 +18,12 @@ final class NoNumberContactsViewController: UIViewController {
     private var contacts: [CNContact] = [] {
         didSet {
             unresolvedContactsCount.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+            selectionButton.isClickable = !contacts.isEmpty
             unresolvedContactsTableView.reloadData()
             if contacts.isEmpty {
                 setupEmptyState()
             } else {
+                selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
                 toolbar.toolbarButton.bind(text: "Delete")
                 toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
                 emptyStateView = nil
@@ -30,6 +33,7 @@ final class NoNumberContactsViewController: UIViewController {
     
     private var contactsForDeletion = Set<CNContact>() {
         didSet {
+            selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
             toolbar.toolbarButton.bind(text: "Delete\(contactsForDeletion.isEmpty ? "" : " Selected (\(contactsForDeletion.count))")")
             toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
             unresolvedContactsTableView.reloadData()
@@ -49,6 +53,14 @@ final class NoNumberContactsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         reloadData()
         setupUnresolvedContactsTableView()
+    }
+    
+    @IBAction func tapOnSelectionButton(_ sender: Any) {
+        if contactsForDeletion.count == contacts.count {
+            contactsForDeletion.removeAll()
+        } else {
+            contactsForDeletion.insert(contacts)
+        }
     }
     
     private func setupUnresolvedContactsTableView() {
@@ -71,6 +83,7 @@ final class NoNumberContactsViewController: UIViewController {
     }
     
     private func setupEmptyState() {
+        selectionButton.bind(text: .selectAll)
         toolbar.toolbarButton.bind(text: "Back")
         toolbar.toolbarButton.isClickable = true
         emptyStateView = view.createEmptyState(type: .noNameContacts)

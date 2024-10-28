@@ -59,6 +59,14 @@
                                     <constraint firstAttribute="height" constant="100" id="awQ-kf-Qc4"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7E1-Ni-Hku" customClass="SelectionButtonStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="282" y="74" width="95" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Select All"/>
+                                <connections>
+                                    <action selector="tapOnSelectionButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="dxn-79-c1N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
@@ -72,14 +80,17 @@
                             <constraint firstItem="pSB-ON-Evf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="KUC-c6-gCu"/>
                             <constraint firstItem="XVe-AF-h1v" firstAttribute="top" secondItem="pSB-ON-Evf" secondAttribute="bottom" constant="14" id="LJe-pu-Q9I"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hTh-ba-8lv" secondAttribute="bottom" id="N2C-VM-EpB"/>
+                            <constraint firstItem="7E1-Ni-Hku" firstAttribute="centerY" secondItem="pSB-ON-Evf" secondAttribute="centerY" id="TSc-CZ-qC8"/>
                             <constraint firstItem="hTh-ba-8lv" firstAttribute="top" secondItem="PLp-GV-qcd" secondAttribute="bottom" constant="16" id="TpH-1O-cwE"/>
                             <constraint firstItem="XVe-AF-h1v" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="dOp-bT-pcw"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7E1-Ni-Hku" secondAttribute="trailing" constant="16" id="kKU-6z-OVr"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="QHa-7A-EDr" secondAttribute="trailing" id="xWi-qM-7Qv"/>
                             <constraint firstItem="PLp-GV-qcd" firstAttribute="top" secondItem="XVe-AF-h1v" secondAttribute="bottom" constant="6" id="zvO-Yi-Twi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="pSB-ON-Evf" id="BDs-QF-wqc"/>
+                        <outlet property="selectionButton" destination="7E1-Ni-Hku" id="yHb-Ue-Zda"/>
                         <outlet property="toolbar" destination="QHa-7A-EDr" id="zIK-XW-G9Q"/>
                         <outlet property="unresolvedContactsCount" destination="PLp-GV-qcd" id="7Og-1U-9rr"/>
                         <outlet property="unresolvedContactsTableView" destination="hTh-ba-8lv" id="HuG-kV-ME1"/>
