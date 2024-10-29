@@ -66,6 +66,8 @@
 		75FC42222AD2A0C5008F3E3A /* TutorialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */; };
 		A50F58B52CB6D10100AB3166 /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */; };
 		A50F58C42CB7B43400AB3166 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58C32CB7B43400AB3166 /* UIColor.swift */; };
+		A51353D12CD156BC00656965 /* Tools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51353D02CD156BC00656965 /* Tools.storyboard */; };
+		A51353D32CD156C500656965 /* ToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51353D22CD156C500656965 /* ToolsViewController.swift */; };
 		A53836AB2CBC68C2005BE39C /* CleanupOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53836A02CBC68C2005BE39C /* CleanupOption.swift */; };
 		A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53836CF2CBEC6DE005BE39C /* Mode.swift */; };
 		A53ED8E72CCBEA6700565625 /* NoNumberContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A53ED8E62CCBEA6700565625 /* NoNumberContacts.storyboard */; };
@@ -287,6 +289,8 @@
 		75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialCell.xib; sourceTree = "<group>"; };
 		A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		A50F58C32CB7B43400AB3166 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		A51353D02CD156BC00656965 /* Tools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tools.storyboard; sourceTree = "<group>"; };
+		A51353D22CD156C500656965 /* ToolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsViewController.swift; sourceTree = "<group>"; };
 		A53836A02CBC68C2005BE39C /* CleanupOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanupOption.swift; sourceTree = "<group>"; };
 		A53836CF2CBEC6DE005BE39C /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		A53ED8E62CCBEA6700565625 /* NoNumberContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NoNumberContacts.storyboard; sourceTree = "<group>"; };
@@ -708,6 +712,7 @@
 		75D3FC6C2A606C0600F351A3 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				A51353CF2CD1567600656965 /* Tools */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
 				FA99F2E42B3C381F00D4B239 /* Password */,
 				FA641DDD2B34564200F6A466 /* Calendar */,
@@ -812,6 +817,15 @@
 				FA53586C2B3C4D6A0026FDC2 /* DBService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		A51353CF2CD1567600656965 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				A51353D02CD156BC00656965 /* Tools.storyboard */,
+				A51353D22CD156C500656965 /* ToolsViewController.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		A53ED8E52CCBEA5000565625 /* NoNumberContacts */ = {
@@ -1479,6 +1493,7 @@
 				75D3FC402A6069B000F351A3 /* Assets.xcassets in Resources */,
 				75D3FC912A606FF500F351A3 /* SF-Pro-Display-Bold.otf in Resources */,
 				FA3987252B303A540096F335 /* AdBlocker.storyboard in Resources */,
+				A51353D12CD156BC00656965 /* Tools.storyboard in Resources */,
 				FA3988042B305FA50096F335 /* DKPhotoGallery.strings in Resources */,
 				FA5914142B31A57800371911 /* Tutorials.storyboard in Resources */,
 				756866CA2ACC08E9008DBF7C /* CardCell.xib in Resources */,
@@ -1632,6 +1647,7 @@
 				FA641DDF2B3456DC00F6A466 /* CalendarService.swift in Sources */,
 				7504C24C2AD44407005FB398 /* PhoneInfoService.swift in Sources */,
 				FA3988442B30602A0096F335 /* dprint.swift in Sources */,
+				A51353D32CD156C500656965 /* ToolsViewController.swift in Sources */,
 				FA39875B2B3055510096F335 /* ArraySection.swift in Sources */,
 				A55235982CC27B9300CBE265 /* ContactsInfoType.swift in Sources */,
 				FA3987EE2B305FA50096F335 /* DKPhotoGalleryTransitionPresent.swift in Sources */,

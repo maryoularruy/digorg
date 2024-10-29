@@ -162,17 +162,29 @@
             </objects>
             <point key="canvasLocation" x="1043.5114503816794" y="3.5211267605633805"/>
         </scene>
+        <!--Tools-->
+        <scene sceneID="Zq9-GF-oV2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Tools" id="pC4-46-EV8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="ToolsNormalTabBarItem" selectedImage="ToolsSelectedTabBarItem" id="vD8-kM-lRs"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iNl-3V-Ztv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1211" y="594"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="JTA-X7-DTO">
             <objects>
                 <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="tKG-JH-HSs" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ALK-Cq-UaW">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="atv-mq-zYo" kind="relationship" relationship="viewControllers" id="pSg-ra-b0P"/>
+                        <segue destination="pC4-46-EV8" kind="relationship" relationship="viewControllers" id="9Id-M4-0O3"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Jm-QO-R96" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -183,6 +195,8 @@
     <resources>
         <image name="HomeNormalTabBarItem" width="53" height="42"/>
         <image name="HomeSelectedTabBarItem" width="53" height="42"/>
+        <image name="ToolsNormalTabBarItem" width="53" height="42"/>
+        <image name="ToolsSelectedTabBarItem" width="53" height="42"/>
         <namedColor name="Black">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
