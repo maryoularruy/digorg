@@ -8,5 +8,9 @@
 import UIKit
 
 final class ToolsViewController: UIViewController {
+    @IBOutlet weak var proImageView: UIImageView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }

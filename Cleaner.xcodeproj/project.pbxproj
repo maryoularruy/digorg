@@ -74,6 +74,7 @@
 		A53ED8E92CCBEA7200565625 /* NoNumberContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53ED8E82CCBEA7200565625 /* NoNumberContactsViewController.swift */; };
 		A53EDA232CD0422700565625 /* EKEventGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EDA222CD0422700565625 /* EKEventGroup.swift */; };
 		A53EDA252CD0429F00565625 /* Date+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EDA242CD0429F00565625 /* Date+ext.swift */; };
+		A54449162CD19C4F001ECA7A /* ToolOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54449152CD19C4F001ECA7A /* ToolOption.swift */; };
 		A552341C2CC17F2000CBE265 /* UILabel+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552341B2CC17F2000CBE265 /* UILabel+ext.swift */; };
 		A55235982CC27B9300CBE265 /* ContactsInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55235972CC27B9300CBE265 /* ContactsInfoType.swift */; };
 		A55CA2612CC904780026D434 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2602CC904780026D434 /* UIImage.swift */; };
@@ -297,6 +298,7 @@
 		A53ED8E82CCBEA7200565625 /* NoNumberContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNumberContactsViewController.swift; sourceTree = "<group>"; };
 		A53EDA222CD0422700565625 /* EKEventGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKEventGroup.swift; sourceTree = "<group>"; };
 		A53EDA242CD0429F00565625 /* Date+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ext.swift"; sourceTree = "<group>"; };
+		A54449152CD19C4F001ECA7A /* ToolOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolOption.swift; sourceTree = "<group>"; };
 		A552341B2CC17F2000CBE265 /* UILabel+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ext.swift"; sourceTree = "<group>"; };
 		A55235972CC27B9300CBE265 /* ContactsInfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsInfoType.swift; sourceTree = "<group>"; };
 		A55CA2602CC904780026D434 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 		A50F58B62CB6D39A00AB3166 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A53836B62CBC6925005BE39C /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A53EDA192CD0417900565625 /* CommonComponents */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CommonComponents; sourceTree = "<group>"; };
+		A54449102CD19943001ECA7A /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A55234102CC16D2900CBE265 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ActionAndCancelToolbar; sourceTree = "<group>"; };
 		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
@@ -598,6 +601,7 @@
 				A53836CF2CBEC6DE005BE39C /* Mode.swift */,
 				A55235972CC27B9300CBE265 /* ContactsInfoType.swift */,
 				A53EDA222CD0422700565625 /* EKEventGroup.swift */,
+				A54449152CD19C4F001ECA7A /* ToolOption.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -822,6 +826,7 @@
 		A51353CF2CD1567600656965 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				A54449102CD19943001ECA7A /* Components */,
 				A51353D02CD156BC00656965 /* Tools.storyboard */,
 				A51353D22CD156C500656965 /* ToolsViewController.swift */,
 			);
@@ -1383,6 +1388,7 @@
 				A50F58B62CB6D39A00AB3166 /* Components */,
 				A53836B62CBC6925005BE39C /* Components */,
 				A53EDA192CD0417900565625 /* CommonComponents */,
+				A54449102CD19943001ECA7A /* Components */,
 				A55234102CC16D2900CBE265 /* Components */,
 				A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
@@ -1631,6 +1637,7 @@
 				FA39872D2B303FB90096F335 /* PaywallViewController.swift in Sources */,
 				FA99F2ED2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.swift in Sources */,
 				FA3987EB2B305FA50096F335 /* DKPhotoPreviewFactory.swift in Sources */,
+				A54449162CD19C4F001ECA7A /* ToolOption.swift in Sources */,
 				FA3988592B30602A0096F335 /* PlayerSeeker.swift in Sources */,
 				FA39884B2B30602A0096F335 /* String.swift in Sources */,
 				A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */,

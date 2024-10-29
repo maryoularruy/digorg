@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,10 +17,39 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cleaner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ref-as-cxc" customClass="Semibold24LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="16" y="66" width="59" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProViewWithText" translatesAutoresizingMaskIntoConstraints="NO" id="L6w-0y-Vxj">
+                                <rect key="frame" x="302" y="63" width="75" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="2sz-fe-ZkN"/>
+                                    <constraint firstAttribute="width" constant="75" id="xsI-ZF-TEz"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q18-Kk-u8I">
+                                <rect key="frame" x="76" y="188" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
+                        <constraints>
+                            <constraint firstItem="Ref-as-cxc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="7" id="Hgg-vF-RH1"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="L6w-0y-Vxj" secondAttribute="trailing" constant="16" id="gka-pR-n2v"/>
+                            <constraint firstItem="Ref-as-cxc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="pi3-4a-1h3"/>
+                            <constraint firstItem="L6w-0y-Vxj" firstAttribute="centerY" secondItem="Ref-as-cxc" secondAttribute="centerY" id="sYD-c3-Xul"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lmt-pG-MVA"/>
+                    <connections>
+                        <outlet property="proImageView" destination="L6w-0y-Vxj" id="Q2m-l3-gD8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -28,12 +58,11 @@
         <!--Navigation Controller-->
         <scene sceneID="dX5-p3-c4k">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CXn-XO-6VF" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="CXn-XO-6VF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="ToolsNormalTabBarItem" selectedImage="ToolsSelectedTabBarItem" id="S88-V9-O00"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vgc-bt-rCV">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -50,10 +79,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ProViewWithText" width="71" height="26"/>
         <image name="ToolsNormalTabBarItem" width="53" height="42"/>
         <image name="ToolsSelectedTabBarItem" width="53" height="42"/>
         <namedColor name="White">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
