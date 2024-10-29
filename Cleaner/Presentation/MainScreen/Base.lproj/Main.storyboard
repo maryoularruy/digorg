@@ -170,7 +170,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iNl-3V-Ztv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1211" y="594"/>
+            <point key="canvasLocation" x="-166" y="507"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="JTA-X7-DTO">
@@ -185,16 +185,29 @@
                     <connections>
                         <segue destination="atv-mq-zYo" kind="relationship" relationship="viewControllers" id="pSg-ra-b0P"/>
                         <segue destination="pC4-46-EV8" kind="relationship" relationship="viewControllers" id="9Id-M4-0O3"/>
+                        <segue destination="99I-j7-zvC" kind="relationship" relationship="viewControllers" id="adh-L8-54J"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Jm-QO-R96" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="116.79389312977099" y="3.5211267605633805"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="dTS-Fk-ez5">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="99I-j7-zvC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="SettingsNormalTabBarItem" selectedImage="SettingsSelectedTabBarItem" id="JdI-k8-J6e"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UT4-Hr-y9T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="302" y="506"/>
+        </scene>
     </scenes>
     <resources>
         <image name="HomeNormalTabBarItem" width="53" height="42"/>
         <image name="HomeSelectedTabBarItem" width="53" height="42"/>
+        <image name="SettingsNormalTabBarItem" width="53" height="42"/>
+        <image name="SettingsSelectedTabBarItem" width="53" height="42"/>
         <image name="ToolsNormalTabBarItem" width="53" height="42"/>
         <image name="ToolsSelectedTabBarItem" width="53" height="42"/>
         <namedColor name="Black">
