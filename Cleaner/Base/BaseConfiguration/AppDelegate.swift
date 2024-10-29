@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                self.window?.makeKeyAndVisible()
 //
 //            } else {
-                let vc = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "TabBarController")
+            let vc = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "TabBarController") as UITabBarController
                 self.window?.rootViewController = vc
                 self.window?.makeKeyAndVisible()
 //            }
