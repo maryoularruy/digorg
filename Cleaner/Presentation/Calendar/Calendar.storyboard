@@ -61,11 +61,18 @@
                                     <action selector="tapOnSelectionButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Cxl-LB-S9D"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCs-h7-4hF" customClass="ActionToolbar" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="752" width="393" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="DzZ-S7-bxV"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="vAN-xT-SCi" secondAttribute="trailing" constant="16" id="AZO-Yc-UVW"/>
+                            <constraint firstItem="iCs-h7-4hF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="GXo-xK-2ry"/>
                             <constraint firstItem="a4u-lf-rmw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="Hsk-yf-e2i"/>
                             <constraint firstItem="9gt-HG-bbw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="MKA-go-aXn"/>
                             <constraint firstItem="76u-j9-agc" firstAttribute="top" secondItem="a4u-lf-rmw" secondAttribute="bottom" constant="14" id="NbU-ve-Zm1"/>
@@ -73,15 +80,18 @@
                             <constraint firstItem="SGM-jc-cII" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="SiO-kK-mlk"/>
                             <constraint firstItem="a4u-lf-rmw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="StY-y7-ShJ"/>
                             <constraint firstItem="SGM-jc-cII" firstAttribute="top" secondItem="76u-j9-agc" secondAttribute="bottom" constant="6" id="T68-uN-lMh"/>
+                            <constraint firstAttribute="bottom" secondItem="iCs-h7-4hF" secondAttribute="bottom" id="UPc-3G-Ibv"/>
                             <constraint firstItem="76u-j9-agc" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="16" id="agN-zD-QdB"/>
                             <constraint firstItem="9gt-HG-bbw" firstAttribute="top" secondItem="SGM-jc-cII" secondAttribute="bottom" id="asa-Ne-emy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9gt-HG-bbw" secondAttribute="trailing" constant="16" id="gC6-Rg-FRQ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="iCs-h7-4hF" secondAttribute="trailing" id="kNM-Gz-uZr"/>
                             <constraint firstItem="vAN-xT-SCi" firstAttribute="centerY" secondItem="a4u-lf-rmw" secondAttribute="centerY" id="neo-Bz-Ggi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="a4u-lf-rmw" id="cFg-Hx-fU0"/>
                         <outlet property="selectionButton" destination="vAN-xT-SCi" id="Hz3-pK-d8u"/>
+                        <outlet property="toolbar" destination="iCs-h7-4hF" id="w9t-o6-KEl"/>
                         <outlet property="unresolvedEventsCount" destination="SGM-jc-cII" id="pWN-79-ZmB"/>
                         <outlet property="unresolvedEventsTableView" destination="9gt-HG-bbw" id="uGE-uF-CHO"/>
                     </connections>

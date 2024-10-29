@@ -9,12 +9,13 @@ import UIKit
 import BottomPopup
 
 enum ConfirmActionType {
-    case mergeContacts, deleteContacts
+    case mergeContacts, deleteContacts, deleteEvents
     
     var title: String {
         switch self {
         case .mergeContacts: "Merge selected contacts?"
         case .deleteContacts: "Delete selected contacts?"
+        case .deleteEvents: "Delete selected events?"
         }
     }
     
@@ -22,6 +23,7 @@ enum ConfirmActionType {
         switch self {
         case .mergeContacts: "This action cannot be restored"
         case .deleteContacts: "This action cannot be restored"
+        case .deleteEvents: "This action cannot be restored"
         }
     }
 }

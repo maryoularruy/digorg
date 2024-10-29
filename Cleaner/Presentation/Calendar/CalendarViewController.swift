@@ -7,13 +7,15 @@
 
 import EventKit
 import UIKit
+import BottomPopup
 
 final class CalendarViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var unresolvedEventsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedEventsTableView: UITableView!
-
+    @IBOutlet weak var toolbar: ActionToolbar!
+    
     private lazy var eventGroups: [EKEventGroup] = [] {
         didSet {
             unresolvedEventsCount.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
@@ -23,6 +25,8 @@ final class CalendarViewController: UIViewController {
                 setupEmptyState()
             } else {
                 selectionButton.bind(text: eventsForDeletion.count == eventsCount ? .deselectAll : .selectAll)
+                toolbar.toolbarButton.bind(text: "Delete")
+                toolbar.toolbarButton.isClickable = !eventsForDeletion.isEmpty
             }
         }
     }
@@ -30,6 +34,8 @@ final class CalendarViewController: UIViewController {
     private lazy var eventsForDeletion = Set<EKEvent>() {
         didSet {
             selectionButton.bind(text: eventsForDeletion.count == eventsCount ? .deselectAll : .selectAll)
+            toolbar.toolbarButton.bind(text: eventsForDeletion.isEmpty ? "Delete 0 Items" : "Delete Items (\(eventsForDeletion.count))")
+            toolbar.toolbarButton.isClickable = !eventsForDeletion.isEmpty
             unresolvedEventsTableView.reloadData()
         }
     }
@@ -94,11 +100,15 @@ final class CalendarViewController: UIViewController {
     
     private func setupEmptyState() {
         selectionButton.bind(text: .selectAll)
+        toolbar.toolbarButton.bind(text: "Back")
+        toolbar.toolbarButton.isClickable = true
     }
 }
 
 extension CalendarViewController: ViewControllerProtocol {
-    func setupUI() {}
+    func setupUI() {
+        toolbar.delegate = self
+    }
     
     func addGestureRecognizers() {
         arrowBackButton.addTapGestureRecognizer { [weak self] in
@@ -160,6 +170,31 @@ extension CalendarViewController: UnresolvedItemCellProtocol {
             eventsForDeletion.remove(event)
         } else {
             eventsForDeletion.insert(event)
+        }
+    }
+}
+
+extension CalendarViewController: ActionToolbarDelegate, BottomPopupDelegate {
+    func tapOnActionButton() {
+        if eventsForDeletion.isEmpty {
+            navigationController?.popViewController(animated: true)
+        } else {
+            guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
+            vc.popupDelegate = self
+            vc.height = 238
+            vc.actionButtonText = "Delete Items (\(eventsForDeletion.count))"
+            vc.type = .deleteContacts
+            DispatchQueue.main.async { [weak self] in
+                self?.present(vc, animated: true)
+            }
+        }
+    }
+    
+    func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
+        if newValue == 100 {
+//            ContactManager.delete(Array(contactsForDeletion))
+            eventsForDeletion.removeAll()
+            reloadData()
         }
     }
 }
