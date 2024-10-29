@@ -129,7 +129,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         34
-    }
+    }    
 }
 
 extension CalendarViewController: UnresolvedItemCellProtocol {

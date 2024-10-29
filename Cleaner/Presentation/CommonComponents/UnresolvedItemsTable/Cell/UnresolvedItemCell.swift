@@ -74,7 +74,7 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         self.type = type
         self.position = position
         firstLabel.text = event.title
-        secondLabel.text = String(describing: event.startDate)
+        secondLabel.text = event.startDate.toYear()
     }
     
 //    MARK: -Setup cell's UI
