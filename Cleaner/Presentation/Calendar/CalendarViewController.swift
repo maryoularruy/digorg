@@ -25,7 +25,7 @@ final class CalendarViewController: UIViewController {
                 setupEmptyState()
             } else {
                 selectionButton.bind(text: eventsForDeletion.count == eventsCount ? .deselectAll : .selectAll)
-                toolbar.toolbarButton.bind(text: "Delete")
+                toolbar.toolbarButton.bind(text: eventsForDeletion.isEmpty ? "Delete 0 Items" : "Delete Items (\(eventsForDeletion.count))")
                 toolbar.toolbarButton.isClickable = !eventsForDeletion.isEmpty
             }
         }
@@ -81,22 +81,6 @@ final class CalendarViewController: UIViewController {
             self?.eventGroups = events
         }
     }
-    
-//    private func deleteEventsFromCalendar(_ events: [Event]) {
-//         let eventStore = EKEventStore()
-//
-//         for event in events {
-//             if let calendarEvent = eventStore.event(withIdentifier: event.id) {
-//                 do {
-//                     print("removed:", event.id)
-//                     try eventStore.remove(calendarEvent, span: .thisEvent)
-//                 } catch {
-//                     print("Error removing event from calendar: \(error.localizedDescription)")
-//                     // Handle error if needed
-//                 }
-//             }
-//         }
-//     }
     
     private func setupEmptyState() {
         selectionButton.bind(text: .selectAll)
@@ -192,9 +176,23 @@ extension CalendarViewController: ActionToolbarDelegate, BottomPopupDelegate {
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
-//            ContactManager.delete(Array(contactsForDeletion))
-            eventsForDeletion.removeAll()
-            reloadData()
+            CalendarService.shared.deleteEvents(Array(eventsForDeletion)) { [weak self] res in
+                guard let self else { return }
+                switch res {
+                case true:
+                    let successView = SuccessView(frame: SuccessView.myFrame)
+                    successView.bind(type: .successDelete)
+                    successView.center = view.center
+                    view.addSubview(successView)
+                    successView.setHidden {
+                        successView.removeFromSuperview()
+                    }
+                    eventsForDeletion.removeAll()
+                    reloadData()
+                    
+                case false: break
+                }
+            }
         }
     }
 }

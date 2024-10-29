@@ -6,12 +6,14 @@
 //
 
 import EventKit
+import OSLog
 
 final class CalendarService {
     static let shared = CalendarService()
     
     private let eventStore = EKEventStore()
     private lazy var twoYears = TimeInterval(63113852)
+    private lazy var logger = Logger()
 
     func requestAccess(completion: @escaping (Bool) -> Void) {
         if #available(iOS 17.0, *) {
@@ -36,6 +38,20 @@ final class CalendarService {
                                 calendars: eventStore.calendars(for: .event).filter { $0.allowsContentModifications } ))
         
         completion(sortByYears(events))
+    }
+    
+    func deleteEvents(_ events: [EKEvent], completion: @escaping (Bool) -> ()) {
+        events.forEach { event in
+            if let event = eventStore.event(withIdentifier: event.eventIdentifier) {
+                do {
+                    try eventStore.remove(event, span: .thisEvent)
+                    completion(true)
+                } catch {
+                    logger.error("\(error.localizedDescription)")
+                    completion(false)
+                }
+            }
+        }
     }
     
     private func sortByYears(_ events: [EKEvent]) -> [EKEventGroup] {

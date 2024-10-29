@@ -180,6 +180,7 @@ extension DuplicateNameContactsViewController: ActionAndCancelToolbarDelegate, B
                 switch result {
                 case true:
                     let successView = SuccessView(frame: SuccessView.myFrame)
+                    successView.bind(type: .successMerge)
                     successView.center = view.center
                     view.addSubview(successView)
                     successView.setHidden {

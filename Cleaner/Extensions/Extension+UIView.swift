@@ -48,7 +48,7 @@ extension UIView {
     
     func setHidden(completion: @escaping (() -> Void)) {
         alpha = 1
-        UIView.animate(withDuration: 0.7, delay: 0.1,
+        UIView.animate(withDuration: 0.7, delay: 0.5,
                        options: .curveEaseOut, animations: { [weak self] in
             self?.alpha = 0
         }, completion: { _ in completion() })
