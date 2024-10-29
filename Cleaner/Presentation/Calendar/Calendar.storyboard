@@ -53,10 +53,19 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="hc1-No-QtC"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAN-xT-SCi" customClass="SelectionButtonStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="282" y="74" width="95" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Select All"/>
+                                <connections>
+                                    <action selector="tapOnSelectionButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Cxl-LB-S9D"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="vAN-xT-SCi" secondAttribute="trailing" constant="16" id="AZO-Yc-UVW"/>
                             <constraint firstItem="a4u-lf-rmw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="Hsk-yf-e2i"/>
                             <constraint firstItem="9gt-HG-bbw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="MKA-go-aXn"/>
                             <constraint firstItem="76u-j9-agc" firstAttribute="top" secondItem="a4u-lf-rmw" secondAttribute="bottom" constant="14" id="NbU-ve-Zm1"/>
@@ -67,10 +76,12 @@
                             <constraint firstItem="76u-j9-agc" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="16" id="agN-zD-QdB"/>
                             <constraint firstItem="9gt-HG-bbw" firstAttribute="top" secondItem="SGM-jc-cII" secondAttribute="bottom" id="asa-Ne-emy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9gt-HG-bbw" secondAttribute="trailing" constant="16" id="gC6-Rg-FRQ"/>
+                            <constraint firstItem="vAN-xT-SCi" firstAttribute="centerY" secondItem="a4u-lf-rmw" secondAttribute="centerY" id="neo-Bz-Ggi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="a4u-lf-rmw" id="cFg-Hx-fU0"/>
+                        <outlet property="selectionButton" destination="vAN-xT-SCi" id="Hz3-pK-d8u"/>
                         <outlet property="unresolvedEventsCount" destination="SGM-jc-cII" id="pWN-79-ZmB"/>
                         <outlet property="unresolvedEventsTableView" destination="9gt-HG-bbw" id="uGE-uF-CHO"/>
                     </connections>

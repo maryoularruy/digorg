@@ -10,21 +10,32 @@ import UIKit
 
 final class CalendarViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
+    @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var unresolvedEventsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedEventsTableView: UITableView!
 
     private lazy var eventGroups: [EKEventGroup] = [] {
         didSet {
-            let eventsCount = eventGroups.reduce(0) { $0 + $1.events.count }
             unresolvedEventsCount.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
+            selectionButton.isClickable = !eventGroups.isEmpty
             unresolvedEventsTableView.reloadData()
+            if eventGroups.isEmpty {
+                setupEmptyState()
+            } else {
+                selectionButton.bind(text: eventsForDeletion.count == eventsCount ? .deselectAll : .selectAll)
+            }
         }
     }
     
     private lazy var eventsForDeletion = Set<EKEvent>() {
         didSet {
+            selectionButton.bind(text: eventsForDeletion.count == eventsCount ? .deselectAll : .selectAll)
             unresolvedEventsTableView.reloadData()
         }
+    }
+    
+    private var eventsCount: Int {
+        eventGroups.reduce(0) { $0 + $1.events.count }
     }
     
     override func viewDidLoad() {
@@ -38,6 +49,14 @@ final class CalendarViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         reloadData()
         setupUnresolvedEventsTableView()
+    }
+    
+    @IBAction func tapOnSelectionButton(_ sender: Any) {
+        if eventsForDeletion.count == eventsCount {
+            eventsForDeletion.removeAll()
+        } else {
+            eventGroups.forEach { eventsForDeletion.insert($0.events) }
+        }
     }
     
     private func setupUnresolvedEventsTableView() {
@@ -73,14 +92,8 @@ final class CalendarViewController: UIViewController {
 //         }
 //     }
     
-    func calendarComponent(_ date: Date, _ component: Calendar.Component) -> Int {
-        return Calendar.current.component(component, from: date)
-    }
-
-    func formattedDate(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM yyyy"
-        return dateFormatter.string(from: date)
+    private func setupEmptyState() {
+        selectionButton.bind(text: .selectAll)
     }
 }
 
@@ -109,6 +122,10 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.bind(event: eventGroups[indexPath.section].events[indexPath.row], (indexPath.section, indexPath.row))
         
+        cell.isUserInteractionEnabled = true
+        
+        cell.checkBoxButton.image = eventsForDeletion.contains(eventGroups[indexPath.section].events[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
+        
         cell.content.backgroundColor = eventsForDeletion.contains(eventGroups[indexPath.section].events[indexPath.row]) ? .lightBlueBackground : .white
         
         return cell
@@ -129,15 +146,20 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         34
-    }    
+    }
 }
 
 extension CalendarViewController: UnresolvedItemCellProtocol {
     func tapOnCheckBox(_ position: (Int, Int)) {
-         
+        tapOnCell(position)
     }
     
     func tapOnCell(_ position: (Int, Int)) {
-         
+        let event = eventGroups[position.0].events[position.1]
+        if eventsForDeletion.contains(event) {
+            eventsForDeletion.remove(event)
+        } else {
+            eventsForDeletion.insert(event)
+        }
     }
 }
