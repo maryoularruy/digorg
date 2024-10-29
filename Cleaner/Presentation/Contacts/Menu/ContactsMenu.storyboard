@@ -13,7 +13,7 @@
         <!--Contacts Menu View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="ContactsMenuViewController" customModule="Cleaner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Y6W-OH-hqX" customClass="ContactsMenuViewController" customModule="Cleaner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,6 +121,7 @@
                             <constraint firstItem="xE2-SA-ps9" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="yW8-hy-xDM"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="arrowBackView" destination="xE2-SA-ps9" id="YMh-La-0Yu"/>
                         <outlet property="duplicateNamesView" destination="iDs-tR-tyo" id="2Yk-nJ-1oj"/>
@@ -144,7 +145,7 @@
             <color red="0.054999999701976776" green="0.016000000759959221" blue="0.11400000005960464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="White">
-            <color red="0.97647058823529409" green="0.97647058823529409" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
