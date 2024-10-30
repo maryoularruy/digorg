@@ -36,8 +36,8 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnR-ZU-J9j" customClass="Regular13LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="72" y="101" width="41.333333333333343" height="701"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnR-ZU-J9j" customClass="Regular13LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="72" y="101" width="265" height="701"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -61,6 +61,7 @@
                 <constraint firstItem="RUL-Sv-ppt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="9" id="edF-Vx-kpq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mnR-ZU-J9j" secondAttribute="bottom" constant="16" id="j0j-oD-dc1"/>
                 <constraint firstAttribute="trailing" secondItem="RUL-Sv-ppt" secondAttribute="trailing" constant="9" id="kbK-P5-rvZ"/>
+                <constraint firstItem="RUL-Sv-ppt" firstAttribute="leading" secondItem="mnR-ZU-J9j" secondAttribute="trailing" constant="5" id="vpR-hB-gA3"/>
                 <constraint firstItem="Cl2-Qf-X2i" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="yIn-EM-sTJ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

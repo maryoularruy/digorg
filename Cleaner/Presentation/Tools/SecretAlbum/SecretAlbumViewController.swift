@@ -30,6 +30,8 @@ final class SecretAlbumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         items = []
+        setupUI()
+        addGestureRecognizers()
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {

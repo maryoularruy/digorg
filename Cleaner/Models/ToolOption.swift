@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum ToolOption: String {
+enum ToolOption: String, CaseIterable {
     case secretAlbum = "Secret Album",
          secretContact = "Secret Contact",
          networkSpeedTest = "Network Speed Test",

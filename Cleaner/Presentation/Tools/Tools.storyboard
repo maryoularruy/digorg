@@ -18,23 +18,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cleaner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ref-as-cxc" customClass="Semibold24LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="66" width="59" height="21"/>
+                                <rect key="frame" x="15.999999999999996" y="66" width="58.666666666666657" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProViewWithText" translatesAutoresizingMaskIntoConstraints="NO" id="L6w-0y-Vxj">
-                                <rect key="frame" x="302" y="63" width="75" height="27"/>
+                                <rect key="frame" x="302" y="62.666666666666657" width="75" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="2sz-fe-ZkN"/>
                                     <constraint firstAttribute="width" constant="75" id="xsI-ZF-TEz"/>
                                 </constraints>
                             </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oy2-lT-tR7">
+                                <rect key="frame" x="0.0" y="99.666666666666686" width="393" height="752.33333333333326"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-DS-pQj">
+                                        <rect key="frame" x="16" y="0.0" width="361" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ay4-DS-pQj" firstAttribute="width" secondItem="Oy2-lT-tR7" secondAttribute="width" constant="-32" id="Gf7-dR-JIa"/>
+                                    <constraint firstAttribute="bottom" secondItem="ay4-DS-pQj" secondAttribute="bottom" id="JaD-NG-HRw"/>
+                                    <constraint firstAttribute="trailing" secondItem="ay4-DS-pQj" secondAttribute="trailing" constant="16" id="kCo-vd-UZi"/>
+                                    <constraint firstItem="ay4-DS-pQj" firstAttribute="leading" secondItem="Oy2-lT-tR7" secondAttribute="leading" constant="16" id="kMa-W3-LoG"/>
+                                    <constraint firstItem="ay4-DS-pQj" firstAttribute="top" secondItem="Oy2-lT-tR7" secondAttribute="top" id="kzc-Wb-st9"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Oy2-lT-tR7" secondAttribute="bottom" id="7JO-o3-LV7"/>
                             <constraint firstItem="Ref-as-cxc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="7" id="Hgg-vF-RH1"/>
+                            <constraint firstItem="Oy2-lT-tR7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="JaV-lb-WJB"/>
+                            <constraint firstItem="Oy2-lT-tR7" firstAttribute="top" secondItem="L6w-0y-Vxj" secondAttribute="bottom" constant="24" id="N2b-tQ-tVK"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Oy2-lT-tR7" secondAttribute="trailing" id="dnl-Uy-Eyb"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="L6w-0y-Vxj" secondAttribute="trailing" constant="16" id="gka-pR-n2v"/>
                             <constraint firstItem="Ref-as-cxc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="pi3-4a-1h3"/>
                             <constraint firstItem="L6w-0y-Vxj" firstAttribute="centerY" secondItem="Ref-as-cxc" secondAttribute="centerY" id="sYD-c3-Xul"/>
@@ -43,6 +64,7 @@
                     <navigationItem key="navigationItem" id="lmt-pG-MVA"/>
                     <connections>
                         <outlet property="proImageView" destination="L6w-0y-Vxj" id="Q2m-l3-gD8"/>
+                        <outlet property="toolOptionsStackView" destination="ay4-DS-pQj" id="ghv-lR-2LJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -93,11 +93,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<PhotoVideoMenuViewController>(storyboard: PhotoVideoMenu.self)
   }
-  internal enum PrivateMenu: StoryboardType {
-    internal static let storyboardName = "PrivateMenu"
-
-    internal static let initialScene = InitialSceneType<PrivateMenuViewController>(storyboard: PrivateMenu.self)
-  }
   internal enum RegularAssets: StoryboardType {
     internal static let storyboardName = "RegularAssets"
 

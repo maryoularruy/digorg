@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ToolOptionViewDelegate: AnyObject {
-    func tapOnOption()
+    func tapOnOption(_ option: ToolOption)
 }
 
 final class ToolOptionView: UIView {
@@ -21,6 +21,7 @@ final class ToolOptionView: UIView {
     @IBOutlet weak var proView: UIImageView!
     
     weak var delegate: ToolOptionViewDelegate?
+    private var type: ToolOption?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,7 +33,8 @@ final class ToolOptionView: UIView {
         setup()
     }
     
-    private func bind(_ option: ToolOption) {
+    func bind(_ option: ToolOption) {
+        type = option
         icon.image = option.icon
         title.bind(text: option.rawValue)
         optionDescription.bind(text: option.description)
@@ -41,14 +43,15 @@ final class ToolOptionView: UIView {
     
     private func setup() {
         Bundle.main.loadNibNamed(nibName, owner: self)
-        layer.cornerRadius = 20
+        contentView.layer.cornerRadius = 20
         addSubview(contentView)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         addShadows()
         
         contentView.addTapGestureRecognizer { [weak self] in
-            self?.delegate?.tapOnOption()
+            guard let self, let type else { return }
+            delegate?.tapOnOption(type)
         }
     }
 }
