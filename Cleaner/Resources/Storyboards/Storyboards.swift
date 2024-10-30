@@ -108,6 +108,11 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<SearchViewController>(storyboard: Search.self)
   }
+  internal enum SecretAlbum: StoryboardType {
+    internal static let storyboardName = "SecretAlbum"
+
+    internal static let initialScene = InitialSceneType<SecretAlbumViewController>(storyboard: SecretAlbum.self)
+  }
   internal enum Settings: StoryboardType {
     internal static let storyboardName = "Settings"
 

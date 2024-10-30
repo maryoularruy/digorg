@@ -471,6 +471,7 @@
 		A53836B62CBC6925005BE39C /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A53EDA192CD0417900565625 /* CommonComponents */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CommonComponents; sourceTree = "<group>"; };
 		A54449102CD19943001ECA7A /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
+		A54449172CD1C434001ECA7A /* SecretAlbum */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SecretAlbum; sourceTree = "<group>"; };
 		A55234102CC16D2900CBE265 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ActionAndCancelToolbar; sourceTree = "<group>"; };
 		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
@@ -826,6 +827,7 @@
 		A51353CF2CD1567600656965 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				A54449172CD1C434001ECA7A /* SecretAlbum */,
 				A54449102CD19943001ECA7A /* Components */,
 				A51353D02CD156BC00656965 /* Tools.storyboard */,
 				A51353D22CD156C500656965 /* ToolsViewController.swift */,
@@ -1389,6 +1391,7 @@
 				A53836B62CBC6925005BE39C /* Components */,
 				A53EDA192CD0417900565625 /* CommonComponents */,
 				A54449102CD19943001ECA7A /* Components */,
+				A54449172CD1C434001ECA7A /* SecretAlbum */,
 				A55234102CC16D2900CBE265 /* Components */,
 				A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
