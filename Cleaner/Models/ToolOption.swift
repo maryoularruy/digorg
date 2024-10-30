@@ -16,11 +16,11 @@ enum ToolOption: String {
     
     var icon: UIImage {
         switch self {
-        case .secretAlbum: UIImage.secretAlbum
-        case .secretContact: UIImage.secretContact
-        case .networkSpeedTest: UIImage.networkSpeedTest
-        case .widgets: UIImage.widgets
-        case .battery: UIImage.battery
+        case .secretAlbum: .secretAlbum
+        case .secretContact: .secretContact
+        case .networkSpeedTest: .networkSpeedTest
+        case .widgets: .widgets
+        case .battery: .battery
         }
     }
     

@@ -192,8 +192,6 @@
 		FA3988602B30602A0096F335 /* VideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39883A2B30602A0096F335 /* VideoSource.swift */; };
 		FA3988682B3060A90096F335 /* Disk in Frameworks */ = {isa = PBXBuildFile; productRef = FA3988672B3060A90096F335 /* Disk */; };
 		FA39886A2B3060F10096F335 /* Extension+Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988692B3060F10096F335 /* Extension+Set.swift */; };
-		FA39886E2B3080950096F335 /* PrivateMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA39886D2B3080950096F335 /* PrivateMenu.storyboard */; };
-		FA3988702B3080B50096F335 /* PrivateMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39886F2B3080B50096F335 /* PrivateMenuViewController.swift */; };
 		FA5358672B3C4C170026FDC2 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FA5358662B3C4C170026FDC2 /* Realm */; };
 		FA5358692B3C4C170026FDC2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA5358682B3C4C170026FDC2 /* RealmSwift */; };
 		FA53586B2B3C4D490026FDC2 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53586A2B3C4D490026FDC2 /* Credentials.swift */; };
@@ -426,8 +424,6 @@
 		FA3988392B30602A0096F335 /* ImageFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFormat.swift; sourceTree = "<group>"; };
 		FA39883A2B30602A0096F335 /* VideoSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSource.swift; sourceTree = "<group>"; };
 		FA3988692B3060F10096F335 /* Extension+Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Set.swift"; sourceTree = "<group>"; };
-		FA39886D2B3080950096F335 /* PrivateMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PrivateMenu.storyboard; sourceTree = "<group>"; };
-		FA39886F2B3080B50096F335 /* PrivateMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateMenuViewController.swift; sourceTree = "<group>"; };
 		FA53586A2B3C4D490026FDC2 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		FA53586C2B3C4D6A0026FDC2 /* DBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService.swift; sourceTree = "<group>"; };
 		FA53586F2B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPasswordViewController.swift; sourceTree = "<group>"; };
@@ -722,7 +718,6 @@
 				FA99F2E42B3C381F00D4B239 /* Password */,
 				FA641DDD2B34564200F6A466 /* Calendar */,
 				FA5914082B31A24E00371911 /* Battery */,
-				FA39886B2B3080490096F335 /* Private */,
 				FA3987302B3048180096F335 /* PhotoVideo */,
 				FA39872B2B303FAC0096F335 /* Paywall */,
 				FA3987262B303DAC0096F335 /* Settings */,
@@ -1206,23 +1201,6 @@
 			path = Media;
 			sourceTree = "<group>";
 		};
-		FA39886B2B3080490096F335 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				FA39886C2B30806D0096F335 /* Menu */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		FA39886C2B30806D0096F335 /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				FA39886D2B3080950096F335 /* PrivateMenu.storyboard */,
-				FA39886F2B3080B50096F335 /* PrivateMenuViewController.swift */,
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
 		FA53586E2B3C5CBD0026FDC2 /* Detailed */ = {
 			isa = PBXGroup;
 			children = (
@@ -1490,7 +1468,6 @@
 				752B10222AE6652800EC0BBA /* ActionView.xib in Resources */,
 				FA59141C2B31B8EE00371911 /* BatteryFirstCollectionViewCell.xib in Resources */,
 				A53ED8E72CCBEA6700565625 /* NoNumberContacts.storyboard in Resources */,
-				FA39886E2B3080950096F335 /* PrivateMenu.storyboard in Resources */,
 				75FC42222AD2A0C5008F3E3A /* TutorialCell.xib in Resources */,
 				7504C2582AD7020D005FB398 /* WiFiProtection.storyboard in Resources */,
 				FA99F2F32B3C3F8E00D4B239 /* PasswordCreation.storyboard in Resources */,
@@ -1614,7 +1591,6 @@
 				FA3987F32B305FA50096F335 /* DKPhotoGalleryItem.swift in Sources */,
 				FA3987582B3055510096F335 /* StagedChangeset.swift in Sources */,
 				FA641DF82B357C7A00F6A466 /* NSImage+SwiftyGif.swift in Sources */,
-				FA3988702B3080B50096F335 /* PrivateMenuViewController.swift in Sources */,
 				FA3988032B305FA50096F335 /* DKPhotoGalleryScrollView.swift in Sources */,
 				756866D42AD1B9FE008DBF7C /* TutorialViewController.swift in Sources */,
 				A552341C2CC17F2000CBE265 /* UILabel+ext.swift in Sources */,
