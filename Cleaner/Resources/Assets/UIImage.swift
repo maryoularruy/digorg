@@ -26,4 +26,7 @@ extension UIImage {
     static var networkSpeedTest = UIImage(resource: .networkSpeedTest)
     static var widgets = UIImage(resource: .widgets)
     static var battery = UIImage(resource: .battery)
+    
+    static var mediaIcon = UIImage(resource: .mediaIcon)
+    static var addButton = UIImage(resource: .addButton)
 }

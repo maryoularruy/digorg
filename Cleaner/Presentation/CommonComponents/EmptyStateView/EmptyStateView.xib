@@ -27,8 +27,8 @@
                         <constraint firstAttribute="width" constant="83" id="T9J-kq-WXl"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgH-hT-Ise" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="140.66666666666666" width="170" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgH-hT-Ise" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="140.66666666666666" width="170" height="20.333333333333343"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>

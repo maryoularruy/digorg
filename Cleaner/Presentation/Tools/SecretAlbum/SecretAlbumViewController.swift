@@ -11,13 +11,37 @@ import Photos
 final class SecretAlbumViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var itemsCountLabel: Regular13LabelStyle!
+    @IBOutlet weak var addButton: UIButton!
     
     private lazy var items: [PHAsset] = [] {
         didSet {
             itemsCountLabel.bind(text: "\(items.count) item\(items.count == 1 ? "" : "s")")
+            addButton.isHidden = !items.isEmpty
+            if items.isEmpty {
+                setupEmptyState()
+            } else {
+                emptyStateView = nil
+            }
         }
     }
     
+    private lazy var emptyStateView: EmptyStateView? = nil
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        items = []
+    }
+    
+    @IBAction func tapOnAddButton(_ sender: Any) {
+        
+    }
+    
+    private func setupEmptyState() {
+        emptyStateView = view.createEmptyState(type: .emptySecretAlbum)
+        if let emptyStateView {
+            view.addSubview(emptyStateView)
+        }
+    }
 }
 
 extension SecretAlbumViewController: ViewControllerProtocol {
