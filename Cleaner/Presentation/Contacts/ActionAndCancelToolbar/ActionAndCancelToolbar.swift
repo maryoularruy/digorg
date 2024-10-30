@@ -17,6 +17,8 @@ final class ActionAndCancelToolbar: UIView {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var actionButton: ActionToolbarButtonStyle!
+    @IBOutlet weak var dismissButton: DismissButtonStyle!
+    
     weak var delegate: ActionAndCancelToolbarDelegate?
     
     override init(frame: CGRect) {

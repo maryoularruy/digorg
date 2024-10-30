@@ -20,6 +20,8 @@ extension UIImage {
     static var emptyCheckBoxBlue = UIImage(resource: .emptyCheckBoxBlue)
     static var selectedCheckBoxBlue = UIImage(resource: .selectedCheckBoxBlue)
     
+    static var stars = UIImage(resource: .stars)
+    
     //MARK: -ToolOption
     static var secretAlbum = UIImage(resource: .secretAlbum)
     static var secretContact = UIImage(resource: .secretContact)

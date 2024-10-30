@@ -9,13 +9,14 @@ import UIKit
 import BottomPopup
 
 enum ConfirmActionType {
-    case mergeContacts, deleteContacts, deleteEvents
+    case mergeContacts, deleteContacts, deleteEvents, createPasscode
     
     var title: String {
         switch self {
         case .mergeContacts: "Merge selected contacts?"
         case .deleteContacts: "Delete selected contacts?"
         case .deleteEvents: "Delete selected events?"
+        case .createPasscode: "This is your secret repository!"
         }
     }
     
@@ -24,6 +25,16 @@ enum ConfirmActionType {
         case .mergeContacts: "This action cannot be restored"
         case .deleteContacts: "This action cannot be restored"
         case .deleteEvents: "This action cannot be restored"
+        case .createPasscode: "Create a Passcode to protect your private photos and videos"
+        }
+    }
+    
+    var dismissButtonText: String {
+        switch self {
+        case .mergeContacts: "Cancel"
+        case .deleteContacts: "Cancel"
+        case .deleteEvents: "Cancel"
+        case .createPasscode: "See Later"
         }
     }
 }
@@ -51,6 +62,7 @@ final class ConfirmActionViewController: BottomPopupViewController {
         primaryLabel.bind(text: type.title)
         secondaryLabel.bind(text: type.subtitle)
         toolbar.actionButton.bind(text: actionButtonText)
+        toolbar.dismissButton.bind(text: type.dismissButtonText)
     }
     
     override var popupHeight: CGFloat { height ?? 300.0 }

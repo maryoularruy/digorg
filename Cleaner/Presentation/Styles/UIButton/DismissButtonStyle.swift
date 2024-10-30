@@ -1,5 +1,5 @@
 //
-//  CancelButtonStyle.swift
+//  DismissButtonStyle.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 21.10.2024.
@@ -7,11 +7,10 @@
 
 import UIKit
 
-final class CancelButtonStyle: UIButton {
+final class DismissButtonStyle: UIButton {
     private lazy var myConfiguration: Configuration = {
         var configuration = UIButton.Configuration.filled()
         configuration.titleAlignment = .center
-        configuration.title = "Cancel"
         configuration.baseBackgroundColor = .white
         configuration.baseForegroundColor = .blue
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 3, bottom: 1, trailing: 3)
@@ -34,8 +33,8 @@ final class CancelButtonStyle: UIButton {
     }
     
     func bind(text: String) {
-        setTitle(text, for: .normal)
-        setTitle(text, for: .selected)
+        myConfiguration.title = text
+        configuration = myConfiguration
     }
     
     private func setup() {
