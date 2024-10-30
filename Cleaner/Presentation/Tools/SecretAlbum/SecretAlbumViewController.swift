@@ -46,7 +46,14 @@ final class SecretAlbumViewController: UIViewController {
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
-        
+        if isPasswordCreated {
+            
+        } else {
+            guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
+            DispatchQueue.main.async { [weak self] in
+                self?.present(vc, animated: true)
+            }
+        }
     }
     
     private func setupEmptyState() {

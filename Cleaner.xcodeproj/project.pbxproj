@@ -471,7 +471,6 @@
 		A54449102CD19943001ECA7A /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A54449172CD1C434001ECA7A /* SecretAlbum */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SecretAlbum; sourceTree = "<group>"; };
 		A55234102CC16D2900CBE265 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
-		A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ActionAndCancelToolbar; sourceTree = "<group>"; };
 		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -525,7 +524,6 @@
 			children = (
 				A53ED8E52CCBEA5000565625 /* NoNumberContacts */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
-				A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */,
 				7532F8622AE29711007469EA /* NoNameContacts */,
 				7532F8612AE29707007469EA /* DuplicateNameContacts */,
 				7532F85E2AE290AD007469EA /* Menu */,
@@ -1374,7 +1372,6 @@
 				A54449102CD19943001ECA7A /* Components */,
 				A54449172CD1C434001ECA7A /* SecretAlbum */,
 				A55234102CC16D2900CBE265 /* Components */,
-				A5B422C52CC5C39600EF8FE4 /* ActionAndCancelToolbar */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
 			);
