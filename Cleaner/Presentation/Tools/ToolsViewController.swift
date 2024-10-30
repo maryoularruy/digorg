@@ -10,6 +10,8 @@ import UIKit
 final class ToolsViewController: UIViewController {
     @IBOutlet weak var proImageView: UIImageView!
     @IBOutlet weak var toolOptionsStackView: UIStackView!
+    @IBOutlet weak var instructionsView: UIView!
+    @IBOutlet weak var instructionsIcon: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +28,20 @@ extension ToolsViewController: ViewControllerProtocol {
             view.bind(option)
             toolOptionsStackView.addArrangedSubview(view)
         }
+        
+        instructionsIcon.layer.cornerRadius = 20
+        instructionsIcon.layer.maskedCorners = [.layerMaxXMaxYCorner]
+        
+        instructionsView.layer.cornerRadius = 20
+        instructionsView.addShadows()
     }
     
     func addGestureRecognizers() {
-         
+        instructionsView.addTapGestureRecognizer { [weak self] in
+            let vc = StoryboardScene.SecretAlbum.initialScene.instantiate()
+            vc.modalPresentationStyle = .fullScreen
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 

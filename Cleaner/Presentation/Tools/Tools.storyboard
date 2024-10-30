@@ -37,11 +37,49 @@
                                         <rect key="frame" x="16" y="0.0" width="361" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="553-JY-dI7">
+                                        <rect key="frame" x="16" y="311.33333333333326" width="361" height="128"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJr-M0-m1X" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="15.999999999999986" width="89.666666666666671" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Instructions" translatesAutoresizingMaskIntoConstraints="NO" id="z2D-Q0-nSG">
+                                                <rect key="frame" x="181" y="20.999999999999986" width="180" height="101"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="180" id="5MY-JB-dvv"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get informed how optimizing IPhone Storage" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pup-gy-ljW" customClass="Regular13LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="48.999999999999986" width="200" height="61"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" name="White"/>
+                                        <constraints>
+                                            <constraint firstItem="WJr-M0-m1X" firstAttribute="top" secondItem="553-JY-dI7" secondAttribute="top" constant="16" id="Aqk-5R-ppQ"/>
+                                            <constraint firstItem="pup-gy-ljW" firstAttribute="leading" secondItem="553-JY-dI7" secondAttribute="leading" constant="16" id="V0n-Sr-Noj"/>
+                                            <constraint firstAttribute="height" constant="122" id="WvK-fX-KB6"/>
+                                            <constraint firstAttribute="bottom" secondItem="z2D-Q0-nSG" secondAttribute="bottom" id="aHf-Md-4Rd"/>
+                                            <constraint firstAttribute="trailing" secondItem="z2D-Q0-nSG" secondAttribute="trailing" id="aPm-8I-PoW"/>
+                                            <constraint firstItem="pup-gy-ljW" firstAttribute="top" secondItem="WJr-M0-m1X" secondAttribute="bottom" constant="12" id="gjZ-zT-sPZ"/>
+                                            <constraint firstItem="z2D-Q0-nSG" firstAttribute="leading" secondItem="pup-gy-ljW" secondAttribute="trailing" constant="-35" id="jcD-a2-bGW"/>
+                                            <constraint firstItem="z2D-Q0-nSG" firstAttribute="top" secondItem="553-JY-dI7" secondAttribute="top" constant="21" id="x3C-OX-KPf"/>
+                                            <constraint firstItem="WJr-M0-m1X" firstAttribute="leading" secondItem="553-JY-dI7" secondAttribute="leading" constant="16" id="zcl-hP-FCR"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="553-JY-dI7" firstAttribute="leading" secondItem="Oy2-lT-tR7" secondAttribute="leading" constant="16" id="9Vi-Hk-K3P"/>
                                     <constraint firstItem="ay4-DS-pQj" firstAttribute="width" secondItem="Oy2-lT-tR7" secondAttribute="width" constant="-32" id="Gf7-dR-JIa"/>
-                                    <constraint firstAttribute="bottom" secondItem="ay4-DS-pQj" secondAttribute="bottom" id="JaD-NG-HRw"/>
+                                    <constraint firstAttribute="bottom" secondItem="553-JY-dI7" secondAttribute="bottom" id="God-cN-8n4"/>
+                                    <constraint firstAttribute="trailing" secondItem="553-JY-dI7" secondAttribute="trailing" constant="16" id="Jpx-Uc-Uan"/>
+                                    <constraint firstItem="553-JY-dI7" firstAttribute="top" secondItem="ay4-DS-pQj" secondAttribute="bottom" constant="8" id="c3K-3P-dHx"/>
                                     <constraint firstAttribute="trailing" secondItem="ay4-DS-pQj" secondAttribute="trailing" constant="16" id="kCo-vd-UZi"/>
                                     <constraint firstItem="ay4-DS-pQj" firstAttribute="leading" secondItem="Oy2-lT-tR7" secondAttribute="leading" constant="16" id="kMa-W3-LoG"/>
                                     <constraint firstItem="ay4-DS-pQj" firstAttribute="top" secondItem="Oy2-lT-tR7" secondAttribute="top" id="kzc-Wb-st9"/>
@@ -63,6 +101,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="lmt-pG-MVA"/>
                     <connections>
+                        <outlet property="instructionsIcon" destination="z2D-Q0-nSG" id="ydz-ct-Mzb"/>
+                        <outlet property="instructionsView" destination="553-JY-dI7" id="NC8-A7-qCT"/>
                         <outlet property="proImageView" destination="L6w-0y-Vxj" id="Q2m-l3-gD8"/>
                         <outlet property="toolOptionsStackView" destination="ay4-DS-pQj" id="ghv-lR-2LJ"/>
                     </connections>
@@ -95,6 +135,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Instructions" width="182.66667175292969" height="103.66666412353516"/>
         <image name="ProViewWithText" width="71" height="26"/>
         <image name="ToolsNormalTabBarItem" width="53" height="42"/>
         <image name="ToolsSelectedTabBarItem" width="53" height="42"/>
