@@ -12,6 +12,7 @@ final class SecretAlbumViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var itemsCountLabel: Regular13LabelStyle!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var lockedStatusIcon: UIImageView!
     
     private lazy var items: [PHAsset] = [] {
         didSet {
@@ -26,12 +27,22 @@ final class SecretAlbumViewController: UIViewController {
     }
     
     private lazy var emptyStateView: EmptyStateView? = nil
+    private lazy var userDefaultsService = UserDefaultsService.shared
+    
+    private var isPasswordCreated: Bool {
+        userDefaultsService.get(String.self, key: .secretAlbumPassword) != nil
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        items = []
         setupUI()
         addGestureRecognizers()
+        items = []
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        lockedStatusIcon.image = isPasswordCreated ? .locked :  .unlocked
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {

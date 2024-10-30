@@ -29,4 +29,6 @@ extension UIImage {
     
     static var mediaIcon = UIImage(resource: .mediaIcon)
     static var addButton = UIImage(resource: .addButton)
+    static var unlocked = UIImage(resource: .unlocked)
+    static var locked = UIImage(resource: .locked)
 }
