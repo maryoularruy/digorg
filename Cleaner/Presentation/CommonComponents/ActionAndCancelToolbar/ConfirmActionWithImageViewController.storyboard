@@ -16,11 +16,57 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlo-3I-m1M" customClass="ActionAndCancelToolbar" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="256" width="393" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="7Mp-AE-oJA"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4A-qD-HIf" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="10" y="208.33333333333334" width="373" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="400-qm-wSP" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="175.66666666666666" y="164" width="42" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DMJ-sG-jyg">
+                                <rect key="frame" x="141.66666666666666" y="22" width="110" height="110"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="Ko2-EN-1mm"/>
+                                    <constraint firstAttribute="width" constant="110" id="dhk-pg-MYG"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="rlo-3I-m1M" secondAttribute="bottom" id="0Lj-f2-X3g"/>
+                            <constraint firstItem="a4A-qD-HIf" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Aam-9n-8Ju"/>
+                            <constraint firstItem="400-qm-wSP" firstAttribute="top" secondItem="DMJ-sG-jyg" secondAttribute="bottom" constant="32" id="Iuc-P7-I0k"/>
+                            <constraint firstItem="rlo-3I-m1M" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ZvL-hD-l6a"/>
+                            <constraint firstItem="DMJ-sG-jyg" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="22" id="a60-3O-OL8"/>
+                            <constraint firstItem="400-qm-wSP" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="dT7-Po-lSL"/>
+                            <constraint firstItem="rlo-3I-m1M" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="jmv-l4-yah"/>
+                            <constraint firstItem="a4A-qD-HIf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="kKg-G1-Fi7"/>
+                            <constraint firstItem="a4A-qD-HIf" firstAttribute="top" secondItem="400-qm-wSP" secondAttribute="bottom" constant="24" id="mG9-At-W7x"/>
+                            <constraint firstItem="DMJ-sG-jyg" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="o7B-Lq-UVg"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="a4A-qD-HIf" secondAttribute="trailing" constant="10" id="yzN-50-tjC"/>
+                        </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="393" height="416"/>
+                    <connections>
+                        <outlet property="imageView" destination="DMJ-sG-jyg" id="blk-VS-JNd"/>
+                        <outlet property="primaryLabel" destination="400-qm-wSP" id="7aN-mN-YaC"/>
+                        <outlet property="secondaryLabel" destination="a4A-qD-HIf" id="SYs-fU-JeN"/>
+                        <outlet property="toolbar" destination="rlo-3I-m1M" id="4Ze-Nv-m45"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

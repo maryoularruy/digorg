@@ -7,6 +7,7 @@
 
 import UIKit
 import Photos
+import BottomPopup
 
 final class SecretAlbumViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
@@ -50,6 +51,7 @@ final class SecretAlbumViewController: UIViewController {
             
         } else {
             guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
+            vc.bind(popupDelegate: self, type: .createPasscode, height: 416, actionButtonText: "Create Passcode")
             DispatchQueue.main.async { [weak self] in
                 self?.present(vc, animated: true)
             }
@@ -72,6 +74,14 @@ extension SecretAlbumViewController: ViewControllerProtocol {
     func addGestureRecognizers() {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
+        }
+    }
+}
+
+extension SecretAlbumViewController: BottomPopupDelegate {
+    func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
+        if newValue == 100 {
+            
         }
     }
 }

@@ -45,7 +45,7 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" name="WhiteBackground"/>
+            <color key="backgroundColor" name="White"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zre-UL-xC0" secondAttribute="trailing" constant="16" id="2Lz-OL-AiJ"/>
                 <constraint firstAttribute="trailing" secondItem="Ueh-bI-2V1" secondAttribute="trailing" constant="16" id="E4J-uc-6Gj"/>
@@ -59,8 +59,8 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="WhiteBackground">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="White">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
