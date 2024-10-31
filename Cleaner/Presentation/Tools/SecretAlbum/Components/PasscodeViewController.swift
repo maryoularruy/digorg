@@ -29,7 +29,8 @@ final class PasscodeViewController: UIViewController {
     @IBOutlet weak var fourthChar: UIImageView!
     
     lazy var passcodeMode: PasscodeMode = .create
-    private var passcode: [Character] = []
+    private var passcode: String = ""
+    private var tempoparyPasscode: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +61,7 @@ extension PasscodeViewController: ViewControllerProtocol {
 extension PasscodeViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         passcode.removeAll()
-        textField.text?.forEach { passcode.append($0) }
+        passcode = textField.text ?? ""
         changeCharsImage(count: passcode.count)
     }
     
@@ -85,7 +86,24 @@ extension PasscodeViewController: UITextFieldDelegate {
             chars[3].image = .unfilledCircle
         } else {
             chars.forEach { $0.image = .filledCircle }
-            setPasscodeMode(.confirm)
+            switch passcodeMode {
+            case .create:
+                saveTempoparyPasscode(passcode)
+                textField.text?.removeAll()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                    chars.forEach { $0.image =  .unfilledCircle}
+                    self?.setPasscodeMode(.confirm)
+                }
+                
+            case .confirm: break
+                 
+            case .enter: break
+                 
+            }
         }
+    }
+    
+    private func saveTempoparyPasscode(_ passcode: String) {
+        tempoparyPasscode = passcode
     }
 }
