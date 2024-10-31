@@ -16,9 +16,76 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c6C-D2-NHg">
+                                <rect key="frame" x="0.0" y="64" width="55" height="55"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ArrowBackIcon" translatesAutoresizingMaskIntoConstraints="NO" id="7Ph-xD-F4D">
+                                        <rect key="frame" x="-4.6666666666666679" y="-4.3333333333333357" width="64.333333333333329" height="64"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="K0f-Wl-gNA"/>
+                                    <constraint firstItem="7Ph-xD-F4D" firstAttribute="centerY" secondItem="c6C-D2-NHg" secondAttribute="centerY" id="ViC-Bi-7eN"/>
+                                    <constraint firstItem="7Ph-xD-F4D" firstAttribute="centerX" secondItem="c6C-D2-NHg" secondAttribute="centerX" id="dbQ-KA-D8d"/>
+                                    <constraint firstAttribute="width" constant="55" id="foE-uv-ruS"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LockedWithBackground" translatesAutoresizingMaskIntoConstraints="NO" id="toq-q1-Msc">
+                                <rect key="frame" x="176.66666666666666" y="193" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="cas-At-LWW"/>
+                                    <constraint firstAttribute="width" constant="40" id="xAY-Bw-aBB"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uS6-6H-OJp" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="20" y="249" width="353" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHB-Xr-K0b">
+                                <rect key="frame" x="10" y="314" width="373" height="44"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UnfilledCircle" translatesAutoresizingMaskIntoConstraints="NO" id="2Us-uZ-kpM">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="7xf-d4-hwB"/>
+                                            <constraint firstAttribute="height" constant="44" id="ggO-aS-JJl"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" name="White"/>
+                                <constraints>
+                                    <constraint firstItem="2Us-uZ-kpM" firstAttribute="top" secondItem="bHB-Xr-K0b" secondAttribute="top" id="Q20-r9-PJx"/>
+                                    <constraint firstItem="2Us-uZ-kpM" firstAttribute="leading" secondItem="bHB-Xr-K0b" secondAttribute="leading" id="nMb-g8-cvn"/>
+                                    <constraint firstAttribute="bottom" secondItem="2Us-uZ-kpM" secondAttribute="bottom" id="vT8-Um-QK7"/>
+                                    <constraint firstAttribute="height" constant="44" id="ySv-oM-ACp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <keyboardLayoutGuide key="keyboard" id="v5q-CR-IU6"/>
                         <color key="backgroundColor" name="White"/>
+                        <constraints>
+                            <constraint firstItem="c6C-D2-NHg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="50K-5W-VdO"/>
+                            <constraint firstItem="uS6-6H-OJp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="5Ln-4R-sy4"/>
+                            <constraint firstItem="toq-q1-Msc" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="9pS-g4-HIY"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="uS6-6H-OJp" secondAttribute="trailing" constant="20" id="R33-fz-hUc"/>
+                            <constraint firstItem="bHB-Xr-K0b" firstAttribute="top" secondItem="uS6-6H-OJp" secondAttribute="bottom" constant="44" id="ZI5-Tc-FH7"/>
+                            <constraint firstItem="toq-q1-Msc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="134" id="bjc-YI-xK7"/>
+                            <constraint firstItem="c6C-D2-NHg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ckG-vA-PRk"/>
+                            <constraint firstItem="bHB-Xr-K0b" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="iao-ny-bPB"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bHB-Xr-K0b" secondAttribute="trailing" constant="10" id="peU-Vf-5Fh"/>
+                            <constraint firstItem="uS6-6H-OJp" firstAttribute="top" secondItem="toq-q1-Msc" secondAttribute="bottom" constant="16" id="rRu-sG-XZg"/>
+                            <constraint firstItem="bHB-Xr-K0b" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="tM1-YK-BSG"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="arrowBackButton" destination="c6C-D2-NHg" id="dgN-hI-Ddi"/>
+                        <outlet property="passcodeLabel" destination="uS6-6H-OJp" id="U4U-c6-2OO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -26,6 +93,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ArrowBackIcon" width="64" height="64"/>
+        <image name="LockedWithBackground" width="40" height="40"/>
+        <image name="UnfilledCircle" width="68" height="68"/>
         <namedColor name="White">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

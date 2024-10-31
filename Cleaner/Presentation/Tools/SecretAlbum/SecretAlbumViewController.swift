@@ -79,6 +79,7 @@ extension SecretAlbumViewController: BottomPopupDelegate {
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
             let vc = StoryboardScene.Passcode.initialScene.instantiate()
+            vc.passcodeMode = .create
             vc.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(vc, animated: true)
         }
