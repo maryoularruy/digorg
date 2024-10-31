@@ -22,8 +22,14 @@ enum PasscodeMode {
 final class PasscodeViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var passcodeLabel: Semibold15LabelStyle!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var firstChar: UIImageView!
+    @IBOutlet weak var secondChar: UIImageView!
+    @IBOutlet weak var thirdChar: UIImageView!
+    @IBOutlet weak var fourthChar: UIImageView!
     
     lazy var passcodeMode: PasscodeMode = .create
+    private var passcode: [Character] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +40,48 @@ final class PasscodeViewController: UIViewController {
 
 extension PasscodeViewController: ViewControllerProtocol {
     func setupUI() {
+        textField.delegate = self
+        textField.becomeFirstResponder()
         passcodeLabel.bind(text: passcodeMode.title)
     }
     
     func addGestureRecognizers() {
         arrowBackButton.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
+        }
+    }
+}
+
+extension PasscodeViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        passcode.removeAll()
+        textField.text?.forEach { passcode.append($0) }
+        changeCharsImage(count: passcode.count)
+    }
+    
+    private func changeCharsImage(count: Int) {
+        let chars: [UIImageView] = [firstChar, secondChar, thirdChar, fourthChar]
+        if count == 0 {
+            chars.forEach { $0.image =  .unfilledCircle}
+        } else if count == 1 {
+            chars[0].image = .filledCircle
+            chars[1].image = .unfilledCircle
+            chars[2].image = .unfilledCircle
+            chars[3].image = .unfilledCircle
+        } else if count == 2 {
+            chars[0].image = .filledCircle
+            chars[1].image = .filledCircle
+            chars[2].image = .unfilledCircle
+            chars[3].image = .unfilledCircle
+        } else if count == 3 {
+            chars[0].image = .filledCircle
+            chars[1].image = .filledCircle
+            chars[2].image = .filledCircle
+            chars[3].image = .unfilledCircle
+        } else {
+            chars.forEach { $0.image = .filledCircle }
+            passcodeMode = .confirm
+            passcodeLabel.bind(text: passcodeMode.title)
         }
     }
 }

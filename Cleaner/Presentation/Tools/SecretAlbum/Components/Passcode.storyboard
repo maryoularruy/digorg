@@ -48,7 +48,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHB-Xr-K0b">
                                 <rect key="frame" x="84.666666666666686" y="314" width="224" height="44"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ly2-R1-ium">
+                                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ly2-R1-ium">
                                         <rect key="frame" x="0.0" y="0.0" width="224" height="44"/>
                                         <color key="backgroundColor" name="White"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -75,7 +75,7 @@
                                             <constraint firstAttribute="height" constant="44" id="il9-Kd-cbz"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UnfilledCircle" translatesAutoresizingMaskIntoConstraints="NO" id="2Us-uZ-kpM">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UnfilledCircle" highlightedImage="FilledCircle" translatesAutoresizingMaskIntoConstraints="NO" id="2Us-uZ-kpM">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="7xf-d4-hwB"/>
@@ -128,7 +128,12 @@
                     </view>
                     <connections>
                         <outlet property="arrowBackButton" destination="c6C-D2-NHg" id="dgN-hI-Ddi"/>
+                        <outlet property="firstChar" destination="2Us-uZ-kpM" id="KFo-gb-kIu"/>
+                        <outlet property="fourthChar" destination="lD8-Sf-qb4" id="w6D-td-Cgg"/>
                         <outlet property="passcodeLabel" destination="uS6-6H-OJp" id="U4U-c6-2OO"/>
+                        <outlet property="secondChar" destination="jAk-Xa-NZt" id="Cmx-19-hHH"/>
+                        <outlet property="textField" destination="Ly2-R1-ium" id="JZJ-AY-JCV"/>
+                        <outlet property="thirdChar" destination="KfI-lw-qFf" id="kG2-VU-4ZV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -138,6 +143,7 @@
     </scenes>
     <resources>
         <image name="ArrowBackIcon" width="64" height="64"/>
+        <image name="FilledCircle" width="68" height="68"/>
         <image name="LockedWithBackground" width="40" height="40"/>
         <image name="UnfilledCircle" width="68" height="68"/>
         <namedColor name="White">
