@@ -36,6 +36,11 @@ final class PasscodeViewController: UIViewController {
         setupUI()
         addGestureRecognizers()
     }
+    
+    private func setPasscodeMode(_ mode: PasscodeMode) {
+        passcodeMode = mode
+        passcodeLabel.bind(text: passcodeMode.title)
+    }
 }
 
 extension PasscodeViewController: ViewControllerProtocol {
@@ -80,8 +85,7 @@ extension PasscodeViewController: UITextFieldDelegate {
             chars[3].image = .unfilledCircle
         } else {
             chars.forEach { $0.image = .filledCircle }
-            passcodeMode = .confirm
-            passcodeLabel.bind(text: passcodeMode.title)
+            setPasscodeMode(.confirm)
         }
     }
 }
