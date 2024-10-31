@@ -33,4 +33,6 @@ extension UIImage {
     static var addButton = UIImage(resource: .addButton)
     static var unlocked = UIImage(resource: .unlocked)
     static var locked = UIImage(resource: .locked)
+    static var unfilledCircle = UIImage(resource: .unfilledCircle)
+    static var filledCircle = UIImage(resource: .filledCircle)
 }

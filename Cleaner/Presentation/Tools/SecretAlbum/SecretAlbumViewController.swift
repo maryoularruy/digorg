@@ -36,7 +36,6 @@ final class SecretAlbumViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         addGestureRecognizers()
         items = []
     }
@@ -67,9 +66,7 @@ final class SecretAlbumViewController: UIViewController {
 }
 
 extension SecretAlbumViewController: ViewControllerProtocol {
-    func setupUI() {
-        
-    }
+    func setupUI() {}
     
     func addGestureRecognizers() {
         arrowBackView.addTapGestureRecognizer { [weak self] in
@@ -81,7 +78,9 @@ extension SecretAlbumViewController: ViewControllerProtocol {
 extension SecretAlbumViewController: BottomPopupDelegate {
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
-            
+            let vc = StoryboardScene.Passcode.initialScene.instantiate()
+            vc.modalPresentationStyle = .fullScreen
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

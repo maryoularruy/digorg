@@ -68,6 +68,11 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<NoNumberContactsViewController>(storyboard: NoNumberContacts.self)
   }
+  internal enum Passcode: StoryboardType {
+    internal static let storyboardName = "Passcode"
+
+    internal static let initialScene = InitialSceneType<PasscodeViewController>(storyboard: Passcode.self)
+  }
   internal enum PasswordCreation: StoryboardType {
     internal static let storyboardName = "PasswordCreation"
 
