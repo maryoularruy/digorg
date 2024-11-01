@@ -5,8 +5,7 @@
 //  Created by Elena Sedunova on 30.10.2024.
 //
 
-import UIKit
-import Photos
+import PhotosUI
 import BottomPopup
 
 final class SecretAlbumViewController: UIViewController {
@@ -83,7 +82,7 @@ final class SecretAlbumViewController: UIViewController {
     }
     
     @IBAction func tapOnImportMediaButton(_ sender: Any) {
-        openImagePicker()
+        configureImagePicker()
     }
     
     @IBAction func tapOnCancelButton(_ sender: Any) {
@@ -136,27 +135,33 @@ extension SecretAlbumViewController: BottomPopupDelegate {
     }
 }
 
-extension SecretAlbumViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        guard let image = info[.editedImage] as? UIImage else {
-             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+extension SecretAlbumViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        if let itemprovider = results.first?.itemProvider {
+          
+            if itemprovider.canLoadObject(ofClass: UIImage.self) {
+                itemprovider.loadObject(ofClass: UIImage.self) { image, error  in
+                    
+                    if let error {
+                        print(error)
+                    }
+                    if let selectedImage = image as? UIImage {
+                        DispatchQueue.main.async {
+//                            self.imageView.image = selectedImage
+                        }
+                    }
+                }
+            }
         }
-        
-        if let imgUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            let imgName = imgUrl.lastPathComponent
-            let data = image.jpegData(compressionQuality: 1)! as Data
-        }
-        
-        picker.dismiss(animated: true) {
-            
-        }
+        picker.dismiss(animated: true)
     }
     
-    private func openImagePicker() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .savedPhotosAlbum //depricated, use PHPickerViewController instead
-        imagePickerController.allowsEditing = true
-        present(imagePickerController, animated: true)
-    }
+    private func configureImagePicker(){
+            var configuration = PHPickerConfiguration()
+            configuration.selectionLimit = 0
+            configuration.filter = .any(of: [.images, .livePhotos, .videos, .screenshots])
+            let pickerViewController = PHPickerViewController(configuration: configuration)
+            pickerViewController.delegate = self
+            present(pickerViewController, animated: true)
+        }
 }
