@@ -36,4 +36,6 @@ extension UIImage {
     static var lockedWithBackground = UIImage(resource: .lockedWithBackground)
     static var unfilledCircle = UIImage(resource: .unfilledCircle)
     static var filledCircle = UIImage(resource: .filledCircle)
+    static var importMedia = UIImage(resource: .importMedia)
+    static var takeMedia = UIImage(resource: .takeMedia)
 }

@@ -47,8 +47,18 @@ final class ActionToolbarButtonStyle: UIButton {
         configuration = myConfiguration
     }
     
-    func changeBackgroundColor(_ color: UIColor) {
-        myConfiguration.baseBackgroundColor = color
+    func bind(backgroundColor: UIColor) {
+        myConfiguration.baseBackgroundColor = backgroundColor
+        configuration = myConfiguration
+    }
+    
+    func bind(text: String, backgroundColor: UIColor = .blue, textColor: UIColor = .white, image: UIImage) {
+        myConfiguration.title = text
+        myConfiguration.baseBackgroundColor = backgroundColor
+        myConfiguration.baseForegroundColor = textColor
+        myConfiguration.image = image
+        myConfiguration.imagePlacement = .leading
+        myConfiguration.imagePadding = 6
         configuration = myConfiguration
     }
     

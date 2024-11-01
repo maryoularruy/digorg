@@ -10,6 +10,7 @@ import UIKit
 extension UIColor {
     static var white = UIColor(resource: .white)
     static var blue = UIColor(resource: .blue)
+    static var acidGreen = UIColor(resource: .acidGreen)
     
     static var blackText = UIColor(resource: .blackText)
     static var greyText = UIColor(resource: .greyText)

@@ -15,6 +15,9 @@ final class SecretAlbumViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var addMediaContainer: UIView!
     @IBOutlet weak var lockedStatusIcon: UIImageView!
+    @IBOutlet weak var importMediaButton: ActionToolbarButtonStyle!
+    @IBOutlet weak var takeMediaButton: ActionToolbarButtonStyle!
+    @IBOutlet weak var cancelButton: DismissButtonStyle!
     
     private lazy var items: [PHAsset] = [] {
         didSet {
@@ -54,6 +57,7 @@ final class SecretAlbumViewController: UIViewController {
         if isPasscodeCreated {
             let vc = StoryboardScene.Passcode.initialScene.instantiate()
             vc.passcodeMode = .enter
+            vc.modalTransitionStyle = .crossDissolve
             vc.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -73,15 +77,25 @@ final class SecretAlbumViewController: UIViewController {
             view.addSubview(emptyStateView)
         }
     }
+    
+    @IBAction func tapOnTakeMediaButton(_ sender: Any) {
+        //TODO: -Open camera
+    }
+    
+    @IBAction func tapOnImportMediaButton(_ sender: Any) {
+        openImagePicker()
+    }
+    
+    @IBAction func tapOnCancelButton(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
 }
 
 extension SecretAlbumViewController: ViewControllerProtocol {
     func setupUI() {
         lockedStatusIcon.image = isPasscodeCreated ? .locked :  .unlocked
         if isPasscodeConfirmed {
-            addMediaContainer.layer.cornerRadius = 20
-            addMediaContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            addMediaContainer.addShadows()
+            setupMediaContainer()
             addButton.isHidden = true
             addMediaContainer.isHidden = false
         } else {
@@ -94,6 +108,20 @@ extension SecretAlbumViewController: ViewControllerProtocol {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    private func setupMediaContainer() {
+        takeMediaButton.bind(text: "Take photo or video",
+                             image: .takeMedia)
+        importMediaButton.bind(text: "Import photo or video",
+                               backgroundColor: .acidGreen,
+                               textColor: .blackText,
+                               image: .importMedia)
+        cancelButton.bind(text: "Cancel")
+        
+        addMediaContainer.layer.cornerRadius = 20
+        addMediaContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        addMediaContainer.addShadows()
     }
 }
 
@@ -119,7 +147,9 @@ extension SecretAlbumViewController: UINavigationControllerDelegate, UIImagePick
             let data = image.jpegData(compressionQuality: 1)! as Data
         }
         
-        picker.dismiss(animated: true) {}
+        picker.dismiss(animated: true) {
+            
+        }
     }
     
     private func openImagePicker() {
@@ -127,6 +157,6 @@ extension SecretAlbumViewController: UINavigationControllerDelegate, UIImagePick
         imagePickerController.delegate = self
         imagePickerController.sourceType = .savedPhotosAlbum //depricated, use PHPickerViewController instead
         imagePickerController.allowsEditing = true
-        present(imagePickerController, animated: true, completion: { })
+        present(imagePickerController, animated: true)
     }
 }
