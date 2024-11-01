@@ -181,7 +181,7 @@
 		FA3988542B30602A0096F335 /* VideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988292B30602A0096F335 /* VideoController.swift */; };
 		FA3988552B30602A0096F335 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39882B2B30602A0096F335 /* PlayerView.swift */; };
 		FA3988562B30602A0096F335 /* ZoomingPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39882C2B30602A0096F335 /* ZoomingPlayerView.swift */; };
-		FA3988572B30602A0096F335 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39882E2B30602A0096F335 /* FileManager.swift */; };
+		FA3988572B30602A0096F335 /* FileManager+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39882E2B30602A0096F335 /* FileManager+ext.swift */; };
 		FA3988582B30602A0096F335 /* PlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988302B30602A0096F335 /* PlaybackController.swift */; };
 		FA3988592B30602A0096F335 /* PlayerSeeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988312B30602A0096F335 /* PlayerSeeker.swift */; };
 		FA39885A2B30602A0096F335 /* AVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988322B30602A0096F335 /* AVPlayer.swift */; };
@@ -415,7 +415,7 @@
 		FA3988292B30602A0096F335 /* VideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoController.swift; sourceTree = "<group>"; };
 		FA39882B2B30602A0096F335 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		FA39882C2B30602A0096F335 /* ZoomingPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomingPlayerView.swift; sourceTree = "<group>"; };
-		FA39882E2B30602A0096F335 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		FA39882E2B30602A0096F335 /* FileManager+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+ext.swift"; sourceTree = "<group>"; };
 		FA3988302B30602A0096F335 /* PlaybackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackController.swift; sourceTree = "<group>"; };
 		FA3988312B30602A0096F335 /* PlayerSeeker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSeeker.swift; sourceTree = "<group>"; };
 		FA3988322B30602A0096F335 /* AVPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayer.swift; sourceTree = "<group>"; };
@@ -740,6 +740,7 @@
 		75D3FC7A2A606E6F00F351A3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FA39882E2B30602A0096F335 /* FileManager+ext.swift */,
 				A552341B2CC17F2000CBE265 /* UILabel+ext.swift */,
 				FA3988692B3060F10096F335 /* Extension+Set.swift */,
 				FA3987802B3058140096F335 /* Extension+PHAsset.swift */,
@@ -1164,7 +1165,6 @@
 		FA39882D2B30602A0096F335 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				FA39882E2B30602A0096F335 /* FileManager.swift */,
 				FA39882F2B30602A0096F335 /* Playback */,
 				FA3988332B30602A0096F335 /* Photo Library */,
 				FA3988362B30602A0096F335 /* CachingGeocoder.swift */,
@@ -1649,7 +1649,7 @@
 				FA3987532B3055510096F335 /* Differentiable.swift in Sources */,
 				FA3987F12B305FA50096F335 /* DKPhotoGalleryContentVC.swift in Sources */,
 				FACA30942B3E03230018FA5F /* AppLocker.swift in Sources */,
-				FA3988572B30602A0096F335 /* FileManager.swift in Sources */,
+				FA3988572B30602A0096F335 /* FileManager+ext.swift in Sources */,
 				FA39884C2B30602A0096F335 /* UIButton.swift in Sources */,
 				FA3988602B30602A0096F335 /* VideoSource.swift in Sources */,
 				FA39883E2B30602A0096F335 /* ZoomPopTransition.swift in Sources */,

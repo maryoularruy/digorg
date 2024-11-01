@@ -31,6 +31,7 @@ final class PasscodeViewController: UIViewController {
     lazy var passcodeMode: PasscodeMode = .create
     private var passcode: String = ""
     private var tempoparyPasscode: String?
+    private lazy var userDefaultsService = UserDefaultsService.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +87,7 @@ extension PasscodeViewController: UITextFieldDelegate {
             chars[3].image = .unfilledCircle
         } else {
             chars.forEach { $0.image = .filledCircle }
+            
             switch passcodeMode {
             case .create:
                 saveTempoparyPasscode(passcode)
@@ -94,8 +96,14 @@ extension PasscodeViewController: UITextFieldDelegate {
                     chars.forEach { $0.image =  .unfilledCircle}
                     self?.setPasscodeMode(.confirm)
                 }
-                
-            case .confirm: break
+
+            case .confirm:
+                guard let tempoparyPasscode else { return }
+                if comparePasscodes() {
+//                    userDefaultsService.set(passcode, key: .secretAlbumPassword)
+                } else {
+                    
+                }
                  
             case .enter: break
                  
@@ -105,5 +113,9 @@ extension PasscodeViewController: UITextFieldDelegate {
     
     private func saveTempoparyPasscode(_ passcode: String) {
         tempoparyPasscode = passcode
+    }
+    
+    private func comparePasscodes() -> Bool {
+        passcode == tempoparyPasscode
     }
 }

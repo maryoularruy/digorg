@@ -85,3 +85,26 @@ extension SecretAlbumViewController: BottomPopupDelegate {
         }
     }
 }
+
+extension SecretAlbumViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        guard let image = info[.editedImage] as? UIImage else {
+             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        
+        if let imgUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            let imgName = imgUrl.lastPathComponent
+            let data = image.jpegData(compressionQuality: 1)! as Data
+        }
+        
+        picker.dismiss(animated: true) {}
+    }
+    
+    private func openImagePicker() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .savedPhotosAlbum //depricated, use PHPickerViewController instead
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: { })
+    }
+}
