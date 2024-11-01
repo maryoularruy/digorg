@@ -13,6 +13,8 @@ final class ToolsViewController: UIViewController {
     @IBOutlet weak var instructionsView: UIView!
     @IBOutlet weak var instructionsIcon: UIImageView!
     
+    private lazy var userDefaultsService = UserDefaultsService.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -58,6 +60,7 @@ extension ToolsViewController: ToolOptionViewDelegate {
         case .battery:
             StoryboardScene.SecretAlbum.initialScene.instantiate()
         }
+        userDefaultsService.remove(key: .secretPasscodeConfirmed)
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -2,7 +2,7 @@
 //  SecretAlbumViewController.swift
 //  Cleaner
 //
-//  Created by f f on 30.10.2024.
+//  Created by Elena Sedunova on 30.10.2024.
 //
 
 import UIKit
@@ -13,6 +13,7 @@ final class SecretAlbumViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var itemsCountLabel: Regular13LabelStyle!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addMediaContainer: UIView!
     @IBOutlet weak var lockedStatusIcon: UIImageView!
     
     private lazy var items: [PHAsset] = [] {
@@ -30,24 +31,31 @@ final class SecretAlbumViewController: UIViewController {
     private lazy var emptyStateView: EmptyStateView? = nil
     private lazy var userDefaultsService = UserDefaultsService.shared
     
-    private var isPasswordCreated: Bool {
-        userDefaultsService.get(String.self, key: .secretAlbumPassword) != nil
+    private var isPasscodeCreated: Bool {
+        userDefaultsService.get(String.self, key: .secretAlbumPasscode) != nil
+    }
+    
+    private var isPasscodeConfirmed: Bool {
+        userDefaultsService.get(Bool.self, key: .secretPasscodeConfirmed) == true
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addGestureRecognizers()
-        items = []
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        lockedStatusIcon.image = isPasswordCreated ? .locked :  .unlocked
+        items = []
+        setupUI()
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
-        if isPasswordCreated {
-            
+        if isPasscodeCreated {
+            let vc = StoryboardScene.Passcode.initialScene.instantiate()
+            vc.passcodeMode = .enter
+            vc.modalPresentationStyle = .fullScreen
+            navigationController?.pushViewController(vc, animated: true)
         } else {
             guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
             vc.bind(popupDelegate: self, type: .createPasscode, height: 416, actionButtonText: "Create Passcode")
@@ -58,7 +66,9 @@ final class SecretAlbumViewController: UIViewController {
     }
     
     private func setupEmptyState() {
-        emptyStateView = view.createEmptyState(type: .emptySecretAlbum)
+        itemsCountLabel.bind(text: "0 items")
+        emptyStateView?.removeFromSuperview()
+        emptyStateView = view.createEmptyState(type: isPasscodeConfirmed ? .emptySecretAlbumConfirmed : .emptySecretAlbum)
         if let emptyStateView {
             view.addSubview(emptyStateView)
         }
@@ -66,7 +76,19 @@ final class SecretAlbumViewController: UIViewController {
 }
 
 extension SecretAlbumViewController: ViewControllerProtocol {
-    func setupUI() {}
+    func setupUI() {
+        lockedStatusIcon.image = isPasscodeCreated ? .locked :  .unlocked
+        if isPasscodeConfirmed {
+            addMediaContainer.layer.cornerRadius = 20
+            addMediaContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            addMediaContainer.addShadows()
+            addButton.isHidden = true
+            addMediaContainer.isHidden = false
+        } else {
+            addButton.isHidden = false
+            addMediaContainer.isHidden = true
+        }
+    }
     
     func addGestureRecognizers() {
         arrowBackView.addTapGestureRecognizer { [weak self] in

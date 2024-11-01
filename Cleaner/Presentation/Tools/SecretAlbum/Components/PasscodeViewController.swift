@@ -98,15 +98,21 @@ extension PasscodeViewController: UITextFieldDelegate {
                 }
 
             case .confirm:
-                guard let tempoparyPasscode else { return }
+//                guard let tempoparyPasscode else { return }
                 if comparePasscodes() {
+                    //TODO: -savePasscode, add security question
 //                    userDefaultsService.set(passcode, key: .secretAlbumPassword)
                 } else {
-                    
+                    //TODO: -savePasscode
                 }
                  
-            case .enter: break
-                 
+            case .enter:
+                if passcode == userDefaultsService.get(String.self, key: .secretAlbumPasscode) {
+                    userDefaultsService.set(true, key: .secretPasscodeConfirmed)
+                    navigationController?.popViewController(animated: true)
+                } else {
+                    //TODO: -forgotPasscode
+                }
             }
         }
     }

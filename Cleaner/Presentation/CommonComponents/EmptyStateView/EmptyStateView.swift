@@ -8,13 +8,14 @@
 import UIKit
 
 enum EmptyStateType {
-    case noDuplicateNames, noNameContacts, emptySecretAlbum
+    case noDuplicateNames, noNameContacts, emptySecretAlbum, emptySecretAlbumConfirmed
     
     var title: String {
         switch self {
         case .noDuplicateNames: "No Duplicate Names"
         case .noNameContacts: "No contacts with the missing names"
         case .emptySecretAlbum: "No secret photos or videos, click “+” button to add some"
+        case .emptySecretAlbumConfirmed: "No secret photos or videos"
         }
     }
     
@@ -23,6 +24,7 @@ enum EmptyStateType {
         case .noDuplicateNames: .people
         case .noNameContacts: .people
         case .emptySecretAlbum: .mediaIcon
+        case .emptySecretAlbumConfirmed: .mediaIcon
         }
     }
 }

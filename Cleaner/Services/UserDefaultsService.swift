@@ -8,7 +8,8 @@
 import Foundation
 
 enum UserDefaultsKey: String {
-    case secretAlbumPassword = "SECRET_ALBUM_PASSWORD"
+    case secretAlbumPasscode = "SECRET_ALBUM_PASSWORD"
+    case secretPasscodeConfirmed = "PASSCODE_CONFIRMED"
 }
 
 final class UserDefaultsService {
@@ -22,7 +23,7 @@ final class UserDefaultsService {
         UserDefaults.standard.set(value, forKey: key.rawValue)
     }
     
-    func remove<T>(_ value: T, key: UserDefaultsKey) {
+    func remove(key: UserDefaultsKey) {
         UserDefaults.standard.removeObject(forKey: key.rawValue)
     }
 }
