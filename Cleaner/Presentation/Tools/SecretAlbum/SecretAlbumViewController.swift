@@ -18,7 +18,7 @@ final class SecretAlbumViewController: UIViewController {
     @IBOutlet weak var takeMediaButton: ActionToolbarButtonStyle!
     @IBOutlet weak var cancelButton: DismissButtonStyle!
     
-    private lazy var items: [PHAsset] = [] {
+    private lazy var items: [MediaModel] = [] {
         didSet {
             itemsCountLabel.bind(text: "\(items.count) item\(items.count == 1 ? "" : "s")")
             addButton.isHidden = !items.isEmpty
@@ -137,31 +137,42 @@ extension SecretAlbumViewController: BottomPopupDelegate {
 
 extension SecretAlbumViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        if let itemprovider = results.first?.itemProvider {
-          
-            if itemprovider.canLoadObject(ofClass: UIImage.self) {
-                itemprovider.loadObject(ofClass: UIImage.self) { image, error  in
-                    
-                    if let error {
-                        print(error)
-                    }
-                    if let selectedImage = image as? UIImage {
+        results.forEach { result in
+            let itemProvider = result.itemProvider
+            guard let typeIdentifier = itemProvider.registeredTypeIdentifiers.first,
+                  let utType = UTType(typeIdentifier)
+            else { return }
+            
+            if utType.conforms(to: .image) {
+                itemProvider.getPhoto { [weak self] result in
+                    switch result {
+                    case .success(let item):
                         DispatchQueue.main.async {
-//                            self.imageView.image = selectedImage
+                            self?.items.append(item)
                         }
-                    }
+                    case .failure(_): break }
+                }
+                
+            } else if utType.conforms(to: .movie) {
+                itemProvider.getVideo(typeIdentifier: typeIdentifier) { [weak self] result in
+                    switch result {
+                    case .success(let item):
+                        DispatchQueue.main.async {
+                            self?.items.append(item)
+                        }
+                    case .failure(_): break }
                 }
             }
         }
+        
         picker.dismiss(animated: true)
     }
     
-    private func configureImagePicker(){
-            var configuration = PHPickerConfiguration()
-            configuration.selectionLimit = 0
-            configuration.filter = .any(of: [.images, .livePhotos, .videos, .screenshots])
-            let pickerViewController = PHPickerViewController(configuration: configuration)
-            pickerViewController.delegate = self
-            present(pickerViewController, animated: true)
-        }
+    private func configureImagePicker() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 0
+        let pickerViewController = PHPickerViewController(configuration: configuration)
+        pickerViewController.delegate = self
+        present(pickerViewController, animated: true)
+    }
 }

@@ -79,6 +79,8 @@
 		A55235982CC27B9300CBE265 /* ContactsInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55235972CC27B9300CBE265 /* ContactsInfoType.swift */; };
 		A55CA2612CC904780026D434 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2602CC904780026D434 /* UIImage.swift */; };
 		A55CA2632CC907350026D434 /* UIFont+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2622CC907350026D434 /* UIFont+ext.swift */; };
+		A5600F612CD532CA006EE6BC /* NSItemProvider+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */; };
+		A5600F632CD94B50006EE6BC /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5600F622CD94B50006EE6BC /* MediaModel.swift */; };
 		A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */; };
 		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
 		A5BC395B2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */; };
@@ -302,6 +304,8 @@
 		A55235972CC27B9300CBE265 /* ContactsInfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsInfoType.swift; sourceTree = "<group>"; };
 		A55CA2602CC904780026D434 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		A55CA2622CC907350026D434 /* UIFont+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+ext.swift"; sourceTree = "<group>"; };
+		A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSItemProvider+ext.swift"; sourceTree = "<group>"; };
+		A5600F622CD94B50006EE6BC /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
 		A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
 		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
 		A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleSubtitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -599,6 +603,7 @@
 				A55235972CC27B9300CBE265 /* ContactsInfoType.swift */,
 				A53EDA222CD0422700565625 /* EKEventGroup.swift */,
 				A54449152CD19C4F001ECA7A /* ToolOption.swift */,
+				A5600F622CD94B50006EE6BC /* MediaModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -752,6 +757,7 @@
 				A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */,
 				A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */,
 				A53EDA242CD0429F00565625 /* Date+ext.swift */,
+				A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1573,6 +1579,7 @@
 				A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */,
 				FA3988562B30602A0096F335 /* ZoomingPlayerView.swift in Sources */,
 				FA3988512B30602A0096F335 /* UILabel.swift in Sources */,
+				A5600F632CD94B50006EE6BC /* MediaModel.swift in Sources */,
 				FA641DFC2B357C7A00F6A466 /* NSImageView+SwiftyGif.swift in Sources */,
 				FA3987F92B305FA50096F335 /* DKPhotoImageUtility.swift in Sources */,
 				FA3988492B30602A0096F335 /* PHAsset.swift in Sources */,
@@ -1628,6 +1635,7 @@
 				FA53586D2B3C4D6A0026FDC2 /* DBService.swift in Sources */,
 				FA3987762B3055930096F335 /* OSTypes.m in Sources */,
 				FA3987522B3055510096F335 /* ContentEquatable.swift in Sources */,
+				A5600F612CD532CA006EE6BC /* NSItemProvider+ext.swift in Sources */,
 				FA59141B2B31B8EE00371911 /* BatteryFirstCollectionViewCell.swift in Sources */,
 				FA3987AB2B30599C0096F335 /* GroupedAssetsViewController.swift in Sources */,
 				FA53586B2B3C4D490026FDC2 /* Credentials.swift in Sources */,
