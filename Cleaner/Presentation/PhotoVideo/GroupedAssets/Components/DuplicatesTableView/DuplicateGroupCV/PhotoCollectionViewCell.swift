@@ -10,7 +10,7 @@ import Photos
 import UIKit
 import Disk
 
-class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
+final class PhotoCollectionViewCell: UICollectionViewCell, NibReusable {
 	@IBOutlet var photoImageView: UIImageView!
 	@IBOutlet var checkBox: UIImageView!
     

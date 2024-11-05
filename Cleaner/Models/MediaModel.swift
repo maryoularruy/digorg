@@ -8,7 +8,7 @@
 import UIKit
 import Photos
 
-struct MediaModel: Identifiable {
+struct MediaModel: Identifiable, Hashable {
     enum MediaType {
         case photo, video, livePhoto
     }

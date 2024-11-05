@@ -5,12 +5,11 @@
 //  Created by Александр Пономарёв on 27.05.2022.
 //
 
-import SDWebImagePhotosPlugin
 import Photos
 import Reusable
 import UIKit
 
-class DuplicateTableViewCell: UITableViewCell, NibReusable {
+final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet var duplicatesAmountLabel: UILabel!
     @IBOutlet weak var duplicateGroupCV: UICollectionView!
     
@@ -47,13 +46,11 @@ class DuplicateTableViewCell: UITableViewCell, NibReusable {
 
 extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return assets.count
+		assets.count
 	}
     
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: PhotoCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-//		let photosURL = assets[indexPath.row].sd_URLRepresentation
-        //cell.photoImageView.sd_setImage(with: photosURL as URL?, placeholderImage: nil, options: [], context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.all.rawValue])
         cell.photoImageView.image = getAssetThumbnail(asset: assets[indexPath.item])
         cell.isChecked = assetsForDeletion.contains(assets[indexPath.item])
 		cell.setupSelectMode(isON: selectMode)

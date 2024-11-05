@@ -14,6 +14,7 @@ final class SecretAlbumViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var addMediaContainer: UIView!
     @IBOutlet weak var lockedStatusIcon: UIImageView!
+    @IBOutlet weak var itemsCollectionView: UICollectionView!
     @IBOutlet weak var importMediaButton: ActionToolbarButtonStyle!
     @IBOutlet weak var takeMediaButton: ActionToolbarButtonStyle!
     @IBOutlet weak var cancelButton: DismissButtonStyle!
@@ -25,10 +26,13 @@ final class SecretAlbumViewController: UIViewController {
             if items.isEmpty {
                 setupEmptyState()
             } else {
-                emptyStateView = nil
+                hideEmptyState()
+                setupItemsCollectionView()
             }
         }
     }
+    
+    private lazy var itemsForDeletionAndRestoring = Set<MediaModel>()
     
     private lazy var emptyStateView: EmptyStateView? = nil
     private lazy var userDefaultsService = UserDefaultsService.shared
@@ -68,15 +72,6 @@ final class SecretAlbumViewController: UIViewController {
         }
     }
     
-    private func setupEmptyState() {
-        itemsCountLabel.bind(text: "0 items")
-        emptyStateView?.removeFromSuperview()
-        emptyStateView = view.createEmptyState(type: isPasscodeConfirmed ? .emptySecretAlbumConfirmed : .emptySecretAlbum)
-        if let emptyStateView {
-            view.addSubview(emptyStateView)
-        }
-    }
-    
     @IBAction func tapOnTakeMediaButton(_ sender: Any) {
         //TODO: -Open camera
     }
@@ -87,6 +82,29 @@ final class SecretAlbumViewController: UIViewController {
     
     @IBAction func tapOnCancelButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
+    }
+    
+    private func setupEmptyState() {
+        itemsCollectionView.isHidden = true
+        itemsCountLabel.bind(text: "0 items")
+        emptyStateView?.removeFromSuperview()
+        emptyStateView = view.createEmptyState(type: isPasscodeConfirmed ? .emptySecretAlbumConfirmed : .emptySecretAlbum)
+        if let emptyStateView {
+            view.addSubview(emptyStateView)
+        }
+    }
+    
+    private func hideEmptyState() {
+        emptyStateView?.removeFromSuperview()
+        emptyStateView = nil
+        addMediaContainer.isHidden = true
+        addButton.isHidden = false
+    }
+    
+    private func setupItemsCollectionView() {
+        itemsCollectionView.register(cellType: PhotoCollectionViewCell.self)
+        itemsCollectionView.reloadData()
+        itemsCollectionView.isHidden = false
     }
 }
 
@@ -174,5 +192,25 @@ extension SecretAlbumViewController: PHPickerViewControllerDelegate {
         let pickerViewController = PHPickerViewController(configuration: configuration)
         pickerViewController.delegate = self
         present(pickerViewController, animated: true)
+    }
+}
+
+extension SecretAlbumViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: PhotoCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.photoImageView.image = items[indexPath.row].photo
+        cell.isChecked = itemsForDeletionAndRestoring.contains(items[indexPath.row])
+        cell.addTapGestureRecognizer {
+            cell.isChecked.toggle()
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: 109, height: 109)
     }
 }
