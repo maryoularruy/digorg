@@ -22,12 +22,11 @@ final class SecretAlbumViewController: UIViewController {
     private lazy var items: [MediaModel] = [] {
         didSet {
             itemsCountLabel.bind(text: "\(items.count) item\(items.count == 1 ? "" : "s")")
-            addButton.isHidden = !items.isEmpty
+            itemsCollectionView.reloadData()
             if items.isEmpty {
                 setupEmptyState()
             } else {
                 hideEmptyState()
-                setupItemsCollectionView()
             }
         }
     }
@@ -47,22 +46,30 @@ final class SecretAlbumViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if isPasscodeCreated {
+            itemsCollectionView.register(cellType: PhotoCollectionViewCell.self)
+        }
         addGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        items = []
         setupUI()
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
         if isPasscodeCreated {
-            let vc = StoryboardScene.Passcode.initialScene.instantiate()
-            vc.passcodeMode = .enter
-            vc.modalTransitionStyle = .crossDissolve
-            vc.modalPresentationStyle = .fullScreen
-            navigationController?.pushViewController(vc, animated: true)
+            if isPasscodeConfirmed {
+                addMediaContainer.isHidden = false
+                addButton.isHidden = true
+            } else {
+                let vc = StoryboardScene.Passcode.initialScene.instantiate()
+                vc.passcodeMode = .enter
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .fullScreen
+                navigationController?.pushViewController(vc, animated: true)
+            }
+
         } else {
             guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
             vc.bind(popupDelegate: self, type: .createPasscode, height: 416, actionButtonText: "Create Passcode")
@@ -95,16 +102,10 @@ final class SecretAlbumViewController: UIViewController {
     }
     
     private func hideEmptyState() {
-        emptyStateView?.removeFromSuperview()
-        emptyStateView = nil
-        addMediaContainer.isHidden = true
-        addButton.isHidden = false
-    }
-    
-    private func setupItemsCollectionView() {
-        itemsCollectionView.register(cellType: PhotoCollectionViewCell.self)
         itemsCollectionView.reloadData()
         itemsCollectionView.isHidden = false
+        emptyStateView?.removeFromSuperview()
+        emptyStateView = nil
     }
 }
 
@@ -113,11 +114,6 @@ extension SecretAlbumViewController: ViewControllerProtocol {
         lockedStatusIcon.image = isPasscodeCreated ? .locked :  .unlocked
         if isPasscodeConfirmed {
             setupMediaContainer()
-            addButton.isHidden = true
-            addMediaContainer.isHidden = false
-        } else {
-            addButton.isHidden = false
-            addMediaContainer.isHidden = true
         }
     }
     
@@ -155,6 +151,9 @@ extension SecretAlbumViewController: BottomPopupDelegate {
 
 extension SecretAlbumViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        addMediaContainer.isHidden = true
+        addButton.isHidden = false
+        
         results.forEach { result in
             let itemProvider = result.itemProvider
             guard let typeIdentifier = itemProvider.registeredTypeIdentifiers.first,
