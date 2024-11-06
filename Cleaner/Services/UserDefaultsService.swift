@@ -16,6 +16,14 @@ enum UserDefaultsKey: String {
 final class UserDefaultsService {
     static let shared = UserDefaultsService()
     
+    var isPasscodeCreated: Bool {
+        self.get(String.self, key: .secretAlbumPasscode) != nil
+    }
+    
+    var isPasscodeConfirmed: Bool {
+        self.get(Bool.self, key: .secretPasscodeConfirmed) == true
+    }
+    
     func get<T>(_ value: T.Type, key: UserDefaultsKey) -> T? {
         UserDefaults.standard.value(forKey: key.rawValue) as? T
     }

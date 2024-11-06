@@ -36,19 +36,10 @@ final class SecretAlbumViewController: UIViewController {
     
     private lazy var emptyStateView: EmptyStateView? = nil
     private lazy var userDefaultsService = UserDefaultsService.shared
-    private lazy var realmManager = RealmManager.shared
-    
-    private var isPasscodeCreated: Bool {
-        userDefaultsService.get(String.self, key: .secretAlbumPasscode) != nil
-    }
-    
-    private var isPasscodeConfirmed: Bool {
-        userDefaultsService.get(Bool.self, key: .secretPasscodeConfirmed) == true
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if isPasscodeCreated {
+        if userDefaultsService.isPasscodeCreated {
             itemsCollectionView.register(cellType: MediaCollectionViewCell.self)
         }
         addGestureRecognizers()
@@ -61,8 +52,8 @@ final class SecretAlbumViewController: UIViewController {
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
-        if isPasscodeCreated {
-            if isPasscodeConfirmed {
+        if userDefaultsService.isPasscodeCreated {
+            if userDefaultsService.isPasscodeConfirmed {
                 addMediaContainer.isHidden = false
                 addButton.isHidden = true
             } else {
@@ -98,7 +89,7 @@ final class SecretAlbumViewController: UIViewController {
         itemsCollectionView.isHidden = true
         itemsCountLabel.bind(text: "0 items")
         emptyStateView?.removeFromSuperview()
-        emptyStateView = view.createEmptyState(type: isPasscodeConfirmed ? .emptySecretAlbumConfirmed : .emptySecretAlbum)
+        emptyStateView = view.createEmptyState(type: userDefaultsService.isPasscodeConfirmed ? .emptySecretAlbumConfirmed : .emptySecretAlbum)
         if let emptyStateView {
             view.addSubview(emptyStateView)
         }
@@ -128,8 +119,8 @@ final class SecretAlbumViewController: UIViewController {
 
 extension SecretAlbumViewController: ViewControllerProtocol {
     func setupUI() {
-        lockedStatusIcon.image = isPasscodeCreated ? .locked :  .unlocked
-        if isPasscodeConfirmed {
+        lockedStatusIcon.image = userDefaultsService.isPasscodeCreated ? .locked :  .unlocked
+        if userDefaultsService.isPasscodeConfirmed {
             setupMediaContainer()
         }
     }

@@ -25,6 +25,8 @@ final class SecretContactsViewController: UIViewController {
         }
     }
     
+    private lazy var userDefaultsService = UserDefaultsService.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addGestureRecognizers()
@@ -39,7 +41,7 @@ final class SecretContactsViewController: UIViewController {
 
 extension SecretContactsViewController: ViewControllerProtocol {
     func setupUI() {
-//        lockedStatusIcon.image = isPasscodeCreated ? .locked :  .unlocked
+        lockedStatusIcon.image = userDefaultsService.isPasscodeCreated ? .locked :  .unlocked
     }
     
     func addGestureRecognizers() {
