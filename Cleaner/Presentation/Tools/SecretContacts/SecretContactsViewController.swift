@@ -41,7 +41,9 @@ final class SecretContactsViewController: UIViewController {
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
-        
+        let vc = StoryboardScene.AllContacts.initialScene.instantiate()
+        vc.modalPresentationStyle = .overCurrentContext
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupEmptyState() {
