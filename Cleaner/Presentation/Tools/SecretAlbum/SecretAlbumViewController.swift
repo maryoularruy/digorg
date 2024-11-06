@@ -7,6 +7,7 @@
 
 import PhotosUI
 import BottomPopup
+import RealmSwift
 
 final class SecretAlbumViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
@@ -19,7 +20,7 @@ final class SecretAlbumViewController: UIViewController {
     @IBOutlet weak var takeMediaButton: ActionToolbarButtonStyle!
     @IBOutlet weak var cancelButton: DismissButtonStyle!
     
-    private lazy var items: [MediaModel] = [] {
+    private lazy var items = [MediaModel]() {
         didSet {
             itemsCountLabel.bind(text: "\(items.count) item\(items.count == 1 ? "" : "s")")
             itemsCollectionView.reloadData()
@@ -35,6 +36,7 @@ final class SecretAlbumViewController: UIViewController {
     
     private lazy var emptyStateView: EmptyStateView? = nil
     private lazy var userDefaultsService = UserDefaultsService.shared
+    private lazy var realmManager = RealmManager.shared
     
     private var isPasscodeCreated: Bool {
         userDefaultsService.get(String.self, key: .secretAlbumPasscode) != nil
@@ -43,7 +45,7 @@ final class SecretAlbumViewController: UIViewController {
     private var isPasscodeConfirmed: Bool {
         userDefaultsService.get(Bool.self, key: .secretPasscodeConfirmed) == true
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if isPasscodeCreated {
@@ -55,6 +57,7 @@ final class SecretAlbumViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupUI()
+        reloadData()
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
@@ -69,7 +72,7 @@ final class SecretAlbumViewController: UIViewController {
                 vc.modalPresentationStyle = .fullScreen
                 navigationController?.pushViewController(vc, animated: true)
             }
-
+            
         } else {
             guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
             vc.bind(popupDelegate: self, type: .createPasscode, height: 416, actionButtonText: "Create Passcode")
@@ -106,6 +109,19 @@ final class SecretAlbumViewController: UIViewController {
         itemsCollectionView.isHidden = false
         emptyStateView?.removeFromSuperview()
         emptyStateView = nil
+    }
+    
+    private func reloadData() {
+        guard let folderName = UserDefaultsService.shared.get(String.self, key: .secretAlbumFolder) else { return }
+        
+        do {
+            let itemNames = try FileManager.default.getAll(folderName: folderName)
+            itemNames.forEach { name in
+                if let image = FileManager.default.getImage(imageName: name, folderName: folderName) {
+                    items.append(MediaModel(with: image))
+                }
+            }
+        } catch { return }
     }
 }
 
@@ -164,9 +180,18 @@ extension SecretAlbumViewController: PHPickerViewControllerDelegate {
                 itemProvider.getPhoto { [weak self] result in
                     switch result {
                     case .success(let item):
-                        DispatchQueue.main.async {
-                            self?.items.append(item)
-                        }
+                        guard let photo = item.photo else { return }
+                        
+                        do {
+                            let folderName = self?.userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
+                            
+                            try FileManager.default.saveImage(image: photo, imageName: item.id, folderName: folderName)
+                            
+                            DispatchQueue.main.async {
+                                self?.items.append(item)
+                            }
+                        } catch { break }
+
                     case .failure(_): break }
                 }
                 

@@ -89,9 +89,9 @@ class PasswordListViewController: UIViewController {
     }
     
     func fillTable() {
-        groupedCredentials = DBService.shared.getCredentialsGroupedByFirstLetter()
+        groupedCredentials = RealmManager.shared.getCredentialsGroupedByFirstLetter()
         sectionTitles = groupedCredentials.keys.sorted()
-        filteredCredentials = DBService.shared.getCredentials()
+        filteredCredentials = RealmManager.shared.getCredentials()
         
         UIView.performWithoutAnimation {
             self.tableView.reloadData()
@@ -105,7 +105,7 @@ class PasswordListViewController: UIViewController {
          alert.addAction(cancelAction)
         let deleteAction = UIAlertAction(title: "Delete Passwords: \(selectedCredentials.count)", style: .destructive) { _ in
              self.deselectAllCells()
-             DBService.shared.deleteCredentials(self.selectedCredentials)
+             RealmManager.shared.deleteCredentials(self.selectedCredentials)
              self.selectedCredentials.removeAll()
              self.fillTable()
          }
@@ -218,9 +218,9 @@ extension PasswordListViewController: UITableViewDataSource, UITableViewDelegate
 extension PasswordListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            filteredCredentials = DBService.shared.getCredentials()
+            filteredCredentials = RealmManager.shared.getCredentials()
         } else {
-            filteredCredentials = DBService.shared.getCredentials().filter {
+            filteredCredentials = RealmManager.shared.getCredentials().filter {
                 $0.link.lowercased().contains(searchText.lowercased())
             }
         }

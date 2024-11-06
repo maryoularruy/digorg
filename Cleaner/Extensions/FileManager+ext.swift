@@ -101,7 +101,7 @@ extension FileManager {
 }
 
 extension FileManager {
-    func saveImage(image: UIImage, imageName: String, folderName: String) {
+    func saveImage(image: UIImage, imageName: String, folderName: String) throws {
         createFolderIfNeeded(folderName: folderName)
 
         guard let data = image.jpegData(compressionQuality: 1.0),
@@ -109,7 +109,7 @@ extension FileManager {
         
         do {
             try data.write(to: url)
-        } catch let error {
+        } catch {
             print("Error saving image. ImageName: \(imageName). \(error)")
         }
     }
@@ -131,12 +131,22 @@ extension FileManager {
         return UIImage(contentsOfFile: url.path)
     }
     
+    func getAll(folderName: String) throws -> [String] {
+        guard let url = getURLForFolder(folderName: folderName) else { return [] }
+        if #available(iOS 16.0, *) {
+            return try FileManager.default.contentsOfDirectory(atPath: url.path())
+        } else {
+            return try FileManager.default.contentsOfDirectory(atPath: url.path)
+        }
+    }
+    
     private func createFolderIfNeeded(folderName: String) {
         guard let url = getURLForFolder(folderName: folderName) else { return }
         
         if !FileManager.default.fileExists(atPath: url.path) {
             do {
                 try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+                UserDefaultsService.shared.set(folderName, key: .secretAlbumFolder)
             } catch let error {
                 print("Error creating directory. FolderName: \(folderName). \(error)")
             }
@@ -144,7 +154,7 @@ extension FileManager {
     }
     
     private func getURLForFolder(folderName: String) -> URL? {
-        guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return nil }
+        guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
         return url.appendingPathComponent(folderName)
     }
     

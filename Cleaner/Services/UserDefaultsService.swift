@@ -10,6 +10,7 @@ import Foundation
 enum UserDefaultsKey: String {
     case secretAlbumPasscode = "SECRET_ALBUM_PASSWORD"
     case secretPasscodeConfirmed = "PASSCODE_CONFIRMED"
+    case secretAlbumFolder = "DEFAULT_SECRET_ALBUM_FOLDER"
 }
 
 final class UserDefaultsService {

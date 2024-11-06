@@ -29,7 +29,7 @@ class EditPasswordViewController: UIViewController {
     
     
     @IBAction func save(_ sender: Any) {
-        DBService.shared.updateCredential(
+        RealmManager.shared.updateCredential(
             entity ?? Credential(link: "", username: "", password: ""),
             withLink: urlTF.text ?? "Empty",
             username: userTF.text ?? "Empty",

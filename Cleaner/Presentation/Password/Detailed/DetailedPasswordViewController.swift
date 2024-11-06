@@ -59,7 +59,7 @@ class DetailedPasswordViewController: UIViewController {
              let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
              alert.addAction(cancelAction)
              let deleteAction = UIAlertAction(title: "Delete Password", style: .destructive) { _ in
-                 DBService.shared.deleteCredential(self.entity ?? Credential())
+                 RealmManager.shared.deleteCredential(self.entity ?? Credential())
                  self.navigationController?.popViewController(animated: true)
              }
              alert.addAction(deleteAction)

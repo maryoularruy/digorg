@@ -24,7 +24,7 @@ class PasswordCreationViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: Any) {
-        DBService.shared.saveCredential(
+        RealmManager.shared.saveCredential(
             link: urlTF.text ?? "Empty",
             username: nameTF.text ?? "Empty",
             password: passwordTF.text ?? "Empty"

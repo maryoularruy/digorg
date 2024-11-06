@@ -1,5 +1,5 @@
 //
-//  DBService.swift
+//  RealmManager.swift
 //  Cleaner
 //
 //  Created by Alex on 27.12.2023.
@@ -7,11 +7,11 @@
 
 import RealmSwift
 
-class DBService {
-    static let shared = DBService()
+final class RealmManager {
+    static let shared = RealmManager()
 
     private var realm: Realm {
-        let config = Realm.Configuration(
+        let config = Realm.Configuration (
         schemaVersion: 2, migrationBlock: { _, oldSchemaVersion in
             if oldSchemaVersion < 2 {
             }
@@ -22,6 +22,17 @@ class DBService {
         } catch {
             fatalError("Realm can't be created")
         }
+    }
+    
+    func add<T>(obj: T) throws where T: Object {
+        try realm.write {
+            realm.add(obj)
+        }
+    }
+    
+    func getAll<T>(type: T.Type) throws -> [T] where T: Object {
+        let objs = Array(realm.objects(T.self))
+        return objs
     }
 
     func saveCredential(link: String, username: String, password: String) {
@@ -81,4 +92,3 @@ class DBService {
         }
     }
 }
-
