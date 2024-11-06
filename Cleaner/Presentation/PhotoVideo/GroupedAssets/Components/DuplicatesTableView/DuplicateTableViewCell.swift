@@ -26,7 +26,7 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.duplicateGroupCV.register(cellType: PhotoCollectionViewCell.self)
+        self.duplicateGroupCV.register(cellType: MediaCollectionViewCell.self)
         self.duplicateGroupCV.reloadData()
     }
 	
@@ -50,7 +50,7 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
 	}
     
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell: PhotoCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+		let cell: MediaCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.photoImageView.image = getAssetThumbnail(asset: assets[indexPath.item])
         cell.isChecked = assetsForDeletion.contains(assets[indexPath.item])
 		cell.setupSelectMode(isON: selectMode)

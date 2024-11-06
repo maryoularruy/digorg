@@ -94,7 +94,7 @@ class RegularAssetsViewController: UIViewController {
 	}
 	
 	func setupCollectionView() {
-		collectionView.register(cellType: PhotoCollectionViewCell.self)
+		collectionView.register(cellType: MediaCollectionViewCell.self)
 		collectionView.allowsSelection = false
 		collectionView.allowsMultipleSelection = false
 	}
@@ -174,7 +174,7 @@ extension RegularAssetsViewController: UICollectionViewDataSource {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell: PhotoCollectionViewCell = self.collectionView.dequeueReusableCell(for: indexPath)
+		let cell: MediaCollectionViewCell = self.collectionView.dequeueReusableCell(for: indexPath)
 		if self.assetsForDeletion.contains(self.assets[indexPath.item]) {
 			cell.isChecked = true
 		} else {

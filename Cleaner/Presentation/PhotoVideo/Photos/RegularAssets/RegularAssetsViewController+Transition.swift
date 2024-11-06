@@ -14,7 +14,7 @@ extension RegularAssetsViewController: ZoomTransitionDelegate {
 
     func zoomTransitionView(_ transition: ZoomTransition) -> UIView? {
         scrollToTransitionCell()
-		return (transitionCell as? PhotoCollectionViewCell)?.photoImageView
+		return (transitionCell as? MediaCollectionViewCell)?.photoImageView
     }
 
     func zoomTransitionDidEnd(_ transition: ZoomTransition) {
