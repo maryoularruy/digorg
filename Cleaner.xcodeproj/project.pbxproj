@@ -81,6 +81,8 @@
 		A55CA2632CC907350026D434 /* UIFont+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2622CC907350026D434 /* UIFont+ext.swift */; };
 		A5600F612CD532CA006EE6BC /* NSItemProvider+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */; };
 		A5600F632CD94B50006EE6BC /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5600F622CD94B50006EE6BC /* MediaModel.swift */; };
+		A5609E9F2CDBBDF9000AF19E /* SecretContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5609E9E2CDBBDF9000AF19E /* SecretContacts.storyboard */; };
+		A5609EA12CDBBE06000AF19E /* SecretContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */; };
 		A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */; };
 		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
 		A5BC395B2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */; };
@@ -306,6 +308,8 @@
 		A55CA2622CC907350026D434 /* UIFont+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+ext.swift"; sourceTree = "<group>"; };
 		A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSItemProvider+ext.swift"; sourceTree = "<group>"; };
 		A5600F622CD94B50006EE6BC /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
+		A5609E9E2CDBBDF9000AF19E /* SecretContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecretContacts.storyboard; sourceTree = "<group>"; };
+		A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretContactsViewController.swift; sourceTree = "<group>"; };
 		A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
 		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
 		A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleSubtitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -830,6 +834,7 @@
 		A51353CF2CD1567600656965 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				A5609E9D2CDBBDDE000AF19E /* SecretContacts */,
 				A54449172CD1C434001ECA7A /* SecretAlbum */,
 				A54449102CD19943001ECA7A /* Components */,
 				A51353D02CD156BC00656965 /* Tools.storyboard */,
@@ -845,6 +850,15 @@
 				A53ED8E82CCBEA7200565625 /* NoNumberContactsViewController.swift */,
 			);
 			path = NoNumberContacts;
+			sourceTree = "<group>";
+		};
+		A5609E9D2CDBBDDE000AF19E /* SecretContacts */ = {
+			isa = PBXGroup;
+			children = (
+				A5609E9E2CDBBDF9000AF19E /* SecretContacts.storyboard */,
+				A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */,
+			);
+			path = SecretContacts;
 			sourceTree = "<group>";
 		};
 		A576FACF2CB69A7700B018DE /* BaseConfiguration */ = {
@@ -1473,6 +1487,7 @@
 				75D3FC8F2A606FF500F351A3 /* SF-Pro-Display-Light.otf in Resources */,
 				752B10222AE6652800EC0BBA /* ActionView.xib in Resources */,
 				FA59141C2B31B8EE00371911 /* BatteryFirstCollectionViewCell.xib in Resources */,
+				A5609E9F2CDBBDF9000AF19E /* SecretContacts.storyboard in Resources */,
 				A53ED8E72CCBEA6700565625 /* NoNumberContacts.storyboard in Resources */,
 				75FC42222AD2A0C5008F3E3A /* TutorialCell.xib in Resources */,
 				7504C2582AD7020D005FB398 /* WiFiProtection.storyboard in Resources */,
@@ -1634,6 +1649,7 @@
 				FA3987FB2B305FA50096F335 /* DKPhotoBaseImagePreviewVC.swift in Sources */,
 				FA53586D2B3C4D6A0026FDC2 /* RealmManager.swift in Sources */,
 				FA3987762B3055930096F335 /* OSTypes.m in Sources */,
+				A5609EA12CDBBE06000AF19E /* SecretContactsViewController.swift in Sources */,
 				FA3987522B3055510096F335 /* ContentEquatable.swift in Sources */,
 				A5600F612CD532CA006EE6BC /* NSItemProvider+ext.swift in Sources */,
 				FA59141B2B31B8EE00371911 /* BatteryFirstCollectionViewCell.swift in Sources */,
