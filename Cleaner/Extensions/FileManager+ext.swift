@@ -1,4 +1,5 @@
 import UIKit
+import Contacts
 
 extension FileManager {
     
@@ -114,14 +115,14 @@ extension FileManager {
         }
     }
     
-    func saveData(data: Data, imageName: String, folderName: String) {
+    func saveData(data: Data, itemName: String, folderName: String) {
         createFolderIfNeeded(folderName: folderName)
-        guard let url = getURLForImage(imageName: imageName, folderName: folderName) else { return }
+        guard let url = getURLForFolder(folderName: folderName) else { return }
         
         do {
             try data.write(to: url)
         } catch let error {
-            print("Error saving image. ImageName: \(imageName). \(error)")
+            print("Error saving data. itemName: \(itemName). \(error)")
         }
     }
     
@@ -138,6 +139,26 @@ extension FileManager {
         } else {
             return try FileManager.default.contentsOfDirectory(atPath: url.path)
         }
+    }
+    
+    func saveSecretContacts(_ contacts: [CNContact]) {
+        createFolderIfNeeded(folderName: "contacts")
+        do {
+            let data = try CNContactVCardSerialization.data(with: contacts)
+            
+            guard let url = FileManager.default.getURLForFolder(folderName: "contacts") else { return }
+            
+            FileManager.default.createFile(atPath: url.appendingPathComponent("contacts105").path, contents: data)
+        } catch { return }
+    }
+    
+    func getSecretContacts(_ data: Data?) {
+        guard let url = FileManager.default.getURLForFolder(folderName: "contacts")?.appendingPathComponent("contacts105") else { return }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let contacts = try CNContactVCardSerialization.contacts(with: data)
+        } catch { return }
     }
     
     private func createFolderIfNeeded(folderName: String) {
