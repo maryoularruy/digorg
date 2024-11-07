@@ -15,7 +15,8 @@ final class AllContactsViewController: UIViewController {
     
     private lazy var contacts: [CNContactSection] = [] {
         didSet {
-            contactsCountLabel.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+            let count = contacts.reduce(0) { $0 + $1.contacts.count }
+            contactsCountLabel.bind(text: "\(count) contact\(count == 1 ? "" : "s")")
         }
     }
     
@@ -82,10 +83,17 @@ extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource 
         tableView.clipsToBounds = false
         let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
         cell.delegate = self
-        if indexPath.row == 0 {
-            cell.setupFirstCellInSection()
-        } else if indexPath.row == contacts[indexPath.section].contacts.endIndex {
-            cell.setupLastCellInSection()
+        
+        if contacts[indexPath.section].contacts.count != 1 {
+            if indexPath.row == 0 {
+                cell.setupFirstCellInSection()
+            } else if indexPath.row == contacts[indexPath.section].contacts.count - 1 {
+                cell.setupLastCellInSection()
+            } else {
+                cell.setupMiddleCellInSection()
+            }
+        } else {
+            cell.setupSingleCellInSection()
         }
         
         cell.checkBoxButton.image = contactsForImport.contains(contacts[indexPath.section].contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue

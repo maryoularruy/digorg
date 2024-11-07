@@ -79,16 +79,24 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
     
 //    MARK: -Setup cell's UI
     func setupFirstCellInSection() {
-        content.layer.cornerRadius = 20
-        content.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        layer.cornerRadius = 20
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     func setupLastCellInSection() {
-        content.layer.cornerRadius = 20
-        content.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        layer.cornerRadius = 20
+        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
     
-    func setupMiddleCellInSection() {}
+    func setupMiddleCellInSection() {
+        layer.cornerRadius = 0
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+    }
+    
+    func setupSingleCellInSection() {
+        layer.cornerRadius = 20
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()

@@ -4,7 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,7 +13,7 @@
         <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="kZQ-A2-x6r" customClass="UnresolvedItemCell" customModule="Cleaner" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kZQ-A2-x6r" id="RGT-M5-Oba">
+            <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kZQ-A2-x6r" id="RGT-M5-Oba">
                 <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -37,7 +37,7 @@
                         <rect key="frame" x="351" y="22" width="26" height="26"/>
                     </imageView>
                 </subviews>
-                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="ui7-rL-AY1" firstAttribute="top" secondItem="RGT-M5-Oba" secondAttribute="top" constant="15" id="HF3-mO-oER"/>
                     <constraint firstAttribute="trailing" secondItem="Rdo-5C-qe3" secondAttribute="trailing" constant="16" id="PTm-ci-rTl"/>
@@ -48,7 +48,7 @@
                     <constraint firstItem="ZuU-83-qxI" firstAttribute="width" secondItem="ui7-rL-AY1" secondAttribute="width" priority="900" id="klD-wh-HCf"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" name="White"/>
             <connections>
                 <outlet property="checkBoxButton" destination="Rdo-5C-qe3" id="nwY-dT-YdP"/>
                 <outlet property="content" destination="RGT-M5-Oba" id="qmp-9h-YqV"/>
@@ -60,8 +60,8 @@
     </objects>
     <resources>
         <image name="EmptyCheckBoxBlue" width="26" height="26"/>
-        <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="White">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>

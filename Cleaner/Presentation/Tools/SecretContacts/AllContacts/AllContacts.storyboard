@@ -17,6 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MGc-bS-evQ">
+                                <rect key="frame" x="16" y="203" width="361" height="649"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="lim-g7-tiu"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="cu8-4v-fnE"/>
+                                </connections>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47x-fM-VUu">
                                 <rect key="frame" x="0.0" y="64" width="55" height="55"/>
                                 <subviews>
@@ -44,24 +52,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MGc-bS-evQ">
-                                <rect key="frame" x="16" y="197" width="361" height="621"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="lim-g7-tiu"/>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="cu8-4v-fnE"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
                         <constraints>
                             <constraint firstItem="zgk-Yq-bRB" firstAttribute="top" secondItem="47x-fM-VUu" secondAttribute="bottom" constant="16" id="6pI-TE-DjL"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="MGc-bS-evQ" secondAttribute="bottom" id="7mt-vq-EYM"/>
+                            <constraint firstAttribute="bottom" secondItem="MGc-bS-evQ" secondAttribute="bottom" id="7mt-vq-EYM"/>
                             <constraint firstItem="MGc-bS-evQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="BdW-io-sUs"/>
                             <constraint firstItem="Wjj-dg-Irr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="HGM-0C-sgh"/>
                             <constraint firstItem="47x-fM-VUu" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="LkZ-Vp-FYp"/>
-                            <constraint firstItem="MGc-bS-evQ" firstAttribute="top" secondItem="Wjj-dg-Irr" secondAttribute="bottom" constant="14" id="Pki-94-GGh"/>
+                            <constraint firstItem="MGc-bS-evQ" firstAttribute="top" secondItem="Wjj-dg-Irr" secondAttribute="bottom" constant="20" id="Pki-94-GGh"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="MGc-bS-evQ" secondAttribute="trailing" constant="16" id="ihR-Hw-nyZ"/>
                             <constraint firstItem="47x-fM-VUu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="o56-XR-S2h"/>
                             <constraint firstItem="Wjj-dg-Irr" firstAttribute="top" secondItem="zgk-Yq-bRB" secondAttribute="bottom" constant="6" id="vmj-xE-5X6"/>
