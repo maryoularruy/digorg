@@ -1,5 +1,5 @@
 //
-//  UnresolvedItemCell.swift
+//  ItemCell.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 18.10.2024.
@@ -10,12 +10,12 @@ import Reusable
 import Contacts
 import EventKit
 
-protocol UnresolvedItemCellProtocol: AnyObject {
+protocol ItemCellProtocol: AnyObject {
     func tapOnCheckBox(_ position: (Int, Int))
     func tapOnCell(_ position: (Int, Int))
 }
 
-final class UnresolvedItemCell: UITableViewCell, NibReusable {
+final class ItemCell: UITableViewCell, NibReusable {
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var firstLabel: Semibold15LabelStyle!
     @IBOutlet weak var secondLabel: Regular15LabelStyle!
@@ -32,7 +32,7 @@ final class UnresolvedItemCell: UITableViewCell, NibReusable {
         }
     }
     
-    weak var delegate: UnresolvedItemCellProtocol?
+    weak var delegate: ItemCellProtocol?
     
     private lazy var position: (Int, Int) = (0, 0)
     private lazy var type: UnresolvedItemCellType? = nil

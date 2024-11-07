@@ -1,5 +1,5 @@
 //
-//  UnresolvedItemCellHeader.swift
+//  ItemCellHeader.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 18.10.2024.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class UnresolvedItemCellHeader: UIView {
-    private let nibName = "UnresolvedItemCellHeader"
+final class ItemCellHeader: UIView {
+    private let nibName = "ItemCellHeader"
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var firstLabel: Regular15LabelStyle!

@@ -64,7 +64,7 @@ final class NoNameContactsViewController: UIViewController {
     }
     
     private func setupUnresolvedContactsTableView() {
-        unresolvedContactsTableView.register(cellType: UnresolvedItemCell.self)
+        unresolvedContactsTableView.register(cellType: ItemCell.self)
     }
     
     private func reloadData() {
@@ -111,7 +111,7 @@ extension NoNameContactsViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
+        let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
         cell.delegate = self
         cell.bindNoName(contact: contacts[indexPath.row], indexPath.row)
         
@@ -128,7 +128,7 @@ extension NoNameContactsViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 
-extension NoNameContactsViewController: UnresolvedItemCellProtocol {
+extension NoNameContactsViewController: ItemCellProtocol {
     func tapOnCheckBox(_ position: (Int, Int)) {
         let contact = contacts[position.1]
         if contactsForDeletion.contains(contact) {

@@ -66,7 +66,7 @@ final class DuplicateNameContactsViewController: UIViewController {
     
     private func setupUnresolvedContactsTableView() {
         unresolvedContactsCount.bind(text: "\(sections.count) contact\(sections.count == 1 ? "" : "s")")
-        unresolvedContactsTableView.register(cellType: UnresolvedItemCell.self)
+        unresolvedContactsTableView.register(cellType: ItemCell.self)
     }
     
     private func reloadData() {
@@ -92,7 +92,7 @@ extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.clipsToBounds = false
-        let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
+        let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
         cell.delegate = self
         if indexPath.row == 0 {
             cell.setupFirstCellInSection()
@@ -115,7 +115,7 @@ extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UnresolvedItemCellHeader()
+        let header = ItemCellHeader()
         header.firstLabel.bind(text: "\(sections[section].count) duplicates")
         return header
     }
@@ -125,7 +125,7 @@ extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewD
     }
 }
 
-extension DuplicateNameContactsViewController: UnresolvedItemCellProtocol {
+extension DuplicateNameContactsViewController: ItemCellProtocol {
     func tapOnCheckBox(_ position: (Int, Int)) {
         let duplicateContacts = sections[position.0]
         if contactsForMerge.contains(duplicateContacts) {

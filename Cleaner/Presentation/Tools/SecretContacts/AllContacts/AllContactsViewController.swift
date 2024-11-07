@@ -46,7 +46,7 @@ final class AllContactsViewController: UIViewController {
 
 extension AllContactsViewController: ViewControllerProtocol {
     func setupUI() {
-        contactsTableView.register(cellType: UnresolvedItemCell.self)
+        contactsTableView.register(cellType: ItemCell.self)
     }
     
     func addGestureRecognizers() {
@@ -62,7 +62,7 @@ extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UnresolvedItemCellHeader()
+        let header = ItemCellHeader()
         header.firstLabel.bind(text: contacts[section].name)
         return header
     }
@@ -81,7 +81,7 @@ extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.clipsToBounds = false
-        let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
+        let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
         cell.delegate = self
         
         if contacts[indexPath.section].contacts.count != 1 {
@@ -103,7 +103,7 @@ extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
-extension AllContactsViewController: UnresolvedItemCellProtocol {
+extension AllContactsViewController: ItemCellProtocol {
     func tapOnCheckBox(_ position: (Int, Int)) {
         
     }

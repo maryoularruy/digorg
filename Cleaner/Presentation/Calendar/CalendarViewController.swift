@@ -66,7 +66,7 @@ final class CalendarViewController: UIViewController {
     }
     
     private func setupUnresolvedEventsTableView() {
-        unresolvedEventsTableView.register(cellType: UnresolvedItemCell.self)
+        unresolvedEventsTableView.register(cellType: ItemCell.self)
     }
     
     private func reloadData() {
@@ -111,7 +111,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath) as UnresolvedItemCell
+        let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
         cell.delegate = self
         
         cell.bind(event: eventGroups[indexPath.section].events[indexPath.row], (indexPath.section, indexPath.row))
@@ -131,7 +131,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UnresolvedItemCellHeader()
+        let header = ItemCellHeader()
         header.firstLabel.bind(text: "\(eventGroups[section].year)")
         header.secondLabel.bind(text: "\(eventGroups[section].events.count) event\(eventGroups[section].events.count == 1 ? "" : "s")")
         header.secondLabel.isHidden = false
@@ -143,7 +143,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension CalendarViewController: UnresolvedItemCellProtocol {
+extension CalendarViewController: ItemCellProtocol {
     func tapOnCheckBox(_ position: (Int, Int)) {
         tapOnCell(position)
     }
