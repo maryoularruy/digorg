@@ -5,21 +5,13 @@
 //  Created by Максим Лебедев on 03.06.2022.
 //
 
-import Foundation
 import SwiftyContacts
-import SwiftyUserDefaults
-import Contacts
 import ContactsUI
 import OSLog
 
-class CNContactSection {
+struct CNContactSection {
     let name: String
     var contacts: [CNContact]
-
-    init(name: String, contacts: [CNContact]) {
-        self.name = name
-        self.contacts = contacts
-    }
 }
 
 final class ContactManager {
@@ -123,7 +115,7 @@ final class ContactManager {
     
     static func loadAllContacts(completion: @escaping ([CNContactSection]) -> ()) {
         loadContacts { contacts in
-            completion(sortContactSections(contacts))
+            completion(sortBySections(contacts))
         }
     }
     
@@ -160,48 +152,45 @@ final class ContactManager {
         }
     }
     
-    public static func sortContactSections(_ contacts: [CNContact]) -> [CNContactSection] {
+    private static func sortBySections(_ contacts: [CNContact]) -> [CNContactSection] {
         var letters: [String] = []
         var sections: [CNContactSection] = []
-        for contact in contacts{
-            if !contact.givenName.isEmpty{
-                if !contact.givenName[String.Index(encodedOffset: 0)].isLetter{
-                    if !letters.contains("#"){
+        
+        contacts.forEach { contact in
+            if contact.givenName.isEmpty {
+                if !letters.contains("#") {
+                    letters.append("#")
+                }
+            } else {
+                if contact.givenName.first!.isLetter {
+                    if !letters.contains(String(contact.givenName.first!)) {
+                        letters.append(String(contact.givenName.first!))
+                    }
+                } else {
+                    if !letters.contains("#") {
                         letters.append("#")
                     }
                 }
-                else{
-                    if !letters.contains(String(contact.givenName[String.Index(encodedOffset: 0)])){
-                        letters.append(String(contact.givenName[String.Index(encodedOffset: 0)]))
-                    }
-                }
-            }
-            else if contact.givenName.isEmpty {
-                    if !letters.contains("#"){
-                        letters.append("#")
-                    }
             }
         }
-        letters = letters.map({ $0.uppercased()})
+        
+        letters = letters.map { $0.uppercased() }
         letters = Array(Set(letters))
-        letters.sort(by: {
-            (letter1, letter2) in
-            letter1 < letter2
-        })
-        for letter in letters{
-            if letter == "#"{
-                sections.append(CNContactSection(name: letter, contacts: contacts.filter({
-                    $0.givenName.isEmpty || !$0.givenName[String.Index(encodedOffset: 0)].isLetter }).sorted(by: {
-                    (contact1, contact2) in
-                    contact1.givenName < contact2.givenName
-                })))
+        letters.sort { $0 < $1 }
+        
+        for letter in letters {
+            if letter == "#" {
+                sections.append(CNContactSection(name: letter, contacts: contacts
+                    .filter { $0.givenName.isEmpty || !$0.givenName[$0.givenName.startIndex].isLetter }
+                    .sorted { $0.givenName < $1.givenName }))
                 continue
             }
-            let contacts = contacts.filter({ $0.givenName.uppercased().starts(with: letter) }).sorted(by: {
-                (contact1, contact2) in
-                contact1.givenName < contact2.givenName
-            })
-            if contacts.count != 0{
+            
+            let contacts = contacts
+                .filter { $0.givenName.uppercased().starts(with: letter) }
+                .sorted { $0.givenName < $1.givenName }
+            
+            if !contacts.isEmpty {
                 sections.append(CNContactSection(name: letter, contacts: contacts))
             }
         }
