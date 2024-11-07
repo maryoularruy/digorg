@@ -26,21 +26,6 @@ final class ContactManager {
     private static var logger = Logger()
     private static var store = CNContactStore()
     private static var defaultDescriptor = CNContactViewController.descriptorForRequiredKeys()
-    
-//    public static func loadSecretContacts(_ handler: @escaping ((_ contacts: [CNContact]) -> Void)){
-//        checkStatus {
-//            fetchContacts(completionHandler: { (result) in
-//                switch result {
-//                case .success(let contacts):
-//                    handler(contacts.filter({ Defaults[\.secretContacts].contains($0.identifier) }))
-//                    // Do your thing here with [CNContacts] array
-//                    break
-//                case .failure:
-//                    break
-//                }
-//            })
-//        }
-//    }
 
     static func loadDuplicatedByName(completion: @escaping ([[CNContact]]) -> ()) {
         loadContacts { contacts in
@@ -134,6 +119,12 @@ final class ContactManager {
         do {
             try store.execute(request)
         } catch {}
+    }
+    
+    static func loadAllContacts(completion: @escaping ([CNContactSection]) -> ()) {
+        loadContacts { contacts in
+            completion(sortContactSections(contacts))
+        }
     }
     
     private static func loadContacts(handler: @escaping (([CNContact]) -> ())) {
