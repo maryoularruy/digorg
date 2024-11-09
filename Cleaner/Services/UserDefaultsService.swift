@@ -11,6 +11,8 @@ enum UserDefaultsKey: String {
     case secretAlbumPasscode = "SECRET_ALBUM_PASSWORD"
     case secretPasscodeConfirmed = "PASSCODE_CONFIRMED"
     case secretAlbumFolder = "DEFAULT_SECRET_ALBUM_FOLDER"
+    case secretContactsFolder = "DEFAULT_SECRET_CONTACTS_FOLDER"
+    case secretContactsFile = "DEFAULT_SECRET_CONTACTS_FILE"
 }
 
 final class UserDefaultsService {

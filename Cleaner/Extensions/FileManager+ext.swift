@@ -103,7 +103,7 @@ extension FileManager {
 
 extension FileManager {
     func saveImage(image: UIImage, imageName: String, folderName: String) throws {
-        createFolderIfNeeded(folderName: folderName)
+        createFolderIfNeeded(folderName: folderName, isMedia: true)
 
         guard let data = image.jpegData(compressionQuality: 1.0),
             let url = getURLForImage(imageName: imageName, folderName: folderName) else { return }
@@ -112,17 +112,6 @@ extension FileManager {
             try data.write(to: url)
         } catch {
             print("Error saving image. ImageName: \(imageName). \(error)")
-        }
-    }
-    
-    func saveData(data: Data, itemName: String, folderName: String) {
-        createFolderIfNeeded(folderName: folderName)
-        guard let url = getURLForFolder(folderName: folderName) else { return }
-        
-        do {
-            try data.write(to: url)
-        } catch let error {
-            print("Error saving data. itemName: \(itemName). \(error)")
         }
     }
     
@@ -142,32 +131,67 @@ extension FileManager {
     }
     
     func saveSecretContacts(_ contacts: [CNContact]) {
-        createFolderIfNeeded(folderName: "contacts")
-        do {
-            let data = try CNContactVCardSerialization.data(with: contacts)
+        let folderName = UserDefaultsService.shared.get(String.self, key: .secretContactsFolder) ?? "contacts"
+        createFolderIfNeeded(folderName: folderName, isMedia: false)
+        
+        guard let url = FileManager.default.getURLForFolder(folderName: folderName) else { return }
+        
+        if let fileName = UserDefaultsService.shared.get(String.self, key: .secretContactsFile) {
             
-            guard let url = FileManager.default.getURLForFolder(folderName: "contacts") else { return }
+            if FileManager.default.fileExists(atPath: url.appendingPathComponent(fileName).path) {
+                var currentSecretContacts = convertDataToContacts(url.appendingPathComponent(fileName)) ?? []
+                currentSecretContacts.append(contentsOf: contacts)
+                guard let data = convertContactsToData(currentSecretContacts) else { return }
+                updateData(data, url: url.appendingPathComponent(fileName))
+            } else {
+                guard let data = convertContactsToData(contacts) else { return }
+                FileManager.default.createFile(atPath: url.appendingPathComponent(fileName).path, contents: data)
+            }
             
-            FileManager.default.createFile(atPath: url.appendingPathComponent("contacts105").path, contents: data)
-        } catch { return }
+        } else {
+            let randomName = UUID().uuidString
+            UserDefaultsService.shared.set(randomName, key: .secretContactsFile)
+            guard let fileName = UserDefaultsService.shared.get(String.self, key: .secretContactsFile),
+                  let data = convertContactsToData(contacts) else { return }
+            FileManager.default.createFile(atPath: url.appendingPathComponent(fileName).path, contents: data)
+        }
     }
     
-    func getSecretContacts(_ data: Data?) {
-        guard let url = FileManager.default.getURLForFolder(folderName: "contacts")?.appendingPathComponent("contacts105") else { return }
+    func getSecretContacts() -> [CNContact]? {
+        guard let folderName = UserDefaultsService.shared.get(String.self, key: .secretContactsFolder),
+        let fileName = UserDefaultsService.shared.get(String.self, key: .secretContactsFile) else { return nil }
         
+        guard let url = FileManager.default.getURLForFolder(folderName: folderName)?.appendingPathComponent(fileName) else { return nil }
+        
+        return convertDataToContacts(url)
+    }
+    
+    private func convertContactsToData(_ contacts: [CNContact]) -> Data? {
+        do {
+            return try CNContactVCardSerialization.data(with: contacts)
+        } catch { return nil }
+    }
+    
+    private func convertDataToContacts(_ url: URL) -> [CNContact]? {
         do {
             let data = try Data(contentsOf: url)
-            let contacts = try CNContactVCardSerialization.contacts(with: data)
-        } catch { return }
+            return try CNContactVCardSerialization.contacts(with: data)
+        } catch { return nil }
     }
     
-    private func createFolderIfNeeded(folderName: String) {
+    private func updateData(_ data: Data, url: URL) {
+        do {
+            try data.write(to: url)
+        } catch { print(error.localizedDescription) }
+    }
+    
+    private func createFolderIfNeeded(folderName: String, isMedia: Bool) {
         guard let url = getURLForFolder(folderName: folderName) else { return }
+        UserDefaultsService.shared.set(folderName, key: isMedia ? .secretAlbumFolder : .secretContactsFolder)
         
         if !FileManager.default.fileExists(atPath: url.path) {
             do {
                 try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-                UserDefaultsService.shared.set(folderName, key: .secretAlbumFolder)
             } catch let error {
                 print("Error creating directory. FolderName: \(folderName). \(error)")
             }

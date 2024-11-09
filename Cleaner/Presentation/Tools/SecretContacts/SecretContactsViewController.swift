@@ -36,8 +36,7 @@ final class SecretContactsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupUI()
-        contacts = []
-//        reloadData()
+        reloadData()
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
@@ -46,8 +45,11 @@ final class SecretContactsViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    private func reloadData() {
+        contacts = ContactManager.getSecretContacts() ?? []
+    }
+    
     private func setupEmptyState() {
-//        itemsCountLabel.bind(text: "0 contacts")
         emptyStateView?.removeFromSuperview()
         emptyStateView = view.createEmptyState(type: .emptySecretContacts)
         if let emptyStateView {

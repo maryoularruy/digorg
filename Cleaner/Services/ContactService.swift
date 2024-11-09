@@ -119,6 +119,14 @@ final class ContactManager {
         }
     }
     
+    static func importSecretContacts(_ contacts: [CNContact]) {
+        FileManager.default.saveSecretContacts(contacts)
+    }
+    
+    static func getSecretContacts() -> [CNContact]? {
+        FileManager.default.getSecretContacts()
+    }
+    
     private static func loadContacts(handler: @escaping (([CNContact]) -> ())) {
         checkStatus {
             fetchContacts { result in

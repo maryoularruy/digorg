@@ -169,7 +169,8 @@ extension AllContactsViewController: ActionToolbarDelegate {
         if sections.isEmpty {
             navigationController?.popViewController(animated: true)
         } else {
-
+            ContactManager.importSecretContacts(Array(contactsForImport))
+            navigationController?.popViewController(animated: true)
         }
     }
 }
