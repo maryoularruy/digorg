@@ -13,6 +13,7 @@ final class AllContactsViewController: UIViewController {
     @IBOutlet weak var contactsCountLabel: Regular13LabelStyle!
     @IBOutlet weak var contactsTableView: UITableView!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
+    @IBOutlet weak var toolbar: ActionToolbar!
     
     private lazy var sections: [CNContactSection] = [] {
         didSet {
@@ -23,6 +24,8 @@ final class AllContactsViewController: UIViewController {
                 setupEmptyState()
             } else {
                 selectionButton.bind(text: contactsForImport.count == sections.count ? .deselectAll : .selectAll)
+                toolbar.toolbarButton.bind(text: "Import Contacts (\(contactsForImport.count))")
+                toolbar.toolbarButton.isClickable = !contactsForImport.isEmpty
             }
         }
     }
@@ -30,6 +33,8 @@ final class AllContactsViewController: UIViewController {
     private lazy var contactsForImport = Set<CNContact>() {
         didSet {
             selectionButton.bind(text: contactsForImport.count == allContactsCount ? .deselectAll : .selectAll)
+            toolbar.toolbarButton.bind(text: "Import Contacts (\(contactsForImport.count))")
+            toolbar.toolbarButton.isClickable = !contactsForImport.isEmpty
             contactsTableView.reloadData()
         }
     }
@@ -68,6 +73,8 @@ final class AllContactsViewController: UIViewController {
     
     private func setupEmptyState() {
         selectionButton.bind(text: .selectAll)
+        toolbar.toolbarButton.bind(text: "Back")
+        toolbar.toolbarButton.isClickable = true
     }
     
     private func presentContact(contact: CNContact) {
@@ -82,6 +89,7 @@ final class AllContactsViewController: UIViewController {
 
 extension AllContactsViewController: ViewControllerProtocol {
     func setupUI() {
+        toolbar.delegate = self
         contactsTableView.register(cellType: ItemCell.self)
     }
     
@@ -132,11 +140,11 @@ extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource 
             cell.setupSingleCellInSection()
         }
         
-        cell.checkBoxButton.image = contactsForImport.contains(sections[indexPath.section].contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
+        let contact = sections[indexPath.section].contacts[indexPath.row]
+        cell.checkBoxButton.image = contactsForImport.contains(contact) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
+        cell.backgroundColor = contactsForImport.contains(contact) ? .lightBlueBackground : .white
+        cell.bind(contact: contact, (indexPath.section, indexPath.row))
         
-        cell.backgroundColor = contactsForImport.contains(sections[indexPath.section].contacts[indexPath.row]) ? .lightBlueBackground : .white
-        
-        cell.bind(contact: sections[indexPath.section].contacts[indexPath.row], (indexPath.section, indexPath.row))
         return cell
     }
 }
@@ -153,5 +161,15 @@ extension AllContactsViewController: ItemCellProtocol {
     
     func tapOnCell(_ position: (Int, Int)) {
         presentContact(contact: sections[position.0].contacts[position.1])
+    }
+}
+
+extension AllContactsViewController: ActionToolbarDelegate {
+    func tapOnActionButton() {
+        if sections.isEmpty {
+            navigationController?.popViewController(animated: true)
+        } else {
+
+        }
     }
 }

@@ -60,6 +60,12 @@
                                     <action selector="tapOnSelectionButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cWn-nm-xn9"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="maS-YL-Smn" customClass="ActionToolbar" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="752" width="393" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="ESO-Ov-0Zp"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
@@ -71,6 +77,9 @@
                             <constraint firstItem="47x-fM-VUu" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="LkZ-Vp-FYp"/>
                             <constraint firstItem="Nsr-u9-nft" firstAttribute="centerY" secondItem="47x-fM-VUu" secondAttribute="centerY" id="OOx-vA-8Ip"/>
                             <constraint firstItem="MGc-bS-evQ" firstAttribute="top" secondItem="Wjj-dg-Irr" secondAttribute="bottom" constant="20" id="Pki-94-GGh"/>
+                            <constraint firstItem="maS-YL-Smn" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="UhM-KH-mfS"/>
+                            <constraint firstAttribute="bottom" secondItem="maS-YL-Smn" secondAttribute="bottom" id="Vsz-uN-XKA"/>
+                            <constraint firstAttribute="trailing" secondItem="maS-YL-Smn" secondAttribute="trailing" id="ebX-ZV-vwz"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="MGc-bS-evQ" secondAttribute="trailing" constant="16" id="ihR-Hw-nyZ"/>
                             <constraint firstItem="47x-fM-VUu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="o56-XR-S2h"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Nsr-u9-nft" secondAttribute="trailing" constant="16" id="raH-mF-2Lb"/>
@@ -83,6 +92,7 @@
                         <outlet property="contactsCountLabel" destination="Wjj-dg-Irr" id="CQf-ka-khR"/>
                         <outlet property="contactsTableView" destination="MGc-bS-evQ" id="31P-fW-gby"/>
                         <outlet property="selectionButton" destination="Nsr-u9-nft" id="ZqE-71-sir"/>
+                        <outlet property="toolbar" destination="maS-YL-Smn" id="7NJ-t6-y2g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
