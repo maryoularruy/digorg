@@ -6,24 +6,36 @@
 //
 
 import UIKit
-import Contacts
+import ContactsUI
 
 final class AllContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var contactsCountLabel: Regular13LabelStyle!
     @IBOutlet weak var contactsTableView: UITableView!
+    @IBOutlet weak var selectionButton: SelectionButtonStyle!
     
-    private lazy var contacts: [CNContactSection] = [] {
+    private lazy var sections: [CNContactSection] = [] {
         didSet {
-            let count = contacts.reduce(0) { $0 + $1.contacts.count }
-            contactsCountLabel.bind(text: "\(count) contact\(count == 1 ? "" : "s")")
+            contactsCountLabel.bind(text: "\(allContactsCount) contact\(allContactsCount == 1 ? "" : "s")")
+            selectionButton.isClickable = !sections.isEmpty
+            contactsTableView.reloadData()
+            if sections.isEmpty {
+                setupEmptyState()
+            } else {
+                selectionButton.bind(text: contactsForImport.count == sections.count ? .deselectAll : .selectAll)
+            }
         }
     }
     
     private lazy var contactsForImport = Set<CNContact>() {
         didSet {
-            
+            selectionButton.bind(text: contactsForImport.count == allContactsCount ? .deselectAll : .selectAll)
+            contactsTableView.reloadData()
         }
+    }
+    
+    private var allContactsCount: Int {
+        sections.reduce(0) { $0 + $1.contacts.count }
     }
     
     override func viewDidLoad() {
@@ -34,12 +46,36 @@ final class AllContactsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
         reloadData()
+    }
+    
+    @IBAction func tapOnSelectionButton(_ sender: Any) {
+        if contactsForImport.count == allContactsCount {
+            contactsForImport.removeAll()
+        } else {
+            var contacts: [CNContact] = []
+            sections.forEach { contacts.append(contentsOf: $0.contacts) }
+            contactsForImport.insert(contacts)
+        }
     }
     
     private func reloadData() {
         ContactManager.loadAllContacts { contacts in
-            self.contacts = contacts
+            self.sections = contacts
+        }
+    }
+    
+    private func setupEmptyState() {
+        selectionButton.bind(text: .selectAll)
+    }
+    
+    private func presentContact(contact: CNContact) {
+        if let contact = ContactManager.findContact(contact: contact) {
+            let contactVC = CNContactViewController(for: contact)
+            contactVC.allowsEditing = true
+            navigationController?.setNavigationBarHidden(false, animated: false)
+            navigationController?.pushViewController(contactVC, animated: true)
         }
     }
 }
@@ -58,12 +94,12 @@ extension AllContactsViewController: ViewControllerProtocol {
 
 extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        contacts.count
+        sections.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ItemCellHeader()
-        header.firstLabel.bind(text: contacts[section].name)
+        header.firstLabel.bind(text: sections[section].name)
         return header
     }
     
@@ -72,7 +108,7 @@ extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        contacts[section].contacts.count
+        sections[section].contacts.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -84,10 +120,10 @@ extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
         cell.delegate = self
         
-        if contacts[indexPath.section].contacts.count != 1 {
+        if sections[indexPath.section].contacts.count != 1 {
             if indexPath.row == 0 {
                 cell.setupFirstCellInSection()
-            } else if indexPath.row == contacts[indexPath.section].contacts.count - 1 {
+            } else if indexPath.row == sections[indexPath.section].contacts.count - 1 {
                 cell.setupLastCellInSection()
             } else {
                 cell.setupMiddleCellInSection()
@@ -96,19 +132,26 @@ extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource 
             cell.setupSingleCellInSection()
         }
         
-        cell.checkBoxButton.image = contactsForImport.contains(contacts[indexPath.section].contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
+        cell.checkBoxButton.image = contactsForImport.contains(sections[indexPath.section].contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         
-        cell.bind(contact: contacts[indexPath.section].contacts[indexPath.row], (indexPath.section, indexPath.row))
+        cell.backgroundColor = contactsForImport.contains(sections[indexPath.section].contacts[indexPath.row]) ? .lightBlueBackground : .white
+        
+        cell.bind(contact: sections[indexPath.section].contacts[indexPath.row], (indexPath.section, indexPath.row))
         return cell
     }
 }
 
 extension AllContactsViewController: ItemCellProtocol {
     func tapOnCheckBox(_ position: (Int, Int)) {
-        
+        let contact = sections[position.0].contacts[position.1]
+        if contactsForImport.contains(contact) {
+            contactsForImport.remove(contact)
+        } else {
+            contactsForImport.insert(contact)
+        }
     }
     
     func tapOnCell(_ position: (Int, Int)) {
-        
+        presentContact(contact: sections[position.0].contacts[position.1])
     }
 }

@@ -52,6 +52,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsr-u9-nft" customClass="SelectionButtonStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="282" y="74" width="95" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Select All"/>
+                                <connections>
+                                    <action selector="tapOnSelectionButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cWn-nm-xn9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
@@ -61,9 +69,11 @@
                             <constraint firstItem="MGc-bS-evQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="BdW-io-sUs"/>
                             <constraint firstItem="Wjj-dg-Irr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="HGM-0C-sgh"/>
                             <constraint firstItem="47x-fM-VUu" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="LkZ-Vp-FYp"/>
+                            <constraint firstItem="Nsr-u9-nft" firstAttribute="centerY" secondItem="47x-fM-VUu" secondAttribute="centerY" id="OOx-vA-8Ip"/>
                             <constraint firstItem="MGc-bS-evQ" firstAttribute="top" secondItem="Wjj-dg-Irr" secondAttribute="bottom" constant="20" id="Pki-94-GGh"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="MGc-bS-evQ" secondAttribute="trailing" constant="16" id="ihR-Hw-nyZ"/>
                             <constraint firstItem="47x-fM-VUu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="o56-XR-S2h"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Nsr-u9-nft" secondAttribute="trailing" constant="16" id="raH-mF-2Lb"/>
                             <constraint firstItem="Wjj-dg-Irr" firstAttribute="top" secondItem="zgk-Yq-bRB" secondAttribute="bottom" constant="6" id="vmj-xE-5X6"/>
                             <constraint firstItem="zgk-Yq-bRB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="yWM-14-oFo"/>
                         </constraints>
@@ -72,6 +82,7 @@
                         <outlet property="arrowBackView" destination="47x-fM-VUu" id="oEd-oj-XpP"/>
                         <outlet property="contactsCountLabel" destination="Wjj-dg-Irr" id="CQf-ka-khR"/>
                         <outlet property="contactsTableView" destination="MGc-bS-evQ" id="31P-fW-gby"/>
+                        <outlet property="selectionButton" destination="Nsr-u9-nft" id="ZqE-71-sir"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
