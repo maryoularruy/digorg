@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -48,7 +47,7 @@
                     <constraint firstItem="ZuU-83-qxI" firstAttribute="width" secondItem="ui7-rL-AY1" secondAttribute="width" priority="900" id="klD-wh-HCf"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" name="White"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="checkBoxButton" destination="Rdo-5C-qe3" id="nwY-dT-YdP"/>
                 <outlet property="content" destination="RGT-M5-Oba" id="qmp-9h-YqV"/>
@@ -60,8 +59,5 @@
     </objects>
     <resources>
         <image name="EmptyCheckBoxBlue" width="26" height="26"/>
-        <namedColor name="White">
-            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
     </resources>
 </document>

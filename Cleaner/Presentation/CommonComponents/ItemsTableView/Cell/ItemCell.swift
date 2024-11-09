@@ -55,6 +55,18 @@ final class ItemCell: UITableViewCell, NibReusable {
         secondLabel.text = numbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
     }
     
+    func bind(contact: CNContact, _ position: Int, type: UnresolvedItemCellType = .single) {
+        self.type = type
+        self.position = (0, position)
+        firstLabel.text = "\(contact.givenName) \(contact.familyName)"
+        
+        var numbers: [String] = []
+        contact.phoneNumbers.forEach { number in
+            numbers.append(number.value.stringValue)
+        }
+        secondLabel.text = numbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
+    }
+    
     func bindNoName(contact: CNContact, _ position: Int, type: UnresolvedItemCellType = .single) {
         self.type = type
         self.position = (0, position)
@@ -107,7 +119,7 @@ final class ItemCell: UITableViewCell, NibReusable {
         clipsToBounds = false
         content.layer.cornerRadius = 20
         secondLabel.setGreyTextColor()
-        addShadows()
+        content.addShadows()
         
         checkBoxButton.addTapGestureRecognizer { [weak self] in
             guard let self else { return }
