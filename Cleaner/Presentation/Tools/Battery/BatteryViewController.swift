@@ -55,6 +55,28 @@ extension BatteryViewController: ViewControllerProtocol {
 
 extension BatteryViewController: BatteryInstructionCellDelegate {
     func tapOnCell(_ type: BatteryInstructionCellType) {
-        
+        let vc: UIViewController = switch type {
+        case .optimizeBatteryCharging: StoryboardScene.OptimizeBatteryCharging.initialScene.instantiate()
+        case .lowPowerMode:
+            StoryboardScene.OptimizeBatteryCharging.initialScene.instantiate()
+        case .managingConnections:
+            StoryboardScene.OptimizeBatteryCharging.initialScene.instantiate()
+        case .locationServices:
+            StoryboardScene.OptimizeBatteryCharging.initialScene.instantiate()
+        case .batteryUsage:
+            StoryboardScene.OptimizeBatteryCharging.initialScene.instantiate()
+        case .backgroundRefresh:
+            StoryboardScene.OptimizeBatteryCharging.initialScene.instantiate()
+        case .brightness:
+            StoryboardScene.OptimizeBatteryCharging.initialScene.instantiate()
+        case .wifiResresh:
+            StoryboardScene.OptimizeBatteryCharging.initialScene.instantiate()
+        case .limitNotifications:
+            StoryboardScene.OptimizeBatteryCharging.initialScene.instantiate()
+        case .overheating:
+            StoryboardScene.OptimizeBatteryCharging.initialScene.instantiate()
+        }
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.present(vc, animated: true)
     }
 }
