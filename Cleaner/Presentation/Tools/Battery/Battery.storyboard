@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eRo-Ob-x9B">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRo-Ob-x9B">
                                 <rect key="frame" x="0.0" y="59" width="393" height="793"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxG-D1-pdN" customClass="Semibold24LabelStyle" customModule="Cleaner" customModuleProvider="target">
@@ -30,7 +30,7 @@
                                         <rect key="frame" x="16" y="5" width="55" height="55"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ArrowBackIcon" translatesAutoresizingMaskIntoConstraints="NO" id="j62-uQ-CNc">
-                                                <rect key="frame" x="-4.3333333333333357" y="-4.6666666666666572" width="64" height="64"/>
+                                                <rect key="frame" x="-4.3333333333333357" y="-4.3333333333333357" width="64" height="64"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,7 +41,7 @@
                                             <constraint firstItem="j62-uQ-CNc" firstAttribute="centerX" secondItem="2LK-x8-ULl" secondAttribute="centerX" id="dje-cF-L1e"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQg-Uo-YAH" customClass="BatteryLevelView" customModule="Cleaner" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aQg-Uo-YAH" customClass="BatteryLevelView" customModule="Cleaner" customModuleProvider="target">
                                         <rect key="frame" x="16" y="117" width="361" height="96"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -55,31 +55,29 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="2LK-x8-ULl" firstAttribute="top" secondItem="wS1-Ku-2ar" secondAttribute="top" constant="5" id="8vQ-eg-TPX"/>
-                                    <constraint firstItem="wS1-Ku-2ar" firstAttribute="trailing" secondItem="lTY-lY-1ax" secondAttribute="trailing" constant="16" id="BkN-3p-VeA"/>
+                                    <constraint firstItem="2LK-x8-ULl" firstAttribute="top" secondItem="eRo-Ob-x9B" secondAttribute="top" constant="5" id="8vQ-eg-TPX"/>
+                                    <constraint firstAttribute="trailing" secondItem="lTY-lY-1ax" secondAttribute="trailing" constant="16" id="BkN-3p-VeA"/>
                                     <constraint firstItem="aQg-Uo-YAH" firstAttribute="top" secondItem="MxG-D1-pdN" secondAttribute="bottom" constant="20" id="EMT-Go-Zat"/>
-                                    <constraint firstItem="lTY-lY-1ax" firstAttribute="leading" secondItem="wS1-Ku-2ar" secondAttribute="leading" constant="16" id="PAF-Gx-C11"/>
-                                    <constraint firstItem="aQg-Uo-YAH" firstAttribute="leading" secondItem="wS1-Ku-2ar" secondAttribute="leading" constant="16" id="SSO-e7-Uen"/>
-                                    <constraint firstItem="pf2-mr-VOB" firstAttribute="bottom" secondItem="lTY-lY-1ax" secondAttribute="bottom" constant="50" id="aw4-EO-dTO"/>
+                                    <constraint firstItem="lTY-lY-1ax" firstAttribute="leading" secondItem="eRo-Ob-x9B" secondAttribute="leading" constant="16" id="PAF-Gx-C11"/>
+                                    <constraint firstItem="aQg-Uo-YAH" firstAttribute="leading" secondItem="eRo-Ob-x9B" secondAttribute="leading" constant="16" id="SSO-e7-Uen"/>
+                                    <constraint firstAttribute="bottom" secondItem="lTY-lY-1ax" secondAttribute="bottom" constant="50" id="aw4-EO-dTO"/>
                                     <constraint firstItem="MxG-D1-pdN" firstAttribute="top" secondItem="2LK-x8-ULl" secondAttribute="bottom" constant="16" id="sZL-n4-3sd"/>
-                                    <constraint firstItem="MxG-D1-pdN" firstAttribute="leading" secondItem="wS1-Ku-2ar" secondAttribute="leading" constant="16" id="t3G-H7-OLu"/>
-                                    <constraint firstItem="2LK-x8-ULl" firstAttribute="leading" secondItem="wS1-Ku-2ar" secondAttribute="leading" constant="16" id="tOo-pV-sgX"/>
-                                    <constraint firstItem="wS1-Ku-2ar" firstAttribute="trailing" secondItem="aQg-Uo-YAH" secondAttribute="trailing" constant="16" id="wmv-MV-8U9"/>
+                                    <constraint firstItem="MxG-D1-pdN" firstAttribute="leading" secondItem="eRo-Ob-x9B" secondAttribute="leading" constant="16" id="t3G-H7-OLu"/>
+                                    <constraint firstItem="2LK-x8-ULl" firstAttribute="leading" secondItem="eRo-Ob-x9B" secondAttribute="leading" constant="16" id="tOo-pV-sgX"/>
+                                    <constraint firstAttribute="trailing" secondItem="aQg-Uo-YAH" secondAttribute="trailing" constant="16" id="wmv-MV-8U9"/>
                                     <constraint firstItem="lTY-lY-1ax" firstAttribute="top" secondItem="aQg-Uo-YAH" secondAttribute="bottom" constant="16" id="xh5-oR-jOv"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="pf2-mr-VOB"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="wS1-Ku-2ar"/>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="White"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eRo-Ob-x9B" secondAttribute="bottom" id="2DV-fh-cJg"/>
                             <constraint firstItem="eRo-Ob-x9B" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="383-8Q-MEa"/>
+                            <constraint firstAttribute="bottom" secondItem="eRo-Ob-x9B" secondAttribute="bottom" id="I9D-c3-wpP"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eRo-Ob-x9B" secondAttribute="trailing" id="Orb-eg-dFK"/>
                             <constraint firstItem="eRo-Ob-x9B" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="bOY-Dn-FAP"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="k7j-CU-Szh"/>
-                            <constraint firstItem="eRo-Ob-x9B" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="tCt-JK-Pdv"/>
+                            <constraint firstItem="eRo-Ob-x9B" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="rMx-hd-78x"/>
                         </constraints>
                     </view>
                     <connections>
