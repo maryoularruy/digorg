@@ -41,7 +41,7 @@
                                             <constraint firstItem="j62-uQ-CNc" firstAttribute="centerX" secondItem="2LK-x8-ULl" secondAttribute="centerX" id="dje-cF-L1e"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aQg-Uo-YAH" customClass="BatteryLevelView" customModule="Cleaner" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQg-Uo-YAH" customClass="BatteryLevelView" customModule="Cleaner" customModuleProvider="target">
                                         <rect key="frame" x="16" y="117" width="361" height="96"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -56,6 +56,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="2LK-x8-ULl" firstAttribute="top" secondItem="eRo-Ob-x9B" secondAttribute="top" constant="5" id="8vQ-eg-TPX"/>
+                                    <constraint firstItem="lTY-lY-1ax" firstAttribute="width" secondItem="eRo-Ob-x9B" secondAttribute="width" constant="-32" id="B4L-lu-ZNb"/>
                                     <constraint firstAttribute="trailing" secondItem="lTY-lY-1ax" secondAttribute="trailing" constant="16" id="BkN-3p-VeA"/>
                                     <constraint firstItem="aQg-Uo-YAH" firstAttribute="top" secondItem="MxG-D1-pdN" secondAttribute="bottom" constant="20" id="EMT-Go-Zat"/>
                                     <constraint firstItem="lTY-lY-1ax" firstAttribute="leading" secondItem="eRo-Ob-x9B" secondAttribute="leading" constant="16" id="PAF-Gx-C11"/>

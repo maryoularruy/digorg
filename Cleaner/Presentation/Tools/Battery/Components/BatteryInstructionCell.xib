@@ -29,7 +29,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwI-EX-IMx" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="48" y="24.666666666666671" width="42" height="21"/>
+                    <rect key="frame" x="48" y="17.666666666666668" width="42" height="21.000000000000004"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -52,7 +52,6 @@
                 <constraint firstItem="InS-zh-M2m" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="YFG-tL-ZSl"/>
                 <constraint firstItem="BwN-nZ-3cz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="gFW-O0-djL"/>
                 <constraint firstItem="cwI-EX-IMx" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="kBl-QT-age"/>
-                <constraint firstItem="BwN-nZ-3cz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="kYo-yV-eyX"/>
                 <constraint firstAttribute="trailing" secondItem="InS-zh-M2m" secondAttribute="trailing" constant="10" id="s0j-2F-fnY"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
