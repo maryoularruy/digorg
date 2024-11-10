@@ -28,13 +28,13 @@ final class BatteryViewController: UIViewController {
     }
     
     @objc func batteryLevelDidChange() {
-        batteryLevelView.bind(batteryLevel: UIDevice.current.batteryLevel, isPowerSavingMode: false)
+        batteryLevelView.bind(batteryLevel: UIDevice.current.batteryLevel, isPowerSavingMode: ProcessInfo.processInfo.isLowPowerModeEnabled)
     }
 }
 
 extension BatteryViewController: ViewControllerProtocol {
     func setupUI() {
-        batteryLevelView.bind(batteryLevel: UIDevice.current.batteryLevel, isPowerSavingMode: false)
+        batteryLevelView.bind(batteryLevel: UIDevice.current.batteryLevel, isPowerSavingMode: ProcessInfo.processInfo.isLowPowerModeEnabled)
         NotificationCenter.default.addObserver(self, selector: #selector(batteryLevelDidChange), name: UIDevice.batteryLevelDidChangeNotification, object: nil)
     }
     
