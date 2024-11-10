@@ -25,10 +25,11 @@ final class BatteryLevelView: UIView {
         setup()
     }
     
-    func bind(batteryLevel: Int, isPowerSavingMode: Bool) {
-        batteryLevelLabel.bind(text: "Battery level \(batteryLevel)%")
-        progressBar.progress = batteryLevel.toProgressBarValue()
+    func bind(batteryLevel: Float, isPowerSavingMode: Bool) {
+        batteryLevelLabel.bind(text: "Battery level \(batteryLevel.toPercent())%")
+        progressBar.progress = batteryLevel
         savingModeLabel.bind(text: "Power saving mode: \(isPowerSavingMode ? "on" : "off")")
+        layoutIfNeeded()
     }
 
     private func setup() {

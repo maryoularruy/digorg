@@ -13,6 +13,7 @@ final class BatteryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIDevice.current.isBatteryMonitoringEnabled = true
         addGestureRecognizers()
     }
     
@@ -20,11 +21,21 @@ final class BatteryViewController: UIViewController {
         super.viewWillAppear(true)
         setupUI()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func batteryLevelDidChange() {
+        batteryLevelView.bind(batteryLevel: UIDevice.current.batteryLevel, isPowerSavingMode: false)
+    }
 }
 
 extension BatteryViewController: ViewControllerProtocol {
     func setupUI() {
-        batteryLevelView.bind(batteryLevel: 45, isPowerSavingMode: false)
+        batteryLevelView.bind(batteryLevel: UIDevice.current.batteryLevel, isPowerSavingMode: false)
+        NotificationCenter.default.addObserver(self, selector: #selector(batteryLevelDidChange), name: UIDevice.batteryLevelDidChangeNotification, object: nil)
     }
     
     func addGestureRecognizers() {
