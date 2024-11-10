@@ -55,7 +55,7 @@ extension ToolsViewController: ToolOptionViewDelegate {
         case .networkSpeedTest: StoryboardScene.SecretAlbum.initialScene.instantiate()
 //        case .widgets:
 //            StoryboardScene.SecretAlbum.initialScene.instantiate()
-        case .battery: StoryboardScene.SecretAlbum.initialScene.instantiate()
+        case .battery: StoryboardScene.Battery.initialScene.instantiate()
         }
         userDefaultsService.remove(key: .secretPasscodeConfirmed)
         vc.modalPresentationStyle = .fullScreen

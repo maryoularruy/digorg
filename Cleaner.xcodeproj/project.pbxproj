@@ -480,6 +480,7 @@
 		A54449172CD1C434001ECA7A /* SecretAlbum */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SecretAlbum; sourceTree = "<group>"; };
 		A55234102CC16D2900CBE265 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5609EAE2CDBD637000AF19E /* AllContacts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AllContacts; sourceTree = "<group>"; };
+		A5609F4A2CE0C141000AF19E /* Battery */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Battery; sourceTree = "<group>"; };
 		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -835,6 +836,7 @@
 		A51353CF2CD1567600656965 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				A5609F4A2CE0C141000AF19E /* Battery */,
 				A5609E9D2CDBBDDE000AF19E /* SecretContacts */,
 				A54449172CD1C434001ECA7A /* SecretAlbum */,
 				A54449102CD19943001ECA7A /* Components */,
@@ -1395,6 +1397,7 @@
 				A54449172CD1C434001ECA7A /* SecretAlbum */,
 				A55234102CC16D2900CBE265 /* Components */,
 				A5609EAE2CDBD637000AF19E /* AllContacts */,
+				A5609F4A2CE0C141000AF19E /* Battery */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
 			);

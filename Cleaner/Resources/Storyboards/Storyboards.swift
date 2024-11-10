@@ -13,6 +13,11 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<AllContactsViewController>(storyboard: AllContacts.self)
   }
+  internal enum Battery: StoryboardType {
+    internal static let storyboardName = "Battery"
+
+    internal static let initialScene = InitialSceneType<BatteryViewController>(storyboard: Battery.self)
+  }
   internal enum Calendar: StoryboardType {
     internal static let storyboardName = "Calendar"
 
