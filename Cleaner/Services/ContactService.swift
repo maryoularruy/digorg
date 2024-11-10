@@ -121,6 +121,7 @@ final class ContactManager {
     
     static func importSecretContacts(_ contacts: [CNContact]) {
         FileManager.default.saveSecretContacts(contacts)
+        delete(contacts)
     }
     
     static func getSecretContacts() -> [CNContact]? {
