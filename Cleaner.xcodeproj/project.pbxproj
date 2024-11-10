@@ -50,7 +50,6 @@
 		75D3FC722A606DD100F351A3 /* Reusable in Frameworks */ = {isa = PBXBuildFile; productRef = 75D3FC712A606DD100F351A3 /* Reusable */; };
 		75D3FC802A606E6F00F351A3 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC7B2A606E6F00F351A3 /* Extension+UIViewController.swift */; };
 		75D3FC812A606E6F00F351A3 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC7C2A606E6F00F351A3 /* Extension+String.swift */; };
-		75D3FC822A606E6F00F351A3 /* Extension+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC7D2A606E6F00F351A3 /* Extension+Int.swift */; };
 		75D3FC842A606E6F00F351A3 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC7F2A606E6F00F351A3 /* Extension+UIView.swift */; };
 		75D3FC8E2A606FF500F351A3 /* SF-Pro-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC862A606FF500F351A3 /* SF-Pro-Display-Thin.otf */; };
 		75D3FC8F2A606FF500F351A3 /* SF-Pro-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC872A606FF500F351A3 /* SF-Pro-Display-Light.otf */; };
@@ -83,6 +82,7 @@
 		A5600F632CD94B50006EE6BC /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5600F622CD94B50006EE6BC /* MediaModel.swift */; };
 		A5609E9F2CDBBDF9000AF19E /* SecretContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5609E9E2CDBBDF9000AF19E /* SecretContacts.storyboard */; };
 		A5609EA12CDBBE06000AF19E /* SecretContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */; };
+		A5609FD22CE0F83A000AF19E /* Int+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609FD12CE0F83A000AF19E /* Int+ext.swift */; };
 		A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */; };
 		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
 		A5BC395B2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */; };
@@ -277,7 +277,6 @@
 		75D3FC5A2A606BA100F351A3 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		75D3FC7B2A606E6F00F351A3 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		75D3FC7C2A606E6F00F351A3 /* Extension+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
-		75D3FC7D2A606E6F00F351A3 /* Extension+Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Int.swift"; sourceTree = "<group>"; };
 		75D3FC7F2A606E6F00F351A3 /* Extension+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		75D3FC862A606FF500F351A3 /* SF-Pro-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Thin.otf"; sourceTree = "<group>"; };
 		75D3FC872A606FF500F351A3 /* SF-Pro-Display-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Light.otf"; sourceTree = "<group>"; };
@@ -310,6 +309,7 @@
 		A5600F622CD94B50006EE6BC /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
 		A5609E9E2CDBBDF9000AF19E /* SecretContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecretContacts.storyboard; sourceTree = "<group>"; };
 		A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretContactsViewController.swift; sourceTree = "<group>"; };
+		A5609FD12CE0F83A000AF19E /* Int+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+ext.swift"; sourceTree = "<group>"; };
 		A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
 		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
 		A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleSubtitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -758,12 +758,12 @@
 				75D3FC9A2A618F5100F351A3 /* KeyboardLayoutConstraint.swift */,
 				75D3FC7B2A606E6F00F351A3 /* Extension+UIViewController.swift */,
 				75D3FC7C2A606E6F00F351A3 /* Extension+String.swift */,
-				75D3FC7D2A606E6F00F351A3 /* Extension+Int.swift */,
 				75D3FC7F2A606E6F00F351A3 /* Extension+UIView.swift */,
 				A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */,
 				A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */,
 				A53EDA242CD0429F00565625 /* Date+ext.swift */,
 				A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */,
+				A5609FD12CE0F83A000AF19E /* Int+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1550,7 +1550,6 @@
 				A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */,
 				FA3987F62B305FA50096F335 /* DKPhotoBasePreviewVC.swift in Sources */,
 				FA3987402B3054930096F335 /* MediaService.swift in Sources */,
-				75D3FC822A606E6F00F351A3 /* Extension+Int.swift in Sources */,
 				FA39885B2B30602A0096F335 /* PHImageManager.swift in Sources */,
 				FA3987A42B30599C0096F335 /* SearchViewController.swift in Sources */,
 				A55CA2612CC904780026D434 /* UIImage.swift in Sources */,
@@ -1615,6 +1614,7 @@
 				7532F84A2AE2749F007469EA /* SpeedTest.swift in Sources */,
 				FA3987ED2B305FA50096F335 /* DKPhotoGalleryInteractiveTransition.swift in Sources */,
 				7532F85D2AE290A6007469EA /* ContactsMenuViewController.swift in Sources */,
+				A5609FD22CE0F83A000AF19E /* Int+ext.swift in Sources */,
 				75D3FC802A606E6F00F351A3 /* Extension+UIViewController.swift in Sources */,
 				FA3987F32B305FA50096F335 /* DKPhotoGalleryItem.swift in Sources */,
 				FA3987582B3055510096F335 /* StagedChangeset.swift in Sources */,
