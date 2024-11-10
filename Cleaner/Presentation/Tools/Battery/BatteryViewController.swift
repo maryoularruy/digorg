@@ -37,11 +37,24 @@ extension BatteryViewController: ViewControllerProtocol {
     func setupUI() {
         batteryLevelView.bind(batteryLevel: UIDevice.current.batteryLevel, isPowerSavingMode: ProcessInfo.processInfo.isLowPowerModeEnabled)
         NotificationCenter.default.addObserver(self, selector: #selector(batteryLevelDidChange), name: UIDevice.batteryLevelDidChangeNotification, object: nil)
+        
+        BatteryInstructionCellType.allCases.forEach { type in
+            let view = BatteryInstructionCell()
+            view.delegate = self
+            view.bind(type)
+            batterySaveInstructionsStackView.addArrangedSubview(view)
+        }
     }
     
     func addGestureRecognizers() {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+    }
+}
+
+extension BatteryViewController: BatteryInstructionCellDelegate {
+    func tapOnCell(_ type: BatteryInstructionCellType) {
+        
     }
 }
