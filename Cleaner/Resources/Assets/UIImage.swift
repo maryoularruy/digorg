@@ -38,4 +38,15 @@ extension UIImage {
     static var filledCircle = UIImage(resource: .filledCircle)
     static var importMedia = UIImage(resource: .importMedia)
     static var takeMedia = UIImage(resource: .takeMedia)
+    
+    static var optimizeBatteryCharging = UIImage(resource: .optimizeBatteryCharging)
+    static var lowPowerMode = UIImage(resource: .lowPowerMode)
+    static var managingConnections = UIImage(resource: .managingConnections)
+    static var locationServices = UIImage(resource: .locationServices)
+    static var batteryUsage = UIImage(resource: .batteryUsage)
+    static var backgroundRefresh = UIImage(resource: .backgroundRefresh)
+    static var brightness = UIImage(resource: .brightness)
+    static var wifiRefresh = UIImage(resource: .wiFiResresh)
+    static var limitNotifications = UIImage(resource: .limitNotifications)
+    static var overheating = UIImage(resource: .overheating)
 }

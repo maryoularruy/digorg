@@ -10,6 +10,7 @@ import UIKit
 final class BatteryViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var batteryLevelView: BatteryLevelView!
+    @IBOutlet weak var batterySaveInstructionsStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
