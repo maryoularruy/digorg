@@ -61,7 +61,14 @@ extension UIView {
         return emptyStateView
     }
     
-    public func addTapGestureRecognizer(action: (() -> Void)?) {
+    func addSubviews(_ views: [UIView]) {
+        views.forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(view)
+        }
+    }
+    
+    func addTapGestureRecognizer(action: (() -> Void)?) {
         self.isUserInteractionEnabled = true
         self.tapGestureRecognizerAction = action
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))

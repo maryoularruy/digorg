@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIImage {
+    //MARK: -Home
     static var duplicateContactNamesIcon = UIImage(resource: .duplicateContactNamesIcon)
     static var duplicateContactNumbersIcon = UIImage(resource: .duplicateContactNumbersIcon)
     static var noNameContactsIcon = UIImage(resource: .noNameContactsIcon)
@@ -49,4 +50,7 @@ extension UIImage {
     static var wifiRefresh = UIImage(resource: .wiFiResresh)
     static var limitNotifications = UIImage(resource: .limitNotifications)
     static var overheating = UIImage(resource: .overheating)
+    
+    //MARK: -Navigation
+    static var arrowBackIcon = UIImage(resource: .arrowBackIcon)
 }

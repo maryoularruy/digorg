@@ -33,10 +33,27 @@ enum Pages: CaseIterable {
 }
 
 final class OptimizeBatteryChargingViewController: UIViewController {
+    private let rootView = OptimizeBatteryChargingView()
+    
+    override func loadView() {
+        super.loadView()
+        view = rootView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addGestureRecognizers()
+    }
+}
+
+extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
+    func setupUI() {
         
-        view.backgroundColor = .red
+    }
+    
+    func addGestureRecognizers() {
+        rootView.arrowBack.addTapGestureRecognizer { [weak self] in
+            self?.dismiss(animated: true)
+        }
     }
 }

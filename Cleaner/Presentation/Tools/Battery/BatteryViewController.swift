@@ -77,6 +77,7 @@ extension BatteryViewController: BatteryInstructionCellDelegate {
             OptimizeBatteryChargingViewController()
         }
         vc.modalPresentationStyle = .fullScreen
+        vc.modalTransitionStyle = .coverVertical
         navigationController?.present(vc, animated: true)
     }
 }
