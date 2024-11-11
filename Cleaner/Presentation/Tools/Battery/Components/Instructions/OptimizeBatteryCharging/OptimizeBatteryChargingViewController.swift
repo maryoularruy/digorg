@@ -7,35 +7,9 @@
 
 import UIKit
 
-enum Pages: CaseIterable {
-    case pageZero
-    case pageOne
-    case pageTwo
-    case pageThree
-    
-    var title: String {
-        switch self {
-        case .pageZero: "Open Settings"
-        case .pageOne: "Go to Battery"
-        case .pageTwo: "Tap Battery Health&Charging"
-        case .pageThree: "Enable Optimize Battery Charging"
-        }
-    }
-    
-    var index: Int {
-        switch self {
-        case .pageZero: 0
-        case .pageOne: 1
-        case .pageTwo: 2
-        case .pageThree: 3
-        }
-    }
-}
-
 final class OptimizeBatteryChargingViewController: UIViewController {
     private let rootView = OptimizeBatteryChargingView()
-//    private var pageController: UIPageViewController?
-    private var pages: [Pages] = Pages.allCases
+    private var pages: [Page] = Page.allCases
     private var currentIndex: Int = 0
     
     override func loadView() {
@@ -54,10 +28,9 @@ final class OptimizeBatteryChargingViewController: UIViewController {
         rootView.pageController.delegate = self
         addChild(rootView.pageController)
         
-//        let initialVC = PageVC(with: pages[0])
+        let initialVC = PageViewConroller(with: pages[0])
         
-//        self.pageController?.setViewControllers([initialVC], direction: .forward, animated: true, completion: nil)
-        
+        rootView.pageController.setViewControllers([initialVC], direction: .forward, animated: true, completion: nil)
         rootView.pageController.didMove(toParent: self)
     }
 }
@@ -76,11 +49,23 @@ extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
 
 extension OptimizeBatteryChargingViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        UIViewController()
+        guard let currentVC = viewController as? PageViewConroller else { return nil }
+        var index = currentVC.page.index
+        
+        if index == 0 { return nil }
+        
+        index -= 1
+        return PageViewConroller(with: pages[index])
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        UIViewController()
+        guard let currentVC = viewController as? PageViewConroller else { return nil }
+        var index = currentVC.page.index
+        
+        if index >= pages.count - 1 { return nil }
+        
+        index += 1
+        return PageViewConroller(with: pages[index])
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
