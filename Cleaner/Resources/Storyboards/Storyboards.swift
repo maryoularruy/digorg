@@ -78,12 +78,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<NoNumberContactsViewController>(storyboard: NoNumberContacts.self)
   }
-    internal enum OptimizeBatteryCharging: StoryboardType {
-    internal static let storyboardName = "OptimizeBatteryCharging"
-
-    internal static let initialScene = InitialSceneType<OptimizeBatteryChargingViewController>(storyboard: OptimizeBatteryCharging.self)
-  }
-    
   internal enum Passcode: StoryboardType {
     internal static let storyboardName = "Passcode"
 
