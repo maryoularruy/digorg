@@ -20,6 +20,8 @@ final class OptimizeBatteryChargingView: UIView {
                                                                          navigationOrientation: .horizontal,
                                                                          options: .none)
     
+    lazy var pageControl: UIPageControl = UIPageControl()
+    
     lazy var actionButton = ActionToolbarButtonStyle()
     
     override init(frame: CGRect) {
@@ -42,6 +44,7 @@ final class OptimizeBatteryChargingView: UIView {
         addSubviews([arrowBackButton,
                      label,
                      pageController.view,
+                     pageControl,
                      actionButton
                     ])
         
@@ -58,6 +61,9 @@ final class OptimizeBatteryChargingView: UIView {
             pageController.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             pageController.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             pageController.view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -110),
+            
+            pageControl.bottomAnchor.constraint(equalTo: pageController.view.bottomAnchor, constant: 0),
+            pageControl.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),

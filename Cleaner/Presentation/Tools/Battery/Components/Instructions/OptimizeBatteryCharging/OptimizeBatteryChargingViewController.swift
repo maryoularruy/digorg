@@ -35,10 +35,15 @@ final class OptimizeBatteryChargingViewController: UIViewController {
     }
     
     private func setupPageControl() {
-        if let pageControl = (rootView.pageController.view.subviews.first { $0 is UIPageControl }) as? UIPageControl {
-            pageControl.currentPageIndicatorTintColor = .blue
-            pageControl.pageIndicatorTintColor = .lightGrey
-        }
+        rootView.pageControl.isUserInteractionEnabled = false
+        rootView.pageControl.numberOfPages = pages.count
+        rootView.pageControl.currentPage = 0
+        rootView.pageControl.currentPageIndicatorTintColor = .blue
+        rootView.pageControl.pageIndicatorTintColor = .lightGrey
+    }
+    
+    private func updateCurrentPage(index: Int) {
+        rootView.pageControl.currentPage = index
     }
     
     private func setupActionButton() {
@@ -59,14 +64,14 @@ extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
         
         rootView.actionButton.addTapGestureRecognizer { [weak self] in
             guard let self else { return }
-            guard let currentViewController = rootView.pageController.viewControllers?.first as? PageViewConroller  else { return }
+            guard let currentVC = rootView.pageController.viewControllers?.first as? PageViewConroller  else { return }
              
-            if currentViewController.page.index == pages.count - 1 {
+            if currentVC.page.index == pages.count - 1 {
                 dismiss(animated: true)
             } else {
-                rootView.pageController.setViewControllers([PageViewConroller(with: pages[currentViewController.page.index + 1])], direction: .forward, animated: true, completion: nil)
+                rootView.pageController.setViewControllers([PageViewConroller(with: pages[currentVC.page.index + 1])], direction: .forward, animated: true, completion: nil)
                 setupActionButton()
-                setupPageControl()
+                updateCurrentPage(index: currentVC.page.index + 1)
             }
         }
     }
@@ -100,7 +105,11 @@ extension OptimizeBatteryChargingViewController: UIPageViewControllerDataSource,
         currentIndex
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        setupActionButton()
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if completed,
+           let currentVC = pageViewController.viewControllers?.first as? PageViewConroller {
+            setupActionButton()
+            updateCurrentPage(index: currentVC.page.index)
+        }
     }
 }
