@@ -36,6 +36,8 @@ For faster access, add this feature to your control center. Go to Settings > Con
 You'll know Battery Saver Mode is active when the battery icon in the upper right corner of the screen turns yellow.
 """)
     
+    private lazy var imageView2 = InstructionsImageView(.lowPowerMode2, size: CGSize(width: 252, height: 214))
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -55,7 +57,7 @@ You'll know Battery Saver Mode is active when the battery icon in the upper righ
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, imageView1, instructionsView1])
+        contentView.addSubviews([arrowBack, label, imageView1, instructionsView1, imageView2])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: topAnchor),
@@ -68,7 +70,6 @@ You'll know Battery Saver Mode is active when the battery icon in the upper righ
             contentView.trailingAnchor.constraint(equalTo: scroll.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scroll.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scroll.widthAnchor, constant: -32),
-            contentView.heightAnchor.constraint(equalToConstant: 1600),
             
             arrowBack.topAnchor.constraint(equalTo: contentView.topAnchor),
             arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -83,7 +84,11 @@ You'll know Battery Saver Mode is active when the battery icon in the upper righ
             
             instructionsView1.topAnchor.constraint(equalTo: imageView1.bottomAnchor, constant: 20),
             instructionsView1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            instructionsView1.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            instructionsView1.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            imageView2.topAnchor.constraint(equalTo: instructionsView1.bottomAnchor, constant: 20),
+            imageView2.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            imageView2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
