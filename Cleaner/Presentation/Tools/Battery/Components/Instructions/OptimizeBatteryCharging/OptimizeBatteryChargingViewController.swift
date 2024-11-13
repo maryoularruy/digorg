@@ -40,6 +40,10 @@ final class OptimizeBatteryChargingViewController: UIViewController {
             pageControl.pageIndicatorTintColor = .lightGrey
         }
     }
+    
+    private func setupActionButton() {
+        rootView.actionButton.bind(text: "\((rootView.pageController.viewControllers?.first as? PageViewConroller)?.page.index == pages.count - 1 ? "Close" : "Next")")
+    }
 }
 
 extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
@@ -51,6 +55,19 @@ extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
     func addGestureRecognizers() {
         rootView.arrowBack.addTapGestureRecognizer { [weak self] in
             self?.dismiss(animated: true)
+        }
+        
+        rootView.actionButton.addTapGestureRecognizer { [weak self] in
+            guard let self else { return }
+            guard let currentViewController = rootView.pageController.viewControllers?.first as? PageViewConroller  else { return }
+             
+            if currentViewController.page.index == pages.count - 1 {
+                dismiss(animated: true)
+            } else {
+                rootView.pageController.setViewControllers([PageViewConroller(with: pages[currentViewController.page.index + 1])], direction: .forward, animated: true, completion: nil)
+                setupActionButton()
+                setupPageControl()
+            }
         }
     }
 }
@@ -84,6 +101,6 @@ extension OptimizeBatteryChargingViewController: UIPageViewControllerDataSource,
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        rootView.actionButton.bind(text: "\((pendingViewControllers.first as? PageViewConroller)?.page.index == pages.count - 1 ? "Close" : "Next")")
+        setupActionButton()
     }
 }
