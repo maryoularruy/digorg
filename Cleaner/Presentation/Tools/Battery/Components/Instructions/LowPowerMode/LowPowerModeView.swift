@@ -20,6 +20,22 @@ final class LowPowerModeView: UIView {
     
     private lazy var imageView1 = InstructionsImageView(.lowPowerMode1, size: CGSize(width: 252, height: 214))
     
+    private lazy var instructionsView1 = InstructionView(title: "Low Power Mode: Save your battery and extend its life",
+                                                         description: """
+You can use the smart features of iOS to extend the life of your battery with Low Power Mode. Stop the battery draining process and extend the life of your device.
+
+Low Power Mode saves battery life by disabling features such as background app updates, automatic downloads, and automatic email retrieval. It also temporarily restricts the selection of certain iOS visual effects.
+
+Unlike airplane mode, power-saving mode doesn't affect normal device usage much. Wi-Fi, Bluetooth and cellular connectivity are still available.
+
+By default, when your battery drops to 20%, you'll usually see an iOS notification suggesting you activate Low Power Mode. You'll get another notification when your battery reaches 10%. When power saving mode is enabled, it will automatically turn off once your battery reaches 80% charge.
+
+You can manually activate this mode without waiting for the notification (Settings > Battery).
+For faster access, add this feature to your control center. Go to Settings > Control Center and tap the + next to Power Save Mode.
+
+You'll know Battery Saver Mode is active when the battery icon in the upper right corner of the screen turns yellow.
+""")
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -39,7 +55,7 @@ final class LowPowerModeView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, imageView1])
+        contentView.addSubviews([arrowBack, label, imageView1, instructionsView1])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: topAnchor),
@@ -52,7 +68,7 @@ final class LowPowerModeView: UIView {
             contentView.trailingAnchor.constraint(equalTo: scroll.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scroll.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scroll.widthAnchor, constant: -32),
-            contentView.heightAnchor.constraint(equalToConstant: 1000),
+            contentView.heightAnchor.constraint(equalToConstant: 1600),
             
             arrowBack.topAnchor.constraint(equalTo: contentView.topAnchor),
             arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -63,7 +79,11 @@ final class LowPowerModeView: UIView {
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
             imageView1.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
-            imageView1.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            imageView1.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            
+            instructionsView1.topAnchor.constraint(equalTo: imageView1.bottomAnchor, constant: 20),
+            instructionsView1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            instructionsView1.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
 }
