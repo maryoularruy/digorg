@@ -16,11 +16,9 @@ final class OptimizeBatteryChargingView: UIView {
         return label
     }()
     
-    lazy var pageController: UIPageViewController = {
-        let vc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: .none)
-        vc.view.backgroundColor = .acidGreen
-        return vc
-    }()
+    lazy var pageController: UIPageViewController = UIPageViewController(transitionStyle: .scroll,
+                                                                         navigationOrientation: .horizontal,
+                                                                         options: .none)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

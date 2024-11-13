@@ -50,6 +50,10 @@ extension UIImage {
     static var wifiRefresh = UIImage(resource: .wiFiResresh)
     static var limitNotifications = UIImage(resource: .limitNotifications)
     static var overheating = UIImage(resource: .overheating)
+    static var batteryInstructions1 = UIImage(resource: .batteryInstructions1)
+    static var batteryInstructions2 = UIImage(resource: .batteryInstructions2)
+    static var batteryInstructions3 = UIImage(resource: .batteryInstructions3)
+    static var batteryInstructions4 = UIImage(resource: .batteryInstructions4)
     
     //MARK: -Navigation
     static var arrowBackIcon = UIImage(resource: .arrowBackIcon)

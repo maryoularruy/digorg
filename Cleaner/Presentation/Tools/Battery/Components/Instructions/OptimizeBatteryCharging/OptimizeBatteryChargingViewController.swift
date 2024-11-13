@@ -33,6 +33,13 @@ final class OptimizeBatteryChargingViewController: UIViewController {
         rootView.pageController.setViewControllers([initialVC], direction: .forward, animated: true, completion: nil)
         rootView.pageController.didMove(toParent: self)
     }
+    
+    private func setupPageControl() {
+        if let pageControl = (rootView.pageController.view.subviews.first { $0 is UIPageControl }) as? UIPageControl {
+            pageControl.currentPageIndicatorTintColor = .blue
+            pageControl.pageIndicatorTintColor = .lightGrey
+        }
+    }
 }
 
 extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
@@ -69,7 +76,8 @@ extension OptimizeBatteryChargingViewController: UIPageViewControllerDataSource,
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        pages.count
+        setupPageControl()
+        return pages.count
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
