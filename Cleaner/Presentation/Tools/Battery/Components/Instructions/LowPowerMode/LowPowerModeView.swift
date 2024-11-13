@@ -18,6 +18,8 @@ final class LowPowerModeView: UIView {
         return label
     }()
     
+    private lazy var imageView1 = InstructionsImageView(.lowPowerMode1, size: CGSize(width: 252, height: 214))
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -37,7 +39,7 @@ final class LowPowerModeView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label])
+        contentView.addSubviews([arrowBack, label, imageView1])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: topAnchor),
@@ -58,7 +60,10 @@ final class LowPowerModeView: UIView {
             arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
             
             label.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 16),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            
+            imageView1.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
+            imageView1.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
 }
