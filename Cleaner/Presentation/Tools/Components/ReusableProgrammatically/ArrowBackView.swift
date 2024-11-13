@@ -10,10 +10,10 @@ import UIKit
 var arrowBackButton: UIView = {
     let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
     
-    let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
+    let imageView = UIImageView()
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.image = .arrowBackIcon
-    imageView.center = view.center
+    imageView.contentMode = .scaleToFill
     imageView.frame = view.bounds
     imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     

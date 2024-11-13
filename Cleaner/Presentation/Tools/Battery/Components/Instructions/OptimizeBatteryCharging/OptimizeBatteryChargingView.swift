@@ -49,8 +49,8 @@ final class OptimizeBatteryChargingView: UIView {
                     ])
         
         NSLayoutConstraint.activate([
-            arrowBackButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 4),
-            arrowBackButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            arrowBackButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 2),
+            arrowBackButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
             arrowBackButton.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBackButton.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
             
