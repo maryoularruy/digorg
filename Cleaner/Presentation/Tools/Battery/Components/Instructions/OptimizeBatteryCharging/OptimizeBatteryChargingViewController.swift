@@ -45,6 +45,7 @@ final class OptimizeBatteryChargingViewController: UIViewController {
 extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
     func setupUI() {
         setupPageController()
+        rootView.actionButton.bind(text: "\(currentIndex == pages.count - 1 ? "Close" : "Next")")
     }
     
     func addGestureRecognizers() {
@@ -58,7 +59,6 @@ extension OptimizeBatteryChargingViewController: UIPageViewControllerDataSource,
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentVC = viewController as? PageViewConroller else { return nil }
         var index = currentVC.page.index
-        
         if index == 0 { return nil }
         
         index -= 1
@@ -68,7 +68,6 @@ extension OptimizeBatteryChargingViewController: UIPageViewControllerDataSource,
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let currentVC = viewController as? PageViewConroller else { return nil }
         var index = currentVC.page.index
-        
         if index >= pages.count - 1 { return nil }
         
         index += 1
@@ -82,5 +81,9 @@ extension OptimizeBatteryChargingViewController: UIPageViewControllerDataSource,
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         currentIndex
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        rootView.actionButton.bind(text: "\((pendingViewControllers.first as? PageViewConroller)?.page.index == pages.count - 1 ? "Close" : "Next")")
     }
 }

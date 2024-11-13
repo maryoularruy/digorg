@@ -20,6 +20,8 @@ final class OptimizeBatteryChargingView: UIView {
                                                                          navigationOrientation: .horizontal,
                                                                          options: .none)
     
+    lazy var actionButton = ActionToolbarButtonStyle()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -39,7 +41,8 @@ final class OptimizeBatteryChargingView: UIView {
     private func initConstraints() {
         addSubviews([arrowBackButton,
                      label,
-                     pageController.view
+                     pageController.view,
+                     actionButton
                     ])
         
         NSLayoutConstraint.activate([
@@ -49,12 +52,17 @@ final class OptimizeBatteryChargingView: UIView {
             arrowBackButton.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
             
             label.topAnchor.constraint(equalTo: arrowBackButton.bottomAnchor, constant: 16),
-            label.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
+            label.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             pageController.view.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
             pageController.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             pageController.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            pageController.view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -110)
+            pageController.view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -110),
+            
+            actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            actionButton.heightAnchor.constraint(equalToConstant: 50),
+            actionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32)
         ])
     }
 }
