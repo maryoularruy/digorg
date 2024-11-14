@@ -1,5 +1,5 @@
 //
-//  WifiRefreshView.swift
+//  OverheatingView.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 14.11.2024.
@@ -7,29 +7,25 @@
 
 import UIKit
 
-final class WifiRefreshView: UIView {
+final class OverheatingView: UIView {
     private lazy var scroll: UIScrollView = scrollView
     private lazy var contentView: UIView = UIView()
     lazy var arrowBack: UIView = arrowBackButton
     
     private lazy var label: Semibold15LabelStyle = {
         let label = Semibold24LabelStyle()
-        label.bind(text: "Wi-Fi Refresh")
+        label.bind(text: "Overheating")
         return label
     }()
     
-    private lazy var imageView1 = InstructionsImageView(.wifiRefresh1, size: CGSize(width: 252, height: 268))
+    private lazy var imageView1 = InstructionsImageView(.overheating1, size: CGSize(width: 252, height: 268))
     
-    private lazy var instructionsView1 = InstructionView(title: "Wi-Fi Refresh: turn off cellular background services",
+    private lazy var instructionsView1 = InstructionView(title: "Overheating: Keeps your device cool and optimizes battery life",
                                                          description: """
-Background updates are useful if you want to stay up to date. However, it consumes a lot of battery power.
+The optimal temperature for long and comfortable use of the device is 32° to 95°F (0° to 35°C). Therefore, it is recommended to protect it from direct sunlight. Keep in mind that too low temperatures can temporarily reduce battery life and turn off your device.
 
-You can reduce the impact of background updating by turning it off for both Wi-Fi and cellular services, or turning it on only for Wi-Fi.
-This allows you to minimize the use of your cell phone. This is good if you plan to limit your data.
-
-You can disable background service updates for cellular signals in Settings > General >
-Background App Refresh. Next, tap
-Background App Refresh once again at the top of the screen and choose the option you prefer.
+Use a phone case that allows some air.
+Otherwise, your battery may suffer. If the temperature rises, your device will send you an alert and you will have to wait a while before you can use it again. To reduce latency, turn off your device and take it to a cool place to cool down.
 """)
     
     override init(frame: CGRect) {

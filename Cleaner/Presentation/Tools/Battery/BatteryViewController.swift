@@ -68,8 +68,7 @@ extension BatteryViewController: BatteryInstructionCellDelegate {
         case .brightness: BrightnessViewController()
         case .wifiResresh: WifiRefreshViewController()
         case .limitNotifications: LimitNotificationsViewController()
-        case .overheating:
-            OptimizeBatteryChargingViewController()
+        case .overheating: OverheatingViewController()
         }
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .coverVertical
