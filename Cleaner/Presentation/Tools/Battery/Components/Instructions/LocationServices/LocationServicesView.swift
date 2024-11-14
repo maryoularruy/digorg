@@ -67,7 +67,7 @@ final class LocationServicesView: UIView {
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
             
-            label.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 16),
+            label.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 22),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
             imageView1.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),

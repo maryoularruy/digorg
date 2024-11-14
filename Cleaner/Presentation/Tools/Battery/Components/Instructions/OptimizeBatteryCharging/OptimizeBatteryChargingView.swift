@@ -54,7 +54,7 @@ final class OptimizeBatteryChargingView: UIView {
             arrowBackButton.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBackButton.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
             
-            label.topAnchor.constraint(equalTo: arrowBackButton.bottomAnchor, constant: 16),
+            label.topAnchor.constraint(equalTo: arrowBackButton.bottomAnchor, constant: 22),
             label.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             pageController.view.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
