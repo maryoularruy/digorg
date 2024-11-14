@@ -15,12 +15,6 @@ extension UIImage {
     static var noNumberContactsIcon = UIImage(resource: .noNumberContactsIcon)
     static var people = UIImage(resource: .people)
     
-    static var emptyCheckBoxWhite = UIImage(resource: .emptyCheckBox)
-    static var selectedCheckBox = UIImage(resource: .selectedCheckBox)
-    
-    static var emptyCheckBoxBlue = UIImage(resource: .emptyCheckBoxBlue)
-    static var selectedCheckBoxBlue = UIImage(resource: .selectedCheckBoxBlue)
-    
     static var stars = UIImage(resource: .stars)
     
     //MARK: -ToolOption
@@ -86,4 +80,11 @@ extension UIImage {
     
     //MARK: -Navigation
     static var arrowBackIcon = UIImage(resource: .arrowBackIcon)
+    
+    //MARK: -CommonComponents
+    static var emptyCheckBoxWhite = UIImage(resource: .emptyCheckBoxWhite)
+    static var selectedCheckBox = UIImage(resource: .selectedCheckBoxWhite)
+    
+    static var emptyCheckBoxBlue = UIImage(resource: .emptyCheckBoxBlue)
+    static var selectedCheckBoxBlue = UIImage(resource: .selectedCheckBoxBlue)
 }

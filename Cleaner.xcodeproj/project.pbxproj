@@ -52,7 +52,6 @@
 		75D3FC932A606FF500F351A3 /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC8B2A606FF500F351A3 /* SF-Pro-Display-Heavy.otf */; };
 		75D3FC942A606FF500F351A3 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC8C2A606FF500F351A3 /* SF-Pro-Display-Semibold.otf */; };
 		75D3FC952A606FF500F351A3 /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC8D2A606FF500F351A3 /* SF-Pro-Display-Ultralight.otf */; };
-		75D3FC992A6071B100F351A3 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC982A6071B100F351A3 /* Assets.swift */; };
 		75D3FC9B2A618F5100F351A3 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC9A2A618F5100F351A3 /* KeyboardLayoutConstraint.swift */; };
 		A50F58B52CB6D10100AB3166 /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */; };
 		A50F58C42CB7B43400AB3166 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58C32CB7B43400AB3166 /* UIColor.swift */; };
@@ -255,7 +254,6 @@
 		75D3FC8B2A606FF500F351A3 /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
 		75D3FC8C2A606FF500F351A3 /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
 		75D3FC8D2A606FF500F351A3 /* SF-Pro-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Ultralight.otf"; sourceTree = "<group>"; };
-		75D3FC982A6071B100F351A3 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		75D3FC9A2A618F5100F351A3 /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		A50F58C32CB7B43400AB3166 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -641,7 +639,6 @@
 			children = (
 				A55CA2602CC904780026D434 /* UIImage.swift */,
 				A50F58C32CB7B43400AB3166 /* UIColor.swift */,
-				75D3FC982A6071B100F351A3 /* Assets.swift */,
 				75D3FC3F2A6069B000F351A3 /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -1361,7 +1358,6 @@
 				FA3987F02B305FA50096F335 /* DKPhotoGallery.swift in Sources */,
 				75D3FC812A606E6F00F351A3 /* Extension+String.swift in Sources */,
 				FA39877C2B3055930096F335 /* OSAHash.m in Sources */,
-				75D3FC992A6071B100F351A3 /* Assets.swift in Sources */,
 				752B10752AEABACD00EC0BBA /* ActionView.swift in Sources */,
 				FA3988502B30602A0096F335 /* UIFont.swift in Sources */,
 				FA3988062B305FA50096F335 /* DKPhotoGalleryResource.swift in Sources */,
