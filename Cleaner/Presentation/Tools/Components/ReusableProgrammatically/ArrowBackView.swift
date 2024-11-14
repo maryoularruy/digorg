@@ -7,7 +7,7 @@
 
 import UIKit
 
-var arrowBackButton: UIView = {
+var arrowBackButton: UIView {
     let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
     
     let imageView = UIImageView()
@@ -19,4 +19,4 @@ var arrowBackButton: UIView = {
     
     view.addSubview(imageView)
     return view
-}()
+}

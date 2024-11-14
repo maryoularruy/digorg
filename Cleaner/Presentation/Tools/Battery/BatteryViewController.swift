@@ -15,6 +15,14 @@ final class BatteryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UIDevice.current.isBatteryMonitoringEnabled = true
+        
+        BatteryInstructionCellType.allCases.forEach { type in
+            let view = BatteryInstructionCell()
+            view.delegate = self
+            view.bind(type)
+            batterySaveInstructionsStackView.addArrangedSubview(view)
+        }
+        
         addGestureRecognizers()
     }
     
@@ -37,13 +45,6 @@ extension BatteryViewController: ViewControllerProtocol {
     func setupUI() {
         batteryLevelView.bind(batteryLevel: UIDevice.current.batteryLevel, isPowerSavingMode: ProcessInfo.processInfo.isLowPowerModeEnabled)
         NotificationCenter.default.addObserver(self, selector: #selector(batteryLevelDidChange), name: UIDevice.batteryLevelDidChangeNotification, object: nil)
-        
-        BatteryInstructionCellType.allCases.forEach { type in
-            let view = BatteryInstructionCell()
-            view.delegate = self
-            view.bind(type)
-            batterySaveInstructionsStackView.addArrangedSubview(view)
-        }
     }
     
     func addGestureRecognizers() {
@@ -63,8 +64,7 @@ extension BatteryViewController: BatteryInstructionCellDelegate {
         case .locationServices: LocationServicesViewContoller()
         case .batteryUsage:
             OptimizeBatteryChargingViewController()
-        case .backgroundRefresh:
-            OptimizeBatteryChargingViewController()
+        case .backgroundRefresh: BackgroundRefreshViewController()
         case .brightness:
             OptimizeBatteryChargingViewController()
         case .wifiResresh:
@@ -76,6 +76,6 @@ extension BatteryViewController: BatteryInstructionCellDelegate {
         }
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .coverVertical
-        navigationController?.present(vc, animated: true)
+        present(vc, animated: true)
     }
 }
