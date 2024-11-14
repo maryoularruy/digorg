@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         
         PhoneInfoService.shared.getTotalRam()
-        StoriesData.shared.setup()
         
         DispatchQueue.main.async {
 //            if Defaults.isOnboardingSeen {

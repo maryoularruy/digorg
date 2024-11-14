@@ -25,15 +25,8 @@
 		7532F86A2AE29758007469EA /* DuplicateNameContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8692AE29758007469EA /* DuplicateNameContactsViewController.swift */; };
 		7532F8722AE304B5007469EA /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8712AE304B5007469EA /* ContactService.swift */; };
 		7532F8752AE30517007469EA /* SwiftyContacts in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F8742AE30517007469EA /* SwiftyContacts */; };
-		756866C42ACC0879008DBF7C /* StoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866C32ACC0879008DBF7C /* StoriesViewController.swift */; };
-		756866C62ACC0884008DBF7C /* Stories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756866C52ACC0884008DBF7C /* Stories.storyboard */; };
-		756866C82ACC08D6008DBF7C /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866C72ACC08D6008DBF7C /* CardCell.swift */; };
-		756866CA2ACC08E9008DBF7C /* CardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 756866C92ACC08E9008DBF7C /* CardCell.xib */; };
-		756866CC2ACD9E8D008DBF7C /* StoriesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866CB2ACD9E8D008DBF7C /* StoriesData.swift */; };
 		756866CF2ACD9ED0008DBF7C /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866CE2ACD9ED0008DBF7C /* OnboardingModel.swift */; };
 		756866D12AD1AE58008DBF7C /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866D02AD1AE58008DBF7C /* CardModel.swift */; };
-		756866D42AD1B9FE008DBF7C /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866D32AD1B9FD008DBF7C /* TutorialViewController.swift */; };
-		756866D62AD1BA12008DBF7C /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756866D52AD1BA12008DBF7C /* Tutorial.storyboard */; };
 		756866D92AD1D398008DBF7C /* PhoneInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866D82AD1D398008DBF7C /* PhoneInfoViewController.swift */; };
 		756866DB2AD1D3A3008DBF7C /* PhoneInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 756866DA2AD1D3A3008DBF7C /* PhoneInfo.storyboard */; };
 		756DF0A92ADC6D0700CC187D /* InternetSpeed in Frameworks */ = {isa = PBXBuildFile; productRef = 756DF0A82ADC6D0700CC187D /* InternetSpeed */; };
@@ -61,8 +54,6 @@
 		75D3FC952A606FF500F351A3 /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC8D2A606FF500F351A3 /* SF-Pro-Display-Ultralight.otf */; };
 		75D3FC992A6071B100F351A3 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC982A6071B100F351A3 /* Assets.swift */; };
 		75D3FC9B2A618F5100F351A3 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC9A2A618F5100F351A3 /* KeyboardLayoutConstraint.swift */; };
-		75FC42202AD2A0AC008F3E3A /* TutorialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC421F2AD2A0AC008F3E3A /* TutorialCell.swift */; };
-		75FC42222AD2A0C5008F3E3A /* TutorialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */; };
 		A50F58B52CB6D10100AB3166 /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */; };
 		A50F58C42CB7B43400AB3166 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F58C32CB7B43400AB3166 /* UIColor.swift */; };
 		A51353D12CD156BC00656965 /* Tools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51353D02CD156BC00656965 /* Tools.storyboard */; };
@@ -91,8 +82,6 @@
 		A5BC395D2CBC604E00153FD1 /* PhotoVideoMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BC39592CBC604E00153FD1 /* PhotoVideoMenu.storyboard */; };
 		A5BC395E2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5BC39582CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.xib */; };
 		A5E920ED2CD256C1008159DB /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */; };
-		FA3987232B303A460096F335 /* AdBlockerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987222B303A460096F335 /* AdBlockerViewController.swift */; };
-		FA3987252B303A540096F335 /* AdBlocker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3987242B303A540096F335 /* AdBlocker.storyboard */; };
 		FA3987282B303DCC0096F335 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987272B303DCC0096F335 /* SettingsViewController.swift */; };
 		FA39872A2B303DD30096F335 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3987292B303DD30096F335 /* Settings.storyboard */; };
 		FA39872D2B303FB90096F335 /* PaywallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39872C2B303FB90096F335 /* PaywallViewController.swift */; };
@@ -204,16 +193,6 @@
 		FA53586D2B3C4D6A0026FDC2 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53586C2B3C4D6A0026FDC2 /* RealmManager.swift */; };
 		FA5358702B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53586F2B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift */; };
 		FA5358722B3C5CDA0026FDC2 /* DetailedPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5358712B3C5CDA0026FDC2 /* DetailedPassword.storyboard */; };
-		FA59140F2B31A2A400371911 /* MainBatteryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA59140E2B31A2A400371911 /* MainBatteryViewController.swift */; };
-		FA5914112B31A2AC00371911 /* MainBattery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5914102B31A2AC00371911 /* MainBattery.storyboard */; };
-		FA5914142B31A57800371911 /* Tutorials.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5914132B31A57800371911 /* Tutorials.storyboard */; };
-		FA5914162B31AB6100371911 /* PowerSavingModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5914152B31AB6100371911 /* PowerSavingModeViewController.swift */; };
-		FA59141B2B31B8EE00371911 /* BatteryFirstCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5914192B31B8EE00371911 /* BatteryFirstCollectionViewCell.swift */; };
-		FA59141C2B31B8EE00371911 /* BatteryFirstCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA59141A2B31B8EE00371911 /* BatteryFirstCollectionViewCell.xib */; };
-		FA59141F2B31B92500371911 /* BatterySecondCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA59141D2B31B92500371911 /* BatterySecondCollectionViewCell.swift */; };
-		FA5914202B31B92500371911 /* BatterySecondCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA59141E2B31B92500371911 /* BatterySecondCollectionViewCell.xib */; };
-		FA5914242B31BCFA00371911 /* ImageTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5914222B31BCFA00371911 /* ImageTitleTableViewCell.swift */; };
-		FA5914252B31BCFA00371911 /* ImageTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5914232B31BCFA00371911 /* ImageTitleTableViewCell.xib */; };
 		FA641DDF2B3456DC00F6A466 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DDE2B3456DC00F6A466 /* CalendarService.swift */; };
 		FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA641DE02B34574300F6A466 /* Calendar.storyboard */; };
 		FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DE22B34575300F6A466 /* CalendarViewController.swift */; };
@@ -254,15 +233,8 @@
 		7532F8672AE29750007469EA /* DuplicateNameContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DuplicateNameContacts.storyboard; sourceTree = "<group>"; };
 		7532F8692AE29758007469EA /* DuplicateNameContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateNameContactsViewController.swift; sourceTree = "<group>"; };
 		7532F8712AE304B5007469EA /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
-		756866C32ACC0879008DBF7C /* StoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesViewController.swift; sourceTree = "<group>"; };
-		756866C52ACC0884008DBF7C /* Stories.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Stories.storyboard; sourceTree = "<group>"; };
-		756866C72ACC08D6008DBF7C /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
-		756866C92ACC08E9008DBF7C /* CardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardCell.xib; sourceTree = "<group>"; };
-		756866CB2ACD9E8D008DBF7C /* StoriesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesData.swift; sourceTree = "<group>"; };
 		756866CE2ACD9ED0008DBF7C /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		756866D02AD1AE58008DBF7C /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
-		756866D32AD1B9FD008DBF7C /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
-		756866D52AD1BA12008DBF7C /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		756866D82AD1D398008DBF7C /* PhoneInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInfoViewController.swift; sourceTree = "<group>"; };
 		756866DA2AD1D3A3008DBF7C /* PhoneInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhoneInfo.storyboard; sourceTree = "<group>"; };
 		75D3FC332A6069AF00F351A3 /* Cleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,8 +261,6 @@
 		75D3FC8D2A606FF500F351A3 /* SF-Pro-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Ultralight.otf"; sourceTree = "<group>"; };
 		75D3FC982A6071B100F351A3 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		75D3FC9A2A618F5100F351A3 /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
-		75FC421F2AD2A0AC008F3E3A /* TutorialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialCell.swift; sourceTree = "<group>"; };
-		75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialCell.xib; sourceTree = "<group>"; };
 		A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		A50F58C32CB7B43400AB3166 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		A51353D02CD156BC00656965 /* Tools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tools.storyboard; sourceTree = "<group>"; };
@@ -319,8 +289,6 @@
 		A5BC39592CBC604E00153FD1 /* PhotoVideoMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoVideoMenu.storyboard; sourceTree = "<group>"; };
 		A5BC395A2CBC604E00153FD1 /* PhotoVideoMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoMenuViewController.swift; sourceTree = "<group>"; };
 		A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
-		FA3987222B303A460096F335 /* AdBlockerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockerViewController.swift; sourceTree = "<group>"; };
-		FA3987242B303A540096F335 /* AdBlocker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdBlocker.storyboard; sourceTree = "<group>"; };
 		FA3987272B303DCC0096F335 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FA3987292B303DD30096F335 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		FA39872C2B303FB90096F335 /* PaywallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallViewController.swift; sourceTree = "<group>"; };
@@ -440,16 +408,6 @@
 		FA53586C2B3C4D6A0026FDC2 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		FA53586F2B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPasswordViewController.swift; sourceTree = "<group>"; };
 		FA5358712B3C5CDA0026FDC2 /* DetailedPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailedPassword.storyboard; sourceTree = "<group>"; };
-		FA59140E2B31A2A400371911 /* MainBatteryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBatteryViewController.swift; sourceTree = "<group>"; };
-		FA5914102B31A2AC00371911 /* MainBattery.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainBattery.storyboard; sourceTree = "<group>"; };
-		FA5914132B31A57800371911 /* Tutorials.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorials.storyboard; sourceTree = "<group>"; };
-		FA5914152B31AB6100371911 /* PowerSavingModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSavingModeViewController.swift; sourceTree = "<group>"; };
-		FA5914192B31B8EE00371911 /* BatteryFirstCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryFirstCollectionViewCell.swift; sourceTree = "<group>"; };
-		FA59141A2B31B8EE00371911 /* BatteryFirstCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BatteryFirstCollectionViewCell.xib; sourceTree = "<group>"; };
-		FA59141D2B31B92500371911 /* BatterySecondCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterySecondCollectionViewCell.swift; sourceTree = "<group>"; };
-		FA59141E2B31B92500371911 /* BatterySecondCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BatterySecondCollectionViewCell.xib; sourceTree = "<group>"; };
-		FA5914222B31BCFA00371911 /* ImageTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleTableViewCell.swift; sourceTree = "<group>"; };
-		FA5914232B31BCFA00371911 /* ImageTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTitleTableViewCell.xib; sourceTree = "<group>"; };
 		FA641DDE2B3456DC00F6A466 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		FA641DE02B34574300F6A466 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		FA641DE22B34575300F6A466 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -474,6 +432,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A50D5B212CE66100006C259C /* Instructions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Instructions; sourceTree = "<group>"; };
 		A50F58AE2CB6BB6C00AB3166 /* Poppins */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Poppins; sourceTree = "<group>"; };
 		A50F58B62CB6D39A00AB3166 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A53836B62CBC6925005BE39C /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
@@ -580,25 +539,6 @@
 			path = ActionView;
 			sourceTree = "<group>";
 		};
-		756866C12ACC085B008DBF7C /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				75FC421E2AD2A05A008F3E3A /* Tutorial */,
-				75FC421D2AD2A01A008F3E3A /* Card */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		756866C22ACC0861008DBF7C /* Stories */ = {
-			isa = PBXGroup;
-			children = (
-				756866C52ACC0884008DBF7C /* Stories.storyboard */,
-				756866C32ACC0879008DBF7C /* StoriesViewController.swift */,
-				756866CB2ACD9E8D008DBF7C /* StoriesData.swift */,
-			);
-			path = Stories;
-			sourceTree = "<group>";
-		};
 		756866CD2ACD9EB6008DBF7C /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,15 +555,6 @@
 				A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		756866D22AD1B9BC008DBF7C /* Tutorial */ = {
-			isa = PBXGroup;
-			children = (
-				756866D52AD1BA12008DBF7C /* Tutorial.storyboard */,
-				756866D32AD1B9FD008DBF7C /* TutorialViewController.swift */,
-			);
-			path = Tutorial;
 			sourceTree = "<group>";
 		};
 		756866D72AD1D378008DBF7C /* PhoneInfo */ = {
@@ -731,18 +662,13 @@
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
 				FA99F2E42B3C381F00D4B239 /* Password */,
 				FA641DDD2B34564200F6A466 /* Calendar */,
-				FA5914082B31A24E00371911 /* Battery */,
 				FA3987302B3048180096F335 /* PhotoVideo */,
 				FA39872B2B303FAC0096F335 /* Paywall */,
 				FA3987262B303DAC0096F335 /* Settings */,
-				FA3987212B303A210096F335 /* AdBlocker */,
 				7532F8782AE664DF007469EA /* ActionView */,
 				7532F85B2AE28B47007469EA /* Contacts */,
 				7504C2532AD6F9C2005FB398 /* Connection */,
-				756866C12ACC085B008DBF7C /* Cells */,
-				756866D22AD1B9BC008DBF7C /* Tutorial */,
 				756866D72AD1D378008DBF7C /* PhoneInfo */,
-				756866C22ACC0861008DBF7C /* Stories */,
 				75D3FC962A60716500F351A3 /* MainScreen */,
 				75D3FC972A60717300F351A3 /* Launch */,
 				A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */,
@@ -802,24 +728,6 @@
 				75D3FC412A6069B000F351A3 /* LaunchScreen.storyboard */,
 			);
 			path = Launch;
-			sourceTree = "<group>";
-		};
-		75FC421D2AD2A01A008F3E3A /* Card */ = {
-			isa = PBXGroup;
-			children = (
-				756866C92ACC08E9008DBF7C /* CardCell.xib */,
-				756866C72ACC08D6008DBF7C /* CardCell.swift */,
-			);
-			path = Card;
-			sourceTree = "<group>";
-		};
-		75FC421E2AD2A05A008F3E3A /* Tutorial */ = {
-			isa = PBXGroup;
-			children = (
-				75FC42212AD2A0C5008F3E3A /* TutorialCell.xib */,
-				75FC421F2AD2A0AC008F3E3A /* TutorialCell.swift */,
-			);
-			path = Tutorial;
 			sourceTree = "<group>";
 		};
 		75FC42242AD3104D008F3E3A /* Services */ = {
@@ -883,15 +791,6 @@
 				A576FACF2CB69A7700B018DE /* BaseConfiguration */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		FA3987212B303A210096F335 /* AdBlocker */ = {
-			isa = PBXGroup;
-			children = (
-				FA3987222B303A460096F335 /* AdBlockerViewController.swift */,
-				FA3987242B303A540096F335 /* AdBlocker.storyboard */,
-			);
-			path = AdBlocker;
 			sourceTree = "<group>";
 		};
 		FA3987262B303DAC0096F335 /* Settings */ = {
@@ -1239,55 +1138,6 @@
 			path = Detailed;
 			sourceTree = "<group>";
 		};
-		FA5914082B31A24E00371911 /* Battery */ = {
-			isa = PBXGroup;
-			children = (
-				FA5914172B31B8CB00371911 /* Cells */,
-				FA5914122B31A54D00371911 /* Tutorials */,
-				FA59140D2B31A29600371911 /* Main */,
-			);
-			path = Battery;
-			sourceTree = "<group>";
-		};
-		FA59140D2B31A29600371911 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				FA59140E2B31A2A400371911 /* MainBatteryViewController.swift */,
-				FA5914102B31A2AC00371911 /* MainBattery.storyboard */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		FA5914122B31A54D00371911 /* Tutorials */ = {
-			isa = PBXGroup;
-			children = (
-				FA5914132B31A57800371911 /* Tutorials.storyboard */,
-				FA5914152B31AB6100371911 /* PowerSavingModeViewController.swift */,
-			);
-			path = Tutorials;
-			sourceTree = "<group>";
-		};
-		FA5914172B31B8CB00371911 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				FA5914212B31BCDF00371911 /* TableCell */,
-				FA5914192B31B8EE00371911 /* BatteryFirstCollectionViewCell.swift */,
-				FA59141D2B31B92500371911 /* BatterySecondCollectionViewCell.swift */,
-				FA59141E2B31B92500371911 /* BatterySecondCollectionViewCell.xib */,
-				FA59141A2B31B8EE00371911 /* BatteryFirstCollectionViewCell.xib */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		FA5914212B31BCDF00371911 /* TableCell */ = {
-			isa = PBXGroup;
-			children = (
-				FA5914222B31BCFA00371911 /* ImageTitleTableViewCell.swift */,
-				FA5914232B31BCFA00371911 /* ImageTitleTableViewCell.xib */,
-			);
-			path = TableCell;
-			sourceTree = "<group>";
-		};
 		FA641DDD2B34564200F6A466 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1497,25 +1347,18 @@
 				A5BC395E2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.xib in Resources */,
 				75D3FC8F2A606FF500F351A3 /* SF-Pro-Display-Light.otf in Resources */,
 				752B10222AE6652800EC0BBA /* ActionView.xib in Resources */,
-				FA59141C2B31B8EE00371911 /* BatteryFirstCollectionViewCell.xib in Resources */,
 				A5609E9F2CDBBDF9000AF19E /* SecretContacts.storyboard in Resources */,
 				A53ED8E72CCBEA6700565625 /* NoNumberContacts.storyboard in Resources */,
-				75FC42222AD2A0C5008F3E3A /* TutorialCell.xib in Resources */,
 				7504C2582AD7020D005FB398 /* WiFiProtection.storyboard in Resources */,
 				FA99F2F32B3C3F8E00D4B239 /* PasswordCreation.storyboard in Resources */,
-				FA5914112B31A2AC00371911 /* MainBattery.storyboard in Resources */,
 				75D3FC432A6069B000F351A3 /* LaunchScreen.storyboard in Resources */,
 				FA39872F2B303FC00096F335 /* Paywall.storyboard in Resources */,
 				FA3987AA2B30599C0096F335 /* GroupedAssets.storyboard in Resources */,
 				FA3987752B3055930096F335 /* include in Resources */,
 				75D3FC402A6069B000F351A3 /* Assets.xcassets in Resources */,
 				75D3FC912A606FF500F351A3 /* SF-Pro-Display-Bold.otf in Resources */,
-				FA3987252B303A540096F335 /* AdBlocker.storyboard in Resources */,
 				A51353D12CD156BC00656965 /* Tools.storyboard in Resources */,
 				FA3988042B305FA50096F335 /* DKPhotoGallery.strings in Resources */,
-				FA5914142B31A57800371911 /* Tutorials.storyboard in Resources */,
-				756866CA2ACC08E9008DBF7C /* CardCell.xib in Resources */,
-				756866D62AD1BA12008DBF7C /* Tutorial.storyboard in Resources */,
 				75D3FC902A606FF500F351A3 /* SF-Pro-Display-Regular.otf in Resources */,
 				7532F8602AE290C2007469EA /* ContactsMenu.storyboard in Resources */,
 				7532F8682AE29750007469EA /* DuplicateNameContacts.storyboard in Resources */,
@@ -1523,11 +1366,8 @@
 				7504C25C2AD9C66D005FB398 /* Connection.storyboard in Resources */,
 				75D3FC952A606FF500F351A3 /* SF-Pro-Display-Ultralight.otf in Resources */,
 				FA5358722B3C5CDA0026FDC2 /* DetailedPassword.storyboard in Resources */,
-				756866C62ACC0884008DBF7C /* Stories.storyboard in Resources */,
 				FACA30872B3C9E790018FA5F /* EditPassword.storyboard in Resources */,
 				75D3FC932A606FF500F351A3 /* SF-Pro-Display-Heavy.otf in Resources */,
-				FA5914252B31BCFA00371911 /* ImageTitleTableViewCell.xib in Resources */,
-				FA5914202B31B92500371911 /* BatterySecondCollectionViewCell.xib in Resources */,
 				FA39872A2B303DD30096F335 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1572,11 +1412,9 @@
 				FACA308F2B3E02D30018FA5F /* UI.swift in Sources */,
 				FA39884F2B30602A0096F335 /* ReversibleFetchResult.swift in Sources */,
 				FA39884D2B30602A0096F335 /* UIViewController.swift in Sources */,
-				FA59140F2B31A2A400371911 /* MainBatteryViewController.swift in Sources */,
 				FA3987572B3055510096F335 /* ElementPath.swift in Sources */,
 				FA3988542B30602A0096F335 /* VideoController.swift in Sources */,
 				FA39875A2B3055510096F335 /* AnyDifferentiable.swift in Sources */,
-				756866C82ACC08D6008DBF7C /* CardCell.swift in Sources */,
 				FA3987542B3055510096F335 /* DifferentiableSection.swift in Sources */,
 				FA3987AC2B30599C0096F335 /* RegularAssetsViewController.swift in Sources */,
 				A5BC395B2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift in Sources */,
@@ -1593,12 +1431,10 @@
 				A55CA2632CC907350026D434 /* UIFont+ext.swift in Sources */,
 				FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */,
 				7504C2562AD6FCF5005FB398 /* WiFiProtectionViewController.swift in Sources */,
-				FA59141F2B31B92500371911 /* BatterySecondCollectionViewCell.swift in Sources */,
 				FA3987FF2B305FA50096F335 /* DKPDFView.swift in Sources */,
 				FA3988522B30602A0096F335 /* UIApplication.swift in Sources */,
 				FA39877E2B3055930096F335 /* OSAbstractHash.m in Sources */,
 				FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */,
-				FA3987232B303A460096F335 /* AdBlockerViewController.swift in Sources */,
 				FA5358702B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift in Sources */,
 				FA3987422B3054B90096F335 /* PHAssetGroup.swift in Sources */,
 				A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */,
@@ -1625,7 +1461,6 @@
 				FA3987582B3055510096F335 /* StagedChangeset.swift in Sources */,
 				FA641DF82B357C7A00F6A466 /* NSImage+SwiftyGif.swift in Sources */,
 				FA3988032B305FA50096F335 /* DKPhotoGalleryScrollView.swift in Sources */,
-				756866D42AD1B9FE008DBF7C /* TutorialViewController.swift in Sources */,
 				A552341C2CC17F2000CBE265 /* UILabel+ext.swift in Sources */,
 				A50F58B52CB6D10100AB3166 /* ViewControllerProtocol.swift in Sources */,
 				75D3FC5E2A606BA100F351A3 /* Storyboards.swift in Sources */,
@@ -1663,7 +1498,6 @@
 				A5609EA12CDBBE06000AF19E /* SecretContactsViewController.swift in Sources */,
 				FA3987522B3055510096F335 /* ContentEquatable.swift in Sources */,
 				A5600F612CD532CA006EE6BC /* NSItemProvider+ext.swift in Sources */,
-				FA59141B2B31B8EE00371911 /* BatteryFirstCollectionViewCell.swift in Sources */,
 				FA3987AB2B30599C0096F335 /* GroupedAssetsViewController.swift in Sources */,
 				FA53586B2B3C4D490026FDC2 /* Credentials.swift in Sources */,
 				FA641DDF2B3456DC00F6A466 /* CalendarService.swift in Sources */,
@@ -1673,11 +1507,8 @@
 				FA39875B2B3055510096F335 /* ArraySection.swift in Sources */,
 				A55235982CC27B9300CBE265 /* ContactsInfoType.swift in Sources */,
 				FA3987EE2B305FA50096F335 /* DKPhotoGalleryTransitionPresent.swift in Sources */,
-				756866CC2ACD9E8D008DBF7C /* StoriesData.swift in Sources */,
 				FA99F2E62B3C389F00D4B239 /* PasswordListViewController.swift in Sources */,
-				756866C42ACC0879008DBF7C /* StoriesViewController.swift in Sources */,
 				FA3987FE2B305FA50096F335 /* DKPhotoProgressIndicatorProtocol.swift in Sources */,
-				75FC42202AD2A0AC008F3E3A /* TutorialCell.swift in Sources */,
 				FA3988552B30602A0096F335 /* PlayerView.swift in Sources */,
 				FA3987F42B305FA50096F335 /* DKPlayerView.swift in Sources */,
 				FA39885A2B30602A0096F335 /* AVPlayer.swift in Sources */,
@@ -1697,8 +1528,6 @@
 				FA3987552B3055510096F335 /* ContentIdentifiable.swift in Sources */,
 				FA39885E2B30602A0096F335 /* ImageEncoding.swift in Sources */,
 				FA39877D2B3055930096F335 /* OSFastGraphics.m in Sources */,
-				FA5914242B31BCFA00371911 /* ImageTitleTableViewCell.swift in Sources */,
-				FA5914162B31AB6100371911 /* PowerSavingModeViewController.swift in Sources */,
 				FA3988582B30602A0096F335 /* PlaybackController.swift in Sources */,
 				75D3FC3B2A6069AF00F351A3 /* MainViewController.swift in Sources */,
 				75D3FC372A6069AF00F351A3 /* AppDelegate.swift in Sources */,
