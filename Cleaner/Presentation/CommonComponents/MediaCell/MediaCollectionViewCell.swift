@@ -18,9 +18,9 @@ final class MediaCollectionViewCell: UICollectionViewCell, NibReusable {
 	lazy var isChecked: Bool = false {
 		didSet {
 			if isChecked {
-                checkBox.image = Asset.selectedCheckBox.image
+                checkBox.image = .selectedCheckBox
 			} else {
-                checkBox.image = Asset.emptyCheckBox.image
+                checkBox.image = .emptyCheckBoxWhite
 			}
 		}
 	}

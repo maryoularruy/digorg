@@ -18,6 +18,6 @@ class TitleSubtitleChevronTableViewCell: UITableViewCell, NibReusable {
     
     override func prepareForReuse() {
         isCellSelected = false
-        checkMarkImageView.image = Asset.emptyCheckBox.image
+        checkMarkImageView.image = .emptyCheckBoxBlue
     }
 }
