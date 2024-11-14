@@ -18,11 +18,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<CalendarViewController>(storyboard: Calendar.self)
   }
-  internal enum Connection: StoryboardType {
-    internal static let storyboardName = "Connection"
-
-    internal static let initialScene = InitialSceneType<ConnectionViewController>(storyboard: Connection.self)
-  }
   internal enum ContactsMenu: StoryboardType {
     internal static let storyboardName = "ContactsMenu"
 
@@ -122,11 +117,6 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Settings"
 
     internal static let initialScene = InitialSceneType<SettingsViewController>(storyboard: Settings.self)
-  }
-  internal enum WiFiProtection: StoryboardType {
-    internal static let storyboardName = "WiFiProtection"
-
-    internal static let initialScene = InitialSceneType<WiFiProtectionViewController>(storyboard: WiFiProtection.self)
   }
 }
 
