@@ -8,7 +8,7 @@
 import UIKit
 
 final class OptimizeBatteryChargingViewController: UIViewController {
-    private let rootView = OptimizeBatteryChargingView()
+    private lazy var rootView = OptimizeBatteryChargingView()
     private var pages: [Page] = Page.allCases
     private var currentIndex: Int = 0
     

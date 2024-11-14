@@ -59,8 +59,7 @@ extension BatteryViewController: BatteryInstructionCellDelegate {
         let vc: UIViewController = switch type {
         case .optimizeBatteryCharging: OptimizeBatteryChargingViewController()
         case .lowPowerMode: LowPowerModeViewController()
-        case .managingConnections:
-            OptimizeBatteryChargingViewController()
+        case .managingConnections: ManagingConnectionsViewContoller()
         case .locationServices: LocationServicesViewContoller()
         case .batteryUsage: BatteryUsageViewContoller()
         case .backgroundRefresh: BackgroundRefreshViewController()
