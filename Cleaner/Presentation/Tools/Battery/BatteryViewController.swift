@@ -62,8 +62,7 @@ extension BatteryViewController: BatteryInstructionCellDelegate {
         case .managingConnections:
             OptimizeBatteryChargingViewController()
         case .locationServices: LocationServicesViewContoller()
-        case .batteryUsage:
-            OptimizeBatteryChargingViewController()
+        case .batteryUsage: BatteryUsageViewContoller()
         case .backgroundRefresh: BackgroundRefreshViewController()
         case .brightness: BrightnessViewController()
         case .wifiResresh: WifiRefreshViewController()
