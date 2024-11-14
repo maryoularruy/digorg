@@ -41,7 +41,7 @@ final class OptimizeBatteryChargingView: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([arrowBackButton,
+        addSubviews([arrowBack,
                      label,
                      pageController.view,
                      pageControl,
@@ -49,12 +49,12 @@ final class OptimizeBatteryChargingView: UIView {
                     ])
         
         NSLayoutConstraint.activate([
-            arrowBackButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 2),
-            arrowBackButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
-            arrowBackButton.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
-            arrowBackButton.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
+            arrowBack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 2),
+            arrowBack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
+            arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
+            arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
             
-            label.topAnchor.constraint(equalTo: arrowBackButton.bottomAnchor, constant: 22),
+            label.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 22),
             label.centerXAnchor.constraint(equalTo: centerXAnchor),
 
             pageController.view.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
