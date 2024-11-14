@@ -68,8 +68,7 @@ extension BatteryViewController: BatteryInstructionCellDelegate {
         case .brightness: BrightnessViewController()
         case .wifiResresh:
             OptimizeBatteryChargingViewController()
-        case .limitNotifications:
-            OptimizeBatteryChargingViewController()
+        case .limitNotifications: LimitNotificationsViewController()
         case .overheating:
             OptimizeBatteryChargingViewController()
         }
