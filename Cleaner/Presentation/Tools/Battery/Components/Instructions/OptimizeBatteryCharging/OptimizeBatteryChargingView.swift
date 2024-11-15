@@ -56,19 +56,19 @@ final class OptimizeBatteryChargingView: UIView {
             
             label.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 22),
             label.centerXAnchor.constraint(equalTo: centerXAnchor),
-
-            pageController.view.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
-            pageController.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            pageController.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            pageController.view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -110),
-            
-            pageControl.bottomAnchor.constraint(equalTo: pageController.view.bottomAnchor, constant: 0),
-            pageControl.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             actionButton.heightAnchor.constraint(equalToConstant: 50),
-            actionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32)
+            actionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            
+            pageControl.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -30),
+            pageControl.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            pageController.view.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
+            pageController.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            pageController.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            pageController.view.bottomAnchor.constraint(equalTo: pageControl.topAnchor)
         ])
     }
 }

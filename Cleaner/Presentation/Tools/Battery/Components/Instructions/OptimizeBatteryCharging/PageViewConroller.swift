@@ -47,7 +47,7 @@ final class PageViewConroller: UIViewController {
     private lazy var label: Regular15LabelStyle = Regular15LabelStyle()
     private lazy var instructionsImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
         return imageView
     }()
     
@@ -71,12 +71,12 @@ final class PageViewConroller: UIViewController {
         view.addSubviews([label, instructionsImageView])
         
         NSLayoutConstraint.activate([
-            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -36),
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
             instructionsImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
-            instructionsImageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -30),
-            instructionsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            instructionsImageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -33),
+            instructionsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
 }
