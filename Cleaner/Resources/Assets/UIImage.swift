@@ -78,6 +78,34 @@ extension UIImage {
     static var managingConnections1 = UIImage(resource: .managingConnections1)
     static var managingConnections2 = UIImage(resource: .managingConnections2)
     
+    //MARK: -Instructions
+    static var safariCache2 = UIImage(resource: .safariCache2)
+    static var safariCache3 = UIImage(resource: .safariCache3)
+    static var safariCache4 = UIImage(resource: .safariCache4)
+    
+    static var telegramCache1 = UIImage(resource: .telegramCache1)
+    static var telegramCache2 = UIImage(resource: .telegramCache2)
+    static var telegramCache3 = UIImage(resource: .telegramCache3)
+    static var telegramCache4 = UIImage(resource: .telegramCache4)
+    static var telegramCache5 = UIImage(resource: .telegramCache5)
+    
+    static var offloadUnusedApps2 = UIImage(resource: .offloadUnusedApps2)
+    static var offloadUnusedApps3 = UIImage(resource: .offloadUnusedApps3)
+    static var offloadUnusedApps4 = UIImage(resource: .offloadUnusedApps4)
+    
+    static var optimizeViberMedia1 = UIImage(resource: .optimizeViberMedia1)
+    static var optimizeViberMedia2 = UIImage(resource: .optimizeViberMedia2)
+    static var optimizeViberMedia3 = UIImage(resource: .optimizeViberMedia3)
+    static var optimizeViberMedia4 = UIImage(resource: .optimizeViberMedia4)
+    static var optimizeViberMedia5 = UIImage(resource: .optimizeViberMedia5)
+    
+    static var whatsAppCleanup1 = UIImage(resource: .whatsAppCleanup1)
+    static var whatsAppCleanup2 = UIImage(resource: .whatsAppCleanup2)
+    static var whatsAppCleanup3 = UIImage(resource: .whatsAppCleanup3)
+    static var whatsAppCleanup4 = UIImage(resource: .whatsAppCleanup4)
+    static var whatsAppCleanup5 = UIImage(resource: .whatsAppCleanup5)
+    static var whatsAppCleanup6 = UIImage(resource: .whatsAppCleanup6)
+    
     //MARK: -Navigation
     static var arrowBackIcon = UIImage(resource: .arrowBackIcon)
     
