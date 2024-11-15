@@ -21,10 +21,10 @@ final class InstructionsViewController: UIViewController {
 extension InstructionsViewController: ViewControllerProtocol {
     func setupUI() {
         InstructionCellType.allCases.forEach { type in
-            let view = BatteryInstructionCell()
+            let view = InstructionCell()
             view.delegate = self
-//            view.bind(type)
-//            batterySaveInstructionsStackView.addArrangedSubview(view)
+            view.bind(type)
+            instructionsStackView.addArrangedSubview(view)
         }
     }
     
@@ -35,8 +35,9 @@ extension InstructionsViewController: ViewControllerProtocol {
     }
 }
 
-extension InstructionsViewController: BatteryInstructionCellDelegate {
-    func tapOnCell(_ type: BatteryInstructionCellType) {
+extension InstructionsViewController: InstructionCellDelegate {
+    func tapOnCell(_ type: InstructionCellType) {
+        
 //        vc.modalPresentationStyle = .fullScreen
 //        vc.modalTransitionStyle = .coverVertical
 //        present(vc, animated: true)
