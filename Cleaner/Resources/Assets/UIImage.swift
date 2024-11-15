@@ -79,6 +79,12 @@ extension UIImage {
     static var managingConnections2 = UIImage(resource: .managingConnections2)
     
     //MARK: -Instructions
+    static var safariIcon = UIImage(resource: .safariIcon)
+    static var telegramIcon = UIImage(resource: .telegramIcon)
+    static var whatsAppIcon = UIImage(resource: .whatsAppIcon)
+    static var viberIcon = UIImage(resource: .viberIcon)
+    static var settingsIcon = UIImage(resource: .settingsIcon)
+    
     static var safariCache2 = UIImage(resource: .safariCache2)
     static var safariCache3 = UIImage(resource: .safariCache3)
     static var safariCache4 = UIImage(resource: .safariCache4)

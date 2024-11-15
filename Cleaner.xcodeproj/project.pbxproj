@@ -51,6 +51,7 @@
 		A53EDA232CD0422700565625 /* EKEventGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EDA222CD0422700565625 /* EKEventGroup.swift */; };
 		A53EDA252CD0429F00565625 /* Date+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EDA242CD0429F00565625 /* Date+ext.swift */; };
 		A54449162CD19C4F001ECA7A /* ToolOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54449152CD19C4F001ECA7A /* ToolOption.swift */; };
+		A5446C2D2CE74B7A00A1F940 /* InstructionCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5446C2C2CE74B7A00A1F940 /* InstructionCellType.swift */; };
 		A552341C2CC17F2000CBE265 /* UILabel+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552341B2CC17F2000CBE265 /* UILabel+ext.swift */; };
 		A55235982CC27B9300CBE265 /* ContactsInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55235972CC27B9300CBE265 /* ContactsInfoType.swift */; };
 		A55CA2612CC904780026D434 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2602CC904780026D434 /* UIImage.swift */; };
@@ -240,6 +241,7 @@
 		A53EDA222CD0422700565625 /* EKEventGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKEventGroup.swift; sourceTree = "<group>"; };
 		A53EDA242CD0429F00565625 /* Date+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ext.swift"; sourceTree = "<group>"; };
 		A54449152CD19C4F001ECA7A /* ToolOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolOption.swift; sourceTree = "<group>"; };
+		A5446C2C2CE74B7A00A1F940 /* InstructionCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionCellType.swift; sourceTree = "<group>"; };
 		A552341B2CC17F2000CBE265 /* UILabel+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ext.swift"; sourceTree = "<group>"; };
 		A55235972CC27B9300CBE265 /* ContactsInfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsInfoType.swift; sourceTree = "<group>"; };
 		A55CA2602CC904780026D434 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 				A54449152CD19C4F001ECA7A /* ToolOption.swift */,
 				A5600F622CD94B50006EE6BC /* MediaModel.swift */,
 				A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */,
+				A5446C2C2CE74B7A00A1F940 /* InstructionCellType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1331,6 +1334,7 @@
 				FA3988522B30602A0096F335 /* UIApplication.swift in Sources */,
 				FA39877E2B3055930096F335 /* OSAbstractHash.m in Sources */,
 				FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */,
+				A5446C2D2CE74B7A00A1F940 /* InstructionCellType.swift in Sources */,
 				FA5358702B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift in Sources */,
 				FA3987422B3054B90096F335 /* PHAssetGroup.swift in Sources */,
 				A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */,
