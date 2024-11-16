@@ -9,7 +9,7 @@ import UIKit
 
 final class OptimizeBatteryChargingViewController: UIViewController {
     private lazy var rootView = OptimizeBatteryChargingView()
-    private var pages: [Page] = Page.allCases
+    private var pages: [Pages.BatteryOptimizationPage] = Pages.BatteryOptimizationPage.allCases
     private var currentIndex: Int = 0
     
     override func loadView() {

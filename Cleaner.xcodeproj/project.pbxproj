@@ -52,6 +52,7 @@
 		A53EDA252CD0429F00565625 /* Date+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53EDA242CD0429F00565625 /* Date+ext.swift */; };
 		A54449162CD19C4F001ECA7A /* ToolOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54449152CD19C4F001ECA7A /* ToolOption.swift */; };
 		A5446C2D2CE74B7A00A1F940 /* InstructionCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5446C2C2CE74B7A00A1F940 /* InstructionCellType.swift */; };
+		A5446D082CE76CCE00A1F940 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5446D072CE76CCE00A1F940 /* Pages.swift */; };
 		A552341C2CC17F2000CBE265 /* UILabel+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A552341B2CC17F2000CBE265 /* UILabel+ext.swift */; };
 		A55235982CC27B9300CBE265 /* ContactsInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55235972CC27B9300CBE265 /* ContactsInfoType.swift */; };
 		A55CA2612CC904780026D434 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2602CC904780026D434 /* UIImage.swift */; };
@@ -242,6 +243,7 @@
 		A53EDA242CD0429F00565625 /* Date+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ext.swift"; sourceTree = "<group>"; };
 		A54449152CD19C4F001ECA7A /* ToolOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolOption.swift; sourceTree = "<group>"; };
 		A5446C2C2CE74B7A00A1F940 /* InstructionCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionCellType.swift; sourceTree = "<group>"; };
+		A5446D072CE76CCE00A1F940 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
 		A552341B2CC17F2000CBE265 /* UILabel+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ext.swift"; sourceTree = "<group>"; };
 		A55235972CC27B9300CBE265 /* ContactsInfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsInfoType.swift; sourceTree = "<group>"; };
 		A55CA2602CC904780026D434 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 				A5600F622CD94B50006EE6BC /* MediaModel.swift */,
 				A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */,
 				A5446C2C2CE74B7A00A1F940 /* InstructionCellType.swift */,
+				A5446D072CE76CCE00A1F940 /* Pages.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1293,6 +1296,7 @@
 				FA3988062B305FA50096F335 /* DKPhotoGalleryResource.swift in Sources */,
 				FA3987FD2B305FA50096F335 /* DKPhotoQRCodeResultVC.swift in Sources */,
 				FA3987BD2B305D720096F335 /* AppKitExtension.swift in Sources */,
+				A5446D082CE76CCE00A1F940 /* Pages.swift in Sources */,
 				FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */,
 				FA39883D2B30602A0096F335 /* ZoomTransitionController.swift in Sources */,
 				A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */,
