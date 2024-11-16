@@ -47,7 +47,8 @@ extension UIImage {
     static var limitNotifications = UIImage(resource: .limitNotifications)
     static var overheating = UIImage(resource: .overheating)
     
-    static var batteryInstructions1 = UIImage(resource: .batteryInstructions1)
+    static var openSettingsInstruction = UIImage(resource: .openSettingsInstruction)
+    
     static var batteryInstructions2 = UIImage(resource: .batteryInstructions2)
     static var batteryInstructions3 = UIImage(resource: .batteryInstructions3)
     static var batteryInstructions4 = UIImage(resource: .batteryInstructions4)
@@ -104,6 +105,7 @@ extension UIImage {
     static var optimizeViberMedia3 = UIImage(resource: .optimizeViberMedia3)
     static var optimizeViberMedia4 = UIImage(resource: .optimizeViberMedia4)
     static var optimizeViberMedia5 = UIImage(resource: .optimizeViberMedia5)
+    static var optimizeViberMedia6 = UIImage(resource: .optimizeViberMedia6)
     
     static var whatsAppCleanup1 = UIImage(resource: .whatsAppCleanup1)
     static var whatsAppCleanup2 = UIImage(resource: .whatsAppCleanup2)
