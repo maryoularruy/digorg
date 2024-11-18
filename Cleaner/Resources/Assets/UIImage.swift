@@ -89,6 +89,7 @@ extension UIImage {
     static var premiumVCBackground = UIImage(resource: .premiumBackground)
     static var premiumVCIcon = UIImage(resource: .premiumIcon)
     static var cancelPremiumVC = UIImage(resource: .cancel)
+    static var checkmark = UIImage(resource: .checkmark)
     
     //MARK: -Navigation
     static var arrowBackIcon = UIImage(resource: .arrowBackIcon)

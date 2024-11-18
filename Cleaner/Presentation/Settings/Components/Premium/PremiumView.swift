@@ -58,6 +58,47 @@ final class PremiumView: UIView {
         return label
     }()
     
+    private lazy var premiumFeaturesView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 18
+        view.layer.borderColor = UIColor.blue.cgColor
+        view.layer.borderWidth = 3
+        return view
+    }()
+    
+    private lazy var premiumFeaturesStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.backgroundColor = .green
+        stackView.axis = .vertical
+        stackView.spacing = 12
+        stackView.distribution = .equalSpacing
+        
+        ["Removing duplicates", "Secret Album", "Secret Contacts", "No Ads"].forEach { text in
+            let checkmarkImageView = UIImageView(image: .checkmark)
+            checkmarkImageView.widthAnchor.constraint(equalToConstant: 18).isActive = true
+            checkmarkImageView.heightAnchor.constraint(equalToConstant: 18).isActive = true
+            let label = Semibold15LabelStyle()
+            label.bind(text: text)
+            
+            let view = UIView()
+            view.addSubviews([checkmarkImageView, label])
+            
+            NSLayoutConstraint.activate([
+                checkmarkImageView.topAnchor.constraint(equalTo: view.topAnchor),
+                checkmarkImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                checkmarkImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                
+                label.leadingAnchor.constraint(equalTo: checkmarkImageView.trailingAnchor, constant: 10),
+                label.centerYAnchor.constraint(equalTo: checkmarkImageView.centerYAnchor)
+            ])
+
+            stackView.addArrangedSubview(view)
+        }
+        
+        return stackView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -88,7 +129,10 @@ final class PremiumView: UIView {
                      cancelImageView,
                      iconImageView,
                      premiumLabel,
-                     subtitleLabel])
+                     subtitleLabel,
+                     premiumFeaturesView])
+        
+        premiumFeaturesView.addSubviews([premiumFeaturesStackView])
         
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
@@ -114,6 +158,15 @@ final class PremiumView: UIView {
             
             subtitleLabel.topAnchor.constraint(equalTo: premiumLabel.bottomAnchor, constant: 8),
             subtitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            premiumFeaturesView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 40),
+            premiumFeaturesView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
+            premiumFeaturesView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -38),
+            
+            premiumFeaturesStackView.topAnchor.constraint(equalTo: premiumFeaturesView.topAnchor, constant: 25),
+            premiumFeaturesStackView.leadingAnchor.constraint(equalTo: premiumFeaturesView.leadingAnchor, constant: 24),
+            premiumFeaturesStackView.trailingAnchor.constraint(equalTo: premiumFeaturesView.trailingAnchor, constant: -24),
+            premiumFeaturesStackView.bottomAnchor.constraint(equalTo: premiumFeaturesView.bottomAnchor, constant: -25)
         ])
     }
 }
