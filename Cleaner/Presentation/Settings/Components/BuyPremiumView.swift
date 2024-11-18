@@ -54,6 +54,10 @@ final class BuyPremiumView: UIView {
         contentView.clipsToBounds = true
         addShadows()
         
+        addTapGestureRecognizer { [weak self] in
+            self?.delegate?.tapOnStartTrial()
+        }
+        
         startTrialButton.addTapGestureRecognizer { [weak self] in
             self?.delegate?.tapOnStartTrial()
         }

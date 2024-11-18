@@ -17,5 +17,30 @@ final class PremiumViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    deinit {
+        print("deinit")
+    }
+}
+
+extension PremiumViewController: ViewControllerProtocol {
+    func setupUI() {
+        rootView.delegate = self
+    }
+    
+    func addGestureRecognizers() {
+        
+    }
+}
+
+extension PremiumViewController: PremiumViewDelegate {
+    func tapOnCancel() {
+        dismiss(animated: true)
+    }
+    
+    func tapOnRestore() {
+        
     }
 }
