@@ -39,6 +39,25 @@ final class PremiumView: UIView {
         return imageView
     }()
     
+    private lazy var iconImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .premiumVCIcon
+        return imageView
+    }()
+    
+    private lazy var premiumLabel: Semibold24LabelStyle = {
+        let label = Semibold24LabelStyle()
+        label.bind(text: "Premium")
+        return label
+    }()
+    
+    private lazy var subtitleLabel: Regular15LabelStyle = {
+        let label = Regular15LabelStyle()
+        label.bind(text: "Get full access to all features")
+        label.setGreyTextColor()
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -66,7 +85,10 @@ final class PremiumView: UIView {
     private func initConstraints() {
         addSubviews([backgroundImageView,
                      restoreLabel,
-                     cancelImageView])
+                     cancelImageView,
+                     iconImageView,
+                     premiumLabel,
+                     subtitleLabel])
         
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
@@ -80,7 +102,18 @@ final class PremiumView: UIView {
             cancelImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 21),
             cancelImageView.centerYAnchor.constraint(equalTo: restoreLabel.centerYAnchor),
             cancelImageView.heightAnchor.constraint(equalToConstant: 25),
-            cancelImageView.widthAnchor.constraint(equalToConstant: 25)
+            cancelImageView.widthAnchor.constraint(equalToConstant: 25),
+            
+            iconImageView.topAnchor.constraint(equalTo: restoreLabel.bottomAnchor, constant: 1),
+            iconImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            iconImageView.heightAnchor.constraint(equalToConstant: 191),
+            iconImageView.widthAnchor.constraint(equalToConstant: 175),
+            
+            premiumLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 21),
+            premiumLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            subtitleLabel.topAnchor.constraint(equalTo: premiumLabel.bottomAnchor, constant: 8),
+            subtitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
     }
 }
