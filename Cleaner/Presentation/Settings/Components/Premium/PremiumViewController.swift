@@ -44,6 +44,14 @@ extension PremiumViewController: PremiumViewDelegate {
     func tapOnRestore() {
         
     }
+    
+    func tapOnPrivacyPolicy() {
+        
+    }
+    
+    func tapOnTermsOfUse() {
+        
+    }
 }
 
 extension PremiumViewController: PremiumOfferViewDelegate {

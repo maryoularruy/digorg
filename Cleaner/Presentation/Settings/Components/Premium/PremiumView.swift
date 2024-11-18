@@ -10,6 +10,8 @@ import UIKit
 protocol PremiumViewDelegate: AnyObject {
     func tapOnCancel()
     func tapOnRestore()
+    func tapOnPrivacyPolicy()
+    func tapOnTermsOfUse()
 }
 
 final class PremiumView: UIView {
@@ -104,6 +106,18 @@ final class PremiumView: UIView {
         return view
     }()
     
+    lazy var privacyPolicyLabel: Regular13LabelStyle = {
+        let label = Regular13LabelStyle()
+        label.underlined(text: "Privacy Policy")
+        return label
+    }()
+    
+    lazy var termsOfUseLabel: Regular13LabelStyle = {
+        let label = Regular13LabelStyle()
+        label.underlined(text: "Terms of Use")
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -126,6 +140,14 @@ final class PremiumView: UIView {
         cancelImageView.addTapGestureRecognizer { [weak self] in
             self?.delegate?.tapOnCancel()
         }
+        
+        privacyPolicyLabel.addTapGestureRecognizer { [weak self] in
+            self?.delegate?.tapOnPrivacyPolicy()
+        }
+        
+        termsOfUseLabel.addTapGestureRecognizer { [weak self] in
+            self?.delegate?.tapOnTermsOfUse()
+        }
     }
     
     private func initConstraints() {
@@ -136,7 +158,9 @@ final class PremiumView: UIView {
                      premiumLabel,
                      subtitleLabel,
                      premiumFeaturesView,
-                     premiumOfferView])
+                     premiumOfferView,
+                     privacyPolicyLabel,
+                     termsOfUseLabel])
         
         premiumFeaturesView.addSubviews([premiumFeaturesStackView])
         
@@ -165,7 +189,7 @@ final class PremiumView: UIView {
             subtitleLabel.topAnchor.constraint(equalTo: premiumLabel.bottomAnchor, constant: 8),
             subtitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            premiumFeaturesView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 40),
+            premiumFeaturesView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 36),
             premiumFeaturesView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
             premiumFeaturesView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -38),
             
@@ -174,9 +198,15 @@ final class PremiumView: UIView {
             premiumFeaturesStackView.trailingAnchor.constraint(equalTo: premiumFeaturesView.trailingAnchor, constant: -24),
             premiumFeaturesStackView.bottomAnchor.constraint(equalTo: premiumFeaturesView.bottomAnchor, constant: -25),
             
-            premiumOfferView.topAnchor.constraint(equalTo: premiumFeaturesView.bottomAnchor, constant: 14),
+            premiumOfferView.topAnchor.constraint(equalTo: premiumFeaturesView.bottomAnchor, constant: 12),
             premiumOfferView.leadingAnchor.constraint(equalTo: leadingAnchor),
             premiumOfferView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            privacyPolicyLabel.topAnchor.constraint(equalTo: premiumOfferView.bottomAnchor, constant: 16),
+            privacyPolicyLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
+            
+            termsOfUseLabel.topAnchor.constraint(equalTo: premiumOfferView.bottomAnchor, constant: 16),
+            termsOfUseLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -38)
         ])
     }
 }
