@@ -8,12 +8,4 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-    @IBOutlet weak var backView: UIView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        backView.addTapGestureRecognizer {
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
 }
