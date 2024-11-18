@@ -26,9 +26,8 @@ extension SettingsViewController: ViewControllerProtocol {
 
 extension SettingsViewController: BuyPremiumViewDelegate {
     func tapOnStartTrial() {
-        
+        let vc = PremiumViewController()
+        vc.modalPresentationStyle = .pageSheet
+        present(vc, animated: true)
     }
 }
-
-
-
