@@ -23,9 +23,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4f-KK-ltr">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r4f-KK-ltr">
                                 <rect key="frame" x="0.0" y="102.33333333333331" width="393" height="666.66666666666674"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fkg-3B-Hwp" customClass="BuyPremiumView" customModule="Cleaner" customModuleProvider="target">
+                                        <rect key="frame" x="36" y="0.0" width="341" height="122"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="fkg-3B-Hwp" secondAttribute="bottom" constant="20" id="NlP-wd-4AA"/>
+                                    <constraint firstItem="fkg-3B-Hwp" firstAttribute="top" secondItem="r4f-KK-ltr" secondAttribute="top" id="b18-gR-hb7"/>
+                                    <constraint firstItem="fkg-3B-Hwp" firstAttribute="centerX" secondItem="r4f-KK-ltr" secondAttribute="centerX" id="gp7-Ji-Vnq"/>
+                                    <constraint firstAttribute="trailing" secondItem="fkg-3B-Hwp" secondAttribute="trailing" constant="-16" id="h53-gY-DDV"/>
+                                    <constraint firstItem="fkg-3B-Hwp" firstAttribute="leading" secondItem="r4f-KK-ltr" secondAttribute="leading" constant="16" id="ibG-Rx-VY2"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -33,7 +46,7 @@
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="r4f-KK-ltr" secondAttribute="bottom" id="0Tx-YP-SjU"/>
                             <constraint firstItem="r4f-KK-ltr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="7B4-pc-vv4"/>
-                            <constraint firstItem="r4f-KK-ltr" firstAttribute="top" secondItem="Sxn-dI-Q9s" secondAttribute="bottom" constant="16" id="K7S-li-AAB"/>
+                            <constraint firstItem="r4f-KK-ltr" firstAttribute="top" secondItem="Sxn-dI-Q9s" secondAttribute="bottom" constant="24" id="K7S-li-AAB"/>
                             <constraint firstItem="Sxn-dI-Q9s" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="7" id="OR0-Ub-vR7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="r4f-KK-ltr" secondAttribute="trailing" id="avj-wb-KYX"/>
                             <constraint firstItem="Sxn-dI-Q9s" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="bCF-ei-aoh"/>
@@ -41,6 +54,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="4J1-4I-gSB"/>
+                    <connections>
+                        <outlet property="buyPremiumView" destination="fkg-3B-Hwp" id="LLN-vy-R3y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

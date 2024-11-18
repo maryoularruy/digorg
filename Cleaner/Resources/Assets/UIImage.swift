@@ -84,6 +84,9 @@ extension UIImage {
     static var managingConnections1 = UIImage(resource: .managingConnections1)
     static var managingConnections2 = UIImage(resource: .managingConnections2)
     
+    //MARK: -Settings
+    static var buyPremiumBackground = UIImage(resource: .buyPremiumViewBackground)
+    
     //MARK: -Navigation
     static var arrowBackIcon = UIImage(resource: .arrowBackIcon)
 }
