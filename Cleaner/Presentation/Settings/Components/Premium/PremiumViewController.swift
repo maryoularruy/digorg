@@ -28,6 +28,7 @@ final class PremiumViewController: UIViewController {
 extension PremiumViewController: ViewControllerProtocol {
     func setupUI() {
         rootView.delegate = self
+        rootView.premiumOfferView.delegate = self
     }
     
     func addGestureRecognizers() {
@@ -42,5 +43,18 @@ extension PremiumViewController: PremiumViewDelegate {
     
     func tapOnRestore() {
         
+    }
+}
+
+extension PremiumViewController: PremiumOfferViewDelegate {
+    func tapOnOfferButton(with status: SubscriptionSuggestion) {
+        switch status {
+        case .connectThreeDaysTrial: break
+            
+        case .connectWeeklyRenewableSubscription: break
+            
+        case .cancelSubscription: break
+            
+        }
     }
 }

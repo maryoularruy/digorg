@@ -69,7 +69,6 @@ final class PremiumView: UIView {
     
     private lazy var premiumFeaturesStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.backgroundColor = .green
         stackView.axis = .vertical
         stackView.spacing = 12
         stackView.distribution = .equalSpacing
@@ -97,6 +96,12 @@ final class PremiumView: UIView {
         }
         
         return stackView
+    }()
+    
+    lazy var premiumOfferView: PremiumOfferView = {
+        let view = PremiumOfferView()
+        view.configureUI(for: .connectThreeDaysTrial)
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -130,7 +135,8 @@ final class PremiumView: UIView {
                      iconImageView,
                      premiumLabel,
                      subtitleLabel,
-                     premiumFeaturesView])
+                     premiumFeaturesView,
+                     premiumOfferView])
         
         premiumFeaturesView.addSubviews([premiumFeaturesStackView])
         
@@ -166,7 +172,11 @@ final class PremiumView: UIView {
             premiumFeaturesStackView.topAnchor.constraint(equalTo: premiumFeaturesView.topAnchor, constant: 25),
             premiumFeaturesStackView.leadingAnchor.constraint(equalTo: premiumFeaturesView.leadingAnchor, constant: 24),
             premiumFeaturesStackView.trailingAnchor.constraint(equalTo: premiumFeaturesView.trailingAnchor, constant: -24),
-            premiumFeaturesStackView.bottomAnchor.constraint(equalTo: premiumFeaturesView.bottomAnchor, constant: -25)
+            premiumFeaturesStackView.bottomAnchor.constraint(equalTo: premiumFeaturesView.bottomAnchor, constant: -25),
+            
+            premiumOfferView.topAnchor.constraint(equalTo: premiumFeaturesView.bottomAnchor, constant: 14),
+            premiumOfferView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            premiumOfferView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 extension UIFont {
     
     static var regular11: UIFont? = UIFont(.regular, size: 11)
+    static var regular12: UIFont? = UIFont(.regular, size: 12)
     static var regular13: UIFont? = UIFont(.regular, size: 13)
     static var regular15: UIFont? = UIFont(.regular, size: 15)
     
