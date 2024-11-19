@@ -95,7 +95,7 @@
           "localizations" : [
             {
               "description" : "Auto-renewable weekly subscription",
-              "displayName" : "Weekly",
+              "displayName" : "Auto-renewable weekly",
               "locale" : "en_US"
             }
           ],

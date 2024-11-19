@@ -70,7 +70,7 @@ extension PremiumViewController: PremiumOfferViewDelegate {
     func tapOnOfferButton(with status: SubscriptionSuggestion) {
         switch status {
         case .connectThreeDaysTrial:
-            guard let weekly = (products.first { $0.displayName == "Weekly" }) else { return }
+            guard let weekly = (products.first { $0.id == "pro.weekly" }) else { return }
             Task {
                 do {
                     try await store.purchase(weekly)
