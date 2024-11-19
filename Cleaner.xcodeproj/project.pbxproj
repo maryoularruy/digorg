@@ -484,6 +484,7 @@
 		A55234102CC16D2900CBE265 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5609EAE2CDBD637000AF19E /* AllContacts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AllContacts; sourceTree = "<group>"; };
 		A5609F4A2CE0C141000AF19E /* Battery */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Battery; sourceTree = "<group>"; };
+		A598A0712CEC9CB1002F346E /* Store */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Store; sourceTree = "<group>"; };
 		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -670,6 +671,7 @@
 		75D3FC4A2A606BA100F351A3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A598A0712CEC9CB1002F346E /* Store */,
 				75D3FC4B2A606BA100F351A3 /* Storyboards */,
 				75D3FC4D2A606BA100F351A3 /* UserDefaults */,
 				75D3FC4F2A606BA100F351A3 /* Keys */,
@@ -1404,6 +1406,7 @@
 				A55234102CC16D2900CBE265 /* Components */,
 				A5609EAE2CDBD637000AF19E /* AllContacts */,
 				A5609F4A2CE0C141000AF19E /* Battery */,
+				A598A0712CEC9CB1002F346E /* Store */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
 			);
