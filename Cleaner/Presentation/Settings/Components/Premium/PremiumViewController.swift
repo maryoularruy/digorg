@@ -20,8 +20,7 @@ final class PremiumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
-        Task { await getProducts() }
+        Task.detached { await self.getProducts() }
     }
     
     deinit {
@@ -73,8 +72,19 @@ extension PremiumViewController: PremiumOfferViewDelegate {
             guard let weekly = (products.first { $0.id == "pro.weekly" }) else { return }
             Task {
                 do {
-                    try await store.purchase(weekly)
-                } catch {
+                    let result = try await store.purchase(weekly)
+                    switch result {
+                    case .success(_): break
+                        
+                    case .failure(let failure):
+                        if failure as? StoreError == StoreError.failedVerification {
+                            print("failedVerification")
+                        } else {
+                            print("other error")
+                        }
+                    }
+                } catch(let error) {
+                    print(error)
                     
                 }
             }

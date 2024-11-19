@@ -7,39 +7,73 @@
 
 import StoreKit
 
+public enum StoreError: Error {
+    case failedVerification
+    case waitingOnSCAOrBuyApproval
+    case userCancelled
+    case unknowedError
+}
+
 final class Store {
     static var shared = Store()
+    
+    var updateListenerTask: Task<Void, Error>? = nil
     private let productIds = ["pro.weekly"]
-//    var products: [Product] = []
+    
+    init() {
+        self.updateListenerTask = listenForTransactions()
+    }
+    
+    deinit {
+        updateListenerTask?.cancel()
+    }
     
     func getProducts() async throws -> [Product] {
         try await Product.products(for: productIds)
     }
     
-    func purchase(_ product: Product) async throws {
-        let result = try await product.purchase()
-
-        switch result {
+    func purchase(_ product: Product) async throws -> Result<Transaction, Error> {
+        switch try await product.purchase() {
         case let .success(.verified(transaction)):
-            // Successful purhcase
+            await deliverContent(for: transaction)
             await transaction.finish()
-        case let .success(.unverified(_, error)):
-            // Successful purchase but transaction/receipt can't be verified
-            // Could be a jailbroken phone
-            break
+            return .success(transaction)
+            
+        case .success(.unverified):
+            return .failure(StoreError.failedVerification)
         case .pending:
-            // Transaction waiting on SCA (Strong Customer Authentication) or
-            // approval from Ask to Buy
-            break
+            return .failure(StoreError.waitingOnSCAOrBuyApproval)
         case .userCancelled:
-            // ^^^
-            break
+            return .failure(StoreError.userCancelled)
         @unknown default:
-            break
+            return .failure(StoreError.unknowedError)
         }
     }
-//
-//    private func loadProducts() async throws {
-//        self.products = try await Product.products(for: productIds)
-//    }
+    
+    private func listenForTransactions() -> Task<Void, Error> {
+        return Task.detached {
+            for await result in Transaction.updates {
+                do {
+                    let transaction = try self.checkVerified(result)
+                    await self.deliverContent(for: transaction)
+                    await transaction.finish()
+                } catch(let error) {
+                    print("Transaction failed verification: \(error)")
+                }
+            }
+        }
+    }
+    
+    private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
+        switch result {
+        case .unverified:
+            throw StoreError.failedVerification
+        case .verified(let safe):
+            return safe
+        }
+    }
+    
+    private func deliverContent(for transaction: Transaction) async {
+        print("Delivering content for product \(transaction.productID)")
+    }
 }
