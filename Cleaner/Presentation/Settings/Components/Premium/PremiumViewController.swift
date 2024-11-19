@@ -5,10 +5,12 @@
 //  Created by Elena Sedunova on 18.11.2024.
 //
 
-import UIKit
+import StoreKit
 
 final class PremiumViewController: UIViewController {
     private lazy var rootView = PremiumView()
+    private lazy var store = Store.shared
+    private lazy var products: [Product] = []
     
     override func loadView() {
         super.loadView()
@@ -18,10 +20,20 @@ final class PremiumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        
+        Task { await getProducts() }
     }
     
     deinit {
         print("deinit")
+    }
+    
+    private func getProducts() async {
+        do {
+            products = try await store.getProducts()
+        } catch {
+            print("error")
+        }
     }
 }
 
@@ -57,7 +69,15 @@ extension PremiumViewController: PremiumViewDelegate {
 extension PremiumViewController: PremiumOfferViewDelegate {
     func tapOnOfferButton(with status: SubscriptionSuggestion) {
         switch status {
-        case .connectThreeDaysTrial: break
+        case .connectThreeDaysTrial:
+            guard let weekly = (products.first { $0.displayName == "Weekly" }) else { return }
+            Task {
+                do {
+                    try await store.purchase(weekly)
+                } catch {
+                    
+                }
+            }
             
         case .connectWeeklyRenewableSubscription: break
             

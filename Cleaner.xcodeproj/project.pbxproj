@@ -84,6 +84,7 @@
 		A5609EA12CDBBE06000AF19E /* SecretContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */; };
 		A5609FD22CE0F83A000AF19E /* Float+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609FD12CE0F83A000AF19E /* Float+ext.swift */; };
 		A5609FD82CE12BB3000AF19E /* BatteryInstructionCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */; };
+		A598A0752CECA12A002F346E /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598A0742CECA12A002F346E /* Store.swift */; };
 		A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */; };
 		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
 		A5BC395B2CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */; };
@@ -312,6 +313,7 @@
 		A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretContactsViewController.swift; sourceTree = "<group>"; };
 		A5609FD12CE0F83A000AF19E /* Float+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+ext.swift"; sourceTree = "<group>"; };
 		A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryInstructionCellType.swift; sourceTree = "<group>"; };
+		A598A0742CECA12A002F346E /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
 		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
 		A5BC39572CBC604E00153FD1 /* ImageTitleSubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleSubtitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -835,6 +837,7 @@
 				FA641DDE2B3456DC00F6A466 /* CalendarService.swift */,
 				FA53586C2B3C4D6A0026FDC2 /* RealmManager.swift */,
 				A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */,
+				A598A0742CECA12A002F346E /* Store.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1643,6 +1646,7 @@
 				FA3988012B305FA50096F335 /* DKPhotoContentAnimationView.swift in Sources */,
 				FA3988432B30602A0096F335 /* UITraitCollection.swift in Sources */,
 				FA39885D2B30602A0096F335 /* CachingGeocoder.swift in Sources */,
+				A598A0752CECA12A002F346E /* Store.swift in Sources */,
 				FA99F2F12B3C3F8000D4B239 /* PasswordCreationViewController.swift in Sources */,
 				FA3987EC2B305FA50096F335 /* DKPhotoGalleryTransitionController.swift in Sources */,
 				FA39883F2B30602A0096F335 /* ZoomPushTransition.swift in Sources */,
