@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PhoneInfoService.shared.getTotalRam()
         StoriesData.shared.setup()
-        
+                
         DispatchQueue.main.async {
 //            if Defaults.isOnboardingSeen {
 //                let vc = StoryboardScene.Main.initialScene.instantiate()

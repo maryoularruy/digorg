@@ -44,7 +44,7 @@
           "index" : 0,
           "type" : "verification"
         },
-        "enabled" : true,
+        "enabled" : false,
         "name" : "Verification"
       },
       {

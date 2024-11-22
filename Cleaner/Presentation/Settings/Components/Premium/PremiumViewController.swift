@@ -9,8 +9,6 @@ import StoreKit
 
 final class PremiumViewController: UIViewController {
     private lazy var rootView = PremiumView()
-    private lazy var store = Store.shared
-    private lazy var products: [Product] = []
     
     override func loadView() {
         super.loadView()
@@ -20,19 +18,24 @@ final class PremiumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        Task.detached { await self.getProducts() }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if ServiceFactory.shared.store.purchasedSubscriptions.isEmpty {
+            
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        
     }
     
     deinit {
         print("deinit")
-    }
-    
-    private func getProducts() async {
-        do {
-            products = try await store.getProducts()
-        } catch(let error) {
-            showAlert(title: "Unknowed error", subtitle: error.localizedDescription)
-        }
     }
 }
 
@@ -69,12 +72,12 @@ extension PremiumViewController: PremiumOfferViewDelegate {
     func tapOnOfferButton(with status: SubscriptionSuggestion) {
         switch status {
         case .connectThreeDaysTrial:
-            guard let weekly = (products.first { $0.id == "premium.weekly" }) else { return }
+            guard let weekly = (ServiceFactory.shared.store.subscriptions.first { $0.id == "premium.weekly" }) else { return }
             Task {
                 do {
-                    let result = try await store.purchase(weekly)
+                    let result = try await ServiceFactory.shared.store.purchase(weekly)
                     switch result {
-                    case .success(_): break
+                    case .success(_): viewWillLayoutSubviews()
                     case .failure(let error):
                         showAlert(error: error)
                     }

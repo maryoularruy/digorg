@@ -9,10 +9,18 @@ import UIKit
 
 final class SettingsViewController: UIViewController {
     @IBOutlet weak var buyPremiumView: BuyPremiumView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if ServiceFactory.shared.store.purchasedSubscriptions.isEmpty {
+            
+        }
     }
 }
 
