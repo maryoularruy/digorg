@@ -8,17 +8,44 @@
 import StoreKit
 
 public enum StoreError: Error {
-    case failedVerification
-    case waitingOnSCAOrBuyApproval
-    case userCancelled
-    case unknowedError
+    case failedVerification,
+         waitingOnSCAOrBuyApproval,
+         unknowedError,
+         userCancelled
+    
+    var isShowAlert: Bool {
+        switch self {
+        case .failedVerification: true
+        case .waitingOnSCAOrBuyApproval: false
+        case .unknowedError: true
+        case.userCancelled: false
+        }
+    }
+    
+    var title: String? {
+        switch self {
+        case .failedVerification: "Failed Verification"
+        case .waitingOnSCAOrBuyApproval: nil
+        case .unknowedError: "Unknowed error"
+        case.userCancelled: nil
+        }
+    }
+    
+    var subtitle: String? {
+        switch self {
+        case .failedVerification: "Your verification is failed"
+        case .waitingOnSCAOrBuyApproval: nil
+        case .unknowedError: "Unknowed error"
+        case.userCancelled: nil
+        }
+    }
 }
 
 final class Store {
     static var shared = Store()
     
     var updateListenerTask: Task<Void, Error>? = nil
-    private let productIds = ["pro.weekly"]
+    private let productIds = ["premium.weekly"]
     
     init() {
         self.updateListenerTask = listenForTransactions()

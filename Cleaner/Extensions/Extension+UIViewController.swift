@@ -6,15 +6,8 @@
 //
 
 import UIKit
-import Foundation
-import SwiftyUserDefaults
-//import Alertift
-import LocalAuthentication
-
-private var aView: UIView?
 
 extension UIViewController {
-    
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -25,39 +18,19 @@ extension UIViewController {
         view.endEditing(true)
     }
 
-	func showSpinner() {
-		aView = UIView(frame: self.view.bounds)
-		aView?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-
-        let ai = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
-		ai.center = aView?.center ?? CGPoint(x: 0, y: 0)
-		ai.startAnimating()
-		aView?.addSubview(ai)
-		self.view.addSubview(aView ?? UIView())
-	}
-
-	func removeSpinner() {
-		aView?.removeFromSuperview()
-		aView = nil
-	}
-
 	func showAlert(title: String, subtitle: String) {
 		let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
-		alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-		self.present(alert, animated: true)
+		alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+		present(alert, animated: true)
 	}
-}
-extension UINavigationController {
-
-    func setStatusBar(backgroundColor: UIColor) {
-        let statusBarFrame: CGRect
-        if #available(iOS 13.0, *) {
-            statusBarFrame = view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
-        } else {
-            statusBarFrame = UIApplication.shared.statusBarFrame
+    
+    func showAlert(error: Error) {
+        if let error = error as? StoreError {
+            if error.isShowAlert {
+                let alert = UIAlertController(title: error.title, message: error.subtitle, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                present(alert, animated: true)
+            }
         }
-        let statusBarView = UIView(frame: statusBarFrame)
-        statusBarView.backgroundColor = backgroundColor
-        view.addSubview(statusBarView)
     }
 }

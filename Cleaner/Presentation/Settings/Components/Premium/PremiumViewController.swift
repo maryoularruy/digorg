@@ -30,8 +30,8 @@ final class PremiumViewController: UIViewController {
     private func getProducts() async {
         do {
             products = try await store.getProducts()
-        } catch {
-            print("error")
+        } catch(let error) {
+            showAlert(title: "Unknowed error", subtitle: error.localizedDescription)
         }
     }
 }
@@ -69,23 +69,17 @@ extension PremiumViewController: PremiumOfferViewDelegate {
     func tapOnOfferButton(with status: SubscriptionSuggestion) {
         switch status {
         case .connectThreeDaysTrial:
-            guard let weekly = (products.first { $0.id == "pro.weekly" }) else { return }
+            guard let weekly = (products.first { $0.id == "premium.weekly" }) else { return }
             Task {
                 do {
                     let result = try await store.purchase(weekly)
                     switch result {
                     case .success(_): break
-                        
-                    case .failure(let failure):
-                        if failure as? StoreError == StoreError.failedVerification {
-                            print("failedVerification")
-                        } else {
-                            print("other error")
-                        }
+                    case .failure(let error):
+                        showAlert(error: error)
                     }
                 } catch(let error) {
-                    print(error)
-                    
+                    showAlert(title: "Unknown error", subtitle: error.localizedDescription)
                 }
             }
             
