@@ -22,7 +22,7 @@ final class PremiumViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupPremiumOfferView()
+        setupPurchaseStatus()
     }
     
     override func viewWillLayoutSubviews() {
@@ -35,13 +35,30 @@ final class PremiumViewController: UIViewController {
         print("deinit")
     }
     
-    private func setupPremiumOfferView() {
-        if ServiceFactory.shared.store.purchasedSubscriptions.isEmpty {
-            rootView.premiumOfferView.configureUI(for: .purchaseThreeDaysTrial)
+    private func setupPurchaseStatus() {
+        guard let product = ServiceFactory.shared.store.purchasedSubscriptions.first(where: { $0.id == WEEKLY_PREMIUM_ID }) else { return }
+        
+        let currentUserPurchase: CurrentUserPurchase = if ServiceFactory.shared.store.purchasedSubscriptions.isEmpty {
+            .none
         } else {
-            guard let product = ServiceFactory.shared.store.purchasedSubscriptions.first(where: { $0.id == WEEKLY_PREMIUM_ID }) else { return }
-            rootView.premiumOfferView.configureUI(for: product.subscription?.introductoryOffer != nil ? .purchaseWeeklyRenewableSubscription : .cancelSubscription)
+            if product.subscription?.introductoryOffer == nil {
+                .weeklyRenewableSubscription
+            } else {
+                .trial
+            }
         }
+        
+        let purchaseStatus: PurchaseStatus = if ServiceFactory.shared.store.purchasedSubscriptions.isEmpty {
+            .purchaseThreeDaysTrial
+        } else {
+            if product.subscription?.introductoryOffer == nil {
+                .cancelSubscription
+            } else {
+                .purchaseWeeklyRenewableSubscription
+            }
+        }
+        rootView.offerDescriptionView.configureUI(for: purchaseStatus)
+        rootView.premiumOfferView.configureUI(for: purchaseStatus)
     }
 }
 

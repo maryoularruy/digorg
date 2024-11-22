@@ -7,20 +7,14 @@
 
 import UIKit
 
-enum PurchaseStatus {
-    case purchaseThreeDaysTrial, purchaseWeeklyRenewableSubscription, cancelSubscription
-}
-
 protocol PremiumOfferViewDelegate: AnyObject {
     func tapOnOfferButton(with status: PurchaseStatus)
 }
 
 final class PremiumOfferView: UIView {
     weak var delegate: PremiumOfferViewDelegate?
-    private var subscriptionStatus: PurchaseStatus?
     
     func configureUI(for status: PurchaseStatus) {
-        self.subscriptionStatus = status
         subviews.forEach { $0.removeFromSuperview() }
         
         switch status {

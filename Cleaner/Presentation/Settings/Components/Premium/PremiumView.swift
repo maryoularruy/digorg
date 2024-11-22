@@ -53,12 +53,7 @@ final class PremiumView: UIView {
         return label
     }()
     
-    private lazy var subtitleLabel: Regular15LabelStyle = {
-        let label = Regular15LabelStyle()
-        label.bind(text: "Get full access to all features")
-        label.setGreyTextColor()
-        return label
-    }()
+    lazy var offerDescriptionView: OfferDescriptionView = OfferDescriptionView()
     
     private lazy var premiumFeaturesView: UIView = {
         let view = UIView()
@@ -100,11 +95,7 @@ final class PremiumView: UIView {
         return stackView
     }()
     
-    lazy var premiumOfferView: PremiumOfferView = {
-        let view = PremiumOfferView()
-        view.configureUI(for: .purchaseThreeDaysTrial)
-        return view
-    }()
+    lazy var premiumOfferView: PremiumOfferView = PremiumOfferView()
     
     lazy var privacyPolicyLabel: Regular13LabelStyle = {
         let label = Regular13LabelStyle()
@@ -156,7 +147,7 @@ final class PremiumView: UIView {
                      cancelImageView,
                      iconImageView,
                      premiumLabel,
-                     subtitleLabel,
+                     offerDescriptionView,
                      premiumFeaturesView,
                      premiumOfferView,
                      privacyPolicyLabel,
@@ -186,10 +177,10 @@ final class PremiumView: UIView {
             premiumLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 21),
             premiumLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            subtitleLabel.topAnchor.constraint(equalTo: premiumLabel.bottomAnchor, constant: 8),
-            subtitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            offerDescriptionView.topAnchor.constraint(equalTo: premiumLabel.bottomAnchor, constant: 8),
+            offerDescriptionView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            premiumFeaturesView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 36),
+            premiumFeaturesView.topAnchor.constraint(equalTo: offerDescriptionView.bottomAnchor, constant: 30),
             premiumFeaturesView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
             premiumFeaturesView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -38),
             
