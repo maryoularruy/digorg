@@ -7,25 +7,25 @@
 
 import UIKit
 
-enum SubscriptionSuggestion {
-    case connectThreeDaysTrial, connectWeeklyRenewableSubscription, cancelSubscription
+enum PurchaseStatus {
+    case purchaseThreeDaysTrial, purchaseWeeklyRenewableSubscription, cancelSubscription
 }
 
 protocol PremiumOfferViewDelegate: AnyObject {
-    func tapOnOfferButton(with status: SubscriptionSuggestion)
+    func tapOnOfferButton(with status: PurchaseStatus)
 }
 
 final class PremiumOfferView: UIView {
     weak var delegate: PremiumOfferViewDelegate?
-    private var subscriptionStatus: SubscriptionSuggestion?
+    private var subscriptionStatus: PurchaseStatus?
     
-    func configureUI(for status: SubscriptionSuggestion) {
+    func configureUI(for status: PurchaseStatus) {
         self.subscriptionStatus = status
         subviews.forEach { $0.removeFromSuperview() }
         
         switch status {
-        case .connectThreeDaysTrial: setupTrialUI()
-        case .connectWeeklyRenewableSubscription: setupSubscriptionUI()
+        case .purchaseThreeDaysTrial: setupTrialUI()
+        case .purchaseWeeklyRenewableSubscription: setupSubscriptionUI()
         case .cancelSubscription: setupCancelSubscriptionUI()
         }
     }
@@ -41,7 +41,7 @@ final class PremiumOfferView: UIView {
         let startTrialButton = ActionToolbarButtonStyle()
         startTrialButton.bind(text: "Start 3 days trial")
         startTrialButton.addTapGestureRecognizer { [weak self] in
-            self?.delegate?.tapOnOfferButton(with: .connectThreeDaysTrial)
+            self?.delegate?.tapOnOfferButton(with: .purchaseThreeDaysTrial)
         }
         
         let subscriptionConditionsLabel = Regular12LabelStyle()

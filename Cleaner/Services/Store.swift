@@ -7,7 +7,9 @@
 
 import StoreKit
 
-public enum StoreError: Error {
+var WEEKLY_PREMIUM_ID = "premium.weekly"
+
+enum StoreError: Error {
     case failedVerification,
          waitingOnSCAOrBuyApproval,
          unknowedError,
@@ -43,7 +45,7 @@ public enum StoreError: Error {
 
 final class Store {
     var updateListenerTask: Task<Void, Error>? = nil
-    private let productIds = ["premium.weekly"]
+    private let productIds = [WEEKLY_PREMIUM_ID]
     private(set) var subscriptions: [Product] = []
     private(set) var purchasedSubscriptions: [Product] = []
     

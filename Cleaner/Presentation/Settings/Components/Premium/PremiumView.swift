@@ -102,7 +102,7 @@ final class PremiumView: UIView {
     
     lazy var premiumOfferView: PremiumOfferView = {
         let view = PremiumOfferView()
-        view.configureUI(for: .connectThreeDaysTrial)
+        view.configureUI(for: .purchaseThreeDaysTrial)
         return view
     }()
     

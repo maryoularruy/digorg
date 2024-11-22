@@ -22,10 +22,7 @@ final class PremiumViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        if ServiceFactory.shared.store.purchasedSubscriptions.isEmpty {
-            
-        }
+        setupPremiumOfferView()
     }
     
     override func viewWillLayoutSubviews() {
@@ -36,6 +33,15 @@ final class PremiumViewController: UIViewController {
     
     deinit {
         print("deinit")
+    }
+    
+    private func setupPremiumOfferView() {
+        if ServiceFactory.shared.store.purchasedSubscriptions.isEmpty {
+            rootView.premiumOfferView.configureUI(for: .purchaseThreeDaysTrial)
+        } else {
+            guard let product = ServiceFactory.shared.store.purchasedSubscriptions.first(where: { $0.id == WEEKLY_PREMIUM_ID }) else { return }
+            rootView.premiumOfferView.configureUI(for: product.subscription?.introductoryOffer != nil ? .purchaseWeeklyRenewableSubscription : .cancelSubscription)
+        }
     }
 }
 
@@ -69,10 +75,10 @@ extension PremiumViewController: PremiumViewDelegate {
 }
 
 extension PremiumViewController: PremiumOfferViewDelegate {
-    func tapOnOfferButton(with status: SubscriptionSuggestion) {
+    func tapOnOfferButton(with status: PurchaseStatus) {
         switch status {
-        case .connectThreeDaysTrial:
-            guard let weekly = (ServiceFactory.shared.store.subscriptions.first { $0.id == "premium.weekly" }) else { return }
+        case .purchaseThreeDaysTrial:
+            guard let weekly = (ServiceFactory.shared.store.subscriptions.first { $0.id == WEEKLY_PREMIUM_ID }) else { return }
             Task {
                 do {
                     let result = try await ServiceFactory.shared.store.purchase(weekly)
@@ -86,7 +92,7 @@ extension PremiumViewController: PremiumOfferViewDelegate {
                 }
             }
             
-        case .connectWeeklyRenewableSubscription: break
+        case .purchaseWeeklyRenewableSubscription: break
             
         case .cancelSubscription: break
             
