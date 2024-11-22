@@ -10,7 +10,3 @@ import Foundation
 enum PurchaseStatus {
     case purchaseThreeDaysTrial, purchaseWeeklyRenewableSubscription, cancelSubscription
 }
-
-enum CurrentUserPurchase {
-    case trial, weeklyRenewableSubscription, none
-}

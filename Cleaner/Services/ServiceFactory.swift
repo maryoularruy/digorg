@@ -11,8 +11,10 @@ final class ServiceFactory {
     static let shared = ServiceFactory()
     
     let store: Store
+    let userService: UserService
     
     private init() {
         store = Store()
+        userService = UserService()
     }
 }
