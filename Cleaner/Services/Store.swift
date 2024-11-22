@@ -51,12 +51,9 @@ final class Store {
     
     init() {
         updateListenerTask = listenForTransactions()
-        Task {
-            await getProducts()
-            await updateCustomerProductStatus()
-        }
+        Task { await performSequentialTasks() }
     }
-    
+
     deinit {
         updateListenerTask?.cancel()
     }
@@ -80,6 +77,27 @@ final class Store {
         }
     }
     
+    private func performSequentialTasks() async {
+        await withTaskGroup(of: Void.self) { taskGroup in
+            let tasks = [1, 2]
+            
+            for task in tasks {
+                taskGroup.addTask {
+                    await self.performTask(task)
+                }
+                await taskGroup.next()
+            }
+        }
+    }
+    
+    private func performTask(_ id: Int) async {
+        if id == 1 {
+            await getProducts()
+        } else if id == 2 {
+            await updateCustomerProductStatus()
+        }
+    }
+    
     private func getProducts() async {
         do {
             let storeProducts = try await Product.products(for: productIds)
@@ -88,7 +106,8 @@ final class Store {
                 switch product.type {
                 case .consumable: break
                 case .nonConsumable: break
-                case .autoRenewable: subscriptions.append(product)
+                case .autoRenewable:
+                    subscriptions.append(product)
                 case .nonRenewable: break
                 default: break
                 }
@@ -96,6 +115,13 @@ final class Store {
         } catch {
             print("Failed product request from the App Store server. \(error)")
         }
+    }
+    
+    func getLatestTransaction() async -> VerificationResult<Transaction>? {
+        do {
+            let storeProducts = try await Product.products(for: productIds)
+            return await storeProducts[0].latestTransaction
+        } catch { return nil }
     }
     
     private func updateCustomerProductStatus() async {

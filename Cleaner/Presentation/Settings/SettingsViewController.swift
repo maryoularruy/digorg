@@ -14,14 +14,6 @@ final class SettingsViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        if ServiceFactory.shared.store.purchasedSubscriptions.isEmpty {
-            
-        }
-    }
 }
 
 extension SettingsViewController: ViewControllerProtocol {
