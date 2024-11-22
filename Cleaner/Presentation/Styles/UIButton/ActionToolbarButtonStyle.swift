@@ -62,6 +62,13 @@ final class ActionToolbarButtonStyle: UIButton {
         configuration = myConfiguration
     }
     
+    func setupCancelSubscriptionStyle() {
+        myConfiguration.title = "Cancel Subscription"
+        myConfiguration.baseBackgroundColor = .whiteBackground
+        myConfiguration.baseForegroundColor = .greyText
+        configuration = myConfiguration
+    }
+    
     private func setup() {
         layer.cornerRadius = 34
         configuration = myConfiguration

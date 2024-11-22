@@ -45,6 +45,7 @@ final class PremiumOfferView: UIView {
         }
         
         let subscriptionConditionsLabel = Regular12LabelStyle()
+        subscriptionConditionsLabel.numberOfLines = 1
         subscriptionConditionsLabel.bind(text: "Auto-renewable. Cancel Anytime")
         
         addSubviews([title, commonPriceLabel, startTrialButton, subscriptionConditionsLabel])
@@ -68,7 +69,28 @@ final class PremiumOfferView: UIView {
     }
     
     private func setupSubscriptionUI() {
+        let cancelSubscriptionButton = ActionToolbarButtonStyle()
+        cancelSubscriptionButton.setupCancelSubscriptionStyle()
+        cancelSubscriptionButton.addTapGestureRecognizer { [weak self] in
+            self?.delegate?.tapOnOfferButton(with: .cancelSubscription)
+        }
         
+        let subscriptionConditionsLabel = Regular12LabelStyle()
+        subscriptionConditionsLabel.numberOfLines = 2
+        subscriptionConditionsLabel.bind(text: "If you cancel now, you can still access\n your subscription untill 08.08.24")
+        
+        addSubviews([cancelSubscriptionButton, subscriptionConditionsLabel])
+        
+        NSLayoutConstraint.activate([
+            subscriptionConditionsLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            subscriptionConditionsLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            cancelSubscriptionButton.topAnchor.constraint(equalTo: topAnchor, constant: 59),
+            cancelSubscriptionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
+            cancelSubscriptionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -38),
+            cancelSubscriptionButton.bottomAnchor.constraint(equalTo: subscriptionConditionsLabel.topAnchor, constant: -15),
+            cancelSubscriptionButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     private func setupCancelSubscriptionUI() {
