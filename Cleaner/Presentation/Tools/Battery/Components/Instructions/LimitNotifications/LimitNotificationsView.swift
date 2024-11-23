@@ -46,7 +46,7 @@ To change permissions for other apps, tap Notifications at the top left to retur
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .paleGrey
     }
     
     private func initConstraints() {

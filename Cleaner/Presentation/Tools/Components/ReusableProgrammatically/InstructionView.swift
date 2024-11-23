@@ -47,7 +47,7 @@ final class InstructionView: UIView {
     
     private func setupView() {
         clipsToBounds = false
-        backgroundColor = .white
+        backgroundColor = .paleGrey
         addShadows()
         layer.cornerRadius = 20
     }

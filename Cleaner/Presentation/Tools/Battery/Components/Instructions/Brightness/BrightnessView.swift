@@ -52,7 +52,7 @@ Apple devices are designed to automatically change the brightness based on the c
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .paleGrey
     }
     
     private func initConstraints() {

@@ -21,7 +21,7 @@ final class GroupedAssetsViewController: UIViewController {
     lazy var duplicatesCount: Int = 0
     lazy var assetsForDeletion = Set<PHAsset>() {
         didSet {
-            actionToolbar.toolbarButton.bind(backgroundColor: assetsForDeletion.isEmpty ? .paleBlueButtonBackground : .blue)
+            actionToolbar.toolbarButton.bind(backgroundColor: assetsForDeletion.isEmpty ? .paleBlue : .blue)
             actionToolbar.toolbarButton.bind(
                 text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(assetsForDeletion.isEmpty ? "0" : "?") MB")
         }

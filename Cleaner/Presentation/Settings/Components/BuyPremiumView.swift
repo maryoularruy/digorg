@@ -49,7 +49,7 @@ final class BuyPremiumView: UIView {
     }
     
     private func setupView() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .paleGrey
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
         addShadows()

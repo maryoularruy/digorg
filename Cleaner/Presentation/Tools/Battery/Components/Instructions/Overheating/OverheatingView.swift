@@ -41,7 +41,7 @@ Otherwise, your battery may suffer. If the temperature rises, your device will s
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .paleGrey
     }
     
     private func initConstraints() {

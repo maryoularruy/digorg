@@ -24,6 +24,6 @@ class Regular11LabelStyle: UILabel {
     
     func setup() {
         font = UIFont.regular11 ?? UIFont.systemFont(ofSize: 11)
-        textColor = .greyText
+        textColor = .darkGrey
     }
 }

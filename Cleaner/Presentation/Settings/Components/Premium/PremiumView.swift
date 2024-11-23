@@ -28,7 +28,7 @@ final class PremiumView: UIView {
     private lazy var restoreLabel: UILabel = {
         let label = UILabel()
         label.text = "Restore"
-        label.textColor = .greyText
+        label.textColor = .darkGrey
         label.font = .medium13
         return label
     }()
@@ -57,7 +57,7 @@ final class PremiumView: UIView {
     
     private lazy var premiumFeaturesView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .paleGrey
         view.layer.cornerRadius = 18
         view.layer.borderColor = UIColor.blue.cgColor
         view.layer.borderWidth = 3
@@ -122,7 +122,7 @@ final class PremiumView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .paleGrey
         
         restoreLabel.addTapGestureRecognizer { [weak self] in
             self?.delegate?.tapOnRestore()

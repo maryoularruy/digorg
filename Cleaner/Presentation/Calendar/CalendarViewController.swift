@@ -120,7 +120,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.checkBoxButton.image = eventsForDeletion.contains(eventGroups[indexPath.section].events[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         
-        cell.content.backgroundColor = eventsForDeletion.contains(eventGroups[indexPath.section].events[indexPath.row]) ? .lightBlueBackground : .white
+        cell.content.backgroundColor = eventsForDeletion.contains(eventGroups[indexPath.section].events[indexPath.row]) ? .lightBlue : .paleGrey
         
         return cell
     }

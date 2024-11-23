@@ -142,7 +142,7 @@ extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource 
         
         let contact = sections[indexPath.section].contacts[indexPath.row]
         cell.checkBoxButton.image = contactsForImport.contains(contact) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
-        cell.backgroundColor = contactsForImport.contains(contact) ? .lightBlueBackground : .white
+        cell.backgroundColor = contactsForImport.contains(contact) ? .lightBlue : .paleGrey
         cell.bind(contact: contact, (indexPath.section, indexPath.row))
         
         return cell

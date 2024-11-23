@@ -11,7 +11,7 @@ final class ActionToolbarButtonStyle: UIButton {
     lazy var isClickable: Bool = true {
         didSet {
             isUserInteractionEnabled = isClickable
-            backgroundColor = isClickable ? .blue : .paleBlueButtonBackground
+            backgroundColor = isClickable ? .blue : .paleBlue
         }
     }
     
@@ -33,7 +33,7 @@ final class ActionToolbarButtonStyle: UIButton {
         self.backgroundColor = backgroundColor
     }
     
-    func bind(text: String, backgroundColor: UIColor = .blue, textColor: UIColor = .white, image: UIImage) {
+    func bind(text: String, backgroundColor: UIColor = .blue, textColor: UIColor = .paleGrey, image: UIImage) {
         titleLabel?.text = text
         self.backgroundColor = backgroundColor
         titleLabel?.textColor = textColor
@@ -44,15 +44,15 @@ final class ActionToolbarButtonStyle: UIButton {
     
     func setupCancelSubscriptionStyle() {
         titleLabel?.text = "Cancel Subscription"
-        backgroundColor = .whiteBackground
-        titleLabel?.textColor = .greyText
+        backgroundColor = .pureWhite
+        titleLabel?.textColor = .darkGrey
     }
     
     private func setup() {
         layer.cornerRadius = 34
         titleLabel?.textAlignment = .center
         backgroundColor = .blue
-        titleLabel?.textColor = .white
+        titleLabel?.textColor = .paleGrey
         titleLabel?.font = .semibold15
         
         

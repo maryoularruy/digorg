@@ -140,7 +140,7 @@ extension SecretAlbumViewController: ViewControllerProtocol {
                              image: .takeMedia)
         importMediaButton.bind(text: "Import photo or video",
                                backgroundColor: .acidGreen,
-                               textColor: .blackText,
+                               textColor: .black,
                                image: .importMedia)
         cancelButton.bind(text: "Cancel")
         

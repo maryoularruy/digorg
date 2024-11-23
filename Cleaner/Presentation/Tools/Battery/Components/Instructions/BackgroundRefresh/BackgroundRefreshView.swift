@@ -40,7 +40,7 @@ Turn it off for all the apps at the top of the screen or go through the list to 
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .paleGrey
     }
     
     private func initConstraints() {

@@ -45,7 +45,7 @@ Background App Refresh once again at the top of the screen and choose the option
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .paleGrey
     }
     
     private func initConstraints() {

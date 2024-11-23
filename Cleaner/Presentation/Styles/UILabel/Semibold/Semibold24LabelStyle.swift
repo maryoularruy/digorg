@@ -10,6 +10,6 @@ import UIKit
 final class Semibold24LabelStyle: Semibold15LabelStyle {
     override func setup() {
         font = UIFont.semibold24 ?? UIFont.boldSystemFont(ofSize: 24)
-        textColor = .blackText
+        textColor = .black
     }
 }

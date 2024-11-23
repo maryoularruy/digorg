@@ -51,7 +51,7 @@ You'll know Battery Saver Mode is active when the battery icon in the upper righ
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .paleGrey
     }
     
     private func initConstraints() {

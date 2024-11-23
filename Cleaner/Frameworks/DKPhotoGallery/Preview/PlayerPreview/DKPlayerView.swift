@@ -430,7 +430,7 @@ open class DKPlayerView: UIView {
                                                     constant: 0))
         
         bottomView.addSubview(self.startTimeLabel)
-        self.startTimeLabel.textColor = UIColor.white
+        self.startTimeLabel.textColor = UIColor.paleGrey
         self.startTimeLabel.textAlignment = .right
         self.startTimeLabel.font = UIFont(name: "Helvetica Neue", size: 13)
         self.startTimeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -476,7 +476,7 @@ open class DKPlayerView: UIView {
                                                     constant: 0))
         
         bottomView.addSubview(self.durationLabel)
-        self.durationLabel.textColor = UIColor.white
+        self.durationLabel.textColor = UIColor.paleGrey
         self.durationLabel.font = self.startTimeLabel.font
         self.durationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.durationLabel.addConstraint(NSLayoutConstraint(item: self.durationLabel,

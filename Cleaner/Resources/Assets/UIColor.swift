@@ -8,21 +8,22 @@
 import UIKit
 
 extension UIColor {
-    static var white = UIColor(resource: .white)
-    static var blue = UIColor(resource: .blue)
+    static var pureWhite = UIColor(resource: .pureWhite)
+    
+    static var paleGrey = UIColor(resource: .paleGrey)
+    static var lightGrey = UIColor(resource: .lightGrey)
+    static var darkGrey = UIColor(resource: .darkGrey)
+    
     static var acidGreen = UIColor(resource: .acidGreen)
     static var green = UIColor(resource: .green)
-    static var lightGrey = UIColor(resource: .lightGrey)
     
-    static var blackText = UIColor(resource: .blackText)
-    static var greyText = UIColor(resource: .greyText)
+    static var lightBlue = UIColor(resource: .lightBlue)
+    static var paleBlue = UIColor(resource: .paleBlue)
+    static var blue = UIColor(resource: .blue)
     
-    static var whiteBackground = UIColor(resource: .whiteBackground)
+    static var black = UIColor(resource: .black)
     
-    static var lightBlueBackground = UIColor(resource: .lightBlueBackground)
-    static var paleBlueButtonBackground = UIColor(resource: .paleBlueBackground)
-    
-    static var yellowProgressBar = UIColor(resource: .yellowProgressBar)
+    static var yellow = UIColor(resource: .yellow)
     
     static var shadowColor = UIColor(resource: .shadow)
 }

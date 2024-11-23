@@ -31,7 +31,7 @@ final class Medium12ButtonStyle: UIButton {
         backgroundColor = .blue
         layer.cornerRadius = 20
         titleLabel?.textAlignment = .center
-        titleLabel?.textColor = .white
+        titleLabel?.textColor = .paleGrey
         imageView?.image = .arrowForwardWhite
         titleLabel?.font = .medium12
 //        configuration.imagePlacement = .trailing
