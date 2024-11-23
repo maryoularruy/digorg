@@ -78,7 +78,11 @@ final class SecretAlbumViewController: UIViewController {
     }
     
     @IBAction func tapOnImportMediaButton(_ sender: Any) {
-        configureImagePicker()
+        if #available(iOS 14.0, *) {
+            configureImagePicker()
+        } else {
+            configurePicker()
+        }
     }
     
     @IBAction func tapOnCancelButton(_ sender: Any) {
@@ -157,6 +161,7 @@ extension SecretAlbumViewController: BottomPopupDelegate {
     }
 }
 
+@available(iOS 14.0, *)
 extension SecretAlbumViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         addMediaContainer.isHidden = true
@@ -208,6 +213,32 @@ extension SecretAlbumViewController: PHPickerViewControllerDelegate {
         let pickerViewController = PHPickerViewController(configuration: configuration)
         pickerViewController.delegate = self
         present(pickerViewController, animated: true)
+    }
+}
+
+extension SecretAlbumViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
+            print("Selected image: \(selectedImage)")
+            // Do something with the image (e.g., display it in an image view)
+        } else if let selectedVideoURL = info[.mediaURL] as? URL {
+            print("Selected video URL: \(selectedVideoURL)")
+            // Handle the video URL
+        }
+        
+        picker.dismiss(animated: true)
+    }
+    
+    private func configurePicker() {
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
+
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.mediaTypes = ["public.image"]
+//        picker.mediaTypes = ["public.image", "public.movie"]
+        picker.allowsEditing = true // Set to false if you don't want editing
+        present(picker, animated: true, completion: nil)
     }
 }
 

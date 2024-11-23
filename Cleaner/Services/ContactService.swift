@@ -7,7 +7,6 @@
 
 import SwiftyContacts
 import ContactsUI
-import OSLog
 
 struct CNContactSection {
     let name: String
@@ -15,7 +14,6 @@ struct CNContactSection {
 }
 
 final class ContactManager {
-    private static var logger = Logger()
     private static var store = CNContactStore()
     private static var defaultDescriptor = CNContactViewController.descriptorForRequiredKeys()
 
@@ -96,7 +94,7 @@ final class ContactManager {
         do {
             return try store.unifiedContact(withIdentifier: contact.identifier, keysToFetch: [defaultDescriptor])
         } catch {
-            logger.error("Failed to get contact from CNContactStore: \(error.localizedDescription)")
+            print("Failed to get contact from CNContactStore: \(error.localizedDescription)")
             return nil
         }
     }
@@ -154,9 +152,9 @@ final class ContactManager {
             switch response {
             case .success(_):
                 handler()
-                logger.info("Contacts Access Granted")
+                print("Contacts Access Granted")
             case .failure(let error):
-                logger.warning("Contacts Access Denied: \(error.localizedDescription)")
+                print("Contacts Access Denied: \(error.localizedDescription)")
             }
         }
     }

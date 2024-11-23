@@ -13,7 +13,6 @@ final class CalendarService {
     
     private let eventStore = EKEventStore()
     private lazy var twoYears = TimeInterval(63113852)
-    private lazy var logger = Logger()
 
     func requestAccess(completion: @escaping (Bool) -> Void) {
         if #available(iOS 17.0, *) {
@@ -47,7 +46,7 @@ final class CalendarService {
                     try eventStore.remove(event, span: .thisEvent)
                     completion(true)
                 } catch {
-                    logger.error("\(error.localizedDescription)")
+                    print("\(error.localizedDescription)")
                     completion(false)
                 }
             }
