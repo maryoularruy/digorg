@@ -41,16 +41,16 @@ extension UIViewController {
     func showAccessDeniedAlert(_ type: PermissionType) {
         let message = switch type {
         case .media:
-            "Please enable access to the photo library in Settings"
+            "We need access to the photo library"
         case .contacts:
-            "Please enable access to the contacts in Settings"
+            "We need access to the contacts"
         case .calendar:
-            "Please enable access to the calendar in Settings"
+            "We need access to the photo calendar"
         case .camera:
-            "Please enable access to the phone camera in Settings"
+            "We need access to the phone camera"
         }
         
-        let alert = UIAlertController(title: "Access Denied", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Access Denied", message: "\(message). Please go to the settings and allow access, then restart the app", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
             self.openAppSettings()
@@ -63,7 +63,9 @@ extension UIViewController {
     
     func openAppSettings() {
         if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-            UIApplication.shared.open(settingsURL)
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                UIApplication.shared.open(settingsURL) { _ in }
+            }
         }
     }
 }

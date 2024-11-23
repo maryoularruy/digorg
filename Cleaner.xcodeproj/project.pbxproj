@@ -147,17 +147,13 @@
 		FA3988452B30602A0096F335 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39881A2B30602A0096F335 /* Result.swift */; };
 		FA3988462B30602A0096F335 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39881B2B30602A0096F335 /* NSObject.swift */; };
 		FA3988472B30602A0096F335 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39881C2B30602A0096F335 /* CGSize.swift */; };
-		FA3988482B30602A0096F335 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39881D2B30602A0096F335 /* UICollectionView.swift */; };
 		FA3988492B30602A0096F335 /* PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39881E2B30602A0096F335 /* PHAsset.swift */; };
 		FA39884A2B30602A0096F335 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39881F2B30602A0096F335 /* UIDevice.swift */; };
-		FA39884B2B30602A0096F335 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988202B30602A0096F335 /* String.swift */; };
 		FA39884C2B30602A0096F335 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988212B30602A0096F335 /* UIButton.swift */; };
 		FA39884D2B30602A0096F335 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988222B30602A0096F335 /* UIViewController.swift */; };
 		FA39884E2B30602A0096F335 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988232B30602A0096F335 /* Combine.swift */; };
 		FA39884F2B30602A0096F335 /* ReversibleFetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988242B30602A0096F335 /* ReversibleFetchResult.swift */; };
-		FA3988502B30602A0096F335 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988252B30602A0096F335 /* UIFont.swift */; };
 		FA3988512B30602A0096F335 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988262B30602A0096F335 /* UILabel.swift */; };
-		FA3988522B30602A0096F335 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988272B30602A0096F335 /* UIApplication.swift */; };
 		FA3988532B30602A0096F335 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988282B30602A0096F335 /* Bundle.swift */; };
 		FA3988542B30602A0096F335 /* VideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988292B30602A0096F335 /* VideoController.swift */; };
 		FA3988552B30602A0096F335 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39882B2B30602A0096F335 /* PlayerView.swift */; };
@@ -352,17 +348,13 @@
 		FA39881A2B30602A0096F335 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		FA39881B2B30602A0096F335 /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		FA39881C2B30602A0096F335 /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
-		FA39881D2B30602A0096F335 /* UICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		FA39881E2B30602A0096F335 /* PHAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAsset.swift; sourceTree = "<group>"; };
 		FA39881F2B30602A0096F335 /* UIDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
-		FA3988202B30602A0096F335 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		FA3988212B30602A0096F335 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		FA3988222B30602A0096F335 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		FA3988232B30602A0096F335 /* Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Combine.swift; sourceTree = "<group>"; };
 		FA3988242B30602A0096F335 /* ReversibleFetchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReversibleFetchResult.swift; sourceTree = "<group>"; };
-		FA3988252B30602A0096F335 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		FA3988262B30602A0096F335 /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
-		FA3988272B30602A0096F335 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		FA3988282B30602A0096F335 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		FA3988292B30602A0096F335 /* VideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoController.swift; sourceTree = "<group>"; };
 		FA39882B2B30602A0096F335 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -997,17 +989,13 @@
 				FA39881A2B30602A0096F335 /* Result.swift */,
 				FA39881B2B30602A0096F335 /* NSObject.swift */,
 				FA39881C2B30602A0096F335 /* CGSize.swift */,
-				FA39881D2B30602A0096F335 /* UICollectionView.swift */,
 				FA39881E2B30602A0096F335 /* PHAsset.swift */,
 				FA39881F2B30602A0096F335 /* UIDevice.swift */,
-				FA3988202B30602A0096F335 /* String.swift */,
 				FA3988212B30602A0096F335 /* UIButton.swift */,
 				FA3988222B30602A0096F335 /* UIViewController.swift */,
 				FA3988232B30602A0096F335 /* Combine.swift */,
 				FA3988242B30602A0096F335 /* ReversibleFetchResult.swift */,
-				FA3988252B30602A0096F335 /* UIFont.swift */,
 				FA3988262B30602A0096F335 /* UILabel.swift */,
-				FA3988272B30602A0096F335 /* UIApplication.swift */,
 				FA3988282B30602A0096F335 /* Bundle.swift */,
 			);
 			path = Utilities;
@@ -1307,7 +1295,6 @@
 				75D3FC812A606E6F00F351A3 /* Extension+String.swift in Sources */,
 				FA39877C2B3055930096F335 /* OSAHash.m in Sources */,
 				752B10752AEABACD00EC0BBA /* ActionView.swift in Sources */,
-				FA3988502B30602A0096F335 /* UIFont.swift in Sources */,
 				FA3988062B305FA50096F335 /* DKPhotoGalleryResource.swift in Sources */,
 				FA3987FD2B305FA50096F335 /* DKPhotoQRCodeResultVC.swift in Sources */,
 				FA3987BD2B305D720096F335 /* AppKitExtension.swift in Sources */,
@@ -1321,7 +1308,6 @@
 				FA3987A42B30599C0096F335 /* SearchViewController.swift in Sources */,
 				A55CA2612CC904780026D434 /* UIImage.swift in Sources */,
 				FA3987592B3055510096F335 /* Changeset.swift in Sources */,
-				FA3988482B30602A0096F335 /* UICollectionView.swift in Sources */,
 				756866CF2ACD9ED0008DBF7C /* OnboardingModel.swift in Sources */,
 				FA3988462B30602A0096F335 /* NSObject.swift in Sources */,
 				7532F86A2AE29758007469EA /* DuplicateNameContactsViewController.swift in Sources */,
@@ -1350,7 +1336,6 @@
 				A55CA2632CC907350026D434 /* UIFont+ext.swift in Sources */,
 				FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */,
 				FA3987FF2B305FA50096F335 /* DKPDFView.swift in Sources */,
-				FA3988522B30602A0096F335 /* UIApplication.swift in Sources */,
 				FA39877E2B3055930096F335 /* OSAbstractHash.m in Sources */,
 				FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */,
 				A5446C2D2CE74B7A00A1F940 /* InstructionCellType.swift in Sources */,
@@ -1408,7 +1393,6 @@
 				FA3987EB2B305FA50096F335 /* DKPhotoPreviewFactory.swift in Sources */,
 				A54449162CD19C4F001ECA7A /* ToolOption.swift in Sources */,
 				FA3988592B30602A0096F335 /* PlayerSeeker.swift in Sources */,
-				FA39884B2B30602A0096F335 /* String.swift in Sources */,
 				A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */,
 				A50F58C42CB7B43400AB3166 /* UIColor.swift in Sources */,
 				FA3987812B3058140096F335 /* Extension+PHAsset.swift in Sources */,
