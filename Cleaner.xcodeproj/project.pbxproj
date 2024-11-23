@@ -245,10 +245,10 @@
 		A53EDA222CD0422700565625 /* EKEventGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKEventGroup.swift; sourceTree = "<group>"; };
 		A53EDA242CD0429F00565625 /* Date+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ext.swift"; sourceTree = "<group>"; };
 		A54449152CD19C4F001ECA7A /* ToolOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolOption.swift; sourceTree = "<group>"; };
-		A551D0E12CF0BADD008563B1 /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
-		A551D0E72CF0DB6C008563B1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		A5446C2C2CE74B7A00A1F940 /* InstructionCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionCellType.swift; sourceTree = "<group>"; };
 		A5446D072CE76CCE00A1F940 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
+		A551D0E12CF0BADD008563B1 /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
+		A551D0E72CF0DB6C008563B1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		A552341B2CC17F2000CBE265 /* UILabel+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ext.swift"; sourceTree = "<group>"; };
 		A55235972CC27B9300CBE265 /* ContactsInfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsInfoType.swift; sourceTree = "<group>"; };
 		A55CA2602CC904780026D434 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -1629,7 +1629,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1673,7 +1673,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
