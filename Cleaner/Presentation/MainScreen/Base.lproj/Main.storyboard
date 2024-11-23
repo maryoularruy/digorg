@@ -83,7 +83,6 @@
                                             <constraint firstAttribute="trailing" secondItem="zHM-bM-q0t" secondAttribute="trailing" id="QBy-eH-DAq"/>
                                             <constraint firstItem="zHM-bM-q0t" firstAttribute="top" secondItem="lu2-o2-cXL" secondAttribute="bottom" constant="16" id="U8I-cT-5AE"/>
                                             <constraint firstAttribute="trailing" secondItem="TQ5-mm-K5l" secondAttribute="trailing" id="W4x-gF-9E4"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lu2-o2-cXL" secondAttribute="trailing" constant="20" symbolic="YES" id="WOL-Xo-JBw"/>
                                             <constraint firstItem="TQ5-mm-K5l" firstAttribute="top" secondItem="80D-7X-N8u" secondAttribute="bottom" constant="16" id="ZAc-w1-LIU"/>
                                             <constraint firstAttribute="trailing" secondItem="80D-7X-N8u" secondAttribute="trailing" id="p14-7u-MwM"/>
                                             <constraint firstItem="80D-7X-N8u" firstAttribute="leading" secondItem="GIo-qk-VCV" secondAttribute="leading" id="s4z-ID-c5Y"/>
@@ -96,7 +95,7 @@
                                 <constraints>
                                     <constraint firstItem="GIo-qk-VCV" firstAttribute="leading" secondItem="rak-Vk-SnI" secondAttribute="leading" constant="14" id="JOv-fH-bLw"/>
                                     <constraint firstAttribute="trailing" secondItem="GIo-qk-VCV" secondAttribute="trailing" constant="-14" id="ZBG-oo-x1w"/>
-                                    <constraint firstAttribute="bottom" secondItem="GIo-qk-VCV" secondAttribute="bottom" id="ZMI-Z9-pSs"/>
+                                    <constraint firstAttribute="bottom" secondItem="GIo-qk-VCV" secondAttribute="bottom" constant="30" id="ZMI-Z9-pSs"/>
                                     <constraint firstItem="GIo-qk-VCV" firstAttribute="width" secondItem="rak-Vk-SnI" secondAttribute="width" constant="-28" id="bRE-PJ-5ts"/>
                                     <constraint firstItem="GIo-qk-VCV" firstAttribute="top" secondItem="rak-Vk-SnI" secondAttribute="top" id="vh9-gc-Vzi"/>
                                 </constraints>
