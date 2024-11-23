@@ -41,7 +41,7 @@
                 </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" name="WhiteBackground"/>
+            <color key="backgroundColor" name="White"/>
             <constraints>
                 <constraint firstItem="u8u-0X-ruW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="59k-Sp-OiI"/>
                 <constraint firstItem="KK9-Dh-CyJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6pu-9R-7jz"/>
@@ -58,8 +58,8 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="WhiteBackground">
-            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="White">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

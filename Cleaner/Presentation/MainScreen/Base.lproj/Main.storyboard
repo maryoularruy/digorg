@@ -44,7 +44,7 @@
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQ5-mm-K5l" customClass="StorageUsageView" customModule="Cleaner" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="156.66666666666666" width="365" height="123.99999999999997"/>
-                                                <color key="backgroundColor" name="WhiteBackground"/>
+                                                <color key="backgroundColor" name="White"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="124" id="gbB-Au-elb"/>
                                                 </constraints>
@@ -69,6 +69,7 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
