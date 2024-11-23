@@ -181,6 +181,69 @@ final class MediaService: MediaServiceProtocol {
               handler(PHAsset.fetchAssets(in: collection, options: options))
           }
       }
+    
+    private func checkStatus(handler: @escaping () -> ()) {
+        let status = if #available(iOS 14, *) {
+            PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        } else {
+            PHPhotoLibrary.authorizationStatus()
+        }
+        
+        switch status {
+        case .notDetermined:
+            requestPhotoLibraryPermission()
+        case .restricted, .denied:
+            print("Access denied or restricted.")
+            showAccessDeniedAlert()
+        case .authorized, .limited:
+            print("Access granted to photo library.")
+            handler()
+        @unknown default:
+            print("Unknown status.")
+        }
+    }
+    
+    private func requestPhotoLibraryPermission() {
+        if #available(iOS 14, *) {
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                switch status {
+                case .authorized:
+                    print("User granted full access to the photo library.")
+                case .limited:
+                    print("User granted limited access to the photo library.")
+                case .denied:
+                    print("User denied access to the photo library.")
+                case .restricted:
+                    print("Access restricted.")
+                case .notDetermined:
+                    print("User has not determined access to the photo library.")
+                @unknown default:
+                    print("Unknown status.")
+                }
+            }
+        } else {
+            PHPhotoLibrary.requestAuthorization { status in
+                switch status {
+                case .notDetermined:
+                    print("User has not determined access to the photo library.")
+                case .restricted:
+                    print("Access restricted.")
+                case .denied:
+                    print("User denied access to the photo library.")
+                case .authorized:
+                    print("User granted full access to the photo library.")
+                case .limited:
+                    print("User granted limited access to the photo library.")
+                @unknown default:
+                    print("Unknown status.")
+                }
+            }
+        }
+    }
+    
+    private func showAccessDeniedAlert() {
+        
+    }
 }
 
 extension MediaService {

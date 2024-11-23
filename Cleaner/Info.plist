@@ -2,10 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string></string>
-	<key>NSFileProviderDomainUsageDescription</key>
-	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to your photo library</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-SemiBold.ttf</string>
@@ -14,12 +12,12 @@
 		<string>Poppins-Regular.ttf</string>
 	</array>
 	<key>NSContactsUsageDescription</key>
-	<string>This app needs acess contacts</string>
+	<string>This app needs access to your contacts</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app needs access to your photo library</string>
 	<key>NSCalendarsFullAccessUsageDescription</key>
-	<string>Give it</string>
-	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
-	<string>Give it</string>
-	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to your calendar</string>
+	<key>NSFileProviderDomainUsageDescription</key>
 	<string></string>
 </dict>
 </plist>

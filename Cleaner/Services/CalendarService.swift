@@ -6,7 +6,6 @@
 //
 
 import EventKit
-import OSLog
 
 final class CalendarService {
     static let shared = CalendarService()
