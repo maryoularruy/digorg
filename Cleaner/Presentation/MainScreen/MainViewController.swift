@@ -139,23 +139,33 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     private func openPhotosCleanup() {
-        navigationController?.pushViewController(createSearchVC(with: .photos), animated: false)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            navigationController?.pushViewController(createSearchVC(with: .photos), animated: true)
+        }
     }
     
     private func openVideosCleanup() {
-        navigationController?.pushViewController(createSearchVC(with: .videos), animated: false)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            navigationController?.pushViewController(createSearchVC(with: .photos), animated: true)
+        }
     }
     
     private func openContactsCleanup() {
         let vc = StoryboardScene.ContactsMenu.initialScene.instantiate()
         vc.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: false)
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     private func openCalendarCleanup() {
         let vc = StoryboardScene.Calendar.initialScene.instantiate()
         vc.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: false)
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     private func createSearchVC(with cleanupOption: CleanupOption) -> SearchViewController {
