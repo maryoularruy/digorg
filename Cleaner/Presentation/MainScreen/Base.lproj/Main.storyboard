@@ -18,74 +18,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rak-Vk-SnI">
-                                <rect key="frame" x="20" y="59" width="353" height="710"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rak-Vk-SnI">
+                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIo-qk-VCV">
-                                        <rect key="frame" x="0.0" y="0.0" width="353" height="719"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GIo-qk-VCV">
+                                        <rect key="frame" x="14" y="0.0" width="365" height="710"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lu2-o2-cXL">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cleaner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lu2-o2-cXL" customClass="Semibold24LabelStyle" customModule="Cleaner" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="7" width="98" height="33.666666666666664"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="Cleaner">
-                                                        <attributes>
-                                                            <color key="NSColor" name="Black"/>
-                                                            <font key="NSFont" size="24" name="Poppins-Bold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="24"/>
+                                                <color key="textColor" name="Black"/>
                                                 <color key="highlightedColor" name="BlackTextColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="80D-7X-N8u">
-                                                <rect key="frame" x="0.0" y="85.666666666666657" width="353" height="55"/>
+                                                <rect key="frame" x="0.0" y="85.666666666666657" width="365" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="55" id="xob-gZ-ibM"/>
                                                 </constraints>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHM-bM-q0t">
-                                                <rect key="frame" x="0.0" y="56.666666666666671" width="353" height="21"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="Device Info">
-                                                        <attributes>
-                                                            <color key="NSColor" name="BlackTextColor"/>
-                                                            <font key="NSFont" size="15" name="Poppins-Bold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Info" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHM-bM-q0t" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="56.666666666666671" width="365" height="21"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="15"/>
+                                                <color key="textColor" name="BlackTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQ5-mm-K5l" customClass="StorageUsageView" customModule="Cleaner" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="156.66666666666666" width="353" height="123.99999999999997"/>
+                                                <rect key="frame" x="0.0" y="156.66666666666666" width="365" height="123.99999999999997"/>
                                                 <color key="backgroundColor" name="WhiteBackground"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="124" id="gbB-Au-elb"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eSw-Bb-xDP">
-                                                <rect key="frame" x="0.0" y="288.66666666666674" width="353" height="390.33333333333326"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eSw-Bb-xDP">
+                                                <rect key="frame" x="0.0" y="288.66666666666674" width="365" height="381.33333333333326"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gq-Bb-ynR" customClass="CleanupOptionView" customModule="Cleaner" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="353" height="91.666666666666671"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Gq-Bb-ynR" customClass="CleanupOptionView" customModule="Cleaner" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="365" height="89.333333333333329"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCW-Cu-DQW" customClass="CleanupOptionView" customModule="Cleaner" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="99.666666666666629" width="353" height="91.666666666666686"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCW-Cu-DQW" customClass="CleanupOptionView" customModule="Cleaner" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="97.333333333333314" width="365" height="89.333333333333314"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYE-S3-y1P" customClass="CleanupOptionView" customModule="Cleaner" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="199.33333333333331" width="353" height="91.333333333333314"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CYE-S3-y1P" customClass="CleanupOptionView" customModule="Cleaner" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="194.66666666666669" width="365" height="89.333333333333314"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCR-8g-HtL" customClass="CleanupOptionView" customModule="Cleaner" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="298.66666666666669" width="353" height="91.666666666666686"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iCR-8g-HtL" customClass="CleanupOptionView" customModule="Cleaner" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="291.99999999999994" width="365" height="89.333333333333314"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" name="GreyBackground"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="eSw-Bb-xDP" secondAttribute="trailing" id="2ft-df-Akg"/>
                                             <constraint firstItem="lu2-o2-cXL" firstAttribute="top" secondItem="GIo-qk-VCV" secondAttribute="top" constant="7" id="4DB-PZ-OZV"/>
@@ -106,26 +92,24 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" name="GreyBackground"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="GIo-qk-VCV" firstAttribute="leading" secondItem="TRU-5S-fVP" secondAttribute="leading" id="2ZF-f0-AsL"/>
-                                    <constraint firstItem="GIo-qk-VCV" firstAttribute="width" secondItem="eFQ-GO-oDN" secondAttribute="width" id="3SX-B1-XIB"/>
-                                    <constraint firstItem="GIo-qk-VCV" firstAttribute="top" secondItem="TRU-5S-fVP" secondAttribute="top" id="6oI-9Z-mqm"/>
-                                    <constraint firstItem="GIo-qk-VCV" firstAttribute="bottom" secondItem="eFQ-GO-oDN" secondAttribute="bottom" id="JbT-GB-Gmr"/>
-                                    <constraint firstItem="GIo-qk-VCV" firstAttribute="trailing" secondItem="TRU-5S-fVP" secondAttribute="trailing" id="djV-cm-J7i"/>
-                                    <constraint firstItem="GIo-qk-VCV" firstAttribute="bottom" secondItem="TRU-5S-fVP" secondAttribute="bottom" id="uN3-p4-SPw"/>
+                                    <constraint firstItem="GIo-qk-VCV" firstAttribute="leading" secondItem="rak-Vk-SnI" secondAttribute="leading" constant="14" id="JOv-fH-bLw"/>
+                                    <constraint firstAttribute="trailing" secondItem="GIo-qk-VCV" secondAttribute="trailing" constant="-14" id="ZBG-oo-x1w"/>
+                                    <constraint firstAttribute="bottom" secondItem="GIo-qk-VCV" secondAttribute="bottom" id="ZMI-Z9-pSs"/>
+                                    <constraint firstItem="GIo-qk-VCV" firstAttribute="width" secondItem="rak-Vk-SnI" secondAttribute="width" constant="-28" id="bRE-PJ-5ts"/>
+                                    <constraint firstItem="GIo-qk-VCV" firstAttribute="top" secondItem="rak-Vk-SnI" secondAttribute="top" id="vh9-gc-Vzi"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="TRU-5S-fVP"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="eFQ-GO-oDN"/>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="GreyBackground"/>
+                        <color key="backgroundColor" name="White"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rak-Vk-SnI" secondAttribute="bottom" id="4ga-q7-wHI"/>
-                            <constraint firstItem="rak-Vk-SnI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Uqe-eT-6Ql"/>
-                            <constraint firstItem="rak-Vk-SnI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="b9c-fb-i6p"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rak-Vk-SnI" secondAttribute="trailing" constant="20" id="xwz-p9-bby"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rak-Vk-SnI" secondAttribute="trailing" id="JC1-jI-cyh"/>
+                            <constraint firstItem="rak-Vk-SnI" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Jkc-Cb-R3X"/>
+                            <constraint firstItem="rak-Vk-SnI" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="cPX-Vt-zbm"/>
+                            <constraint firstItem="rak-Vk-SnI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="q9O-rg-koj"/>
+                            <constraint firstItem="rak-Vk-SnI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rvh-Yn-WvW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hOv-Uz-ffd"/>
@@ -217,7 +201,7 @@
         <namedColor name="BlackTextColor">
             <color red="0.11764705882352941" green="0.12156862745098039" blue="0.12941176470588237" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <namedColor name="GreyBackground">
+        <namedColor name="White">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="WhiteBackground">
