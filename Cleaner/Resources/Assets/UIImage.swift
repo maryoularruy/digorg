@@ -93,4 +93,5 @@ extension UIImage {
     
     //MARK: -Navigation
     static var arrowBackIcon = UIImage(resource: .arrowBackIcon)
+    static var arrowForwardWhite = UIImage(resource: .arrowForwardWhite)
 }

@@ -8,27 +8,10 @@
 import UIKit
 
 final class ActionToolbarButtonStyle: UIButton {
-    private lazy var myConfiguration: Configuration = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.titleAlignment = .center
-        configuration.title = " "
-        configuration.baseBackgroundColor = .blue
-        configuration.baseForegroundColor = .white
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 3, bottom: 1, trailing: 3)
-        configuration.cornerStyle = .capsule
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.semibold15
-            return outgoing
-        }
-        return configuration
-    }()
-
     lazy var isClickable: Bool = true {
         didSet {
             isUserInteractionEnabled = isClickable
-            myConfiguration.baseBackgroundColor = isClickable ? .blue : .paleBlueButtonBackground
-            configuration = myConfiguration
+            backgroundColor = isClickable ? .blue : .paleBlueButtonBackground
         }
     }
     
@@ -43,34 +26,38 @@ final class ActionToolbarButtonStyle: UIButton {
     }
     
     func bind(text: String) {
-        myConfiguration.title = text
-        configuration = myConfiguration
+        titleLabel?.text = text
     }
     
     func bind(backgroundColor: UIColor) {
-        myConfiguration.baseBackgroundColor = backgroundColor
-        configuration = myConfiguration
+        self.backgroundColor = backgroundColor
     }
     
     func bind(text: String, backgroundColor: UIColor = .blue, textColor: UIColor = .white, image: UIImage) {
-        myConfiguration.title = text
-        myConfiguration.baseBackgroundColor = backgroundColor
-        myConfiguration.baseForegroundColor = textColor
-        myConfiguration.image = image
-        myConfiguration.imagePlacement = .leading
-        myConfiguration.imagePadding = 6
-        configuration = myConfiguration
+        titleLabel?.text = text
+        self.backgroundColor = backgroundColor
+        titleLabel?.textColor = textColor
+        imageView?.image = image
+//        myConfiguration.imagePlacement = .leading
+//        myConfiguration.imagePadding = 6
     }
     
     func setupCancelSubscriptionStyle() {
-        myConfiguration.title = "Cancel Subscription"
-        myConfiguration.baseBackgroundColor = .whiteBackground
-        myConfiguration.baseForegroundColor = .greyText
-        configuration = myConfiguration
+        titleLabel?.text = "Cancel Subscription"
+        backgroundColor = .whiteBackground
+        titleLabel?.textColor = .greyText
     }
     
     private func setup() {
         layer.cornerRadius = 34
-        configuration = myConfiguration
+        titleLabel?.textAlignment = .center
+        backgroundColor = .blue
+        titleLabel?.textColor = .white
+        titleLabel?.font = .semibold15
+        
+        
+        
+//            configuration.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 3, bottom: 1, trailing: 3)
+//            configuration.cornerStyle = .capsule
     }
 }

@@ -8,24 +8,6 @@
 import UIKit
 
 final class Medium12ButtonStyle: UIButton {
-    private lazy var myConfiguration: Configuration = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.titleAlignment = .center
-        configuration.title = " "
-        configuration.baseForegroundColor = .white
-        configuration.image = UIImage(resource: .arrowForwardWhite)
-        configuration.imagePlacement = .trailing
-        configuration.imagePadding = -5
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 12, bottom: 3, trailing: 4)
-        configuration.cornerStyle = .capsule
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.medium12
-            return outgoing
-        }
-        return configuration
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -42,13 +24,18 @@ final class Medium12ButtonStyle: UIButton {
     }
     
     func bind(duplicatesCount: Int) {
-        myConfiguration.title = "\(duplicatesCount) files / ? MB "
-        configuration = myConfiguration
+        titleLabel?.text = "\(duplicatesCount) files / ? MB "
     }
     
     private func setup() {
         backgroundColor = .blue
         layer.cornerRadius = 20
-        configuration = myConfiguration
+        titleLabel?.textAlignment = .center
+        titleLabel?.textColor = .white
+        imageView?.image = .arrowForwardWhite
+        titleLabel?.font = .medium12
+//        configuration.imagePlacement = .trailing
+//        configuration.imagePadding = -5
+//        configuration.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 12, bottom: 3, trailing: 4)
     }
 }

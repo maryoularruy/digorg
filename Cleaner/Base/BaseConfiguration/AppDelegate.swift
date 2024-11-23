@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PhoneInfoService.shared.getTotalRam()
         StoriesData.shared.setup()
-                
+        Store.shared.fetchProducts(productIdentifiers: Store.productIds)
+        
         DispatchQueue.main.async {
 //            if Defaults.isOnboardingSeen {
 //                let vc = StoryboardScene.Main.initialScene.instantiate()

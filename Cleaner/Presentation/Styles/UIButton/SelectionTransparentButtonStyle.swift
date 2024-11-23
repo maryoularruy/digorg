@@ -10,8 +10,7 @@ import Foundation
 final class SelectionTransparentButtonStyle: SelectionButtonStyle {
     override func setup() {
         layer.cornerRadius = 20
-        myConfiguration.baseForegroundColor = .clear
-        configuration = myConfiguration
+        backgroundColor = .clear
         addShadows()
     }
 }
