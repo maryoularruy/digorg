@@ -25,6 +25,7 @@ final class Medium12ButtonStyle: UIButton {
     
     func bind(duplicatesCount: Int) {
         setTitle("\(duplicatesCount) files", for: .normal)
+        imageEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 12)
         layoutSubviews()
     }
     
@@ -37,9 +38,14 @@ final class Medium12ButtonStyle: UIButton {
         titleLabel?.textColor = .paleGrey
         titleLabel?.font = .medium12
         
+        imageView?.contentMode = .scaleAspectFill
         setImage(.arrowForwardWhite, for: .normal)
         tintColor = .paleGrey
-        imageEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 12)
+        imageEdgeInsets = if titleLabel == nil || titleLabel?.text == "" || titleLabel?.text == " " {
+            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
+        } else {
+            UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 12)
+        }
         semanticContentAttribute = .forceRightToLeft
     }
 }

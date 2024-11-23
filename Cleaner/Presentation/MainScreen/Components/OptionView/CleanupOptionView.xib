@@ -12,7 +12,7 @@
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Ix2-oE-Epw"/>
                 <outlet property="imageView" destination="KK9-Dh-CyJ" id="bgD-DY-56R"/>
-                <outlet property="infoButton" destination="j3w-J2-fL7" id="OGB-FA-a2d"/>
+                <outlet property="infoButton" destination="oqu-Ut-uae" id="axJ-Lj-IDX"/>
                 <outlet property="titleLabel" destination="u8u-0X-ruW" id="r80-Ii-2IQ"/>
             </connections>
         </placeholder>
@@ -27,29 +27,28 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3w-J2-fL7" customClass="Medium12ButtonStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="16" y="49.333333333333343" width="28.666666666666671" height="34.333333333333314"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title=" "/>
-                </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KK9-Dh-CyJ">
                     <rect key="frame" x="253" y="0.0" width="140" height="97"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="140" id="TtS-ez-MeQ"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqu-Ut-uae" customClass="Medium12ButtonStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="16" y="46" width="30" height="35"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title=" "/>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="u8u-0X-ruW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="59k-Sp-OiI"/>
                 <constraint firstItem="KK9-Dh-CyJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6pu-9R-7jz"/>
+                <constraint firstItem="oqu-Ut-uae" firstAttribute="top" secondItem="u8u-0X-ruW" secondAttribute="bottom" constant="11" id="8Tt-GW-ux4"/>
                 <constraint firstAttribute="trailing" secondItem="KK9-Dh-CyJ" secondAttribute="trailing" id="HAF-TO-7J8"/>
-                <constraint firstAttribute="bottom" secondItem="j3w-J2-fL7" secondAttribute="bottom" constant="18" id="I17-W9-WFl"/>
+                <constraint firstItem="oqu-Ut-uae" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="RgP-wx-3JH"/>
+                <constraint firstAttribute="bottom" secondItem="oqu-Ut-uae" secondAttribute="bottom" constant="18" id="X0N-sz-789"/>
                 <constraint firstItem="u8u-0X-ruW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="gVP-j2-HwR"/>
-                <constraint firstItem="j3w-J2-fL7" firstAttribute="top" secondItem="u8u-0X-ruW" secondAttribute="bottom" constant="11" id="sAD-qI-WmR"/>
-                <constraint firstItem="j3w-J2-fL7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="900" constant="16" id="wYz-cP-VwG"/>
                 <constraint firstAttribute="bottom" secondItem="KK9-Dh-CyJ" secondAttribute="bottom" id="xdA-u3-EP5"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

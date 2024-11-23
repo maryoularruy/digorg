@@ -167,7 +167,6 @@ final class MediaService: MediaServiceProtocol {
            let options = PHFetchOptions()
            let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-//        handler(PHAsset.fetchAssets(in: PHAssetCollection(), options: options))
            albumsPhoto.enumerateObjects { collection, index, object in
                handler(PHAsset.fetchAssets(in: collection, options: options))
            }
