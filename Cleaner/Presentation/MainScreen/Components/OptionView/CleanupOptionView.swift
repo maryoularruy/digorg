@@ -33,7 +33,7 @@ final class CleanupOptionView: UIView {
     private func setup() {
         Bundle.main.loadNibNamed(nibName, owner: self)
         contentView.backgroundColor = .paleGrey
-        contentView.layer.cornerRadius = 24
+        contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
         addShadows()
         addSubview(contentView)

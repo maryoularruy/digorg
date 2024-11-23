@@ -102,7 +102,7 @@
                         <color key="backgroundColor" name="White"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rak-Vk-SnI" secondAttribute="trailing" id="JC1-jI-cyh"/>
-                            <constraint firstItem="rak-Vk-SnI" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Jkc-Cb-R3X"/>
+                            <constraint firstItem="rak-Vk-SnI" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="Jkc-Cb-R3X"/>
                             <constraint firstItem="rak-Vk-SnI" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="cPX-Vt-zbm"/>
                             <constraint firstItem="rak-Vk-SnI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="q9O-rg-koj"/>
                             <constraint firstItem="rak-Vk-SnI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rvh-Yn-WvW"/>
