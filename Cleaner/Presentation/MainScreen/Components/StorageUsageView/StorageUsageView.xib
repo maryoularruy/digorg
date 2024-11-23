@@ -68,7 +68,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" name="White"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="BJb-yV-J4M" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="0ql-mO-tCP"/>
                 <constraint firstItem="cZG-Bg-fQ1" firstAttribute="top" secondItem="38r-k0-Yt5" secondAttribute="bottom" constant="7" id="7N1-En-s9h"/>
@@ -91,9 +91,6 @@
     <resources>
         <namedColor name="BlueButtonBackground">
             <color red="0.20784313725490197" green="0.52156862745098043" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="White">
-            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="WhiteText">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

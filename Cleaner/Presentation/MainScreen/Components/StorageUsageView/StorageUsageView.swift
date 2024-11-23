@@ -29,7 +29,9 @@ final class StorageUsageView: UIView {
     
     private func setup() {
         Bundle.main.loadNibNamed(nibName, owner: self)
-        layer.cornerRadius = 24
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 24
+        contentView.clipsToBounds = true
         addShadows()
         addSubview(contentView)
         contentView.frame = bounds
