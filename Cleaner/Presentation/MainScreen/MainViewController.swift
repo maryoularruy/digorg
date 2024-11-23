@@ -29,7 +29,7 @@ final class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupCleanupOptions()
+        checkPhotoLibraryStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,40 +38,46 @@ final class MainViewController: UIViewController {
         storageUsageView.circularProgressBarView.progressAnimation(0.65)
     }
     
-    private func checkAccessStatus() {
-        let store = CNContactStore()
-        store.requestAccess(for: .contacts) { [weak self] (granted, error) in
-            guard let self else { return }
-            if granted {
-                DispatchQueue.main.async {
-                    let vc = StoryboardScene.ContactsMenu.initialScene.instantiate()
-                    vc.modalPresentationStyle = .fullScreen
-                    self.navigationController?.pushViewController(vc, animated: true)
+    private func checkPhotoLibraryStatus() {
+        mediaService.checkStatus { [weak self] status in
+            if #available(iOS 14, *) {
+                if status == .authorized || status == .limited {
+                    self?.updatePhotosCleanupOption()
+                    self?.updateVideosCleanupOption()
+                } else if status == .denied {
+                    self?.showAccessDeniedAlert(.media)
                 }
+                
             } else {
-                DispatchQueue.main.async {
-                    self.showPermissionAlert()
+            
+                if status == .authorized {
+                    self?.updatePhotosCleanupOption()
+                    self?.updateVideosCleanupOption()
+                } else if status == .denied {
+                    self?.showAccessDeniedAlert(.media)
                 }
             }
         }
     }
     
-    private func showPermissionAlert() {
-        let alertController = UIAlertController(title: "You did not give access to 'Contacts'",
-                                                message: "We need access to the “Contacts”. Please go to the settings and allow access, then restart the app.",
-                                                preferredStyle: .alert)
-        let disallowAction = UIAlertAction(title: "Disallow", style: .cancel)
-        let settingsAction = UIAlertAction(title: "In settings", style: .default) { _ in
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl) { _ in }
+    private func updatePhotosCleanupOption() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.mediaService.loadSimilarPhotos(live: false) { _, duplicatesCount in
+                DispatchQueue.main.async {
+                    self?.photosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
+                }
             }
         }
-        alertController.addAction(disallowAction)
-        alertController.addAction(settingsAction)
-        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func updateVideosCleanupOption() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.mediaService.loadSimilarVideos { _, duplicatesCount in
+                DispatchQueue.main.async {
+                    self?.videosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
+                }
+            }
+        }
     }
 }
 
@@ -126,31 +132,6 @@ extension MainViewController: ViewControllerProtocol {
     
     @objc func updateSpeed() {
         (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.downloadSpeed)
-    }
-    
-    private func setupCleanupOptions() {
-        updatePhotosCleanupOption()
-        updateVideosCleanupOption()
-    }
-    
-    private func updatePhotosCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.mediaService.loadSimilarPhotos(live: false) { _, duplicatesCount in
-                DispatchQueue.main.async {
-                    self?.photosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
-                }
-            }
-        }
-    }
-    
-    private func updateVideosCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.mediaService.loadSimilarVideos { _, duplicatesCount in
-                DispatchQueue.main.async {
-                    self?.videosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
-                }
-            }
-        }
     }
     
     private func openPhotosCleanup() {

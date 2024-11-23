@@ -24,7 +24,8 @@ final class Medium12ButtonStyle: UIButton {
     }
     
     func bind(duplicatesCount: Int) {
-        titleLabel?.text = "\(duplicatesCount) files / ? MB "
+        setTitle("\(duplicatesCount) files", for: .normal)
+        layoutSubviews()
     }
     
     private func setup() {
