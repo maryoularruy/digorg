@@ -2,18 +2,32 @@
 //  SettingsViewController.swift
 //  Cleaner
 //
-//  Created by Alex on 18.12.2023.
+//  Created by Elena Sedunova on 18.11.2024.
 //
 
 import UIKit
 
-class SettingsViewController: UIViewController {
-    @IBOutlet weak var backView: UIView!
-    
+final class SettingsViewController: UIViewController {
+    @IBOutlet weak var buyPremiumView: BuyPremiumView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        backView.addTapGestureRecognizer {
-            self.navigationController?.popViewController(animated: true)
-        }
+        setupUI()
+    }
+}
+
+extension SettingsViewController: ViewControllerProtocol {
+    func setupUI() {
+        buyPremiumView.delegate = self
+    }
+    
+    func addGestureRecognizers() {}
+}
+
+extension SettingsViewController: BuyPremiumViewDelegate {
+    func tapOnStartTrial() {
+        let vc = PremiumViewController()
+        vc.modalPresentationStyle = .pageSheet
+        present(vc, animated: true)
     }
 }

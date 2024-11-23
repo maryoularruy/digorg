@@ -112,10 +112,18 @@ extension UIImage {
     static var whatsAppCleanup3 = UIImage(resource: .whatsAppCleanup3)
     static var whatsAppCleanup4 = UIImage(resource: .whatsAppCleanup4)
     static var whatsAppCleanup5 = UIImage(resource: .whatsAppCleanup5)
-    static var whatsAppCleanup6 = UIImage(resource: .whatsAppCleanup6)
+    static var whatsAppCleanup6 = UIImage(resource: .whatsAppCleanup6)  
+
+    //MARK: -Settings
+    static var buyPremiumBackground = UIImage(resource: .buyPremiumViewBackground)
+    static var premiumVCBackground = UIImage(resource: .premiumBackground)
+    static var premiumVCIcon = UIImage(resource: .premiumIcon)
+    static var cancelPremiumVC = UIImage(resource: .cancel)
+    static var checkmark = UIImage(resource: .checkmark)
     
     //MARK: -Navigation
     static var arrowBackIcon = UIImage(resource: .arrowBackIcon)
+    static var arrowForwardWhite = UIImage(resource: .arrowForwardWhite)
     
     //MARK: -CommonComponents
     static var emptyCheckBoxWhite = UIImage(resource: .emptyCheckBoxWhite)

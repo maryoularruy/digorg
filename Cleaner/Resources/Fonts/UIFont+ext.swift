@@ -10,10 +10,12 @@ import UIKit
 extension UIFont {
     
     static var regular11: UIFont? = UIFont(.regular, size: 11)
+    static var regular12: UIFont? = UIFont(.regular, size: 12)
     static var regular13: UIFont? = UIFont(.regular, size: 13)
     static var regular15: UIFont? = UIFont(.regular, size: 15)
     
     static var medium12: UIFont? = UIFont(.medium, size: 12)
+    static var medium13: UIFont? = UIFont(.medium, size: 13)
     
     static var semibold15: UIFont? = UIFont(.semibold, size: 15)
     static var semibold24: UIFont? = UIFont(.semibold, size: 24)

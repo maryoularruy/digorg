@@ -26,4 +26,8 @@ class Semibold15LabelStyle: UILabel {
         font = UIFont.semibold15 ?? UIFont.boldSystemFont(ofSize: 15)
         textColor = .blackText
     }
+    
+    func setGreyText() {
+        textColor = .greyText
+    }
 }
