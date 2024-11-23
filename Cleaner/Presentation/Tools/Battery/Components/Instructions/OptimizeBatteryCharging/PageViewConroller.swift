@@ -19,7 +19,7 @@ final class PageViewConroller: UIViewController {
     private lazy var label: Regular15LabelStyle = Regular15LabelStyle()
     private lazy var instructionsImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
