@@ -46,10 +46,9 @@
                 <constraint firstItem="KK9-Dh-CyJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6pu-9R-7jz"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="KK9-Dh-CyJ" secondAttribute="trailing" id="HAF-TO-7J8"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="j3w-J2-fL7" secondAttribute="bottom" constant="2" id="I17-W9-WFl"/>
-                <constraint firstItem="j3w-J2-fL7" firstAttribute="leading" secondItem="u8u-0X-ruW" secondAttribute="leading" id="eRx-9T-ATe"/>
                 <constraint firstItem="u8u-0X-ruW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="gVP-j2-HwR"/>
                 <constraint firstItem="j3w-J2-fL7" firstAttribute="top" secondItem="u8u-0X-ruW" secondAttribute="bottom" constant="11" id="sAD-qI-WmR"/>
-                <constraint firstItem="j3w-J2-fL7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="900" constant="16" id="wYz-cP-VwG"/>
+                <constraint firstItem="j3w-J2-fL7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="900" constant="16" id="wYz-cP-VwG"/>
                 <constraint firstAttribute="bottom" secondItem="KK9-Dh-CyJ" secondAttribute="bottom" id="xdA-u3-EP5"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -30,12 +30,15 @@ final class Medium12ButtonStyle: UIButton {
     private func setup() {
         backgroundColor = .blue
         layer.cornerRadius = 20
+        contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 0)
+        
         titleLabel?.textAlignment = .center
         titleLabel?.textColor = .paleGrey
-        imageView?.image = .arrowForwardWhite
         titleLabel?.font = .medium12
-//        configuration.imagePlacement = .trailing
-//        configuration.imagePadding = -5
-//        configuration.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 12, bottom: 3, trailing: 4)
+        
+        setImage(.arrowForwardWhite, for: .normal)
+        tintColor = .paleGrey
+        imageEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 12)
+        semanticContentAttribute = .forceRightToLeft
     }
 }
