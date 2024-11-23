@@ -34,7 +34,6 @@ final class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         storageUsageView.circularProgressBarView.progressAnimation(0.65)
     }
     
@@ -95,10 +94,15 @@ extension MainViewController: ViewControllerProtocol {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhoneInfoScreen))
         deviceInfoLabel.addTapGestureRecognizer(action: openPhoneInfoScreen)
         deviceInfoStackView.addGestureRecognizer(gesture)
+        
         photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
+        photosCleanup.infoButton.addTapGestureRecognizer(action: openPhotosCleanup)
         videosCleanup.addTapGestureRecognizer(action: openVideosCleanup)
+        videosCleanup.infoButton.addTapGestureRecognizer(action: openVideosCleanup)
         contactsCleanup.addTapGestureRecognizer(action: openContactsCleanup)
+        contactsCleanup.infoButton.addTapGestureRecognizer(action: openContactsCleanup)
         calendarCleanup.addTapGestureRecognizer(action: openCalendarCleanup)
+        calendarCleanup.infoButton.addTapGestureRecognizer(action: openCalendarCleanup)
     }
     
     @objc private func openPhoneInfoScreen() {
