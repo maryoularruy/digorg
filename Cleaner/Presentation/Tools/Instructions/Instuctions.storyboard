@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Instructions View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="Y6W-OH-hqX" customClass="InstructionsViewController" customModule="Cleaner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFa-tr-b6c">
+                                <rect key="frame" x="0.0" y="59" width="393" height="793"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bM1-1K-K6P">
+                                        <rect key="frame" x="4" y="5" width="55" height="55"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ArrowBackIcon" translatesAutoresizingMaskIntoConstraints="NO" id="X3T-bf-jjN">
+                                                <rect key="frame" x="-4.6666666666666679" y="-4.3333333333333357" width="64.333333333333329" height="64"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="X3T-bf-jjN" firstAttribute="centerY" secondItem="bM1-1K-K6P" secondAttribute="centerY" id="1Fq-ww-nlP"/>
+                                            <constraint firstItem="X3T-bf-jjN" firstAttribute="centerX" secondItem="bM1-1K-K6P" secondAttribute="centerX" id="O2h-uU-N31"/>
+                                            <constraint firstAttribute="height" constant="55" id="sCo-Ew-yB3"/>
+                                            <constraint firstAttribute="width" constant="55" id="u3M-FQ-3sv"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1L-gj-BYQ" customClass="Semibold24LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="76" width="89.666666666666671" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8fw-Pp-qbW">
+                                        <rect key="frame" x="16" y="113" width="361" height="200"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="8fw-Pp-qbW" secondAttribute="trailing" constant="16" id="1bn-kH-eMd"/>
+                                    <constraint firstItem="C1L-gj-BYQ" firstAttribute="leading" secondItem="aFa-tr-b6c" secondAttribute="leading" constant="16" id="3q1-Ef-XjZ"/>
+                                    <constraint firstItem="8fw-Pp-qbW" firstAttribute="top" secondItem="C1L-gj-BYQ" secondAttribute="bottom" constant="16" id="D7N-eD-0Eh"/>
+                                    <constraint firstItem="8fw-Pp-qbW" firstAttribute="leading" secondItem="aFa-tr-b6c" secondAttribute="leading" constant="16" id="OVe-0D-Tbf"/>
+                                    <constraint firstAttribute="bottom" secondItem="8fw-Pp-qbW" secondAttribute="bottom" constant="50" id="YYC-CM-9RY"/>
+                                    <constraint firstItem="C1L-gj-BYQ" firstAttribute="top" secondItem="bM1-1K-K6P" secondAttribute="bottom" constant="16" id="hsg-CI-Wu6"/>
+                                    <constraint firstItem="bM1-1K-K6P" firstAttribute="leading" secondItem="aFa-tr-b6c" secondAttribute="leading" constant="4" id="ign-Lb-bKL"/>
+                                    <constraint firstItem="8fw-Pp-qbW" firstAttribute="width" secondItem="aFa-tr-b6c" secondAttribute="width" constant="-32" id="lT6-iA-PAC"/>
+                                    <constraint firstItem="bM1-1K-K6P" firstAttribute="top" secondItem="aFa-tr-b6c" secondAttribute="top" constant="5" id="m1m-A5-lvu"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" name="White"/>
+                        <constraints>
+                            <constraint firstItem="aFa-tr-b6c" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Blr-6r-fPi"/>
+                            <constraint firstAttribute="bottom" secondItem="aFa-tr-b6c" secondAttribute="bottom" id="Brq-mX-tBV"/>
+                            <constraint firstItem="aFa-tr-b6c" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" id="L5N-Je-w6T"/>
+                            <constraint firstItem="aFa-tr-b6c" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="LOy-uL-T5D"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aFa-tr-b6c" secondAttribute="trailing" id="nze-Js-ul9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="arrowBackView" destination="bM1-1K-K6P" id="rZP-8J-1SI"/>
+                        <outlet property="instructionsStackView" destination="8fw-Pp-qbW" id="2hD-33-cdd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="123" y="-2"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ArrowBackIcon" width="64" height="64"/>
+        <namedColor name="White">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

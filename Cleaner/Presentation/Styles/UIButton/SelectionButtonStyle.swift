@@ -15,21 +15,6 @@ enum SelectionButtonText: String {
 }
 
 class SelectionButtonStyle: UIButton {
-    lazy var myConfiguration: Configuration = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.titleAlignment = .center
-        configuration.baseBackgroundColor = .white
-        configuration.baseForegroundColor = .blue
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
-        configuration.cornerStyle = .capsule
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.medium12
-            return outgoing
-        }
-        return configuration
-    }()
-    
     lazy var isClickable: Bool = true {
         didSet {
             isUserInteractionEnabled = isClickable
@@ -48,12 +33,16 @@ class SelectionButtonStyle: UIButton {
     }
     
     func bind(text: SelectionButtonText) {
-        myConfiguration.title = text.rawValue
-        configuration = myConfiguration
+        titleLabel?.text = text.rawValue
     }
     
     func setup() {
-        configuration = myConfiguration
+        titleLabel?.textAlignment = .center
+        backgroundColor = .white
+        titleLabel?.textColor = .blue
+        titleLabel?.font = .medium12
+//        configuration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
+//        configuration.cornerStyle = .capsule
         addShadow()
     }
 }

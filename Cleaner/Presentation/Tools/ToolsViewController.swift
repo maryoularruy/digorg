@@ -40,7 +40,7 @@ extension ToolsViewController: ViewControllerProtocol {
     
     func addGestureRecognizers() {
         instructionsView.addTapGestureRecognizer { [weak self] in
-            let vc = StoryboardScene.SecretAlbum.initialScene.instantiate()
+            let vc = StoryboardScene.Instructions.initialScene.instantiate()
             vc.modalPresentationStyle = .fullScreen
             self?.navigationController?.pushViewController(vc, animated: true)
         }

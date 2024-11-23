@@ -7,7 +7,6 @@
 
 import IQKeyboardManagerSwift
 import UIKit
-import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         
         PhoneInfoService.shared.getTotalRam()
-        StoriesData.shared.setup()
-                
+        Store.shared.fetchProducts(productIdentifiers: Store.productIds)
+        
         DispatchQueue.main.async {
 //            if Defaults.isOnboardingSeen {
 //                let vc = StoryboardScene.Main.initialScene.instantiate()

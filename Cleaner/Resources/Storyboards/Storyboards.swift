@@ -3,11 +3,6 @@ import UIKit
 // MARK: - Storyboard Scenes
 
 internal enum StoryboardScene {
-  internal enum AdBlocker: StoryboardType {
-    internal static let storyboardName = "AdBlocker"
-
-    internal static let initialScene = InitialSceneType<AdBlockerViewController>(storyboard: AdBlocker.self)
-  }
   internal enum AllContacts: StoryboardType {
     internal static let storyboardName = "AllContacts"
 
@@ -22,11 +17,6 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Calendar"
 
     internal static let initialScene = InitialSceneType<CalendarViewController>(storyboard: Calendar.self)
-  }
-  internal enum Connection: StoryboardType {
-    internal static let storyboardName = "Connection"
-
-    internal static let initialScene = InitialSceneType<ConnectionViewController>(storyboard: Connection.self)
   }
   internal enum ContactsMenu: StoryboardType {
     internal static let storyboardName = "ContactsMenu"
@@ -58,15 +48,15 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: LaunchScreen.self)
   }
+  internal enum Instructions: StoryboardType {
+    internal static let storyboardName = "Instuctions"
+
+    internal static let initialScene = InitialSceneType<InstructionsViewController>(storyboard: Instructions.self)
+  }
   internal enum Main: StoryboardType {
     internal static let storyboardName = "Main"
 
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Main.self)
-  }
-  internal enum MainBattery: StoryboardType {
-    internal static let storyboardName = "MainBattery"
-
-    internal static let initialScene = InitialSceneType<MainBatteryViewController>(storyboard: MainBattery.self)
   }
   internal enum NoNameContacts: StoryboardType {
     internal static let storyboardName = "NoNameContacts"
@@ -103,11 +93,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<PhoneInfoViewController>(storyboard: PhoneInfo.self)
   }
-  internal enum PhotoVideoMenu: StoryboardType {
-    internal static let storyboardName = "PhotoVideoMenu"
-
-    internal static let initialScene = InitialSceneType<PhotoVideoMenuViewController>(storyboard: PhotoVideoMenu.self)
-  }
   internal enum RegularAssets: StoryboardType {
     internal static let storyboardName = "RegularAssets"
 
@@ -132,42 +117,6 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Settings"
 
     internal static let initialScene = InitialSceneType<SettingsViewController>(storyboard: Settings.self)
-  }
-  internal enum Stories: StoryboardType {
-    internal static let storyboardName = "Stories"
-
-    internal static let initialScene = InitialSceneType<StoriesViewController>(storyboard: Stories.self)
-  }
-  internal enum Tutorial: StoryboardType {
-    internal static let storyboardName = "Tutorial"
-
-    internal static let initialScene = InitialSceneType<TutorialViewController>(storyboard: Tutorial.self)
-  }
-  internal enum Tutorials: StoryboardType {
-    internal static let storyboardName = "Tutorials"
-
-    internal static let automaticUpdates = SceneType<PowerSavingModeViewController>(storyboard: Tutorials.self, identifier: "AutomaticUpdates")
-
-    internal static let batteryUsage = SceneType<PowerSavingModeViewController>(storyboard: Tutorials.self, identifier: "BatteryUsage")
-
-    internal static let brightness = SceneType<PowerSavingModeViewController>(storyboard: Tutorials.self, identifier: "Brightness")
-
-    internal static let cellularCommunication = SceneType<PowerSavingModeViewController>(storyboard: Tutorials.self, identifier: "CellularCommunication")
-
-    internal static let geolocationServices = SceneType<PowerSavingModeViewController>(storyboard: Tutorials.self, identifier: "GeolocationServices")
-
-    internal static let notifications = SceneType<PowerSavingModeViewController>(storyboard: Tutorials.self, identifier: "Notifications")
-
-    internal static let powerSaving = SceneType<PowerSavingModeViewController>(storyboard: Tutorials.self, identifier: "PowerSaving")
-
-    internal static let wiFiUpdate = SceneType<PowerSavingModeViewController>(storyboard: Tutorials.self, identifier: "WiFiUpdate")
-
-    internal static let iPhoneCooling = SceneType<PowerSavingModeViewController>(storyboard: Tutorials.self, identifier: "iPhoneCooling")
-  }
-  internal enum WiFiProtection: StoryboardType {
-    internal static let storyboardName = "WiFiProtection"
-
-    internal static let initialScene = InitialSceneType<WiFiProtectionViewController>(storyboard: WiFiProtection.self)
   }
 }
 

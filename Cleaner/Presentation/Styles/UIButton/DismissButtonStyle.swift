@@ -8,20 +8,6 @@
 import UIKit
 
 final class DismissButtonStyle: UIButton {
-    private lazy var myConfiguration: Configuration = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.titleAlignment = .center
-        configuration.baseBackgroundColor = .white
-        configuration.baseForegroundColor = .blue
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 3, bottom: 1, trailing: 3)
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.semibold15
-            return outgoing
-        }
-        return configuration
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -33,11 +19,14 @@ final class DismissButtonStyle: UIButton {
     }
     
     func bind(text: String) {
-        myConfiguration.title = text
-        configuration = myConfiguration
+        titleLabel?.text = text
     }
     
     private func setup() {
-        configuration = myConfiguration
+        layer.cornerRadius = 34
+        titleLabel?.textAlignment = .center
+        backgroundColor = .white
+        titleLabel?.textColor = .blue
+        titleLabel?.font = .semibold15
     }
 }

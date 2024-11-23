@@ -15,12 +15,6 @@ extension UIImage {
     static var noNumberContactsIcon = UIImage(resource: .noNumberContactsIcon)
     static var people = UIImage(resource: .people)
     
-    static var emptyCheckBoxWhite = UIImage(resource: .emptyCheckBox)
-    static var selectedCheckBox = UIImage(resource: .selectedCheckBox)
-    
-    static var emptyCheckBoxBlue = UIImage(resource: .emptyCheckBoxBlue)
-    static var selectedCheckBoxBlue = UIImage(resource: .selectedCheckBoxBlue)
-    
     static var stars = UIImage(resource: .stars)
     
     //MARK: -ToolOption
@@ -53,7 +47,8 @@ extension UIImage {
     static var limitNotifications = UIImage(resource: .limitNotifications)
     static var overheating = UIImage(resource: .overheating)
     
-    static var batteryInstructions1 = UIImage(resource: .batteryInstructions1)
+    static var openSettingsInstruction = UIImage(resource: .openSettingsInstruction)
+    
     static var batteryInstructions2 = UIImage(resource: .batteryInstructions2)
     static var batteryInstructions3 = UIImage(resource: .batteryInstructions3)
     static var batteryInstructions4 = UIImage(resource: .batteryInstructions4)
@@ -84,6 +79,41 @@ extension UIImage {
     static var managingConnections1 = UIImage(resource: .managingConnections1)
     static var managingConnections2 = UIImage(resource: .managingConnections2)
     
+    //MARK: -Instructions
+    static var safariIcon = UIImage(resource: .safariIcon)
+    static var telegramIcon = UIImage(resource: .telegramIcon)
+    static var whatsAppIcon = UIImage(resource: .whatsAppIcon)
+    static var viberIcon = UIImage(resource: .viberIcon)
+    static var settingsIcon = UIImage(resource: .settingsIcon)
+    
+    static var safariCache2 = UIImage(resource: .safariCache2)
+    static var safariCache3 = UIImage(resource: .safariCache3)
+    static var safariCache4 = UIImage(resource: .safariCache4)
+    
+    static var telegramCache1 = UIImage(resource: .telegramCache1)
+    static var telegramCache2 = UIImage(resource: .telegramCache2)
+    static var telegramCache3 = UIImage(resource: .telegramCache3)
+    static var telegramCache4 = UIImage(resource: .telegramCache4)
+    static var telegramCache5 = UIImage(resource: .telegramCache5)
+    
+    static var offloadUnusedApps2 = UIImage(resource: .offloadUnusedApps2)
+    static var offloadUnusedApps3 = UIImage(resource: .offloadUnusedApps3)
+    static var offloadUnusedApps4 = UIImage(resource: .offloadUnusedApps4)
+    
+    static var optimizeViberMedia1 = UIImage(resource: .optimizeViberMedia1)
+    static var optimizeViberMedia2 = UIImage(resource: .optimizeViberMedia2)
+    static var optimizeViberMedia3 = UIImage(resource: .optimizeViberMedia3)
+    static var optimizeViberMedia4 = UIImage(resource: .optimizeViberMedia4)
+    static var optimizeViberMedia5 = UIImage(resource: .optimizeViberMedia5)
+    static var optimizeViberMedia6 = UIImage(resource: .optimizeViberMedia6)
+    
+    static var whatsAppCleanup1 = UIImage(resource: .whatsAppCleanup1)
+    static var whatsAppCleanup2 = UIImage(resource: .whatsAppCleanup2)
+    static var whatsAppCleanup3 = UIImage(resource: .whatsAppCleanup3)
+    static var whatsAppCleanup4 = UIImage(resource: .whatsAppCleanup4)
+    static var whatsAppCleanup5 = UIImage(resource: .whatsAppCleanup5)
+    static var whatsAppCleanup6 = UIImage(resource: .whatsAppCleanup6)  
+
     //MARK: -Settings
     static var buyPremiumBackground = UIImage(resource: .buyPremiumViewBackground)
     static var premiumVCBackground = UIImage(resource: .premiumBackground)
@@ -93,4 +123,12 @@ extension UIImage {
     
     //MARK: -Navigation
     static var arrowBackIcon = UIImage(resource: .arrowBackIcon)
+    static var arrowForwardWhite = UIImage(resource: .arrowForwardWhite)
+    
+    //MARK: -CommonComponents
+    static var emptyCheckBoxWhite = UIImage(resource: .emptyCheckBoxWhite)
+    static var selectedCheckBox = UIImage(resource: .selectedCheckBoxWhite)
+    
+    static var emptyCheckBoxBlue = UIImage(resource: .emptyCheckBoxBlue)
+    static var selectedCheckBoxBlue = UIImage(resource: .selectedCheckBoxBlue)
 }

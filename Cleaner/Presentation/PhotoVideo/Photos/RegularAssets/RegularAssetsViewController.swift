@@ -181,7 +181,6 @@ extension RegularAssetsViewController: UICollectionViewDataSource {
 			cell.isChecked = false
 		}
 		let photosURL = assets[indexPath.row].sd_URLRepresentation
-		cell.photoImageView.sd_setImage(with: photosURL as URL?, placeholderImage: Asset.infoCPU.image, options: [], context: [SDWebImageContextOption.storeCacheType: SDImageCacheType.all.rawValue])
 		cell.setupSelectMode(isON: selectMode)
 		cell.addTapGestureRecognizer(action: { [weak self] in
 			guard let self = self else { return }

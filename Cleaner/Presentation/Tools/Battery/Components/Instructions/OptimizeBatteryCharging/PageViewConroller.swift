@@ -7,42 +7,14 @@
 
 import UIKit
 
-enum Page: CaseIterable {
-    case pageZero
-    case pageOne
-    case pageTwo
-    case pageThree
-    
-    var index: Int {
-        switch self {
-        case .pageZero: 0
-        case .pageOne: 1
-        case .pageTwo: 2
-        case .pageThree: 3
-        }
-    }
-    
-    var title: String {
-        switch self {
-        case .pageZero: "Open Settings"
-        case .pageOne: "Go to Battery"
-        case .pageTwo: "Tap Battery Health&Charging"
-        case .pageThree: "Enable Optimize Battery Charging"
-        }
-    }
-    
-    var image: UIImage {
-        switch self {
-        case .pageZero: .batteryInstructions1
-        case .pageOne: .batteryInstructions2
-        case .pageTwo: .batteryInstructions3
-        case .pageThree: .batteryInstructions4
-        }
-    }
+protocol PageProtocol: CaseIterable {
+    var index: Int { get }
+    var title: String { get }
+    var image: UIImage { get }
 }
 
 final class PageViewConroller: UIViewController {
-    var page: Page
+    var page: any PageProtocol
     
     private lazy var label: Regular15LabelStyle = Regular15LabelStyle()
     private lazy var instructionsImageView: UIImageView = {
@@ -51,7 +23,7 @@ final class PageViewConroller: UIViewController {
         return imageView
     }()
     
-    init(with page: Page) {
+    init(with page: any PageProtocol) {
         self.page = page
         super.init(nibName: nil, bundle: nil)
         bind(page)
@@ -62,7 +34,7 @@ final class PageViewConroller: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func bind(_ page: Page) {
+    private func bind(_ page: any PageProtocol) {
         label.bind(text: page.title)
         instructionsImageView.image = page.image
     }
@@ -71,12 +43,12 @@ final class PageViewConroller: UIViewController {
         view.addSubviews([label, instructionsImageView])
         
         NSLayoutConstraint.activate([
-            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -36),
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
             instructionsImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
-            instructionsImageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -30),
-            instructionsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            instructionsImageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -33),
+            instructionsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
 }

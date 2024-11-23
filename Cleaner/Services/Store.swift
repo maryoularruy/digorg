@@ -38,134 +38,71 @@ enum StoreError: Error {
         case .failedVerification: "Your verification is failed"
         case .waitingOnSCAOrBuyApproval: nil
         case .unknowedError: "Unknowed error"
-        case.userCancelled: nil
+        case .userCancelled: nil
         }
     }
 }
 
-final class Store {
-    var updateListenerTask: Task<Void, Error>? = nil
-    private let productIds = [WEEKLY_PREMIUM_ID]
-    private(set) var subscriptions: [Product] = []
-    private(set) var purchasedSubscriptions: [Product] = []
+final class Store: NSObject {
+    static var shared = Store()
+    static let productIds = [WEEKLY_PREMIUM_ID]
     
-    init() {
-        updateListenerTask = listenForTransactions()
-        Task { await performSequentialTasks() }
+    private(set) var subscriptions: [SKProduct] = []
+    private var productRequest: SKProductsRequest?
+    
+    override init() {
+        super.init()
+        SKPaymentQueue.default().add(self)
     }
 
     deinit {
-        updateListenerTask?.cancel()
+        SKPaymentQueue.default().remove(self)
     }
     
-    func purchase(_ product: Product) async throws -> Result<Transaction, Error> {
-        switch try await product.purchase() {
-        case let .success(.verified(transaction)):
-            await deliverContent(for: transaction)
-            await updateCustomerProductStatus()
-            await transaction.finish()
-            return .success(transaction)
-            
-        case .success(.unverified):
-            return .failure(StoreError.failedVerification)
-        case .pending:
-            return .failure(StoreError.waitingOnSCAOrBuyApproval)
-        case .userCancelled:
-            return .failure(StoreError.userCancelled)
-        @unknown default:
-            return .failure(StoreError.unknowedError)
+    func fetchProducts(productIdentifiers: [String]) {
+        let productIdentifiersSet = Set(productIdentifiers)
+        productRequest = SKProductsRequest(productIdentifiers: productIdentifiersSet)
+        productRequest?.delegate = self
+        productRequest?.start()
+    }
+    
+    func purchase(_ product: SKProduct) {
+        if SKPaymentQueue.canMakePayments() {
+            SKPaymentQueue.default().add(SKPayment(product: product))
+        } else {
+            print("User cannot make payments.")
         }
     }
-    
-    private func performSequentialTasks() async {
-        await withTaskGroup(of: Void.self) { taskGroup in
-            let tasks = [1, 2]
-            
-            for task in tasks {
-                taskGroup.addTask {
-                    await self.performTask(task)
-                }
-                await taskGroup.next()
-            }
-        }
-    }
-    
-    private func performTask(_ id: Int) async {
-        if id == 1 {
-            await getProducts()
-        } else if id == 2 {
-            await updateCustomerProductStatus()
-        }
-    }
-    
-    private func getProducts() async {
-        do {
-            let storeProducts = try await Product.products(for: productIds)
+}
 
-            for product in storeProducts {
-                switch product.type {
-                case .consumable: break
-                case .nonConsumable: break
-                case .autoRenewable:
-                    subscriptions.append(product)
-                case .nonRenewable: break
-                default: break
-                }
-            }
-        } catch {
-            print("Failed product request from the App Store server. \(error)")
-        }
-    }
-    
-    func getLatestTransaction() async -> VerificationResult<Transaction>? {
-        do {
-            let storeProducts = try await Product.products(for: productIds)
-            return await storeProducts[0].latestTransaction
-        } catch { return nil }
-    }
-    
-    private func updateCustomerProductStatus() async {
-        for await result in Transaction.currentEntitlements {
-            do {
-                let transaction = try checkVerified(result)
-                
-                switch transaction.productType {
-                case .nonConsumable: break
-                case .nonRenewable: break
-                case .autoRenewable:
-                    if let subscription = subscriptions.first(where: { $0.id == transaction.productID }) {
-                        purchasedSubscriptions.append(subscription)
-                    }
-                default: break
-                }
-            } catch { break }
-        }
-    }
-    
-    private func listenForTransactions() -> Task<Void, Error> {
-        return Task.detached {
-            for await result in Transaction.updates {
-                do {
-                    let transaction = try self.checkVerified(result)
-                    await self.deliverContent(for: transaction)
-                    await transaction.finish()
-                } catch(let error) {
-                    print("Transaction failed verification: \(error)")
-                }
+extension Store: SKPaymentTransactionObserver {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        transactions.forEach { transaction in
+            switch transaction.transactionState {
+            case .purchasing:
+                break
+            case .purchased:
+                print("purchase success")
+                SKPaymentQueue.default().finishTransaction(transaction)
+            case .failed:
+                SKPaymentQueue.default().finishTransaction(transaction)
+            case .restored:
+                SKPaymentQueue.default().finishTransaction(transaction)
+            case .deferred:
+                break
+            @unknown default:
+                break
             }
         }
     }
-    
-    private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
-        switch result {
-        case .unverified:
-            throw StoreError.failedVerification
-        case .verified(let safe):
-            return safe
-        }
+}
+
+extension Store: SKProductsRequestDelegate {
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        subscriptions = response.products
     }
     
-    private func deliverContent(for transaction: Transaction) async {
-        print("Delivering content for product \(transaction.productID)")
+    func request(_ request: SKRequest, didFailWithError error: any Error) {
+        print(error.localizedDescription)
     }
 }

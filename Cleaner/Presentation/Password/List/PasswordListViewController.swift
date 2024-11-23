@@ -40,7 +40,7 @@ class PasswordListViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
         searchBar.delegate = self
-        searchBar.setImage(Asset.magnifier.image, for: .search, state: .normal)
+//        searchBar.setImage(Asset.magnifier.image, for: .search, state: .normal)
         
         searchBar.barTintColor = .clear
         searchBar.backgroundColor = .clear
@@ -156,13 +156,13 @@ extension PasswordListViewController: UITableViewDataSource, UITableViewDelegate
         }
         if isSelectingMode {
             if cell.isCellSelected {
-                cell.checkMarkImageView.image = Asset.selectedCheckBox.image
+//                cell.checkMarkImageView.image = Asset.selectedCheckBox.image
             } else {
-                cell.checkMarkImageView.image = Asset.emptyCheckBox.image
+//                cell.checkMarkImageView.image = Asset.emptyCheckBox.image
             }
         } else {
             cell.isCellSelected = false
-            cell.checkMarkImageView.image = Asset.emptyCheckBox.image
+//            cell.checkMarkImageView.image = Asset.emptyCheckBox.image
         }
         cell.titleLabel.text = credential.link
         cell.subtitleLabel.text = credential.username
@@ -181,10 +181,10 @@ extension PasswordListViewController: UITableViewDataSource, UITableViewDelegate
                 
                 
                 if cell.isCellSelected {
-                    cell.checkMarkImageView.image = Asset.selectedCheckBox.image
+//                    cell.checkMarkImageView.image = Asset.selectedCheckBox.image
                     selectedCredentials.append(selectedCredential)
                 } else {
-                    cell.checkMarkImageView.image = Asset.emptyCheckBox.image
+//                    cell.checkMarkImageView.image = Asset.emptyCheckBox.image
                     if let index = selectedCredentials.firstIndex(of: selectedCredential) {
                         selectedCredentials.remove(at: index)
                     }
@@ -209,7 +209,7 @@ extension PasswordListViewController: UITableViewDataSource, UITableViewDelegate
         for indexPath in visibleIndexPaths {
             if let cell = tableView.cellForRow(at: indexPath) as? TitleSubtitleChevronTableViewCell {
                 cell.isCellSelected = false
-                cell.checkMarkImageView.image = Asset.emptyCheckBox.image
+//                cell.checkMarkImageView.image = Asset.emptyCheckBox.image
             }
         }
     }
