@@ -43,17 +43,11 @@ final class MainViewController: UIViewController {
                 if status == .authorized || status == .limited {
                     self?.updatePhotosCleanupOption()
                     self?.updateVideosCleanupOption()
-                } else if status == .denied {
-                    self?.showAccessDeniedAlert(.media)
                 }
-                
             } else {
-            
                 if status == .authorized {
                     self?.updatePhotosCleanupOption()
                     self?.updateVideosCleanupOption()
-                } else if status == .denied {
-                    self?.showAccessDeniedAlert(.media)
                 }
             }
         }
