@@ -1,5 +1,5 @@
 //
-//  MediaService.swift
+//  PhotoVideoManager.swift
 //  Cleaner
 //
 //  Created by Александр Пономарёв on 19.05.2022.
@@ -8,13 +8,13 @@
 import Photos
 import Vision
 
-protocol MediaServiceProtocol {
+protocol PhotoVideoManagerProtocol {
     func loadSimilarPhotos(from dateFrom: String, to dateTo: String, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ())
     func loadSimilarVideos(from dateFrom: String, to dateTo: String, handler: @escaping ([PHAssetGroup], Int) -> ())
 }
 
-final class MediaService: MediaServiceProtocol {
-    static let shared = MediaService()
+final class PhotoVideoManager: PhotoVideoManagerProtocol {
+    static let shared = PhotoVideoManager()
     static var defaultStartDate = "01 Jan 1970 00:00:00"
     static var defaultEndDate = "01 Jan 2030 00:00:00"
     
@@ -211,7 +211,7 @@ final class MediaService: MediaServiceProtocol {
     }
 }
 
-extension MediaService {
+extension PhotoVideoManager {
     func loadSelfiePhotos(_ handler: @escaping (([PHAsset]) -> ())) {
         fetchSelfies({
             photoInAlbum in

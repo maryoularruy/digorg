@@ -18,7 +18,7 @@ final class MainViewController: UIViewController {
     @IBOutlet weak var contactsCleanup: CleanupOptionView!
     @IBOutlet weak var calendarCleanup: CleanupOptionView!
     
-    private lazy var mediaService = MediaService.shared
+    private lazy var photoVideoManager = PhotoVideoManager.shared
     private lazy var contactManager = ContactManager.shared
     
     override func viewDidLoad() {
@@ -41,7 +41,7 @@ final class MainViewController: UIViewController {
     }
     
     private func checkPhotoLibraryAccessStatus() {
-        mediaService.checkStatus { [weak self] status in
+        photoVideoManager.checkStatus { [weak self] status in
             if #available(iOS 14, *) {
                 if status == .authorized || status == .limited {
                     self?.updatePhotosCleanupOption()
@@ -76,7 +76,7 @@ final class MainViewController: UIViewController {
     
     private func updatePhotosCleanupOption() {
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.mediaService.loadSimilarPhotos(live: false) { _, duplicatesCount in
+            self?.photoVideoManager.loadSimilarPhotos(live: false) { _, duplicatesCount in
                 DispatchQueue.main.async {
                     self?.photosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
                 }
@@ -86,7 +86,7 @@ final class MainViewController: UIViewController {
     
     private func updateVideosCleanupOption() {
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.mediaService.loadSimilarVideos { _, duplicatesCount in
+            self?.photoVideoManager.loadSimilarVideos { _, duplicatesCount in
                 DispatchQueue.main.async {
                     self?.videosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
                 }
@@ -97,7 +97,7 @@ final class MainViewController: UIViewController {
     private func updateContactsCleanupOption() {
 //        DispatchQueue.global(qos: .background).async { [weak self] in
 //            ContactManager.loadDuplicatedByName { contacts in
-//                
+//
 //            }
 //        }
     }

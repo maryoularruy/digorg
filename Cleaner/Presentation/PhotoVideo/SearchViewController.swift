@@ -12,7 +12,7 @@ final class SearchViewController: UIViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var searchLabel: UILabel!
     
-    private let mediaService = MediaService.shared
+    private let mediaService = PhotoVideoManager.shared
     private var cleanupOption: CleanupOption?
     
 	private lazy var timer = Timer()
@@ -100,7 +100,7 @@ final class SearchViewController: UIViewController {
 				}
 			case .video:
 				titleLabel.text = "Video organization"
-//				mediaService.loadVideos { assets in
+//				photoVideoManager.loadVideos { assets in
 //					self.setupMetadataForAssets(assets: assets) { metaAssets in
 //						let vc = StoryboardScene.SortedAssets.initialScene.instantiate()
 //						vc.modalPresentationStyle = .fullScreen
