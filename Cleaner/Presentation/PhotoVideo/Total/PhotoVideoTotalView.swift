@@ -39,8 +39,6 @@ final class PhotoVideoTotalView: UIView {
         scroll.addSubviews([contentView])
         contentView.addSubviews([arrowBack, label])
         
-        arrowBack.backgroundColor = .acidGreen
-        
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scroll.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
@@ -57,7 +55,7 @@ final class PhotoVideoTotalView: UIView {
             arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -16),
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
-            arrowBack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+//            arrowBack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
