@@ -18,6 +18,8 @@ final class PhotoVideoTotalView: UIView {
         return label
     }()
     
+    private lazy var similarPhotosView = OneCategoryHorizontalView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -37,7 +39,7 @@ final class PhotoVideoTotalView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label])
+        contentView.addSubviews([arrowBack, label, similarPhotosView])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -58,7 +60,13 @@ final class PhotoVideoTotalView: UIView {
 //            arrowBack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            
+            similarPhotosView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
+            similarPhotosView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            similarPhotosView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            similarPhotosView.heightAnchor.constraint(equalToConstant: 200),
+            similarPhotosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
