@@ -184,7 +184,9 @@ extension MainViewController: ViewControllerProtocol {
     private func openPhotosCleanup() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            navigationController?.pushViewController(createSearchVC(with: .photos), animated: true)
+            let vc = PhotoVideoTotalViewController()
+            navigationController?.pushViewController(vc, animated: true)
+//            navigationController?.pushViewController(createSearchVC(with: .photos), animated: true)
         }
     }
     

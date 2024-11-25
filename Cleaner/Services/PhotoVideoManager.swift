@@ -18,7 +18,8 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
     static var defaultStartDate = "01 Jan 1970 00:00:00"
     static var defaultEndDate = "01 Jan 2030 00:00:00"
     
-    var isLoading: Bool = false
+    var isLoadingPhotos: Bool?
+    var isLoadingVideos: Bool?
     
     func checkStatus(handler: @escaping (PHAuthorizationStatus) -> ()) {
         let status = if #available(iOS 14, *) {
@@ -37,6 +38,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
     }
     
     func loadSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ()) {
+        isLoadingPhotos = true
         fetchPhotos(from: dateFrom, to: dateTo, live: live) { photoInAlbum in
             DispatchQueue.global(qos: .userInitiated).async {
                     var images: [OSTuple<NSString, NSData>] = []
@@ -56,7 +58,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                     }
                     
                     let similarImageIdsAsTuples = OSImageHashing.sharedInstance().similarImages(with: OSImageHashingQuality.high, forImages: images)
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
                         var similarPhotosNumbers: [Int] = []
                         var similarPhotoGroups: [PHAssetGroup] = []
                         guard similarImageIdsAsTuples.count >= 1 else {
@@ -101,6 +103,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                         }
                         similarPhotoGroups.removeAll { group in group.assets.isEmpty }
                         let duplicatesCount = similarPhotoGroups.reduce(0) { $0 + $1.assets.count }
+                        self?.isLoadingPhotos = false
                         handler(similarPhotoGroups, duplicatesCount)
                     }
                 }
@@ -109,6 +112,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
 
 
 	func loadSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAssetGroup], Int) -> ()) {
+        isLoadingVideos = true
 			fetchVideos(from: dateFrom, to: dateTo) { videosInAlbum in
 				DispatchQueue.global(qos: .background).async {
 					var videos: [OSTuple<NSString, NSData>] = []
@@ -128,7 +132,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
 					}
                     
 					let similarVideoIdsAsTuples = OSImageHashing.sharedInstance().similarImages(withProvider: .pHash, forImages: videos)
-					DispatchQueue.main.async {
+					DispatchQueue.main.async { [weak self] in
 						var similarVideoNumbers: [Int] = []
 						var similarVideoGroups: [PHAssetGroup] = []
                         guard similarVideoIdsAsTuples.count >= 1 else {
@@ -173,6 +177,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                         }
                         similarVideoGroups.removeAll { group in group.assets.isEmpty }
                         let duplicatesCount = similarVideoGroups.reduce(0) { $0 + $1.assets.count }
+                        self?.isLoadingVideos = false
                         handler(similarVideoGroups, duplicatesCount)
 					}
 				}
