@@ -1,5 +1,5 @@
 //
-//  MediaService.swift
+//  PhotoVideoManager.swift
 //  Cleaner
 //
 //  Created by Александр Пономарёв on 19.05.2022.
@@ -8,17 +8,33 @@
 import Photos
 import Vision
 
-protocol MediaServiceProtocol {
+protocol PhotoVideoManagerProtocol {
     func loadSimilarPhotos(from dateFrom: String, to dateTo: String, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ())
     func loadSimilarVideos(from dateFrom: String, to dateTo: String, handler: @escaping ([PHAssetGroup], Int) -> ())
 }
 
-final class MediaService: MediaServiceProtocol {
-    static let shared = MediaService()
+final class PhotoVideoManager: PhotoVideoManagerProtocol {
+    static let shared = PhotoVideoManager()
     static var defaultStartDate = "01 Jan 1970 00:00:00"
     static var defaultEndDate = "01 Jan 2030 00:00:00"
     
-	private var maxAcceptableDifferenceBetweenDates = 10
+    var isLoading: Bool = false
+    
+    func checkStatus(handler: @escaping (PHAuthorizationStatus) -> ()) {
+        let status = if #available(iOS 14, *) {
+            PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        } else {
+            PHPhotoLibrary.authorizationStatus()
+        }
+        
+        if status == .notDetermined {
+            requestPhotoLibraryAutorization() { status in
+                handler(status)
+            }
+        } else {
+            handler(status)
+        }
+    }
     
     func loadSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ()) {
         fetchPhotos(from: dateFrom, to: dateTo, live: live) { photoInAlbum in
@@ -167,7 +183,6 @@ final class MediaService: MediaServiceProtocol {
            let options = PHFetchOptions()
            let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-//        handler(PHAsset.fetchAssets(in: PHAssetCollection(), options: options))
            albumsPhoto.enumerateObjects { collection, index, object in
                handler(PHAsset.fetchAssets(in: collection, options: options))
            }
@@ -181,9 +196,22 @@ final class MediaService: MediaServiceProtocol {
               handler(PHAsset.fetchAssets(in: collection, options: options))
           }
       }
+    
+    private func requestPhotoLibraryAutorization(handler: @escaping (PHAuthorizationStatus) -> ()) {
+        if #available(iOS 14, *) {
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                handler(status)
+            }
+            
+        } else {
+            PHPhotoLibrary.requestAuthorization { status in
+                handler(status)
+            }
+        }
+    }
 }
 
-extension MediaService {
+extension PhotoVideoManager {
     func loadSelfiePhotos(_ handler: @escaping (([PHAsset]) -> ())) {
         fetchSelfies({
             photoInAlbum in

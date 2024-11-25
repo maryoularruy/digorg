@@ -35,7 +35,7 @@ class DKPhotoWebVC: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.paleGrey
         
         self.webView.navigationDelegate = self
         self.webView.frame = self.view.bounds

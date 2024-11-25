@@ -34,7 +34,7 @@ class DKPhotoProgressIndicator: UIView, DKPhotoProgressIndicatorProtocol {
                              width: circleDiameter,
                              height: circleDiameter)
         
-        UIColor.white.setStroke()
+        UIColor.paleGrey.setStroke()
         
         context.setLineWidth(lineWidth)
         context.strokeEllipse(in: circleRect)        
@@ -53,7 +53,7 @@ class DKPhotoProgressIndicator: UIView, DKPhotoProgressIndicatorProtocol {
         
         context.setBlendMode(.copy)
         
-        UIColor.white.set()
+        UIColor.paleGrey.set()
         
         processPath.stroke()
     }

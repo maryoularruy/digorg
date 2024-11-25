@@ -24,18 +24,28 @@ final class Medium12ButtonStyle: UIButton {
     }
     
     func bind(duplicatesCount: Int) {
-        titleLabel?.text = "\(duplicatesCount) files / ? MB "
+        setTitle("\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s")", for: .normal)
+        imageEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 12)
+        layoutSubviews()
     }
     
     private func setup() {
         backgroundColor = .blue
         layer.cornerRadius = 20
+        contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 0)
+        
         titleLabel?.textAlignment = .center
-        titleLabel?.textColor = .white
-        imageView?.image = .arrowForwardWhite
+        titleLabel?.textColor = .paleGrey
         titleLabel?.font = .medium12
-//        configuration.imagePlacement = .trailing
-//        configuration.imagePadding = -5
-//        configuration.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 12, bottom: 3, trailing: 4)
+        
+        imageView?.contentMode = .scaleAspectFill
+        setImage(.arrowForwardWhite, for: .normal)
+        tintColor = .paleGrey
+        imageEdgeInsets = if titleLabel == nil || titleLabel?.text == "" || titleLabel?.text == " " {
+            UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
+        } else {
+            UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 12)
+        }
+        semanticContentAttribute = .forceRightToLeft
     }
 }

@@ -11,7 +11,7 @@ extension UILabel {
     static func subheadline() -> UILabel {
         let label = UILabel()
         let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.greyText,
+            .foregroundColor: UIColor.darkGrey,
             .font: UIFont.regular11 ?? UIFont.systemFont(ofSize: 11)
         ]
         label.attributedText = NSAttributedString(string: " ", attributes: attributes)
@@ -22,7 +22,7 @@ extension UILabel {
     static func subtitle() -> UILabel {
         let label = UILabel()
         let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.blackText,
+            .foregroundColor: UIColor.black,
             .font: UIFont.bold15 ?? UIFont.boldSystemFont(ofSize: 15)
         ]
         label.attributedText = NSAttributedString(string: " ", attributes: attributes)

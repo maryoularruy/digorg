@@ -15,6 +15,8 @@ final class NoNumberContactsViewController: UIViewController {
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
     @IBOutlet weak var toolbar: ActionToolbar!
     
+    private lazy var contactManager = ContactManager.shared
+    
     private var contacts: [CNContact] = [] {
         didSet {
             unresolvedContactsCount.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
@@ -68,13 +70,13 @@ final class NoNumberContactsViewController: UIViewController {
     }
     
     private func reloadData() {
-        ContactManager.loadIncompletedByNumber { contacts in
+        contactManager.loadIncompletedByNumber { contacts in
             self.contacts = contacts
         }
     }
     
     private func presentContact(contact: CNContact) {
-        if let contact = ContactManager.findContact(contact: contact) {
+        if let contact = contactManager.findContact(contact: contact) {
             let contactVC = CNContactViewController(for: contact)
             contactVC.allowsEditing = true
             navigationController?.setNavigationBarHidden(false, animated: false)
@@ -117,7 +119,7 @@ extension NoNumberContactsViewController: UITableViewDelegate, UITableViewDataSo
         
         cell.checkBoxButton.image = contactsForDeletion.contains(contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         
-        cell.content.backgroundColor = contactsForDeletion.contains(contacts[indexPath.row]) ? .lightBlueBackground : .white
+        cell.content.backgroundColor = contactsForDeletion.contains(contacts[indexPath.row]) ? .lightBlue : .paleGrey
         
         return cell
     }
@@ -161,7 +163,7 @@ extension NoNumberContactsViewController: ActionToolbarDelegate, BottomPopupDele
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
-            ContactManager.delete(Array(contactsForDeletion))
+            contactManager.delete(Array(contactsForDeletion))
             contactsForDeletion.removeAll()
             reloadData()
         }

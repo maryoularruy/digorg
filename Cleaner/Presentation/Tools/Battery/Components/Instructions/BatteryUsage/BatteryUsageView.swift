@@ -48,7 +48,7 @@ Check the battery status to see if it is in good condition. This section shows t
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .paleGrey
     }
     
     private func initConstraints() {

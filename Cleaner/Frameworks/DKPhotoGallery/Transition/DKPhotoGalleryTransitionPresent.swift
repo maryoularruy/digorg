@@ -45,7 +45,7 @@ open class DKPhotoGalleryTransitionPresent: NSObject, UIViewControllerAnimatedTr
                 snapshotImageView.contentMode = toView.contentMode
                 snapshotImageView.clipsToBounds = toView.clipsToBounds
                 snapshotImageView.layer.cornerRadius = toView.layer.cornerRadius
-                containerView.backgroundColor = UIColor.blackText
+                containerView.backgroundColor = UIColor.black
             }) { (finished) in
                 let wasCanceled = transitionContext.transitionWasCancelled
                 if !wasCanceled {

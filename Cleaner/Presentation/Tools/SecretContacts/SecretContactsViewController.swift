@@ -112,7 +112,7 @@ extension SecretContactsViewController: UITableViewDelegate, UITableViewDataSour
         
         cell.checkBoxButton.image = contactsForDeletion.contains(contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         
-        cell.content.backgroundColor = contactsForDeletion.contains(contacts[indexPath.row]) ? .lightBlueBackground : .white
+        cell.content.backgroundColor = contactsForDeletion.contains(contacts[indexPath.row]) ? .lightBlue : .paleGrey
         
         return cell
     }

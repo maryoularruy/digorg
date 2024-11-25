@@ -30,6 +30,15 @@ enum CleanupOption: String, CaseIterable {
         }
     }
     
+    var gradientColor: UIColor {
+        switch self {
+        case .photos: .orange
+        case .videos: .acidGreen
+        case .contacts: .blue
+        case .calendar: .purple
+        }
+    }
+    
     func getPossibleModes() -> [Mode] {
         switch self {
         case .photos: [.duplicatePhotos]

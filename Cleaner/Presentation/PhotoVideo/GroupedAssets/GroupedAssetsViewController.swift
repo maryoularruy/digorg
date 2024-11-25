@@ -21,7 +21,7 @@ final class GroupedAssetsViewController: UIViewController {
     lazy var duplicatesCount: Int = 0
     lazy var assetsForDeletion = Set<PHAsset>() {
         didSet {
-            actionToolbar.toolbarButton.bind(backgroundColor: assetsForDeletion.isEmpty ? .paleBlueButtonBackground : .blue)
+            actionToolbar.toolbarButton.bind(backgroundColor: assetsForDeletion.isEmpty ? .paleBlue : .blue)
             actionToolbar.toolbarButton.bind(
                 text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(assetsForDeletion.isEmpty ? "0" : "?") MB")
         }
@@ -175,11 +175,11 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
     
     @objc func refreshSimilarItems() {
         if assetGroups.first?.subtype == .smartAlbumVideos {
-            MediaService.shared.loadSimilarVideos { [weak self] assetGroups, duplicatesCount in
+            PhotoVideoManager.shared.loadSimilarVideos { [weak self] assetGroups, duplicatesCount in
                 self?.refreshUI(assetGroups: assetGroups, duplicatesCount: duplicatesCount)
             }
         } else {
-            MediaService.shared.loadSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
+            PhotoVideoManager.shared.loadSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
                 self?.refreshUI(assetGroups: assetGroups, duplicatesCount: duplicatesCount)
             }
         }

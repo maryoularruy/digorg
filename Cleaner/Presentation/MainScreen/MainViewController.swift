@@ -18,7 +18,9 @@ final class MainViewController: UIViewController {
     @IBOutlet weak var contactsCleanup: CleanupOptionView!
     @IBOutlet weak var calendarCleanup: CleanupOptionView!
     
-    private lazy var mediaService = MediaService.shared
+    private lazy var photoVideoManager = PhotoVideoManager.shared
+    private lazy var contactManager = ContactManager.shared
+    private lazy var calendarManager = CalendarManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,49 +31,95 @@ final class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupCleanupOptions()
+        checkPhotoLibraryAccessStatus()
+        checkContactsAccessStatus()
+        checkCalendarAccessStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         storageUsageView.circularProgressBarView.progressAnimation(0.65)
     }
     
-    private func checkAccessStatus() {
-        let store = CNContactStore()
-        store.requestAccess(for: .contacts) { [weak self] (granted, error) in
-            guard let self else { return }
-            if granted {
-                DispatchQueue.main.async {
-                    let vc = StoryboardScene.ContactsMenu.initialScene.instantiate()
-                    vc.modalPresentationStyle = .fullScreen
-                    self.navigationController?.pushViewController(vc, animated: true)
+    private func checkPhotoLibraryAccessStatus() {
+        photoVideoManager.checkStatus { [weak self] status in
+            if #available(iOS 14, *) {
+                if status == .authorized || status == .limited {
+                    self?.updatePhotosCleanupOption()
+                    self?.updateVideosCleanupOption()
                 }
             } else {
-                DispatchQueue.main.async {
-                    self.showPermissionAlert()
+                if status == .authorized {
+                    self?.updatePhotosCleanupOption()
+                    self?.updateVideosCleanupOption()
                 }
             }
         }
     }
     
-    private func showPermissionAlert() {
-        let alertController = UIAlertController(title: "You did not give access to 'Contacts'",
-                                                message: "We need access to the “Contacts”. Please go to the settings and allow access, then restart the app.",
-                                                preferredStyle: .alert)
-        let disallowAction = UIAlertAction(title: "Disallow", style: .cancel)
-        let settingsAction = UIAlertAction(title: "In settings", style: .default) { _ in
-            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                return
-            }
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl) { _ in }
+    private func checkContactsAccessStatus() {
+        contactManager.checkStatus { [weak self] status in
+            if #available(iOS 18.0, *) {
+                if status == .authorized || status == .limited {
+                    self?.updateContactsCleanupOption()
+                }
+            } else {
+                if status == .authorized {
+                    self?.updateContactsCleanupOption()
+                }
             }
         }
-        alertController.addAction(disallowAction)
-        alertController.addAction(settingsAction)
-        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func checkCalendarAccessStatus() {
+        calendarManager.checkStatus { [weak self] status in
+            if #available(iOS 17.0, *) {
+                if status == .authorized || status == .fullAccess || status == .writeOnly {
+                    self?.updateCalendarCleanupOption()
+                }
+            } else {
+                if status == .authorized {
+                    self?.updateCalendarCleanupOption()
+                }
+            }
+        }
+    }
+    
+    private func updatePhotosCleanupOption() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.photoVideoManager.loadSimilarPhotos(live: false) { _, duplicatesCount in
+                DispatchQueue.main.async {
+                    self?.photosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
+                }
+            }
+        }
+    }
+    
+    private func updateVideosCleanupOption() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.photoVideoManager.loadSimilarVideos { _, duplicatesCount in
+                DispatchQueue.main.async {
+                    self?.videosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
+                }
+            }
+        }
+    }
+    
+    private func updateContactsCleanupOption() {
+        contactManager.loadDuplicatedByName { [weak self] contacts in
+            DispatchQueue.main.async {
+                self?.contactsCleanup.infoButton.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+            }
+        }
+    }
+    
+    private func updateCalendarCleanupOption() {
+        calendarManager.fetchEvents { [weak self] eventGroups in
+            let eventsCount = eventGroups.reduce(0) { $0 + $1.events.count }
+            DispatchQueue.main.async {
+                self?.calendarCleanup.infoButton.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
+            }
+        }
     }
 }
 
@@ -89,10 +137,15 @@ extension MainViewController: ViewControllerProtocol {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhoneInfoScreen))
         deviceInfoLabel.addTapGestureRecognizer(action: openPhoneInfoScreen)
         deviceInfoStackView.addGestureRecognizer(gesture)
+        
         photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
+        photosCleanup.infoButton.addTapGestureRecognizer(action: openPhotosCleanup)
         videosCleanup.addTapGestureRecognizer(action: openVideosCleanup)
+        videosCleanup.infoButton.addTapGestureRecognizer(action: openVideosCleanup)
         contactsCleanup.addTapGestureRecognizer(action: openContactsCleanup)
+        contactsCleanup.infoButton.addTapGestureRecognizer(action: openContactsCleanup)
         calendarCleanup.addTapGestureRecognizer(action: openCalendarCleanup)
+        calendarCleanup.infoButton.addTapGestureRecognizer(action: openCalendarCleanup)
     }
     
     @objc private func openPhoneInfoScreen() {
@@ -128,49 +181,34 @@ extension MainViewController: ViewControllerProtocol {
         (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.downloadSpeed)
     }
     
-    private func setupCleanupOptions() {
-        updatePhotosCleanupOption()
-        updateVideosCleanupOption()
-    }
-    
-    private func updatePhotosCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.mediaService.loadSimilarPhotos(live: false) { _, duplicatesCount in
-                DispatchQueue.main.async {
-                    self?.photosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
-                }
-            }
-        }
-    }
-    
-    private func updateVideosCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.mediaService.loadSimilarVideos { _, duplicatesCount in
-                DispatchQueue.main.async {
-                    self?.videosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
-                }
-            }
-        }
-    }
-    
     private func openPhotosCleanup() {
-        navigationController?.pushViewController(createSearchVC(with: .photos), animated: false)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            navigationController?.pushViewController(createSearchVC(with: .photos), animated: true)
+        }
     }
     
     private func openVideosCleanup() {
-        navigationController?.pushViewController(createSearchVC(with: .videos), animated: false)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            navigationController?.pushViewController(createSearchVC(with: .photos), animated: true)
+        }
     }
     
     private func openContactsCleanup() {
         let vc = StoryboardScene.ContactsMenu.initialScene.instantiate()
         vc.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: false)
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     private func openCalendarCleanup() {
         let vc = StoryboardScene.Calendar.initialScene.instantiate()
         vc.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: false)
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     private func createSearchVC(with cleanupOption: CleanupOption) -> SearchViewController {

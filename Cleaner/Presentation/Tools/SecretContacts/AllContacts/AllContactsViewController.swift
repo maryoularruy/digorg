@@ -15,6 +15,8 @@ final class AllContactsViewController: UIViewController {
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var toolbar: ActionToolbar!
     
+    private lazy var contactManager = ContactManager.shared
+    
     private lazy var sections: [CNContactSection] = [] {
         didSet {
             contactsCountLabel.bind(text: "\(allContactsCount) contact\(allContactsCount == 1 ? "" : "s")")
@@ -66,7 +68,7 @@ final class AllContactsViewController: UIViewController {
     }
     
     private func reloadData() {
-        ContactManager.loadAllContacts { contacts in
+        contactManager.loadAllContacts { contacts in
             self.sections = contacts
         }
     }
@@ -78,7 +80,7 @@ final class AllContactsViewController: UIViewController {
     }
     
     private func presentContact(contact: CNContact) {
-        if let contact = ContactManager.findContact(contact: contact) {
+        if let contact = contactManager.findContact(contact: contact) {
             let contactVC = CNContactViewController(for: contact)
             contactVC.allowsEditing = true
             navigationController?.setNavigationBarHidden(false, animated: false)
@@ -142,7 +144,7 @@ extension AllContactsViewController: UITableViewDelegate, UITableViewDataSource 
         
         let contact = sections[indexPath.section].contacts[indexPath.row]
         cell.checkBoxButton.image = contactsForImport.contains(contact) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
-        cell.backgroundColor = contactsForImport.contains(contact) ? .lightBlueBackground : .white
+        cell.backgroundColor = contactsForImport.contains(contact) ? .lightBlue : .paleGrey
         cell.bind(contact: contact, (indexPath.section, indexPath.row))
         
         return cell
@@ -169,7 +171,7 @@ extension AllContactsViewController: ActionToolbarDelegate {
         if sections.isEmpty {
             navigationController?.popViewController(animated: true)
         } else {
-            ContactManager.importSecretContacts(Array(contactsForImport))
+            contactManager.importSecretContacts(Array(contactsForImport))
             navigationController?.popViewController(animated: true)
         }
     }

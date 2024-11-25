@@ -38,7 +38,7 @@ class SelectionButtonStyle: UIButton {
     
     func setup() {
         titleLabel?.textAlignment = .center
-        backgroundColor = .white
+        backgroundColor = .paleGrey
         titleLabel?.textColor = .blue
         titleLabel?.font = .medium12
 //        configuration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)

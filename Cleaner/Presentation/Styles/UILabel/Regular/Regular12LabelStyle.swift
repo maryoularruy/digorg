@@ -10,6 +10,6 @@ import UIKit
 final class Regular12LabelStyle: Regular11LabelStyle {
     override func setup() {
         font = UIFont.regular12 ?? UIFont.systemFont(ofSize: 12)
-        textColor = .greyText
+        textColor = .darkGrey
     }
 }

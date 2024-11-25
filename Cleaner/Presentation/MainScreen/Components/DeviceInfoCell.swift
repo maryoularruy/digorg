@@ -43,7 +43,7 @@ final class DeviceInfoCell: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .paleGrey
         layer.cornerRadius = 10
         addShadows()
     }

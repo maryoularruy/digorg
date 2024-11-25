@@ -10,10 +10,10 @@ import UIKit
 final class Regular15LabelStyle: Regular11LabelStyle {
     override func setup() {
         font = UIFont.regular15 ?? UIFont.systemFont(ofSize: 15)
-        textColor = .blackText
+        textColor = .black
     }
     
     func setGreyTextColor() {
-        textColor = .greyText
+        textColor = .darkGrey
     }
 }

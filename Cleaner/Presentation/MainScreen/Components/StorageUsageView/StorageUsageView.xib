@@ -25,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="124"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storage Usage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38r-k0-Yt5" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storage Usage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38r-k0-Yt5" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
                     <rect key="frame" x="141" y="19" width="232" height="21"/>
                     <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="15"/>
                     <nil key="textColor"/>
@@ -38,11 +38,8 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHI-Ki-6JT" customClass="Medium12ButtonStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="141" y="78.333333333333329" width="232" height="32"/>
+                    <rect key="frame" x="141" y="78.333333333333329" width="30" height="28.666666666666671"/>
                     <color key="backgroundColor" name="BlueButtonBackground"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="32" id="Z3y-Rb-l8d"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal">
@@ -68,7 +65,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" name="WhiteBackground"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="BJb-yV-J4M" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="0ql-mO-tCP"/>
                 <constraint firstItem="cZG-Bg-fQ1" firstAttribute="top" secondItem="38r-k0-Yt5" secondAttribute="bottom" constant="7" id="7N1-En-s9h"/>
@@ -78,11 +75,11 @@
                 <constraint firstItem="eHI-Ki-6JT" firstAttribute="leading" secondItem="38r-k0-Yt5" secondAttribute="leading" id="MAo-Bl-HH2"/>
                 <constraint firstItem="cZG-Bg-fQ1" firstAttribute="leading" secondItem="38r-k0-Yt5" secondAttribute="leading" id="OS7-mF-Nqc"/>
                 <constraint firstAttribute="trailing" secondItem="38r-k0-Yt5" secondAttribute="trailing" constant="20" id="Wxe-Ho-Ahj"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eHI-Ki-6JT" secondAttribute="trailing" constant="20" id="aPu-4I-XtQ"/>
                 <constraint firstItem="eHI-Ki-6JT" firstAttribute="top" secondItem="cZG-Bg-fQ1" secondAttribute="bottom" constant="13" id="c6k-yS-Byp"/>
                 <constraint firstItem="38r-k0-Yt5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" priority="900" constant="141" id="ct8-k0-MoM"/>
                 <constraint firstItem="38r-k0-Yt5" firstAttribute="leading" secondItem="BJb-yV-J4M" secondAttribute="trailing" constant="25" id="fbo-Dc-wxr"/>
                 <constraint firstItem="cZG-Bg-fQ1" firstAttribute="trailing" secondItem="38r-k0-Yt5" secondAttribute="trailing" id="iOJ-Xo-URO"/>
+                <constraint firstAttribute="bottom" secondItem="eHI-Ki-6JT" secondAttribute="bottom" constant="17" id="lee-Md-E3g"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-28.244274809160306" y="34.507042253521128"/>
@@ -91,9 +88,6 @@
     <resources>
         <namedColor name="BlueButtonBackground">
             <color red="0.20784313725490197" green="0.52156862745098043" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="WhiteBackground">
-            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="WhiteText">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

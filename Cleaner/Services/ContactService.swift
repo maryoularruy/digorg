@@ -14,10 +14,24 @@ struct CNContactSection {
 }
 
 final class ContactManager {
-    private static var store = CNContactStore()
-    private static var defaultDescriptor = CNContactViewController.descriptorForRequiredKeys()
+    static let shared = ContactManager()
+    
+    private let store = CNContactStore()
+    private let defaultDescriptor = CNContactViewController.descriptorForRequiredKeys()
+    
+    func checkStatus(handler: @escaping (CNAuthorizationStatus) -> ()) {
+        let status = CNContactStore.authorizationStatus(for: .contacts)
+        
+        if status == .notDetermined {
+            requestAutorization() { granted in
+                handler(granted ? .authorized : .denied)
+            }
+        } else {
+            handler(status)
+        }
+    }
 
-    static func loadDuplicatedByName(completion: @escaping ([[CNContact]]) -> ()) {
+    func loadDuplicatedByName(completion: @escaping ([[CNContact]]) -> ()) {
         loadContacts { contacts in
             var duplicates = [[CNContact]]()
             var checkedContacts = Set<CNContact>()
@@ -53,19 +67,19 @@ final class ContactManager {
         }
     }
     
-    static func loadIncompletedByName(completion: @escaping ([CNContact]) -> ()) {
+    func loadIncompletedByName(completion: @escaping ([CNContact]) -> ()) {
         loadContacts { contacts in
             completion(contacts.filter { $0.givenName.isEmpty && $0.familyName.isEmpty && !$0.phoneNumbers.isEmpty })
         }
     }
     
-    static func loadIncompletedByNumber(completion: @escaping ([CNContact]) -> ()) {
+    func loadIncompletedByNumber(completion: @escaping ([CNContact]) -> ()) {
         loadContacts { contacts in
             completion(contacts.filter { $0.phoneNumbers.isEmpty })
         }
     }
     
-    static func merge(_ contacts: [CNContact], completion: @escaping ((Bool) -> ())) {
+    func merge(_ contacts: [CNContact], completion: @escaping ((Bool) -> ())) {
         var bestContact: CNContact?
         var bestValue: Int = 0
         for contact in contacts {
@@ -90,7 +104,7 @@ final class ContactManager {
         }
     }
     
-    static func findContact(contact: CNContact) -> CNContact? {
+    func findContact(contact: CNContact) -> CNContact? {
         do {
             return try store.unifiedContact(withIdentifier: contact.identifier, keysToFetch: [defaultDescriptor])
         } catch {
@@ -99,11 +113,11 @@ final class ContactManager {
         }
     }
     
-    static func delete(_ contacts: [CNContact]) {
+    func delete(_ contacts: [CNContact]) {
         contacts.forEach { delete($0) }
     }
     
-    static func delete(_ contact: CNContact) {
+    func delete(_ contact: CNContact) {
         let request = CNSaveRequest()
         request.delete(contact.mutableCopy() as! CNMutableContact)
         do {
@@ -111,13 +125,14 @@ final class ContactManager {
         } catch {}
     }
     
-    static func loadAllContacts(completion: @escaping ([CNContactSection]) -> ()) {
-        loadContacts { contacts in
+    func loadAllContacts(completion: @escaping ([CNContactSection]) -> ()) {
+        loadContacts { [weak self] contacts in
+            guard let self else { return }
             completion(sortBySections(contacts))
         }
     }
     
-    static func importSecretContacts(_ contacts: [CNContact]) {
+    func importSecretContacts(_ contacts: [CNContact]) {
         FileManager.default.saveSecretContacts(contacts)
         delete(contacts)
     }
@@ -126,7 +141,13 @@ final class ContactManager {
         FileManager.default.getSecretContacts()
     }
     
-    private static func loadContacts(handler: @escaping (([CNContact]) -> ())) {
+    private func requestAutorization(handler: @escaping (Bool) -> ()) {
+        store.requestAccess(for: .contacts) { granted, _ in
+            handler(granted)
+        }
+    }
+    
+    private func loadContacts(handler: @escaping (([CNContact]) -> ())) {
         checkStatus {
             fetchContacts { result in
                 switch result {
@@ -137,7 +158,7 @@ final class ContactManager {
         }
     }
     
-    private static func checkStatus(handler: @escaping () -> ()) {
+    private func checkStatus(handler: @escaping () -> ()) {
         if authorizationStatus() == .authorized {
             handler()
         } else {
@@ -147,7 +168,7 @@ final class ContactManager {
         }
     }
     
-    private static func requestContactAccess(handler: @escaping () -> ()) {
+    private func requestContactAccess(handler: @escaping () -> ()) {
         requestAccess { response in
             switch response {
             case .success(_):
@@ -159,7 +180,7 @@ final class ContactManager {
         }
     }
     
-    private static func sortBySections(_ contacts: [CNContact]) -> [CNContactSection] {
+    private func sortBySections(_ contacts: [CNContact]) -> [CNContactSection] {
         var letters: [String] = []
         var sections: [CNContactSection] = []
         

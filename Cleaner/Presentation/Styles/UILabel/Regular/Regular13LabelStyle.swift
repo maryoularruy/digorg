@@ -10,14 +10,14 @@ import UIKit
 final class Regular13LabelStyle: Regular11LabelStyle {
     override func setup() {
         font = UIFont.regular13 ?? UIFont.systemFont(ofSize: 13)
-        textColor = .greyText
+        textColor = .darkGrey
     }
     
     func underlined(text: String) {
         let attributes = NSAttributedString(
             string: text,
             attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue,
-                         .underlineColor: UIColor.greyText]
+                         .underlineColor: UIColor.darkGrey]
         )
         self.attributedText = attributes
     }

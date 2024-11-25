@@ -63,13 +63,13 @@ class DKPhotoIncrementalIndicator: UIView {
         self.replicatorLayer = self.layer as? CAReplicatorLayer
         self.replicatorLayer.instanceCount = 0
         self.replicatorLayer.instanceDelay = CFTimeInterval(1 / Float(self.maxInstanceCount))
-        self.replicatorLayer.instanceColor = UIColor.white.cgColor
+        self.replicatorLayer.instanceColor = UIColor.paleGrey.cgColor
         
         let angle = Float(Double.pi * 2.0) / Float(self.maxInstanceCount)
         self.replicatorLayer.instanceTransform = CATransform3DMakeRotation(CGFloat(angle), 0.0, 0.0, 1.0)
         
         self.instanceLayer = CALayer()
-        self.instanceLayer.backgroundColor = UIColor.white.cgColor
+        self.instanceLayer.backgroundColor = UIColor.paleGrey.cgColor
         self.instanceLayer.opacity = 1.0
         self.replicatorLayer.addSublayer(self.instanceLayer)
     }

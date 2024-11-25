@@ -1,32 +1,26 @@
 //
-//  CalendarService.swift
+//  CalendarManager.swift
 //  Cleaner
 //
 //  Created by Alex on 21.12.2023.
 //
 
 import EventKit
-import OSLog
 
-final class CalendarService {
-    static let shared = CalendarService()
+final class CalendarManager {
+    static let shared = CalendarManager()
     
     private let eventStore = EKEventStore()
     private lazy var twoYears = TimeInterval(63113852)
-
-    func requestAccess(completion: @escaping (Bool) -> Void) {
-        if #available(iOS 17.0, *) {
-            eventStore.requestFullAccessToEvents(completion: { granted, error in
-                DispatchQueue.main.async {
-                    completion(granted)
-                }
-            })
-        } else {
-            eventStore.requestAccess(to: .event) { (granted, error) in
-                DispatchQueue.main.async {
-                    completion(granted)
-                }
+    
+    func checkStatus(handler: @escaping (EKAuthorizationStatus) -> ()) {
+        let status = EKEventStore.authorizationStatus(for: .event)
+        if status == .notDetermined {
+            requestAutorization() { granted in
+                handler(granted ? .authorized : .denied)
             }
+        } else {
+            handler(status)
         }
     }
 
@@ -49,6 +43,18 @@ final class CalendarService {
                     print("\(error.localizedDescription)")
                     completion(false)
                 }
+            }
+        }
+    }
+    
+    private func requestAutorization(completion: @escaping (Bool) -> Void) {
+        if #available(iOS 17.0, *) {
+            eventStore.requestFullAccessToEvents { granted, _ in
+                completion(granted)
+            }
+        } else {
+            eventStore.requestAccess(to: .event) { granted, _ in
+                completion(granted)
             }
         }
     }

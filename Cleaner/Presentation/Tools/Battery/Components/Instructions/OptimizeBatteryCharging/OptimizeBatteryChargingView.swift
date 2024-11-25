@@ -37,7 +37,7 @@ final class OptimizeBatteryChargingView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .paleGrey
     }
     
     private func initConstraints() {
