@@ -24,7 +24,7 @@ final class Medium12ButtonStyle: UIButton {
     }
     
     func bind(duplicatesCount: Int) {
-        setTitle("\(duplicatesCount) files", for: .normal)
+        setTitle("\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s")", for: .normal)
         imageEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 12)
         layoutSubviews()
     }

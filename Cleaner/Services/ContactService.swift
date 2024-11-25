@@ -25,7 +25,6 @@ final class ContactManager {
         if status == .notDetermined {
             requestAutorization() { granted in
                 handler(granted ? .authorized : .denied)
-                handler(status)
             }
         } else {
             handler(status)

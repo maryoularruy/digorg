@@ -16,6 +16,8 @@ final class CalendarViewController: UIViewController {
     @IBOutlet weak var unresolvedEventsTableView: UITableView!
     @IBOutlet weak var toolbar: ActionToolbar!
     
+    private lazy var calendarManager = CalendarManager.shared
+    
     private lazy var eventGroups: [EKEventGroup] = [] {
         didSet {
             unresolvedEventsCount.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
@@ -70,14 +72,11 @@ final class CalendarViewController: UIViewController {
     }
     
     private func reloadData() {
-        CalendarService.shared.requestAccess { [weak self] granted in
-            if granted { self?.fetchEvents() }
-            else { }
-        }
+        fetchEvents()
     }
     
     private func fetchEvents() {
-        CalendarService.shared.fetchEvents { [weak self] events in
+        CalendarManager.shared.fetchEvents { [weak self] events in
             self?.eventGroups = events
         }
     }
@@ -176,7 +175,7 @@ extension CalendarViewController: ActionToolbarDelegate, BottomPopupDelegate {
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
-            CalendarService.shared.deleteEvents(Array(eventsForDeletion)) { [weak self] res in
+            calendarManager.deleteEvents(Array(eventsForDeletion)) { [weak self] res in
                 guard let self else { return }
                 switch res {
                 case true:

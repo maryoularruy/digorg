@@ -20,6 +20,7 @@ final class MainViewController: UIViewController {
     
     private lazy var photoVideoManager = PhotoVideoManager.shared
     private lazy var contactManager = ContactManager.shared
+    private lazy var calendarManager = CalendarManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,21 +58,31 @@ final class MainViewController: UIViewController {
     }
     
     private func checkContactsAccessStatus() {
-        contactManager.checkStatus { status in
+        contactManager.checkStatus { [weak self] status in
             if #available(iOS 18.0, *) {
                 if status == .authorized || status == .limited {
-                    
+                    self?.updateContactsCleanupOption()
                 }
             } else {
                 if status == .authorized {
-                    
+                    self?.updateContactsCleanupOption()
                 }
             }
         }
     }
     
     private func checkCalendarAccessStatus() {
-        
+        calendarManager.checkStatus { [weak self] status in
+            if #available(iOS 17.0, *) {
+                if status == .authorized || status == .fullAccess || status == .writeOnly {
+                    self?.updateCalendarCleanupOption()
+                }
+            } else {
+                if status == .authorized {
+                    self?.updateCalendarCleanupOption()
+                }
+            }
+        }
     }
     
     private func updatePhotosCleanupOption() {
@@ -95,11 +106,20 @@ final class MainViewController: UIViewController {
     }
     
     private func updateContactsCleanupOption() {
-//        DispatchQueue.global(qos: .background).async { [weak self] in
-//            ContactManager.loadDuplicatedByName { contacts in
-//
-//            }
-//        }
+        contactManager.loadDuplicatedByName { [weak self] contacts in
+            DispatchQueue.main.async {
+                self?.contactsCleanup.infoButton.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+            }
+        }
+    }
+    
+    private func updateCalendarCleanupOption() {
+        calendarManager.fetchEvents { [weak self] eventGroups in
+            let eventsCount = eventGroups.reduce(0) { $0 + $1.events.count }
+            DispatchQueue.main.async {
+                self?.calendarCleanup.infoButton.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
+            }
+        }
     }
 }
 
