@@ -73,7 +73,7 @@
 		FA39872A2B303DD30096F335 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3987292B303DD30096F335 /* Settings.storyboard */; };
 		FA39872D2B303FB90096F335 /* PaywallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39872C2B303FB90096F335 /* PaywallViewController.swift */; };
 		FA39872F2B303FC00096F335 /* Paywall.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA39872E2B303FC00096F335 /* Paywall.storyboard */; };
-		FA3987402B3054930096F335 /* MediaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39873F2B3054930096F335 /* MediaService.swift */; };
+		FA3987402B3054930096F335 /* PhotoVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39873F2B3054930096F335 /* PhotoVideoManager.swift */; };
 		FA3987422B3054B90096F335 /* PHAssetGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987412B3054B90096F335 /* PHAssetGroup.swift */; };
 		FA3987522B3055510096F335 /* ContentEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987472B3055510096F335 /* ContentEquatable.swift */; };
 		FA3987532B3055510096F335 /* Differentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987482B3055510096F335 /* Differentiable.swift */; };
@@ -263,7 +263,7 @@
 		FA3987292B303DD30096F335 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		FA39872C2B303FB90096F335 /* PaywallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallViewController.swift; sourceTree = "<group>"; };
 		FA39872E2B303FC00096F335 /* Paywall.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Paywall.storyboard; sourceTree = "<group>"; };
-		FA39873F2B3054930096F335 /* MediaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaService.swift; sourceTree = "<group>"; };
+		FA39873F2B3054930096F335 /* PhotoVideoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoManager.swift; sourceTree = "<group>"; };
 		FA3987412B3054B90096F335 /* PHAssetGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAssetGroup.swift; sourceTree = "<group>"; };
 		FA3987472B3055510096F335 /* ContentEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentEquatable.swift; sourceTree = "<group>"; };
 		FA3987482B3055510096F335 /* Differentiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Differentiable.swift; sourceTree = "<group>"; };
@@ -666,7 +666,7 @@
 		75FC42242AD3104D008F3E3A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				FA39873F2B3054930096F335 /* MediaService.swift */,
+				FA39873F2B3054930096F335 /* PhotoVideoManager.swift */,
 				7504C24B2AD44407005FB398 /* PhoneInfoService.swift */,
 				7532F8492AE2749F007469EA /* SpeedTest.swift */,
 				7532F8712AE304B5007469EA /* ContactService.swift */,
@@ -1303,7 +1303,7 @@
 				FA39883D2B30602A0096F335 /* ZoomTransitionController.swift in Sources */,
 				A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */,
 				FA3987F62B305FA50096F335 /* DKPhotoBasePreviewVC.swift in Sources */,
-				FA3987402B3054930096F335 /* MediaService.swift in Sources */,
+				FA3987402B3054930096F335 /* PhotoVideoManager.swift in Sources */,
 				FA39885B2B30602A0096F335 /* PHImageManager.swift in Sources */,
 				FA3987A42B30599C0096F335 /* SearchViewController.swift in Sources */,
 				A55CA2612CC904780026D434 /* UIImage.swift in Sources */,

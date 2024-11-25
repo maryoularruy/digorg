@@ -16,6 +16,8 @@ final class DuplicateNameContactsViewController: UIViewController {
     @IBOutlet weak var toolbar: ActionAndCancelToolbar!
     @IBOutlet weak var emptyStateToolbar: ActionToolbar!
     
+    private lazy var contactManager = ContactManager.shared
+    
     private lazy var selectMode = false {
         didSet {
             if selectMode {
@@ -70,13 +72,13 @@ final class DuplicateNameContactsViewController: UIViewController {
     }
     
     private func reloadData() {
-        ContactManager.loadDuplicatedByName { [weak self] duplicateGroups in
+        contactManager.loadDuplicatedByName { [weak self] duplicateGroups in
             self?.sections = duplicateGroups
         }
     }
     
     private func presentContact(contact: CNContact) {
-        if let contact = ContactManager.findContact(contact: contact) {
+        if let contact = contactManager.findContact(contact: contact) {
             let contactVC = CNContactViewController(for: contact)
             contactVC.allowsEditing = true
             navigationController?.setNavigationBarHidden(false, animated: false)
@@ -175,7 +177,7 @@ extension DuplicateNameContactsViewController: ActionAndCancelToolbarDelegate, B
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
-            contactsForMerge.forEach { ContactManager.merge($0) { [weak self] result in
+            contactsForMerge.forEach { contactManager.merge($0) { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case true:

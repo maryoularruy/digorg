@@ -15,6 +15,8 @@ final class NoNameContactsViewController: UIViewController {
     @IBOutlet weak var toolbar: ActionToolbar!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     
+    private lazy var contactManager = ContactManager.shared
+    
     private var contacts: [CNContact] = [] {
         didSet {
             unresolvedContactsCount.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
@@ -68,13 +70,13 @@ final class NoNameContactsViewController: UIViewController {
     }
     
     private func reloadData() {
-        ContactManager.loadIncompletedByName { contacts in
+        contactManager.loadIncompletedByName { contacts in
             self.contacts = contacts
         }
     }
     
     private func presentContact(contact: CNContact) {
-        if let contact = ContactManager.findContact(contact: contact) {
+        if let contact = contactManager.findContact(contact: contact) {
             let contactVC = CNContactViewController(for: contact)
             contactVC.allowsEditing = true
             navigationController?.setNavigationBarHidden(false, animated: false)
@@ -161,7 +163,7 @@ extension NoNameContactsViewController: ActionToolbarDelegate, BottomPopupDelega
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
-            ContactManager.delete(Array(contactsForDeletion))
+            contactManager.delete(Array(contactsForDeletion))
             contactsForDeletion.removeAll()
             reloadData()
         }
