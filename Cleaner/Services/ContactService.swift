@@ -14,8 +14,23 @@ struct CNContactSection {
 }
 
 final class ContactManager {
+    static let shared = ContactManager()
+    
     private static var store = CNContactStore()
     private static var defaultDescriptor = CNContactViewController.descriptorForRequiredKeys()
+    
+    func checkStatus(handler: @escaping (CNAuthorizationStatus) -> ()) {
+        let status = CNContactStore.authorizationStatus(for: .contacts)
+        
+        if status == .notDetermined {
+            ContactManager.requestAutorization() { granted in
+                handler(granted ? .authorized : .denied)
+                handler(status)
+            }
+        } else {
+            handler(status)
+        }
+    }
 
     static func loadDuplicatedByName(completion: @escaping ([[CNContact]]) -> ()) {
         loadContacts { contacts in
@@ -124,6 +139,12 @@ final class ContactManager {
     
     static func getSecretContacts() -> [CNContact]? {
         FileManager.default.getSecretContacts()
+    }
+    
+    private static func requestAutorization(handler: @escaping (Bool) -> ()) {
+        store.requestAccess(for: .contacts) { granted, _ in
+            handler(granted)
+        }
     }
     
     private static func loadContacts(handler: @escaping (([CNContact]) -> ())) {

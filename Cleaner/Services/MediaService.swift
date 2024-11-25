@@ -18,7 +18,23 @@ final class MediaService: MediaServiceProtocol {
     static var defaultStartDate = "01 Jan 1970 00:00:00"
     static var defaultEndDate = "01 Jan 2030 00:00:00"
     
-	private var maxAcceptableDifferenceBetweenDates = 10
+    var isLoading: Bool = false
+    
+    func checkStatus(handler: @escaping (PHAuthorizationStatus) -> ()) {
+        let status = if #available(iOS 14, *) {
+            PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        } else {
+            PHPhotoLibrary.authorizationStatus()
+        }
+        
+        if status == .notDetermined {
+            requestPhotoLibraryAutorization() { status in
+                handler(status)
+            }
+        } else {
+            handler(status)
+        }
+    }
     
     func loadSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ()) {
         fetchPhotos(from: dateFrom, to: dateTo, live: live) { photoInAlbum in
@@ -180,22 +196,6 @@ final class MediaService: MediaServiceProtocol {
               handler(PHAsset.fetchAssets(in: collection, options: options))
           }
       }
-    
-    func checkStatus(handler: @escaping (PHAuthorizationStatus) -> ()) {
-        let status = if #available(iOS 14, *) {
-            PHPhotoLibrary.authorizationStatus(for: .readWrite)
-        } else {
-            PHPhotoLibrary.authorizationStatus()
-        }
-        
-        if status == .notDetermined {
-            requestPhotoLibraryAutorization() { status in
-                handler(status)
-            }
-        } else {
-            handler(status)
-        }
-    }
     
     private func requestPhotoLibraryAutorization(handler: @escaping (PHAuthorizationStatus) -> ()) {
         if #available(iOS 14, *) {

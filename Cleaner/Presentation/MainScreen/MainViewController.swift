@@ -19,6 +19,7 @@ final class MainViewController: UIViewController {
     @IBOutlet weak var calendarCleanup: CleanupOptionView!
     
     private lazy var mediaService = MediaService.shared
+    private lazy var contactManager = ContactManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,9 @@ final class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        checkPhotoLibraryStatus()
+        checkPhotoLibraryAccessStatus()
+        checkContactsAccessStatus()
+        checkCalendarAccessStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,7 +40,7 @@ final class MainViewController: UIViewController {
         storageUsageView.circularProgressBarView.progressAnimation(0.65)
     }
     
-    private func checkPhotoLibraryStatus() {
+    private func checkPhotoLibraryAccessStatus() {
         mediaService.checkStatus { [weak self] status in
             if #available(iOS 14, *) {
                 if status == .authorized || status == .limited {
@@ -51,6 +54,24 @@ final class MainViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func checkContactsAccessStatus() {
+        contactManager.checkStatus { status in
+            if #available(iOS 18.0, *) {
+                if status == .authorized || status == .limited {
+                    
+                }
+            } else {
+                if status == .authorized {
+                    
+                }
+            }
+        }
+    }
+    
+    private func checkCalendarAccessStatus() {
+        
     }
     
     private func updatePhotosCleanupOption() {
@@ -71,6 +92,14 @@ final class MainViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func updateContactsCleanupOption() {
+//        DispatchQueue.global(qos: .background).async { [weak self] in
+//            ContactManager.loadDuplicatedByName { contacts in
+//                
+//            }
+//        }
     }
 }
 
