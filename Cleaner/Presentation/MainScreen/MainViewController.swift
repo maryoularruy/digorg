@@ -106,18 +106,22 @@ final class MainViewController: UIViewController {
     }
     
     private func updateContactsCleanupOption() {
-        contactManager.loadDuplicatedByName { [weak self] contacts in
-            DispatchQueue.main.async {
-                self?.contactsCleanup.infoButton.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.contactManager.loadDuplicatedByName { contacts in
+                DispatchQueue.main.async {
+                    self?.contactsCleanup.infoButton.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+                }
             }
         }
     }
     
     private func updateCalendarCleanupOption() {
-        calendarManager.fetchEvents { [weak self] eventGroups in
-            let eventsCount = eventGroups.reduce(0) { $0 + $1.events.count }
-            DispatchQueue.main.async {
-                self?.calendarCleanup.infoButton.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.calendarManager.fetchEvents { eventGroups in
+                let eventsCount = eventGroups.reduce(0) { $0 + $1.events.count }
+                DispatchQueue.main.async {
+                    self?.calendarCleanup.infoButton.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
+                }
             }
         }
     }
@@ -185,6 +189,7 @@ extension MainViewController: ViewControllerProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             let vc = PhotoVideoTotalViewController()
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
 //            navigationController?.pushViewController(createSearchVC(with: .photos), animated: true)
         }

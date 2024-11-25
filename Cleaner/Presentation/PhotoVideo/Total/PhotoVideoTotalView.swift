@@ -12,6 +12,12 @@ final class PhotoVideoTotalView: UIView {
     private lazy var contentView: UIView = UIView()
     lazy var arrowBack: UIView = arrowBackButton
     
+    private lazy var label: Semibold15LabelStyle = {
+        let label = Semibold15LabelStyle()
+        label.bind(text: "Photo Cleanup")
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -31,7 +37,9 @@ final class PhotoVideoTotalView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack])
+        contentView.addSubviews([arrowBack, label])
+        
+        arrowBack.backgroundColor = .acidGreen
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -45,10 +53,14 @@ final class PhotoVideoTotalView: UIView {
             contentView.bottomAnchor.constraint(equalTo: scroll.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scroll.widthAnchor, constant: -32),
             
-            arrowBack.topAnchor.constraint(equalTo: scroll.topAnchor),
-            arrowBack.leadingAnchor.constraint(equalTo: scroll.leadingAnchor, constant: -16),
+            arrowBack.topAnchor.constraint(equalTo: contentView.topAnchor),
+            arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -16),
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
-            arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width)
+            arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
+            arrowBack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
 }

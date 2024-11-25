@@ -12,7 +12,7 @@ final class LowPowerModeView: UIView {
     private lazy var contentView: UIView = UIView()
     lazy var arrowBack: UIView = arrowBackButton
     
-    private lazy var label: Semibold15LabelStyle = {
+    private lazy var label: Semibold24LabelStyle = {
         let label = Semibold24LabelStyle()
         label.bind(text: "Low Power Mode")
         return label
