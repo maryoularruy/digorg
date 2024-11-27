@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import Photos
+
+protocol OneCategoryHorizontalViewDelegate: AnyObject {
+    func tapOnCategory()
+}
 
 enum OneCategoryHorizontalViewType {
     case similarPhotos, duplicatePhotos, portraits, allPhotos,
@@ -25,6 +30,8 @@ enum OneCategoryHorizontalViewType {
 }
 
 final class OneCategoryHorizontalView: UIView {
+    weak var delegate: OneCategoryHorizontalViewDelegate?
+    
     private lazy var contentView: UIView = UIView()
     private lazy var label: Semibold15LabelStyle = Semibold15LabelStyle()
     
@@ -34,10 +41,10 @@ final class OneCategoryHorizontalView: UIView {
         return imageView
     }()
     
-    private lazy var itemsSizeLabel: Regular15LabelStyle = Regular15LabelStyle()
-    private lazy var itemsCountLabel: Regular15LabelStyle = Regular15LabelStyle()
+    private lazy var assetsSizeLabel: Regular15LabelStyle = Regular15LabelStyle()
+    private lazy var assetsCountLabel: Regular15LabelStyle = Regular15LabelStyle()
     
-    lazy var itemsCollectionView: UICollectionView = {
+    lazy var assetsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 78, height: 78)
@@ -46,33 +53,30 @@ final class OneCategoryHorizontalView: UIView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 //        collectionView.backgroundColor = UIColor. // Set background color
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(OneCategoryHorizontalCell.self, forCellWithReuseIdentifier: OneCategoryHorizontalCell.identifier)
         return collectionView
     }()
     
-    private var type: OneCategoryHorizontalViewType?
+    private var type: OneCategoryHorizontalViewType
+    lazy var assets: [PHAsset] = [] {
+        didSet {
+            assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
+            assetsCollectionView.reloadData()
+        }
+    }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(_ type: OneCategoryHorizontalViewType) {
+        self.type = type
+        super.init(frame: .zero)
         setupView()
         initConstraints()
     }
     
     required init?(coder: NSCoder) {
+        type = .similarPhotos
         super.init(coder: coder)
-        setupView()
-        initConstraints()
-    }
-    
-    func bind(_ type: OneCategoryHorizontalViewType) {
-        self.type = type
-        label.bind(text: type.title)
-    }
-    
-    func bind(itemsCount: Int) {
-        itemsCountLabel.bind(text: "\(itemsCount) File\(itemsCount == 1 ? "" :  "s")")
     }
     
     private func setupView() {
@@ -80,11 +84,17 @@ final class OneCategoryHorizontalView: UIView {
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
         addShadows()
+        
+        label.bind(text: type.title)
+        
+        addTapGestureRecognizer { [weak self] in
+            self?.delegate?.tapOnCategory()
+        }
     }
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([label, arrowForwardImageView, itemsCountLabel])
+        contentView.addSubviews([label, arrowForwardImageView, assetsCountLabel, assetsCollectionView])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: topAnchor),
@@ -98,8 +108,24 @@ final class OneCategoryHorizontalView: UIView {
             arrowForwardImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             arrowForwardImageView.centerYAnchor.constraint(equalTo: label.centerYAnchor),
             
-            itemsCountLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 4),
-            itemsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
+            assetsCountLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 4),
+            assetsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            
+            assetsCollectionView.topAnchor.constraint(equalTo: assetsCountLabel.bottomAnchor, constant: 14),
+            assetsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            assetsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
+    }
+}
+
+extension OneCategoryHorizontalView: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        assets.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: OneCategoryHorizontalCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.bind(assets[indexPath.row].getAssetThumbnail(.small))
+        return cell
     }
 }

@@ -8,6 +8,21 @@
 import Photos
 import UIKit
 
+enum TargetSize {
+    case small, medium, large
+    
+    var size: CGSize {
+        switch self {
+        case .small:
+            CGSize(width: 78, height: 78)
+        case .medium:
+            CGSize(width: 109, height: 109)
+        case .large:
+            CGSize(width: 133, height: 133)
+        }
+    }
+}
+
 extension PHAsset: Differentiable { }
 
 extension PHAsset {
@@ -75,6 +90,27 @@ extension PHAsset {
 			})
 		return thumbnail
 	}
+    
+    func getAssetThumbnail(_ targetSize: TargetSize = TargetSize.medium) -> UIImage {
+        let manager = PHImageManager.default()
+        let option = PHImageRequestOptions()
+        
+        var thumbnail = UIImage()
+        option.isSynchronous = true
+        
+        option.deliveryMode = .opportunistic
+        option.version = .current
+        option.resizeMode = .exact
+        manager.requestImage(
+            for: self,
+            targetSize: targetSize.size,
+            contentMode: .aspectFit,
+            options: option,
+            resultHandler: {(result, info) -> Void in
+                thumbnail = result ?? #imageLiteral(resourceName: "gif")
+            })
+        return thumbnail
+    }
 	
 	func getHighQualityImage() -> UIImage {
 		let manager = PHImageManager.default()

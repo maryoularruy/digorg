@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Photos
 
 final class PhotoVideoTotalViewController: UIViewController {
     private lazy var rootView = PhotoVideoTotalView()
+    private lazy var photoVideoManager = PhotoVideoManager.shared
     
     override func loadView() {
         super.loadView()
@@ -18,6 +20,25 @@ final class PhotoVideoTotalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addGestureRecognizers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updatePhotosCleanupOption()
+    }
+    
+    private func updatePhotosCleanupOption() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.photoVideoManager.loadSimilarPhotos(live: false) { assetGroups, duplicatesCount in
+                var assets: [PHAsset] = []
+                assetGroups.forEach { group in
+                    assets.append(contentsOf: group.assets)
+                }
+                DispatchQueue.main.async {
+                    self?.rootView.similarPhotosView.assets = assets
+                }
+            }
+        }
     }
 }
 

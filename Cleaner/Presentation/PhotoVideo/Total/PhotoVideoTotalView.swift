@@ -18,7 +18,10 @@ final class PhotoVideoTotalView: UIView {
         return label
     }()
     
-    private lazy var similarPhotosView = OneCategoryHorizontalView()
+    lazy var similarPhotosView = OneCategoryHorizontalView(.similarPhotos)
+    lazy var duplicatePhotosView = OneCategoryHorizontalView(.duplicatePhotos)
+    lazy var portraitsPhotosView = OneCategoryHorizontalView(.portraits)
+    lazy var allPhotosView = OneCategoryHorizontalView(.allPhotos)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,7 +68,7 @@ final class PhotoVideoTotalView: UIView {
             similarPhotosView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
             similarPhotosView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             similarPhotosView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            similarPhotosView.heightAnchor.constraint(equalToConstant: 200),
+//            similarPhotosView.heightAnchor.constraint(equalToConstant: 200),
             similarPhotosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
