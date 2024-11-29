@@ -53,8 +53,6 @@ final class OneCategoryHorizontalView: UIView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 //        collectionView.backgroundColor = UIColor. // Set background color
-        collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.register(OneCategoryHorizontalCell.self, forCellWithReuseIdentifier: OneCategoryHorizontalCell.identifier)
         return collectionView
     }()
@@ -84,6 +82,9 @@ final class OneCategoryHorizontalView: UIView {
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
         addShadows()
+        
+        assetsCollectionView.delegate = self
+        assetsCollectionView.dataSource = self
         
         label.bind(text: type.title)
         
@@ -118,14 +119,18 @@ final class OneCategoryHorizontalView: UIView {
     }
 }
 
-extension OneCategoryHorizontalView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension OneCategoryHorizontalView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         assets.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: OneCategoryHorizontalCell = collectionView.dequeueReusableCell(for: indexPath)
+       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneCategoryHorizontalCell.identifier, for: indexPath) as! OneCategoryHorizontalCell
         cell.bind(assets[indexPath.row].getAssetThumbnail(.small))
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        TargetSize.small.size
     }
 }

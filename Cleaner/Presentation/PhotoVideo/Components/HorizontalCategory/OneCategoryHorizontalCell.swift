@@ -42,7 +42,9 @@ final class OneCategoryHorizontalCell: UICollectionViewCell, Reusable {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 78),
+            imageView.widthAnchor.constraint(equalToConstant: 78)
         ])
     }
 }

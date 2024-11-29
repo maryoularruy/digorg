@@ -51,7 +51,7 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
     
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: MediaCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.photoImageView.image = getAssetThumbnail(asset: assets[indexPath.item])
+        cell.photoImageView.image = assets[indexPath.item].getAssetThumbnail(.large)
         cell.isChecked = assetsForDeletion.contains(assets[indexPath.item])
 		cell.setupSelectMode(isON: selectMode)
 		cell.addTapGestureRecognizer { [weak self] in
@@ -68,17 +68,7 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
 		return cell
 	}
     
-    private func getAssetThumbnail(asset: PHAsset) -> UIImage {
-        let option = PHImageRequestOptions()
-        var thumbnail = UIImage()
-        option.isSynchronous = true
-        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 133, height: 133), contentMode: .aspectFill, options: option, resultHandler: { (result, info) -> () in
-            thumbnail = result!
-        })
-        return thumbnail
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 133, height: 133)
+        TargetSize.large.size
     }
 }
