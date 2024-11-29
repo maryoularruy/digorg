@@ -60,7 +60,6 @@ final class PhotoVideoTotalView: UIView {
             arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -16),
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
-//            arrowBack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -68,7 +67,6 @@ final class PhotoVideoTotalView: UIView {
             similarPhotosView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
             similarPhotosView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             similarPhotosView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-//            similarPhotosView.heightAnchor.constraint(equalToConstant: 200),
             similarPhotosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }

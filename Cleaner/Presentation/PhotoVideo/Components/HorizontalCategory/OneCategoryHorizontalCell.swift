@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import Reusable
 
-final class OneCategoryHorizontalCell: UICollectionViewCell, Reusable {
+final class OneCategoryHorizontalCell: UICollectionViewCell {
     static var identifier = "OneCategoryHorizontalCell"
     
     lazy var imageView = UIImageView()
@@ -43,8 +42,8 @@ final class OneCategoryHorizontalCell: UICollectionViewCell, Reusable {
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 78),
-            imageView.widthAnchor.constraint(equalToConstant: 78)
+//            imageView.heightAnchor.constraint(equalToConstant: 78),
+//            imageView.widthAnchor.constraint(equalToConstant: 78)
         ])
     }
 }

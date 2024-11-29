@@ -53,9 +53,40 @@ extension PhotoVideoTotalViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+        
+        rootView.similarPhotosView.delegate = self
     }
     
     @objc private func handleSwipeRight() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension PhotoVideoTotalViewController: OneCategoryHorizontalViewDelegate {
+    func tapOnCategory(_ type: OneCategoryHorizontalViewType) {
+        switch type {
+        case .similarPhotos:
+            photoVideoManager.loadSimilarPhotos(live: false) { assetGroups, duplicatesCount in
+                let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
+                vc.modalPresentationStyle = .fullScreen
+                vc.assetGroups = assetGroups
+                vc.duplicatesCount = duplicatesCount
+                DispatchQueue.main.async { [weak self] in
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        case .duplicatePhotos:
+            break
+        case .portraits:
+            break
+        case .allPhotos:
+            break
+        case .duplicateVideos:
+            break
+        case .superSizedVideos:
+            break
+        case .allVideos:
+            break
+        }
     }
 }

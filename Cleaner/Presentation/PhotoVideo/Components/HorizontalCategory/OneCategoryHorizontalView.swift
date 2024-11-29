@@ -9,7 +9,7 @@ import UIKit
 import Photos
 
 protocol OneCategoryHorizontalViewDelegate: AnyObject {
-    func tapOnCategory()
+    func tapOnCategory(_ type: OneCategoryHorizontalViewType)
 }
 
 enum OneCategoryHorizontalViewType {
@@ -47,12 +47,13 @@ final class OneCategoryHorizontalView: UIView {
     lazy var assetsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 78, height: 78)
+        layout.itemSize = TargetSize.small.size
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = -36
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 //        collectionView.backgroundColor = UIColor. // Set background color
+        let nib = UINib(nibName: OneCategoryHorizontalCell.identifier, bundle: nil)
         collectionView.register(OneCategoryHorizontalCell.self, forCellWithReuseIdentifier: OneCategoryHorizontalCell.identifier)
         return collectionView
     }()
@@ -89,7 +90,8 @@ final class OneCategoryHorizontalView: UIView {
         label.bind(text: type.title)
         
         addTapGestureRecognizer { [weak self] in
-            self?.delegate?.tapOnCategory()
+            guard let self else { return }
+            delegate?.tapOnCategory(type)
         }
     }
     
@@ -132,5 +134,9 @@ extension OneCategoryHorizontalView: UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         TargetSize.small.size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 }
