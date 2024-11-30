@@ -48,12 +48,11 @@ final class OneCategoryHorizontalView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = TargetSize.small.size
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = -36
+        layout.minimumLineSpacing = -36
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        collectionView.backgroundColor = UIColor. // Set background color
-        let nib = UINib(nibName: OneCategoryHorizontalCell.identifier, bundle: nil)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(OneCategoryHorizontalCell.self, forCellWithReuseIdentifier: OneCategoryHorizontalCell.identifier)
         return collectionView
     }()
@@ -116,12 +115,18 @@ final class OneCategoryHorizontalView: UIView {
             
             assetsCollectionView.topAnchor.constraint(equalTo: assetsCountLabel.bottomAnchor, constant: 14),
             assetsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            assetsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            assetsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            assetsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            assetsCollectionView.heightAnchor.constraint(equalToConstant: TargetSize.small.size.height)
         ])
     }
 }
 
 extension OneCategoryHorizontalView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         assets.count
     }
@@ -130,13 +135,5 @@ extension OneCategoryHorizontalView: UICollectionViewDataSource, UICollectionVie
        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneCategoryHorizontalCell.identifier, for: indexPath) as! OneCategoryHorizontalCell
         cell.bind(assets[indexPath.row].getAssetThumbnail(.small))
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        TargetSize.small.size
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
     }
 }

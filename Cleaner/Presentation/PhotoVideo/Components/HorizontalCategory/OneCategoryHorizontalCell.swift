@@ -32,6 +32,7 @@ final class OneCategoryHorizontalCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 16
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.lightGrey.cgColor
+        contentView.clipsToBounds = true
     }
     
     private func initConstraints() {
@@ -41,9 +42,7 @@ final class OneCategoryHorizontalCell: UICollectionViewCell {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-//            imageView.heightAnchor.constraint(equalToConstant: 78),
-//            imageView.widthAnchor.constraint(equalToConstant: 78)
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
