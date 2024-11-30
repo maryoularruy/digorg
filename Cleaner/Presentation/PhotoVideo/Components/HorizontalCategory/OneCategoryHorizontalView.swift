@@ -20,8 +20,8 @@ enum OneCategoryHorizontalViewType {
         switch self {
         case .similarPhotos: "Similar Photos"
         case .duplicatePhotos: "Duplicate Photos"
-        case .portraits: ""
-        case .allPhotos: ""
+        case .portraits: "Portraits"
+        case .allPhotos: "All Photos"
         case .duplicateVideos: ""
         case .superSizedVideos: ""
         case .allVideos: ""
@@ -94,6 +94,9 @@ final class OneCategoryHorizontalView: UIView {
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
         addShadows()
+        
+        assetsSizeLabel.setGreyTextColor()
+        assetsCountLabel.setGreyTextColor()
         
         assetsCollectionView.delegate = self
         assetsCollectionView.dataSource = self

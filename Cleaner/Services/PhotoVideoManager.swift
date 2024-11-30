@@ -40,6 +40,18 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
         }
     }
     
+    func fetchAllPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAsset]) -> ()) {
+        let options = PHFetchOptions()
+        options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let fetchResult = PHAsset.fetchAssets(with: options)
+        var photos: [PHAsset] = []
+        fetchResult.enumerateObjects { asset, _, _ in
+            photos.append(asset)
+        }
+        handler(photos)
+    }
+    
     func loadSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ()) {
         isLoadingPhotos = true
         fetchPhotos(from: dateFrom, to: dateTo, live: live) { photoInAlbum in
@@ -189,7 +201,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
 			}
 		}
     
-    func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
+    private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
            let options = PHFetchOptions()
            let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -229,8 +241,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
 
 extension PhotoVideoManager {
     func loadSelfiePhotos(_ handler: @escaping (([PHAsset]) -> ())) {
-        fetchSelfies({
-            photoInAlbum in
+        fetchSelfies { photoInAlbum in
             DispatchQueue.global(qos: .background).async {
                 var images: [PHAsset] = []
                 if photoInAlbum.count == 0 {
@@ -246,7 +257,7 @@ extension PhotoVideoManager {
                     handler(images)
                 }
             }
-        })
+        }
     }
     
     private func fetchSelfies(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
@@ -254,9 +265,9 @@ extension PhotoVideoManager {
         let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumSelfPortraits, options: options)
         options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        albumsPhoto.enumerateObjects({(collection, index, object) in
+        albumsPhoto.enumerateObjects { collection, _, _ in
             handler(PHAsset.fetchAssets(in: collection, options: options))
-        })
+        }
     }
     
     private func fetchGIFs(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {

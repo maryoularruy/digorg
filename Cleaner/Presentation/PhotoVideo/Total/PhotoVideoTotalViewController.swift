@@ -48,6 +48,14 @@ extension PhotoVideoTotalViewController: ViewControllerProtocol {
             rootView.similarPhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
             rootView.duplicatePhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
         }
+        
+        photoVideoManager.loadSelfiePhotos { [weak self] selfies in
+            self?.rootView.portraitsPhotosView.assets = selfies
+        }
+        
+        photoVideoManager.fetchAllPhotos { [weak self] photos in
+            self?.rootView.allPhotosView.assets = photos
+        }
     }
     
     func addGestureRecognizers() {
