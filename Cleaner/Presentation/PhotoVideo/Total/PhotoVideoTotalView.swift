@@ -42,7 +42,7 @@ final class PhotoVideoTotalView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, similarPhotosView])
+        contentView.addSubviews([arrowBack, label, similarPhotosView, duplicatePhotosView])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -67,7 +67,11 @@ final class PhotoVideoTotalView: UIView {
             similarPhotosView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
             similarPhotosView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             similarPhotosView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            similarPhotosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            
+            duplicatePhotosView.topAnchor.constraint(equalTo: similarPhotosView.bottomAnchor, constant: 8),
+            duplicatePhotosView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            duplicatePhotosView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            duplicatePhotosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
 }

@@ -19,7 +19,7 @@ enum OneCategoryHorizontalViewType {
     var title: String {
         switch self {
         case .similarPhotos: "Similar Photos"
-        case .duplicatePhotos: ""
+        case .duplicatePhotos: "Duplicate Photos"
         case .portraits: ""
         case .allPhotos: ""
         case .duplicateVideos: ""

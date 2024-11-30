@@ -42,7 +42,7 @@ extension PremiumViewController: PremiumViewDelegate {
     }
     
     func tapOnRestore() {
-        
+        Store.shared.restorePurchases()
     }
     
     func tapOnPrivacyPolicy() {

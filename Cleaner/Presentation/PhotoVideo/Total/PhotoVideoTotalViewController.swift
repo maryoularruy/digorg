@@ -24,19 +24,11 @@ final class PhotoVideoTotalViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateSimilarPhotos()
-    }
-    
-    private func updateSimilarPhotos() {
-        if photoVideoManager.isLoadingPhotos {
-            setupScanning()
-        } else {
-            rootView.similarPhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
-        }
+        setupUI()
     }
     
     private func setupScanning() {
-        //each subview is not enabled
+        rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
         showProgressBar()
     }
     
@@ -46,7 +38,15 @@ final class PhotoVideoTotalViewController: UIViewController {
 }
 
 extension PhotoVideoTotalViewController: ViewControllerProtocol {
-    func setupUI() {}
+    func setupUI() {
+        if photoVideoManager.isLoadingPhotos {
+            setupScanning()
+        } else {
+            rootView.subviews.forEach { $0.isUserInteractionEnabled = true }
+            rootView.similarPhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
+            rootView.duplicatePhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
+        }
+    }
     
     func addGestureRecognizers() {
         rootView.arrowBack.addTapGestureRecognizer { [weak self] in
@@ -58,6 +58,7 @@ extension PhotoVideoTotalViewController: ViewControllerProtocol {
         view.addGestureRecognizer(swipeRightGesture)
         
         rootView.similarPhotosView.delegate = self
+        rootView.duplicatePhotosView.delegate = self
     }
     
     @objc private func handleSwipeRight() {
