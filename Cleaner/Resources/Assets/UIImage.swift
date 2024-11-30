@@ -132,4 +132,6 @@ extension UIImage {
     
     static var emptyCheckBoxBlue = UIImage(resource: .emptyCheckBoxBlue)
     static var selectedCheckBoxBlue = UIImage(resource: .selectedCheckBoxBlue)
+    
+    static var pro = UIImage(resource: .proView)
 }

@@ -80,6 +80,15 @@ final class OneCategoryHorizontalView: UIView {
         super.init(coder: coder)
     }
     
+    func setLocked() {
+        arrowForwardImageView.image = .pro
+        isUserInteractionEnabled = false
+    }
+    
+    func unlock() {
+        isUserInteractionEnabled = true
+    }
+    
     private func setupView() {
         contentView.backgroundColor = .paleGrey
         contentView.layer.cornerRadius = 20

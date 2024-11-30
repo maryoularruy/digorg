@@ -70,7 +70,7 @@ final class Store: NSObject {
         if SKPaymentQueue.canMakePayments() {
             SKPaymentQueue.default().add(SKPayment(product: product))
         } else {
-            print("User cannot make payments.")
+            print("User cannot make payments")
         }
     }
     
@@ -161,6 +161,7 @@ extension Store: SKPaymentTransactionObserver {
                 break
             case .purchased:
                 print("purchase success")
+                UserDefaultsService.shared.set(true, key: .isSubscriptionActive)
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .failed:
                 SKPaymentQueue.default().finishTransaction(transaction)

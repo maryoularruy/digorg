@@ -37,6 +37,11 @@ final class PhotoVideoTotalView: UIView {
     
     private func setupView() {
         backgroundColor = .paleGrey
+        if !UserDefaultsService.shared.isSubscriptionActive {
+            duplicatePhotosView.setLocked()
+        } else {
+            duplicatePhotosView.unlock()
+        }
     }
     
     private func initConstraints() {
