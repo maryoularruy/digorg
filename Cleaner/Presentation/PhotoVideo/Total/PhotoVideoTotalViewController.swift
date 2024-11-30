@@ -40,6 +40,8 @@ final class PhotoVideoTotalViewController: UIViewController {
 extension PhotoVideoTotalViewController: ViewControllerProtocol {
     func setupUI() {
         if photoVideoManager.isLoadingPhotos {
+            rootView.similarPhotosView.assets = []
+            rootView.duplicatePhotosView.assets = []
             setupScanning()
         } else {
             rootView.subviews.forEach { $0.isUserInteractionEnabled = true }

@@ -57,10 +57,13 @@ final class OneCategoryHorizontalView: UIView {
         return collectionView
     }()
     
+    private lazy var assetsCollectionViewHeight = assetsCollectionView.heightAnchor.constraint(equalToConstant: TargetSize.small.size.height)
+    
     private var type: OneCategoryHorizontalViewType
     lazy var assets: [PHAsset] = [] {
         didSet {
             assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
+            assetsCollectionViewHeight.constant = assets.isEmpty ? 0 : TargetSize.small.size.height
             assetsCollectionView.reloadData()
         }
     }
@@ -117,7 +120,7 @@ final class OneCategoryHorizontalView: UIView {
             assetsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             assetsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             assetsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            assetsCollectionView.heightAnchor.constraint(equalToConstant: TargetSize.small.size.height)
+            assetsCollectionViewHeight
         ])
     }
 }
