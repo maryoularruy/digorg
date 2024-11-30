@@ -18,8 +18,11 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
     static var defaultStartDate = "01 Jan 1970 00:00:00"
     static var defaultEndDate = "01 Jan 2030 00:00:00"
     
-    var isLoadingPhotos: Bool?
-    var isLoadingVideos: Bool?
+    private(set) var isLoadingPhotos: Bool = false
+    private(set) var isLoadingVideos: Bool = false
+    
+    private(set) var similarPhotos: [PHAssetGroup] = []
+    private(set) var similarPhotosCount: Int = 0
     
     func checkStatus(handler: @escaping (PHAuthorizationStatus) -> ()) {
         let status = if #available(iOS 14, *) {
@@ -103,7 +106,9 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                         }
                         similarPhotoGroups.removeAll { group in group.assets.isEmpty }
                         let duplicatesCount = similarPhotoGroups.reduce(0) { $0 + $1.assets.count }
+                        self?.similarPhotos = similarPhotoGroups
                         self?.isLoadingPhotos = false
+                        self?.similarPhotosCount = duplicatesCount
                         handler(similarPhotoGroups, duplicatesCount)
                     }
                 }
@@ -201,6 +206,12 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
               handler(PHAsset.fetchAssets(in: collection, options: options))
           }
       }
+    
+    func join(_ groups: [PHAssetGroup]) -> [PHAsset] {
+        var assets: [PHAsset] = []
+        groups.forEach { assets.append(contentsOf: $0.assets) }
+        return assets
+    }
     
     private func requestPhotoLibraryAutorization(handler: @escaping (PHAuthorizationStatus) -> ()) {
         if #available(iOS 14, *) {

@@ -191,7 +191,6 @@ extension MainViewController: ViewControllerProtocol {
             let vc = PhotoVideoTotalViewController()
             vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
-//            navigationController?.pushViewController(createSearchVC(with: .photos), animated: true)
         }
     }
     

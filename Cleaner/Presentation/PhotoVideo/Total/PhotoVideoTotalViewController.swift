@@ -24,21 +24,24 @@ final class PhotoVideoTotalViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updatePhotosCleanupOption()
+        updateSimilarPhotos()
     }
     
-    private func updatePhotosCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.photoVideoManager.loadSimilarPhotos(live: false) { assetGroups, duplicatesCount in
-                var assets: [PHAsset] = []
-                assetGroups.forEach { group in
-                    assets.append(contentsOf: group.assets)
-                }
-                DispatchQueue.main.async {
-                    self?.rootView.similarPhotosView.assets = assets
-                }
-            }
+    private func updateSimilarPhotos() {
+        if photoVideoManager.isLoadingPhotos {
+            setupScanning()
+        } else {
+            rootView.similarPhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
         }
+    }
+    
+    private func setupScanning() {
+        //each subview is not enabled
+        showProgressBar()
+    }
+    
+    private func showProgressBar() {
+        
     }
 }
 
@@ -64,29 +67,26 @@ extension PhotoVideoTotalViewController: ViewControllerProtocol {
 
 extension PhotoVideoTotalViewController: OneCategoryHorizontalViewDelegate {
     func tapOnCategory(_ type: OneCategoryHorizontalViewType) {
-        switch type {
+        let vc: UIViewController? = switch type {
         case .similarPhotos:
-            photoVideoManager.loadSimilarPhotos(live: false) { assetGroups, duplicatesCount in
-                let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
-                vc.modalPresentationStyle = .fullScreen
-                vc.assetGroups = assetGroups
-                vc.duplicatesCount = duplicatesCount
-                DispatchQueue.main.async { [weak self] in
-                    self?.navigationController?.pushViewController(vc, animated: true)
-                }
-            }
+            StoryboardScene.GroupedAssets.initialScene.instantiate()
         case .duplicatePhotos:
-            break
+            StoryboardScene.GroupedAssets.initialScene.instantiate()
         case .portraits:
-            break
+            StoryboardScene.GroupedAssets.initialScene.instantiate()
         case .allPhotos:
-            break
+            StoryboardScene.GroupedAssets.initialScene.instantiate()
         case .duplicateVideos:
-            break
-        case .superSizedVideos:
-            break
-        case .allVideos:
-            break
+            StoryboardScene.GroupedAssets.initialScene.instantiate()
+        case .superSizedVideos: nil
+        case .allVideos: nil
+        }
+        
+        if let vc {
+            vc.modalPresentationStyle = .fullScreen
+            DispatchQueue.main.async { [weak self] in
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
 }
