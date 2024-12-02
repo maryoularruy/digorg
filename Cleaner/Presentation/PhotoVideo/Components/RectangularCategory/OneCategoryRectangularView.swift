@@ -27,37 +27,12 @@ final class OneCategoryRectangularView: UIView {
     static var size = CGSize(width: 168, height: 153)
     weak var delegate: OneCategoryRectangularViewDelegate?
     
-    private lazy var contentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .blue
-        return view
-    }()
-    
-    private lazy var backgroundImageView = UIImageView(image: .liveViewBackground)
-    
-    private lazy var label: Semibold15LabelStyle = {
-        let label = Semibold15LabelStyle()
-        label.textColor = .paleGrey
-        return label
-    }()
-    
-    private lazy var assetsSizeLabel: Regular15LabelStyle = {
-        let label = Regular15LabelStyle()
-        label.textColor = .lightGrey
-        return label
-    }()
-    
-    private lazy var assetsCountLabel: Regular15LabelStyle = {
-        let label = Regular15LabelStyle()
-        label.textColor = .lightGrey
-        return label
-    }()
-    
-    private lazy var arrowForwardImageView: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
-        imageView.image = .arrowForwardWhite
-        return imageView
-    }()
+    private lazy var contentView: UIView = UIView()
+    private lazy var backgroundImageView = UIImageView()
+    private lazy var label: Semibold15LabelStyle = Semibold15LabelStyle()
+    private lazy var assetsSizeLabel: Regular15LabelStyle = Regular15LabelStyle()
+    private lazy var assetsCountLabel: Regular15LabelStyle = Regular15LabelStyle()
+    private lazy var arrowForwardImageView: UIImageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
     
     private var type: OneCategoryRectangularViewType
     lazy var assets: [PHAsset] = [] {
@@ -83,7 +58,25 @@ final class OneCategoryRectangularView: UIView {
         contentView.clipsToBounds = true
         addShadows()
         
-        label.bind(text: type.title)
+        switch type {
+        case .live:
+            label.textColor = .paleGrey
+            label.bind(text: type.title)
+            assetsSizeLabel.textColor = .lightGrey
+            assetsCountLabel.textColor = .lightGrey
+            contentView.backgroundColor = .blue
+            arrowForwardImageView.image = .arrowForwardWhite
+            backgroundImageView.image = .liveViewBackground
+            
+        case .blurry:
+            label.textColor = .black
+            label.bind(text: type.title)
+            assetsSizeLabel.textColor = .darkGrey
+            assetsCountLabel.textColor = .darkGrey
+            contentView.backgroundColor = .paleGrey
+            arrowForwardImageView.image = .arrowForwardBlue
+            backgroundImageView.image = .blurryViewBackground
+        }
         
         addTapGestureRecognizer { [weak self] in
             guard let self else { return }

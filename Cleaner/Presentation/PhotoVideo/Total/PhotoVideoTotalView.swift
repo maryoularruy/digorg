@@ -21,6 +21,7 @@ final class PhotoVideoTotalView: UIView {
     lazy var similarPhotosView = OneCategoryHorizontalView(.similarPhotos)
     lazy var duplicatePhotosView = OneCategoryHorizontalView(.duplicatePhotos)
     lazy var livePhotosView = OneCategoryRectangularView(.live)
+    lazy var blurryPhotosView = OneCategoryRectangularView(.blurry)
     lazy var portraitsPhotosView = OneCategoryHorizontalView(.portraits)
     lazy var allPhotosView = OneCategoryHorizontalView(.allPhotos)
     
@@ -48,7 +49,7 @@ final class PhotoVideoTotalView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, similarPhotosView, duplicatePhotosView, livePhotosView, portraitsPhotosView, allPhotosView])
+        contentView.addSubviews([arrowBack, label, similarPhotosView, duplicatePhotosView, livePhotosView, blurryPhotosView, portraitsPhotosView, allPhotosView])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -83,7 +84,12 @@ final class PhotoVideoTotalView: UIView {
             livePhotosView.heightAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.height),
             livePhotosView.widthAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.width),
             
-            portraitsPhotosView.topAnchor.constraint(equalTo: livePhotosView.bottomAnchor, constant: 16),
+            blurryPhotosView.topAnchor.constraint(equalTo: livePhotosView.bottomAnchor, constant: 8),
+            blurryPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            blurryPhotosView.heightAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.height),
+            blurryPhotosView.widthAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.width),
+            
+            portraitsPhotosView.topAnchor.constraint(equalTo: blurryPhotosView.bottomAnchor, constant: 16),
             portraitsPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             portraitsPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
