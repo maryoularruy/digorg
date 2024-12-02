@@ -28,7 +28,7 @@ final class SearchViewController: UIViewController {
 		switch cleanupOption.mode {
 			case .duplicatePhotos:
 				titleLabel.text = "Duplicate photos"
-				mediaService.loadSimilarPhotos(live: false) { assetGroups, duplicatesCount in
+				mediaService.fetchSimilarPhotos(live: false) { assetGroups, duplicatesCount in
 					let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
 					vc.modalPresentationStyle = .fullScreen
 					vc.assetGroups = assetGroups
@@ -52,23 +52,11 @@ final class SearchViewController: UIViewController {
 				}
 			case .selfies:
 				titleLabel.text = "Selfies"
-				mediaService.loadSelfiePhotos { assets in
+				mediaService.fetchSelfiePhotos { assets in
 					let vc = StoryboardScene.RegularAssets.initialScene.instantiate()
 					vc.modalPresentationStyle = .fullScreen
 					vc.assets = assets
 					vc.type = .selfie
-					DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-						self.navigationController?.pushViewController(vc, animated: true)
-						self.timer.invalidate()
-					}
-				}
-			case .gif:
-				titleLabel.text = "Gif"
-				mediaService.loadGifPhotos { assets in
-					let vc = StoryboardScene.RegularAssets.initialScene.instantiate()
-					vc.modalPresentationStyle = .fullScreen
-					vc.assets = assets
-					vc.type = .gif
 					DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 						self.navigationController?.pushViewController(vc, animated: true)
 						self.timer.invalidate()
@@ -88,7 +76,7 @@ final class SearchViewController: UIViewController {
 				}
 			case .duplicateVideos:
 				titleLabel.text = "Duplicate videos"
-				mediaService.loadSimilarVideos { assets, duplicatesCount in
+				mediaService.fetchSimilarVideos { assets, duplicatesCount in
 					let vc = StoryboardScene.GroupedAssets.initialScene.instantiate()
 					vc.modalPresentationStyle = .fullScreen
 					vc.assetGroups = assets
@@ -114,6 +102,7 @@ final class SearchViewController: UIViewController {
         case .some(.duplicateContacts): break
         case .some(.imcompleteContacts): break
         case .none: break
+        case .some(.gif): break
         }
     }
 	

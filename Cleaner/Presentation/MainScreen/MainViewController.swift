@@ -87,7 +87,7 @@ final class MainViewController: UIViewController {
     
     private func updatePhotosCleanupOption() {
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.photoVideoManager.loadSimilarPhotos(live: false) { _, duplicatesCount in
+            self?.photoVideoManager.fetchSimilarPhotos(live: false) { _, duplicatesCount in
                 DispatchQueue.main.async {
                     self?.photosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
                 }
@@ -97,7 +97,7 @@ final class MainViewController: UIViewController {
     
     private func updateVideosCleanupOption() {
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.photoVideoManager.loadSimilarVideos { _, duplicatesCount in
+            self?.photoVideoManager.fetchSimilarVideos { _, duplicatesCount in
                 DispatchQueue.main.async {
                     self?.videosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
                 }

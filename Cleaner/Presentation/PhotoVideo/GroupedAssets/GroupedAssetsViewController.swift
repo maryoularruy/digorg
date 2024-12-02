@@ -183,11 +183,11 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
     
     @objc func refreshSimilarItems() {
         if assetGroups.first?.subtype == .smartAlbumVideos {
-            PhotoVideoManager.shared.loadSimilarVideos { [weak self] assetGroups, duplicatesCount in
+            PhotoVideoManager.shared.fetchSimilarVideos { [weak self] assetGroups, duplicatesCount in
                 self?.refreshUI(assetGroups: assetGroups, duplicatesCount: duplicatesCount)
             }
         } else {
-            PhotoVideoManager.shared.loadSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
+            PhotoVideoManager.shared.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
                 self?.refreshUI(assetGroups: assetGroups, duplicatesCount: duplicatesCount)
             }
         }

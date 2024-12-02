@@ -9,8 +9,8 @@ import Photos
 import Vision
 
 protocol PhotoVideoManagerProtocol {
-    func loadSimilarPhotos(from dateFrom: String, to dateTo: String, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ())
-    func loadSimilarVideos(from dateFrom: String, to dateTo: String, handler: @escaping ([PHAssetGroup], Int) -> ())
+    func fetchSimilarPhotos(from dateFrom: String, to dateTo: String, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ())
+    func fetchSimilarVideos(from dateFrom: String, to dateTo: String, handler: @escaping ([PHAssetGroup], Int) -> ())
 }
 
 final class PhotoVideoManager: PhotoVideoManagerProtocol {
@@ -52,7 +52,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
         handler(photos)
     }
     
-    func loadSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ()) {
+    func fetchSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ()) {
         isLoadingPhotos = true
         fetchPhotos(from: dateFrom, to: dateTo, live: live) { photoInAlbum in
             DispatchQueue.global(qos: .userInitiated).async {
@@ -128,7 +128,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
         }
 
 
-	func loadSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAssetGroup], Int) -> ()) {
+	func fetchSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAssetGroup], Int) -> ()) {
         isLoadingVideos = true
 			fetchVideos(from: dateFrom, to: dateTo) { videosInAlbum in
 				DispatchQueue.global(qos: .background).async {
@@ -201,46 +201,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
 			}
 		}
     
-    private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
-           let options = PHFetchOptions()
-           let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
-           options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-           albumsPhoto.enumerateObjects { collection, index, object in
-               handler(PHAsset.fetchAssets(in: collection, options: options))
-           }
-       }
-    
-    private func fetchVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
-          let options = PHFetchOptions()
-          let albumVideos: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: options)
-          options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-          albumVideos.enumerateObjects{ collection, index, object in
-              handler(PHAsset.fetchAssets(in: collection, options: options))
-          }
-      }
-    
-    func join(_ groups: [PHAssetGroup]) -> [PHAsset] {
-        var assets: [PHAsset] = []
-        groups.forEach { assets.append(contentsOf: $0.assets) }
-        return assets
-    }
-    
-    private func requestPhotoLibraryAutorization(handler: @escaping (PHAuthorizationStatus) -> ()) {
-        if #available(iOS 14, *) {
-            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
-                handler(status)
-            }
-            
-        } else {
-            PHPhotoLibrary.requestAuthorization { status in
-                handler(status)
-            }
-        }
-    }
-}
-
-extension PhotoVideoManager {
-    func loadSelfiePhotos(_ handler: @escaping (([PHAsset]) -> ())) {
+    func fetchSelfiePhotos(_ handler: @escaping (([PHAsset]) -> ())) {
         fetchSelfies { photoInAlbum in
             DispatchQueue.global(qos: .background).async {
                 var images: [PHAsset] = []
@@ -260,6 +221,30 @@ extension PhotoVideoManager {
         }
     }
     
+    func join(_ groups: [PHAssetGroup]) -> [PHAsset] {
+        var assets: [PHAsset] = []
+        groups.forEach { assets.append(contentsOf: $0.assets) }
+        return assets
+    }
+    
+    private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
+           let options = PHFetchOptions()
+           let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
+           options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+           albumsPhoto.enumerateObjects { collection, index, object in
+               handler(PHAsset.fetchAssets(in: collection, options: options))
+           }
+       }
+    
+    private func fetchVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
+          let options = PHFetchOptions()
+          let albumVideos: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: options)
+          options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+          albumVideos.enumerateObjects{ collection, index, object in
+              handler(PHAsset.fetchAssets(in: collection, options: options))
+          }
+      }
+    
     private func fetchSelfies(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
         let options = PHFetchOptions()
         let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumSelfPortraits, options: options)
@@ -270,38 +255,22 @@ extension PhotoVideoManager {
         }
     }
     
-    private func fetchGIFs(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
-        let options = PHFetchOptions()
-        let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumAnimated, options: options)
-        options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        albumsPhoto.enumerateObjects({(collection, index, object) in
-            handler(PHAsset.fetchAssets(in: collection, options: options))
-        })
-    }
-    
-    func loadGifPhotos(_ handler: @escaping ([PHAsset]) -> ()) {
-        fetchGIFs({
-            photoInAlbum in
-            DispatchQueue.global(qos: .background).async {
-                var images: [PHAsset] = []
-                if photoInAlbum.count == 0 {
-                    DispatchQueue.main.async {
-                        handler([])
-                    }
-                    return
-                }
-                for i in 1...photoInAlbum.count {
-                    images.append(photoInAlbum[i - 1])
-                }
-                DispatchQueue.main.async {
-                    handler(images)
-                }
+    private func requestPhotoLibraryAutorization(handler: @escaping (PHAuthorizationStatus) -> ()) {
+        if #available(iOS 14, *) {
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                handler(status)
             }
-        })
+            
+        } else {
+            PHPhotoLibrary.requestAuthorization { status in
+                handler(status)
+            }
+        }
     }
-    
-    func loadLivePhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate,_ handler: @escaping ([PHAsset]) -> ()) {
+}
+
+extension PhotoVideoManager {
+    func loadLivePhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
            fetchPhotos(from: dateFrom, to: dateTo, live: true) { photoInAlbum in
                DispatchQueue.global(qos: .background).async {
                    var images: [PHAsset] = []

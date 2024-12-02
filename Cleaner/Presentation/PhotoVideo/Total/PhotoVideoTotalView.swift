@@ -50,8 +50,6 @@ final class PhotoVideoTotalView: UIView {
         scroll.addSubviews([contentView])
         contentView.addSubviews([arrowBack, label, similarPhotosView, duplicatePhotosView, livePhotosView, portraitsPhotosView, allPhotosView])
         
-        contentView.backgroundColor = .green
-        
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scroll.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
