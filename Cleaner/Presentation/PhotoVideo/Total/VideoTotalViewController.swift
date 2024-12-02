@@ -29,7 +29,18 @@ final class VideoTotalViewController: UIViewController {
 
 extension VideoTotalViewController: ViewControllerProtocol {
     func setupUI() {
+        photoVideoManager.fetchSimilarVideos { [weak self] assetGroups, duplicatesCount in
+            guard let self else { return }
+            rootView.duplicateVideosView.assets = photoVideoManager.join(assetGroups)
+        }
         
+        photoVideoManager.fetchSuperSizedVideos { [weak self] videos in
+            self?.rootView.superSizedVideosView.assets = videos
+        }
+        
+        photoVideoManager.fetchAllVideos { [weak self] videos in
+            self?.rootView.allVideosView.assets = videos
+        }
     }
     
     func addGestureRecognizers() {
