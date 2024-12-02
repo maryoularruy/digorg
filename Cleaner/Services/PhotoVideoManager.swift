@@ -201,6 +201,26 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
 			}
 		}
     
+    func fetchLivePhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
+           fetchPhotos(from: dateFrom, to: dateTo, live: true) { photoInAlbum in
+               DispatchQueue.global(qos: .background).async {
+                   var images: [PHAsset] = []
+                   if photoInAlbum.count == 0 {
+                       DispatchQueue.main.async {
+                           handler([])
+                       }
+                       return
+                   }
+                   for i in 1...photoInAlbum.count{
+                       images.append(photoInAlbum[i - 1])
+                   }
+                   DispatchQueue.main.async {
+                       handler(images)
+                   }
+               }
+           }
+       }
+    
     func fetchSelfiePhotos(_ handler: @escaping (([PHAsset]) -> ())) {
         fetchSelfies { photoInAlbum in
             DispatchQueue.global(qos: .background).async {
@@ -218,6 +238,33 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                     handler(images)
                 }
             }
+        }
+    }
+    
+    func fetchBlurryPhotos(_ handler: @escaping (([PHAsset]) -> ())) {
+        fetchAllPhotos { assets in
+            let options = PHImageRequestOptions()
+            options.deliveryMode = .highQualityFormat
+            options.isSynchronous = true
+            
+            var blurryPhotos: [PHAsset] = []
+            
+            assets.forEach { asset in
+                PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFit, options: options) { image, _ in
+                    guard let image = image, let cgImage = image.cgImage else { return }
+                    
+                    _ = VNGenerateImageFeaturePrintRequest { request, error in
+                        guard error == nil else { return }
+                        
+                        if request.results is [VNFeaturePrintObservation] {
+                            if self.calculateSharpness(cgImage: cgImage) < 100 {
+                                blurryPhotos.append(asset)
+                            }
+                        }
+                    }
+                }
+            }
+            handler(blurryPhotos)
         }
     }
     
@@ -270,25 +317,26 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
 }
 
 extension PhotoVideoManager {
-    func loadLivePhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
-           fetchPhotos(from: dateFrom, to: dateTo, live: true) { photoInAlbum in
-               DispatchQueue.global(qos: .background).async {
-                   var images: [PHAsset] = []
-                   if photoInAlbum.count == 0 {
-                       DispatchQueue.main.async {
-                           handler([])
-                       }
-                       return
-                   }
-                   for i in 1...photoInAlbum.count{
-                       images.append(photoInAlbum[i - 1])
-                   }
-                   DispatchQueue.main.async {
-                       handler(images)
-                   }
-               }
-           }
-       }
+    private func calculateSharpness(cgImage: CGImage) -> Float {
+        let ciImage = CIImage(cgImage: cgImage)
+        let filter = CIFilter(name: "CILaplacian")!
+        let width = 8
+        let height = 8
+        filter.setValue(ciImage, forKey: kCIInputImageKey)
+        
+        let context = CIContext()
+        guard let outputImage = filter.outputImage,
+              let _ = context.createCGImage(outputImage, from: outputImage.extent) else { return 0 }
+        
+        let pixelData = [UInt8](repeating: 0, count: width * height)
+        return calculateVariance(of: pixelData)
+    }
+    
+    private func calculateVariance(of pixelData: [UInt8]) -> Float {
+        let mean = Float(pixelData.reduce(0, +)) / Float(pixelData.count)
+        let variance = Float(pixelData.reduce(0) { $0 + Int(pow(Float($1) - mean, 2)) }) / Float(pixelData.count)
+        return variance
+    }
 
     func loadVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
         fetchVideos(from: dateFrom, to: dateTo) { videoInAlbum in

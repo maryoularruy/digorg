@@ -57,8 +57,12 @@ extension PhotoVideoTotalViewController: ViewControllerProtocol {
             self?.rootView.allPhotosView.assets = photos
         }
         
-        photoVideoManager.loadLivePhotos { [weak self] livePhotos in
+        photoVideoManager.fetchLivePhotos { [weak self] livePhotos in
             self?.rootView.livePhotosView.assets = livePhotos
+        }
+        
+        photoVideoManager.fetchBlurryPhotos { [weak self] blurries in
+            self?.rootView.blurryPhotosView.assets = blurries
         }
     }
     

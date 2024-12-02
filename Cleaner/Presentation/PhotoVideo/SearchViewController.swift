@@ -40,7 +40,7 @@ final class SearchViewController: UIViewController {
 				}
 			case .live:
 				titleLabel.text = "Live photos"
-				mediaService.loadLivePhotos { assets in
+				mediaService.fetchLivePhotos { assets in
 					let vc = StoryboardScene.RegularAssets.initialScene.instantiate()
 					vc.modalPresentationStyle = .fullScreen
 					vc.assets = assets
