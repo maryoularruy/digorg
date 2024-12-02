@@ -7,7 +7,6 @@
 
 import PhotosUI
 import BottomPopup
-import RealmSwift
 
 final class SecretAlbumViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
@@ -220,10 +219,8 @@ extension SecretAlbumViewController: UIImagePickerControllerDelegate, UINavigati
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
             print("Selected image: \(selectedImage)")
-            // Do something with the image (e.g., display it in an image view)
         } else if let selectedVideoURL = info[.mediaURL] as? URL {
             print("Selected video URL: \(selectedVideoURL)")
-            // Handle the video URL
         }
         
         picker.dismiss(animated: true)
@@ -237,7 +234,7 @@ extension SecretAlbumViewController: UIImagePickerControllerDelegate, UINavigati
         picker.sourceType = .photoLibrary
         picker.mediaTypes = ["public.image"]
 //        picker.mediaTypes = ["public.image", "public.movie"]
-        picker.allowsEditing = true // Set to false if you don't want editing
+        picker.allowsEditing = true
         present(picker, animated: true, completion: nil)
     }
 }
