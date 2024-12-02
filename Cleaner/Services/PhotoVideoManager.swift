@@ -24,6 +24,9 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
     private(set) var similarPhotos: [PHAssetGroup] = []
     private(set) var similarPhotosCount: Int = 0
     
+    private(set) var similarVideos: [PHAssetGroup] = []
+    private(set) var similarVideosCount: Int = 0
+    
     func checkStatus(handler: @escaping (PHAuthorizationStatus) -> ()) {
         let status = if #available(iOS 14, *) {
             PHPhotoLibrary.authorizationStatus(for: .readWrite)
@@ -50,6 +53,18 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
             photos.append(asset)
         }
         handler(photos)
+    }
+    
+    func fetchAllVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAsset]) -> ()) {
+        let options = PHFetchOptions()
+        options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.video.rawValue)
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let fetchResult = PHAsset.fetchAssets(with: options)
+        var videos: [PHAsset] = []
+        fetchResult.enumerateObjects { asset, _, _ in
+            videos.append(asset)
+        }
+        handler(videos)
     }
     
     func fetchSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ()) {
@@ -194,12 +209,39 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                         }
                         similarVideoGroups.removeAll { group in group.assets.isEmpty }
                         let duplicatesCount = similarVideoGroups.reduce(0) { $0 + $1.assets.count }
+                        self?.similarVideos = similarVideoGroups
+                        self?.similarVideosCount = duplicatesCount
                         self?.isLoadingVideos = false
                         handler(similarVideoGroups, duplicatesCount)
 					}
 				}
 			}
 		}
+    
+    func fetchSuperSizedVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAsset]) -> ()) {
+        fetchVideos(from: dateFrom, to: dateTo) { videos in
+            DispatchQueue.global(qos: .background).async {
+                var superSizedVideos: [PHAsset] = []
+                if videos.count == 0 {
+                    DispatchQueue.main.async {
+                        handler([])
+                    }
+                    return
+                }
+                
+                let superSized = 500000000
+                for i in 1...videos.count {
+                    if videos[i - 1].imageSize >= superSized {
+                        superSizedVideos.append(videos[i - 1])
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    handler(superSizedVideos)
+                }
+            }
+        }
+    }
     
     func fetchLivePhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
            fetchPhotos(from: dateFrom, to: dateTo, live: true) { photoInAlbum in
@@ -278,7 +320,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
            let options = PHFetchOptions()
            let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
            options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-           albumsPhoto.enumerateObjects { collection, index, object in
+           albumsPhoto.enumerateObjects { collection, _, _ in
                handler(PHAsset.fetchAssets(in: collection, options: options))
            }
        }
@@ -287,7 +329,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
           let options = PHFetchOptions()
           let albumVideos: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: options)
           options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-          albumVideos.enumerateObjects{ collection, index, object in
+          albumVideos.enumerateObjects { collection, _, _ in
               handler(PHAsset.fetchAssets(in: collection, options: options))
           }
       }
@@ -338,26 +380,6 @@ extension PhotoVideoManager {
         return variance
     }
 
-    func loadVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
-        fetchVideos(from: dateFrom, to: dateTo) { videoInAlbum in
-            DispatchQueue.global(qos: .background).async {
-                var images: [PHAsset] = []
-                if videoInAlbum.count == 0 {
-                    DispatchQueue.main.async {
-                        handler([])
-                    }
-                    return
-                }
-                for i in 1...videoInAlbum.count {
-                    images.append(videoInAlbum[i - 1])
-                }
-                DispatchQueue.main.async {
-                    handler(images)
-                }
-            }
-        }
-    }
-    
     func loadScreenshotPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
         fetchScreenshots { photoInAlbum in
             DispatchQueue.global(qos: .background).async{

@@ -54,6 +54,9 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             let joinedAssets = photoVideoManager.join(assetGroups)
             rootView.similarPhotosView.assets = joinedAssets
             rootView.duplicatePhotosView.assets = joinedAssets
+            
+            rootView.similarPhotosView.delegate = self
+            rootView.duplicatePhotosView.delegate = self
         }
         
         photoVideoManager.fetchSelfiePhotos { [weak self] selfies in
@@ -85,9 +88,6 @@ extension PhotoTotalViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
-        
-        rootView.similarPhotosView.delegate = self
-        rootView.duplicatePhotosView.delegate = self
     }
     
     @objc private func handleSwipeRight() {
@@ -114,6 +114,9 @@ extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate {
         
         if let vc {
             vc.modalPresentationStyle = .fullScreen
+            if vc is GroupedAssetsViewController {
+                (vc as! GroupedAssetsViewController).type = .similarPhotos
+            }
             DispatchQueue.main.async { [weak self] in
                 self?.navigationController?.pushViewController(vc, animated: true)
             }

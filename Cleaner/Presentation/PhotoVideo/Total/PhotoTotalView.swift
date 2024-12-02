@@ -102,7 +102,7 @@ final class PhotoTotalView: UIView {
             allPhotosView.topAnchor.constraint(equalTo: portraitsPhotosView.bottomAnchor, constant: 8),
             allPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             allPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            allPhotosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            allPhotosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }

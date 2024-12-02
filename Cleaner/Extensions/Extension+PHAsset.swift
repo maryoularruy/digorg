@@ -55,7 +55,6 @@ extension PHAsset {
 		}
 	}
 	
-	/// To get size image on disk from PHAssets
 	var imageSize : Int64 {
 		let resources = PHAssetResource.assetResources(for: self)
 		var sizeOnDisk: Int64 = 0

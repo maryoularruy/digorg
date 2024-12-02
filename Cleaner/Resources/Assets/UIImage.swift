@@ -128,6 +128,7 @@ extension UIImage {
     static var arrowBackIcon = UIImage(resource: .arrowBackIcon)
     static var arrowForwardWhite = UIImage(resource: .arrowForwardWhite)
     static var arrowForwardBlue = UIImage(resource: .arrowForwardBlue)
+    static var arrowForwardGrey = UIImage(resource: .arrowForwardGrey)
     
     //MARK: -CommonComponents
     static var emptyCheckBoxWhite = UIImage(resource: .emptyCheckBoxWhite)

@@ -22,9 +22,9 @@ enum OneCategoryHorizontalViewType {
         case .duplicatePhotos: "Duplicate Photos"
         case .portraits: "Portraits"
         case .allPhotos: "All Photos"
-        case .duplicateVideos: ""
-        case .superSizedVideos: ""
-        case .allVideos: ""
+        case .duplicateVideos: "Duplicate Videos"
+        case .superSizedVideos: "Super-sized Video"
+        case .allVideos: "All Videos"
         }
     }
 }
@@ -37,7 +37,12 @@ final class OneCategoryHorizontalView: UIView {
     
     private lazy var arrowForwardImageView: UIImageView = {
         let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
-        imageView.image = .arrowForwardBlue
+        
+        imageView.image = if type == .duplicateVideos || type == .superSizedVideos || type == .allVideos {
+            .arrowForwardGrey
+        } else {
+            .arrowForwardBlue
+        }
         return imageView
     }()
     
