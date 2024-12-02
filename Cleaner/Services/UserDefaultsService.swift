@@ -13,6 +13,7 @@ enum UserDefaultsKey: String {
     case secretAlbumFolder = "DEFAULT_SECRET_ALBUM_FOLDER"
     case secretContactsFolder = "DEFAULT_SECRET_CONTACTS_FOLDER"
     case secretContactsFile = "DEFAULT_SECRET_CONTACTS_FILE"
+    case isSubscriptionActive = "SUBSCRIPTION_STATUS"
 }
 
 final class UserDefaultsService {
@@ -24,6 +25,10 @@ final class UserDefaultsService {
     
     var isPasscodeConfirmed: Bool {
         self.get(Bool.self, key: .secretPasscodeConfirmed) == true
+    }
+    
+    var isSubscriptionActive: Bool {
+        self.get(Bool.self, key: .isSubscriptionActive) == true
     }
     
     func get<T>(_ value: T.Type, key: UserDefaultsKey) -> T? {

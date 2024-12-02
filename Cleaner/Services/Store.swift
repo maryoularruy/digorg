@@ -70,8 +70,86 @@ final class Store: NSObject {
         if SKPaymentQueue.canMakePayments() {
             SKPaymentQueue.default().add(SKPayment(product: product))
         } else {
-            print("User cannot make payments.")
+            print("User cannot make payments")
         }
+    }
+    
+    func restorePurchases() {
+        SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+    
+    func checkUserSubscription() {
+        guard let receiptData = getAppReceipt() else { return }
+        let receiptString = receiptData.base64EncodedString()
+        
+        validateReceipt(receiptData: receiptString, isSandbox: false) { [weak self] res in
+            guard let res else { return }
+            self?.parseReceipt(res)
+        }
+    }
+    
+    private func parseReceipt(_ receipt: [String: Any]) {
+        if let latestReceiptInfo = receipt["latest_receipt_info"] as? [[String: Any]] {
+            for transaction in latestReceiptInfo {
+                if let productId = transaction["product_id"] as? String,
+                   let expiresDateStr = transaction["expires_date"] as? String,
+                   let expiresDate = parseDate(expiresDateStr) {
+                    let isActive = isSubscriptionActive(expiresDate: expiresDate)
+                }
+            }
+        }
+    }
+
+    private func parseDate(_ dateStr: String) -> Date? {
+        // For example, "2023-11-25 10:00:00 Etc/GMT"
+        nil
+    }
+    
+    private func isSubscriptionActive(expiresDate: Date) -> Bool {
+        Date() < expiresDate
+    }
+    
+    private func validateReceipt(receiptData: String, isSandbox: Bool = false, completion: @escaping ([String: Any]?) -> Void) {
+        let urlString = isSandbox ? "https://sandbox.itunes.apple.com/verifyReceipt" : "https://buy.itunes.apple.com/verifyReceipt"
+        guard let url = URL(string: urlString) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let requestData: [String: Any] = [
+            "receipt-data": receiptData,
+            "password": "<your-shared-secret>",
+            "exclude-old-transactions": true
+        ]
+        
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: requestData, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data,
+                  let receiptInfo = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                completion(nil)
+                return
+            }
+            completion(receiptInfo)
+        }
+        task.resume()
+    }
+    
+    private func getAppReceipt() -> Data? {
+        if let appReceiptURL = Bundle.main.appStoreReceiptURL,
+           let receiptData = try? Data(contentsOf: appReceiptURL) {
+            return receiptData
+        } else {
+            refreshReceipt()
+            return nil
+        }
+    }
+    
+    private func refreshReceipt() {
+        let request = SKReceiptRefreshRequest()
+        request.delegate = self
+        request.start()
     }
 }
 
@@ -83,6 +161,7 @@ extension Store: SKPaymentTransactionObserver {
                 break
             case .purchased:
                 print("purchase success")
+                UserDefaultsService.shared.set(true, key: .isSubscriptionActive)
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .failed:
                 SKPaymentQueue.default().finishTransaction(transaction)
@@ -105,4 +184,6 @@ extension Store: SKProductsRequestDelegate {
     func request(_ request: SKRequest, didFailWithError error: any Error) {
         print(error.localizedDescription)
     }
+    
+    func requestDidFinish(_ request: SKRequest) {}
 }

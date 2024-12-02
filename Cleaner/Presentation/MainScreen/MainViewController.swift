@@ -87,7 +87,7 @@ final class MainViewController: UIViewController {
     
     private func updatePhotosCleanupOption() {
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.photoVideoManager.loadSimilarPhotos(live: false) { _, duplicatesCount in
+            self?.photoVideoManager.fetchSimilarPhotos(live: false) { _, duplicatesCount in
                 DispatchQueue.main.async {
                     self?.photosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
                 }
@@ -97,7 +97,7 @@ final class MainViewController: UIViewController {
     
     private func updateVideosCleanupOption() {
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.photoVideoManager.loadSimilarVideos { _, duplicatesCount in
+            self?.photoVideoManager.fetchSimilarVideos { _, duplicatesCount in
                 DispatchQueue.main.async {
                     self?.videosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
                 }
@@ -106,18 +106,22 @@ final class MainViewController: UIViewController {
     }
     
     private func updateContactsCleanupOption() {
-        contactManager.loadDuplicatedByName { [weak self] contacts in
-            DispatchQueue.main.async {
-                self?.contactsCleanup.infoButton.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.contactManager.loadDuplicatedByName { contacts in
+                DispatchQueue.main.async {
+                    self?.contactsCleanup.infoButton.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+                }
             }
         }
     }
     
     private func updateCalendarCleanupOption() {
-        calendarManager.fetchEvents { [weak self] eventGroups in
-            let eventsCount = eventGroups.reduce(0) { $0 + $1.events.count }
-            DispatchQueue.main.async {
-                self?.calendarCleanup.infoButton.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.calendarManager.fetchEvents { eventGroups in
+                let eventsCount = eventGroups.reduce(0) { $0 + $1.events.count }
+                DispatchQueue.main.async {
+                    self?.calendarCleanup.infoButton.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
+                }
             }
         }
     }
@@ -184,7 +188,9 @@ extension MainViewController: ViewControllerProtocol {
     private func openPhotosCleanup() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            navigationController?.pushViewController(createSearchVC(with: .photos), animated: true)
+            let vc = PhotoTotalViewController()
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     

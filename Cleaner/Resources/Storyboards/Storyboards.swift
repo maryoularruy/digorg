@@ -83,11 +83,6 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<PasswordListViewController>(storyboard: PasswordList.self)
   }
-  internal enum Paywall: StoryboardType {
-    internal static let storyboardName = "Paywall"
-
-    internal static let initialScene = InitialSceneType<PaywallViewController>(storyboard: Paywall.self)
-  }
   internal enum PhoneInfo: StoryboardType {
     internal static let storyboardName = "PhoneInfo"
 

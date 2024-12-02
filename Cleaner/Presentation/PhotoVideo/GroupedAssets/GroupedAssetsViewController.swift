@@ -17,6 +17,8 @@ final class GroupedAssetsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var actionToolbar: ActionToolbar!
     
+    private lazy var photoVideoManager = PhotoVideoManager.shared
+    
     lazy var assetGroups = [PHAssetGroup]()
     lazy var duplicatesCount: Int = 0
     lazy var assetsForDeletion = Set<PHAsset>() {
@@ -61,6 +63,12 @@ final class GroupedAssetsViewController: UIViewController {
         setupUI()
         tableView.register(cellType: DuplicateTableViewCell.self)
         addGestureRecognizers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        assetGroups = photoVideoManager.similarPhotos
+        duplicatesCount = photoVideoManager.similarPhotosCount
     }
 }
 
@@ -175,11 +183,11 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
     
     @objc func refreshSimilarItems() {
         if assetGroups.first?.subtype == .smartAlbumVideos {
-            PhotoVideoManager.shared.loadSimilarVideos { [weak self] assetGroups, duplicatesCount in
+            PhotoVideoManager.shared.fetchSimilarVideos { [weak self] assetGroups, duplicatesCount in
                 self?.refreshUI(assetGroups: assetGroups, duplicatesCount: duplicatesCount)
             }
         } else {
-            PhotoVideoManager.shared.loadSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
+            PhotoVideoManager.shared.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
                 self?.refreshUI(assetGroups: assetGroups, duplicatesCount: duplicatesCount)
             }
         }

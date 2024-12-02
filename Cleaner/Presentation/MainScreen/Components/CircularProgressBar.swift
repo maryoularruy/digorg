@@ -1,5 +1,5 @@
 //
-//  CircularProgressBarView.swift
+//  CircularProgressBar.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 11.10.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CircularProgressBarView: UIView {
+final class CircularProgressBar: UIView {
     private lazy var circleLayer = CAShapeLayer()
     private lazy var progressLayer = CAShapeLayer()
     private lazy var startPoint = CGFloat(Double.pi / 2)

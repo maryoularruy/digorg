@@ -17,6 +17,9 @@ extension UIImage {
     
     static var stars = UIImage(resource: .stars)
     
+    static var liveViewBackground = UIImage(resource: .liveViewBackground)
+    static var blurryViewBackground = UIImage(resource: .blurryViewBackground)
+    
     //MARK: -ToolOption
     static var secretAlbum = UIImage(resource: .secretAlbum)
     static var secretContact = UIImage(resource: .secretContact)
@@ -124,6 +127,7 @@ extension UIImage {
     //MARK: -Navigation
     static var arrowBackIcon = UIImage(resource: .arrowBackIcon)
     static var arrowForwardWhite = UIImage(resource: .arrowForwardWhite)
+    static var arrowForwardBlue = UIImage(resource: .arrowForwardBlue)
     
     //MARK: -CommonComponents
     static var emptyCheckBoxWhite = UIImage(resource: .emptyCheckBoxWhite)
@@ -131,4 +135,6 @@ extension UIImage {
     
     static var emptyCheckBoxBlue = UIImage(resource: .emptyCheckBoxBlue)
     static var selectedCheckBoxBlue = UIImage(resource: .selectedCheckBoxBlue)
+    
+    static var pro = UIImage(resource: .proView)
 }
