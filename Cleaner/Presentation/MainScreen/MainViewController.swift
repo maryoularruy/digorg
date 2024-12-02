@@ -197,7 +197,9 @@ extension MainViewController: ViewControllerProtocol {
     private func openVideosCleanup() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            navigationController?.pushViewController(createSearchVC(with: .photos), animated: true)
+            let vc = VideoTotalViewController()
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -215,12 +217,5 @@ extension MainViewController: ViewControllerProtocol {
         DispatchQueue.main.async { [weak self] in
             self?.navigationController?.pushViewController(vc, animated: true)
         }
-    }
-    
-    private func createSearchVC(with cleanupOption: CleanupOption) -> SearchViewController {
-        let vc = StoryboardScene.Search.initialScene.instantiate()
-        vc.modalPresentationStyle = .fullScreen
-        vc.setCleanupOption(cleanupOption)
-        return vc
     }
 }

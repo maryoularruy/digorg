@@ -92,8 +92,6 @@
 		FA39877D2B3055930096F335 /* OSFastGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3987732B3055930096F335 /* OSFastGraphics.m */; };
 		FA39877E2B3055930096F335 /* OSAbstractHash.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3987742B3055930096F335 /* OSAbstractHash.m */; };
 		FA3987812B3058140096F335 /* Extension+PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987802B3058140096F335 /* Extension+PHAsset.swift */; };
-		FA3987A42B30599C0096F335 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987922B30599C0096F335 /* SearchViewController.swift */; };
-		FA3987A52B30599C0096F335 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3987932B30599C0096F335 /* Search.storyboard */; };
 		FA3987AA2B30599C0096F335 /* GroupedAssets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA39879B2B30599C0096F335 /* GroupedAssets.storyboard */; };
 		FA3987AB2B30599C0096F335 /* GroupedAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39879C2B30599C0096F335 /* GroupedAssetsViewController.swift */; };
 		FA3987AC2B30599C0096F335 /* RegularAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39879E2B30599C0096F335 /* RegularAssetsViewController.swift */; };
@@ -291,8 +289,6 @@
 		FA3987732B3055930096F335 /* OSFastGraphics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSFastGraphics.m; sourceTree = "<group>"; };
 		FA3987742B3055930096F335 /* OSAbstractHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSAbstractHash.m; sourceTree = "<group>"; };
 		FA3987802B3058140096F335 /* Extension+PHAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+PHAsset.swift"; sourceTree = "<group>"; };
-		FA3987922B30599C0096F335 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		FA3987932B30599C0096F335 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		FA39879B2B30599C0096F335 /* GroupedAssets.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GroupedAssets.storyboard; sourceTree = "<group>"; };
 		FA39879C2B30599C0096F335 /* GroupedAssetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedAssetsViewController.swift; sourceTree = "<group>"; };
 		FA39879E2B30599C0096F335 /* RegularAssetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularAssetsViewController.swift; sourceTree = "<group>"; };
@@ -736,8 +732,6 @@
 				A546AE642CF4FF5B0077D3F7 /* Components */,
 				A546AE592CF4D0790077D3F7 /* Total */,
 				FA3987822B3058E10096F335 /* Photos */,
-				FA3987922B30599C0096F335 /* SearchViewController.swift */,
-				FA3987932B30599C0096F335 /* Search.storyboard */,
 				FA39879A2B30599C0096F335 /* GroupedAssets */,
 			);
 			path = PhotoVideo;
@@ -1243,7 +1237,6 @@
 				FA3988052B305FA50096F335 /* Images.xcassets in Resources */,
 				FA99F2E92B3C38B700D4B239 /* PasswordList.storyboard in Resources */,
 				7532F8642AE2972C007469EA /* NoNameContacts.storyboard in Resources */,
-				FA3987A52B30599C0096F335 /* Search.storyboard in Resources */,
 				FA99F2EE2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.xib in Resources */,
 				756866DB2AD1D3A3008DBF7C /* PhoneInfo.storyboard in Resources */,
 				FA3987AE2B30599C0096F335 /* RegularAssets.storyboard in Resources */,
@@ -1290,7 +1283,6 @@
 				FA3987F62B305FA50096F335 /* DKPhotoBasePreviewVC.swift in Sources */,
 				FA3987402B3054930096F335 /* PhotoVideoManager.swift in Sources */,
 				FA39885B2B30602A0096F335 /* PHImageManager.swift in Sources */,
-				FA3987A42B30599C0096F335 /* SearchViewController.swift in Sources */,
 				A55CA2612CC904780026D434 /* UIImage.swift in Sources */,
 				FA3987592B3055510096F335 /* Changeset.swift in Sources */,
 				756866CF2ACD9ED0008DBF7C /* OnboardingModel.swift in Sources */,
