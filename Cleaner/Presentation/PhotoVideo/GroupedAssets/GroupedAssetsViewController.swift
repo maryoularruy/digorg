@@ -7,7 +7,18 @@
 
 import Photos
 import UIKit
-import CryptoKit
+
+enum GroupedAssetsType {
+    case similarPhotos, duplicatePhotos, duplicateVideos
+    
+    var title: String {
+        switch self {
+        case .similarPhotos: "Similar Photos"
+        case .duplicatePhotos: "Duplicate Photos"
+        case .duplicateVideos: "Duplicate Videos"
+        }
+    }
+}
 
 final class GroupedAssetsViewController: UIViewController {
     @IBOutlet weak var similarPhotoLabel: Semibold24LabelStyle!
@@ -17,11 +28,13 @@ final class GroupedAssetsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var actionToolbar: ActionToolbar!
     
+    lazy var type: GroupedAssetsType? = nil
+    
     private lazy var photoVideoManager = PhotoVideoManager.shared
     
-    lazy var assetGroups = [PHAssetGroup]()
-    lazy var duplicatesCount: Int = 0
-    lazy var assetsForDeletion = Set<PHAsset>() {
+    private lazy var assetGroups = [PHAssetGroup]()
+    private lazy var duplicatesCount: Int = 0
+    private lazy var assetsForDeletion = Set<PHAsset>() {
         didSet {
             actionToolbar.toolbarButton.bind(backgroundColor: assetsForDeletion.isEmpty ? .paleBlue : .blue)
             actionToolbar.toolbarButton.bind(
@@ -29,7 +42,7 @@ final class GroupedAssetsViewController: UIViewController {
         }
     }
     
-	var assetsInput: [PHAssetGroup] {
+	private var assetsInput: [PHAssetGroup] {
 		get { assetGroups }
 		set {
 			let changeset = StagedChangeset(source: assetGroups, target: newValue)
@@ -45,7 +58,7 @@ final class GroupedAssetsViewController: UIViewController {
 		}
 	}
     
-	lazy var selectMode = false {
+	private lazy var selectMode = false {
 		didSet {
             if selectMode {
                 selectModeButton.bind(text: .deselect)
@@ -67,8 +80,25 @@ final class GroupedAssetsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        assetGroups = photoVideoManager.similarPhotos
-        duplicatesCount = photoVideoManager.similarPhotosCount
+        guard let type else { return }
+        
+        assetGroups = switch type {
+        case .similarPhotos:
+            photoVideoManager.similarPhotos
+        case .duplicatePhotos:
+            photoVideoManager.similarPhotos
+        case .duplicateVideos:
+            photoVideoManager.similarVideos
+        }
+        
+        duplicatesCount = switch type {
+        case .similarPhotos:
+            photoVideoManager.similarPhotosCount
+        case .duplicatePhotos:
+            photoVideoManager.similarPhotosCount
+        case .duplicateVideos:
+            photoVideoManager.similarVideosCount
+        }
     }
 }
 
@@ -133,7 +163,8 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
     }
     
     func setupUI() {
-        similarPhotoLabel.text = "Similar \(assetGroups.first?.subtype == .smartAlbumVideos ? "videos" : "photos")"
+        guard let type else { return }
+        similarPhotoLabel.text = type.title
         duplicatesCountLabel.text = "\(duplicatesCount) files"
         selectMode = false
         updatePlaceholder()

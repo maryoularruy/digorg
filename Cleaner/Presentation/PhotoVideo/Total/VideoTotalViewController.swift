@@ -32,6 +32,7 @@ extension VideoTotalViewController: ViewControllerProtocol {
         photoVideoManager.fetchSimilarVideos { [weak self] assetGroups, duplicatesCount in
             guard let self else { return }
             rootView.duplicateVideosView.assets = photoVideoManager.join(assetGroups)
+            rootView.duplicateVideosView.delegate = self
         }
         
         photoVideoManager.fetchSuperSizedVideos { [weak self] videos in
@@ -55,5 +56,29 @@ extension VideoTotalViewController: ViewControllerProtocol {
     
     @objc private func handleSwipeRight() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension VideoTotalViewController: OneCategoryHorizontalViewDelegate {
+    func tapOnCategory(_ type: OneCategoryHorizontalViewType) {
+        let vc: UIViewController? = switch type {
+        case .similarPhotos: nil
+        case .duplicatePhotos: nil
+        case .portraits: nil
+        case .allPhotos: nil
+        case .duplicateVideos: StoryboardScene.GroupedAssets.initialScene.instantiate()
+        case .superSizedVideos: StoryboardScene.GroupedAssets.initialScene.instantiate()
+        case .allVideos: StoryboardScene.GroupedAssets.initialScene.instantiate()
+        }
+        
+        if let vc {
+            vc.modalPresentationStyle = .fullScreen
+            if vc is GroupedAssetsViewController {
+                (vc as! GroupedAssetsViewController).type = .duplicateVideos
+            }
+            DispatchQueue.main.async { [weak self] in
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
 }

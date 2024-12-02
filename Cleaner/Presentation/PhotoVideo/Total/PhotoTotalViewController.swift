@@ -114,6 +114,9 @@ extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate {
         
         if let vc {
             vc.modalPresentationStyle = .fullScreen
+            if vc is GroupedAssetsViewController {
+                (vc as! GroupedAssetsViewController).type = .similarPhotos
+            }
             DispatchQueue.main.async { [weak self] in
                 self?.navigationController?.pushViewController(vc, animated: true)
             }

@@ -24,6 +24,9 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
     private(set) var similarPhotos: [PHAssetGroup] = []
     private(set) var similarPhotosCount: Int = 0
     
+    private(set) var similarVideos: [PHAssetGroup] = []
+    private(set) var similarVideosCount: Int = 0
+    
     func checkStatus(handler: @escaping (PHAuthorizationStatus) -> ()) {
         let status = if #available(iOS 14, *) {
             PHPhotoLibrary.authorizationStatus(for: .readWrite)
@@ -206,6 +209,8 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                         }
                         similarVideoGroups.removeAll { group in group.assets.isEmpty }
                         let duplicatesCount = similarVideoGroups.reduce(0) { $0 + $1.assets.count }
+                        self?.similarVideos = similarVideoGroups
+                        self?.similarVideosCount = duplicatesCount
                         self?.isLoadingVideos = false
                         handler(similarVideoGroups, duplicatesCount)
 					}
