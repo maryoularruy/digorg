@@ -1,5 +1,5 @@
 //
-//  PhotoVideoTotalViewController.swift
+//  PhotoTotalViewController.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 25.11.2024.
@@ -8,8 +8,8 @@
 import UIKit
 import Photos
 
-final class PhotoVideoTotalViewController: UIViewController {
-    private lazy var rootView = PhotoVideoTotalView()
+final class PhotoTotalViewController: UIViewController {
+    private lazy var rootView = PhotoTotalView()
     private lazy var photoVideoManager = PhotoVideoManager.shared
     
     override func loadView() {
@@ -37,7 +37,7 @@ final class PhotoVideoTotalViewController: UIViewController {
     }
 }
 
-extension PhotoVideoTotalViewController: ViewControllerProtocol {
+extension PhotoTotalViewController: ViewControllerProtocol {
     func setupUI() {
 //        if photoVideoManager.isLoadingPhotos {
 //            rootView.similarPhotosView.assets = []
@@ -95,7 +95,7 @@ extension PhotoVideoTotalViewController: ViewControllerProtocol {
     }
 }
 
-extension PhotoVideoTotalViewController: OneCategoryHorizontalViewDelegate {
+extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate {
     func tapOnCategory(_ type: OneCategoryHorizontalViewType) {
         let vc: UIViewController? = switch type {
         case .similarPhotos:

@@ -1,5 +1,5 @@
 //
-//  PhotoVideoTotalView.swift
+//  PhotoTotalView.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 25.11.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PhotoVideoTotalView: UIView {
+final class PhotoTotalView: UIView {
     private lazy var scroll: UIScrollView = scrollView
     private lazy var contentView: UIView = UIView()
     lazy var arrowBack: UIView = arrowBackButton

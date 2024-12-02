@@ -188,7 +188,7 @@ extension MainViewController: ViewControllerProtocol {
     private func openPhotosCleanup() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            let vc = PhotoVideoTotalViewController()
+            let vc = PhotoTotalViewController()
             vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
