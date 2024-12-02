@@ -17,6 +17,8 @@ extension UIImage {
     
     static var stars = UIImage(resource: .stars)
     
+    static var liveViewBackground = UIImage(resource: .liveViewBackground)
+    
     //MARK: -ToolOption
     static var secretAlbum = UIImage(resource: .secretAlbum)
     static var secretContact = UIImage(resource: .secretContact)

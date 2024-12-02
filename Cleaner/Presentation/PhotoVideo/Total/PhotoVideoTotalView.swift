@@ -20,6 +20,7 @@ final class PhotoVideoTotalView: UIView {
     
     lazy var similarPhotosView = OneCategoryHorizontalView(.similarPhotos)
     lazy var duplicatePhotosView = OneCategoryHorizontalView(.duplicatePhotos)
+    lazy var livePhotosView = OneCategoryRectangularView(.live)
     lazy var portraitsPhotosView = OneCategoryHorizontalView(.portraits)
     lazy var allPhotosView = OneCategoryHorizontalView(.allPhotos)
     
@@ -47,7 +48,9 @@ final class PhotoVideoTotalView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, similarPhotosView, duplicatePhotosView, portraitsPhotosView, allPhotosView])
+        contentView.addSubviews([arrowBack, label, similarPhotosView, duplicatePhotosView, livePhotosView, portraitsPhotosView, allPhotosView])
+        
+        contentView.backgroundColor = .green
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -70,20 +73,25 @@ final class PhotoVideoTotalView: UIView {
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
             similarPhotosView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
-            similarPhotosView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            similarPhotosView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            similarPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            similarPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
             duplicatePhotosView.topAnchor.constraint(equalTo: similarPhotosView.bottomAnchor, constant: 8),
-            duplicatePhotosView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            duplicatePhotosView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            duplicatePhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            duplicatePhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            portraitsPhotosView.topAnchor.constraint(equalTo: duplicatePhotosView.bottomAnchor, constant: 8),
-            portraitsPhotosView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            portraitsPhotosView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            livePhotosView.topAnchor.constraint(equalTo: duplicatePhotosView.bottomAnchor, constant: 16),
+            livePhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            livePhotosView.heightAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.height),
+            livePhotosView.widthAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.width),
+            
+            portraitsPhotosView.topAnchor.constraint(equalTo: livePhotosView.bottomAnchor, constant: 16),
+            portraitsPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            portraitsPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
             allPhotosView.topAnchor.constraint(equalTo: portraitsPhotosView.bottomAnchor, constant: 8),
-            allPhotosView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            allPhotosView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            allPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            allPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             allPhotosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }

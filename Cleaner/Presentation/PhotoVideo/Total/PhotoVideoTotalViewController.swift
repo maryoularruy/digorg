@@ -56,6 +56,8 @@ extension PhotoVideoTotalViewController: ViewControllerProtocol {
         photoVideoManager.fetchAllPhotos { [weak self] photos in
             self?.rootView.allPhotosView.assets = photos
         }
+        
+//        photoVideoManager.fetch
     }
     
     func addGestureRecognizers() {
