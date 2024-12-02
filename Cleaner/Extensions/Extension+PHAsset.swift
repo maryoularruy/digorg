@@ -66,8 +66,8 @@ extension PHAsset {
 		}
 		return sizeOnDisk
 	}
-
-    func getAssetThumbnail(_ targetSize: TargetSize = TargetSize.medium) -> UIImage {
+    
+    func getAssetThumbnail(_ size: CGSize) -> UIImage {
         let manager = PHImageManager.default()
         let option = PHImageRequestOptions()
         var thumbnail = UIImage()
@@ -76,7 +76,7 @@ extension PHAsset {
         option.deliveryMode = .opportunistic
         option.version = .current
         option.resizeMode = .exact
-        manager.requestImage(for: self, targetSize: targetSize.size, contentMode: .aspectFit, options: option) { result, info in
+        manager.requestImage(for: self, targetSize: size, contentMode: .aspectFit, options: option) { result, info in
                 thumbnail = result ?? #imageLiteral(resourceName: "gif")
             }
         return thumbnail

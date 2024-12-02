@@ -1,5 +1,5 @@
 //
-//  OneCategoryHorizontalCell.swift
+//  OneCategoryCell.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 27.11.2024.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class OneCategoryHorizontalCell: UICollectionViewCell {
-    static var identifier = "OneCategoryHorizontalCell"
+final class OneCategoryCell: UICollectionViewCell {
+    static var identifier = "OneCategoryCell"
     
     lazy var imageView = UIImageView()
     
@@ -32,6 +32,7 @@ final class OneCategoryHorizontalCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 16
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.lightGrey.cgColor
+        imageView.contentMode = .scaleAspectFill
         contentView.clipsToBounds = true
     }
     

@@ -25,6 +25,7 @@ enum OneCategoryVerticalViewType {
 final class OneCategoryVerticalView: UIView {
     weak var delegate: OneCategoryVerticalViewDelegate?
     
+    private static var size = CGSize(width: 46, height: 88)
     private lazy var contentView: UIView = UIView()
     private lazy var label: Semibold15LabelStyle = Semibold15LabelStyle()
     
@@ -37,12 +38,25 @@ final class OneCategoryVerticalView: UIView {
     private lazy var assetsSizeLabel: Regular15LabelStyle = Regular15LabelStyle()
     private lazy var assetsCountLabel: Regular15LabelStyle = Regular15LabelStyle()
     
+    lazy var assetsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.itemSize = OneCategoryVerticalView.size
+        layout.minimumLineSpacing = -23
+        layout.minimumInteritemSpacing = -28
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(OneCategoryCell.self, forCellWithReuseIdentifier: OneCategoryCell.identifier)
+        return collectionView
+    }()
+    
     private var type: OneCategoryVerticalViewType
     lazy var assets: [PHAsset] = [] {
         didSet {
             assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
-//            assetsCollectionViewHeight.constant = assets.isEmpty ? 0 : TargetSize.small.size.height
-//            assetsCollectionView.reloadData()
+            assetsCollectionView.reloadData()
         }
     }
     
@@ -67,8 +81,8 @@ final class OneCategoryVerticalView: UIView {
         assetsSizeLabel.setGreyTextColor()
         assetsCountLabel.setGreyTextColor()
         
-//        assetsCollectionView.delegate = self
-//        assetsCollectionView.dataSource = self
+        assetsCollectionView.delegate = self
+        assetsCollectionView.dataSource = self
         
         label.bind(text: type.title)
         
@@ -80,7 +94,7 @@ final class OneCategoryVerticalView: UIView {
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([label, arrowForwardImageView, assetsCountLabel])
+        contentView.addSubviews([assetsCollectionView, label, arrowForwardImageView, assetsCountLabel])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: topAnchor),
@@ -88,14 +102,32 @@ final class OneCategoryVerticalView: UIView {
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            arrowForwardImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -9),
-            arrowForwardImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -14),
+            assetsCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 19),
+            assetsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 14),
+            assetsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -11),
             
-            assetsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            assetsCountLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -36),
-            
+            label.topAnchor.constraint(equalTo: assetsCollectionView.bottomAnchor, constant: 22),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            label.bottomAnchor.constraint(equalTo: assetsCountLabel.bottomAnchor, constant: -7)
+            
+            assetsCountLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 7),
+            assetsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            
+            arrowForwardImageView.topAnchor.constraint(equalTo: assetsCountLabel.bottomAnchor, constant: 2),
+            arrowForwardImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -9),
+            arrowForwardImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -14)
         ])
+    }
+}
+
+extension OneCategoryVerticalView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        assets.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneCategoryCell.identifier, for: indexPath) as! OneCategoryCell
+        cell.layer.cornerRadius = 8
+        cell.bind(assets[indexPath.row].getAssetThumbnail(OneCategoryVerticalView.size))
+        return cell
     }
 }

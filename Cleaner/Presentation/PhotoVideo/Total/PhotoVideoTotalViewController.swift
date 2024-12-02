@@ -39,14 +39,21 @@ final class PhotoVideoTotalViewController: UIViewController {
 
 extension PhotoVideoTotalViewController: ViewControllerProtocol {
     func setupUI() {
-        if photoVideoManager.isLoadingPhotos {
-            rootView.similarPhotosView.assets = []
-            rootView.duplicatePhotosView.assets = []
-            setupScanning()
-        } else {
-            rootView.subviews.forEach { $0.isUserInteractionEnabled = true }
-            rootView.similarPhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
-            rootView.duplicatePhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
+//        if photoVideoManager.isLoadingPhotos {
+//            rootView.similarPhotosView.assets = []
+//            rootView.duplicatePhotosView.assets = []
+//            setupScanning()
+//        } else {
+//            rootView.subviews.forEach { $0.isUserInteractionEnabled = true }
+//            rootView.similarPhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
+//            rootView.duplicatePhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
+//        }
+        
+        photoVideoManager.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
+            guard let self else { return }
+            let joinedAssets = photoVideoManager.join(assetGroups)
+            rootView.similarPhotosView.assets = joinedAssets
+            rootView.duplicatePhotosView.assets = joinedAssets
         }
         
         photoVideoManager.fetchSelfiePhotos { [weak self] selfies in
@@ -63,6 +70,10 @@ extension PhotoVideoTotalViewController: ViewControllerProtocol {
         
         photoVideoManager.fetchBlurryPhotos { [weak self] blurries in
             self?.rootView.blurryPhotosView.assets = blurries
+        }
+        
+        photoVideoManager.loadScreenshotPhotos { [weak self] screenshots in
+            self?.rootView.screenshotsView.assets = screenshots
         }
     }
     

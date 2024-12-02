@@ -359,7 +359,7 @@ extension PhotoVideoManager {
     }
     
     func loadScreenshotPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
-        self.fetchScreenshots(from: dateFrom, to: dateTo) { photoInAlbum in
+        fetchScreenshots { photoInAlbum in
             DispatchQueue.global(qos: .background).async{
                 var images: [PHAsset] = []
                 if photoInAlbum.count == 0 {
@@ -382,20 +382,14 @@ extension PhotoVideoManager {
         fetchPhotos(live: false) { fetchResult in }
     }
     
-    func fetchScreenshots(
-        from dateFrom: String = "01-01-1970",
-        to dateTo: String = "01-01-2030",
-        handler: @escaping (PHFetchResult<PHAsset>) -> Void
-    ) {
+    private func fetchScreenshots(handler: @escaping (PHFetchResult<PHAsset>) -> Void) {
         let options = PHFetchOptions()
         let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(
             with: .smartAlbum,
             subtype: .smartAlbumScreenshots,
             options: options
         )
-        options.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: false)
-        ]
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         handler(PHAsset.fetchAssets(in: albumsPhoto[0], options: options))
     }
 }

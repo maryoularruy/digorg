@@ -53,7 +53,7 @@ final class OneCategoryHorizontalView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(OneCategoryHorizontalCell.self, forCellWithReuseIdentifier: OneCategoryHorizontalCell.identifier)
+        collectionView.register(OneCategoryCell.self, forCellWithReuseIdentifier: OneCategoryCell.identifier)
         return collectionView
     }()
     
@@ -147,8 +147,8 @@ extension OneCategoryHorizontalView: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneCategoryHorizontalCell.identifier, for: indexPath) as! OneCategoryHorizontalCell
-        cell.bind(assets[indexPath.row].getAssetThumbnail(.small))
+       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneCategoryCell.identifier, for: indexPath) as! OneCategoryCell
+        cell.bind(assets[indexPath.row].getAssetThumbnail(TargetSize.small.size))
         return cell
     }
 }

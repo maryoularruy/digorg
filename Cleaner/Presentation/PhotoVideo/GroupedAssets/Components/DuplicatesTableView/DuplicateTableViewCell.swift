@@ -51,7 +51,7 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
     
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: MediaCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.photoImageView.image = assets[indexPath.item].getAssetThumbnail(.large)
+        cell.photoImageView.image = assets[indexPath.item].getAssetThumbnail(TargetSize.large.size)
         cell.isChecked = assetsForDeletion.contains(assets[indexPath.item])
 		cell.setupSelectMode(isON: selectMode)
 		cell.addTapGestureRecognizer { [weak self] in
