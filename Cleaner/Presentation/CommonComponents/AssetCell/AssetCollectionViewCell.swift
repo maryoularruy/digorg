@@ -1,5 +1,5 @@
 //
-//  MediaCollectionViewCell.swift
+//  AssetCollectionViewCell.swift
 //  Cleaner
 //
 //  Created by Александр Пономарёв on 23.05.2022.
@@ -10,7 +10,7 @@ import Photos
 import UIKit
 import Disk
 
-final class MediaCollectionViewCell: UICollectionViewCell, NibReusable {
+final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
 	@IBOutlet var photoImageView: UIImageView!
 	@IBOutlet var checkBox: UIImageView!
     

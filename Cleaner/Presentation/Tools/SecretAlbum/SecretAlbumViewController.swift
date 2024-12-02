@@ -40,7 +40,7 @@ final class SecretAlbumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if userDefaultsService.isPasscodeCreated {
-            itemsCollectionView.register(cellType: MediaCollectionViewCell.self)
+            itemsCollectionView.register(cellType: AssetCollectionViewCell.self)
         }
         addGestureRecognizers()
     }
@@ -248,7 +248,7 @@ extension SecretAlbumViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: MediaCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.photoImageView.image = items[indexPath.row].photo
         cell.isChecked = itemsForDeletionAndRestoring.contains(items[indexPath.row])
         cell.addTapGestureRecognizer {
