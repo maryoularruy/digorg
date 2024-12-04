@@ -33,6 +33,11 @@ final class RegularAssetsViewController: UIViewController {
     private lazy var assets: [PHAsset] = [] {
         didSet {
             rootView.assetsCountLabel.bind(text: "\(assets.count) file\(assets.count == 1 ? "" : "s")")
+            if assets.isEmpty {
+                setupEmptyState()
+            } else {
+                hideEmptyState()
+            }
         }
     }
     
@@ -41,6 +46,8 @@ final class RegularAssetsViewController: UIViewController {
             
         }
     }
+    
+    private lazy var emptyStateView: EmptyStateView? = nil
     
     init(type: RegularAssetsType) {
         self.type = type
@@ -64,6 +71,22 @@ final class RegularAssetsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
+    }
+    
+    private func setupEmptyState() {
+        rootView.assetsCollectionView.isHidden = true
+        emptyStateView?.removeFromSuperview()
+        emptyStateView = rootView.createEmptyState(type: .empty)
+        if let emptyStateView {
+            rootView.addSubview(emptyStateView)
+        }
+    }
+    
+    private func hideEmptyState() {
+        rootView.assetsCollectionView.isHidden = false
+        rootView.assetsCollectionView.reloadData()
+        emptyStateView?.removeFromSuperview()
+        emptyStateView = nil
     }
 }
 
