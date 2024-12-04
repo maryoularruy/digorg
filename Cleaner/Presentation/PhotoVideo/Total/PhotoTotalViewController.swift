@@ -103,11 +103,10 @@ extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate {
         case .duplicatePhotos:
             StoryboardScene.GroupedAssets.initialScene.instantiate()
         case .portraits:
-            StoryboardScene.GroupedAssets.initialScene.instantiate()
+            RegularAssetsViewController(type: .portraits)
         case .allPhotos:
-            StoryboardScene.GroupedAssets.initialScene.instantiate()
-        case .duplicateVideos:
-            StoryboardScene.GroupedAssets.initialScene.instantiate()
+            RegularAssetsViewController(type: .allPhotos)
+        case .duplicateVideos: nil
         case .superSizedVideos: nil
         case .allVideos: nil
         }

@@ -390,6 +390,7 @@
 		A5446F802CEB3CCF00A1F940 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A546AE592CF4D0790077D3F7 /* Total */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Total; sourceTree = "<group>"; };
 		A546AE642CF4FF5B0077D3F7 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
+		A546B15D2D005BA80077D3F7 /* RegularAssets */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RegularAssets; sourceTree = "<group>"; };
 		A55234102CC16D2900CBE265 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5609EAE2CDBD637000AF19E /* AllContacts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AllContacts; sourceTree = "<group>"; };
 		A5609F4A2CE0C141000AF19E /* Battery */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Battery; sourceTree = "<group>"; };
@@ -723,9 +724,9 @@
 		FA3987302B3048180096F335 /* PhotoVideo */ = {
 			isa = PBXGroup;
 			children = (
+				A546B15D2D005BA80077D3F7 /* RegularAssets */,
 				A546AE642CF4FF5B0077D3F7 /* Components */,
 				A546AE592CF4D0790077D3F7 /* Total */,
-				FA3987822B3058E10096F335 /* Photos */,
 				FA39879A2B30599C0096F335 /* GroupedAssets */,
 			);
 			path = PhotoVideo;
@@ -792,14 +793,6 @@
 			path = ImageHashing;
 			sourceTree = "<group>";
 		};
-		FA3987822B3058E10096F335 /* Photos */ = {
-			isa = PBXGroup;
-			children = (
-				FA39879D2B30599C0096F335 /* RegularAssets */,
-			);
-			path = Photos;
-			sourceTree = "<group>";
-		};
 		FA39879A2B30599C0096F335 /* GroupedAssets */ = {
 			isa = PBXGroup;
 			children = (
@@ -808,13 +801,6 @@
 				FA39879C2B30599C0096F335 /* GroupedAssetsViewController.swift */,
 			);
 			path = GroupedAssets;
-			sourceTree = "<group>";
-		};
-		FA39879D2B30599C0096F335 /* RegularAssets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = RegularAssets;
 			sourceTree = "<group>";
 		};
 		FA3987BA2B305D720096F335 /* Extensions */ = {
@@ -1143,6 +1129,7 @@
 				A5446F802CEB3CCF00A1F940 /* Components */,
 				A546AE592CF4D0790077D3F7 /* Total */,
 				A546AE642CF4FF5B0077D3F7 /* Components */,
+				A546B15D2D005BA80077D3F7 /* RegularAssets */,
 				A55234102CC16D2900CBE265 /* Components */,
 				A5609EAE2CDBD637000AF19E /* AllContacts */,
 				A5609F4A2CE0C141000AF19E /* Battery */,

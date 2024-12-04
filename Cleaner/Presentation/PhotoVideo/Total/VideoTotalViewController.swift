@@ -67,8 +67,8 @@ extension VideoTotalViewController: OneCategoryHorizontalViewDelegate {
         case .portraits: nil
         case .allPhotos: nil
         case .duplicateVideos: StoryboardScene.GroupedAssets.initialScene.instantiate()
-        case .superSizedVideos: StoryboardScene.GroupedAssets.initialScene.instantiate()
-        case .allVideos: StoryboardScene.GroupedAssets.initialScene.instantiate()
+        case .superSizedVideos: RegularAssetsViewController(type: .superSizedVideos)
+        case .allVideos: RegularAssetsViewController(type: .allVideos)
         }
         
         if let vc {
