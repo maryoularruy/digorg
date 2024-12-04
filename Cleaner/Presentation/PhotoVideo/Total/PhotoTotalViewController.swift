@@ -61,22 +61,27 @@ extension PhotoTotalViewController: ViewControllerProtocol {
         
         photoVideoManager.fetchSelfiePhotos { [weak self] selfies in
             self?.rootView.portraitsPhotosView.assets = selfies
+            self?.rootView.portraitsPhotosView.delegate = self
         }
         
         photoVideoManager.fetchAllPhotos { [weak self] photos in
             self?.rootView.allPhotosView.assets = photos
+            self?.rootView.allPhotosView.delegate = self
         }
         
         photoVideoManager.fetchLivePhotos { [weak self] livePhotos in
             self?.rootView.livePhotosView.assets = livePhotos
+            self?.rootView.livePhotosView.delegate = self
         }
         
         photoVideoManager.fetchBlurryPhotos { [weak self] blurries in
             self?.rootView.blurryPhotosView.assets = blurries
+            self?.rootView.blurryPhotosView.delegate = self
         }
         
         photoVideoManager.loadScreenshotPhotos { [weak self] screenshots in
             self?.rootView.screenshotsView.assets = screenshots
+            self?.rootView.screenshotsView.delegate = self
         }
     }
     
@@ -95,7 +100,33 @@ extension PhotoTotalViewController: ViewControllerProtocol {
     }
 }
 
-extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate {
+extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate, OneCategoryRectangularViewDelegate, OneCategoryVerticalViewDelegate {
+    func tapOnCategory(_ type: OneCategoryVerticalViewType) {
+        let vc: UIViewController = switch type {
+        case .screenshots:
+            RegularAssetsViewController(type: .screenshots)
+        }
+        
+        vc.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func tapOnCategory(_ type: OneCategoryRectangularViewType) {
+        let vc: UIViewController = switch type {
+        case .live:
+            RegularAssetsViewController(type: .livePhotos)
+        case .blurry:
+            RegularAssetsViewController(type: .blurryPhotos)
+        }
+        
+        vc.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func tapOnCategory(_ type: OneCategoryHorizontalViewType) {
         let vc: UIViewController? = switch type {
         case .similarPhotos:

@@ -24,7 +24,7 @@ enum RegularAssetsType {
 }
 
 final class RegularAssetsViewController: UIViewController {
-    private lazy var rootView = VideoTotalView()
+    private lazy var rootView = RegularAssetsView(type)
     
     private lazy var photoVideoManager = PhotoVideoManager.shared
     private var type: RegularAssetsType
