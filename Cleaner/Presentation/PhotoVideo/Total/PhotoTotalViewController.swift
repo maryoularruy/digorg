@@ -79,7 +79,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             self?.rootView.blurryPhotosView.delegate = self
         }
         
-        photoVideoManager.loadScreenshotPhotos { [weak self] screenshots in
+        photoVideoManager.fetchScreenshots { [weak self] screenshots in
             self?.rootView.screenshotsView.assets = screenshots
             self?.rootView.screenshotsView.delegate = self
         }

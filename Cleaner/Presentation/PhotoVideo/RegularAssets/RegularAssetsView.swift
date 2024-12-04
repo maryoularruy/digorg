@@ -8,10 +8,24 @@
 import UIKit
 
 final class RegularAssetsView: UIView {
+    static var spacingBetweenAssets: CGFloat = 8
+    static var assetsInRow: CGFloat = 3
+    
     private lazy var contentView: UIView = UIView()
     lazy var arrowBack: UIImageView = UIImageView(image: .arrowBackIcon)
     private lazy var label: Semibold24LabelStyle = Semibold24LabelStyle()
-    private lazy var assetsCountLabel: Regular13LabelStyle = Regular13LabelStyle()
+    lazy var assetsCountLabel: Regular13LabelStyle = Regular13LabelStyle()
+    
+    lazy var assetsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = RegularAssetsView.spacingBetweenAssets
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.register(cellType: AssetCollectionViewCell.self)
+        return collectionView
+    }()
     
     private var type: RegularAssetsType
     
@@ -29,10 +43,6 @@ final class RegularAssetsView: UIView {
         initConstraints()
     }
     
-    func bind(assetsCount: Int) {
-        assetsCountLabel.bind(text: "\(assetsCount) file\(assetsCount == 1 ? "" : "s")")
-    }
-    
     private func setupView() {
         backgroundColor = .paleGrey
         arrowBack.contentMode = .center
@@ -41,7 +51,7 @@ final class RegularAssetsView: UIView {
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, assetsCountLabel])
+        contentView.addSubviews([arrowBack, label, assetsCountLabel, assetsCollectionView])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -49,7 +59,7 @@ final class RegularAssetsView: UIView {
             contentView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
             contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             
-            arrowBack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 3),
+            arrowBack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             arrowBack.heightAnchor.constraint(equalToConstant: 40),
             arrowBack.widthAnchor.constraint(equalToConstant: 40),
@@ -58,8 +68,12 @@ final class RegularAssetsView: UIView {
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
             assetsCountLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 6),
-            assetsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
+            assetsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
+            assetsCollectionView.topAnchor.constraint(equalTo: assetsCountLabel.bottomAnchor, constant: 20),
+            assetsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            assetsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            assetsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }

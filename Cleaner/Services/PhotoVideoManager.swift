@@ -344,6 +344,26 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
         }
     }
     
+    func fetchScreenshots(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
+        fetchScreenshots { photoInAlbum in
+            DispatchQueue.global(qos: .background).async{
+                var images: [PHAsset] = []
+                if photoInAlbum.count == 0 {
+                    DispatchQueue.main.async {
+                        handler([])
+                    }
+                    return
+                }
+                for i in 1...photoInAlbum.count {
+                    images.append(photoInAlbum[i - 1])
+                }
+                DispatchQueue.main.async {
+                    handler(images)
+                }
+            }
+        }
+    }
+    
     private func requestPhotoLibraryAutorization(handler: @escaping (PHAuthorizationStatus) -> ()) {
         if #available(iOS 14, *) {
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
@@ -378,26 +398,6 @@ extension PhotoVideoManager {
         let mean = Float(pixelData.reduce(0, +)) / Float(pixelData.count)
         let variance = Float(pixelData.reduce(0) { $0 + Int(pow(Float($1) - mean, 2)) }) / Float(pixelData.count)
         return variance
-    }
-
-    func loadScreenshotPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
-        fetchScreenshots { photoInAlbum in
-            DispatchQueue.global(qos: .background).async{
-                var images: [PHAsset] = []
-                if photoInAlbum.count == 0 {
-                    DispatchQueue.main.async {
-                        handler([])
-                    }
-                    return
-                }
-                for i in 1...photoInAlbum.count {
-                    images.append(photoInAlbum[i - 1])
-                }
-                DispatchQueue.main.async {
-                    handler(images)
-                }
-            }
-        }
     }
     
     func getAssetsWithText(completion: @escaping ([PHAsset]) -> Void) {
