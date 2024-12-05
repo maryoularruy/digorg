@@ -36,6 +36,7 @@ final class RegularAssetsViewController: UIViewController {
                 guard let self else { return }
                 rootView.assetsCountLabel.bind(text: "\(assets.count) file\(assets.count == 1 ? "" : "s")")
                 rootView.selectionButton.isClickable = !assets.isEmpty
+                rootView.assetsCollectionView.reloadData()
                 if assets.isEmpty {
                     setupEmptyState()
                 } else {
@@ -51,6 +52,7 @@ final class RegularAssetsViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 rootView.selectionButton.bind(text: assetsForDeletion.count == assets.count ? .deselectAll : .selectAll)
+                rootView.assetsCollectionView.reloadData()
             }
         }
     }
@@ -79,11 +81,6 @@ final class RegularAssetsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
     
     private func setupEmptyState() {
@@ -133,8 +130,7 @@ extension RegularAssetsViewController: ViewControllerProtocol {
         case .allPhotos:
             photoVideoManager.fetchAllPhotos { [weak self] assets in
                 self?.assets = assets
-//                self?.assetsForDeletion.insert(assets)
-                self?.assetsForDeletion = []
+                self?.assetsForDeletion.insert(assets)
 
             }
         case .superSizedVideos:
@@ -153,6 +149,7 @@ extension RegularAssetsViewController: ViewControllerProtocol {
         
         rootView.assetsCollectionView.delegate = self
         rootView.assetsCollectionView.dataSource = self
+        rootView.selectionButton.delegate = self
     }
     
     func addGestureRecognizers() {
@@ -170,6 +167,16 @@ extension RegularAssetsViewController: ViewControllerProtocol {
     }
 }
 
+extension RegularAssetsViewController: SelectionButtonProtocol {
+    func tapOnButton() {
+        if assetsForDeletion.count == assets.count {
+            assetsForDeletion.removeAll()
+        } else {
+            assetsForDeletion.insert(assets)
+        }
+    }
+}
+
 extension RegularAssetsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         assets.count
@@ -179,8 +186,13 @@ extension RegularAssetsViewController: UICollectionViewDataSource, UICollectionV
         let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.photoImageView.image = assets[indexPath.row].getAssetThumbnail(TargetSize.medium.size)
         cell.isChecked = assetsForDeletion.contains(assets[indexPath.row])
-        cell.addTapGestureRecognizer {
-            cell.isChecked.toggle()
+        cell.addTapGestureRecognizer { [weak self] in
+            guard let self else { return }
+            if cell.isChecked {
+                assetsForDeletion.remove(assets[indexPath.row])
+            } else {
+                assetsForDeletion.insert(assets[indexPath.row])
+            }
         }
         return cell
     }

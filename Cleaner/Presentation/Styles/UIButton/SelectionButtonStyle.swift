@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SelectionButtonProtocol: AnyObject {
+    func tapOnButton()
+}
+
 enum SelectionButtonText: String {
     case select = "Select"
     case selectAll = "Select All"
@@ -15,6 +19,8 @@ enum SelectionButtonText: String {
 }
 
 class SelectionButtonStyle: UIButton {
+    weak var delegate: SelectionButtonProtocol?
+    
     lazy var isClickable: Bool = true {
         didSet {
             isUserInteractionEnabled = isClickable
@@ -47,6 +53,10 @@ class SelectionButtonStyle: UIButton {
         setTitleColor(.blue, for: .selected)
         titleLabel?.textAlignment = .center
         titleLabel?.font = .medium12
+        
+        addTapGestureRecognizer { [weak self] in
+            self?.delegate?.tapOnButton()
+        }
 
         setupShadow()
     }
