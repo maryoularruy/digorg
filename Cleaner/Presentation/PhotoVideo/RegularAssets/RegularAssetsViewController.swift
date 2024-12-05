@@ -32,18 +32,26 @@ final class RegularAssetsViewController: UIViewController {
 
     private lazy var assets: [PHAsset] = [] {
         didSet {
-            rootView.assetsCountLabel.bind(text: "\(assets.count) file\(assets.count == 1 ? "" : "s")")
-            if assets.isEmpty {
-                setupEmptyState()
-            } else {
-                hideEmptyState()
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                rootView.assetsCountLabel.bind(text: "\(assets.count) file\(assets.count == 1 ? "" : "s")")
+                rootView.selectionButton.isClickable = !assets.isEmpty
+                if assets.isEmpty {
+                    setupEmptyState()
+                } else {
+                    rootView.selectionButton.bind(text: assetsForDeletion.count == assets.count ? .deselectAll : .selectAll)
+                    hideEmptyState()
+                }
             }
         }
     }
     
     private lazy var assetsForDeletion = Set<PHAsset>() {
         didSet {
-            
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                rootView.selectionButton.bind(text: assetsForDeletion.count == assets.count ? .deselectAll : .selectAll)
+            }
         }
     }
     
@@ -73,7 +81,13 @@ final class RegularAssetsViewController: UIViewController {
         setupUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     private func setupEmptyState() {
+        rootView.selectionButton.bind(text: .selectAll)
         rootView.assetsCollectionView.isHidden = true
         emptyStateView?.removeFromSuperview()
         emptyStateView = rootView.createEmptyState(type: .empty)
@@ -119,7 +133,8 @@ extension RegularAssetsViewController: ViewControllerProtocol {
         case .allPhotos:
             photoVideoManager.fetchAllPhotos { [weak self] assets in
                 self?.assets = assets
-                self?.assetsForDeletion.insert(assets)
+//                self?.assetsForDeletion.insert(assets)
+                self?.assetsForDeletion = []
 
             }
         case .superSizedVideos:

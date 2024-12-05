@@ -15,6 +15,7 @@ final class RegularAssetsView: UIView {
     lazy var arrowBack: UIImageView = UIImageView(image: .arrowBackIcon)
     private lazy var label: Semibold24LabelStyle = Semibold24LabelStyle()
     lazy var assetsCountLabel: Regular13LabelStyle = Regular13LabelStyle()
+    lazy var selectionButton: SelectionButtonStyle = SelectionButtonStyle(type: .custom)
     
     lazy var assetsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -51,7 +52,7 @@ final class RegularAssetsView: UIView {
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, assetsCountLabel, assetsCollectionView])
+        contentView.addSubviews([arrowBack, label, assetsCountLabel, selectionButton, assetsCollectionView])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -69,6 +70,10 @@ final class RegularAssetsView: UIView {
             
             assetsCountLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 6),
             assetsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            
+            selectionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            selectionButton.centerYAnchor.constraint(equalTo: arrowBack.centerYAnchor),
+            selectionButton.heightAnchor.constraint(equalToConstant: 40),
             
             assetsCollectionView.topAnchor.constraint(equalTo: assetsCountLabel.bottomAnchor, constant: 20),
             assetsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
