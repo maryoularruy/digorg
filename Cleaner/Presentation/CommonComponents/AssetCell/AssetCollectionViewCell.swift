@@ -11,7 +11,8 @@ import UIKit
 import Disk
 
 final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
-	@IBOutlet var photoImageView: UIImageView!
+    @IBOutlet weak var bestIcon: BestIcon!
+    @IBOutlet var photoImageView: UIImageView!
 	@IBOutlet var checkBox: UIImageView!
     
 	lazy var asset = UIImage()
@@ -24,6 +25,11 @@ final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
 			}
 		}
 	}
+    lazy var isBest: Bool = false {
+        didSet {
+            bestIcon.isHidden = !isBest
+        }
+    }
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()

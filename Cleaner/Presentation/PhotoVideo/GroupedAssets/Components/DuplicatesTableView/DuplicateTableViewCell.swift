@@ -22,6 +22,7 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     }
 	var assetsForDeletion = Set<PHAsset>()
     private lazy var assets = [PHAsset]()
+    private lazy var indexOfBest = 0
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,6 +41,7 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
 	
 	func setupData(assets: [PHAsset]) {
 		self.assets = assets
+        indexOfBest = PhotoVideoManager.shared.chooseTheBest(assets) ?? 0
 		duplicatesAmountLabel.text = "\(assets.count) duplicates"
 	}
 }
@@ -53,6 +55,7 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
 		let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.photoImageView.image = assets[indexPath.item].getAssetThumbnail(TargetSize.large.size)
         cell.isChecked = assetsForDeletion.contains(assets[indexPath.item])
+        cell.isBest = indexPath.item == indexOfBest ? true : false
 		cell.setupSelectMode(isON: selectMode)
 		cell.addTapGestureRecognizer { [weak self] in
             guard let self else { return }

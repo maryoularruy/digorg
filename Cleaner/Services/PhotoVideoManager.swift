@@ -310,6 +310,43 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
         }
     }
     
+    func fetchScreenshots(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
+        fetchScreenshots { photoInAlbum in
+            DispatchQueue.global(qos: .background).async{
+                var images: [PHAsset] = []
+                if photoInAlbum.count == 0 {
+                    DispatchQueue.main.async {
+                        handler([])
+                    }
+                    return
+                }
+                for i in 1...photoInAlbum.count {
+                    images.append(photoInAlbum[i - 1])
+                }
+                DispatchQueue.main.async {
+                    handler(images)
+                }
+            }
+        }
+    }
+    
+    func chooseTheBest(_ assets: [PHAsset]) -> Int? {
+        if assets.isEmpty {
+            return nil
+        }
+        
+        var indexOfBest = 0
+        var sizeOfBest = assets[0].imageSize
+        
+        for i in 1..<assets.count {
+            if sizeOfBest < assets[i].imageSize {
+                indexOfBest = i
+                sizeOfBest = assets[i].imageSize
+            }
+        }
+        return indexOfBest
+    }
+    
     func join(_ groups: [PHAssetGroup]) -> [PHAsset] {
         var assets: [PHAsset] = []
         groups.forEach { assets.append(contentsOf: $0.assets) }
@@ -355,26 +392,6 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         albumsPhoto.enumerateObjects { collection, _, _ in
             handler(PHAsset.fetchAssets(in: collection, options: options))
-        }
-    }
-    
-    func fetchScreenshots(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
-        fetchScreenshots { photoInAlbum in
-            DispatchQueue.global(qos: .background).async{
-                var images: [PHAsset] = []
-                if photoInAlbum.count == 0 {
-                    DispatchQueue.main.async {
-                        handler([])
-                    }
-                    return
-                }
-                for i in 1...photoInAlbum.count {
-                    images.append(photoInAlbum[i - 1])
-                }
-                DispatchQueue.main.async {
-                    handler(images)
-                }
-            }
         }
     }
     
