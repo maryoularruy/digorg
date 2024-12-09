@@ -104,7 +104,7 @@ final class GroupedAssetsViewController: UIViewController {
 
 extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return assetGroups.count
+		assetGroups.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -183,7 +183,7 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
     }
     
     private func deletePhotos() {
-        if delete(assets: Array(assetsForDeletion)) {
+        if photoVideoManager.delete(assets: Array(assetsForDeletion)) {
             assetsInput = assetsInput.map { group in
                 var tempGroup = group
                 let notDeleted = tempGroup.assets.filter { !assetsForDeletion.contains($0) }
@@ -196,20 +196,6 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
             refreshSimilarItems()
             updatePlaceholder()
         }
-    }
-    
-    private func delete(assets: [PHAsset]) -> Bool {
-        let semaphore = DispatchSemaphore(value: 0)
-        var result = false
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.deleteAssets(assets as NSArray)}, completionHandler: { success, _ in
-                if success {
-                    result = true
-                }
-            semaphore.signal()
-        })
-        let semaphoreResult = semaphore.wait(timeout: .distantFuture)
-        return semaphoreResult == .success ? result : false
     }
     
     @objc func refreshSimilarItems() {

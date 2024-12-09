@@ -97,7 +97,6 @@
 		FA3987B12B305A3A0096F335 /* SDWebImagePhotosPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */; };
 		FA3987B42B305B190096F335 /* BottomPopup in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B32B305B190096F335 /* BottomPopup */; };
 		FA3987B72B305C120096F335 /* Haneke in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B62B305C120096F335 /* Haneke */; };
-		FA3987BD2B305D720096F335 /* AppKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987BB2B305D720096F335 /* AppKitExtension.swift */; };
 		FA3987BE2B305D720096F335 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987BC2B305D720096F335 /* UIKitExtension.swift */; };
 		FA3987EB2B305FA50096F335 /* DKPhotoPreviewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987C52B305FA40096F335 /* DKPhotoPreviewFactory.swift */; };
 		FA3987EC2B305FA50096F335 /* DKPhotoGalleryTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987C72B305FA40096F335 /* DKPhotoGalleryTransitionController.swift */; };
@@ -288,7 +287,6 @@
 		FA3987802B3058140096F335 /* Extension+PHAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+PHAsset.swift"; sourceTree = "<group>"; };
 		FA39879B2B30599C0096F335 /* GroupedAssets.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GroupedAssets.storyboard; sourceTree = "<group>"; };
 		FA39879C2B30599C0096F335 /* GroupedAssetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedAssetsViewController.swift; sourceTree = "<group>"; };
-		FA3987BB2B305D720096F335 /* AppKitExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtension.swift; sourceTree = "<group>"; };
 		FA3987BC2B305D720096F335 /* UIKitExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
 		FA3987C52B305FA40096F335 /* DKPhotoPreviewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoPreviewFactory.swift; sourceTree = "<group>"; };
 		FA3987C72B305FA40096F335 /* DKPhotoGalleryTransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoGalleryTransitionController.swift; sourceTree = "<group>"; };
@@ -806,7 +804,6 @@
 		FA3987BA2B305D720096F335 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FA3987BB2B305D720096F335 /* AppKitExtension.swift */,
 				FA3987BC2B305D720096F335 /* UIKitExtension.swift */,
 			);
 			path = Extensions;
@@ -1252,7 +1249,6 @@
 				752B10752AEABACD00EC0BBA /* ActionView.swift in Sources */,
 				FA3988062B305FA50096F335 /* DKPhotoGalleryResource.swift in Sources */,
 				FA3987FD2B305FA50096F335 /* DKPhotoQRCodeResultVC.swift in Sources */,
-				FA3987BD2B305D720096F335 /* AppKitExtension.swift in Sources */,
 				A5446D082CE76CCE00A1F940 /* Pages.swift in Sources */,
 				FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */,
 				FA39883D2B30602A0096F335 /* ZoomTransitionController.swift in Sources */,
