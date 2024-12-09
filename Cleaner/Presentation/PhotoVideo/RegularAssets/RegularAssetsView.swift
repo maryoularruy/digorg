@@ -28,6 +28,8 @@ final class RegularAssetsView: UIView {
         return collectionView
     }()
     
+    lazy var toolbar: ActionToolbar = ActionToolbar()
+    
     private var type: RegularAssetsType
     
     init(_ type: RegularAssetsType) {
@@ -51,7 +53,7 @@ final class RegularAssetsView: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([contentView])
+        addSubviews([contentView, toolbar])
         contentView.addSubviews([arrowBack, label, assetsCountLabel, selectionButton, assetsCollectionView])
         
         NSLayoutConstraint.activate([
@@ -78,7 +80,12 @@ final class RegularAssetsView: UIView {
             assetsCollectionView.topAnchor.constraint(equalTo: assetsCountLabel.bottomAnchor, constant: 20),
             assetsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             assetsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            assetsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            assetsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            toolbar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            toolbar.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            toolbar.bottomAnchor.constraint(equalTo: bottomAnchor),
+            toolbar.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 }

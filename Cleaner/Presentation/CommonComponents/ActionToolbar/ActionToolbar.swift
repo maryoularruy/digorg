@@ -33,6 +33,7 @@ final class ActionToolbar: UIView {
     }
     
     private func setup() {
+        clipsToBounds = true
         Bundle.main.loadNibNamed(nibName, owner: self)
         layer.cornerRadius = 20
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

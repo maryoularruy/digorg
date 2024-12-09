@@ -41,6 +41,8 @@ final class RegularAssetsViewController: UIViewController {
                     setupEmptyState()
                 } else {
                     rootView.selectionButton.bind(text: assetsForDeletion.count == assets.count ? .deselectAll : .selectAll)
+                    rootView.toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s")")
+                    rootView.toolbar.toolbarButton.isClickable = !assetsForDeletion.isEmpty
                     hideEmptyState()
                 }
             }
@@ -51,8 +53,14 @@ final class RegularAssetsViewController: UIViewController {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                rootView.selectionButton.bind(text: assetsForDeletion.count == assets.count ? .deselectAll : .selectAll)
-                rootView.assetsCollectionView.reloadData()
+                if assets.isEmpty {
+                    setupEmptyState()
+                } else {
+                    rootView.toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s")")
+                    rootView.selectionButton.bind(text: assetsForDeletion.count == assets.count ? .deselectAll : .selectAll)
+                    rootView.toolbar.toolbarButton.isClickable = !assetsForDeletion.isEmpty
+                    rootView.assetsCollectionView.reloadData()
+                }
             }
         }
     }
@@ -85,12 +93,15 @@ final class RegularAssetsViewController: UIViewController {
     
     private func setupEmptyState() {
         rootView.selectionButton.bind(text: .selectAll)
+        rootView.toolbar.toolbarButton.bind(text: "Back")
+        rootView.toolbar.toolbarButton.isClickable = true
         rootView.assetsCollectionView.isHidden = true
         emptyStateView?.removeFromSuperview()
         emptyStateView = rootView.createEmptyState(type: .empty)
         if let emptyStateView {
             rootView.addSubview(emptyStateView)
         }
+        rootView.layoutIfNeeded()
     }
     
     private func hideEmptyState() {
@@ -99,57 +110,56 @@ final class RegularAssetsViewController: UIViewController {
         emptyStateView?.removeFromSuperview()
         emptyStateView = nil
     }
-}
-
-extension RegularAssetsViewController: ViewControllerProtocol {
-    func setupUI() {
+    
+    private func fetchAssets(isFirstResponder: Bool = true) {
         switch type {
         case .livePhotos:
             photoVideoManager.fetchLivePhotos { [weak self] assets in
                 self?.assets = assets
-                self?.assetsForDeletion.insert(assets)
+                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
             }
         case .blurryPhotos:
             photoVideoManager.fetchBlurryPhotos { [weak self] assets in
                 self?.assets = assets
-                self?.assetsForDeletion.insert(assets)
-
+                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
             }
         case .portraits:
             photoVideoManager.fetchSelfiePhotos { [weak self] assets in
                 self?.assets = assets
-                self?.assetsForDeletion.insert(assets)
-
+                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
             }
         case .screenshots:
             photoVideoManager.fetchScreenshots { [weak self] assets in
                 self?.assets = assets
-                self?.assetsForDeletion.insert(assets)
-
+                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
             }
         case .allPhotos:
             photoVideoManager.fetchAllPhotos { [weak self] assets in
                 self?.assets = assets
-                self?.assetsForDeletion.insert(assets)
-
+                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
             }
         case .superSizedVideos:
             photoVideoManager.fetchSuperSizedVideos { [weak self] assets in
                 self?.assets = assets
-                self?.assetsForDeletion.insert(assets)
-
+                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
             }
         case .allVideos:
             photoVideoManager.fetchAllVideos { [weak self] assets in
                 self?.assets = assets
-                self?.assetsForDeletion.insert(assets)
-
+                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
             }
         }
+    }
+}
+
+extension RegularAssetsViewController: ViewControllerProtocol {
+    func setupUI() {
+        fetchAssets()
         
         rootView.assetsCollectionView.delegate = self
         rootView.assetsCollectionView.dataSource = self
         rootView.selectionButton.delegate = self
+        rootView.toolbar.delegate = self
     }
     
     func addGestureRecognizers() {
@@ -177,6 +187,19 @@ extension RegularAssetsViewController: SelectionButtonProtocol {
     }
 }
 
+extension RegularAssetsViewController: ActionToolbarDelegate {
+    func tapOnActionButton() {
+        if assets.isEmpty {
+            navigationController?.popViewController(animated: true)
+        } else {
+            if photoVideoManager.delete(assets: Array(assetsForDeletion)) {
+                assetsForDeletion.removeAll()
+                fetchAssets(isFirstResponder: false)
+            }
+        }
+    }
+}
+
 extension RegularAssetsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         assets.count
@@ -198,7 +221,7 @@ extension RegularAssetsViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (rootView.assetsCollectionView.frame.width / RegularAssetsView.assetsInRow) - RegularAssetsView.spacingBetweenAssets
-        return CGSize(width: size, height: size)
+        let oneSideSize = (rootView.assetsCollectionView.frame.width / RegularAssetsView.assetsInRow) - RegularAssetsView.spacingBetweenAssets
+        return CGSize(width: oneSideSize, height: oneSideSize)
     }
 }

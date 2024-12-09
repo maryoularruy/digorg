@@ -23,7 +23,7 @@ class Semibold15LabelStyle: UILabel {
     }
     
     func setup() {
-        font = UIFont.semibold15 ?? UIFont.boldSystemFont(ofSize: 15)
+        font = .semibold15 ?? UIFont.boldSystemFont(ofSize: 15)
         textColor = .black
     }
     

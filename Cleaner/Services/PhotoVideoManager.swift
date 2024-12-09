@@ -316,6 +316,20 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
         return assets
     }
     
+    func delete(assets: [PHAsset]) -> Bool {
+        let semaphore = DispatchSemaphore(value: 0)
+        var result = false
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.deleteAssets(assets as NSArray)}, completionHandler: { success, _ in
+                if success {
+                    result = true
+                }
+            semaphore.signal()
+        })
+        let semaphoreResult = semaphore.wait(timeout: .distantFuture)
+        return semaphoreResult == .success ? result : false
+    }
+    
     private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
            let options = PHFetchOptions()
            let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
