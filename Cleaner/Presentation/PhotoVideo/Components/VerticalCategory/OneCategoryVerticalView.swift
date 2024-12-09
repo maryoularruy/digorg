@@ -9,20 +9,11 @@ import UIKit
 import Photos
 
 protocol OneCategoryVerticalViewDelegate: AnyObject {
-    func tapOnCategory(_ type: OneCategoryVerticalViewType)
+    func tapOnCategory(_ type: OneCategory.VerticalViewType)
 }
 
-enum OneCategoryVerticalViewType {
-    case screenshots
-    
-    var title: String {
-        switch self {
-        case .screenshots: "Screenshots"
-        }
-    }
-}
-
-final class OneCategoryVerticalView: UIView {
+final class OneCategoryVerticalView: UIView, OneCategoryProtocol {
+    var type: Any
     weak var delegate: OneCategoryVerticalViewDelegate?
     
     private static var size = CGSize(width: 46, height: 88)
@@ -52,7 +43,6 @@ final class OneCategoryVerticalView: UIView {
         return collectionView
     }()
     
-    private var type: OneCategoryVerticalViewType
     lazy var assets: [PHAsset] = [] {
         didSet {
             assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
@@ -60,7 +50,7 @@ final class OneCategoryVerticalView: UIView {
         }
     }
     
-    init(_ type: OneCategoryVerticalViewType) {
+    init(_ type: OneCategory.VerticalViewType) {
         self.type = type
         super.init(frame: .zero)
         setupView()
@@ -68,11 +58,12 @@ final class OneCategoryVerticalView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        type = .screenshots
-        super.init(coder: coder)
+        fatalError()
     }
     
     private func setupView() {
+        guard let type = type as? OneCategory.VerticalViewType else { return }
+        
         contentView.backgroundColor = .paleGrey
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true

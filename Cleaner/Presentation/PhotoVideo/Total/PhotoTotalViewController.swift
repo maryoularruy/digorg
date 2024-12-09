@@ -49,6 +49,9 @@ extension PhotoTotalViewController: ViewControllerProtocol {
 //            rootView.duplicatePhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
 //        }
         
+        let dispatchGroup = DispatchGroup()
+
+        dispatchGroup.enter()
         photoVideoManager.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
             guard let self else { return }
             let joinedAssets = photoVideoManager.join(assetGroups)
@@ -57,31 +60,54 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             
             rootView.similarPhotosView.delegate = self
             rootView.duplicatePhotosView.delegate = self
+            
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchSelfiePhotos { [weak self] selfies in
-            self?.rootView.portraitsPhotosView.assets = selfies
-            self?.rootView.portraitsPhotosView.delegate = self
+            guard let self else { return }
+            rootView.portraitsPhotosView.assets = selfies
+            rootView.portraitsPhotosView.delegate = self
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchAllPhotos { [weak self] photos in
-            self?.rootView.allPhotosView.assets = photos
-            self?.rootView.allPhotosView.delegate = self
+            guard let self else { return }
+            rootView.allPhotosView.assets = photos
+            rootView.allPhotosView.delegate = self
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchLivePhotos { [weak self] livePhotos in
-            self?.rootView.livePhotosView.assets = livePhotos
-            self?.rootView.livePhotosView.delegate = self
+            guard let self else { return }
+            rootView.livePhotosView.assets = livePhotos
+            rootView.livePhotosView.delegate = self
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchBlurryPhotos { [weak self] blurries in
-            self?.rootView.blurryPhotosView.assets = blurries
-            self?.rootView.blurryPhotosView.delegate = self
+            guard let self else { return }
+            rootView.blurryPhotosView.assets = blurries
+            rootView.blurryPhotosView.delegate = self
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchScreenshots { [weak self] screenshots in
-            self?.rootView.screenshotsView.assets = screenshots
-            self?.rootView.screenshotsView.delegate = self
+            guard let self else { return }
+            rootView.screenshotsView.assets = screenshots
+            rootView.screenshotsView.delegate = self
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            guard let self else { return }
+            rootView.visibleOneCategoryViews = rootView.allOneCategoryViews.filter { !$0.assets.isEmpty }
+            
         }
     }
     
@@ -101,7 +127,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
 }
 
 extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate, OneCategoryRectangularViewDelegate, OneCategoryVerticalViewDelegate {
-    func tapOnCategory(_ type: OneCategoryVerticalViewType) {
+    func tapOnCategory(_ type: OneCategory.VerticalViewType) {
         let vc: UIViewController = switch type {
         case .screenshots:
             RegularAssetsViewController(type: .screenshots)
@@ -113,7 +139,7 @@ extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate, OneCatego
         }
     }
     
-    func tapOnCategory(_ type: OneCategoryRectangularViewType) {
+    func tapOnCategory(_ type: OneCategory.RectangularViewType) {
         let vc: UIViewController = switch type {
         case .live:
             RegularAssetsViewController(type: .livePhotos)
@@ -127,7 +153,7 @@ extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate, OneCatego
         }
     }
     
-    func tapOnCategory(_ type: OneCategoryHorizontalViewType) {
+    func tapOnCategory(_ type: OneCategory.HorizontalViewType) {
         let vc: UIViewController? = switch type {
         case .similarPhotos:
             StoryboardScene.GroupedAssets.initialScene.instantiate()

@@ -26,6 +26,19 @@ final class PhotoTotalView: UIView {
     lazy var portraitsPhotosView = OneCategoryHorizontalView(.portraits)
     lazy var allPhotosView = OneCategoryHorizontalView(.allPhotos)
     
+    lazy var allOneCategoryViews: [OneCategoryProtocol] = [
+        similarPhotosView,
+        duplicatePhotosView,
+        livePhotosView,
+        blurryPhotosView,
+        screenshotsView,
+        portraitsPhotosView,
+        allPhotosView
+    ]
+    
+    lazy var visibleOneCategoryViews: [OneCategoryProtocol] = []
+    private lazy var contentainerForVisibleOneCategoryViews = UIView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -36,6 +49,35 @@ final class PhotoTotalView: UIView {
         super.init(coder: coder)
         setupView()
         initConstraints()
+    }
+    
+    func constrainVisibleOneCategoryViews() {
+        contentainerForVisibleOneCategoryViews.subviews.forEach { $0.removeFromSuperview() }
+        
+        contentainerForVisibleOneCategoryViews.addSubviews(visibleOneCategoryViews)
+        
+        for (index, subview) in visibleOneCategoryViews.enumerated() {
+            if index == 0 {
+                NSLayoutConstraint.activate([
+                    subview.topAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.topAnchor),
+                    subview.leadingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.leadingAnchor),
+                    subview.trailingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.trailingAnchor),
+                ])
+            } else {
+                NSLayoutConstraint.activate([
+
+                    
+                    subview.leadingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.leadingAnchor),
+                    subview.trailingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.trailingAnchor),
+                ])
+            }
+            
+            if let lastSubview = visibleOneCategoryViews.last {
+                NSLayoutConstraint.activate([
+                    lastSubview.bottomAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.bottomAnchor)
+                ])
+            }
+        }
     }
     
     private func setupView() {
@@ -50,7 +92,9 @@ final class PhotoTotalView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, similarPhotosView, duplicatePhotosView, livePhotosView, blurryPhotosView, screenshotsView, portraitsPhotosView, allPhotosView])
+        contentView.addSubviews([arrowBack, label, contentainerForVisibleOneCategoryViews])
+        
+        contentainerForVisibleOneCategoryViews.backgroundColor = .acidGreen
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -72,37 +116,41 @@ final class PhotoTotalView: UIView {
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            similarPhotosView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
-            similarPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            similarPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            duplicatePhotosView.topAnchor.constraint(equalTo: similarPhotosView.bottomAnchor, constant: 8),
-            duplicatePhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            duplicatePhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            livePhotosView.topAnchor.constraint(equalTo: duplicatePhotosView.bottomAnchor, constant: 16),
-            livePhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            livePhotosView.heightAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.height),
-            livePhotosView.widthAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.width),
-            
-            blurryPhotosView.topAnchor.constraint(equalTo: livePhotosView.bottomAnchor, constant: 8),
-            blurryPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            blurryPhotosView.heightAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.height),
-            blurryPhotosView.widthAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.width),
-            
-            screenshotsView.topAnchor.constraint(equalTo: duplicatePhotosView.bottomAnchor, constant: 16),
-            screenshotsView.leadingAnchor.constraint(equalTo: livePhotosView.trailingAnchor, constant: 8),
-            screenshotsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            screenshotsView.bottomAnchor.constraint(equalTo: blurryPhotosView.bottomAnchor),
-            
-            portraitsPhotosView.topAnchor.constraint(equalTo: blurryPhotosView.bottomAnchor, constant: 16),
-            portraitsPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            portraitsPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            allPhotosView.topAnchor.constraint(equalTo: portraitsPhotosView.bottomAnchor, constant: 8),
-            allPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            allPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            allPhotosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            contentainerForVisibleOneCategoryViews.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
+            contentainerForVisibleOneCategoryViews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            contentainerForVisibleOneCategoryViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            contentainerForVisibleOneCategoryViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+//            similarPhotosView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
+//            similarPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            similarPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            
+//            duplicatePhotosView.topAnchor.constraint(equalTo: similarPhotosView.bottomAnchor, constant: 8),
+//            duplicatePhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            duplicatePhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            
+//            livePhotosView.topAnchor.constraint(equalTo: duplicatePhotosView.bottomAnchor, constant: 16),
+//            livePhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            livePhotosView.heightAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.height),
+//            livePhotosView.widthAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.width),
+//            
+//            blurryPhotosView.topAnchor.constraint(equalTo: livePhotosView.bottomAnchor, constant: 8),
+//            blurryPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            blurryPhotosView.heightAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.height),
+//            blurryPhotosView.widthAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.width),
+//            
+//            screenshotsView.topAnchor.constraint(equalTo: duplicatePhotosView.bottomAnchor, constant: 16),
+//            screenshotsView.leadingAnchor.constraint(equalTo: livePhotosView.trailingAnchor, constant: 8),
+//            screenshotsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            screenshotsView.bottomAnchor.constraint(equalTo: blurryPhotosView.bottomAnchor),
+//            
+//            portraitsPhotosView.topAnchor.constraint(equalTo: blurryPhotosView.bottomAnchor, constant: 16),
+//            portraitsPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            portraitsPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            
+//            allPhotosView.topAnchor.constraint(equalTo: portraitsPhotosView.bottomAnchor, constant: 8),
+//            allPhotosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            allPhotosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            allPhotosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }

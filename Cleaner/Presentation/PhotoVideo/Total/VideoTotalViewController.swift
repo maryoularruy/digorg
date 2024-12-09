@@ -60,7 +60,7 @@ extension VideoTotalViewController: ViewControllerProtocol {
 }
 
 extension VideoTotalViewController: OneCategoryHorizontalViewDelegate {
-    func tapOnCategory(_ type: OneCategoryHorizontalViewType) {
+    func tapOnCategory(_ type: OneCategory.HorizontalViewType) {
         let vc: UIViewController? = switch type {
         case .similarPhotos: nil
         case .duplicatePhotos: nil
