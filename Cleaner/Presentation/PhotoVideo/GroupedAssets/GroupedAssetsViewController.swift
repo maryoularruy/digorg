@@ -113,13 +113,14 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCell(for: indexPath) as DuplicateTableViewCell
 		cell.setupData(assets: assetGroups[indexPath.item].assets)
-        cell.selectMode = self.selectMode
-		cell.onTap = { [weak self] image, index in
+        cell.selectMode = selectMode
+        cell.selectionStyle = .none
+		cell.onTap = { [weak self] assets, index in
 			guard let self = self else { return }
 			let gallery = DKPhotoGallery()
 			gallery.singleTapMode = .dismiss
 			var dkarr = [DKPhotoGalleryItem]()
-			image.forEach { asset in
+            assets.forEach { asset in
 				dkarr.append(DKPhotoGalleryItem(asset: asset))
 			}
 			gallery.items = dkarr

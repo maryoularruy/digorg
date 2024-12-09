@@ -26,8 +26,8 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.duplicateGroupCV.register(cellType: AssetCollectionViewCell.self)
-        self.duplicateGroupCV.reloadData()
+        duplicateGroupCV.register(cellType: AssetCollectionViewCell.self)
+        duplicateGroupCV.reloadData()
     }
 	
 	func setupSelectMode(isON: Bool) {
@@ -35,7 +35,7 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
 	}
 	
 	override func prepareForReuse() {
-		self.duplicateGroupCV.reloadData()
+		duplicateGroupCV.reloadData()
 	}
 	
 	func setupData(assets: [PHAsset]) {
