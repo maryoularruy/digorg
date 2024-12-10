@@ -8,7 +8,7 @@
 import UIKit
 
 final class PhotoTotalView: UIView {
-    private lazy var scroll: UIScrollView = scrollView
+    lazy var scroll: UIScrollView = scrollView
     private lazy var contentView: UIView = UIView()
     lazy var progressBar = HorizontalProgressBar()
     lazy var arrowBack: UIView = arrowBackButton

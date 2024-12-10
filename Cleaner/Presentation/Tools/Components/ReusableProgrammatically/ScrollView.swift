@@ -11,5 +11,6 @@ var scrollView: UIScrollView {
     let scrollView = UIScrollView()
     scrollView.contentInset = UIEdgeInsets(top: 4, left: 16, bottom: 36, right: 16)
     scrollView.backgroundColor = .clear
+    scrollView.refreshControl = UIRefreshControl()
     return scrollView
 }

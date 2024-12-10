@@ -31,6 +31,7 @@ final class PhotoTotalViewController: UIViewController {
 extension PhotoTotalViewController: ViewControllerProtocol {
     func setupUI() {
         let progressStep: CGFloat = 1.0 / 6
+        rootView.progressBar.updateProgress(to: 0)
         let dispatchGroup = DispatchGroup()
         rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
         
@@ -113,10 +114,17 @@ extension PhotoTotalViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+        
+        rootView.scroll.refreshControl?.addTarget(self, action: #selector(updateUI), for: .valueChanged)
     }
     
     @objc private func handleSwipeRight() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func updateUI() {
+        setupUI()
+        rootView.scroll.refreshControl?.endRefreshing()
     }
 }
 

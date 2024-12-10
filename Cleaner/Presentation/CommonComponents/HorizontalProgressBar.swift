@@ -31,7 +31,7 @@ final class HorizontalProgressBar: UIView {
         updateProgress(to: currentProgress)
     }
     
-    private func updateProgress(to progress: CGFloat) {
+    func updateProgress(to progress: CGFloat) {
         let clampedProgress = max(0.0, min(progress, 1.0))
         let maxWidth = backgroundView.frame.width
         let newWidth = maxWidth * clampedProgress
