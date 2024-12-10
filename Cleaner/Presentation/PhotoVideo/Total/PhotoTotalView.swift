@@ -10,7 +10,6 @@ import UIKit
 final class PhotoTotalView: UIView {
     lazy var scroll: UIScrollView = scrollView
     private lazy var contentView: UIView = UIView()
-    lazy var progressBar = HorizontalProgressBar()
     lazy var arrowBack: UIView = arrowBackButton
     
     private lazy var label: Semibold15LabelStyle = {
@@ -18,6 +17,8 @@ final class PhotoTotalView: UIView {
         label.bind(text: "Photo Cleanup")
         return label
     }()
+    
+    lazy var progressView: ScanningGalleryProgressView = ScanningGalleryProgressView()
     
     lazy var similarPhotosView = OneCategoryHorizontalView(.similarPhotos)
     lazy var duplicatePhotosView = OneCategoryHorizontalView(.duplicatePhotos)
@@ -132,7 +133,7 @@ final class PhotoTotalView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, progressBar, contentainerForVisibleOneCategoryViews])
+        contentView.addSubviews([arrowBack, label, progressView, contentainerForVisibleOneCategoryViews])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -154,11 +155,11 @@ final class PhotoTotalView: UIView {
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            progressBar.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 29),
-            progressBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            progressBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            progressView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 29),
+            progressView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            contentainerForVisibleOneCategoryViews.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 20),
+            contentainerForVisibleOneCategoryViews.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 20),
             contentainerForVisibleOneCategoryViews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             contentainerForVisibleOneCategoryViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             contentainerForVisibleOneCategoryViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)

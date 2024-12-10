@@ -31,7 +31,7 @@ final class PhotoTotalViewController: UIViewController {
 extension PhotoTotalViewController: ViewControllerProtocol {
     func setupUI() {
         let progressStep: CGFloat = 1.0 / 6
-        rootView.progressBar.updateProgress(to: 0)
+        rootView.progressView.resetProgress()
         let dispatchGroup = DispatchGroup()
         rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
         
@@ -45,7 +45,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             rootView.similarPhotosView.delegate = self
             rootView.duplicatePhotosView.delegate = self
             
-            rootView.progressBar.addProgress(progressStep)
+            rootView.progressView.progressBar.addProgress(progressStep)
             dispatchGroup.leave()
         }
         
@@ -55,7 +55,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             rootView.portraitsPhotosView.assets = selfies
             rootView.portraitsPhotosView.delegate = self
             
-            rootView.progressBar.addProgress(progressStep)
+            rootView.progressView.updateProgress(progressStep)
             dispatchGroup.leave()
         }
         
@@ -65,7 +65,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             rootView.allPhotosView.assets = photos
             rootView.allPhotosView.delegate = self
             
-            rootView.progressBar.addProgress(progressStep)
+            rootView.progressView.updateProgress(progressStep)
             dispatchGroup.leave()
         }
         
@@ -75,7 +75,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             rootView.livePhotosView.assets = livePhotos
             rootView.livePhotosView.delegate = self
             
-            rootView.progressBar.addProgress(progressStep)
+            rootView.progressView.updateProgress(progressStep)
             dispatchGroup.leave()
         }
         
@@ -85,7 +85,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             rootView.blurryPhotosView.assets = blurries
             rootView.blurryPhotosView.delegate = self
             
-            rootView.progressBar.addProgress(progressStep)
+            rootView.progressView.updateProgress(progressStep)
             dispatchGroup.leave()
         }
         
@@ -95,7 +95,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             rootView.screenshotsView.assets = screenshots
             rootView.screenshotsView.delegate = self
             
-            rootView.progressBar.addProgress(progressStep)
+            rootView.progressView.updateProgress(progressStep)
             dispatchGroup.leave()
         }
         
