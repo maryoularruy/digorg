@@ -15,8 +15,9 @@ protocol OneCategoryVerticalViewDelegate: AnyObject {
 final class OneCategoryVerticalView: UIView, OneCategoryProtocol {
     var type: Any
     weak var delegate: OneCategoryVerticalViewDelegate?
+    static var width: CGFloat = 167
     
-    private static var size = CGSize(width: 46, height: 88)
+    private static var assetSize = CGSize(width: 46, height: 88)
     private lazy var contentView: UIView = UIView()
     private lazy var label: Semibold15LabelStyle = Semibold15LabelStyle()
     
@@ -32,7 +33,7 @@ final class OneCategoryVerticalView: UIView, OneCategoryProtocol {
     lazy var assetsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = OneCategoryVerticalView.size
+        layout.itemSize = OneCategoryVerticalView.assetSize
         layout.minimumLineSpacing = -23
         layout.minimumInteritemSpacing = -28
         
@@ -118,7 +119,7 @@ extension OneCategoryVerticalView: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneCategoryCell.identifier, for: indexPath) as! OneCategoryCell
         cell.layer.cornerRadius = 8
-        cell.bind(assets[indexPath.row].getAssetThumbnail(OneCategoryVerticalView.size))
+        cell.bind(assets[indexPath.row].getAssetThumbnail(OneCategoryVerticalView.assetSize))
         return cell
     }
 }

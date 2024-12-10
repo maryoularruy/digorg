@@ -107,7 +107,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let self else { return }
             rootView.visibleOneCategoryViews = rootView.allOneCategoryViews.filter { !$0.assets.isEmpty }
-            
+            rootView.constrainVisibleOneCategoryViews()
         }
     }
     
