@@ -80,7 +80,7 @@ final class RegularAssetsView: UIView {
             assetsCollectionView.topAnchor.constraint(equalTo: assetsCountLabel.bottomAnchor, constant: 20),
             assetsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             assetsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            assetsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            assetsCollectionView.bottomAnchor.constraint(equalTo: toolbar.topAnchor, constant: -15),
             
             toolbar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             toolbar.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),

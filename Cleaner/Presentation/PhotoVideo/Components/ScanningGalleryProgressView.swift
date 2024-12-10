@@ -8,6 +8,7 @@
 import UIKit
 
 final class ScanningGalleryProgressView: UIView {
+    static var height: CGFloat = 76.0
     private lazy var contentView: UIView = UIView()
     lazy var progressLabel: Regular13LabelStyle = Regular13LabelStyle()
     lazy var progressBar: HorizontalProgressBar = HorizontalProgressBar()
@@ -59,7 +60,7 @@ final class ScanningGalleryProgressView: UIView {
             progressBar.topAnchor.constraint(equalTo: progressLabel.bottomAnchor, constant: 14),
             progressBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             progressBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            progressBar.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            progressBar.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -16)
         ])
     }
 }

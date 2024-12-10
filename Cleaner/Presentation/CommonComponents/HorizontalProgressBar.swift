@@ -68,7 +68,6 @@ final class HorizontalProgressBar: UIView {
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             backgroundView.heightAnchor.constraint(equalToConstant: 12),
-            backgroundView.widthAnchor.constraint(equalTo: widthAnchor),
             
             foregroundView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor),
             foregroundView.topAnchor.constraint(equalTo: backgroundView.topAnchor),

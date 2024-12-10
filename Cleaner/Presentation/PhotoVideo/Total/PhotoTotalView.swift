@@ -19,6 +19,7 @@ final class PhotoTotalView: UIView {
     }()
     
     lazy var progressView: ScanningGalleryProgressView = ScanningGalleryProgressView()
+    lazy var progressViewHeight = progressView.heightAnchor.constraint(equalToConstant: ScanningGalleryProgressView.height)
     
     lazy var similarPhotosView = OneCategoryHorizontalView(.similarPhotos)
     lazy var duplicatePhotosView = OneCategoryHorizontalView(.duplicatePhotos)
@@ -28,7 +29,7 @@ final class PhotoTotalView: UIView {
     lazy var portraitsPhotosView = OneCategoryHorizontalView(.portraits)
     lazy var allPhotosView = OneCategoryHorizontalView(.allPhotos)
     
-    private lazy var contentainerForVisibleOneCategoryViews = UIView()
+    lazy var contentainerForVisibleOneCategoryViews = UIView()
     
     private lazy var horizontalOneCategoryViews: [OneCategoryProtocol] = [
         similarPhotosView,
@@ -54,7 +55,7 @@ final class PhotoTotalView: UIView {
         setupView()
         initConstraints()
     }
-    
+
     func constrainVisibleOneCategoryViews() {
         let container = createNonHorizontalOneCategoryViewsContainer()
         
@@ -158,6 +159,7 @@ final class PhotoTotalView: UIView {
             progressView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 29),
             progressView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            progressViewHeight,
             
             contentainerForVisibleOneCategoryViews.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 20),
             contentainerForVisibleOneCategoryViews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

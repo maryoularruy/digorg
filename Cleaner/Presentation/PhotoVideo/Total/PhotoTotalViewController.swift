@@ -31,6 +31,7 @@ final class PhotoTotalViewController: UIViewController {
 extension PhotoTotalViewController: ViewControllerProtocol {
     func setupUI() {
         let progressStep: CGFloat = 1.0 / 6
+        rootView.progressViewHeight.constant = ScanningGalleryProgressView.height
         rootView.progressView.resetProgress()
         let dispatchGroup = DispatchGroup()
         rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
@@ -102,6 +103,11 @@ extension PhotoTotalViewController: ViewControllerProtocol {
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let self else { return }
             rootView.subviews.forEach { $0.isUserInteractionEnabled = true }
+            rootView.progressViewHeight.constant = 0
+            UIView.animate(withDuration: 0.6) {
+                self.rootView.progressView.layoutIfNeeded()
+                self.rootView.contentainerForVisibleOneCategoryViews.layoutIfNeeded()
+            }
             rootView.constrainVisibleOneCategoryViews()
         }
     }
