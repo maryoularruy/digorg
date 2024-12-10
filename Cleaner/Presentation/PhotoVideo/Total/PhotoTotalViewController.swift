@@ -106,7 +106,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             rootView.progressViewHeight.constant = 0
             UIView.animate(withDuration: 0.6) {
                 self.rootView.progressView.layoutIfNeeded()
-                self.rootView.contentainerForVisibleOneCategoryViews.layoutIfNeeded()
+                self.rootView.containerForVisibleOneCategoryViews.layoutIfNeeded()
             }
             rootView.constrainVisibleOneCategoryViews()
         }

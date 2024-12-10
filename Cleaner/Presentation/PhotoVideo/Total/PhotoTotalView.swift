@@ -29,7 +29,7 @@ final class PhotoTotalView: UIView {
     lazy var portraitsPhotosView = OneCategoryHorizontalView(.portraits)
     lazy var allPhotosView = OneCategoryHorizontalView(.allPhotos)
     
-    lazy var contentainerForVisibleOneCategoryViews = UIView()
+    lazy var containerForVisibleOneCategoryViews = UIView()
     
     private lazy var horizontalOneCategoryViews: [OneCategoryProtocol] = [
         similarPhotosView,
@@ -65,31 +65,31 @@ final class PhotoTotalView: UIView {
         } else {
             visibleViews.insert(container, at: 0)
         }
-        contentainerForVisibleOneCategoryViews.subviews.forEach { $0.removeFromSuperview() }
-        contentainerForVisibleOneCategoryViews.addSubviews(visibleViews)
+        containerForVisibleOneCategoryViews.subviews.forEach { $0.removeFromSuperview() }
+        containerForVisibleOneCategoryViews.addSubviews(visibleViews)
 
-        for (index, subview) in contentainerForVisibleOneCategoryViews.subviews.enumerated() {
+        for (index, subview) in containerForVisibleOneCategoryViews.subviews.enumerated() {
             //setup top contsraint
             if index == 0 {
                 NSLayoutConstraint.activate([
-                    subview.topAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.topAnchor)
+                    subview.topAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.topAnchor)
                 ])
             } else {
                 NSLayoutConstraint.activate([
-                    subview.topAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.subviews[index - 1].bottomAnchor, constant: 8)
+                    subview.topAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.subviews[index - 1].bottomAnchor, constant: 8)
                 ])
             }
             
             //setup leading&trailing constraints
             NSLayoutConstraint.activate([
-                subview.leadingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.leadingAnchor),
-                subview.trailingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.trailingAnchor)
+                subview.leadingAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.leadingAnchor),
+                subview.trailingAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.trailingAnchor)
             ])
             
             //setup bottom constraints
-            if index == contentainerForVisibleOneCategoryViews.subviews.count - 1 {
+            if index == containerForVisibleOneCategoryViews.subviews.count - 1 {
                 NSLayoutConstraint.activate([
-                    subview.bottomAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.bottomAnchor, constant: -8)
+                    subview.bottomAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.bottomAnchor, constant: -8)
                 ])
             }
         }
@@ -134,7 +134,7 @@ final class PhotoTotalView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, progressView, contentainerForVisibleOneCategoryViews])
+        contentView.addSubviews([arrowBack, label, progressView, containerForVisibleOneCategoryViews])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -156,15 +156,15 @@ final class PhotoTotalView: UIView {
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            progressView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 29),
+            progressView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
             progressView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             progressViewHeight,
             
-            contentainerForVisibleOneCategoryViews.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 20),
-            contentainerForVisibleOneCategoryViews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contentainerForVisibleOneCategoryViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            contentainerForVisibleOneCategoryViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            containerForVisibleOneCategoryViews.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 16),
+            containerForVisibleOneCategoryViews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerForVisibleOneCategoryViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            containerForVisibleOneCategoryViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }

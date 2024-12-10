@@ -29,18 +29,51 @@ final class VideoTotalViewController: UIViewController {
 
 extension VideoTotalViewController: ViewControllerProtocol {
     func setupUI() {
+        let progressStep: CGFloat = 1.0 / 3
+        rootView.progressViewHeight.constant = ScanningGalleryProgressView.height
+        rootView.progressView.resetProgress()
+        let dispatchGroup = DispatchGroup()
+        rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
+        
+        dispatchGroup.enter()
         photoVideoManager.fetchSimilarVideos { [weak self] assetGroups, duplicatesCount in
             guard let self else { return }
             rootView.duplicateVideosView.assets = photoVideoManager.join(assetGroups)
             rootView.duplicateVideosView.delegate = self
+            
+            rootView.progressView.progressBar.addProgress(progressStep)
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchSuperSizedVideos { [weak self] videos in
-            self?.rootView.superSizedVideosView.assets = videos
+            guard let self else { return }
+            rootView.superSizedVideosView.assets = videos
+            rootView.superSizedVideosView.delegate = self
+            
+            rootView.progressView.progressBar.addProgress(progressStep)
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchAllVideos { [weak self] videos in
-            self?.rootView.allVideosView.assets = videos
+            guard let self else { return }
+            rootView.allVideosView.assets = videos
+            rootView.allVideosView.delegate = self
+            
+            rootView.progressView.progressBar.addProgress(progressStep)
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            guard let self else { return }
+            rootView.subviews.forEach { $0.isUserInteractionEnabled = true }
+            rootView.progressViewHeight.constant = 0
+            UIView.animate(withDuration: 0.6) {
+                self.rootView.progressView.layoutIfNeeded()
+                self.rootView.containerForVisibleOneCategoryViews.layoutIfNeeded()
+            }
+            rootView.constrainVisibleOneCategoryViews()
         }
     }
     
@@ -52,10 +85,17 @@ extension VideoTotalViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+        
+        rootView.scroll.refreshControl?.addTarget(self, action: #selector(updateUI), for: .valueChanged)
     }
     
     @objc private func handleSwipeRight() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func updateUI() {
+        setupUI()
+        rootView.scroll.refreshControl?.endRefreshing()
     }
 }
 
@@ -66,9 +106,12 @@ extension VideoTotalViewController: OneCategoryHorizontalViewDelegate {
         case .duplicatePhotos: nil
         case .portraits: nil
         case .allPhotos: nil
-        case .duplicateVideos: StoryboardScene.GroupedAssets.initialScene.instantiate()
-        case .superSizedVideos: RegularAssetsViewController(type: .superSizedVideos)
-        case .allVideos: RegularAssetsViewController(type: .allVideos)
+        case .duplicateVideos:
+            StoryboardScene.GroupedAssets.initialScene.instantiate()
+        case .superSizedVideos:
+            RegularAssetsViewController(type: .superSizedVideos)
+        case .allVideos:
+            RegularAssetsViewController(type: .allVideos)
         }
         
         if let vc {
