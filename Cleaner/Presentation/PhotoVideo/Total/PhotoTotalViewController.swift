@@ -26,31 +26,14 @@ final class PhotoTotalViewController: UIViewController {
         super.viewWillAppear(animated)
         setupUI()
     }
-    
-    private func setupScanning() {
-        rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
-        showProgressBar()
-    }
-    
-    private func showProgressBar() {
-        
-    }
 }
 
 extension PhotoTotalViewController: ViewControllerProtocol {
     func setupUI() {
-//        if photoVideoManager.isLoadingPhotos {
-//            rootView.similarPhotosView.assets = []
-//            rootView.duplicatePhotosView.assets = []
-//            setupScanning()
-//        } else {
-//            rootView.subviews.forEach { $0.isUserInteractionEnabled = true }
-//            rootView.similarPhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
-//            rootView.duplicatePhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
-//        }
-        
+        let progressStep: CGFloat = 1.0 / 6
         let dispatchGroup = DispatchGroup()
-
+        rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
+        
         dispatchGroup.enter()
         photoVideoManager.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
             guard let self else { return }
@@ -61,6 +44,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             rootView.similarPhotosView.delegate = self
             rootView.duplicatePhotosView.delegate = self
             
+            rootView.progressBar.addProgress(progressStep)
             dispatchGroup.leave()
         }
         
@@ -69,6 +53,8 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             guard let self else { return }
             rootView.portraitsPhotosView.assets = selfies
             rootView.portraitsPhotosView.delegate = self
+            
+            rootView.progressBar.addProgress(progressStep)
             dispatchGroup.leave()
         }
         
@@ -77,6 +63,8 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             guard let self else { return }
             rootView.allPhotosView.assets = photos
             rootView.allPhotosView.delegate = self
+            
+            rootView.progressBar.addProgress(progressStep)
             dispatchGroup.leave()
         }
         
@@ -85,6 +73,8 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             guard let self else { return }
             rootView.livePhotosView.assets = livePhotos
             rootView.livePhotosView.delegate = self
+            
+            rootView.progressBar.addProgress(progressStep)
             dispatchGroup.leave()
         }
         
@@ -93,6 +83,8 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             guard let self else { return }
             rootView.blurryPhotosView.assets = blurries
             rootView.blurryPhotosView.delegate = self
+            
+            rootView.progressBar.addProgress(progressStep)
             dispatchGroup.leave()
         }
         
@@ -101,12 +93,14 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             guard let self else { return }
             rootView.screenshotsView.assets = screenshots
             rootView.screenshotsView.delegate = self
+            
+            rootView.progressBar.addProgress(progressStep)
             dispatchGroup.leave()
         }
         
         dispatchGroup.notify(queue: .main) { [weak self] in
             guard let self else { return }
-            rootView.visibleOneCategoryViews = rootView.allOneCategoryViews.filter { !$0.assets.isEmpty }
+            rootView.subviews.forEach { $0.isUserInteractionEnabled = true }
             rootView.constrainVisibleOneCategoryViews()
         }
     }

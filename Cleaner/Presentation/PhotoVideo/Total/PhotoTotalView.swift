@@ -10,6 +10,7 @@ import UIKit
 final class PhotoTotalView: UIView {
     private lazy var scroll: UIScrollView = scrollView
     private lazy var contentView: UIView = UIView()
+    lazy var progressBar = HorizontalProgressBar()
     lazy var arrowBack: UIView = arrowBackButton
     
     private lazy var label: Semibold15LabelStyle = {
@@ -26,18 +27,20 @@ final class PhotoTotalView: UIView {
     lazy var portraitsPhotosView = OneCategoryHorizontalView(.portraits)
     lazy var allPhotosView = OneCategoryHorizontalView(.allPhotos)
     
-    lazy var allOneCategoryViews: [OneCategoryProtocol] = [
+    private lazy var contentainerForVisibleOneCategoryViews = UIView()
+    
+    private lazy var horizontalOneCategoryViews: [OneCategoryProtocol] = [
         similarPhotosView,
         duplicatePhotosView,
-        livePhotosView,
-        blurryPhotosView,
-        screenshotsView,
         portraitsPhotosView,
         allPhotosView
     ]
     
-    lazy var visibleOneCategoryViews: [OneCategoryProtocol] = []
-    private lazy var contentainerForVisibleOneCategoryViews = UIView()
+    private lazy var nonHorizontalOneCategoryViews: [OneCategoryProtocol] = [
+        livePhotosView,
+        blurryPhotosView,
+        screenshotsView,
+    ]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,61 +55,69 @@ final class PhotoTotalView: UIView {
     }
     
     func constrainVisibleOneCategoryViews() {
+        let container = createNonHorizontalOneCategoryViewsContainer()
+        
+        var visibleViews: [UIView] = horizontalOneCategoryViews.filter { !$0.assets.isEmpty }
+        if let duplicatePhotosViewIndex = visibleViews.firstIndex(where: { $0 == duplicatePhotosView }) {
+            visibleViews.insert(container, at: duplicatePhotosViewIndex + 1)
+        } else {
+            visibleViews.insert(container, at: 0)
+        }
         contentainerForVisibleOneCategoryViews.subviews.forEach { $0.removeFromSuperview() }
-        
-        contentainerForVisibleOneCategoryViews.addSubviews(visibleOneCategoryViews)
-        
-        for (index, subview) in visibleOneCategoryViews.enumerated() {
+        contentainerForVisibleOneCategoryViews.addSubviews(visibleViews)
+
+        for (index, subview) in contentainerForVisibleOneCategoryViews.subviews.enumerated() {
             //setup top contsraint
             if index == 0 {
                 NSLayoutConstraint.activate([
                     subview.topAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.topAnchor)
                 ])
             } else {
-                let topConstraint = subview.topAnchor.constraint(equalTo: visibleOneCategoryViews[index - 1].bottomAnchor)
-                topConstraint.constant =
-                if let type = subview.type as? OneCategory.RectangularViewType {
-                    type == .live ? 16 : 8
-                } else if let type = subview.type as? OneCategory.VerticalViewType {
-                    type == .screenshots ? 16 : 8
-                } else if let type = subview.type as? OneCategory.HorizontalViewType {
-                    type == .portraits ? 16 : 8
-                } else { 8 }
-                topConstraint.isActive = true
+                NSLayoutConstraint.activate([
+                    subview.topAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.subviews[index - 1].bottomAnchor, constant: 8)
+                ])
             }
             
             //setup leading&trailing constraints
-            if let type = subview.type as? OneCategory.RectangularViewType {
-                NSLayoutConstraint.activate([
-                    subview.leadingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.leadingAnchor),
-                    subview.heightAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.height),
-                    subview.widthAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.width)
-                ])
-            } else if let type = subview.type as? OneCategory.VerticalViewType {
-                NSLayoutConstraint.activate([
-                    subview.trailingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.trailingAnchor),
-                    subview.widthAnchor.constraint(equalToConstant: OneCategoryVerticalView.width)
-                ])
-                
-                if index == visibleOneCategoryViews.count - 1 {
-                    NSLayoutConstraint.activate([
-                        subview.bottomAnchor.constraint(equalTo: visibleOneCategoryViews[index + 1].topAnchor, constant: -8)
-                    ])
-                }
-            } else {
-                NSLayoutConstraint.activate([
-                    subview.leadingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.leadingAnchor),
-                    subview.trailingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.trailingAnchor)
-                ])
-            }
+            NSLayoutConstraint.activate([
+                subview.leadingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.leadingAnchor),
+                subview.trailingAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.trailingAnchor)
+            ])
             
             //setup bottom constraints
-            if let lastSubview = visibleOneCategoryViews.last {
+            if index == contentainerForVisibleOneCategoryViews.subviews.count - 1 {
                 NSLayoutConstraint.activate([
-                    lastSubview.bottomAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.bottomAnchor)
+                    subview.bottomAnchor.constraint(equalTo: contentainerForVisibleOneCategoryViews.bottomAnchor, constant: -8)
                 ])
             }
         }
+    }
+    
+    private func createNonHorizontalOneCategoryViewsContainer() -> UIView {
+        let containerView = UIView()
+        containerView.addSubviews([livePhotosView, blurryPhotosView, screenshotsView])
+        
+        NSLayoutConstraint.activate([
+            livePhotosView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            livePhotosView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            livePhotosView.heightAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.height),
+            livePhotosView.widthAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.width),
+            
+            blurryPhotosView.topAnchor.constraint(equalTo: livePhotosView.bottomAnchor, constant: 8),
+            blurryPhotosView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            blurryPhotosView.heightAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.height),
+            blurryPhotosView.widthAnchor.constraint(equalToConstant: OneCategoryRectangularView.size.width),
+            blurryPhotosView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            
+            screenshotsView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            screenshotsView.leadingAnchor.constraint(equalTo: livePhotosView.trailingAnchor, constant: 8),
+            screenshotsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            screenshotsView.bottomAnchor.constraint(equalTo: blurryPhotosView.bottomAnchor)
+        ])
+        
+        ([livePhotosView, blurryPhotosView, screenshotsView] as [OneCategoryProtocol]).forEach { $0.isHidden = $0.assets.isEmpty }
+        
+        return containerView
     }
     
     private func setupView() {
@@ -121,9 +132,7 @@ final class PhotoTotalView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, contentainerForVisibleOneCategoryViews])
-        
-        contentainerForVisibleOneCategoryViews.backgroundColor = .acidGreen
+        contentView.addSubviews([arrowBack, label, progressBar, contentainerForVisibleOneCategoryViews])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -138,14 +147,18 @@ final class PhotoTotalView: UIView {
             contentView.widthAnchor.constraint(equalTo: scroll.widthAnchor, constant: -32),
             
             arrowBack.topAnchor.constraint(equalTo: contentView.topAnchor),
-            arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -16),
+            arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
             
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            contentainerForVisibleOneCategoryViews.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
+            progressBar.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 29),
+            progressBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            progressBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            contentainerForVisibleOneCategoryViews.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 20),
             contentainerForVisibleOneCategoryViews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             contentainerForVisibleOneCategoryViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             contentainerForVisibleOneCategoryViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)

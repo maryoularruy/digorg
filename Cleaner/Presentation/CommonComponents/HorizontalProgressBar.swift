@@ -11,6 +11,7 @@ final class HorizontalProgressBar: UIView {
     private let backgroundView = UIView()
     private let foregroundView = UIView()
     
+    private var currentProgress: CGFloat = 0.0
     private var progressWidthConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
@@ -25,21 +26,26 @@ final class HorizontalProgressBar: UIView {
         initConstraints()
     }
     
-    func updateProgress(to progress: CGFloat) {
+    func addProgress(_ progress: CGFloat) {
+        currentProgress += progress
+        updateProgress(to: currentProgress)
+    }
+    
+    private func updateProgress(to progress: CGFloat) {
         let clampedProgress = max(0.0, min(progress, 1.0))
         let maxWidth = backgroundView.frame.width
         let newWidth = maxWidth * clampedProgress
         
-        progressWidthConstraint.constant = newWidth
-        
-        UIView.animate(withDuration: 0.4) { [weak self] in
-            self?.layoutIfNeeded()
+        DispatchQueue.main.async { [weak self] in
+            self?.progressWidthConstraint.constant = newWidth
+            
+            UIView.animate(withDuration: 0.2) {
+                self?.layoutIfNeeded()
+            }
         }
     }
     
     private func setupView() {
-        backgroundColor = .red
-        
         backgroundView.backgroundColor = .lightBlue
         backgroundView.layer.cornerRadius = 7
         backgroundView.clipsToBounds = true
