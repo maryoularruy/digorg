@@ -146,8 +146,8 @@ final class PhotoTotalView: UIView {
             contentView.bottomAnchor.constraint(equalTo: scroll.bottomAnchor, constant: -90),
             contentView.widthAnchor.constraint(equalTo: scroll.widthAnchor, constant: -32),
             
-            arrowBack.topAnchor.constraint(equalTo: contentView.topAnchor),
-            arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            arrowBack.centerYAnchor.constraint(equalTo: label.centerYAnchor),
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
             

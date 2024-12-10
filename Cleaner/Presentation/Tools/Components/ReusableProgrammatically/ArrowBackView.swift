@@ -7,16 +7,9 @@
 
 import UIKit
 
-var arrowBackButton: UIView {
-    let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
-    
-    let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.image = .arrowBackIcon
-    imageView.contentMode = .scaleToFill
-    imageView.frame = view.bounds
-    imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    
-    view.addSubview(imageView)
+var arrowBackButton: UIImageView {
+    let view = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
+    view.setImage(.arrowBackIcon)
+    view.contentMode = .center
     return view
 }
