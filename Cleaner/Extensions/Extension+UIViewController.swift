@@ -35,6 +35,10 @@ extension UIViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alert, animated: true)
             }
+        } else {
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alert, animated: true)
         }
     }
     
