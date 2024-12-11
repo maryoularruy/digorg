@@ -8,15 +8,13 @@
 import UIKit
 
 final class CleaningAssetsView: UIView {
-    private lazy var progressLabel: Semibold24LabelStyle = Semibold24LabelStyle()
-    
     private lazy var cleaningItemsLabel: Regular15LabelStyle = {
         let label = Regular15LabelStyle()
         label.bind(text: "Cleaning unnecessary files....")
         return label
     }()
     
-    lazy var progressBar: HorizontalProgressBar = HorizontalProgressBar()
+    private lazy var progressBar: HorizontalProgressBar = HorizontalProgressBar()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,11 +29,7 @@ final class CleaningAssetsView: UIView {
     }
     
     func startProgress() {
-        progressBar.updateProgress(to: 1, duration: 1.4)
-    }
-    
-    func updateProgress() {
-        progressLabel.bind(text: "\(progressBar.currentProgress.toPercent())%")
+        progressBar.updateProgress(to: 1.0, duration: 1)
     }
     
     func showCongratsView(deletedItemsCount: Int) {
@@ -71,7 +65,7 @@ final class CleaningAssetsView: UIView {
         
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -90),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -80),
             
             congratsLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
             congratsLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -83,22 +77,19 @@ final class CleaningAssetsView: UIView {
     
     private func setupView() {
         backgroundColor = .paleGrey
+        progressBar.backgroundView.frame = CGRect(origin: .zero, size: CGSize(width: 213, height: 12))
     }
     
     private func initConstraints() {
-        addSubviews([progressLabel, cleaningItemsLabel, progressBar])
+        addSubviews([cleaningItemsLabel, progressBar])
         
         NSLayoutConstraint.activate([
-            progressLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            progressLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -20),
-            
-            cleaningItemsLabel.topAnchor.constraint(equalTo: progressLabel.bottomAnchor, constant: 16),
             cleaningItemsLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            cleaningItemsLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -40),
             
             progressBar.topAnchor.constraint(equalTo: cleaningItemsLabel.bottomAnchor, constant: 16),
             progressBar.centerXAnchor.constraint(equalTo: centerXAnchor),
-            progressBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 70),
-            progressBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -70)
+            progressBar.widthAnchor.constraint(equalToConstant: 213)
         ])
     }
 }

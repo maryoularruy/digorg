@@ -30,10 +30,6 @@ final class CleaningItemsView: UIView {
         initConstraints()
     }
     
-    func updateProgress() {
-        
-    }
-    
     private func setupView() {
         backgroundColor = .paleGrey
     }

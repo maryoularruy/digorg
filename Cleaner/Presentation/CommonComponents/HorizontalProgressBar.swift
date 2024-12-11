@@ -8,7 +8,7 @@
 import UIKit
 
 final class HorizontalProgressBar: UIView {
-    private let backgroundView = UIView()
+    let backgroundView = UIView()
     private let foregroundView = UIView()
     
     var currentProgress: CGFloat = 0.0
@@ -31,7 +31,7 @@ final class HorizontalProgressBar: UIView {
         updateProgress(to: currentProgress)
     }
     
-    func updateProgress(to progress: CGFloat) {
+    func updateProgress(to progress: CGFloat, duration: TimeInterval = 0.2) {
         currentProgress = progress
         let clampedProgress = max(0.0, min(progress, 1.0))
         let maxWidth = backgroundView.frame.width
@@ -40,7 +40,7 @@ final class HorizontalProgressBar: UIView {
         DispatchQueue.main.async { [weak self] in
             self?.progressWidthConstraint.constant = newWidth
             
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: duration) {
                 self?.layoutIfNeeded()
             }
         }

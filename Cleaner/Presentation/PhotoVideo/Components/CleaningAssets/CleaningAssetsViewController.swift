@@ -29,21 +29,16 @@ final class CleaningAssetsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         rootView.startProgress()
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
-    }
-    
-    @objc func updateProgress() {
-        rootView.updateProgress()
-        if rootView.progressBar.currentProgress >= 0.99 {
-            timer.invalidate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.showCongratsView()
         }
     }
     
-    func showCongratsView() {
+    private func showCongratsView() {
         rootView.showCongratsView(deletedItemsCount: itemsForDeletion)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
-            self?.navigationController?.dismiss(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+            self?.navigationController?.popViewController(animated: false)
         }
     }
 }

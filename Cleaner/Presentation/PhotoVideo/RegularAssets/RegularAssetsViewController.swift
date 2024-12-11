@@ -84,10 +84,6 @@ final class RegularAssetsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addGestureRecognizers()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setupUI()
     }
     
@@ -193,6 +189,9 @@ extension RegularAssetsViewController: ActionToolbarDelegate {
             navigationController?.popViewController(animated: true)
         } else {
             if photoVideoManager.delete(assets: Array(assetsForDeletion)) {
+                let vc = CleaningAssetsViewController(itemsForDeleting: assetsForDeletion.count)
+                vc.modalPresentationStyle = .currentContext
+                navigationController?.pushViewController(vc, animated: false)
                 assetsForDeletion.removeAll()
                 fetchAssets(isFirstResponder: false)
             }
