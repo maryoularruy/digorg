@@ -8,7 +8,7 @@
 import UIKit
 
 final class VideoTotalView: UIView {
-    private lazy var scroll: UIScrollView = scrollView
+    lazy var scroll: UIScrollView = scrollView
     private lazy var contentView: UIView = UIView()
     lazy var arrowBack: UIImageView = UIImageView(image: .arrowBackIcon)
     
@@ -18,9 +18,20 @@ final class VideoTotalView: UIView {
         return label
     }()
     
+    lazy var progressView: ScanningGalleryProgressView = ScanningGalleryProgressView()
+    lazy var progressViewHeight = progressView.heightAnchor.constraint(equalToConstant: ScanningGalleryProgressView.height)
+    
     lazy var duplicateVideosView = OneCategoryHorizontalView(.duplicateVideos)
     lazy var superSizedVideosView = OneCategoryHorizontalView(.superSizedVideos)
     lazy var allVideosView = OneCategoryHorizontalView(.allVideos)
+    
+    lazy var containerForVisibleOneCategoryViews = UIView()
+    
+    private lazy var oneCategoryViews: [OneCategoryProtocol] = [
+        duplicateVideosView,
+        superSizedVideosView,
+        allVideosView
+    ]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,6 +45,38 @@ final class VideoTotalView: UIView {
         initConstraints()
     }
     
+    func constrainVisibleOneCategoryViews() {
+        let visibleViews: [UIView] = oneCategoryViews.filter { !$0.assets.isEmpty }
+        containerForVisibleOneCategoryViews.subviews.forEach { $0.removeFromSuperview() }
+        containerForVisibleOneCategoryViews.addSubviews(visibleViews)
+
+        for (index, subview) in containerForVisibleOneCategoryViews.subviews.enumerated() {
+            //setup top contsraint
+            if index == 0 {
+                NSLayoutConstraint.activate([
+                    subview.topAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.topAnchor)
+                ])
+            } else {
+                NSLayoutConstraint.activate([
+                    subview.topAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.subviews[index - 1].bottomAnchor, constant: 8)
+                ])
+            }
+            
+            //setup leading&trailing constraints
+            NSLayoutConstraint.activate([
+                subview.leadingAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.leadingAnchor),
+                subview.trailingAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.trailingAnchor)
+            ])
+            
+            //setup bottom constraints
+            if index == containerForVisibleOneCategoryViews.subviews.count - 1 {
+                NSLayoutConstraint.activate([
+                    subview.bottomAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.bottomAnchor, constant: -8)
+                ])
+            }
+        }
+    }
+    
     private func setupView() {
         backgroundColor = .paleGrey
         arrowBack.contentMode = .center
@@ -42,7 +85,7 @@ final class VideoTotalView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, duplicateVideosView, superSizedVideosView, allVideosView])
+        contentView.addSubviews([arrowBack, label, progressView, containerForVisibleOneCategoryViews])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -64,18 +107,15 @@ final class VideoTotalView: UIView {
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            duplicateVideosView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
-            duplicateVideosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            duplicateVideosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            progressView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
+            progressView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            progressViewHeight,
             
-            superSizedVideosView.topAnchor.constraint(equalTo: duplicateVideosView.bottomAnchor, constant: 8),
-            superSizedVideosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            superSizedVideosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            allVideosView.topAnchor.constraint(equalTo: superSizedVideosView.bottomAnchor, constant: 8),
-            allVideosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            allVideosView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            allVideosView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            containerForVisibleOneCategoryViews.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 16),
+            containerForVisibleOneCategoryViews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerForVisibleOneCategoryViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            containerForVisibleOneCategoryViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
        ])
     }
 }

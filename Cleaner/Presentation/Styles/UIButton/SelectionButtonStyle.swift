@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SelectionButtonProtocol: AnyObject {
+    func tapOnButton()
+}
+
 enum SelectionButtonText: String {
     case select = "Select"
     case selectAll = "Select All"
@@ -15,6 +19,8 @@ enum SelectionButtonText: String {
 }
 
 class SelectionButtonStyle: UIButton {
+    weak var delegate: SelectionButtonProtocol?
+    
     lazy var isClickable: Bool = true {
         didSet {
             isUserInteractionEnabled = isClickable
@@ -33,16 +39,25 @@ class SelectionButtonStyle: UIButton {
     }
     
     func bind(text: SelectionButtonText) {
-        titleLabel?.text = text.rawValue
+        setTitle(text.rawValue, for: .normal)
+        setTitle(text.rawValue, for: .selected)
+        layoutSubviews()
     }
     
     func setup() {
-        titleLabel?.textAlignment = .center
         backgroundColor = .paleGrey
-        titleLabel?.textColor = .blue
+        layer.cornerRadius = 20
+        contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+
+        setTitleColor(.blue, for: .normal)
+        setTitleColor(.blue, for: .selected)
+        titleLabel?.textAlignment = .center
         titleLabel?.font = .medium12
-//        configuration.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
-//        configuration.cornerStyle = .capsule
-        addShadow()
+        
+        addTapGestureRecognizer { [weak self] in
+            self?.delegate?.tapOnButton()
+        }
+
+        setupShadow()
     }
 }

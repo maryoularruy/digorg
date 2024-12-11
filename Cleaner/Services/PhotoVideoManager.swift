@@ -71,37 +71,52 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
         isLoadingPhotos = true
         fetchPhotos(from: dateFrom, to: dateTo, live: live) { photoInAlbum in
             DispatchQueue.global(qos: .userInitiated).async {
-                    var images: [OSTuple<NSString, NSData>] = []
-                    if photoInAlbum.count == 0 {
-                        DispatchQueue.main.async {
-                            handler([], 0)
-                        }
+                var images: [OSTuple<NSString, NSData>] = []
+                if photoInAlbum.count == 0 {
+                    DispatchQueue.main.async {
+                        handler([], 0)
+                    }
+                    return
+                }
+                
+                for i in 1...photoInAlbum.count {
+                    if let image = photoInAlbum[i - 1].image,
+                       let data = image.jpegData(compressionQuality: 0.8),
+                       !photoInAlbum[i - 1].mediaSubtypes.contains(.photoScreenshot) {
+                        let tuple = OSTuple<NSString, NSData>(first: "image\(i)" as NSString, andSecond: data as NSData)
+                        images.append(tuple)
+                    }
+                }
+                
+                let similarImageIdsAsTuples = OSImageHashing.sharedInstance().similarImages(with: OSImageHashingQuality.high, forImages: images)
+                DispatchQueue.main.async { [weak self] in
+                    var similarPhotosNumbers: [Int] = []
+                    var similarPhotoGroups: [PHAssetGroup] = []
+                    guard similarImageIdsAsTuples.count >= 1 else {
+                        handler([], 0)
                         return
                     }
-                    
-                    for i in 1...photoInAlbum.count {
-                        if let image = photoInAlbum[i - 1].image, let data = image.jpegData(compressionQuality: 0.8) {
-                            let tuple = OSTuple<NSString, NSData>(first: "image\(i)" as NSString,
-                                                                  andSecond: data as NSData)
-                            images.append(tuple)
+                    for i in 1...similarImageIdsAsTuples.count {
+                        let tuple = similarImageIdsAsTuples[i - 1]
+                        var groupAssets: [PHAsset] = []
+                        let n = (tuple.first! as String).removeImageAndToInt() - 1
+                        let n2 = (tuple.second! as String).removeImageAndToInt() - 1
+                        if abs(n2 - n) >= 10 { continue }
+                        if !similarPhotosNumbers.contains(n){
+                            similarPhotosNumbers.append(n)
+                            groupAssets.append(photoInAlbum[n])
                         }
-                    }
-                    
-                    let similarImageIdsAsTuples = OSImageHashing.sharedInstance().similarImages(with: OSImageHashingQuality.high, forImages: images)
-                    DispatchQueue.main.async { [weak self] in
-                        var similarPhotosNumbers: [Int] = []
-                        var similarPhotoGroups: [PHAssetGroup] = []
-                        guard similarImageIdsAsTuples.count >= 1 else {
-                            handler([], 0)
-                            return
+                        if !similarPhotosNumbers.contains(n2) {
+                            similarPhotosNumbers.append(n2)
+                            groupAssets.append(photoInAlbum[n2])
                         }
-                        for i in 1...similarImageIdsAsTuples.count {
-                            let tuple = similarImageIdsAsTuples[i - 1]
-                            var groupAssets: [PHAsset] = []
+                        similarImageIdsAsTuples.filter({$0.first != nil && $0.second != nil}).filter({ $0.first == tuple.first || $0.first == tuple.second || $0.second == tuple.second || $0.second == tuple.first }).forEach({ tuple in
                             let n = (tuple.first! as String).removeImageAndToInt() - 1
                             let n2 = (tuple.second! as String).removeImageAndToInt() - 1
-                            if abs(n2 - n) >= 10 { continue }
-                            if !similarPhotosNumbers.contains(n){
+                            if abs(n2 - n) >= 10{
+                                return
+                            }
+                            if !similarPhotosNumbers.contains(n) {
                                 similarPhotosNumbers.append(n)
                                 groupAssets.append(photoInAlbum[n])
                             }
@@ -109,39 +124,24 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                                 similarPhotosNumbers.append(n2)
                                 groupAssets.append(photoInAlbum[n2])
                             }
-                            similarImageIdsAsTuples.filter({$0.first != nil && $0.second != nil}).filter({ $0.first == tuple.first || $0.first == tuple.second || $0.second == tuple.second || $0.second == tuple.first }).forEach({ tuple in
-                                let n = (tuple.first! as String).removeImageAndToInt() - 1
-                                let n2 = (tuple.second! as String).removeImageAndToInt() - 1
-                                if abs(n2 - n) >= 10{
-                                    return
-                                }
-                                if !similarPhotosNumbers.contains(n) {
-                                    similarPhotosNumbers.append(n)
-                                    groupAssets.append(photoInAlbum[n])
-                                }
-                                if !similarPhotosNumbers.contains(n2) {
-                                    similarPhotosNumbers.append(n2)
-                                    groupAssets.append(photoInAlbum[n2])
-                                }
-                            })
-                            if groupAssets.count >= 2 {
-                                similarPhotoGroups.append(PHAssetGroup(name: "", assets: groupAssets, subtype: .smartAlbumUserLibrary))
-                            }
+                        })
+                        if groupAssets.count >= 2 {
+                            similarPhotoGroups.append(PHAssetGroup(name: "", assets: groupAssets, subtype: .smartAlbumUserLibrary))
                         }
-                        for index in similarPhotoGroups.indices {
-                            similarPhotoGroups[index].assets = similarPhotoGroups[index].assets.filter { !$0.isVideo }
-                        }
-                        similarPhotoGroups.removeAll { group in group.assets.isEmpty }
-                        let duplicatesCount = similarPhotoGroups.reduce(0) { $0 + $1.assets.count }
-                        self?.similarPhotos = similarPhotoGroups
-                        self?.isLoadingPhotos = false
-                        self?.similarPhotosCount = duplicatesCount
-                        handler(similarPhotoGroups, duplicatesCount)
                     }
+                    for index in similarPhotoGroups.indices {
+                        similarPhotoGroups[index].assets = similarPhotoGroups[index].assets.filter { !$0.isVideo }
+                    }
+                    similarPhotoGroups.removeAll { group in group.assets.isEmpty }
+                    let duplicatesCount = similarPhotoGroups.reduce(0) { $0 + $1.assets.count }
+                    self?.similarPhotos = similarPhotoGroups
+                    self?.isLoadingPhotos = false
+                    self?.similarPhotosCount = duplicatesCount
+                    handler(similarPhotoGroups, duplicatesCount)
                 }
             }
         }
-
+    }
 
 	func fetchSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAssetGroup], Int) -> ()) {
         isLoadingVideos = true
@@ -310,29 +310,80 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
         }
     }
     
+    func fetchScreenshots(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
+        fetchScreenshots { photoInAlbum in
+            DispatchQueue.global(qos: .background).async{
+                var images: [PHAsset] = []
+                if photoInAlbum.count == 0 {
+                    DispatchQueue.main.async {
+                        handler([])
+                    }
+                    return
+                }
+                for i in 1...photoInAlbum.count {
+                    images.append(photoInAlbum[i - 1])
+                }
+                DispatchQueue.main.async {
+                    handler(images)
+                }
+            }
+        }
+    }
+    
+    func chooseTheBest(_ assets: [PHAsset]) -> Int? {
+        if assets.isEmpty {
+            return nil
+        }
+        
+        var indexOfBest = 0
+        var sizeOfBest = assets[0].imageSize
+        
+        for i in 1..<assets.count {
+            if sizeOfBest < assets[i].imageSize {
+                indexOfBest = i
+                sizeOfBest = assets[i].imageSize
+            }
+        }
+        return indexOfBest
+    }
+    
     func join(_ groups: [PHAssetGroup]) -> [PHAsset] {
         var assets: [PHAsset] = []
         groups.forEach { assets.append(contentsOf: $0.assets) }
         return assets
     }
     
+    func delete(assets: [PHAsset]) -> Bool {
+        let semaphore = DispatchSemaphore(value: 0)
+        var result = false
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.deleteAssets(assets as NSArray)}, completionHandler: { success, _ in
+                if success {
+                    result = true
+                }
+            semaphore.signal()
+        })
+        let semaphoreResult = semaphore.wait(timeout: .distantFuture)
+        return semaphoreResult == .success ? result : false
+    }
+    
     private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
-           let options = PHFetchOptions()
-           let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
-           options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-           albumsPhoto.enumerateObjects { collection, _, _ in
-               handler(PHAsset.fetchAssets(in: collection, options: options))
-           }
-       }
+        let options = PHFetchOptions()
+        let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        albumsPhoto.enumerateObjects { collection, _, _ in
+            handler(PHAsset.fetchAssets(in: collection, options: options))
+        }
+    }
     
     private func fetchVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
-          let options = PHFetchOptions()
-          let albumVideos: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: options)
-          options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-          albumVideos.enumerateObjects { collection, _, _ in
-              handler(PHAsset.fetchAssets(in: collection, options: options))
-          }
-      }
+        let options = PHFetchOptions()
+        let albumVideos: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: options)
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        albumVideos.enumerateObjects { collection, _, _ in
+            handler(PHAsset.fetchAssets(in: collection, options: options))
+        }
+    }
     
     private func fetchSelfies(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
         let options = PHFetchOptions()
@@ -378,26 +429,6 @@ extension PhotoVideoManager {
         let mean = Float(pixelData.reduce(0, +)) / Float(pixelData.count)
         let variance = Float(pixelData.reduce(0) { $0 + Int(pow(Float($1) - mean, 2)) }) / Float(pixelData.count)
         return variance
-    }
-
-    func loadScreenshotPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ([PHAsset]) -> ()) {
-        fetchScreenshots { photoInAlbum in
-            DispatchQueue.global(qos: .background).async{
-                var images: [PHAsset] = []
-                if photoInAlbum.count == 0 {
-                    DispatchQueue.main.async {
-                        handler([])
-                    }
-                    return
-                }
-                for i in 1...photoInAlbum.count {
-                    images.append(photoInAlbum[i - 1])
-                }
-                DispatchQueue.main.async {
-                    handler(images)
-                }
-            }
-        }
     }
     
     func getAssetsWithText(completion: @escaping ([PHAsset]) -> Void) {

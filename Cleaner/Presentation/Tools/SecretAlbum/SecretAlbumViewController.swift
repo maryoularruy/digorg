@@ -255,6 +255,6 @@ extension SecretAlbumViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 109, height: 109)
+        TargetSize.medium.size
     }
 }

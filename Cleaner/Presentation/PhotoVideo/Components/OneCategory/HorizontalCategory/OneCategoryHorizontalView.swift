@@ -9,42 +9,17 @@ import UIKit
 import Photos
 
 protocol OneCategoryHorizontalViewDelegate: AnyObject {
-    func tapOnCategory(_ type: OneCategoryHorizontalViewType)
+    func tapOnCategory(_ type: OneCategory.HorizontalViewType)
 }
 
-enum OneCategoryHorizontalViewType {
-    case similarPhotos, duplicatePhotos, portraits, allPhotos,
-    duplicateVideos, superSizedVideos, allVideos
-    
-    var title: String {
-        switch self {
-        case .similarPhotos: "Similar Photos"
-        case .duplicatePhotos: "Duplicate Photos"
-        case .portraits: "Portraits"
-        case .allPhotos: "All Photos"
-        case .duplicateVideos: "Duplicate Videos"
-        case .superSizedVideos: "Super-sized Video"
-        case .allVideos: "All Videos"
-        }
-    }
-}
-
-final class OneCategoryHorizontalView: UIView {
+final class OneCategoryHorizontalView: UIView, OneCategoryProtocol {
+    var type: Any
     weak var delegate: OneCategoryHorizontalViewDelegate?
     
     private lazy var contentView: UIView = UIView()
     private lazy var label: Semibold15LabelStyle = Semibold15LabelStyle()
     
-    private lazy var arrowForwardImageView: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
-        
-        imageView.image = if type == .duplicateVideos || type == .superSizedVideos || type == .allVideos {
-            .arrowForwardGrey
-        } else {
-            .arrowForwardBlue
-        }
-        return imageView
-    }()
+    private lazy var arrowForwardImageView: UIImageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
     
     private lazy var assetsSizeLabel: Regular15LabelStyle = Regular15LabelStyle()
     private lazy var assetsCountLabel: Regular15LabelStyle = Regular15LabelStyle()
@@ -64,7 +39,6 @@ final class OneCategoryHorizontalView: UIView {
     
     private lazy var assetsCollectionViewHeight = assetsCollectionView.heightAnchor.constraint(equalToConstant: TargetSize.small.size.height)
     
-    private var type: OneCategoryHorizontalViewType
     lazy var assets: [PHAsset] = [] {
         didSet {
             assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
@@ -73,7 +47,7 @@ final class OneCategoryHorizontalView: UIView {
         }
     }
     
-    init(_ type: OneCategoryHorizontalViewType) {
+    init(_ type: OneCategory.HorizontalViewType) {
         self.type = type
         super.init(frame: .zero)
         setupView()
@@ -81,8 +55,7 @@ final class OneCategoryHorizontalView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        type = .similarPhotos
-        super.init(coder: coder)
+        fatalError()
     }
     
     func setLocked() {
@@ -95,10 +68,18 @@ final class OneCategoryHorizontalView: UIView {
     }
     
     private func setupView() {
+        guard let type = type as? OneCategory.HorizontalViewType else { return }
+        
         contentView.backgroundColor = .paleGrey
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
         addShadows()
+        
+        arrowForwardImageView.image = if type == .duplicateVideos || type == .superSizedVideos || type == .allVideos {
+            .arrowForwardGrey
+        } else {
+            .arrowForwardBlue
+        }
         
         assetsSizeLabel.setGreyTextColor()
         assetsCountLabel.setGreyTextColor()

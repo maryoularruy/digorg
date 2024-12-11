@@ -9,23 +9,15 @@ import UIKit
 import Photos
 
 protocol OneCategoryVerticalViewDelegate: AnyObject {
-    func tapOnCategory(_ type: OneCategoryVerticalViewType)
+    func tapOnCategory(_ type: OneCategory.VerticalViewType)
 }
 
-enum OneCategoryVerticalViewType {
-    case screenshots
-    
-    var title: String {
-        switch self {
-        case .screenshots: "Screenshots"
-        }
-    }
-}
-
-final class OneCategoryVerticalView: UIView {
+final class OneCategoryVerticalView: UIView, OneCategoryProtocol {
+    var type: Any
     weak var delegate: OneCategoryVerticalViewDelegate?
+    static var width: CGFloat = 167
     
-    private static var size = CGSize(width: 46, height: 88)
+    private static var assetSize = CGSize(width: 46, height: 88)
     private lazy var contentView: UIView = UIView()
     private lazy var label: Semibold15LabelStyle = Semibold15LabelStyle()
     
@@ -41,7 +33,7 @@ final class OneCategoryVerticalView: UIView {
     lazy var assetsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = OneCategoryVerticalView.size
+        layout.itemSize = OneCategoryVerticalView.assetSize
         layout.minimumLineSpacing = -23
         layout.minimumInteritemSpacing = -28
         
@@ -52,7 +44,6 @@ final class OneCategoryVerticalView: UIView {
         return collectionView
     }()
     
-    private var type: OneCategoryVerticalViewType
     lazy var assets: [PHAsset] = [] {
         didSet {
             assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
@@ -60,7 +51,7 @@ final class OneCategoryVerticalView: UIView {
         }
     }
     
-    init(_ type: OneCategoryVerticalViewType) {
+    init(_ type: OneCategory.VerticalViewType) {
         self.type = type
         super.init(frame: .zero)
         setupView()
@@ -68,11 +59,12 @@ final class OneCategoryVerticalView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        type = .screenshots
-        super.init(coder: coder)
+        fatalError()
     }
     
     private func setupView() {
+        guard let type = type as? OneCategory.VerticalViewType else { return }
+        
         contentView.backgroundColor = .paleGrey
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
@@ -127,7 +119,7 @@ extension OneCategoryVerticalView: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneCategoryCell.identifier, for: indexPath) as! OneCategoryCell
         cell.layer.cornerRadius = 8
-        cell.bind(assets[indexPath.row].getAssetThumbnail(OneCategoryVerticalView.size))
+        cell.bind(assets[indexPath.row].getAssetThumbnail(OneCategoryVerticalView.assetSize))
         return cell
     }
 }

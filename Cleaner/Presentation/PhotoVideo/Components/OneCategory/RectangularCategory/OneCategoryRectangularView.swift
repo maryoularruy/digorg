@@ -9,21 +9,11 @@ import UIKit
 import Photos
 
 protocol OneCategoryRectangularViewDelegate: AnyObject {
-    func tapOnCategory(_ type: OneCategoryRectangularViewType)
+    func tapOnCategory(_ type: OneCategory.RectangularViewType)
 }
 
-enum OneCategoryRectangularViewType {
-    case live, blurry
-    
-    var title: String {
-        switch self {
-        case .live: "Live"
-        case .blurry: "Blurry"
-        }
-    }
-}
-
-final class OneCategoryRectangularView: UIView {
+final class OneCategoryRectangularView: UIView, OneCategoryProtocol {
+    var type: Any
     static var size = CGSize(width: 168, height: 153)
     weak var delegate: OneCategoryRectangularViewDelegate?
     
@@ -34,14 +24,13 @@ final class OneCategoryRectangularView: UIView {
     private lazy var assetsCountLabel: Regular15LabelStyle = Regular15LabelStyle()
     private lazy var arrowForwardImageView: UIImageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
     
-    private var type: OneCategoryRectangularViewType
     lazy var assets: [PHAsset] = [] {
         didSet {
             assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
         }
     }
     
-    init(_ type: OneCategoryRectangularViewType) {
+    init(_ type: OneCategory.RectangularViewType) {
         self.type = type
         super.init(frame: .zero)
         setupView()
@@ -49,11 +38,12 @@ final class OneCategoryRectangularView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        type = .blurry
-        super.init(coder: coder)
+        fatalError()
     }
     
     private func setupView() {
+        guard let type = type as? OneCategory.RectangularViewType else { return }
+        
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
         addShadows()

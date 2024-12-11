@@ -11,6 +11,6 @@ final class SelectionTransparentButtonStyle: SelectionButtonStyle {
     override func setup() {
         layer.cornerRadius = 20
         backgroundColor = .clear
-        addShadows()
+        setupShadow()
     }
 }

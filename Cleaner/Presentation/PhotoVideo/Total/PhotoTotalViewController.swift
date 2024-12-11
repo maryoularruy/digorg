@@ -26,29 +26,17 @@ final class PhotoTotalViewController: UIViewController {
         super.viewWillAppear(animated)
         setupUI()
     }
-    
-    private func setupScanning() {
-        rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
-        showProgressBar()
-    }
-    
-    private func showProgressBar() {
-        
-    }
 }
 
 extension PhotoTotalViewController: ViewControllerProtocol {
     func setupUI() {
-//        if photoVideoManager.isLoadingPhotos {
-//            rootView.similarPhotosView.assets = []
-//            rootView.duplicatePhotosView.assets = []
-//            setupScanning()
-//        } else {
-//            rootView.subviews.forEach { $0.isUserInteractionEnabled = true }
-//            rootView.similarPhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
-//            rootView.duplicatePhotosView.assets = photoVideoManager.join(photoVideoManager.similarPhotos)
-//        }
+        let progressStep: CGFloat = 1.0 / 6
+        rootView.progressViewHeight.constant = ScanningGalleryProgressView.height
+        rootView.progressView.resetProgress()
+        let dispatchGroup = DispatchGroup()
+        rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
             guard let self else { return }
             let joinedAssets = photoVideoManager.join(assetGroups)
@@ -57,26 +45,70 @@ extension PhotoTotalViewController: ViewControllerProtocol {
             
             rootView.similarPhotosView.delegate = self
             rootView.duplicatePhotosView.delegate = self
+            
+            rootView.progressView.progressBar.addProgress(progressStep)
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchSelfiePhotos { [weak self] selfies in
-            self?.rootView.portraitsPhotosView.assets = selfies
+            guard let self else { return }
+            rootView.portraitsPhotosView.assets = selfies
+            rootView.portraitsPhotosView.delegate = self
+            
+            rootView.progressView.updateProgress(progressStep)
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchAllPhotos { [weak self] photos in
-            self?.rootView.allPhotosView.assets = photos
+            guard let self else { return }
+            rootView.allPhotosView.assets = photos
+            rootView.allPhotosView.delegate = self
+            
+            rootView.progressView.updateProgress(progressStep)
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchLivePhotos { [weak self] livePhotos in
-            self?.rootView.livePhotosView.assets = livePhotos
+            guard let self else { return }
+            rootView.livePhotosView.assets = livePhotos
+            rootView.livePhotosView.delegate = self
+            
+            rootView.progressView.updateProgress(progressStep)
+            dispatchGroup.leave()
         }
         
+        dispatchGroup.enter()
         photoVideoManager.fetchBlurryPhotos { [weak self] blurries in
-            self?.rootView.blurryPhotosView.assets = blurries
+            guard let self else { return }
+            rootView.blurryPhotosView.assets = blurries
+            rootView.blurryPhotosView.delegate = self
+            
+            rootView.progressView.updateProgress(progressStep)
+            dispatchGroup.leave()
         }
         
-        photoVideoManager.loadScreenshotPhotos { [weak self] screenshots in
-            self?.rootView.screenshotsView.assets = screenshots
+        dispatchGroup.enter()
+        photoVideoManager.fetchScreenshots { [weak self] screenshots in
+            guard let self else { return }
+            rootView.screenshotsView.assets = screenshots
+            rootView.screenshotsView.delegate = self
+            
+            rootView.progressView.updateProgress(progressStep)
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            guard let self else { return }
+            rootView.subviews.forEach { $0.isUserInteractionEnabled = true }
+            rootView.progressViewHeight.constant = 0
+            UIView.animate(withDuration: 0.6) {
+                self.rootView.progressView.layoutIfNeeded()
+                self.rootView.containerForVisibleOneCategoryViews.layoutIfNeeded()
+            }
+            rootView.constrainVisibleOneCategoryViews()
         }
     }
     
@@ -88,26 +120,58 @@ extension PhotoTotalViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+        
+        rootView.scroll.refreshControl?.addTarget(self, action: #selector(updateUI), for: .valueChanged)
     }
     
     @objc private func handleSwipeRight() {
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc private func updateUI() {
+        setupUI()
+        rootView.scroll.refreshControl?.endRefreshing()
+    }
 }
 
-extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate {
-    func tapOnCategory(_ type: OneCategoryHorizontalViewType) {
+extension PhotoTotalViewController: OneCategoryHorizontalViewDelegate, OneCategoryRectangularViewDelegate, OneCategoryVerticalViewDelegate {
+    func tapOnCategory(_ type: OneCategory.VerticalViewType) {
+        let vc: UIViewController = switch type {
+        case .screenshots:
+            RegularAssetsViewController(type: .screenshots)
+        }
+        
+        vc.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func tapOnCategory(_ type: OneCategory.RectangularViewType) {
+        let vc: UIViewController = switch type {
+        case .live:
+            RegularAssetsViewController(type: .livePhotos)
+        case .blurry:
+            RegularAssetsViewController(type: .blurryPhotos)
+        }
+        
+        vc.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func tapOnCategory(_ type: OneCategory.HorizontalViewType) {
         let vc: UIViewController? = switch type {
         case .similarPhotos:
             StoryboardScene.GroupedAssets.initialScene.instantiate()
         case .duplicatePhotos:
             StoryboardScene.GroupedAssets.initialScene.instantiate()
         case .portraits:
-            StoryboardScene.GroupedAssets.initialScene.instantiate()
+            RegularAssetsViewController(type: .portraits)
         case .allPhotos:
-            StoryboardScene.GroupedAssets.initialScene.instantiate()
-        case .duplicateVideos:
-            StoryboardScene.GroupedAssets.initialScene.instantiate()
+            RegularAssetsViewController(type: .allPhotos)
+        case .duplicateVideos: nil
         case .superSizedVideos: nil
         case .allVideos: nil
         }

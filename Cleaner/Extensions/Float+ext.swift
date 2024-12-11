@@ -12,3 +12,9 @@ extension Float {
         Int(self * 100)
     }
 }
+
+extension CGFloat {
+    func toPercent() -> Int {
+        Int(ceil(self * 100))
+    }
+}

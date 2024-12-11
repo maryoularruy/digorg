@@ -31,18 +31,24 @@
                             <constraint firstAttribute="height" constant="26" id="N13-uO-6Ls"/>
                         </constraints>
                     </imageView>
+                    <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ric-Ae-S40" customClass="BestIcon" customModule="Cleaner" customModuleProvider="target">
+                        <rect key="frame" x="40" y="48" width="133" height="52"/>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="ric-Ae-S40" firstAttribute="leading" secondItem="CsV-er-Rhh" secondAttribute="leading" constant="8" id="6Jn-N9-OVU"/>
                     <constraint firstItem="F0e-8I-vKB" firstAttribute="top" secondItem="CsV-er-Rhh" secondAttribute="top" id="EhQ-68-AXy"/>
                     <constraint firstAttribute="trailing" secondItem="xjG-rf-j4E" secondAttribute="trailing" constant="16" id="Exd-q8-IUE"/>
                     <constraint firstAttribute="bottom" secondItem="F0e-8I-vKB" secondAttribute="bottom" id="HSF-jr-oHh"/>
                     <constraint firstAttribute="trailing" secondItem="F0e-8I-vKB" secondAttribute="trailing" id="Wkh-Td-aH2"/>
+                    <constraint firstItem="ric-Ae-S40" firstAttribute="top" secondItem="CsV-er-Rhh" secondAttribute="top" constant="8" id="boZ-4f-dqV"/>
                     <constraint firstAttribute="bottom" secondItem="xjG-rf-j4E" secondAttribute="bottom" constant="16" id="mLs-aa-vL7"/>
                     <constraint firstItem="F0e-8I-vKB" firstAttribute="leading" secondItem="CsV-er-Rhh" secondAttribute="leading" id="unc-3v-c7q"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="266" height="250"/>
             <connections>
+                <outlet property="bestIcon" destination="ric-Ae-S40" id="V67-v3-VK7"/>
                 <outlet property="checkBox" destination="xjG-rf-j4E" id="6w9-F1-1IJ"/>
                 <outlet property="photoImageView" destination="F0e-8I-vKB" id="rRy-84-C97"/>
             </connections>

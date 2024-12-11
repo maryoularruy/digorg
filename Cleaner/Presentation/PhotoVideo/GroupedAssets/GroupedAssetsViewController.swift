@@ -38,7 +38,7 @@ final class GroupedAssetsViewController: UIViewController {
         didSet {
             actionToolbar.toolbarButton.bind(backgroundColor: assetsForDeletion.isEmpty ? .paleBlue : .blue)
             actionToolbar.toolbarButton.bind(
-                text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(assetsForDeletion.isEmpty ? "0" : "?") MB")
+                text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s")")
         }
     }
     
@@ -73,7 +73,8 @@ final class GroupedAssetsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         actionToolbar.delegate = self
-        setupUI()
+        guard let type else { return }
+        similarPhotoLabel.text = type.title
         tableView.register(cellType: DuplicateTableViewCell.self)
         addGestureRecognizers()
     }
@@ -99,24 +100,27 @@ final class GroupedAssetsViewController: UIViewController {
         case .duplicateVideos:
             photoVideoManager.similarVideosCount
         }
+        
+        setupUI()
     }
 }
 
 extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return assetGroups.count
+		assetGroups.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCell(for: indexPath) as DuplicateTableViewCell
 		cell.setupData(assets: assetGroups[indexPath.item].assets)
-        cell.selectMode = self.selectMode
-		cell.onTap = { [weak self] image, index in
+        cell.selectMode = selectMode
+        cell.selectionStyle = .none
+		cell.onTap = { [weak self] assets, index in
 			guard let self = self else { return }
 			let gallery = DKPhotoGallery()
 			gallery.singleTapMode = .dismiss
 			var dkarr = [DKPhotoGalleryItem]()
-			image.forEach { asset in
+            assets.forEach { asset in
 				dkarr.append(DKPhotoGalleryItem(asset: asset))
 			}
 			gallery.items = dkarr
@@ -150,9 +154,7 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 extension GroupedAssetsViewController: ViewControllerProtocol {
     func addGestureRecognizers() {
         arrowBackView.addTapGestureRecognizer { [weak self] in
-            guard let self else { return }
-            let viewControllers: [UIViewController] = navigationController!.viewControllers as [UIViewController]
-            navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+            self?.navigationController?.popViewController(animated: true)
         }
         
         selectModeButton.addTapGestureRecognizer { [weak self] in
@@ -163,8 +165,6 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
     }
     
     func setupUI() {
-        guard let type else { return }
-        similarPhotoLabel.text = type.title
         duplicatesCountLabel.text = "\(duplicatesCount) files"
         selectMode = false
         updatePlaceholder()
@@ -183,7 +183,7 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
     }
     
     private func deletePhotos() {
-        if delete(assets: Array(assetsForDeletion)) {
+        if photoVideoManager.delete(assets: Array(assetsForDeletion)) {
             assetsInput = assetsInput.map { group in
                 var tempGroup = group
                 let notDeleted = tempGroup.assets.filter { !assetsForDeletion.contains($0) }
@@ -196,20 +196,6 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
             refreshSimilarItems()
             updatePlaceholder()
         }
-    }
-    
-    private func delete(assets: [PHAsset]) -> Bool {
-        let semaphore = DispatchSemaphore(value: 0)
-        var result = false
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.deleteAssets(assets as NSArray)}, completionHandler: { success, _ in
-                if success {
-                    result = true
-                }
-            semaphore.signal()
-        })
-        let semaphoreResult = semaphore.wait(timeout: .distantFuture)
-        return semaphoreResult == .success ? result : false
     }
     
     @objc func refreshSimilarItems() {
