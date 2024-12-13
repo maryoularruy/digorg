@@ -24,7 +24,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDq-js-W8n" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                        <rect key="frame" x="36" y="16" width="34" height="210"/>
+                        <rect key="frame" x="36" y="0.0" width="34" height="226"/>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
+                        <color key="textColor" name="PrimaryTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxv-D2-Ogq" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                        <rect key="frame" x="78" y="105" width="34" height="16.5"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
                         <color key="textColor" name="PrimaryTextColor"/>
                         <nil key="highlightedColor"/>
@@ -49,16 +55,19 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="0JN-5S-b7g" firstAttribute="top" secondItem="wDq-js-W8n" secondAttribute="bottom" constant="16" id="BcX-TX-HbT"/>
+                    <constraint firstItem="Lxv-D2-Ogq" firstAttribute="centerY" secondItem="wDq-js-W8n" secondAttribute="centerY" id="TeC-Ox-RFj"/>
+                    <constraint firstItem="Lxv-D2-Ogq" firstAttribute="leading" secondItem="wDq-js-W8n" secondAttribute="trailing" constant="8" id="TuC-h1-ykZ"/>
                     <constraint firstItem="wDq-js-W8n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="eKq-aI-tAe"/>
                     <constraint firstAttribute="bottom" secondItem="0JN-5S-b7g" secondAttribute="bottom" constant="8" id="flw-vk-OfN"/>
                     <constraint firstItem="0JN-5S-b7g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="iAQ-4B-qLl"/>
-                    <constraint firstItem="wDq-js-W8n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="npw-lh-lMP"/>
+                    <constraint firstItem="wDq-js-W8n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="npw-lh-lMP"/>
                     <constraint firstAttribute="trailing" secondItem="0JN-5S-b7g" secondAttribute="trailing" id="qsA-mz-b3W"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="dateLabel" destination="Lxv-D2-Ogq" id="X9F-hL-vda"/>
                 <outlet property="duplicateGroupCV" destination="0JN-5S-b7g" id="0FC-el-bKH"/>
                 <outlet property="duplicatesAmountLabel" destination="wDq-js-W8n" id="ePg-jx-CfA"/>
             </connections>

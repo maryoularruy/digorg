@@ -11,6 +11,7 @@ import UIKit
 
 final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet var duplicatesAmountLabel: UILabel!
+    @IBOutlet weak var dateLabel: Regular15LabelStyle!
     @IBOutlet weak var duplicateGroupCV: UICollectionView!
     
     var onTap: (([PHAsset], Int) -> ())?
@@ -27,6 +28,7 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        dateLabel.setGreyTextColor()
         duplicateGroupCV.register(cellType: AssetCollectionViewCell.self)
         duplicateGroupCV.reloadData()
     }
@@ -43,6 +45,8 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
 		self.assets = assets
         indexOfBest = PhotoVideoManager.shared.chooseTheBest(assets) ?? 0
 		duplicatesAmountLabel.text = "\(assets.count) duplicates"
+        guard let firstAssetDate = assets.first?.creationDate else { return }
+        dateLabel.bind(text: firstAssetDate.toFullDate())
 	}
 }
 
