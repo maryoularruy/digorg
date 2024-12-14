@@ -139,7 +139,7 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 		cell.onTapSelectAll = { [weak self] assets in
 			guard let self = self else { return }
 			self.selectMode = true
-			self.assetsForDeletion.insert(assets) //= Set(assets)
+			self.assetsForDeletion.insert(assets)
 			self.tableView.reloadData()
 		}
         cell.assetsForDeletion = self.assetsForDeletion

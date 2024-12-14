@@ -12,6 +12,7 @@ import UIKit
 final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet var duplicatesAmountLabel: UILabel!
     @IBOutlet weak var dateLabel: Regular15LabelStyle!
+    @IBOutlet weak var selectAllButton: SelectionTransparentButtonStyle!
     @IBOutlet weak var duplicateGroupCV: UICollectionView!
     
     var onTap: (([PHAsset], Int) -> ())?
@@ -19,7 +20,10 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     var onTapSelectAll: (([PHAsset]) -> ())?
     
     lazy var selectMode = false {
-        didSet { duplicateGroupCV.reloadData() }
+        didSet {
+            selectAllButton.isHidden = !selectMode
+            duplicateGroupCV.reloadData()
+        }
     }
 	var assetsForDeletion = Set<PHAsset>()
     private lazy var assets = [PHAsset]()
@@ -43,6 +47,9 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
 	
 	func setupData(assets: [PHAsset]) {
 		self.assets = assets
+        selectAllButton.addTapGestureRecognizer { [weak self] in
+            self?.onTapSelectAll?(assets)
+        }
         indexOfBest = PhotoVideoManager.shared.chooseTheBest(assets) ?? 0
 		duplicatesAmountLabel.text = "\(assets.count) duplicates"
         guard let firstAssetDate = assets.first?.creationDate else { return }

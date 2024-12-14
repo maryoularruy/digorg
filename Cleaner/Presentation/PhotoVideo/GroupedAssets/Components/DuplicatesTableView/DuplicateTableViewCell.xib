@@ -51,6 +51,11 @@
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="gGb-Za-zEV"/>
                         </connections>
                     </collectionView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rr1-l8-f2i" customClass="SelectionTransparentButtonStyle" customModule="Cleaner" customModuleProvider="target">
+                        <rect key="frame" x="326" y="41" width="75" height="35"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -58,9 +63,11 @@
                     <constraint firstItem="Lxv-D2-Ogq" firstAttribute="centerY" secondItem="wDq-js-W8n" secondAttribute="centerY" id="TeC-Ox-RFj"/>
                     <constraint firstItem="Lxv-D2-Ogq" firstAttribute="leading" secondItem="wDq-js-W8n" secondAttribute="trailing" constant="8" id="TuC-h1-ykZ"/>
                     <constraint firstItem="wDq-js-W8n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="eKq-aI-tAe"/>
+                    <constraint firstItem="0JN-5S-b7g" firstAttribute="top" secondItem="rr1-l8-f2i" secondAttribute="bottom" constant="16" id="fen-eA-QLu"/>
                     <constraint firstAttribute="bottom" secondItem="0JN-5S-b7g" secondAttribute="bottom" constant="24" id="flw-vk-OfN"/>
                     <constraint firstItem="0JN-5S-b7g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="iAQ-4B-qLl"/>
                     <constraint firstItem="wDq-js-W8n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="npw-lh-lMP"/>
+                    <constraint firstAttribute="trailing" secondItem="rr1-l8-f2i" secondAttribute="trailing" id="p3E-7Z-kId"/>
                     <constraint firstAttribute="trailing" secondItem="0JN-5S-b7g" secondAttribute="trailing" id="qsA-mz-b3W"/>
                 </constraints>
             </tableViewCellContentView>
@@ -70,6 +77,7 @@
                 <outlet property="dateLabel" destination="Lxv-D2-Ogq" id="X9F-hL-vda"/>
                 <outlet property="duplicateGroupCV" destination="0JN-5S-b7g" id="0FC-el-bKH"/>
                 <outlet property="duplicatesAmountLabel" destination="wDq-js-W8n" id="ePg-jx-CfA"/>
+                <outlet property="selectAllButton" destination="rr1-l8-f2i" id="VuW-Ji-KSn"/>
             </connections>
             <point key="canvasLocation" x="187.68115942028987" y="189.50892857142856"/>
         </tableViewCell>
