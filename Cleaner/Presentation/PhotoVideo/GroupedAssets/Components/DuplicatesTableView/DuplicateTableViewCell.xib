@@ -16,27 +16,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="DuplicateTableViewCell" customModule="Cleaner" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="401" height="400"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="266" id="KGk-i7-Jjw" customClass="DuplicateTableViewCell" customModule="Cleaner" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="401" height="266"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="401" height="400"/>
+                <rect key="frame" x="0.0" y="0.0" width="401" height="266"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDq-js-W8n" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                        <rect key="frame" x="36" y="0.0" width="34" height="226"/>
+                        <rect key="frame" x="20" y="0.0" width="34" height="76"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
                         <color key="textColor" name="PrimaryTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxv-D2-Ogq" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                        <rect key="frame" x="78" y="105" width="34" height="16.5"/>
+                        <rect key="frame" x="62" y="30" width="34" height="16.5"/>
                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
                         <color key="textColor" name="PrimaryTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0JN-5S-b7g">
-                        <rect key="frame" x="0.0" y="242" width="401" height="150"/>
+                        <rect key="frame" x="0.0" y="92" width="401" height="150"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="150" id="rWf-4i-TxP"/>
                         </constraints>
@@ -57,8 +57,8 @@
                     <constraint firstItem="0JN-5S-b7g" firstAttribute="top" secondItem="wDq-js-W8n" secondAttribute="bottom" constant="16" id="BcX-TX-HbT"/>
                     <constraint firstItem="Lxv-D2-Ogq" firstAttribute="centerY" secondItem="wDq-js-W8n" secondAttribute="centerY" id="TeC-Ox-RFj"/>
                     <constraint firstItem="Lxv-D2-Ogq" firstAttribute="leading" secondItem="wDq-js-W8n" secondAttribute="trailing" constant="8" id="TuC-h1-ykZ"/>
-                    <constraint firstItem="wDq-js-W8n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="16" id="eKq-aI-tAe"/>
-                    <constraint firstAttribute="bottom" secondItem="0JN-5S-b7g" secondAttribute="bottom" constant="8" id="flw-vk-OfN"/>
+                    <constraint firstItem="wDq-js-W8n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="eKq-aI-tAe"/>
+                    <constraint firstAttribute="bottom" secondItem="0JN-5S-b7g" secondAttribute="bottom" constant="24" id="flw-vk-OfN"/>
                     <constraint firstItem="0JN-5S-b7g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="iAQ-4B-qLl"/>
                     <constraint firstItem="wDq-js-W8n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="npw-lh-lMP"/>
                     <constraint firstAttribute="trailing" secondItem="0JN-5S-b7g" secondAttribute="trailing" id="qsA-mz-b3W"/>
@@ -71,7 +71,7 @@
                 <outlet property="duplicateGroupCV" destination="0JN-5S-b7g" id="0FC-el-bKH"/>
                 <outlet property="duplicatesAmountLabel" destination="wDq-js-W8n" id="ePg-jx-CfA"/>
             </connections>
-            <point key="canvasLocation" x="187.68115942028987" y="144.64285714285714"/>
+            <point key="canvasLocation" x="187.68115942028987" y="189.50892857142856"/>
         </tableViewCell>
     </objects>
     <resources>
