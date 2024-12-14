@@ -41,6 +41,8 @@ final class OneCategoryHorizontalView: UIView, OneCategoryProtocol {
     
     lazy var assets: [PHAsset] = [] {
         didSet {
+            let size: Int64 = assets.reduce(0) { $0 + $1.imageSize }
+            assetsSizeLabel.bind(text: size.convertToString())
             assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
             assetsCollectionViewHeight.constant = assets.isEmpty ? 0 : TargetSize.small.size.height
             assetsCollectionView.reloadData()
@@ -97,7 +99,7 @@ final class OneCategoryHorizontalView: UIView, OneCategoryProtocol {
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([label, arrowForwardImageView, assetsCountLabel, assetsCollectionView])
+        contentView.addSubviews([label, arrowForwardImageView, assetsSizeLabel, assetsCountLabel, assetsCollectionView])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: topAnchor),
@@ -111,8 +113,11 @@ final class OneCategoryHorizontalView: UIView, OneCategoryProtocol {
             arrowForwardImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             arrowForwardImageView.centerYAnchor.constraint(equalTo: label.centerYAnchor),
             
+            assetsSizeLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 4),
+            assetsSizeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            
             assetsCountLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 4),
-            assetsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            assetsCountLabel.leadingAnchor.constraint(equalTo: assetsSizeLabel.trailingAnchor, constant: 10),
             
             assetsCollectionView.topAnchor.constraint(equalTo: assetsCountLabel.bottomAnchor, constant: 14),
             assetsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),

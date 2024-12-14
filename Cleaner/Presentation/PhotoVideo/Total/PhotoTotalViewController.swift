@@ -37,7 +37,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
         rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
         
         dispatchGroup.enter()
-        photoVideoManager.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
+        photoVideoManager.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount, _ in
             guard let self else { return }
             let joinedAssets = photoVideoManager.join(assetGroups)
             rootView.similarPhotosView.assets = joinedAssets

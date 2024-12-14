@@ -36,7 +36,7 @@ extension VideoTotalViewController: ViewControllerProtocol {
         rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
         
         dispatchGroup.enter()
-        photoVideoManager.fetchSimilarVideos { [weak self] assetGroups, duplicatesCount in
+        photoVideoManager.fetchSimilarVideos { [weak self] assetGroups, duplicatesCount, _ in
             guard let self else { return }
             rootView.duplicateVideosView.assets = photoVideoManager.join(assetGroups)
             rootView.duplicateVideosView.delegate = self

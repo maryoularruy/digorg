@@ -23,12 +23,6 @@ final class Medium12ButtonStyle: UIButton {
         setTitle(text, for: .selected)
     }
     
-    func bind(duplicatesCount: Int) {
-        setTitle("\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s")", for: .normal)
-        imageEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 12)
-        layoutSubviews()
-    }
-    
     private func setup() {
         backgroundColor = .blue
         layer.cornerRadius = 20
