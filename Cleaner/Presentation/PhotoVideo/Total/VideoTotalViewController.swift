@@ -86,6 +86,7 @@ extension VideoTotalViewController: ViewControllerProtocol {
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
         
+        rootView.scroll.refreshControl = UIRefreshControl()
         rootView.scroll.refreshControl?.addTarget(self, action: #selector(updateUI), for: .valueChanged)
     }
     
