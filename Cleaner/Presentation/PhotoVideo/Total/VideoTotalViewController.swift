@@ -89,10 +89,6 @@ extension VideoTotalViewController: ViewControllerProtocol {
         rootView.scroll.refreshControl?.addTarget(self, action: #selector(updateUI), for: .valueChanged)
     }
     
-    @objc private func handleSwipeRight() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     @objc private func updateUI() {
         setupUI()
         rootView.scroll.refreshControl?.endRefreshing()

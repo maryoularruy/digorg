@@ -167,13 +167,9 @@ extension RegularAssetsViewController: ViewControllerProtocol {
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
     }
-    
-    @objc private func handleSwipeRight() {
-        navigationController?.popViewController(animated: true)
-    }
 }
 
-extension RegularAssetsViewController: SelectionButtonProtocol {
+extension RegularAssetsViewController: SelectionButtonDelegate {
     func tapOnButton() {
         if assetsForDeletion.count == assets.count {
             assetsForDeletion.removeAll()

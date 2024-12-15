@@ -16,15 +16,9 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet weak var duplicateGroupCV: UICollectionView!
     
     var onTap: (([PHAsset], Int) -> ())?
-	var onTapWithSelectMode: ((Int) -> ())?
+	var onTapCheckBox: ((Int) -> ())?
     var onTapSelectAll: (([PHAsset]) -> ())?
     
-    lazy var selectMode = false {
-        didSet {
-            selectAllButton.isHidden = !selectMode
-            duplicateGroupCV.reloadData()
-        }
-    }
 	var assetsForDeletion = Set<PHAsset>()
     private lazy var assets = [PHAsset]()
     private lazy var indexOfBest = 0
@@ -36,10 +30,6 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
         duplicateGroupCV.register(cellType: AssetCollectionViewCell.self)
         duplicateGroupCV.reloadData()
     }
-	
-	func setupSelectMode(isON: Bool) {
-		selectMode = isON
-	}
 	
 	override func prepareForReuse() {
 		duplicateGroupCV.reloadData()
@@ -67,18 +57,14 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
         cell.photoImageView.image = assets[indexPath.item].getAssetThumbnail(TargetSize.large.size)
         cell.isChecked = assetsForDeletion.contains(assets[indexPath.item])
         cell.isBest = indexPath.item == indexOfBest ? true : false
-		cell.setupSelectMode(isON: selectMode)
-		cell.addTapGestureRecognizer { [weak self] in
+        cell.addTapGestureRecognizer { [weak self] in
             guard let self else { return }
-			if self.selectMode {
-                cell.checkBox.isHidden = false
-				cell.isChecked.toggle()
-				self.onTapWithSelectMode?(indexPath.item)
-			} else {
-                cell.checkBox.isHidden = true
-				self.onTap?(self.assets, indexPath.item)
-			}
+            onTap?(assets, indexPath.item)
 		}
+        cell.checkBox.addTapGestureRecognizer { [weak self] in
+            cell.isChecked.toggle()
+            self?.onTapCheckBox?(indexPath.item)
+        }
 		return cell
 	}
     

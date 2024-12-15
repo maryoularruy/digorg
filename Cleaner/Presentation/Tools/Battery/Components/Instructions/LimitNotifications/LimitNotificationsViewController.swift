@@ -34,7 +34,7 @@ extension LimitNotificationsViewController: ViewControllerProtocol {
         view.addGestureRecognizer(swipeRightGesture)
     }
     
-    @objc private func handleSwipeRight() {
+    @objc override func handleSwipeRight() {
         dismiss(animated: true)
     }
 }
