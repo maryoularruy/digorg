@@ -166,6 +166,12 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
 
 extension GroupedAssetsViewController: SelectionButtonDelegate {
     func tapOnButton() {
+        let allAssetsCount = assetGroups.reduce(0) { $0 + $1.assets.count }
+        if allAssetsCount == assetsForDeletion.count {
+            assetsForDeletion.removeAll()
+        } else {
+            assetGroups.forEach { assetsForDeletion.insert($0.assets) }
+        }
         tableView.reloadData()
     }
 }
