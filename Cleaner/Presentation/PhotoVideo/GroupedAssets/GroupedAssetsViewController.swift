@@ -25,6 +25,7 @@ final class GroupedAssetsViewController: UIViewController {
     @IBOutlet weak var duplicatesCountLabel: Regular13LabelStyle!
 	@IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
+    @IBOutlet weak var sortButton: SortButtonStyle!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var toolbar: ActionToolbar!
     
@@ -78,6 +79,7 @@ final class GroupedAssetsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectionButton.delegate = self
+        setupSort()
         toolbar.delegate = self
         guard let type else { return }
         similarPhotoLabel.text = type.title
@@ -173,6 +175,38 @@ extension GroupedAssetsViewController: SelectionButtonDelegate {
             assetGroups.forEach { assetsForDeletion.insert($0.assets) }
         }
         tableView.reloadData()
+    }
+}
+
+extension GroupedAssetsViewController: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        UIContextMenuConfiguration(actionProvider: { [weak self] _ in
+            guard let self else { return nil }
+            return UIMenu(children: getSortMenuElements())
+        })
+    }
+    
+    private func setupSort() {
+        if #available(iOS 14.0, *) {
+            let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
+            sortButton.showsMenuAsPrimaryAction = true
+            sortButton.menu = menu
+        } else {
+            sortButton.addInteraction(UIContextMenuInteraction(delegate: self))
+        }
+    }
+    
+    private func getSortMenuElements() -> [UIMenuElement] {
+        let latest = UIAction(title: SortType.latest.title) { [weak self] _ in
+            self?.sortButton.bind(type: .latest)
+        }
+        let oldest = UIAction(title: SortType.oldest.title) { [weak self] _ in
+            self?.sortButton.bind(type: .oldest)
+        }
+        let largest = UIAction(title: SortType.largest.title) { [weak self] _ in
+            self?.sortButton.bind(type: .largest)
+        }
+        return [latest, oldest, largest]
     }
 }
 
