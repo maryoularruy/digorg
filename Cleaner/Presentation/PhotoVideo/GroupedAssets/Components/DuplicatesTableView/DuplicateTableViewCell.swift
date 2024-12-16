@@ -11,15 +11,14 @@ import UIKit
 
 final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet var duplicatesAmountLabel: UILabel!
+    @IBOutlet weak var dateLabel: Regular15LabelStyle!
+    @IBOutlet weak var selectAllButton: SelectionTransparentButtonStyle!
     @IBOutlet weak var duplicateGroupCV: UICollectionView!
     
     var onTap: (([PHAsset], Int) -> ())?
-	var onTapWithSelectMode: ((Int) -> ())?
+	var onTapCheckBox: ((Int) -> ())?
     var onTapSelectAll: (([PHAsset]) -> ())?
     
-    lazy var selectMode = false {
-        didSet { duplicateGroupCV.reloadData() }
-    }
 	var assetsForDeletion = Set<PHAsset>()
     private lazy var assets = [PHAsset]()
     private lazy var indexOfBest = 0
@@ -27,13 +26,10 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        dateLabel.setGreyTextColor()
         duplicateGroupCV.register(cellType: AssetCollectionViewCell.self)
         duplicateGroupCV.reloadData()
     }
-	
-	func setupSelectMode(isON: Bool) {
-		selectMode = isON
-	}
 	
 	override func prepareForReuse() {
 		duplicateGroupCV.reloadData()
@@ -41,8 +37,14 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
 	
 	func setupData(assets: [PHAsset]) {
 		self.assets = assets
+        selectAllButton.isHidden = true
+        selectAllButton.addTapGestureRecognizer { [weak self] in
+            self?.onTapSelectAll?(assets)
+        }
         indexOfBest = PhotoVideoManager.shared.chooseTheBest(assets) ?? 0
 		duplicatesAmountLabel.text = "\(assets.count) duplicates"
+        guard let firstAssetDate = assets.first?.creationDate else { return }
+        dateLabel.bind(text: firstAssetDate.toFullDate())
 	}
 }
 
@@ -56,18 +58,14 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
         cell.photoImageView.image = assets[indexPath.item].getAssetThumbnail(TargetSize.large.size)
         cell.isChecked = assetsForDeletion.contains(assets[indexPath.item])
         cell.isBest = indexPath.item == indexOfBest ? true : false
-		cell.setupSelectMode(isON: selectMode)
-		cell.addTapGestureRecognizer { [weak self] in
+        cell.addTapGestureRecognizer { [weak self] in
             guard let self else { return }
-			if self.selectMode {
-                cell.checkBox.isHidden = false
-				cell.isChecked.toggle()
-				self.onTapWithSelectMode?(indexPath.item)
-			} else {
-                cell.checkBox.isHidden = true
-				self.onTap?(self.assets, indexPath.item)
-			}
+            onTap?(assets, indexPath.item)
 		}
+        cell.checkBox.addTapGestureRecognizer { [weak self] in
+            cell.isChecked.toggle()
+            self?.onTapCheckBox?(indexPath.item)
+        }
 		return cell
 	}
     

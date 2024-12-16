@@ -37,7 +37,7 @@ extension PhotoTotalViewController: ViewControllerProtocol {
         rootView.subviews.forEach { $0.isUserInteractionEnabled = false }
         
         dispatchGroup.enter()
-        photoVideoManager.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
+        photoVideoManager.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount, _ in
             guard let self else { return }
             let joinedAssets = photoVideoManager.join(assetGroups)
             rootView.similarPhotosView.assets = joinedAssets
@@ -121,11 +121,8 @@ extension PhotoTotalViewController: ViewControllerProtocol {
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
         
+        rootView.scroll.refreshControl = UIRefreshControl()
         rootView.scroll.refreshControl?.addTarget(self, action: #selector(updateUI), for: .valueChanged)
-    }
-    
-    @objc private func handleSwipeRight() {
-        navigationController?.popViewController(animated: true)
     }
     
     @objc private func updateUI() {

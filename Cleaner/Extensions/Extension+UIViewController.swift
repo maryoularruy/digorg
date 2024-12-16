@@ -72,4 +72,8 @@ extension UIViewController {
             }
         }
     }
+    
+    @objc func handleSwipeRight() {
+        navigationController?.popViewController(animated: true)
+    }
 }

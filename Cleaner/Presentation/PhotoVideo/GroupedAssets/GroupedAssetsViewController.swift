@@ -23,22 +23,39 @@ enum GroupedAssetsType {
 final class GroupedAssetsViewController: UIViewController {
     @IBOutlet weak var similarPhotoLabel: Semibold24LabelStyle!
     @IBOutlet weak var duplicatesCountLabel: Regular13LabelStyle!
-	@IBOutlet var arrowBackView: UIView!
-    @IBOutlet weak var selectModeButton: SelectionButtonStyle!
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet weak var actionToolbar: ActionToolbar!
+	@IBOutlet weak var arrowBackView: UIView!
+    @IBOutlet weak var selectionButton: SelectionButtonStyle!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var toolbar: ActionToolbar!
     
     lazy var type: GroupedAssetsType? = nil
     
     private lazy var photoVideoManager = PhotoVideoManager.shared
     
-    private lazy var assetGroups = [PHAssetGroup]()
+    private lazy var assetGroups = [PHAssetGroup]() {
+        didSet {
+            let allAssetsCount = assetGroups.reduce(0) { $0 + $1.assets.count }
+            selectionButton.isClickable = !assetGroups.isEmpty
+            duplicatesCountLabel.bind(text: "\(allAssetsCount) file\(allAssetsCount == 1 ? "" : "s")")
+            
+            if assetGroups.isEmpty {
+                setupEmptyState()
+            } else {
+                selectionButton.bind(text: assetsForDeletion.count == allAssetsCount ? .deselectAll : .selectAll)
+            }
+        }
+    }
+    
     private lazy var duplicatesCount: Int = 0
+    
     private lazy var assetsForDeletion = Set<PHAsset>() {
         didSet {
-            actionToolbar.toolbarButton.bind(backgroundColor: assetsForDeletion.isEmpty ? .paleBlue : .blue)
-            actionToolbar.toolbarButton.bind(
-                text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s")")
+            let size = assetsForDeletion.reduce(0) { $0 + $1.imageSize }
+            toolbar.toolbarButton.bind(backgroundColor: assetsForDeletion.isEmpty ? .paleBlue : .blue)
+            toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(size.convertToString())")
+            
+            let allAssetsCount = assetGroups.reduce(0) { $0 + $1.assets.count }
+            selectionButton.bind(text: assetsForDeletion.count == allAssetsCount ? .deselectAll : .selectAll)
         }
     }
     
@@ -57,22 +74,11 @@ final class GroupedAssetsViewController: UIViewController {
 			}
 		}
 	}
-    
-	private lazy var selectMode = false {
-		didSet {
-            if selectMode {
-                selectModeButton.bind(text: .deselect)
-			} else {
-                selectModeButton.bind(text: .select)
-				assetsForDeletion.removeAll()
-                tableView.reloadData()
-			}
-		}
-	}
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        actionToolbar.delegate = self
+        selectionButton.delegate = self
+        toolbar.delegate = self
         guard let type else { return }
         similarPhotoLabel.text = type.title
         tableView.register(cellType: DuplicateTableViewCell.self)
@@ -81,27 +87,11 @@ final class GroupedAssetsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guard let type else { return }
-        
-        assetGroups = switch type {
-        case .similarPhotos:
-            photoVideoManager.similarPhotos
-        case .duplicatePhotos:
-            photoVideoManager.similarPhotos
-        case .duplicateVideos:
-            photoVideoManager.similarVideos
-        }
-        
-        duplicatesCount = switch type {
-        case .similarPhotos:
-            photoVideoManager.similarPhotosCount
-        case .duplicatePhotos:
-            photoVideoManager.similarPhotosCount
-        case .duplicateVideos:
-            photoVideoManager.similarVideosCount
-        }
-        
         setupUI()
+    }
+    
+    private func setupEmptyState() {
+        
     }
 }
 
@@ -113,7 +103,6 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCell(for: indexPath) as DuplicateTableViewCell
 		cell.setupData(assets: assetGroups[indexPath.item].assets)
-        cell.selectMode = selectMode
         cell.selectionStyle = .none
 		cell.onTap = { [weak self] assets, index in
 			guard let self = self else { return }
@@ -127,7 +116,7 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 			gallery.presentationIndex = index
 			self.present(photoGallery: gallery)
 		}
-		cell.onTapWithSelectMode = { [weak self] index in
+		cell.onTapCheckBox = { [weak self] index in
 			guard let self else { return }
 			if !self.assetsForDeletion.contains(self.assetGroups[indexPath.item].assets[index]) {
 				self.assetsForDeletion.insert(self.assetGroups[indexPath.item].assets[index])
@@ -137,10 +126,9 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
             cell.assetsForDeletion = self.assetsForDeletion
 		}
 		cell.onTapSelectAll = { [weak self] assets in
-			guard let self = self else { return }
-			self.selectMode = true
-			self.assetsForDeletion.insert(assets) //= Set(assets)
-			self.tableView.reloadData()
+			guard let self else { return }
+			assetsForDeletion.insert(assets)
+			tableView.reloadData()
 		}
         cell.assetsForDeletion = self.assetsForDeletion
 		return cell
@@ -157,23 +145,34 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
             self?.navigationController?.popViewController(animated: true)
         }
         
-        selectModeButton.addTapGestureRecognizer { [weak self] in
-            guard let self else { return }
-            selectMode.toggle()
-            tableView.reloadData()
-        }
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
     }
     
     func setupUI() {
-        duplicatesCountLabel.text = "\(duplicatesCount) files"
-        selectMode = false
-        updatePlaceholder()
-    }
-    
-    private func updatePlaceholder() {
-        if assetGroups.isEmpty {
-            self.selectModeButton.isHidden = true
+        guard let type else { return }
+        assetGroups = switch type {
+        case .similarPhotos:
+            photoVideoManager.similarPhotos
+        case .duplicatePhotos:
+            photoVideoManager.similarPhotos
+        case .duplicateVideos:
+            photoVideoManager.similarVideos
         }
+        assetsForDeletion = []
+    }
+}
+
+extension GroupedAssetsViewController: SelectionButtonDelegate {
+    func tapOnButton() {
+        let allAssetsCount = assetGroups.reduce(0) { $0 + $1.assets.count }
+        if allAssetsCount == assetsForDeletion.count {
+            assetsForDeletion.removeAll()
+        } else {
+            assetGroups.forEach { assetsForDeletion.insert($0.assets) }
+        }
+        tableView.reloadData()
     }
 }
 
@@ -192,27 +191,24 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
             }
             assetsInput = assetsInput.filter { $0.assets.count != 0 }
             assetsForDeletion.removeAll()
-            selectMode = false
             refreshSimilarItems()
-            updatePlaceholder()
         }
     }
     
     @objc func refreshSimilarItems() {
         if assetGroups.first?.subtype == .smartAlbumVideos {
-            PhotoVideoManager.shared.fetchSimilarVideos { [weak self] assetGroups, duplicatesCount in
-                self?.refreshUI(assetGroups: assetGroups, duplicatesCount: duplicatesCount)
+            PhotoVideoManager.shared.fetchSimilarVideos { [weak self] assetGroups, _, _ in
+                self?.refreshUI(assetGroups: assetGroups)
             }
         } else {
-            PhotoVideoManager.shared.fetchSimilarPhotos(live: false) { [weak self] assetGroups, duplicatesCount in
-                self?.refreshUI(assetGroups: assetGroups, duplicatesCount: duplicatesCount)
+            PhotoVideoManager.shared.fetchSimilarPhotos(live: false) { [weak self] assetGroups, _, _ in
+                self?.refreshUI(assetGroups: assetGroups)
             }
         }
     }
     
-    private func refreshUI(assetGroups: [PHAssetGroup], duplicatesCount: Int) {
+    private func refreshUI(assetGroups: [PHAssetGroup]) {
         self.assetGroups = assetGroups
-        self.duplicatesCount = duplicatesCount
         setupUI()
         tableView.reloadData()
     }

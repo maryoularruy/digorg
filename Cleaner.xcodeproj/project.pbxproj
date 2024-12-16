@@ -63,6 +63,7 @@
 		A5609EA12CDBBE06000AF19E /* SecretContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */; };
 		A5609FD22CE0F83A000AF19E /* Float+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609FD12CE0F83A000AF19E /* Float+ext.swift */; };
 		A5609FD82CE12BB3000AF19E /* BatteryInstructionCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */; };
+		A5858DD82D0C500C00C4BDD9 /* Int+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5858DD72D0C500C00C4BDD9 /* Int+ext.swift */; };
 		A598A0752CECA12A002F346E /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598A0742CECA12A002F346E /* Store.swift */; };
 		A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */; };
 		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
@@ -243,6 +244,7 @@
 		A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretContactsViewController.swift; sourceTree = "<group>"; };
 		A5609FD12CE0F83A000AF19E /* Float+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+ext.swift"; sourceTree = "<group>"; };
 		A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryInstructionCellType.swift; sourceTree = "<group>"; };
+		A5858DD72D0C500C00C4BDD9 /* Int+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+ext.swift"; sourceTree = "<group>"; };
 		A598A0742CECA12A002F346E /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
 		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 				A53EDA242CD0429F00565625 /* Date+ext.swift */,
 				A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */,
 				A5609FD12CE0F83A000AF19E /* Float+ext.swift */,
+				A5858DD72D0C500C00C4BDD9 /* Int+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1383,6 +1386,7 @@
 				75D3FC3B2A6069AF00F351A3 /* MainViewController.swift in Sources */,
 				75D3FC372A6069AF00F351A3 /* AppDelegate.swift in Sources */,
 				FA3988532B30602A0096F335 /* Bundle.swift in Sources */,
+				A5858DD82D0C500C00C4BDD9 /* Int+ext.swift in Sources */,
 				FA3987282B303DCC0096F335 /* SettingsViewController.swift in Sources */,
 				FA3987782B3055930096F335 /* OSCategories.m in Sources */,
 				A53EDA252CD0429F00565625 /* Date+ext.swift in Sources */,

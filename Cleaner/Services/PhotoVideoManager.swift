@@ -8,12 +8,7 @@
 import Photos
 import Vision
 
-protocol PhotoVideoManagerProtocol {
-    func fetchSimilarPhotos(from dateFrom: String, to dateTo: String, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ())
-    func fetchSimilarVideos(from dateFrom: String, to dateTo: String, handler: @escaping ([PHAssetGroup], Int) -> ())
-}
-
-final class PhotoVideoManager: PhotoVideoManagerProtocol {
+final class PhotoVideoManager {
     static let shared = PhotoVideoManager()
     static var defaultStartDate = "01 Jan 1970 00:00:00"
     static var defaultEndDate = "01 Jan 2030 00:00:00"
@@ -67,14 +62,14 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
         handler(videos)
     }
     
-    func fetchSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int) -> ()) {
+    func fetchSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int, Int64) -> ()) {
         isLoadingPhotos = true
         fetchPhotos(from: dateFrom, to: dateTo, live: live) { photoInAlbum in
             DispatchQueue.global(qos: .userInitiated).async {
                 var images: [OSTuple<NSString, NSData>] = []
                 if photoInAlbum.count == 0 {
                     DispatchQueue.main.async {
-                        handler([], 0)
+                        handler([], 0, 0)
                     }
                     return
                 }
@@ -93,7 +88,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                     var similarPhotosNumbers: [Int] = []
                     var similarPhotoGroups: [PHAssetGroup] = []
                     guard similarImageIdsAsTuples.count >= 1 else {
-                        handler([], 0)
+                        handler([], 0, 0)
                         return
                     }
                     for i in 1...similarImageIdsAsTuples.count {
@@ -134,23 +129,25 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                     }
                     similarPhotoGroups.removeAll { group in group.assets.isEmpty }
                     let duplicatesCount = similarPhotoGroups.reduce(0) { $0 + $1.assets.count }
+                    var size: Int64 = 0
+                    similarPhotoGroups.forEach { size += $0.assets.reduce(0) { $0 + $1.imageSize } }
                     self?.similarPhotos = similarPhotoGroups
                     self?.isLoadingPhotos = false
                     self?.similarPhotosCount = duplicatesCount
-                    handler(similarPhotoGroups, duplicatesCount)
+                    handler(similarPhotoGroups, duplicatesCount, size)
                 }
             }
         }
     }
 
-	func fetchSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAssetGroup], Int) -> ()) {
+	func fetchSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAssetGroup], Int, Int64) -> ()) {
         isLoadingVideos = true
 			fetchVideos(from: dateFrom, to: dateTo) { videosInAlbum in
 				DispatchQueue.global(qos: .background).async {
 					var videos: [OSTuple<NSString, NSData>] = []
 					if videosInAlbum.count == 0 {
 						DispatchQueue.main.async{
-                            handler([], 0)
+                            handler([], 0, 0)
 						}
 						return
 					}
@@ -168,7 +165,7 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
 						var similarVideoNumbers: [Int] = []
 						var similarVideoGroups: [PHAssetGroup] = []
                         guard similarVideoIdsAsTuples.count >= 1 else {
-                            handler([], 0)
+                            handler([], 0, 0)
                             return
                         }
 						for i in 1...similarVideoIdsAsTuples.count {
@@ -209,10 +206,12 @@ final class PhotoVideoManager: PhotoVideoManagerProtocol {
                         }
                         similarVideoGroups.removeAll { group in group.assets.isEmpty }
                         let duplicatesCount = similarVideoGroups.reduce(0) { $0 + $1.assets.count }
+                        var size: Int64 = 0
+                        similarVideoGroups.forEach { size += $0.assets.reduce(0) { $0 + $1.imageSize } }
                         self?.similarVideos = similarVideoGroups
                         self?.similarVideosCount = duplicatesCount
                         self?.isLoadingVideos = false
-                        handler(similarVideoGroups, duplicatesCount)
+                        handler(similarVideoGroups, duplicatesCount, size)
 					}
 				}
 			}

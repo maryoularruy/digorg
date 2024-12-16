@@ -35,11 +35,7 @@ final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
 		super.awakeFromNib()
         setupUI()
 	}
-	
-	func setupSelectMode(isON: Bool) {
-        checkBox.isHidden = isON ? false : true
-	}
-	
+
 	private func setupForStorage(with image: String) {
 		do {
 			let retrievedImage = try Disk.retrieve(image, from: .documents, as: UIImage.self)

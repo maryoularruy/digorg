@@ -87,9 +87,9 @@ final class MainViewController: UIViewController {
     
     private func updatePhotosCleanupOption() {
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.photoVideoManager.fetchSimilarPhotos(live: false) { _, duplicatesCount in
+            self?.photoVideoManager.fetchSimilarPhotos(live: false) { assetsGroups, duplicatesCount, size in
                 DispatchQueue.main.async {
-                    self?.photosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
+                    self?.photosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.convertToString())")
                 }
             }
         }
@@ -97,9 +97,9 @@ final class MainViewController: UIViewController {
     
     private func updateVideosCleanupOption() {
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.photoVideoManager.fetchSimilarVideos { _, duplicatesCount in
+            self?.photoVideoManager.fetchSimilarVideos { _, duplicatesCount, size in
                 DispatchQueue.main.async {
-                    self?.videosCleanup.infoButton.bind(duplicatesCount: duplicatesCount)
+                    self?.videosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.convertToString())")
                 }
             }
         }

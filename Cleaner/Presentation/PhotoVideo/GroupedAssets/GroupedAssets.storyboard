@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="27x-6D-L5n">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -88,12 +87,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="actionToolbar" destination="wHd-R4-dnf" id="kr1-wC-uIh"/>
                         <outlet property="arrowBackView" destination="N1k-U1-7FJ" id="jCa-HU-AGQ"/>
                         <outlet property="duplicatesCountLabel" destination="Lkk-Of-Ud7" id="eDu-lD-Xek"/>
-                        <outlet property="selectModeButton" destination="pX6-gp-mlx" id="bvQ-Ov-08F"/>
+                        <outlet property="selectionButton" destination="pX6-gp-mlx" id="bvQ-Ov-08F"/>
                         <outlet property="similarPhotoLabel" destination="pzO-BD-2ZM" id="CJo-rO-JMQ"/>
                         <outlet property="tableView" destination="e6p-HG-smV" id="zRa-0u-tJU"/>
+                        <outlet property="toolbar" destination="wHd-R4-dnf" id="kr1-wC-uIh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDv-Cb-aQP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

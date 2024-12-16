@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SelectionButtonProtocol: AnyObject {
+protocol SelectionButtonDelegate: AnyObject {
     func tapOnButton()
 }
 
@@ -19,7 +19,7 @@ enum SelectionButtonText: String {
 }
 
 class SelectionButtonStyle: UIButton {
-    weak var delegate: SelectionButtonProtocol?
+    weak var delegate: SelectionButtonDelegate?
     
     lazy var isClickable: Bool = true {
         didSet {
