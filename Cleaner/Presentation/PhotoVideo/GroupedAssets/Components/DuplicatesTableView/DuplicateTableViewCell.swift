@@ -37,6 +37,7 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
 	
 	func setupData(assets: [PHAsset]) {
 		self.assets = assets
+        selectAllButton.isHidden = true
         selectAllButton.addTapGestureRecognizer { [weak self] in
             self?.onTapSelectAll?(assets)
         }
