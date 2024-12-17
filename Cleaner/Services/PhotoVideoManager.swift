@@ -373,7 +373,7 @@ final class PhotoVideoManager {
         case .oldest:
             assetGroups.sort { $0.assets[0].creationDate ?? Date(timeIntervalSince1970: 0) < $1.assets[0].creationDate ?? Date(timeIntervalSince1970: 0) }
         case .largest:
-            break
+            assetGroups.sort { $0.assets.reduce(0) { $0 + $1.imageSize } > $1.assets.reduce(0) { $0 + $1.imageSize } }
         case .date:
             break
         }
