@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="27x-6D-L5n">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -64,6 +65,11 @@
                                     <constraint firstAttribute="height" constant="100" id="oiO-k7-wts"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itd-TM-oy4" customClass="SortButtonStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="344" y="117.5" width="54" height="34"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WX4-Ey-lrt"/>
                         <color key="backgroundColor" name="White"/>
@@ -79,6 +85,8 @@
                             <constraint firstItem="e6p-HG-smV" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" id="VTh-e5-z9R"/>
                             <constraint firstItem="Lkk-Of-Ud7" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" priority="900" constant="16" id="Vvu-uZ-Rhm"/>
                             <constraint firstItem="wHd-R4-dnf" firstAttribute="trailing" secondItem="WX4-Ey-lrt" secondAttribute="trailing" id="WS5-nz-gUj"/>
+                            <constraint firstItem="WX4-Ey-lrt" firstAttribute="trailing" secondItem="itd-TM-oy4" secondAttribute="trailing" constant="16" id="Yme-mi-iTf"/>
+                            <constraint firstItem="itd-TM-oy4" firstAttribute="centerY" secondItem="pzO-BD-2ZM" secondAttribute="centerY" id="bWO-kO-qIC"/>
                             <constraint firstItem="Lkk-Of-Ud7" firstAttribute="top" secondItem="pzO-BD-2ZM" secondAttribute="bottom" constant="6" id="dxu-IW-mx9"/>
                             <constraint firstItem="pzO-BD-2ZM" firstAttribute="top" secondItem="N1k-U1-7FJ" secondAttribute="bottom" constant="16" id="nIx-at-JMm"/>
                             <constraint firstItem="wHd-R4-dnf" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" id="qFj-C2-aUy"/>
@@ -91,6 +99,7 @@
                         <outlet property="duplicatesCountLabel" destination="Lkk-Of-Ud7" id="eDu-lD-Xek"/>
                         <outlet property="selectionButton" destination="pX6-gp-mlx" id="bvQ-Ov-08F"/>
                         <outlet property="similarPhotoLabel" destination="pzO-BD-2ZM" id="CJo-rO-JMQ"/>
+                        <outlet property="sortButton" destination="itd-TM-oy4" id="7Gn-sV-PG7"/>
                         <outlet property="tableView" destination="e6p-HG-smV" id="zRa-0u-tJU"/>
                         <outlet property="toolbar" destination="wHd-R4-dnf" id="kr1-wC-uIh"/>
                     </connections>

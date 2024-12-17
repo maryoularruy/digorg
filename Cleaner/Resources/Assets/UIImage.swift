@@ -17,8 +17,11 @@ extension UIImage {
     
     static var stars = UIImage(resource: .stars)
     
+    //MARK: -Photo&Video Assets
     static var liveViewBackground = UIImage(resource: .liveViewBackground)
     static var blurryViewBackground = UIImage(resource: .blurryViewBackground)
+    
+    static var sortIcon = UIImage(resource: .sortIcon)
     
     //MARK: -ToolOption
     static var secretAlbum = UIImage(resource: .secretAlbum)

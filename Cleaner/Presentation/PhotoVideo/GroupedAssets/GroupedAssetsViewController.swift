@@ -25,6 +25,7 @@ final class GroupedAssetsViewController: UIViewController {
     @IBOutlet weak var duplicatesCountLabel: Regular13LabelStyle!
 	@IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
+    @IBOutlet weak var sortButton: SortButtonStyle!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var toolbar: ActionToolbar!
     
@@ -78,6 +79,7 @@ final class GroupedAssetsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectionButton.delegate = self
+        setupSort()
         toolbar.delegate = self
         guard let type else { return }
         similarPhotoLabel.text = type.title
@@ -152,7 +154,7 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
     
     func setupUI() {
         guard let type else { return }
-        assetGroups = switch type {
+        var groups = switch type {
         case .similarPhotos:
             photoVideoManager.similarPhotos
         case .duplicatePhotos:
@@ -160,6 +162,8 @@ extension GroupedAssetsViewController: ViewControllerProtocol {
         case .duplicateVideos:
             photoVideoManager.similarVideos
         }
+        photoVideoManager.sort(&groups, type: sortButton.type ?? .latest)
+        assetGroups = groups
         assetsForDeletion = []
     }
 }
@@ -173,6 +177,47 @@ extension GroupedAssetsViewController: SelectionButtonDelegate {
             assetGroups.forEach { assetsForDeletion.insert($0.assets) }
         }
         tableView.reloadData()
+    }
+}
+
+extension GroupedAssetsViewController: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        UIContextMenuConfiguration(actionProvider: { [weak self] _ in
+            guard let self else { return nil }
+            return UIMenu(children: getSortMenuElements())
+        })
+    }
+    
+    private func setupSort() {
+        if #available(iOS 14.0, *) {
+            let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
+            sortButton.showsMenuAsPrimaryAction = true
+            sortButton.menu = menu
+        } else {
+            sortButton.addInteraction(UIContextMenuInteraction(delegate: self))
+        }
+    }
+    
+    private func getSortMenuElements() -> [UIMenuElement] {
+        let latest = UIAction(title: SortType.latest.title) { [weak self] _ in
+            guard let self else { return }
+            photoVideoManager.sort(&assetGroups, type: .latest)
+            sortButton.bind(type: .latest)
+            tableView.reloadData()
+        }
+        let oldest = UIAction(title: SortType.oldest.title) { [weak self] _ in
+            guard let self else { return }
+            photoVideoManager.sort(&assetGroups, type: .oldest)
+            sortButton.bind(type: .oldest)
+            tableView.reloadData()
+        }
+        let largest = UIAction(title: SortType.largest.title) { [weak self] _ in
+            guard let self else { return }
+            photoVideoManager.sort(&assetGroups, type: .largest)
+            sortButton.bind(type: .largest)
+            tableView.reloadData()
+        }
+        return [latest, oldest, largest]
     }
 }
 
@@ -198,10 +243,16 @@ extension GroupedAssetsViewController: ActionToolbarDelegate {
     @objc func refreshSimilarItems() {
         if assetGroups.first?.subtype == .smartAlbumVideos {
             PhotoVideoManager.shared.fetchSimilarVideos { [weak self] assetGroups, _, _ in
+                var groups = assetGroups
+                self?.photoVideoManager.sort(&groups, type: self?.sortButton.type ?? .latest)
+                self?.assetGroups = groups
                 self?.refreshUI(assetGroups: assetGroups)
             }
         } else {
             PhotoVideoManager.shared.fetchSimilarPhotos(live: false) { [weak self] assetGroups, _, _ in
+                var groups = assetGroups
+                self?.photoVideoManager.sort(&groups, type: self?.sortButton.type ?? .latest)
+                self?.assetGroups = groups
                 self?.refreshUI(assetGroups: assetGroups)
             }
         }
