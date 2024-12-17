@@ -84,6 +84,7 @@ final class RegularAssetsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addGestureRecognizers()
+        setupSort()
         setupUI()
     }
     
@@ -111,38 +112,59 @@ final class RegularAssetsViewController: UIViewController {
         switch type {
         case .livePhotos:
             photoVideoManager.fetchLivePhotos { [weak self] assets in
-                self?.assets = assets
-                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
+                guard let self else { return }
+                var unsortedAssets = assets
+                photoVideoManager.sort(&unsortedAssets, type: rootView.sortButton.type ?? .latest)
+                self.assets = unsortedAssets
+                assetsForDeletion.insert(isFirstResponder ? self.assets : [])
             }
         case .blurryPhotos:
             photoVideoManager.fetchBlurryPhotos { [weak self] assets in
-                self?.assets = assets
-                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
+                guard let self else { return }
+                var unsortedAssets = assets
+                photoVideoManager.sort(&unsortedAssets, type: rootView.sortButton.type ?? .latest)
+                self.assets = unsortedAssets
+                assetsForDeletion.insert(isFirstResponder ? self.assets : [])
             }
         case .portraits:
             photoVideoManager.fetchSelfiePhotos { [weak self] assets in
-                self?.assets = assets
-                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
+                guard let self else { return }
+                var unsortedAssets = assets
+                photoVideoManager.sort(&unsortedAssets, type: rootView.sortButton.type ?? .latest)
+                self.assets = unsortedAssets
+                assetsForDeletion.insert(isFirstResponder ? self.assets : [])
             }
         case .screenshots:
             photoVideoManager.fetchScreenshots { [weak self] assets in
-                self?.assets = assets
-                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
+                guard let self else { return }
+                var unsortedAssets = assets
+                photoVideoManager.sort(&unsortedAssets, type: rootView.sortButton.type ?? .latest)
+                self.assets = unsortedAssets
+                assetsForDeletion.insert(isFirstResponder ? self.assets : [])
             }
         case .allPhotos:
             photoVideoManager.fetchAllPhotos { [weak self] assets in
-                self?.assets = assets
-                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
+                guard let self else { return }
+                var unsortedAssets = assets
+                photoVideoManager.sort(&unsortedAssets, type: rootView.sortButton.type ?? .latest)
+                self.assets = unsortedAssets
+                assetsForDeletion.insert(isFirstResponder ? self.assets : [])
             }
         case .superSizedVideos:
             photoVideoManager.fetchSuperSizedVideos { [weak self] assets in
-                self?.assets = assets
-                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
+                guard let self else { return }
+                var unsortedAssets = assets
+                photoVideoManager.sort(&unsortedAssets, type: rootView.sortButton.type ?? .latest)
+                self.assets = unsortedAssets
+                assetsForDeletion.insert(isFirstResponder ? self.assets : [])
             }
         case .allVideos:
             photoVideoManager.fetchAllVideos { [weak self] assets in
-                self?.assets = assets
-                self?.assetsForDeletion.insert(isFirstResponder ? assets : [])
+                guard let self else { return }
+                var unsortedAssets = assets
+                photoVideoManager.sort(&unsortedAssets, type: rootView.sortButton.type ?? .latest)
+                self.assets = unsortedAssets
+                assetsForDeletion.insert(isFirstResponder ? self.assets : [])
             }
         }
     }
@@ -176,6 +198,47 @@ extension RegularAssetsViewController: SelectionButtonDelegate {
         } else {
             assetsForDeletion.insert(assets)
         }
+    }
+}
+
+extension RegularAssetsViewController: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        UIContextMenuConfiguration(actionProvider: { [weak self] _ in
+            guard let self else { return nil }
+            return UIMenu(children: getSortMenuElements())
+        })
+    }
+    
+    private func setupSort() {
+        if #available(iOS 14.0, *) {
+            let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
+            rootView.sortButton.showsMenuAsPrimaryAction = true
+            rootView.sortButton.menu = menu
+        } else {
+            rootView.sortButton.addInteraction(UIContextMenuInteraction(delegate: self))
+        }
+    }
+    
+    private func getSortMenuElements() -> [UIMenuElement] {
+        let latest = UIAction(title: SortType.latest.title) { [weak self] _ in
+            guard let self else { return }
+            photoVideoManager.sort(&assets, type: .latest)
+            rootView.sortButton.bind(type: .latest)
+            rootView.assetsCollectionView.reloadData()
+        }
+        let oldest = UIAction(title: SortType.oldest.title) { [weak self] _ in
+            guard let self else { return }
+            photoVideoManager.sort(&assets, type: .oldest)
+            rootView.sortButton.bind(type: .oldest)
+            rootView.assetsCollectionView.reloadData()
+        }
+        let largest = UIAction(title: SortType.largest.title) { [weak self] _ in
+            guard let self else { return }
+            photoVideoManager.sort(&assets, type: .largest)
+            rootView.sortButton.bind(type: .largest)
+            rootView.assetsCollectionView.reloadData()
+        }
+        return [latest, oldest, largest]
     }
 }
 

@@ -379,8 +379,17 @@ final class PhotoVideoManager {
         }
     }
     
-    func sort(_ assets: [PHAsset]) {
-        
+    func sort(_ assets: inout [PHAsset], type: SortType) {
+        switch type {
+        case .latest:
+            assets.sort { $0.creationDate ?? Date(timeIntervalSince1970: 0) > $1.creationDate ?? Date(timeIntervalSince1970: 0) }
+        case .oldest:
+            assets.sort { $0.creationDate ?? Date(timeIntervalSince1970: 0) < $1.creationDate ?? Date(timeIntervalSince1970: 0) }
+        case .largest:
+            assets.sort { $0.imageSize > $1.imageSize }
+        case .date:
+            break
+        }
     }
     
     private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {

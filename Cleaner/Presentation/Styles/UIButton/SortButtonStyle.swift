@@ -27,6 +27,11 @@ enum SortType {
 final class SortButtonStyle: UIButton {
     private(set) var type: SortType?
     
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        setup()
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
