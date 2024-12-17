@@ -85,6 +85,10 @@ final class DuplicateNameContactsViewController: UIViewController {
             navigationController?.pushViewController(contactVC, animated: true)
         }
     }
+    
+    deinit {
+        print("deinit dup names")
+    }
 }
 
 extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -155,6 +159,10 @@ extension DuplicateNameContactsViewController: ViewControllerProtocol {
         arrowBackButton.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
     }
 }
 

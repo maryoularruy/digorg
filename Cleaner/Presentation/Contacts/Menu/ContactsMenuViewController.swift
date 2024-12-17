@@ -60,6 +60,10 @@ final class ContactsMenuViewController: UIViewController {
         alertController.addAction(settingsAction)
         present(alertController, animated: true, completion: nil)
     }
+    
+    deinit {
+        print("deinit contacts menu")
+    }
 }
 
 extension ContactsMenuViewController: ViewControllerProtocol {
@@ -69,14 +73,19 @@ extension ContactsMenuViewController: ViewControllerProtocol {
         duplicateNumbersView.bind(type: .dublicateNumbers)
         noNameView.bind(type: .noNameContacts)
         noNumberView.bind(type: .noNumberContacts)
+        
+        [duplicateNamesView, duplicateNumbersView,
+         noNameView, noNumberView].forEach { $0.delegate = self }
     }
     
     func addGestureRecognizers() {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
-        [duplicateNamesView, duplicateNumbersView,
-         noNameView, noNumberView].forEach { $0.delegate = self }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
     }
     
     private func checkPermissionStatus() {

@@ -93,6 +93,10 @@ final class NoNameContactsViewController: UIViewController {
             view.addSubview(emptyStateView)
         }
     }
+    
+    deinit {
+        print("deinit no names")
+    }
 }
 
 extension NoNameContactsViewController: ViewControllerProtocol {
@@ -104,6 +108,10 @@ extension NoNameContactsViewController: ViewControllerProtocol {
         arrowBackButton.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
     }
 }
 
