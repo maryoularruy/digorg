@@ -366,6 +366,23 @@ final class PhotoVideoManager {
         return semaphoreResult == .success ? result : false
     }
     
+    func sort(_ assetGroups: inout [PHAssetGroup], type: SortType) {
+        switch type {
+        case .latest:
+            assetGroups.sort { $0.assets[0].creationDate ?? Date(timeIntervalSince1970: 0) > $1.assets[0].creationDate ?? Date(timeIntervalSince1970: 0) }
+        case .oldest:
+            assetGroups.sort { $0.assets[0].creationDate ?? Date(timeIntervalSince1970: 0) < $1.assets[0].creationDate ?? Date(timeIntervalSince1970: 0) }
+        case .largest:
+            break
+        case .date:
+            break
+        }
+    }
+    
+    func sort(_ assets: [PHAsset]) {
+        
+    }
+    
     private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
         let options = PHFetchOptions()
         let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
