@@ -107,9 +107,9 @@ final class MainViewController: UIViewController {
     
     private func updateContactsCleanupOption() {
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.contactManager.loadDuplicatedByName { contacts in
+            self?.contactManager.countUnresolvedContacts { _, _, _, _, summaryCount in
                 DispatchQueue.main.async {
-                    self?.contactsCleanup.infoButton.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
+                    self?.contactsCleanup.infoButton.bind(text: "\(summaryCount) contact\(summaryCount == 1 ? "" : "s")")
                 }
             }
         }

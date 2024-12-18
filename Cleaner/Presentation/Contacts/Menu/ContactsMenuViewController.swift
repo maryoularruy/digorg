@@ -18,11 +18,21 @@ final class ContactsMenuViewController: UIViewController {
     @IBOutlet weak var noNumberView: ContactsMenuView!
     
     private lazy var contactStore = CNContactStore()
+    private lazy var contactManager = ContactManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         contentSV.frame = view.bounds
         contentSV.alwaysBounceVertical = true
+        
+        duplicateNamesView.bind(type: .duplicateNames)
+        duplicateNumbersView.bind(type: .dublicateNumbers)
+        noNameView.bind(type: .noNameContacts)
+        noNumberView.bind(type: .noNumberContacts)
+        
+        [duplicateNamesView, duplicateNumbersView,
+         noNameView, noNumberView].forEach { $0.delegate = self }
+        
         checkPermissionStatus()
     }
     
@@ -72,14 +82,18 @@ final class ContactsMenuViewController: UIViewController {
 
 extension ContactsMenuViewController: ViewControllerProtocol {
     func setupUI() {
-        unresolvedContactsCount.bind(text: "50 contacts")
-        duplicateNamesView.bind(type: .duplicateNames)
-        duplicateNumbersView.bind(type: .dublicateNumbers)
-        noNameView.bind(type: .noNameContacts)
-        noNumberView.bind(type: .noNumberContacts)
-        
-        [duplicateNamesView, duplicateNumbersView,
-         noNameView, noNumberView].forEach { $0.delegate = self }
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.contactManager.countUnresolvedContacts { duplicatedByName, duplicatedByNumber, noName, noNumber, summaryCount in
+                DispatchQueue.main.async {
+                    self?.unresolvedContactsCount.bind(text: "\(summaryCount) contact\(summaryCount == 1 ? "" : "s")")
+                    
+                    self?.duplicateNamesView.unresolvedItemsCount.bind(text: "\(duplicatedByName) contact\(duplicatedByName == 1 ? "" : "s")")
+                    self?.duplicateNumbersView.unresolvedItemsCount.bind(text: "\(duplicatedByNumber) contact\(duplicatedByNumber == 1 ? "" : "s")")
+                    self?.noNameView.unresolvedItemsCount.bind(text: "\(noName) contact\(noName == 1 ? "" : "s")")
+                    self?.noNumberView.unresolvedItemsCount.bind(text: "\(noNumber) contact\(noNumber == 1 ? "" : "s")")
+                }
+            }
+        }
     }
     
     func addGestureRecognizers() {
@@ -97,7 +111,7 @@ extension ContactsMenuViewController: ViewControllerProtocol {
     
     
     @objc func refreshUI() {
-        //setupUI
+        setupUI()
         contentSV.refreshControl?.endRefreshing()
     }
     
