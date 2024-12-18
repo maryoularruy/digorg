@@ -9,6 +9,7 @@ import UIKit
 import Contacts
 
 final class ContactsMenuViewController: UIViewController {
+    @IBOutlet var contentSV: UIScrollView!
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var duplicateNamesView: ContactsMenuView!
@@ -17,8 +18,11 @@ final class ContactsMenuViewController: UIViewController {
     @IBOutlet weak var noNumberView: ContactsMenuView!
     
     private lazy var contactStore = CNContactStore()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentSV.frame = view.bounds
+        contentSV.alwaysBounceVertical = true
         checkPermissionStatus()
     }
     
@@ -86,6 +90,15 @@ extension ContactsMenuViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+        
+        contentSV.refreshControl = UIRefreshControl()
+        contentSV.refreshControl?.addTarget(self, action: #selector(refreshUI), for: .valueChanged)
+    }
+    
+    
+    @objc func refreshUI() {
+        //setupUI
+        contentSV.refreshControl?.endRefreshing()
     }
     
     private func checkPermissionStatus() {
