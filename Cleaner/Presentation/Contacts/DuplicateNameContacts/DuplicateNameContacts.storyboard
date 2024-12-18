@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x5d-Ne-Os9">
-                                <rect key="frame" x="0.0" y="64" width="55" height="55"/>
+                                <rect key="frame" x="8" y="64" width="55" height="55"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ArrowBackIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4cV-rI-alw">
-                                        <rect key="frame" x="-4.6666666666666679" y="-4.3333333333333357" width="64.333333333333329" height="64"/>
+                                        <rect key="frame" x="-4.3333333333333357" y="-4.3333333333333357" width="64" height="64"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -90,7 +90,7 @@
                             <constraint firstItem="ClE-fA-3z3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Y68-vo-QZ1"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CbR-7W-sDH" secondAttribute="trailing" id="a0K-Uy-wu3"/>
                             <constraint firstItem="odr-cq-nVd" firstAttribute="top" secondItem="ClE-fA-3z3" secondAttribute="bottom" constant="6" id="e8K-ek-xtf"/>
-                            <constraint firstItem="x5d-Ne-Os9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="iLQ-OU-CjO"/>
+                            <constraint firstItem="x5d-Ne-Os9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="iLQ-OU-CjO"/>
                             <constraint firstAttribute="bottom" secondItem="adP-Ie-DuI" secondAttribute="bottom" id="tYP-l7-KfZ"/>
                             <constraint firstItem="xge-Oo-nOS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="wZQ-Pv-dwi"/>
                             <constraint firstItem="x5d-Ne-Os9" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="yk1-Vh-Dzd"/>
