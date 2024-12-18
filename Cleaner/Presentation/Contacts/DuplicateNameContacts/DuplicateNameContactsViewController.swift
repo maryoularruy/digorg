@@ -18,32 +18,24 @@ final class DuplicateNameContactsViewController: UIViewController {
     
     private lazy var contactManager = ContactManager.shared
     
-    private lazy var selectMode = false {
-        didSet {
-            if selectMode {
-                contactsForMerge.insert(contactGroups)
-                selectionButton.bind(text: .deselectAll)
-            } else {
-                contactGroups.forEach { contactsForMerge.remove($0) }
-                selectionButton.bind(text: .selectAll)
-                unresolvedContactsTableView.reloadData()
-            }
-        }
-    }
-    
     private lazy var contactGroups = [[CNContact]]() {
         didSet {
-            if contactGroups.isEmpty { setupEmptyState() }
-            else { hideEmptyState() }
+            selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
+            if contactGroups.isEmpty {
+                setupEmptyState()
+            } else {
+                hideEmptyState()
+            }
         }
     }
     
     private lazy var contactsForMerge = Set<[CNContact]>() {
         didSet {
+            selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
             unresolvedContactsCount.text = "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")"
             unresolvedContactsTableView.reloadData()
             toolbar.isHidden = contactsForMerge.isEmpty
-            toolbar.actionButton.bind(text: "Merge Contacts (\(contactGroups.count))")
+            toolbar.actionButton.bind(text: "Merge Contacts (\(contactsForMerge.count))")
         }
     }
     
@@ -58,20 +50,16 @@ final class DuplicateNameContactsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        reloadData()
+        refreshData()
         setupUnresolvedContactsTableView()
     }
-    
-    @IBAction func tapOnSelectAllButton(_ sender: Any) {
-        selectMode.toggle()
-    }
-    
+
     private func setupUnresolvedContactsTableView() {
         unresolvedContactsCount.bind(text: "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")")
         unresolvedContactsTableView.register(cellType: ItemCell.self)
     }
     
-    private func reloadData() {
+    private func refreshData() {
         contactManager.loadDuplicatedByName { [weak self] duplicateGroups in
             self?.contactGroups = duplicateGroups
         }
@@ -149,10 +137,6 @@ extension DuplicateNameContactsViewController: ItemCellProtocol {
         } else {
             contactsForMerge.insert(duplicateContacts)
         }
-        
-        if contactsForMerge.count == contactGroups.count {
-            tapOnSelectAllButton(self)
-        }
     }
     
     func tapOnCell(_ position: (Int, Int)) {
@@ -162,6 +146,7 @@ extension DuplicateNameContactsViewController: ItemCellProtocol {
 
 extension DuplicateNameContactsViewController: ViewControllerProtocol {
     func setupUI() {
+        selectionButton.delegate = self
         toolbar.delegate = self
     }
     
@@ -173,6 +158,16 @@ extension DuplicateNameContactsViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+    }
+}
+
+extension DuplicateNameContactsViewController: SelectionButtonDelegate {
+    func tapOnButton() {
+        if contactsForMerge.count == contactGroups.count {
+            contactsForMerge.removeAll()
+        } else {
+            contactsForMerge.insert(contactGroups)
+        }
     }
 }
 
@@ -189,8 +184,8 @@ extension DuplicateNameContactsViewController: ActionAndCancelToolbarDelegate, B
     }
     
     func tapOnCancel() {
-        selectMode = false
-        reloadData()
+        contactsForMerge.removeAll()
+        unresolvedContactsTableView.reloadData()
     }
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
@@ -208,7 +203,7 @@ extension DuplicateNameContactsViewController: ActionAndCancelToolbarDelegate, B
                     }
                     DispatchQueue.global(qos: .userInitiated).sync { [weak self] in
                         guard let self else { return }
-                        reloadData()
+                        refreshData()
                         setupUnresolvedContactsTableView()
                         toolbar.isHidden = true
                         unresolvedContactsTableView.reloadData()
