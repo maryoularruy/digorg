@@ -131,6 +131,14 @@ extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         34
     }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        24
+    }
 }
 
 extension DuplicateNameContactsViewController: ItemCellProtocol {

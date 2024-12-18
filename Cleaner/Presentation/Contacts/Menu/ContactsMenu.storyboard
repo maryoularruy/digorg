@@ -22,7 +22,7 @@
                                 <rect key="frame" x="8" y="64" width="55" height="55"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ArrowBackIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Yv1-1R-Q3e">
-                                        <rect key="frame" x="-4.3333333333333357" y="-4.3333333333333357" width="63.999999999999993" height="64"/>
+                                        <rect key="frame" x="-4.3333333333333357" y="-4.3333333333333357" width="64" height="64"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -39,48 +39,48 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5Y-op-Ow5" customClass="Regular13LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="162" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5Y-op-Ow5" customClass="Regular13LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="16" y="162" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ai2-Ng-bAa" customClass="ContactsMenuView" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="240" width="361" height="73"/>
+                                <rect key="frame" x="16" y="219" width="361" height="73"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="73" id="I6d-zm-3Yu"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6F3-jH-uNg" customClass="ContactsMenuView" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="329" width="361" height="73"/>
+                                <rect key="frame" x="16" y="308" width="361" height="73"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="73" id="ddp-mK-tq4"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OfD-3Z-uD0" customClass="ContactsMenuView" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="465" width="361" height="73"/>
+                                <rect key="frame" x="16" y="444" width="361" height="73"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="73" id="0P0-RB-1j7"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AKv-LN-tVg" customClass="ContactsMenuView" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="554" width="361" height="73"/>
+                                <rect key="frame" x="16" y="533" width="361" height="73"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="73" id="It9-ve-rkX"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duplicate data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIC-HH-H2o" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="203" width="110" height="21"/>
+                                <rect key="frame" x="16" y="182" width="110" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incomplete information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyY-KX-ATr" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="428" width="176" height="21"/>
+                                <rect key="frame" x="16" y="407" width="176" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
