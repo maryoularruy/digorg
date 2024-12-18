@@ -46,7 +46,16 @@ final class ItemCell: UITableViewCell, NibReusable {
     func bind(contact: CNContact, _ position: (Int, Int), type: UnresolvedItemCellType = .grouped) {
         self.type = type
         self.position = position
-        firstLabel.text = "\(contact.givenName) \(contact.familyName)"
+        let fullName = "\(contact.givenName) \(contact.familyName)"
+        if fullName.isEmpty || fullName == "" || fullName == " " {
+            let missingText = "Name is missing"
+            let attributes = [NSAttributedString.Key.foregroundColor : UIColor.darkGrey]
+            let attributedText = NSAttributedString(string: missingText, attributes: attributes)
+            firstLabel.attributedText = attributedText
+        } else {
+            firstLabel.attributedText = nil
+            firstLabel.text = fullName
+        }
         
         var numbers: [String] = []
         contact.phoneNumbers.forEach { number in
@@ -107,7 +116,6 @@ final class ItemCell: UITableViewCell, NibReusable {
     }
     
     func setupSingleCellInSection() {
-        refreshCornerRadiuses()
         content.layer.cornerRadius = 20
         content.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
     }
