@@ -103,8 +103,11 @@ extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewD
             cell.setupFirstCellInSection()
         } else if indexPath.row == contactGroups[indexPath.section].count - 1 {
             cell.setupLastCellInSection()
+        } else {
+            cell.setupMiddleCellInSection()
         }
-        cell.backgroundColor = contactsForMerge.contains(contactGroups[indexPath.section]) ? .lightBlue : .clear
+        
+        cell.content.backgroundColor = contactsForMerge.contains(contactGroups[indexPath.section]) ? .lightBlue : .clear
         cell.checkBoxButton.image = contactsForMerge.contains(contactGroups[indexPath.section]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         
         cell.bind(contact: contactGroups[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
