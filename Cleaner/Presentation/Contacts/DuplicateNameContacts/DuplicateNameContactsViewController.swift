@@ -87,6 +87,7 @@ extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
         cell.delegate = self
+        cell.bind(contact: contactGroups[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
         if indexPath.row == 0 {
             cell.setupFirstCellInSection()
         } else if indexPath.row == contactGroups[indexPath.section].count - 1 {
