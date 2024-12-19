@@ -112,7 +112,10 @@ extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ItemCellHeader()
+        header.delegate = self
+        header.bind(section: section)
         header.firstLabel.bind(text: "\(contactGroups[section].count) duplicates")
+        header.selectAllButton.bind(text: contactsForMerge.contains(contactGroups[section]) ? .deselectAll : .selectAll)
         return header
     }
     
@@ -129,7 +132,7 @@ extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewD
     }
 }
 
-extension DuplicateNameContactsViewController: ItemCellProtocol {
+extension DuplicateNameContactsViewController: ItemCellProtocol, HeaderSelectAllButtonDelegate {
     func tapOnCheckBox(_ position: (Int, Int)) {
         let duplicateContacts = contactGroups[position.0]
         if contactsForMerge.contains(duplicateContacts) {
@@ -141,6 +144,14 @@ extension DuplicateNameContactsViewController: ItemCellProtocol {
     
     func tapOnCell(_ position: (Int, Int)) {
         presentContact(contact: contactGroups[position.0][position.1])
+    }
+    
+    func tapOnSelectAllButton(_ section: Int) {
+        if contactsForMerge.contains(contactGroups[section]) {
+            contactsForMerge.remove(contactGroups[section])
+        } else {
+            contactsForMerge.insert(contactGroups[section])
+        }
     }
 }
 
