@@ -46,7 +46,16 @@ final class ItemCell: UITableViewCell, NibReusable {
     func bind(contact: CNContact, _ position: (Int, Int), type: UnresolvedItemCellType = .grouped) {
         self.type = type
         self.position = position
-        firstLabel.text = "\(contact.givenName) \(contact.familyName)"
+        let fullName = "\(contact.givenName) \(contact.familyName)"
+        if fullName.isEmpty || fullName == "" || fullName == " " {
+            let missingText = "Name is missing"
+            let attributes = [NSAttributedString.Key.foregroundColor : UIColor.darkGrey]
+            let attributedText = NSAttributedString(string: missingText, attributes: attributes)
+            firstLabel.attributedText = attributedText
+        } else {
+            firstLabel.attributedText = nil
+            firstLabel.text = fullName
+        }
         
         var numbers: [String] = []
         contact.phoneNumbers.forEach { number in
@@ -91,23 +100,24 @@ final class ItemCell: UITableViewCell, NibReusable {
     
 //    MARK: -Setup cell's UI
     func setupFirstCellInSection() {
-        layer.cornerRadius = 20
-        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        refreshCornerRadiuses()
+        content.layer.cornerRadius = 20
+        content.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     func setupLastCellInSection() {
-        layer.cornerRadius = 20
-        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        refreshCornerRadiuses()
+        content.layer.cornerRadius = 20
+        content.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
     
     func setupMiddleCellInSection() {
-        layer.cornerRadius = 0
-        layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        refreshCornerRadiuses()
     }
     
     func setupSingleCellInSection() {
-        layer.cornerRadius = 20
-        layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        content.layer.cornerRadius = 20
+        content.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
     }
     
     override func layoutSubviews() {
@@ -117,9 +127,9 @@ final class ItemCell: UITableViewCell, NibReusable {
     
     private func setup() {
         clipsToBounds = false
-        content.layer.cornerRadius = 20
+        content.clipsToBounds = true
         secondLabel.setGreyTextColor()
-        content.addShadows()
+        addShadows()
         
         checkBoxButton.addTapGestureRecognizer { [weak self] in
             guard let self else { return }
@@ -130,5 +140,10 @@ final class ItemCell: UITableViewCell, NibReusable {
             guard let self else { return }
             delegate?.tapOnCell(position)
         }
+    }
+    
+    private func refreshCornerRadiuses() {
+        content.layer.cornerRadius = 0
+        content.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
     }
 }

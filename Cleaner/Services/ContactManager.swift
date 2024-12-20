@@ -1,5 +1,5 @@
 //
-//  ContactService.swift
+//  ContactManager.swift
 //  Cleaner
 //
 //  Created by Максим Лебедев on 03.06.2022.
@@ -28,6 +28,19 @@ final class ContactManager {
             }
         } else {
             handler(status)
+        }
+    }
+    
+    func countUnresolvedContacts(completion: @escaping (Int, Int, Int, Int, Int) -> ()) {
+        loadContacts { [weak self] contacts in
+            guard let self else { return }
+            let duplicatedByName = fitlerDuplicatedByName(contacts).count
+            let duplicatedByNumber = fitlerDuplicatedByNumber(contacts).count
+            let noName = filterIncompletedByName(contacts).count
+            let noNumber = filterIncompletedByNumber(contacts).count
+            let unresolvedContacts = duplicatedByName + duplicatedByNumber + noName + noNumber
+            
+            completion(duplicatedByName, duplicatedByNumber, noName, noNumber, unresolvedContacts)
         }
     }
 
@@ -223,5 +236,81 @@ final class ContactManager {
             }
         }
         return sections
+    }
+    
+    private func fitlerDuplicatedByName(_ contacts: [CNContact]) -> [[CNContact]] {
+        var duplicates = [[CNContact]]()
+        var checkedContacts = Set<CNContact>()
+        
+        for i in 0..<contacts.count {
+            if checkedContacts.contains(contacts[i]) || contacts[i].givenName.isEmpty && contacts[i].familyName.isEmpty {
+                continue
+            }
+            
+            var group = [CNContact]()
+            group.append(contacts[i])
+            
+            for j in i+1..<contacts.count {
+                if checkedContacts.contains(contacts[j]) {
+                    continue
+                }
+                
+                if (contacts[i].givenName + " " + contacts[i].familyName == contacts[j].givenName + " " + contacts[j].familyName) ||
+                    (!contacts[i].phoneNumbers.isEmpty && (contacts[i].phoneNumbers.first?.value.stringValue == contacts[j].phoneNumbers.first?.value.stringValue)) ||
+                    (!contacts[i].emailAddresses.isEmpty && (contacts[i].emailAddresses.first?.value == contacts[j].emailAddresses.first?.value)) {
+                    group.append(contacts[j])
+                    checkedContacts.insert(contacts[j])
+                }
+            }
+            
+            if group.count > 1 {
+                duplicates.append(group)
+            }
+            
+            checkedContacts.insert(contacts[i])
+        }
+        return duplicates
+    }
+    
+    private func fitlerDuplicatedByNumber(_ contacts: [CNContact]) -> [[CNContact]] {
+        var duplicates = [[CNContact]]()
+        var checkedContacts = Set<CNContact>()
+        
+        for i in 0..<contacts.count {
+            if checkedContacts.contains(contacts[i]) || contacts[i].phoneNumbers.isEmpty {
+                continue
+            }
+            
+            var group = [CNContact]()
+            group.append(contacts[i])
+            
+            for j in i+1..<contacts.count {
+                if checkedContacts.contains(contacts[j]) {
+                    continue
+                }
+                
+                contacts[j].phoneNumbers.forEach { phoneNumber in
+                    if contacts[i].phoneNumbers.contains(phoneNumber) {
+                        group.append(contacts[j])
+                        checkedContacts.insert(contacts[j])
+                    }
+                }
+            }
+            
+            if group.count > 1 {
+                duplicates.append(group)
+            }
+            
+            checkedContacts.insert(contacts[i])
+        }
+        return duplicates
+    }
+    
+    private func filterIncompletedByName(_ contacts: [CNContact]) -> [CNContact] {
+        contacts.filter { $0.givenName.isEmpty && $0.familyName.isEmpty && !$0.phoneNumbers.isEmpty }
+    }
+    
+    private func filterIncompletedByNumber(_ contacts: [CNContact]) -> [CNContact] {
+        contacts.filter { $0.phoneNumbers.isEmpty }
     }
 }

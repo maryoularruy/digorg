@@ -19,7 +19,7 @@
 		7532F8662AE29735007469EA /* NoNameContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8652AE29735007469EA /* NoNameContactsViewController.swift */; };
 		7532F8682AE29750007469EA /* DuplicateNameContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F8672AE29750007469EA /* DuplicateNameContacts.storyboard */; };
 		7532F86A2AE29758007469EA /* DuplicateNameContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8692AE29758007469EA /* DuplicateNameContactsViewController.swift */; };
-		7532F8722AE304B5007469EA /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8712AE304B5007469EA /* ContactService.swift */; };
+		7532F8722AE304B5007469EA /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8712AE304B5007469EA /* ContactManager.swift */; };
 		7532F8752AE30517007469EA /* SwiftyContacts in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F8742AE30517007469EA /* SwiftyContacts */; };
 		756866CF2ACD9ED0008DBF7C /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866CE2ACD9ED0008DBF7C /* OnboardingModel.swift */; };
 		756866D12AD1AE58008DBF7C /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866D02AD1AE58008DBF7C /* CardModel.swift */; };
@@ -202,7 +202,7 @@
 		7532F8652AE29735007469EA /* NoNameContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNameContactsViewController.swift; sourceTree = "<group>"; };
 		7532F8672AE29750007469EA /* DuplicateNameContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DuplicateNameContacts.storyboard; sourceTree = "<group>"; };
 		7532F8692AE29758007469EA /* DuplicateNameContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateNameContactsViewController.swift; sourceTree = "<group>"; };
-		7532F8712AE304B5007469EA /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
+		7532F8712AE304B5007469EA /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		756866CE2ACD9ED0008DBF7C /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		756866D02AD1AE58008DBF7C /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		756866D82AD1D398008DBF7C /* PhoneInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInfoViewController.swift; sourceTree = "<group>"; };
@@ -654,7 +654,7 @@
 				FA39873F2B3054930096F335 /* PhotoVideoManager.swift */,
 				7504C24B2AD44407005FB398 /* PhoneInfoService.swift */,
 				7532F8492AE2749F007469EA /* SpeedTest.swift */,
-				7532F8712AE304B5007469EA /* ContactService.swift */,
+				7532F8712AE304B5007469EA /* ContactManager.swift */,
 				FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */,
 				FA53586C2B3C4D6A0026FDC2 /* RealmManager.swift */,
 				A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */,
@@ -1304,7 +1304,7 @@
 				FA3988022B305FA50096F335 /* DKPhotoProgressIndicator.swift in Sources */,
 				FA3988422B30602A0096F335 /* RawRepresentable.swift in Sources */,
 				FA39883C2B30602A0096F335 /* TransitionUtilities.swift in Sources */,
-				7532F8722AE304B5007469EA /* ContactService.swift in Sources */,
+				7532F8722AE304B5007469EA /* ContactManager.swift in Sources */,
 				75D3FC9B2A618F5100F351A3 /* KeyboardLayoutConstraint.swift in Sources */,
 				FA3987EF2B305FA50096F335 /* DKPhotoGalleryTransitionDismiss.swift in Sources */,
 				FA39884A2B30602A0096F335 /* UIDevice.swift in Sources */,

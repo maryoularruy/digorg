@@ -9,6 +9,7 @@ import UIKit
 import Contacts
 
 final class ContactsMenuViewController: UIViewController {
+    @IBOutlet var contentSV: UIScrollView!
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var duplicateNamesView: ContactsMenuView!
@@ -17,8 +18,21 @@ final class ContactsMenuViewController: UIViewController {
     @IBOutlet weak var noNumberView: ContactsMenuView!
     
     private lazy var contactStore = CNContactStore()
+    private lazy var contactManager = ContactManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentSV.frame = view.bounds
+        contentSV.alwaysBounceVertical = true
+        
+        duplicateNamesView.bind(type: .duplicateNames)
+        duplicateNumbersView.bind(type: .dublicateNumbers)
+        noNameView.bind(type: .noNameContacts)
+        noNumberView.bind(type: .noNumberContacts)
+        
+        [duplicateNamesView, duplicateNumbersView,
+         noNameView, noNumberView].forEach { $0.delegate = self }
+        
         checkPermissionStatus()
     }
     
@@ -60,23 +74,45 @@ final class ContactsMenuViewController: UIViewController {
         alertController.addAction(settingsAction)
         present(alertController, animated: true, completion: nil)
     }
+    
+    deinit {
+        print("deinit contacts menu")
+    }
 }
 
 extension ContactsMenuViewController: ViewControllerProtocol {
     func setupUI() {
-        unresolvedContactsCount.bind(text: "50 contacts")
-        duplicateNamesView.bind(type: .duplicateNames)
-        duplicateNumbersView.bind(type: .dublicateNumbers)
-        noNameView.bind(type: .noNameContacts)
-        noNumberView.bind(type: .noNumberContacts)
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.contactManager.countUnresolvedContacts { duplicatedByName, duplicatedByNumber, noName, noNumber, summaryCount in
+                DispatchQueue.main.async {
+                    self?.unresolvedContactsCount.bind(text: "\(summaryCount) contact\(summaryCount == 1 ? "" : "s")")
+                    
+                    self?.duplicateNamesView.unresolvedItemsCount.bind(text: "\(duplicatedByName) contact\(duplicatedByName == 1 ? "" : "s")")
+                    self?.duplicateNumbersView.unresolvedItemsCount.bind(text: "\(duplicatedByNumber) contact\(duplicatedByNumber == 1 ? "" : "s")")
+                    self?.noNameView.unresolvedItemsCount.bind(text: "\(noName) contact\(noName == 1 ? "" : "s")")
+                    self?.noNumberView.unresolvedItemsCount.bind(text: "\(noNumber) contact\(noNumber == 1 ? "" : "s")")
+                }
+            }
+        }
     }
     
     func addGestureRecognizers() {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
-        [duplicateNamesView, duplicateNumbersView,
-         noNameView, noNumberView].forEach { $0.delegate = self }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
+        
+        contentSV.refreshControl = UIRefreshControl()
+        contentSV.refreshControl?.addTarget(self, action: #selector(refreshUI), for: .valueChanged)
+    }
+    
+    
+    @objc func refreshUI() {
+        setupUI()
+        contentSV.refreshControl?.endRefreshing()
     }
     
     private func checkPermissionStatus() {

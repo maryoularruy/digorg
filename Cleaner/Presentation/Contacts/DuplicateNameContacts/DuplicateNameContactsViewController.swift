@@ -18,32 +18,24 @@ final class DuplicateNameContactsViewController: UIViewController {
     
     private lazy var contactManager = ContactManager.shared
     
-    private lazy var selectMode = false {
+    private lazy var contactGroups = [[CNContact]]() {
         didSet {
-            if selectMode {
-                contactsForMerge.insert(sections)
-                selectionButton.bind(text: .deselectAll)
+            selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
+            if contactGroups.isEmpty {
+                setupEmptyState()
             } else {
-                sections.forEach { contactsForMerge.remove($0) }
-                selectionButton.bind(text: .selectAll)
-                unresolvedContactsTableView.reloadData()
+                hideEmptyState()
             }
-        }
-    }
-    
-    private lazy var sections = [[CNContact]]() {
-        didSet {
-            if sections.isEmpty { setupEmptyState() }
-            else { hideEmptyState() }
         }
     }
     
     private lazy var contactsForMerge = Set<[CNContact]>() {
         didSet {
-            unresolvedContactsCount.text = "\(sections.count) contact\(sections.count == 1 ? "" : "s")"
+            selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
+            unresolvedContactsCount.text = "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")"
             unresolvedContactsTableView.reloadData()
             toolbar.isHidden = contactsForMerge.isEmpty
-            toolbar.actionButton.bind(text: "Merge Contacts (\(sections.count))")
+            toolbar.actionButton.bind(text: "Merge Contacts (\(contactsForMerge.count))")
         }
     }
     
@@ -58,22 +50,18 @@ final class DuplicateNameContactsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        reloadData()
+        refreshData()
         setupUnresolvedContactsTableView()
     }
-    
-    @IBAction func tapOnSelectAllButton(_ sender: Any) {
-        selectMode.toggle()
-    }
-    
+
     private func setupUnresolvedContactsTableView() {
-        unresolvedContactsCount.bind(text: "\(sections.count) contact\(sections.count == 1 ? "" : "s")")
+        unresolvedContactsCount.bind(text: "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")")
         unresolvedContactsTableView.register(cellType: ItemCell.self)
     }
     
-    private func reloadData() {
+    private func refreshData() {
         contactManager.loadDuplicatedByName { [weak self] duplicateGroups in
-            self?.sections = duplicateGroups
+            self?.contactGroups = duplicateGroups
         }
     }
     
@@ -85,26 +73,33 @@ final class DuplicateNameContactsViewController: UIViewController {
             navigationController?.pushViewController(contactVC, animated: true)
         }
     }
+    
+    deinit {
+        print("deinit dup names")
+    }
 }
 
 extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sections.reduce(0) { $0 + $1.count }
+        contactGroups[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.clipsToBounds = false
         let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
         cell.delegate = self
+        cell.bind(contact: contactGroups[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
         if indexPath.row == 0 {
             cell.setupFirstCellInSection()
-        } else if indexPath.row == sections[indexPath.section].count - 1 {
+        } else if indexPath.row == contactGroups[indexPath.section].count - 1 {
             cell.setupLastCellInSection()
+        } else {
+            cell.setupMiddleCellInSection()
         }
         
-        cell.checkBoxButton.image = contactsForMerge.contains(sections[indexPath.section]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
+        cell.content.backgroundColor = contactsForMerge.contains(contactGroups[indexPath.section]) ? .lightBlue : .clear
+        cell.checkBoxButton.image = contactsForMerge.contains(contactGroups[indexPath.section]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         
-        cell.bind(contact: sections[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
+        cell.bind(contact: contactGroups[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
         return cell
     }
     
@@ -113,47 +108,77 @@ extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        sections.count
+        contactGroups.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ItemCellHeader()
-        header.firstLabel.bind(text: "\(sections[section].count) duplicates")
+        header.delegate = self
+        header.bind(section: section)
+        header.firstLabel.bind(text: "\(contactGroups[section].count) duplicates")
+        header.selectAllButton.bind(text: contactsForMerge.contains(contactGroups[section]) ? .deselectAll : .selectAll)
         return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         34
     }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        24
+    }
 }
 
-extension DuplicateNameContactsViewController: ItemCellProtocol {
+extension DuplicateNameContactsViewController: ItemCellProtocol, HeaderSelectAllButtonDelegate {
     func tapOnCheckBox(_ position: (Int, Int)) {
-        let duplicateContacts = sections[position.0]
+        let duplicateContacts = contactGroups[position.0]
         if contactsForMerge.contains(duplicateContacts) {
             contactsForMerge.remove(duplicateContacts)
         } else {
             contactsForMerge.insert(duplicateContacts)
         }
-        
-        if contactsForMerge.count == sections.count {
-            tapOnSelectAllButton(self)
-        }
     }
     
     func tapOnCell(_ position: (Int, Int)) {
-        presentContact(contact: sections[position.0][position.1])
+        presentContact(contact: contactGroups[position.0][position.1])
+    }
+    
+    func tapOnSelectAllButton(_ section: Int) {
+        if contactsForMerge.contains(contactGroups[section]) {
+            contactsForMerge.remove(contactGroups[section])
+        } else {
+            contactsForMerge.insert(contactGroups[section])
+        }
     }
 }
 
 extension DuplicateNameContactsViewController: ViewControllerProtocol {
     func setupUI() {
+        selectionButton.delegate = self
         toolbar.delegate = self
     }
     
     func addGestureRecognizers() {
         arrowBackButton.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
+        }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
+    }
+}
+
+extension DuplicateNameContactsViewController: SelectionButtonDelegate {
+    func tapOnButton() {
+        if contactsForMerge.count == contactGroups.count {
+            contactsForMerge.removeAll()
+        } else {
+            contactsForMerge.insert(contactGroups)
         }
     }
 }
@@ -163,7 +188,7 @@ extension DuplicateNameContactsViewController: ActionAndCancelToolbarDelegate, B
         guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
         vc.popupDelegate = self
         vc.height = 238
-        vc.actionButtonText = "Merge Contacts (\(sections.count))"
+        vc.actionButtonText = "Merge Contacts (\(contactGroups.count))"
         vc.type = .mergeContacts
         DispatchQueue.main.async { [weak self] in
             self?.present(vc, animated: true)
@@ -171,8 +196,8 @@ extension DuplicateNameContactsViewController: ActionAndCancelToolbarDelegate, B
     }
     
     func tapOnCancel() {
-        selectMode = false
-        reloadData()
+        contactsForMerge.removeAll()
+        unresolvedContactsTableView.reloadData()
     }
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
@@ -190,7 +215,7 @@ extension DuplicateNameContactsViewController: ActionAndCancelToolbarDelegate, B
                     }
                     DispatchQueue.global(qos: .userInitiated).sync { [weak self] in
                         guard let self else { return }
-                        reloadData()
+                        refreshData()
                         setupUnresolvedContactsTableView()
                         toolbar.isHidden = true
                         unresolvedContactsTableView.reloadData()

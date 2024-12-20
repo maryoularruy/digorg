@@ -93,6 +93,10 @@ final class NoNumberContactsViewController: UIViewController {
             view.addSubview(emptyStateView)
         }
     }
+    
+    deinit {
+        print("deinit no number")
+    }
 }
 
 extension NoNumberContactsViewController: ViewControllerProtocol {
@@ -104,6 +108,10 @@ extension NoNumberContactsViewController: ViewControllerProtocol {
         arrowBackButton.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
     }
 }
 
