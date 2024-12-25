@@ -51,8 +51,6 @@ final class DuplicateNumberContactsView: UIView {
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            scrollView.widthAnchor.constraint(equalToConstant: bounds.width),
-            scrollView.heightAnchor.constraint(equalToConstant: bounds.width),
             
 //            scrollView.topAnchor.constraint(equalTo: topAnchor),
 //            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),

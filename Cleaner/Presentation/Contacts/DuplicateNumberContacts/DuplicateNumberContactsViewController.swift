@@ -16,11 +16,12 @@ final class DuplicateNumberContactsViewController: UIViewController {
     private lazy var contactGroups = [[CNContact]]() {
         didSet {
             rootView.duplicatesCountLabel.bind(text: "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")")
-            rootView.selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
+            rootView.selectionButton.isClickable = !contactGroups.isEmpty
             if contactGroups.isEmpty {
-//                setupEmptyState()
+                setupEmptyState()
             } else {
-//                hideEmptyState()
+                rootView.selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
+                emptyStateView = nil
             }
         }
     }
@@ -52,9 +53,21 @@ final class DuplicateNumberContactsViewController: UIViewController {
         addGestureRecognizers()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupUI()
+    }
+    
+    private func setupEmptyState() {
+        rootView.selectionButton.bind(text: .selectAll)
+        emptyStateView = view.createEmptyState(type: .noDuplicateNumbers)
+        if let emptyStateView {
+            view.addSubview(emptyStateView)
+        }
+    }
+    
+    deinit {
+        print("deinit dup numbers")
     }
 }
 

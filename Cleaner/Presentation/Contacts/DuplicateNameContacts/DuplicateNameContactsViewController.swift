@@ -20,12 +20,13 @@ final class DuplicateNameContactsViewController: UIViewController {
     
     private lazy var contactGroups = [[CNContact]]() {
         didSet {
-            selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
+            selectionButton.isClickable = !contactGroups.isEmpty
             unresolvedContactsCount.text = "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")"
             if contactGroups.isEmpty {
                 setupEmptyState()
             } else {
-                hideEmptyState()
+                selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
+                emptyStateView = nil
             }
         }
     }
@@ -234,7 +235,7 @@ extension DuplicateNameContactsViewController: ActionToolbarDelegate {
     }
     
     private func setupEmptyState() {
-        selectionButton.isEnabled = false
+        selectionButton.bind(text: .selectAll)
         emptyStateView = view.createEmptyState(type: .noDuplicateNames)
         if let emptyStateView {
             view.addSubview(emptyStateView)
@@ -242,12 +243,5 @@ extension DuplicateNameContactsViewController: ActionToolbarDelegate {
         emptyStateToolbar.toolbarButton.bind(text: "Back")
         emptyStateToolbar.delegate = self
         emptyStateToolbar.isHidden = false
-    }
-    
-    private func hideEmptyState() {
-        selectionButton.isEnabled = true
-        emptyStateToolbar.delegate = nil
-        emptyStateToolbar.isHidden = true
-        emptyStateView = nil
     }
 }
