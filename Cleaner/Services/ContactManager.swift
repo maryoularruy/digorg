@@ -80,6 +80,13 @@ final class ContactManager {
         }
     }
     
+    func loadDuplicatedByNumber(completion: @escaping ([[CNContact]]) -> ()) {
+        loadContacts { [weak self] contacts in
+            guard let self else { return }
+            completion(fitlerDuplicatedByNumber(contacts))
+        }
+    }
+    
     func loadIncompletedByName(completion: @escaping ([CNContact]) -> ()) {
         loadContacts { contacts in
             completion(contacts.filter { $0.givenName.isEmpty && $0.familyName.isEmpty && !$0.phoneNumbers.isEmpty })

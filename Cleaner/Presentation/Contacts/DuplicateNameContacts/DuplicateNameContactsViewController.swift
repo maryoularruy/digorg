@@ -21,6 +21,7 @@ final class DuplicateNameContactsViewController: UIViewController {
     private lazy var contactGroups = [[CNContact]]() {
         didSet {
             selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
+            unresolvedContactsCount.text = "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")"
             if contactGroups.isEmpty {
                 setupEmptyState()
             } else {
