@@ -17,6 +17,7 @@ final class DuplicateNumberContactsViewController: UIViewController {
         didSet {
             rootView.duplicatesCountLabel.bind(text: "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")")
             rootView.selectionButton.isClickable = !contactGroups.isEmpty
+            rootView.toolbar.isHidden = !contactGroups.isEmpty
             if contactGroups.isEmpty {
                 setupEmptyState()
             } else {
@@ -48,7 +49,6 @@ final class DuplicateNumberContactsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        rootView.scrollView.frame = view.bounds
         rootView.selectionButton.delegate = self
         addGestureRecognizers()
     }
@@ -58,8 +58,15 @@ final class DuplicateNumberContactsViewController: UIViewController {
         setupUI()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        rootView.scrollView.frame = view.bounds
+    }
+    
     private func setupEmptyState() {
         rootView.selectionButton.bind(text: .selectAll)
+        rootView.toolbar.toolbarButton.bind(text: "Back")
+        rootView.toolbar.delegate = self
         emptyStateView = view.createEmptyState(type: .noDuplicateNumbers)
         if let emptyStateView {
             view.addSubview(emptyStateView)
@@ -102,6 +109,14 @@ extension DuplicateNumberContactsViewController: SelectionButtonDelegate {
             contactsForMerge.removeAll()
         } else {
             contactsForMerge.insert(contactGroups)
+        }
+    }
+}
+
+extension DuplicateNumberContactsViewController: ActionToolbarDelegate {
+    func tapOnActionButton() {
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
         }
     }
 }

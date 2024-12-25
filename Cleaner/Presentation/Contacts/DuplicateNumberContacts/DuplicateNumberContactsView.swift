@@ -25,6 +25,7 @@ final class DuplicateNumberContactsView: UIView {
     
     lazy var duplicatesCountLabel: Regular13LabelStyle = Regular13LabelStyle()
     lazy var selectionButton: SelectionButtonStyle = SelectionButtonStyle()
+    lazy var toolbar: ActionToolbar = ActionToolbar()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,7 +44,7 @@ final class DuplicateNumberContactsView: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([scrollView])
+        addSubviews([scrollView, toolbar])
         scrollView.addSubviews([arrowBack, label, duplicatesCountLabel, selectionButton])
         
         NSLayoutConstraint.activate([
@@ -69,7 +70,12 @@ final class DuplicateNumberContactsView: UIView {
             duplicatesCountLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
             
             selectionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            selectionButton.centerYAnchor.constraint(equalTo: arrowBack.centerYAnchor)
+            selectionButton.centerYAnchor.constraint(equalTo: arrowBack.centerYAnchor),
+            
+            toolbar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            toolbar.trailingAnchor.constraint(equalTo: trailingAnchor),
+            toolbar.bottomAnchor.constraint(equalTo: bottomAnchor),
+            toolbar.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 }
