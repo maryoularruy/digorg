@@ -8,14 +8,6 @@
 import UIKit
 
 final class DuplicateNumberContactsView: UIView {
-    lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.alwaysBounceVertical = true
-        scrollView.refreshControl = UIRefreshControl()
-        scrollView.isScrollEnabled = false
-        return scrollView
-    }()
-    
     lazy var arrowBack: UIImageView = arrowBackButton
     
     private lazy var label: Semibold24LabelStyle = {
@@ -34,6 +26,7 @@ final class DuplicateNumberContactsView: UIView {
         tableView.allowsMultipleSelection = true
         tableView.separatorStyle = .none
         tableView.clipsToBounds = true
+        tableView.backgroundColor = .clear
         return tableView
     }()
     
@@ -54,18 +47,11 @@ final class DuplicateNumberContactsView: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([scrollView, toolbar])
-        scrollView.addSubviews([arrowBack, label, duplicatesCountLabel, selectionButton, duplicatesTableView])
-        
-        duplicatesTableView.backgroundColor = .red.withAlphaComponent(0.1)
+        addSubviews([toolbar])
+        addSubviews([arrowBack, label, duplicatesCountLabel, selectionButton, duplicatesTableView])
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            
-            arrowBack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
+            arrowBack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
             arrowBack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
@@ -82,8 +68,7 @@ final class DuplicateNumberContactsView: UIView {
             duplicatesTableView.topAnchor.constraint(equalTo: duplicatesCountLabel.bottomAnchor, constant: 20),
             duplicatesTableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             duplicatesTableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            duplicatesTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            duplicatesTableView.heightAnchor.constraint(equalToConstant: 400),
+            duplicatesTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             toolbar.leadingAnchor.constraint(equalTo: leadingAnchor),
             toolbar.trailingAnchor.constraint(equalTo: trailingAnchor),

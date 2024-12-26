@@ -89,13 +89,6 @@ extension DuplicateNumberContactsViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
-        
-        rootView.scrollView.refreshControl?.addTarget(self, action: #selector(refreshUI), for: .valueChanged)
-    }
-    
-    @objc func refreshUI() {
-        setupUI()
-        rootView.scrollView.refreshControl?.endRefreshing()
     }
 }
 
@@ -117,6 +110,12 @@ extension DuplicateNumberContactsViewController: ActionToolbarDelegate {
     }
 }
 
+extension DuplicateNumberContactsViewController: DuplicatesTableViewCellDelegate {
+    func tapOnSelectButton(rowPosition: Int) {
+        
+    }
+}
+
 extension DuplicateNumberContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         contactGroups.count
@@ -124,6 +123,7 @@ extension DuplicateNumberContactsViewController: UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesTableViewCell.identifier, for: indexPath) as! DuplicatesTableViewCell
+        cell.delegate = self
         cell.bind(contactGroups[indexPath.row], position: indexPath.row)
         return cell
     }

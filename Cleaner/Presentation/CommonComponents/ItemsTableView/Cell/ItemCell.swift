@@ -46,7 +46,7 @@ final class ItemCell: UITableViewCell, NibReusable {
     func bind(contact: CNContact, _ position: (Int, Int), type: UnresolvedItemCellType = .grouped) {
         self.type = type
         self.position = position
-        let fullName = "\(contact.givenName) \(contact.familyName)"
+        let fullName = "\(contact.givenName)\(contact.givenName.isEmpty ? "" : " ")\(contact.familyName)"
         if fullName.isEmpty || fullName == "" || fullName == " " {
             let missingText = "Name is missing"
             let attributes = [NSAttributedString.Key.foregroundColor : UIColor.darkGrey]
