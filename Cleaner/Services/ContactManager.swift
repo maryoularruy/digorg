@@ -128,6 +128,19 @@ final class ContactManager {
         delete(contacts)
     }
     
+    func findDuplicatedNumber(_ contacts: [CNContact]) -> String? {
+        for i in 0..<contacts.count {
+            for j in 0..<contacts[i].phoneNumbers.count {
+                for k in 0..<contacts[i+1].phoneNumbers.count {
+                    if contacts[i].phoneNumbers[j].value.stringValue == contacts[i+1].phoneNumbers[k].value.stringValue {
+                        return contacts[i].phoneNumbers[j].value.stringValue
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
     static func getSecretContacts() -> [CNContact]? {
         FileManager.default.getSecretContacts()
     }

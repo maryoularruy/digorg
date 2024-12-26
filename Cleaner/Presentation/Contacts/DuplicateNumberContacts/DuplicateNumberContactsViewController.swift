@@ -119,16 +119,12 @@ extension DuplicateNumberContactsViewController: ActionToolbarDelegate {
 
 extension DuplicateNumberContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        contactGroups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesTableViewCell.identifier, for: indexPath) as! DuplicatesTableViewCell
-        cell.duplicateNumberLabel.bind(text: "atsnretis")
+        cell.bind(contactGroups[indexPath.row], position: indexPath.row)
         return cell
     }
-//    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        40
-//    }
 }

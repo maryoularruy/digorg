@@ -12,6 +12,7 @@ final class DuplicateNumberContactsView: UIView {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
         scrollView.refreshControl = UIRefreshControl()
+        scrollView.isScrollEnabled = false
         return scrollView
     }()
     
@@ -28,7 +29,7 @@ final class DuplicateNumberContactsView: UIView {
     lazy var toolbar: ActionToolbar = ActionToolbar()
     
     lazy var duplicatesTableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(DuplicatesTableViewCell.self, forCellReuseIdentifier: DuplicatesTableViewCell.identifier)
         tableView.allowsMultipleSelection = true
         tableView.separatorStyle = .none
@@ -48,10 +49,6 @@ final class DuplicateNumberContactsView: UIView {
         initConstraints()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
     private func setupView() {
         backgroundColor = .paleGrey
     }
@@ -60,7 +57,7 @@ final class DuplicateNumberContactsView: UIView {
         addSubviews([scrollView, toolbar])
         scrollView.addSubviews([arrowBack, label, duplicatesCountLabel, selectionButton, duplicatesTableView])
         
-        duplicatesTableView.backgroundColor = .red
+        duplicatesTableView.backgroundColor = .red.withAlphaComponent(0.1)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),

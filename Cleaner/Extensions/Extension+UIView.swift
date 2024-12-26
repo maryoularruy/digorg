@@ -46,6 +46,17 @@ extension UIView {
             self.clipsToBounds = false
         }
     
+    func addShadowsWithoutClipToBounds(
+        color: UIColor = UIColor.shadowColor,
+        radius: CGFloat = 4.0,
+        opacity: Float = 0.72,
+        offset: CGSize = CGSize(width: 2, height: 2)) {
+            layer.shadowColor = color.cgColor
+            layer.shadowRadius = radius
+            layer.shadowOpacity = opacity
+            layer.shadowOffset = offset
+        }
+    
     func setHidden(completion: @escaping (() -> Void)) {
         alpha = 1
         UIView.animate(withDuration: 0.7, delay: 0.5,
