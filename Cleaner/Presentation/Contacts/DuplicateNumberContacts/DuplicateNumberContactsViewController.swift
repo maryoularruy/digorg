@@ -35,8 +35,6 @@ final class DuplicateNumberContactsViewController: UIViewController {
         didSet {
             rootView.duplicatesCountLabel.bind(text: "\(contactGroups) contact\(contactGroups.count == 1 ? "" : "s")")
             rootView.selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
-//            toolbar.isHidden = contactsForMerge.isEmpty
-//            toolbar.actionButton.bind(text: "Merge Contacts (\(contactsForMerge.count))")
         }
     }
     
@@ -50,17 +48,15 @@ final class DuplicateNumberContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         rootView.selectionButton.delegate = self
+        rootView.duplicatesTableView.dataSource = self
+        rootView.duplicatesTableView.delegate = self
         addGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        rootView.scrollView.frame = view.bounds
+        rootView.duplicatesTableView.register(DuplicatesTableViewCell.self, forCellReuseIdentifier: DuplicatesTableViewCell.identifier)
     }
     
     private func setupEmptyState() {
@@ -119,4 +115,20 @@ extension DuplicateNumberContactsViewController: ActionToolbarDelegate {
             self?.navigationController?.popViewController(animated: true)
         }
     }
+}
+
+extension DuplicateNumberContactsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesTableViewCell.identifier, for: indexPath) as! DuplicatesTableViewCell
+        cell.duplicateNumberLabel.bind(text: "atsnretis")
+        return cell
+    }
+//    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        40
+//    }
 }
