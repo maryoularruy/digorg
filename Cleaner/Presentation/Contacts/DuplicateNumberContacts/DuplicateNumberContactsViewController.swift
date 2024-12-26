@@ -33,8 +33,9 @@ final class DuplicateNumberContactsViewController: UIViewController {
     
     private lazy var contactsForMerge = Set<[CNContact]>() {
         didSet {
-            rootView.duplicatesCountLabel.bind(text: "\(contactGroups) contact\(contactGroups.count == 1 ? "" : "s")")
+            rootView.duplicatesCountLabel.bind(text: "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")")
             rootView.selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
+            rootView.duplicatesTableView.reloadData()
         }
     }
     
@@ -125,6 +126,7 @@ extension DuplicateNumberContactsViewController: UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesTableViewCell.identifier, for: indexPath) as! DuplicatesTableViewCell
         cell.delegate = self
         cell.bind(contactGroups[indexPath.row], position: indexPath.row)
+        cell.selectionButton.bind(text: contactsForMerge.contains(contactGroups[indexPath.row]) ? .deselectAll : .selectAll)
         return cell
     }
 }

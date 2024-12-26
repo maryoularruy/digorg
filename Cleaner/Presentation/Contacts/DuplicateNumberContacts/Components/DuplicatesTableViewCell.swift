@@ -17,7 +17,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
     weak var delegate: DuplicatesTableViewCellDelegate?
     
     private lazy var duplicateNumberLabel: Semibold15LabelStyle = Semibold15LabelStyle()
-    private lazy var selectionButton: SelectionTransparentButtonStyle = SelectionTransparentButtonStyle()
+    lazy var selectionButton: SelectionTransparentButtonStyle = SelectionTransparentButtonStyle()
     
     private lazy var containerForInnerTableView = UIView()
     private lazy var containerForInnerTableViewHeight = containerForInnerTableView.heightAnchor.constraint(equalToConstant: DuplicatesListCell.HEIGHT + 8.0)
@@ -60,7 +60,6 @@ final class DuplicatesTableViewCell: UITableViewCell {
         }
         duplicatesListTableView.reloadData()
         containerForInnerTableViewHeight.constant = (DuplicatesListCell.HEIGHT * Double(contacts.count)) + 8.0
-        selectionButton.bind(text: .selectAll)
     }
     
     private func setupCell() {
