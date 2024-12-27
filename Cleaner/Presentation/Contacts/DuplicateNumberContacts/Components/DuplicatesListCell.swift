@@ -80,20 +80,20 @@ final class DuplicatesListCell: UITableViewCell {
     }
     
     private func initConstraints() {
-        addSubviews([nameContactLabel, numbersLabel, checkBox])
+        contentView.addSubviews([nameContactLabel, numbersLabel, checkBox])
         
         NSLayoutConstraint.activate([
-            nameContactLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            nameContactLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            nameContactLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            nameContactLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             nameContactLabel.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: -10),
             
             numbersLabel.topAnchor.constraint(equalTo: nameContactLabel.bottomAnchor, constant: 5),
-            numbersLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            numbersLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             numbersLabel.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: -10),
-            numbersLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            numbersLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             
-            checkBox.topAnchor.constraint(equalTo: topAnchor, constant: 23.5),
-            checkBox.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            checkBox.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 23.5),
+            checkBox.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             checkBox.heightAnchor.constraint(equalToConstant: 26),
             checkBox.widthAnchor.constraint(equalToConstant: 26)
         ])

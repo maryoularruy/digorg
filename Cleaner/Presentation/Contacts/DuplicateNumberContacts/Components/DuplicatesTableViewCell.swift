@@ -27,6 +27,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
         tableView.register(DuplicatesListCell.self, forCellReuseIdentifier: DuplicatesListCell.identifier)
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .none
+        tableView.allowsMultipleSelection = true
         tableView.clipsToBounds = true
         tableView.delegate = self
         tableView.dataSource = self
@@ -66,29 +67,32 @@ final class DuplicatesTableViewCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
         
-        selectionButton.delegate = self
-        
         containerForInnerTableView.backgroundColor = .paleGrey
         containerForInnerTableView.layer.cornerRadius = 20
         containerForInnerTableView.addShadowsWithoutClipToBounds()
         duplicatesListTableView.clipsToBounds = true
+        
+        selectionButton.addTapGestureRecognizer { [weak self] in
+            guard let self else { return }
+            delegate?.tapOnSelectButton(rowPosition: position)
+        }
     }
     
     private func initConstraints() {
-        addSubviews([duplicateNumberLabel, selectionButton, containerForInnerTableView])
+        contentView.addSubviews([duplicateNumberLabel, selectionButton, containerForInnerTableView])
         containerForInnerTableView.addSubviews([duplicatesListTableView])
         
         NSLayoutConstraint.activate([
-            duplicateNumberLabel.topAnchor.constraint(equalTo: topAnchor),
-            duplicateNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            duplicateNumberLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            duplicateNumberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            selectionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            selectionButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             selectionButton.centerYAnchor.constraint(equalTo: duplicateNumberLabel.centerYAnchor),
             
             containerForInnerTableView.topAnchor.constraint(equalTo: selectionButton.bottomAnchor, constant: 16),
-            containerForInnerTableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            containerForInnerTableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            containerForInnerTableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
+            containerForInnerTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            containerForInnerTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            containerForInnerTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
             containerForInnerTableViewHeight,
             
             duplicatesListTableView.topAnchor.constraint(equalTo: containerForInnerTableView.topAnchor),
@@ -96,12 +100,6 @@ final class DuplicatesTableViewCell: UITableViewCell {
             duplicatesListTableView.trailingAnchor.constraint(equalTo: containerForInnerTableView.trailingAnchor),
             duplicatesListTableView.bottomAnchor.constraint(equalTo: containerForInnerTableView.bottomAnchor, constant: -8)
         ])
-    }
-}
-
-extension DuplicatesTableViewCell: SelectionButtonDelegate {
-    func tapOnButton() {
-        delegate?.tapOnSelectButton(rowPosition: position)
     }
 }
 

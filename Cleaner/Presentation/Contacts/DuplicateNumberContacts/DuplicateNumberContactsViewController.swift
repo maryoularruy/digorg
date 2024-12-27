@@ -113,7 +113,11 @@ extension DuplicateNumberContactsViewController: ActionToolbarDelegate {
 
 extension DuplicateNumberContactsViewController: DuplicatesTableViewCellDelegate {
     func tapOnSelectButton(rowPosition: Int) {
-        
+        if contactsForMerge.contains(contactGroups[rowPosition]) {
+            contactsForMerge.remove(contactGroups[rowPosition])
+        } else {
+            contactsForMerge.insert(contactGroups[rowPosition])
+        }
     }
 }
 
@@ -125,6 +129,7 @@ extension DuplicateNumberContactsViewController: UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesTableViewCell.identifier, for: indexPath) as! DuplicatesTableViewCell
         cell.delegate = self
+        cell.isUserInteractionEnabled = true
         cell.bind(contactGroups[indexPath.row], position: indexPath.row)
         cell.selectionButton.bind(text: contactsForMerge.contains(contactGroups[indexPath.row]) ? .deselectAll : .selectAll)
         return cell
