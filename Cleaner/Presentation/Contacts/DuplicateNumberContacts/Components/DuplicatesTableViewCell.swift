@@ -39,6 +39,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
     }()
     
     private lazy var contacts: [CNContact] = [CNContact]()
+    private lazy var contactsForMerge: [CNContact]? = nil
     private lazy var position: Int = 0
     
     private lazy var contactManager = ContactManager.shared
@@ -55,12 +56,14 @@ final class DuplicatesTableViewCell: UITableViewCell {
         initConstraints()
     }
     
-    func bind(_ contacts: [CNContact], position: Int) {
+    func bind(_ contacts: [CNContact], position: Int, contactsForMerge: [CNContact]?) {
         self.contacts = contacts
+        self.contactsForMerge = contactsForMerge
         self.position = position
         if let number = contactManager.findDuplicatedNumber(contacts) {
             duplicateNumberLabel.bind(text: number)
         }
+        selectionButton.bind(text: contactsForMerge?.count == contacts.count ? .deselectAll : .selectAll)
         duplicatesListTableView.reloadData()
         containerForInnerTableViewHeight.constant = (DuplicatesListCell.HEIGHT * Double(contacts.count)) + 8.0
     }
@@ -125,6 +128,13 @@ extension DuplicatesTableViewCell: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesListCell.identifier, for: indexPath) as! DuplicatesListCell
         cell.delegate = self
         cell.bind(contacts[indexPath.row], position: indexPath.row)
+        
+        if let contactsForMerge {
+            cell.checkBox.setImage(contactsForMerge.contains(contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue)
+        } else {
+            cell.checkBox.setImage(.emptyCheckBoxBlue)
+        }
+        
         return cell
     }
     

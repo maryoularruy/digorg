@@ -21,7 +21,7 @@ final class DuplicatesListCell: UITableViewCell {
     
     private lazy var nameContactLabel: Semibold15LabelStyle = Semibold15LabelStyle()
     private lazy var numbersLabel: Regular15LabelStyle = Regular15LabelStyle()
-    private lazy var checkBox: UIImageView = UIImageView(image: .emptyCheckBoxBlue)
+    lazy var checkBox: UIImageView = UIImageView(image: .emptyCheckBoxBlue)
     
     private var contact: CNContact?
     private lazy var position: Int = 0

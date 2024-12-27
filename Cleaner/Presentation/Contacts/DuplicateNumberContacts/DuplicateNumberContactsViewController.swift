@@ -159,8 +159,7 @@ extension DuplicateNumberContactsViewController: UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesTableViewCell.identifier, for: indexPath) as! DuplicatesTableViewCell
         cell.delegate = self
-        cell.selectionButton.bind(text: contactsForMerge[indexPath.row]?.count == contactGroups[indexPath.row].count ? .deselectAll : .selectAll)
-        cell.bind(contactGroups[indexPath.row], position: indexPath.row)
+        cell.bind(contactGroups[indexPath.row], position: indexPath.row, contactsForMerge: contactsForMerge[indexPath.row])
         return cell
     }
 }
