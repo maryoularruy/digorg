@@ -31,15 +31,7 @@ final class DuplicateNumberContactsViewController: UIViewController {
         contactGroups.reduce(0) { $0 + $1.count }
     }
     
-    private lazy var contactsForMerge = Set<[CNContact]>() {
-        didSet {
-            rootView.duplicatesCountLabel.bind(text: "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")")
-            rootView.selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
-            rootView.duplicatesTableView.reloadData()
-        }
-    }
-    
-    private lazy var contactsForMerge2 = [Int: [CNContact]]() {
+    private lazy var contactsForMerge = [Int: [CNContact]]() {
         didSet {
             rootView.duplicatesCountLabel.bind(text: "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")")
             rootView.selectionButton.bind(text: contactsCount == contactsForMergeCount ? .deselectAll : .selectAll)
@@ -47,7 +39,7 @@ final class DuplicateNumberContactsViewController: UIViewController {
     }
     
     private var contactsForMergeCount: Int {
-        contactsForMerge2.reduce(0) { $0 + $1.value.count }
+        contactsForMerge.reduce(0) { $0 + $1.value.count }
     }
     
     private lazy var emptyStateView: EmptyStateView? = nil
@@ -117,11 +109,11 @@ extension DuplicateNumberContactsViewController: ViewControllerProtocol {
 extension DuplicateNumberContactsViewController: SelectionButtonDelegate {
     func tapOnButton() {
         if contactsCount == contactsForMergeCount {
-            contactsForMerge2.removeAll()
+            contactsForMerge.removeAll()
         } else {
-            contactsForMerge2.removeAll()
+            contactsForMerge.removeAll()
             for i in 0..<contactGroups.count {
-                contactsForMerge2[i] = contactGroups[i]
+                contactsForMerge[i] = contactGroups[i]
             }
         }
         rootView.duplicatesTableView.reloadData()
@@ -146,11 +138,16 @@ extension DuplicateNumberContactsViewController: DuplicatesTableViewCellDelegate
     }
     
     func tapOnSelectButton(rowPosition: Int) {
-        if contactsForMerge.contains(contactGroups[rowPosition]) {
-            contactsForMerge.remove(contactGroups[rowPosition])
+        if let contacts = contactsForMerge[rowPosition] {
+            if contacts.count == contactGroups[rowPosition].count {
+                contactsForMerge[rowPosition]?.removeAll()
+            } else {
+                contactsForMerge[rowPosition] = contactGroups[rowPosition]
+            }
         } else {
-            contactsForMerge.insert(contactGroups[rowPosition])
+            contactsForMerge[rowPosition] = contactGroups[rowPosition]
         }
+        rootView.duplicatesTableView.reloadRows(at: [IndexPath(row: rowPosition, section: 0)], with: .none)
     }
 }
 
@@ -162,9 +159,8 @@ extension DuplicateNumberContactsViewController: UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesTableViewCell.identifier, for: indexPath) as! DuplicatesTableViewCell
         cell.delegate = self
-        cell.isUserInteractionEnabled = true
+        cell.selectionButton.bind(text: contactsForMerge[indexPath.row]?.count == contactGroups[indexPath.row].count ? .deselectAll : .selectAll)
         cell.bind(contactGroups[indexPath.row], position: indexPath.row)
-        cell.selectionButton.bind(text: contactsForMerge.contains(contactGroups[indexPath.row]) ? .deselectAll : .selectAll)
         return cell
     }
 }

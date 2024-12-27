@@ -72,6 +72,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
         containerForInnerTableView.backgroundColor = .paleGrey
         containerForInnerTableView.layer.cornerRadius = 20
         containerForInnerTableView.addShadowsWithoutClipToBounds()
+        containerForInnerTableViewHeight.priority = .init(600)
         duplicatesListTableView.clipsToBounds = true
         
         selectionButton.addTapGestureRecognizer { [weak self] in
