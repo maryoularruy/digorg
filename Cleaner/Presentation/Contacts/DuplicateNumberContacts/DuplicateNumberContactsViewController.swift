@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Contacts
+import ContactsUI
 
 final class DuplicateNumberContactsViewController: UIViewController {
     private var rootView = DuplicateNumberContactsView()
@@ -21,7 +21,7 @@ final class DuplicateNumberContactsViewController: UIViewController {
             if contactGroups.isEmpty {
                 setupEmptyState()
             } else {
-                rootView.selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
+                rootView.selectionButton.bind(text: contactsCount == contactsForMergeCount ? .deselectAll : .selectAll)
                 emptyStateView = nil
             }
         }
@@ -37,6 +37,17 @@ final class DuplicateNumberContactsViewController: UIViewController {
             rootView.selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
             rootView.duplicatesTableView.reloadData()
         }
+    }
+    
+    private lazy var contactsForMerge2 = [Int: [CNContact]]() {
+        didSet {
+            rootView.duplicatesCountLabel.bind(text: "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")")
+            rootView.selectionButton.bind(text: contactsCount == contactsForMergeCount ? .deselectAll : .selectAll)
+        }
+    }
+    
+    private var contactsForMergeCount: Int {
+        contactsForMerge2.reduce(0) { $0 + $1.value.count }
     }
     
     private lazy var emptyStateView: EmptyStateView? = nil
@@ -56,6 +67,7 @@ final class DuplicateNumberContactsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
         setupUI()
         rootView.duplicatesTableView.register(DuplicatesTableViewCell.self, forCellReuseIdentifier: DuplicatesTableViewCell.identifier)
     }
@@ -67,6 +79,15 @@ final class DuplicateNumberContactsViewController: UIViewController {
         emptyStateView = view.createEmptyState(type: .noDuplicateNumbers)
         if let emptyStateView {
             view.addSubview(emptyStateView)
+        }
+    }
+    
+    private func presentContact(contact: CNContact) {
+        if let contact = contactManager.findContact(contact: contact) {
+            let contactVC = CNContactViewController(for: contact)
+            contactVC.allowsEditing = true
+            navigationController?.setNavigationBarHidden(false, animated: false)
+            navigationController?.pushViewController(contactVC, animated: true)
         }
     }
     
@@ -95,11 +116,15 @@ extension DuplicateNumberContactsViewController: ViewControllerProtocol {
 
 extension DuplicateNumberContactsViewController: SelectionButtonDelegate {
     func tapOnButton() {
-        if contactsForMerge.count == contactGroups.count {
-            contactsForMerge.removeAll()
+        if contactsCount == contactsForMergeCount {
+            contactsForMerge2.removeAll()
         } else {
-            contactsForMerge.insert(contactGroups)
+            contactsForMerge2.removeAll()
+            for i in 0..<contactGroups.count {
+                contactsForMerge2[i] = contactGroups[i]
+            }
         }
+        rootView.duplicatesTableView.reloadData()
     }
 }
 
@@ -112,6 +137,14 @@ extension DuplicateNumberContactsViewController: ActionToolbarDelegate {
 }
 
 extension DuplicateNumberContactsViewController: DuplicatesTableViewCellDelegate {
+    func tapOnCheckBox(contact: [CNContact]) {
+        
+    }
+    
+    func tapOnCell(contact: CNContact) {
+        presentContact(contact: contact)
+    }
+    
     func tapOnSelectButton(rowPosition: Int) {
         if contactsForMerge.contains(contactGroups[rowPosition]) {
             contactsForMerge.remove(contactGroups[rowPosition])

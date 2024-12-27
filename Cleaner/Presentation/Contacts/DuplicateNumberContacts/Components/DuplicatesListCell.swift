@@ -9,8 +9,8 @@ import UIKit
 import Contacts
 
 protocol DuplicatesListCellDelegate: AnyObject {
-    func tapOnCell(itemInRowPosition: Int)
-    func tapOnCheckBox(itemInRowPosition: Int)
+    func tapOnCell(contact: CNContact)
+    func tapOnCheckBox(contact: CNContact)
 }
 
 final class DuplicatesListCell: UITableViewCell {
@@ -69,13 +69,13 @@ final class DuplicatesListCell: UITableViewCell {
         numbersLabel.setGreyTextColor()
         
         addTapGestureRecognizer { [weak self] in
-            guard let self else { return }
-            delegate?.tapOnCell(itemInRowPosition: position)
+            guard let self, let contact else { return }
+            delegate?.tapOnCell(contact: contact)
         }
         
         checkBox.addTapGestureRecognizer { [weak self] in
-            guard let self else { return }
-            delegate?.tapOnCheckBox(itemInRowPosition: position)
+            guard let self, let contact else { return }
+            delegate?.tapOnCheckBox(contact: contact)
         }
     }
     

@@ -10,6 +10,8 @@ import Contacts
 
 protocol DuplicatesTableViewCellDelegate: AnyObject {
     func tapOnSelectButton(rowPosition: Int)
+    func tapOnCheckBox(contact: [CNContact])
+    func tapOnCell(contact: CNContact)
 }
 
 final class DuplicatesTableViewCell: UITableViewCell {
@@ -104,12 +106,12 @@ final class DuplicatesTableViewCell: UITableViewCell {
 }
 
 extension DuplicatesTableViewCell: DuplicatesListCellDelegate {
-    func tapOnCell(itemInRowPosition: Int) {
-        
+    func tapOnCell(contact: CNContact) {
+        delegate?.tapOnCell(contact: contact)
     }
     
-    func tapOnCheckBox(itemInRowPosition: Int) {
-        
+    func tapOnCheckBox(contact: CNContact) {
+//        delegate?.tapOnCheckBox(contact: contact)
     }
 }
 
