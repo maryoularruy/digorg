@@ -9,8 +9,8 @@ import UIKit
 import Contacts
 
 protocol DuplicatesTableViewCellDelegate: AnyObject {
-    func tapOnSelectButton(rowPosition: Int)
-    func tapOnCheckBox(contact: [CNContact])
+    func tapOnSelectButton(row: Int)
+    func tapOnCheckBox(selectedContacts: [CNContact], row: Int)
     func tapOnCell(contact: CNContact)
 }
 
@@ -80,7 +80,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
         
         selectionButton.addTapGestureRecognizer { [weak self] in
             guard let self else { return }
-            delegate?.tapOnSelectButton(rowPosition: position)
+            delegate?.tapOnSelectButton(row: position)
         }
     }
     
@@ -115,7 +115,7 @@ extension DuplicatesTableViewCell: DuplicatesListCellDelegate {
     }
     
     func tapOnCheckBox(contact: CNContact) {
-//        delegate?.tapOnCheckBox(contact: contact)
+        delegate?.tapOnCheckBox(selectedContacts: contacts.count == 2 ? contacts : [contact], row: position)
     }
 }
 
@@ -126,6 +126,7 @@ extension DuplicatesTableViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesListCell.identifier, for: indexPath) as! DuplicatesListCell
+        cell.selectionStyle = .none
         cell.delegate = self
         cell.bind(contacts[indexPath.row], position: indexPath.row)
         

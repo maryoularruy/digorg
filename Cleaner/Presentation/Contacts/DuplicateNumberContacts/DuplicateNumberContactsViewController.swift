@@ -129,25 +129,40 @@ extension DuplicateNumberContactsViewController: ActionToolbarDelegate {
 }
 
 extension DuplicateNumberContactsViewController: DuplicatesTableViewCellDelegate {
-    func tapOnCheckBox(contact: [CNContact]) {
-        
+    func tapOnCheckBox(selectedContacts: [CNContact], row: Int) {
+        if let contactsForMergeByRow = contactsForMerge[row] {
+            if contactsForMerge[row]?.count == selectedContacts.count && selectedContacts.count == 2 {
+                contactsForMerge[row]?.removeAll()
+            } else {
+                selectedContacts.forEach { contact in
+                    if contactsForMergeByRow.contains(contact) {
+                        contactsForMerge[row]?.removeAll { $0.identifier == contact.identifier }
+                    } else {
+                        contactsForMerge[row]?.append(contact)
+                    }
+                }
+            }
+        } else {
+            contactsForMerge[row] = selectedContacts
+        }
+        rootView.duplicatesTableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
     }
     
     func tapOnCell(contact: CNContact) {
         presentContact(contact: contact)
     }
     
-    func tapOnSelectButton(rowPosition: Int) {
-        if let contacts = contactsForMerge[rowPosition] {
-            if contacts.count == contactGroups[rowPosition].count {
-                contactsForMerge[rowPosition]?.removeAll()
+    func tapOnSelectButton(row: Int) {
+        if let contacts = contactsForMerge[row] {
+            if contacts.count == contactGroups[row].count {
+                contactsForMerge[row]?.removeAll()
             } else {
-                contactsForMerge[rowPosition] = contactGroups[rowPosition]
+                contactsForMerge[row] = contactGroups[row]
             }
         } else {
-            contactsForMerge[rowPosition] = contactGroups[rowPosition]
+            contactsForMerge[row] = contactGroups[row]
         }
-        rootView.duplicatesTableView.reloadRows(at: [IndexPath(row: rowPosition, section: 0)], with: .none)
+        rootView.duplicatesTableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
     }
 }
 
