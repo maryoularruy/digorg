@@ -38,10 +38,9 @@ final class DuplicatesListCell: UITableViewCell {
         initConstraints()
     }
     
-    func bind(_ contact: CNContact, position: Int) {
+    func bind(_ contact: CNContact, position: Int, duplicateNumber: String) {
         self.contact = contact
         self.position = position
-        
         
         let fullName = "\(contact.givenName)\(contact.givenName.isEmpty ? "" : " ")\(contact.familyName)"
         if fullName.isEmpty || fullName == "" || fullName == " " {
@@ -54,9 +53,11 @@ final class DuplicatesListCell: UITableViewCell {
             nameContactLabel.text = fullName
         }
         
-        var numbers: [String] = []
+        var numbers: [String] = [duplicateNumber]
         contact.phoneNumbers.forEach { number in
-            numbers.append(number.value.stringValue)
+            if duplicateNumber != number.value.stringValue {
+                numbers.append(number.value.stringValue)
+            }
         }
         numbersLabel.text = contact.phoneNumbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
         

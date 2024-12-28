@@ -41,6 +41,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
     private lazy var contacts: [CNContact] = [CNContact]()
     private lazy var contactsForMerge: [CNContact]? = nil
     private lazy var position: Int = 0
+    private lazy var duplicateNumber: String = ""
     
     private lazy var contactManager = ContactManager.shared
     
@@ -61,6 +62,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
         self.contactsForMerge = contactsForMerge
         self.position = position
         if let number = contactManager.findDuplicatedNumber(contacts) {
+            duplicateNumber = number
             duplicateNumberLabel.bind(text: number)
         }
         selectionButton.bind(text: contactsForMerge?.count == contacts.count ? .deselectAll : .selectAll)
@@ -128,7 +130,7 @@ extension DuplicatesTableViewCell: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesListCell.identifier, for: indexPath) as! DuplicatesListCell
         cell.selectionStyle = .none
         cell.delegate = self
-        cell.bind(contacts[indexPath.row], position: indexPath.row)
+        cell.bind(contacts[indexPath.row], position: indexPath.row, duplicateNumber: duplicateNumber)
         
         if let contactsForMerge {
             cell.checkBox.setImage(contactsForMerge.contains(contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue)
