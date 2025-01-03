@@ -39,7 +39,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
     }()
     
     private lazy var contacts: [CNContact] = [CNContact]()
-    private lazy var contactsForMerge: [CNContact]? = nil
+    private lazy var contactsForMerge: [CNContact] = [CNContact]()
     private lazy var position: Int = 0
     private lazy var duplicateNumber: String = ""
     
@@ -57,7 +57,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
         initConstraints()
     }
     
-    func bind(_ contacts: [CNContact], position: Int, contactsForMerge: [CNContact]?) {
+    func bind(_ contacts: [CNContact], position: Int, contactsForMerge: [CNContact]) {
         self.contacts = contacts
         self.contactsForMerge = contactsForMerge
         self.position = position
@@ -65,7 +65,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
             duplicateNumber = number
             duplicateNumberLabel.bind(text: number)
         }
-        selectionButton.bind(text: contactsForMerge?.count == contacts.count ? .deselectAll : .selectAll)
+        selectionButton.bind(text: contactsForMerge.count == contacts.count ? .deselectAll : .selectAll)
         duplicatesListTableView.reloadData()
         containerForInnerTableViewHeight.constant = (DuplicatesListCell.HEIGHT * Double(contacts.count)) + 8.0
     }
@@ -130,14 +130,7 @@ extension DuplicatesTableViewCell: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesListCell.identifier, for: indexPath) as! DuplicatesListCell
         cell.selectionStyle = .none
         cell.delegate = self
-        cell.bind(contacts[indexPath.row], position: indexPath.row, duplicateNumber: duplicateNumber)
-        
-        if let contactsForMerge {
-            cell.checkBox.setImage(contactsForMerge.contains(contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue)
-        } else {
-            cell.checkBox.setImage(.emptyCheckBoxBlue)
-        }
-        
+        cell.bind(contacts[indexPath.row], position: indexPath.row, duplicateNumber: duplicateNumber, isSelected: contactsForMerge.contains(contacts[indexPath.row]))
         return cell
     }
     

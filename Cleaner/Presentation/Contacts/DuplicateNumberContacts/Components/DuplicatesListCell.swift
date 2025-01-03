@@ -21,7 +21,7 @@ final class DuplicatesListCell: UITableViewCell {
     
     private lazy var nameContactLabel: Semibold15LabelStyle = Semibold15LabelStyle()
     private lazy var numbersLabel: Regular15LabelStyle = Regular15LabelStyle()
-    lazy var checkBox: UIImageView = UIImageView(image: .emptyCheckBoxBlue)
+    private lazy var checkBox: UIImageView = UIImageView(image: .emptyCheckBoxBlue)
     
     private var contact: CNContact?
     private lazy var position: Int = 0
@@ -38,7 +38,7 @@ final class DuplicatesListCell: UITableViewCell {
         initConstraints()
     }
     
-    func bind(_ contact: CNContact, position: Int, duplicateNumber: String) {
+    func bind(_ contact: CNContact, position: Int, duplicateNumber: String, isSelected: Bool) {
         self.contact = contact
         self.position = position
         
@@ -61,6 +61,7 @@ final class DuplicatesListCell: UITableViewCell {
         }
         numbersLabel.text = contact.phoneNumbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
         
+        checkBox.setImage(isSelected ? .selectedCheckBoxBlue : .emptyCheckBoxBlue)
     }
     
     private func setupCell() {
