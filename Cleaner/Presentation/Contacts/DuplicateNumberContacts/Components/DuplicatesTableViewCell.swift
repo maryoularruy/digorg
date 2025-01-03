@@ -53,6 +53,9 @@ final class DuplicatesTableViewCell: UITableViewCell {
     }()
     private lazy var mergeContactsButtonHeight = mergeContactsButton.heightAnchor.constraint(equalToConstant: 0)
     
+    private lazy var spacerView: UIView = UIView()
+    private lazy var spacerViewHeight = spacerView.heightAnchor.constraint(equalToConstant: 8)
+    
     private lazy var contacts: [CNContact] = [CNContact]()
     private lazy var contactsForMerge: [CNContact] = [CNContact]()
     private lazy var position: Int = 0
@@ -84,6 +87,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
         duplicatesListTableView.reloadData()
         containerForInnerTableViewHeight.constant = (DuplicatesListCell.HEIGHT * Double(contacts.count)) + DuplicatesListCell.LAST_CELL_BOTTOM_CONSTRAINT
         mergeContactsButtonHeight.constant = contactsForMerge.count >= 2 ? 32.0 : 0.0
+        spacerViewHeight.constant = contactsForMerge.count >= 2 ? 24.0 : 8.0
     }
     
     @objc func tapOnMergeContactsButton() {
@@ -107,7 +111,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
     }
     
     private func initConstraints() {
-        contentView.addSubviews([duplicateNumberLabel, selectionButton, containerForInnerTableView, mergeContactsButton])
+        contentView.addSubviews([duplicateNumberLabel, selectionButton, containerForInnerTableView, mergeContactsButton, spacerView])
         containerForInnerTableView.addSubviews([duplicatesListTableView])
         
         NSLayoutConstraint.activate([
@@ -130,8 +134,13 @@ final class DuplicatesTableViewCell: UITableViewCell {
             mergeContactsButton.topAnchor.constraint(equalTo: containerForInnerTableView.bottomAnchor, constant: 16),
             mergeContactsButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             mergeContactsButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            mergeContactsButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            mergeContactsButtonHeight
+            mergeContactsButtonHeight,
+            
+            spacerView.topAnchor.constraint(equalTo: mergeContactsButton.bottomAnchor),
+            spacerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            spacerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            spacerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            spacerViewHeight
         ])
     }
 }
