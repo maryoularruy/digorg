@@ -22,7 +22,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
     lazy var selectionButton: SelectionTransparentButtonStyle = SelectionTransparentButtonStyle()
     
     private lazy var containerForInnerTableView = UIView()
-    private lazy var containerForInnerTableViewHeight = containerForInnerTableView.heightAnchor.constraint(equalToConstant: DuplicatesListCell.HEIGHT + 8.0)
+    private lazy var containerForInnerTableViewHeight = containerForInnerTableView.heightAnchor.constraint(equalToConstant: (DuplicatesListCell.HEIGHT * Double(contacts.count)) + DuplicatesListCell.LAST_CELL_BOTTOM_CONSTRAINT)
     
     private lazy var duplicatesListTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -67,14 +67,14 @@ final class DuplicatesTableViewCell: UITableViewCell {
         }
         selectionButton.bind(text: contactsForMerge.count == contacts.count ? .deselectAll : .selectAll)
         duplicatesListTableView.reloadData()
-        containerForInnerTableViewHeight.constant = (DuplicatesListCell.HEIGHT * Double(contacts.count)) + 8.0
+        containerForInnerTableViewHeight.constant = (DuplicatesListCell.HEIGHT * Double(contacts.count)) + DuplicatesListCell.LAST_CELL_BOTTOM_CONSTRAINT
     }
     
     private func setupCell() {
         backgroundColor = .clear
         selectionStyle = .none
         
-        containerForInnerTableView.backgroundColor = .paleGrey
+        containerForInnerTableView.backgroundColor = .clear
         containerForInnerTableView.layer.cornerRadius = 20
         containerForInnerTableView.addShadowsWithoutClipToBounds()
         containerForInnerTableViewHeight.priority = .init(600)
@@ -106,7 +106,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
             duplicatesListTableView.topAnchor.constraint(equalTo: containerForInnerTableView.topAnchor),
             duplicatesListTableView.leadingAnchor.constraint(equalTo: containerForInnerTableView.leadingAnchor),
             duplicatesListTableView.trailingAnchor.constraint(equalTo: containerForInnerTableView.trailingAnchor),
-            duplicatesListTableView.bottomAnchor.constraint(equalTo: containerForInnerTableView.bottomAnchor, constant: -8)
+            duplicatesListTableView.bottomAnchor.constraint(equalTo: containerForInnerTableView.bottomAnchor)
         ])
     }
 }
@@ -130,11 +130,7 @@ extension DuplicatesTableViewCell: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: DuplicatesListCell.identifier, for: indexPath) as! DuplicatesListCell
         cell.selectionStyle = .none
         cell.delegate = self
-        cell.bind(contacts[indexPath.row], position: indexPath.row, duplicateNumber: duplicateNumber, isSelected: contactsForMerge.contains(contacts[indexPath.row]))
+        cell.bind(contacts[indexPath.row], position: indexPath.row, duplicateNumber: duplicateNumber, isSelected: contactsForMerge.contains(contacts[indexPath.row]), isLast: indexPath.row == contacts.count - 1)
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        DuplicatesListCell.HEIGHT
     }
 }

@@ -15,16 +15,20 @@ protocol DuplicatesListCellDelegate: AnyObject {
 
 final class DuplicatesListCell: UITableViewCell {
     static var identifier = "DuplicatesListCell"
-    static var HEIGHT = 65.0
+    static var HEIGHT = 71.0
+    static var LAST_CELL_BOTTOM_CONSTRAINT = 8.0
     
     weak var delegate: DuplicatesListCellDelegate?
     
     private lazy var nameContactLabel: Semibold15LabelStyle = Semibold15LabelStyle()
     private lazy var numbersLabel: Regular15LabelStyle = Regular15LabelStyle()
+    private lazy var labelsContainer: UIView = UIView()
     private lazy var checkBox: UIImageView = UIImageView(image: .emptyCheckBoxBlue)
     
     private var contact: CNContact?
     private lazy var position: Int = 0
+    
+    private lazy var labelsContainerBottomConstraint = labelsContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,7 +42,7 @@ final class DuplicatesListCell: UITableViewCell {
         initConstraints()
     }
     
-    func bind(_ contact: CNContact, position: Int, duplicateNumber: String, isSelected: Bool) {
+    func bind(_ contact: CNContact, position: Int, duplicateNumber: String, isSelected: Bool, isLast: Bool) {
         self.contact = contact
         self.position = position
         
@@ -62,6 +66,10 @@ final class DuplicatesListCell: UITableViewCell {
         numbersLabel.text = contact.phoneNumbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
         
         checkBox.setImage(isSelected ? .selectedCheckBoxBlue : .emptyCheckBoxBlue)
+        contentView.backgroundColor = isSelected ? .lightBlue : .paleGrey
+        
+        labelsContainerBottomConstraint.constant = isLast ? -16 : -8
+        layoutIfNeeded()
     }
     
     private func setupCell() {
@@ -82,20 +90,26 @@ final class DuplicatesListCell: UITableViewCell {
     }
     
     private func initConstraints() {
-        contentView.addSubviews([nameContactLabel, numbersLabel, checkBox])
+        contentView.addSubviews([labelsContainer, checkBox])
+        labelsContainer.addSubviews([nameContactLabel, numbersLabel])
         
         NSLayoutConstraint.activate([
-            nameContactLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            nameContactLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            nameContactLabel.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: -10),
+            labelsContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            labelsContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            labelsContainer.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: -10),
+            labelsContainerBottomConstraint,
+            
+            nameContactLabel.topAnchor.constraint(equalTo: labelsContainer.topAnchor),
+            nameContactLabel.leadingAnchor.constraint(equalTo: labelsContainer.leadingAnchor),
+            nameContactLabel.trailingAnchor.constraint(equalTo: labelsContainer.trailingAnchor),
             
             numbersLabel.topAnchor.constraint(equalTo: nameContactLabel.bottomAnchor, constant: 5),
-            numbersLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            numbersLabel.trailingAnchor.constraint(equalTo: checkBox.leadingAnchor, constant: -10),
-            numbersLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            numbersLabel.leadingAnchor.constraint(equalTo: labelsContainer.leadingAnchor),
+            numbersLabel.trailingAnchor.constraint(equalTo: labelsContainer.trailingAnchor),
+            numbersLabel.bottomAnchor.constraint(equalTo: labelsContainer.bottomAnchor),
             
-            checkBox.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 23.5),
             checkBox.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            checkBox.centerYAnchor.constraint(equalTo: labelsContainer.centerYAnchor),
             checkBox.heightAnchor.constraint(equalToConstant: 26),
             checkBox.widthAnchor.constraint(equalToConstant: 26)
         ])
