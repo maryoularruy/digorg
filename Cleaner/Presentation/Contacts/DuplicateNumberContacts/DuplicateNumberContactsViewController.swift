@@ -145,7 +145,7 @@ extension DuplicateNumberContactsViewController: DuplicatesTableViewCellDelegate
         } else {
             contactsForMerge[row] = selectedContacts
         }
-        rootView.duplicatesTableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
+        rootView.duplicatesTableView.reloadData()
     }
     
     func tapOnCell(contact: CNContact) {
@@ -162,7 +162,7 @@ extension DuplicateNumberContactsViewController: DuplicatesTableViewCellDelegate
         } else {
             contactsForMerge[row] = contactGroups[row]
         }
-        rootView.duplicatesTableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
+        rootView.duplicatesTableView.reloadData()
     }
 }
 

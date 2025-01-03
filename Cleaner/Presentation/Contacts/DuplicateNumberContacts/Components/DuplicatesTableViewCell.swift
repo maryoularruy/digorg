@@ -38,6 +38,21 @@ final class DuplicatesTableViewCell: UITableViewCell {
         return tableView
     }()
     
+    private lazy var mergeContactsButton: UIButton = {
+        let button = UIButton(type: .roundedRect)
+        button.backgroundColor = .blue
+        button.layer.cornerRadius = 16.0
+        button.layer.cornerCurve = .circular
+        button.setTitle("Merge Contacts", for: .normal)
+        button.setTitleColor(.paleGrey, for: .normal)
+        button.setTitleColor(.paleGrey, for: .selected)
+        button.titleLabel?.font = .medium12
+        button.tintColor = .paleGrey
+        button.addTarget(self, action: #selector(tapOnMergeContactsButton), for: .touchUpInside)
+        return button
+    }()
+    private lazy var mergeContactsButtonHeight = mergeContactsButton.heightAnchor.constraint(equalToConstant: 0)
+    
     private lazy var contacts: [CNContact] = [CNContact]()
     private lazy var contactsForMerge: [CNContact] = [CNContact]()
     private lazy var position: Int = 0
@@ -68,6 +83,11 @@ final class DuplicatesTableViewCell: UITableViewCell {
         selectionButton.bind(text: contactsForMerge.count == contacts.count ? .deselectAll : .selectAll)
         duplicatesListTableView.reloadData()
         containerForInnerTableViewHeight.constant = (DuplicatesListCell.HEIGHT * Double(contacts.count)) + DuplicatesListCell.LAST_CELL_BOTTOM_CONSTRAINT
+        mergeContactsButtonHeight.constant = contactsForMerge.count >= 2 ? 32.0 : 0.0
+    }
+    
+    @objc func tapOnMergeContactsButton() {
+        
     }
     
     private func setupCell() {
@@ -87,7 +107,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
     }
     
     private func initConstraints() {
-        contentView.addSubviews([duplicateNumberLabel, selectionButton, containerForInnerTableView])
+        contentView.addSubviews([duplicateNumberLabel, selectionButton, containerForInnerTableView, mergeContactsButton])
         containerForInnerTableView.addSubviews([duplicatesListTableView])
         
         NSLayoutConstraint.activate([
@@ -100,13 +120,18 @@ final class DuplicatesTableViewCell: UITableViewCell {
             containerForInnerTableView.topAnchor.constraint(equalTo: selectionButton.bottomAnchor, constant: 16),
             containerForInnerTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             containerForInnerTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            containerForInnerTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
             containerForInnerTableViewHeight,
             
             duplicatesListTableView.topAnchor.constraint(equalTo: containerForInnerTableView.topAnchor),
             duplicatesListTableView.leadingAnchor.constraint(equalTo: containerForInnerTableView.leadingAnchor),
             duplicatesListTableView.trailingAnchor.constraint(equalTo: containerForInnerTableView.trailingAnchor),
-            duplicatesListTableView.bottomAnchor.constraint(equalTo: containerForInnerTableView.bottomAnchor)
+            duplicatesListTableView.bottomAnchor.constraint(equalTo: containerForInnerTableView.bottomAnchor),
+            
+            mergeContactsButton.topAnchor.constraint(equalTo: containerForInnerTableView.bottomAnchor, constant: 16),
+            mergeContactsButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            mergeContactsButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            mergeContactsButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            mergeContactsButtonHeight
         ])
     }
 }
