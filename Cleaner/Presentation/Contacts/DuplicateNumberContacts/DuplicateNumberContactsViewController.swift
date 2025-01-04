@@ -7,6 +7,7 @@
 
 import UIKit
 import ContactsUI
+import BottomPopup
 
 final class DuplicateNumberContactsViewController: UIViewController {
     private var rootView = DuplicateNumberContactsView()
@@ -163,6 +164,21 @@ extension DuplicateNumberContactsViewController: DuplicatesTableViewCellDelegate
             contactsForMerge[row] = contactGroups[row]
         }
         rootView.duplicatesTableView.reloadData()
+    }
+    
+    func tapOnMergeContacts(contactsForMerge: [CNContact], row: Int) {
+        guard let vc = UIStoryboard(name: SelectedContactsBottomPopupViewController.idenfifier, bundle: .main).instantiateViewController(identifier: SelectedContactsBottomPopupViewController.idenfifier) as? SelectedContactsBottomPopupViewController else { return }
+        vc.popupDelegate = self
+        vc.height = 400
+        DispatchQueue.main.async { [weak self] in
+            self?.present(vc, animated: true)
+        }
+    }
+}
+
+extension DuplicateNumberContactsViewController: BottomPopupDelegate {
+    func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
+        
     }
 }
 

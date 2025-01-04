@@ -12,6 +12,7 @@ protocol DuplicatesTableViewCellDelegate: AnyObject {
     func tapOnSelectButton(row: Int)
     func tapOnCheckBox(selectedContacts: [CNContact], row: Int)
     func tapOnCell(contact: CNContact)
+    func tapOnMergeContacts(contactsForMerge: [CNContact], row: Int)
 }
 
 final class DuplicatesTableViewCell: UITableViewCell {
@@ -91,7 +92,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
     }
     
     @objc func tapOnMergeContactsButton() {
-        
+        delegate?.tapOnMergeContacts(contactsForMerge: contactsForMerge, row: position)
     }
     
     private func setupCell() {
