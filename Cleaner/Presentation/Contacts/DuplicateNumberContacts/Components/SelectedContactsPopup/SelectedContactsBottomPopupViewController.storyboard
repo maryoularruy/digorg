@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,10 +24,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1mB-0E-DlL" customClass="ActionAndCancelToolbar" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="240" width="393" height="160"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="qgy-Ba-DbM"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jNB-eW-EQp">
+                                <rect key="frame" x="16" y="50" width="361" height="194"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="PaleGrey"/>
                         <constraints>
+                            <constraint firstItem="1mB-0E-DlL" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="0Gh-Le-ozf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1mB-0E-DlL" secondAttribute="trailing" id="1gj-dJ-eZd"/>
+                            <constraint firstItem="jNB-eW-EQp" firstAttribute="top" secondItem="Afp-25-o2o" secondAttribute="bottom" constant="24" id="7mS-Vp-a0u"/>
+                            <constraint firstAttribute="bottom" secondItem="1mB-0E-DlL" secondAttribute="bottom" id="NWm-2c-eCI"/>
+                            <constraint firstItem="1mB-0E-DlL" firstAttribute="top" secondItem="jNB-eW-EQp" secondAttribute="bottom" constant="-4" id="VRa-dX-Nw6"/>
+                            <constraint firstItem="jNB-eW-EQp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="YFy-qe-MsS"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jNB-eW-EQp" secondAttribute="trailing" constant="16" id="sLq-hC-hqC"/>
                             <constraint firstItem="Afp-25-o2o" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="tl0-fy-st6"/>
                             <constraint firstItem="Afp-25-o2o" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="26" id="zqp-On-Bz7"/>
                         </constraints>
@@ -34,7 +53,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="393" height="400"/>
                     <connections>
+                        <outlet property="contactsStackView" destination="jNB-eW-EQp" id="n9E-LQ-x3F"/>
                         <outlet property="label" destination="Afp-25-o2o" id="yhA-1A-Sm0"/>
+                        <outlet property="toolbar" destination="1mB-0E-DlL" id="kX9-OR-3fy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -46,5 +67,8 @@
         <namedColor name="PaleGrey">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

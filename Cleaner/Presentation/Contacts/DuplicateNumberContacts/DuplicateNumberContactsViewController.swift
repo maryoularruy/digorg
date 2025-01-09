@@ -170,7 +170,9 @@ extension DuplicateNumberContactsViewController: DuplicatesTableViewCellDelegate
         guard let vc = UIStoryboard(name: SelectedContactsBottomPopupViewController.idenfifier, bundle: .main).instantiateViewController(identifier: SelectedContactsBottomPopupViewController.idenfifier) as? SelectedContactsBottomPopupViewController else { return }
         vc.popupDelegate = self
         vc.type = .mergeContacts
-        vc.height = 400
+        vc.contacts = contactsForMerge
+        vc.position = row
+        vc.calcPopupHeight()
         DispatchQueue.main.async { [weak self] in
             self?.present(vc, animated: true)
         }

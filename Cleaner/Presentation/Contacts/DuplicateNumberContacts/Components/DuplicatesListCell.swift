@@ -46,7 +46,7 @@ final class DuplicatesListCell: UITableViewCell {
         self.contact = contact
         self.position = position
         
-        let fullName = "\(contact.givenName)\(contact.givenName.isEmpty ? "" : " ")\(contact.familyName)"
+        let fullName = contact.fullName
         if fullName.isEmpty || fullName == "" || fullName == " " {
             let missingText = "Name is missing"
             let attributes = [NSAttributedString.Key.foregroundColor : UIColor.darkGrey]
