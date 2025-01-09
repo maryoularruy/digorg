@@ -16,11 +16,26 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afp-25-o2o" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="196.66666666666666" y="26" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="PaleGrey"/>
+                        <constraints>
+                            <constraint firstItem="Afp-25-o2o" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="tl0-fy-st6"/>
+                            <constraint firstItem="Afp-25-o2o" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="26" id="zqp-On-Bz7"/>
+                        </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="393" height="400"/>
+                    <connections>
+                        <outlet property="label" destination="Afp-25-o2o" id="yhA-1A-Sm0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
