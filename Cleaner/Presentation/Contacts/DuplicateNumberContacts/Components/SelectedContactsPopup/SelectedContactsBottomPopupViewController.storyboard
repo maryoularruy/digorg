@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Selected Contacts Bottom Popup View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController restorationIdentifier="SelectedContactsBottomPopupViewController" storyboardIdentifier="SelectedContactsBottomPopupViewController" id="Y6W-OH-hqX" customClass="SelectedContactsBottomPopupViewController" customModule="Cleaner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afp-25-o2o" customClass="Semibold15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="196.66666666666666" y="26" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1mB-0E-DlL" customClass="ActionAndCancelToolbar" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="240" width="393" height="160"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="qgy-Ba-DbM"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jNB-eW-EQp">
+                                <rect key="frame" x="16" y="50" width="361" height="194"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" name="PaleGrey"/>
+                        <constraints>
+                            <constraint firstItem="1mB-0E-DlL" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="0Gh-Le-ozf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1mB-0E-DlL" secondAttribute="trailing" id="1gj-dJ-eZd"/>
+                            <constraint firstItem="jNB-eW-EQp" firstAttribute="top" secondItem="Afp-25-o2o" secondAttribute="bottom" constant="24" id="7mS-Vp-a0u"/>
+                            <constraint firstAttribute="bottom" secondItem="1mB-0E-DlL" secondAttribute="bottom" id="NWm-2c-eCI"/>
+                            <constraint firstItem="1mB-0E-DlL" firstAttribute="top" secondItem="jNB-eW-EQp" secondAttribute="bottom" constant="-4" id="VRa-dX-Nw6"/>
+                            <constraint firstItem="jNB-eW-EQp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="YFy-qe-MsS"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jNB-eW-EQp" secondAttribute="trailing" constant="16" id="sLq-hC-hqC"/>
+                            <constraint firstItem="Afp-25-o2o" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="tl0-fy-st6"/>
+                            <constraint firstItem="Afp-25-o2o" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="26" id="zqp-On-Bz7"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="393" height="400"/>
+                    <connections>
+                        <outlet property="contactsStackView" destination="jNB-eW-EQp" id="n9E-LQ-x3F"/>
+                        <outlet property="label" destination="Afp-25-o2o" id="yhA-1A-Sm0"/>
+                        <outlet property="toolbar" destination="1mB-0E-DlL" id="kX9-OR-3fy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="79" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="PaleGrey">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

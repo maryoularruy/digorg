@@ -45,38 +45,16 @@ final class ContactManager {
     }
 
     func loadDuplicatedByName(completion: @escaping ([[CNContact]]) -> ()) {
-        loadContacts { contacts in
-            var duplicates = [[CNContact]]()
-            var checkedContacts = Set<CNContact>()
-            
-            for i in 0..<contacts.count {
-                if checkedContacts.contains(contacts[i]) || contacts[i].givenName.isEmpty && contacts[i].familyName.isEmpty {
-                    continue
-                }
-                
-                var group = [CNContact]()
-                group.append(contacts[i])
-                
-                for j in i+1..<contacts.count {
-                    if checkedContacts.contains(contacts[j]) {
-                        continue
-                    }
-                    
-                    if (contacts[i].givenName + " " + contacts[i].familyName == contacts[j].givenName + " " + contacts[j].familyName) ||
-                        (!contacts[i].phoneNumbers.isEmpty && (contacts[i].phoneNumbers.first?.value.stringValue == contacts[j].phoneNumbers.first?.value.stringValue)) ||
-                        (!contacts[i].emailAddresses.isEmpty && (contacts[i].emailAddresses.first?.value == contacts[j].emailAddresses.first?.value)) {
-                        group.append(contacts[j])
-                        checkedContacts.insert(contacts[j])
-                    }
-                }
-                
-                if group.count > 1 {
-                    duplicates.append(group)
-                }
-                
-                checkedContacts.insert(contacts[i])
-            }
-            completion(duplicates)
+        loadContacts { [weak self] contacts in
+            guard let self else { return }
+            completion(fitlerDuplicatedByName(contacts))
+        }
+    }
+    
+    func loadDuplicatedByNumber(completion: @escaping ([[CNContact]]) -> ()) {
+        loadContacts { [weak self] contacts in
+            guard let self else { return }
+            completion(fitlerDuplicatedByNumber(contacts))
         }
     }
     
@@ -102,16 +80,32 @@ final class ContactManager {
             }
         }
         
-        let deleteContacts = contacts.filter { $0 != bestContact! }
+        let deletedContacts = contacts.filter { $0 != bestContact! }
         guard let bestContact = bestContact?.mutableCopy() as? CNMutableContact else { return }
-        deleteContacts.forEach { bestContact.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
+        deletedContacts.forEach { bestContact.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
 
         do {
             try updateContact(bestContact)
         } catch {
             print(error.localizedDescription)
         }
-        delete(deleteContacts)
+        delete(deletedContacts)
+        DispatchQueue.main.async {
+            completion(true)
+        }
+    }
+    
+    func merge(_ contacts: [CNContact], userChoice: Int, completion: @escaping ((Bool) -> ())) {
+        let deletedContacts = contacts.filter { $0 != contacts[userChoice] }
+        guard let contactForMerging = contacts[userChoice].mutableCopy() as? CNMutableContact else { return }
+        deletedContacts.forEach { contactForMerging.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
+        
+        do {
+            try updateContact(contactForMerging)
+        } catch {
+            print(error.localizedDescription)
+        }
+        delete(deletedContacts)
         DispatchQueue.main.async {
             completion(true)
         }
@@ -148,6 +142,19 @@ final class ContactManager {
     func importSecretContacts(_ contacts: [CNContact]) {
         FileManager.default.saveSecretContacts(contacts)
         delete(contacts)
+    }
+    
+    func findDuplicatedNumber(_ contacts: [CNContact]) -> String? {
+        for i in 0..<contacts.count {
+            for j in 0..<contacts[i].phoneNumbers.count {
+                for k in 0..<contacts[i+1].phoneNumbers.count {
+                    if contacts[i].phoneNumbers[j].value.stringValue == contacts[i+1].phoneNumbers[k].value.stringValue {
+                        return contacts[i].phoneNumbers[j].value.stringValue
+                    }
+                }
+            }
+        }
+        return nil
     }
     
     static func getSecretContacts() -> [CNContact]? {
@@ -255,9 +262,7 @@ final class ContactManager {
                     continue
                 }
                 
-                if (contacts[i].givenName + " " + contacts[i].familyName == contacts[j].givenName + " " + contacts[j].familyName) ||
-                    (!contacts[i].phoneNumbers.isEmpty && (contacts[i].phoneNumbers.first?.value.stringValue == contacts[j].phoneNumbers.first?.value.stringValue)) ||
-                    (!contacts[i].emailAddresses.isEmpty && (contacts[i].emailAddresses.first?.value == contacts[j].emailAddresses.first?.value)) {
+                if (contacts[i].givenName + " " + contacts[i].familyName == contacts[j].givenName + " " + contacts[j].familyName) {
                     group.append(contacts[j])
                     checkedContacts.insert(contacts[j])
                 }
@@ -285,14 +290,16 @@ final class ContactManager {
             group.append(contacts[i])
             
             for j in i+1..<contacts.count {
-                if checkedContacts.contains(contacts[j]) {
+                if checkedContacts.contains(contacts[i]) {
                     continue
                 }
-                
-                contacts[j].phoneNumbers.forEach { phoneNumber in
-                    if contacts[i].phoneNumbers.contains(phoneNumber) {
-                        group.append(contacts[j])
-                        checkedContacts.insert(contacts[j])
+
+                contacts[i].phoneNumbers.forEach { firstNumber in
+                    contacts[j].phoneNumbers.forEach { secondNumber in
+                        if firstNumber.value.stringValue == secondNumber.value.stringValue {
+                            group.append(contacts[j])
+                            checkedContacts.insert(contacts[j])
+                        }
                     }
                 }
             }

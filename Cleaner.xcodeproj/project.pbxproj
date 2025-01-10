@@ -397,6 +397,7 @@
 		A598A0712CEC9CB1002F346E /* Store */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Store; sourceTree = "<group>"; };
 		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
+		A5CBDF112D1603820065862E /* DuplicateNumberContacts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DuplicateNumberContacts; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -427,6 +428,7 @@
 		7532F85B2AE28B47007469EA /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				A5CBDF112D1603820065862E /* DuplicateNumberContacts */,
 				A53ED8E52CCBEA5000565625 /* NoNumberContacts */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				7532F8622AE29711007469EA /* NoNameContacts */,
@@ -1136,6 +1138,7 @@
 				A598A0712CEC9CB1002F346E /* Store */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
+				A5CBDF112D1603820065862E /* DuplicateNumberContacts */,
 			);
 			name = Cleaner;
 			packageProductDependencies = (

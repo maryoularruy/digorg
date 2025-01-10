@@ -133,7 +133,7 @@ extension ContactsMenuViewController: ContactsMenuViewProtocol {
         case .duplicateNames:
             StoryboardScene.DuplicateNameContacts.initialScene.instantiate()
         case .dublicateNumbers:
-            StoryboardScene.DuplicateNameContacts.initialScene.instantiate()
+            DuplicateNumberContactsViewController()
         case .noNameContacts:
             StoryboardScene.NoNameContacts.initialScene.instantiate()
         case .noNumberContacts:

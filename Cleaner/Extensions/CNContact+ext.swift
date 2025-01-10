@@ -8,6 +8,10 @@
 import SwiftyContacts
 
 extension CNContact {
+    var fullName: String {
+        "\(givenName)\(givenName.isEmpty ? "" : " ")\(familyName)"
+    }
+    
     func calcRating() -> Int {
         emailAddresses.count +
         phoneNumbers.count +
