@@ -47,8 +47,7 @@ final class DuplicateNumberContactsView: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([toolbar])
-        addSubviews([arrowBack, label, duplicatesCountLabel, selectionButton, duplicatesTableView])
+        addSubviews([arrowBack, label, duplicatesCountLabel, selectionButton, duplicatesTableView, toolbar])
         
         NSLayoutConstraint.activate([
             arrowBack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
