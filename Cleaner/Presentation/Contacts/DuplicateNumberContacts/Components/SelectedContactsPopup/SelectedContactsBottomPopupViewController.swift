@@ -9,6 +9,10 @@ import UIKit
 import BottomPopup
 import Contacts
 
+protocol SelectedContactsBottomPopupViewControllerDelegate: AnyObject {
+    func tapOnMerge(activeChoice: Int, row: Int)
+}
+
 enum SelectedContactsType {
     case mergeContacts, previewContacts
     
@@ -37,6 +41,8 @@ enum SelectedContactsType {
 final class SelectedContactsBottomPopupViewController: BottomPopupViewController {
     static var idenfifier = "SelectedContactsBottomPopupViewController"
     
+    weak var delegate: SelectedContactsBottomPopupViewControllerDelegate?
+    
     var height: CGFloat?
     var topCornerRadius: CGFloat?
     var presentDuration: Double?
@@ -47,7 +53,13 @@ final class SelectedContactsBottomPopupViewController: BottomPopupViewController
     lazy var contacts: [CNContact] = []
     lazy var position: Int = 0
     
-    private var activeChoise: CNContact?
+    private var activeChoice: Int = 0 {
+        didSet {
+            contactsStackView.arrangedSubviews.forEach { subview in
+                subview.backgroundColor = subview.tag == activeChoice ? .lightBlue : .clear
+            }
+        }
+    }
     
     @IBOutlet weak var label: Semibold15LabelStyle!
     @IBOutlet weak var toolbar: ActionAndCancelToolbar!
@@ -67,13 +79,12 @@ final class SelectedContactsBottomPopupViewController: BottomPopupViewController
         toolbar.actionButton.bind(text: type.actionButtonText)
         toolbar.dismissButton.bind(text: type.dismissButtonText)
         
-        contacts.forEach { contact in
+        for i in 0..<contacts.count {
             let view = UIView(frame: CGRect(x: 0, y: 0, width: contactsStackView.frame.width, height: 50))
-            view.backgroundColor = .lightBlue
             view.layer.cornerRadius = 20
             
             let label = Regular15LabelStyle()
-            let fullName = contact.fullName
+            let fullName = contacts[i].fullName
             if fullName.isEmpty || fullName == "" || fullName == " " {
                 let missingText = "Name is missing"
                 let attributes = [NSAttributedString.Key.foregroundColor : UIColor.darkGrey]
@@ -90,8 +101,14 @@ final class SelectedContactsBottomPopupViewController: BottomPopupViewController
                 label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
             ])
             
+            view.tag = i
+            view.addTapGestureRecognizer { [weak self] in
+                self?.activeChoice = i
+            }
+            
             contactsStackView.addArrangedSubview(view)
         }
+        activeChoice = 0
     }
     
     func calcPopupHeight() {
@@ -110,7 +127,8 @@ final class SelectedContactsBottomPopupViewController: BottomPopupViewController
 
 extension SelectedContactsBottomPopupViewController: ActionAndCancelToolbarDelegate {
     func tapOnAction() {
-        
+        delegate?.tapOnMerge(activeChoice: activeChoice, row: position)
+        dismiss(animated: true)
     }
     
     func tapOnCancel() {
