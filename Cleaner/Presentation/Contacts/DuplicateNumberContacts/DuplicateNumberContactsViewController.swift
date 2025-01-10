@@ -168,13 +168,37 @@ extension DuplicateNumberContactsViewController: DuplicatesTableViewCellDelegate
     
     func tapOnMergeContacts(contactsForMerge: [CNContact], row: Int) {
         guard let vc = UIStoryboard(name: SelectedContactsBottomPopupViewController.idenfifier, bundle: .main).instantiateViewController(identifier: SelectedContactsBottomPopupViewController.idenfifier) as? SelectedContactsBottomPopupViewController else { return }
-        vc.popupDelegate = self
+        vc.delegate = self
         vc.type = .mergeContacts
         vc.contacts = contactsForMerge
         vc.position = row
         vc.calcPopupHeight()
         DispatchQueue.main.async { [weak self] in
             self?.present(vc, animated: true)
+        }
+    }
+}
+
+extension DuplicateNumberContactsViewController: SelectedContactsBottomPopupViewControllerDelegate {
+    func tapOnMerge(activeChoice: Int, row: Int) {
+        contactManager.merge(contactsForMerge[row] ?? [], userChoice: activeChoice) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case true:
+                let successView = SuccessView(frame: SuccessView.myFrame)
+                successView.bind(type: .successMerge)
+                successView.center = view.center
+                view.addSubview(successView)
+                successView.setHidden {
+                    successView.removeFromSuperview()
+                }
+                DispatchQueue.global(qos: .userInitiated).sync { [weak self] in
+                    guard let self else { return }
+                    setupUI()
+                    rootView.duplicatesTableView.reloadData()
+                }
+            case false: break
+            }
         }
     }
 }

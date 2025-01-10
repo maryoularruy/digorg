@@ -80,16 +80,32 @@ final class ContactManager {
             }
         }
         
-        let deleteContacts = contacts.filter { $0 != bestContact! }
+        let deletedContacts = contacts.filter { $0 != bestContact! }
         guard let bestContact = bestContact?.mutableCopy() as? CNMutableContact else { return }
-        deleteContacts.forEach { bestContact.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
+        deletedContacts.forEach { bestContact.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
 
         do {
             try updateContact(bestContact)
         } catch {
             print(error.localizedDescription)
         }
-        delete(deleteContacts)
+        delete(deletedContacts)
+        DispatchQueue.main.async {
+            completion(true)
+        }
+    }
+    
+    func merge(_ contacts: [CNContact], userChoice: Int, completion: @escaping ((Bool) -> ())) {
+        let deletedContacts = contacts.filter { $0 != contacts[userChoice] }
+        guard let contactForMerging = contacts[userChoice].mutableCopy() as? CNMutableContact else { return }
+        deletedContacts.forEach { contactForMerging.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
+        
+        do {
+            try updateContact(contactForMerging)
+        } catch {
+            print(error.localizedDescription)
+        }
+        delete(deletedContacts)
         DispatchQueue.main.async {
             completion(true)
         }
