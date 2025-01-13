@@ -153,9 +153,11 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     @objc private func openPhoneInfoScreen() {
-        let vc = StoryboardScene.PhoneInfo.initialScene.instantiate()
-        vc.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: true)
+        let vc = DeviceInfoViewController()
+        vc.hidesBottomBarWhenPushed = true
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     private func setupDeviceInfoSection() {
