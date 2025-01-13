@@ -26,8 +26,7 @@ final class DeviceInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupActions()
-//        setupUI()
+        addGestureRecognizers()
     }
     
 //    private func setupActions() {
@@ -53,4 +52,20 @@ final class DeviceInfoViewController: UIViewController {
 //    @objc func updateSpeed() {
 //        downloadSpeedLabel.text = PhoneInfoService.shared.downloadSpeed
 //    }
+}
+
+extension DeviceInfoViewController: ViewControllerProtocol {
+    func setupUI() {
+        
+    }
+    
+    func addGestureRecognizers() {
+        rootView.arrowBack.addTapGestureRecognizer { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
+    }
 }
