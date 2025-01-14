@@ -18,6 +18,10 @@ final class DeviceInfoView: UIView {
         return label
     }()
     
+    private lazy var ramView: DeviceInfoCategoryView = DeviceInfoCategoryView(type: .ram)
+    private lazy var downloadView: DeviceInfoCategoryView = DeviceInfoCategoryView(type: .download)
+    private lazy var cpuView: DeviceInfoCategoryView = DeviceInfoCategoryView(type: .cpu)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -32,12 +36,14 @@ final class DeviceInfoView: UIView {
     
     private func setupView() {
         backgroundColor = .paleGrey
+        
+        scroll.showsVerticalScrollIndicator = false
     }
     
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label])
+        contentView.addSubviews([arrowBack, label, ramView, downloadView, cpuView])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -48,7 +54,7 @@ final class DeviceInfoView: UIView {
             contentView.topAnchor.constraint(equalTo: scroll.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scroll.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scroll.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scroll.bottomAnchor, constant: -90),
+            contentView.bottomAnchor.constraint(equalTo: scroll.bottomAnchor, constant: -10),
             contentView.widthAnchor.constraint(equalTo: scroll.widthAnchor, constant: -32),
             
             arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -59,9 +65,18 @@ final class DeviceInfoView: UIView {
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            //
-            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-            //
+            ramView.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 16),
+            ramView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            ramView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            downloadView.topAnchor.constraint(equalTo: ramView.bottomAnchor, constant: 8),
+            downloadView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            downloadView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            cpuView.topAnchor.constraint(equalTo: downloadView.bottomAnchor, constant: 8),
+            cpuView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            cpuView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            cpuView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
