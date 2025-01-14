@@ -8,7 +8,7 @@
 import UIKit
 import NetworkFlows
 
-class PhoneInfoService: TrafficMonitorDelegate {
+final class PhoneInfoService: TrafficMonitorDelegate {
     
     static let shared = PhoneInfoService()
     

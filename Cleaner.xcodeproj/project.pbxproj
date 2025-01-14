@@ -63,6 +63,7 @@
 		A5609FD22CE0F83A000AF19E /* Float+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609FD12CE0F83A000AF19E /* Float+ext.swift */; };
 		A5609FD82CE12BB3000AF19E /* BatteryInstructionCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */; };
 		A573446D2D314B7E00A4F3DF /* DeviceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A573446C2D314B7E00A4F3DF /* DeviceInfoView.swift */; };
+		A57346B02D36C89200A4F3DF /* UIDevice+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */; };
 		A5858DD82D0C500C00C4BDD9 /* Int+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5858DD72D0C500C00C4BDD9 /* Int+ext.swift */; };
 		A598A0752CECA12A002F346E /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598A0742CECA12A002F346E /* Store.swift */; };
 		A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */; };
@@ -244,6 +245,7 @@
 		A5609FD12CE0F83A000AF19E /* Float+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+ext.swift"; sourceTree = "<group>"; };
 		A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryInstructionCellType.swift; sourceTree = "<group>"; };
 		A573446C2D314B7E00A4F3DF /* DeviceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoView.swift; sourceTree = "<group>"; };
+		A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+ext.swift"; sourceTree = "<group>"; };
 		A5858DD72D0C500C00C4BDD9 /* Int+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+ext.swift"; sourceTree = "<group>"; };
 		A598A0742CECA12A002F346E /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
@@ -630,6 +632,7 @@
 				A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */,
 				A5609FD12CE0F83A000AF19E /* Float+ext.swift */,
 				A5858DD72D0C500C00C4BDD9 /* Int+ext.swift */,
+				A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1386,6 +1389,7 @@
 				FA3988472B30602A0096F335 /* CGSize.swift in Sources */,
 				FA39877A2B3055930096F335 /* OSPHash.m in Sources */,
 				FA3987552B3055510096F335 /* ContentIdentifiable.swift in Sources */,
+				A57346B02D36C89200A4F3DF /* UIDevice+ext.swift in Sources */,
 				FA39885E2B30602A0096F335 /* ImageEncoding.swift in Sources */,
 				FA39877D2B3055930096F335 /* OSFastGraphics.m in Sources */,
 				FA3988582B30602A0096F335 /* PlaybackController.swift in Sources */,
