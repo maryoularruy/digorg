@@ -64,7 +64,8 @@
 		A5609FD82CE12BB3000AF19E /* BatteryInstructionCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */; };
 		A573446D2D314B7E00A4F3DF /* DeviceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A573446C2D314B7E00A4F3DF /* DeviceInfoView.swift */; };
 		A57346B02D36C89200A4F3DF /* UIDevice+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */; };
-		A5858DD82D0C500C00C4BDD9 /* Int+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5858DD72D0C500C00C4BDD9 /* Int+ext.swift */; };
+		A57346B42D37D20900A4F3DF /* UInt64+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57346B32D37D20900A4F3DF /* UInt64+ext.swift */; };
+		A5858DD82D0C500C00C4BDD9 /* Int64+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5858DD72D0C500C00C4BDD9 /* Int64+ext.swift */; };
 		A598A0752CECA12A002F346E /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598A0742CECA12A002F346E /* Store.swift */; };
 		A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */; };
 		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
@@ -246,7 +247,8 @@
 		A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryInstructionCellType.swift; sourceTree = "<group>"; };
 		A573446C2D314B7E00A4F3DF /* DeviceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoView.swift; sourceTree = "<group>"; };
 		A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+ext.swift"; sourceTree = "<group>"; };
-		A5858DD72D0C500C00C4BDD9 /* Int+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+ext.swift"; sourceTree = "<group>"; };
+		A57346B32D37D20900A4F3DF /* UInt64+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt64+ext.swift"; sourceTree = "<group>"; };
+		A5858DD72D0C500C00C4BDD9 /* Int64+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+ext.swift"; sourceTree = "<group>"; };
 		A598A0742CECA12A002F346E /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
 		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
@@ -631,7 +633,8 @@
 				A53EDA242CD0429F00565625 /* Date+ext.swift */,
 				A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */,
 				A5609FD12CE0F83A000AF19E /* Float+ext.swift */,
-				A5858DD72D0C500C00C4BDD9 /* Int+ext.swift */,
+				A5858DD72D0C500C00C4BDD9 /* Int64+ext.swift */,
+				A57346B32D37D20900A4F3DF /* UInt64+ext.swift */,
 				A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */,
 			);
 			path = Extensions;
@@ -1356,6 +1359,7 @@
 				FA3987812B3058140096F335 /* Extension+PHAsset.swift in Sources */,
 				FA39885F2B30602A0096F335 /* ImageFormat.swift in Sources */,
 				FA3987FB2B305FA50096F335 /* DKPhotoBaseImagePreviewVC.swift in Sources */,
+				A57346B42D37D20900A4F3DF /* UInt64+ext.swift in Sources */,
 				FA53586D2B3C4D6A0026FDC2 /* RealmManager.swift in Sources */,
 				FA3987762B3055930096F335 /* OSTypes.m in Sources */,
 				A5609EA12CDBBE06000AF19E /* SecretContactsViewController.swift in Sources */,
@@ -1396,7 +1400,7 @@
 				75D3FC3B2A6069AF00F351A3 /* MainViewController.swift in Sources */,
 				75D3FC372A6069AF00F351A3 /* AppDelegate.swift in Sources */,
 				FA3988532B30602A0096F335 /* Bundle.swift in Sources */,
-				A5858DD82D0C500C00C4BDD9 /* Int+ext.swift in Sources */,
+				A5858DD82D0C500C00C4BDD9 /* Int64+ext.swift in Sources */,
 				FA3987282B303DCC0096F335 /* SettingsViewController.swift in Sources */,
 				FA3987782B3055930096F335 /* OSCategories.m in Sources */,
 				A53EDA252CD0429F00565625 /* Date+ext.swift in Sources */,

@@ -1,17 +1,13 @@
 //
-//  Int+ext.swift
+//  UInt64+ext.swift
 //  Cleaner
 //
-//  Created by Elena Sedunova on 13.12.2024.
+//  Created by Elena Sedunova on 15.01.2025.
 //
 
 import Foundation
 
-extension Int64 {
-    var asMegabytes: Int64 {
-        self / 1024 / 1024
-    }
-    
+extension UInt64 {
     func convertToString() -> String {
         if self == 0 {
             return "0 MB"
@@ -23,7 +19,7 @@ extension Int64 {
         } else if sizeInKB >= 1000 && sizeInKB < 1_000_000 {
             "\(sizeInKB / 1024) MB"
         } else {
-            "\(sizeInKB / 1024 * 1024) GB"
+            String(format: "%.1f", (Double(sizeInKB) / (1024 * 1024))) + " GB"
         }
     }
 }

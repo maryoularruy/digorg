@@ -72,6 +72,17 @@ final class DeviceInfoCategoryView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func bind(value: Any) {
+        switch type {
+        case .ram:
+            actualValueLabel.bind(text: (value as! UInt64).convertToString() + " / " + PhoneInfoService.totalRam)
+        case .download:
+            break
+        case .cpu:
+            break
+        }
+    }
+    
     private func setupView() {
         backgroundColor = .clear
         contentView.backgroundColor = .paleGrey
@@ -83,9 +94,9 @@ final class DeviceInfoCategoryView: UIView {
         hintLabel.bind(text: type.hint)
         descriptionLabel.bind(text: type.description)
         
-        //
-        actualValueLabel.bind(text: "50 MB / 4 GB")
-        //
+        if type == .ram {
+            actualValueLabel.bind(text: PhoneInfoService.totalRam)
+        }
     }
     
     private func initConstraints() {

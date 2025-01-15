@@ -10,14 +10,8 @@ import UIKit
 final class DeviceInfoViewController: UIViewController {
     private lazy var rootView = DeviceInfoView()
     
-//    @IBOutlet weak var busyCPULabel: UILabel!
-//    @IBOutlet weak var maxRAM: UILabel!
-//    @IBOutlet weak var currentRAM: UILabel!
-//    @IBOutlet weak var downloadSpeedLabel: UILabel!
-//    @IBOutlet weak var backView: UIView!
-    
-    var timer: Timer?
-    var speedTimer: Timer?
+    private var timer: Timer?
+    private var speedTimer: Timer?
     
     override func loadView() {
         super.loadView()
@@ -26,14 +20,10 @@ final class DeviceInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        rootView.ramView.bind(value: PhoneInfoService.shared.freeRam)
+        setupUI()
         addGestureRecognizers()
     }
-    
-//    private func setupActions() {
-//        backView.addTapGestureRecognizer {
-//            self.navigationController?.popViewController(animated: true)
-//        }
-//    }
 //    
 //    private func setupUI() {
 //        downloadSpeedLabel.text = PhoneInfoService.shared.downloadSpeed
@@ -44,10 +34,11 @@ final class DeviceInfoViewController: UIViewController {
 //        speedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
 //    }
 //    
-//    @objc func updateData() {
+    @objc func updateRamAndCpu() {
+        rootView.ramView.bind(value: PhoneInfoService.shared.freeRam)
 //        busyCPULabel.text = PhoneInfoService.shared.busyCPU
 //        currentRAM.text = PhoneInfoService.shared.freeRAM
-//    }
+    }
 //    
 //    @objc func updateSpeed() {
 //        downloadSpeedLabel.text = PhoneInfoService.shared.downloadSpeed
@@ -56,7 +47,7 @@ final class DeviceInfoViewController: UIViewController {
 
 extension DeviceInfoViewController: ViewControllerProtocol {
     func setupUI() {
-        
+        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateRamAndCpu), userInfo: nil, repeats: true)
     }
     
     func addGestureRecognizers() {

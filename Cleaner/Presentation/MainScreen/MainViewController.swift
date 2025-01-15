@@ -161,8 +161,8 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     private func setupDeviceInfoSection() {
-        updateData()
-        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
+        updateRamAndCpu()
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateRamAndCpu), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
     }
     
@@ -174,11 +174,10 @@ extension MainViewController: ViewControllerProtocol {
         }
     }
 
-    @objc func updateData() {
-        PhoneInfoService.shared.getFreeRAM()
+    @objc func updateRamAndCpu() {
         PhoneInfoService.shared.getBusyCPU()
         
-        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.freeRAM)
+        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.freeRam.convertToString())
         
         (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.busyCPU)
     }

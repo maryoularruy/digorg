@@ -18,9 +18,9 @@ final class DeviceInfoView: UIView {
         return label
     }()
     
-    private lazy var ramView: DeviceInfoCategoryView = DeviceInfoCategoryView(type: .ram)
-    private lazy var downloadView: DeviceInfoCategoryView = DeviceInfoCategoryView(type: .download)
-    private lazy var cpuView: DeviceInfoCategoryView = DeviceInfoCategoryView(type: .cpu)
+    lazy var ramView: DeviceInfoCategoryView = DeviceInfoCategoryView(type: .ram)
+    lazy var downloadView: DeviceInfoCategoryView = DeviceInfoCategoryView(type: .download)
+    lazy var cpuView: DeviceInfoCategoryView = DeviceInfoCategoryView(type: .cpu)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
