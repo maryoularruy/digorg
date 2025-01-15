@@ -79,7 +79,7 @@ final class DeviceInfoCategoryView: UIView {
         case .download:
             break
         case .cpu:
-            break
+            actualValueLabel.bind(text: "\(String(format: "%.1f", value as! CVarArg)) %")
         }
     }
     

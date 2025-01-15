@@ -20,7 +20,7 @@ final class DeviceInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        rootView.ramView.bind(value: PhoneInfoService.shared.freeRam)
+        updateRamAndCpu()
         setupUI()
         addGestureRecognizers()
     }
@@ -36,8 +36,7 @@ final class DeviceInfoViewController: UIViewController {
 //    
     @objc func updateRamAndCpu() {
         rootView.ramView.bind(value: PhoneInfoService.shared.freeRam)
-//        busyCPULabel.text = PhoneInfoService.shared.busyCPU
-//        currentRAM.text = PhoneInfoService.shared.freeRAM
+        rootView.cpuView.bind(value: PhoneInfoService.shared.busyCpu)
     }
 //    
 //    @objc func updateSpeed() {

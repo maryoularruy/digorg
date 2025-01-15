@@ -175,11 +175,9 @@ extension MainViewController: ViewControllerProtocol {
     }
 
     @objc func updateRamAndCpu() {
-        PhoneInfoService.shared.getBusyCPU()
-        
         (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.freeRam.convertToString())
         
-        (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.busyCPU)
+        (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: "\(String(format: "%.1f", PhoneInfoService.shared.busyCpu)) %")
     }
     
     @objc func updateSpeed() {

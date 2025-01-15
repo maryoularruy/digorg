@@ -19,8 +19,11 @@ final class PhoneInfoService: TrafficMonitorDelegate {
         physicalMemory - memoryUsage()
     }
     
+    var busyCpu: Double {
+        cpuUsage()
+    }
+    
     lazy var downloadSpeed: String = ""
-    lazy var busyCPU: String = ""
     
     private lazy var physicalMemory: UInt64 = {
         ProcessInfo.processInfo.physicalMemory
@@ -28,10 +31,6 @@ final class PhoneInfoService: TrafficMonitorDelegate {
     
     init() {
         TrafficMonitor.shared.delegate = self
-    }
-    
-    func getBusyCPU() {
-        busyCPU = "\(([8,9,10,10,10,10,11,12,13].randomElement() ?? 10) + Int(cpuUsage())) %"
     }
     
     func trafficMonitor(updatedInfo: TrafficInfo) {
