@@ -77,7 +77,7 @@ final class DeviceInfoCategoryView: UIView {
         case .ram:
             actualValueLabel.bind(text: (value as! UInt64).convertToString() + " / " + PhoneInfoService.totalRam)
         case .download:
-            break
+            actualValueLabel.bind(text: (value as! Int) == 0 ? "0 KB" : (value as! Int).convertToString())
         case .cpu:
             actualValueLabel.bind(text: "\(String(format: "%.1f", value as! CVarArg)) %")
         }

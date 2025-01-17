@@ -1,13 +1,13 @@
 //
-//  UInt64+ext.swift
+//  FixedWidthInteger+ext.swift
 //  Cleaner
 //
-//  Created by Elena Sedunova on 15.01.2025.
+//  Created by Elena Sedunova on 17.01.2025.
 //
 
 import Foundation
 
-extension UInt64 {
+extension FixedWidthInteger {
     func convertToString() -> String {
         if self == 0 {
             return "0 MB"

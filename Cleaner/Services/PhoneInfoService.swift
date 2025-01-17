@@ -23,7 +23,7 @@ final class PhoneInfoService: TrafficMonitorDelegate {
         cpuUsage()
     }
     
-    lazy var downloadSpeed: String = ""
+    var downloadInfo: TrafficInfoItem?
     
     private lazy var physicalMemory: UInt64 = {
         ProcessInfo.processInfo.physicalMemory
@@ -34,9 +34,7 @@ final class PhoneInfoService: TrafficMonitorDelegate {
     }
     
     func trafficMonitor(updatedInfo: TrafficInfo) {
-        let number = updatedInfo.trafficPerSecond.downTotal.humanReadableNumber
-        let unit = updatedInfo.trafficPerSecond.downTotal.humanReadableNumberUnit
-        downloadSpeed = number + " " + unit
+        downloadInfo = updatedInfo.trafficPerSecond.downTotal
     }
     
     private func memoryUsage() -> UInt64 {

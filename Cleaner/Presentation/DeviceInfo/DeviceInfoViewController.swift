@@ -21,32 +21,34 @@ final class DeviceInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateRamAndCpu()
+        updateSpeed()
         setupUI()
         addGestureRecognizers()
     }
-//    
-//    private func setupUI() {
-//        downloadSpeedLabel.text = PhoneInfoService.shared.downloadSpeed
-//        maxRAM.text = PhoneInfoService.shared.totalRAM
-//        updateData()
-//        
-//        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
-//        speedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
-//    }
-//    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer?.invalidate()
+        timer = nil
+        speedTimer?.invalidate()
+        speedTimer = nil
+    }
+
     @objc func updateRamAndCpu() {
         rootView.ramView.bind(value: PhoneInfoService.shared.freeRam)
         rootView.cpuView.bind(value: PhoneInfoService.shared.busyCpu)
     }
-//    
-//    @objc func updateSpeed() {
-//        downloadSpeedLabel.text = PhoneInfoService.shared.downloadSpeed
-//    }
+    
+    @objc func updateSpeed() {
+        guard let downloadSpeed = PhoneInfoService.shared.downloadInfo else { return }
+        rootView.downloadView.bind(value: downloadSpeed.byteCount)
+    }
 }
 
 extension DeviceInfoViewController: ViewControllerProtocol {
     func setupUI() {
         timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateRamAndCpu), userInfo: nil, repeats: true)
+        speedTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
     }
     
     func addGestureRecognizers() {

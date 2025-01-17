@@ -162,6 +162,7 @@ extension MainViewController: ViewControllerProtocol {
     
     private func setupDeviceInfoSection() {
         updateRamAndCpu()
+        updateSpeed()
         Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateRamAndCpu), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
     }
@@ -181,7 +182,11 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     @objc func updateSpeed() {
-        (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.downloadSpeed)
+        if let downloadInfo = PhoneInfoService.shared.downloadInfo {
+            (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: downloadInfo.humanReadableNumber + " " + downloadInfo.humanReadableNumberUnit)
+        } else {
+            (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: "0 KB/s")
+        }
     }
     
     private func openPhotosCleanup() {
