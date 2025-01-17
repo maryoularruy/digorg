@@ -22,6 +22,9 @@ final class MainViewController: UIViewController {
     private lazy var contactManager = ContactManager.shared
     private lazy var calendarManager = CalendarManager.shared
     
+    private var timer: Timer?
+    private var speedTimer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -31,6 +34,7 @@ final class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        setupDeviceInfoSection()
         checkPhotoLibraryAccessStatus()
         checkContactsAccessStatus()
         checkCalendarAccessStatus()
@@ -39,6 +43,14 @@ final class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         storageUsageView.circularProgressBarView.progressAnimation(0.65)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        timer?.invalidate()
+        timer = nil
+        speedTimer?.invalidate()
+        speedTimer = nil
     }
     
     private func checkPhotoLibraryAccessStatus() {
@@ -130,7 +142,6 @@ final class MainViewController: UIViewController {
 extension MainViewController: ViewControllerProtocol {
     func setupUI() {
         bindDeviceInfoStackView()
-        setupDeviceInfoSection()
         photosCleanup.bind(.photos)
         videosCleanup.bind(.videos)
         contactsCleanup.bind(.contacts)
@@ -138,8 +149,8 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     func addGestureRecognizers() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhoneInfoScreen))
-        deviceInfoLabel.addTapGestureRecognizer(action: openPhoneInfoScreen)
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(openDeviceInfoScreen))
+        deviceInfoLabel.addTapGestureRecognizer(action: openDeviceInfoScreen)
         deviceInfoStackView.addGestureRecognizer(gesture)
         
         photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
@@ -152,7 +163,7 @@ extension MainViewController: ViewControllerProtocol {
         calendarCleanup.infoButton.addTapGestureRecognizer(action: openCalendarCleanup)
     }
     
-    @objc private func openPhoneInfoScreen() {
+    @objc private func openDeviceInfoScreen() {
         let vc = DeviceInfoViewController()
         vc.hidesBottomBarWhenPushed = true
         DispatchQueue.main.async { [weak self] in
@@ -163,8 +174,8 @@ extension MainViewController: ViewControllerProtocol {
     private func setupDeviceInfoSection() {
         updateRamAndCpu()
         updateSpeed()
-        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateRamAndCpu), userInfo: nil, repeats: true)
-        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateRamAndCpu), userInfo: nil, repeats: true)
+        speedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
     }
     
     private func bindDeviceInfoStackView() {
