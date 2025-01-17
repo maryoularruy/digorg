@@ -75,7 +75,7 @@ final class DeviceInfoCategoryView: UIView {
     func bind(value: Any) {
         switch type {
         case .ram:
-            actualValueLabel.bind(text: (value as! UInt64).convertToString() + " / " + PhoneInfoService.totalRam)
+            actualValueLabel.bind(text: (value as! UInt64).convertToString() + " / " + DeviceInfoService.totalRam)
         case .download:
             actualValueLabel.bind(text: (value as! Int) == 0 ? "0 KB" : (value as! Int).convertToString())
         case .cpu:
@@ -95,7 +95,7 @@ final class DeviceInfoCategoryView: UIView {
         descriptionLabel.bind(text: type.description)
         
         if type == .ram {
-            actualValueLabel.bind(text: PhoneInfoService.totalRam)
+            actualValueLabel.bind(text: DeviceInfoService.totalRam)
         }
     }
     

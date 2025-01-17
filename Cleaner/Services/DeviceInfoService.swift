@@ -1,5 +1,5 @@
 //
-//  PhoneInfoService.swift
+//  DeviceInfoService.swift
 //  Cleaner
 //
 //  Created by Максим Лебедев on 09.10.2023.
@@ -8,8 +8,8 @@
 import UIKit
 import NetworkFlows
 
-final class PhoneInfoService: TrafficMonitorDelegate {
-    static let shared = PhoneInfoService()
+final class DeviceInfoService: TrafficMonitorDelegate {
+    static let shared = DeviceInfoService()
     
     static var totalRam: String = {
         UIDevice.ramSize

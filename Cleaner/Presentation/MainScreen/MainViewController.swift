@@ -176,13 +176,13 @@ extension MainViewController: ViewControllerProtocol {
     }
 
     @objc func updateRamAndCpu() {
-        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.freeRam.convertToString())
+        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: DeviceInfoService.shared.freeRam.convertToString())
         
-        (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: "\(String(format: "%.1f", PhoneInfoService.shared.busyCpu)) %")
+        (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: "\(String(format: "%.1f", DeviceInfoService.shared.busyCpu)) %")
     }
     
     @objc func updateSpeed() {
-        if let downloadInfo = PhoneInfoService.shared.downloadInfo {
+        if let downloadInfo = DeviceInfoService.shared.downloadInfo {
             (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: downloadInfo.humanReadableNumber + " " + downloadInfo.humanReadableNumberUnit)
         } else {
             (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: "0 KB/s")

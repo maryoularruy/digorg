@@ -35,12 +35,12 @@ final class DeviceInfoViewController: UIViewController {
     }
 
     @objc func updateRamAndCpu() {
-        rootView.ramView.bind(value: PhoneInfoService.shared.freeRam)
-        rootView.cpuView.bind(value: PhoneInfoService.shared.busyCpu)
+        rootView.ramView.bind(value: DeviceInfoService.shared.freeRam)
+        rootView.cpuView.bind(value: DeviceInfoService.shared.busyCpu)
     }
     
     @objc func updateSpeed() {
-        guard let downloadSpeed = PhoneInfoService.shared.downloadInfo else { return }
+        guard let downloadSpeed = DeviceInfoService.shared.downloadInfo else { return }
         rootView.downloadView.bind(value: downloadSpeed.byteCount)
     }
 }

@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7504C24C2AD44407005FB398 /* PhoneInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7504C24B2AD44407005FB398 /* PhoneInfoService.swift */; };
+		7504C24C2AD44407005FB398 /* DeviceInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7504C24B2AD44407005FB398 /* DeviceInfoService.swift */; };
 		7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */ = {isa = PBXBuildFile; productRef = 7504C24E2AD5E99B005FB398 /* NetworkFlows */; };
 		752B10222AE6652800EC0BBA /* ActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 752B10212AE6652800EC0BBA /* ActionView.xib */; };
 		752B10752AEABACD00EC0BBA /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B10742AEABACD00EC0BBA /* ActionView.swift */; };
-		7532F84A2AE2749F007469EA /* SpeedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8492AE2749F007469EA /* SpeedTest.swift */; };
 		7532F8502AE2766B007469EA /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F84F2AE2766B007469EA /* Reachability */; };
 		7532F85D2AE290A6007469EA /* ContactsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F85C2AE290A6007469EA /* ContactsMenuViewController.swift */; };
 		7532F8602AE290C2007469EA /* ContactsMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F85F2AE290C2007469EA /* ContactsMenu.storyboard */; };
@@ -194,10 +193,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7504C24B2AD44407005FB398 /* PhoneInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInfoService.swift; sourceTree = "<group>"; };
+		7504C24B2AD44407005FB398 /* DeviceInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoService.swift; sourceTree = "<group>"; };
 		752B10212AE6652800EC0BBA /* ActionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionView.xib; sourceTree = "<group>"; };
 		752B10742AEABACD00EC0BBA /* ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionView.swift; sourceTree = "<group>"; };
-		7532F8492AE2749F007469EA /* SpeedTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTest.swift; sourceTree = "<group>"; };
 		7532F85C2AE290A6007469EA /* ContactsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMenuViewController.swift; sourceTree = "<group>"; };
 		7532F85F2AE290C2007469EA /* ContactsMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactsMenu.storyboard; sourceTree = "<group>"; };
 		7532F8632AE2972C007469EA /* NoNameContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NoNameContacts.storyboard; sourceTree = "<group>"; };
@@ -662,8 +660,7 @@
 			isa = PBXGroup;
 			children = (
 				FA39873F2B3054930096F335 /* PhotoVideoManager.swift */,
-				7504C24B2AD44407005FB398 /* PhoneInfoService.swift */,
-				7532F8492AE2749F007469EA /* SpeedTest.swift */,
+				7504C24B2AD44407005FB398 /* DeviceInfoService.swift */,
 				7532F8712AE304B5007469EA /* ContactManager.swift */,
 				FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */,
 				FA53586C2B3C4D6A0026FDC2 /* RealmManager.swift */,
@@ -1320,7 +1317,6 @@
 				75D3FC9B2A618F5100F351A3 /* KeyboardLayoutConstraint.swift in Sources */,
 				FA3987EF2B305FA50096F335 /* DKPhotoGalleryTransitionDismiss.swift in Sources */,
 				FA39884A2B30602A0096F335 /* UIDevice.swift in Sources */,
-				7532F84A2AE2749F007469EA /* SpeedTest.swift in Sources */,
 				FA3987ED2B305FA50096F335 /* DKPhotoGalleryInteractiveTransition.swift in Sources */,
 				7532F85D2AE290A6007469EA /* ContactsMenuViewController.swift in Sources */,
 				A5609FD22CE0F83A000AF19E /* Float+ext.swift in Sources */,
@@ -1368,7 +1364,7 @@
 				FA3987AB2B30599C0096F335 /* GroupedAssetsViewController.swift in Sources */,
 				FA53586B2B3C4D490026FDC2 /* Credentials.swift in Sources */,
 				FA641DDF2B3456DC00F6A466 /* CalendarManager.swift in Sources */,
-				7504C24C2AD44407005FB398 /* PhoneInfoService.swift in Sources */,
+				7504C24C2AD44407005FB398 /* DeviceInfoService.swift in Sources */,
 				FA3988442B30602A0096F335 /* dprint.swift in Sources */,
 				A51353D32CD156C500656965 /* ToolsViewController.swift in Sources */,
 				FA39875B2B3055510096F335 /* ArraySection.swift in Sources */,
