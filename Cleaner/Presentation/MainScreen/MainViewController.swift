@@ -153,14 +153,17 @@ extension MainViewController: ViewControllerProtocol {
     }
     
     @objc private func openPhoneInfoScreen() {
-        let vc = StoryboardScene.PhoneInfo.initialScene.instantiate()
-        vc.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: true)
+        let vc = DeviceInfoViewController()
+        vc.hidesBottomBarWhenPushed = true
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     private func setupDeviceInfoSection() {
-        updateData()
-        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateData), userInfo: nil, repeats: true)
+        updateRamAndCpu()
+        updateSpeed()
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateRamAndCpu), userInfo: nil, repeats: true)
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
     }
     
@@ -172,17 +175,18 @@ extension MainViewController: ViewControllerProtocol {
         }
     }
 
-    @objc func updateData() {
-        PhoneInfoService.shared.getFreeRAM()
-        PhoneInfoService.shared.getBusyCPU()
+    @objc func updateRamAndCpu() {
+        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.freeRam.convertToString())
         
-        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.freeRAM)
-        
-        (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.busyCPU)
+        (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: "\(String(format: "%.1f", PhoneInfoService.shared.busyCpu)) %")
     }
     
     @objc func updateSpeed() {
-        (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: PhoneInfoService.shared.downloadSpeed)
+        if let downloadInfo = PhoneInfoService.shared.downloadInfo {
+            (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: downloadInfo.humanReadableNumber + " " + downloadInfo.humanReadableNumberUnit)
+        } else {
+            (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: "0 KB/s")
+        }
     }
     
     private func openPhotosCleanup() {

@@ -8,37 +8,33 @@
 import UIKit
 import NetworkFlows
 
-class PhoneInfoService: TrafficMonitorDelegate {
-    
+final class PhoneInfoService: TrafficMonitorDelegate {
     static let shared = PhoneInfoService()
     
-    lazy var downloadSpeed: String = ""
-    lazy var freeRAM: String = ""
-    lazy var totalRAM: String = ""
-    lazy var busyCPU: String = ""
+    static var totalRam: String = {
+        UIDevice.ramSize
+    }()
+    
+    var freeRam: UInt64 {
+        physicalMemory - memoryUsage()
+    }
+    
+    var busyCpu: Double {
+        cpuUsage()
+    }
+    
+    var downloadInfo: TrafficInfoItem?
+    
+    private lazy var physicalMemory: UInt64 = {
+        ProcessInfo.processInfo.physicalMemory
+    }()
     
     init() {
         TrafficMonitor.shared.delegate = self
     }
     
-    func getFreeRAM() {
-        freeRAM = "\(((ProcessInfo.processInfo.physicalMemory / 1024) - memoryUsage()) / (1024 * 1024)) GB"
-    }
-    
-    
-    func getTotalRam() {
-        let ram = ProcessInfo.processInfo.physicalMemory / (1024 * 1024)
-        totalRAM = "of \((ram + 500) / 1000) GB"
-    }
-    
-    func getBusyCPU() {
-        busyCPU = "\(([8,9,10,10,10,10,11,12,13].randomElement() ?? 10) + Int(cpuUsage())) %"
-    }
-    
     func trafficMonitor(updatedInfo: TrafficInfo) {
-        let number = updatedInfo.trafficPerSecond.downTotal.humanReadableNumber
-        let unit = updatedInfo.trafficPerSecond.downTotal.humanReadableNumberUnit
-        downloadSpeed = number + " " + unit
+        downloadInfo = updatedInfo.trafficPerSecond.downTotal
     }
     
     private func memoryUsage() -> UInt64 {
@@ -54,8 +50,7 @@ class PhoneInfoService: TrafficMonitorDelegate {
         if result == KERN_SUCCESS {
             used = UInt64(taskInfo.phys_footprint)
         }
-        
-        return used / 1024 / 1024
+        return used
     }
     
     private func cpuUsage() -> Double {

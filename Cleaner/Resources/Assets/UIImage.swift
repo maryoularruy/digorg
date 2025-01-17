@@ -17,6 +17,11 @@ extension UIImage {
     
     static var stars = UIImage(resource: .stars)
     
+    //MARK: -Device Info
+    static var ramIcon = UIImage(resource: .RAM)
+    static var downloadIcon = UIImage(resource: .download)
+    static var cpuIcon = UIImage(resource: .CPU)
+    
     //MARK: -Photo&Video Assets
     static var liveViewBackground = UIImage(resource: .liveViewBackground)
     static var blurryViewBackground = UIImage(resource: .blurryViewBackground)
