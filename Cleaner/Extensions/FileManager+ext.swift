@@ -52,6 +52,29 @@ extension FileManager {
     }
 }
 
+// MARK: -Device Storage
+extension FileManager {
+    func getTotalStorageSizeInGigabytes() -> Int? {
+        do {
+            let attributes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
+            guard let sizeInBytes = attributes[.systemSize] as? NSNumber else { return nil }
+            return Int(ceil(sizeInBytes.doubleValue / (1000 * 1000 * 1000)))
+        } catch {
+            return nil
+        }
+    }
+    
+    func getFreeStorageSizeInGigabytes() -> Int? {
+        do {
+            let attributes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
+            guard let sizeInBytes = attributes[.systemFreeSize] as? NSNumber else { return nil }
+            return Int(ceil(sizeInBytes.doubleValue / (1000 * 1000 * 1000)))
+        } catch {
+            return nil
+        }
+    }
+}
+
 // MARK: -Photo&Video
 extension FileManager {
     func getImage(imageName: String, folderName: String) -> UIImage? {
