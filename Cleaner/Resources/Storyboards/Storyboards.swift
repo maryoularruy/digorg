@@ -63,10 +63,10 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<PasscodeViewController>(storyboard: Passcode.self)
   }
-  internal enum SecretAlbum: StoryboardType {
-    internal static let storyboardName = "SecretAlbum"
+  internal enum SecretAssets: StoryboardType {
+    internal static let storyboardName = "SecretAssets"
 
-    internal static let initialScene = InitialSceneType<SecretAlbumViewController>(storyboard: SecretAlbum.self)
+    internal static let initialScene = InitialSceneType<SecretAssetsViewController>(storyboard: SecretAssets.self)
   }
   internal enum SecretContacts: StoryboardType {
     internal static let storyboardName = "SecretContacts"

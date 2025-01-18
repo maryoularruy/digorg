@@ -1,5 +1,5 @@
 //
-//  SecretAlbumViewController.swift
+//  SecretAssetsViewController.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 30.10.2024.
@@ -8,7 +8,7 @@
 import PhotosUI
 import BottomPopup
 
-final class SecretAlbumViewController: UIViewController {
+final class SecretAssetsViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var itemsCountLabel: Regular13LabelStyle!
     @IBOutlet weak var addButton: UIButton!
@@ -120,7 +120,7 @@ final class SecretAlbumViewController: UIViewController {
     }
 }
 
-extension SecretAlbumViewController: ViewControllerProtocol {
+extension SecretAssetsViewController: ViewControllerProtocol {
     func setupUI() {
         lockedStatusIcon.image = userDefaultsService.isPasscodeCreated ? .locked :  .unlocked
         if userDefaultsService.isPasscodeConfirmed {
@@ -149,7 +149,7 @@ extension SecretAlbumViewController: ViewControllerProtocol {
     }
 }
 
-extension SecretAlbumViewController: BottomPopupDelegate {
+extension SecretAssetsViewController: BottomPopupDelegate {
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
             let vc = StoryboardScene.Passcode.initialScene.instantiate()
@@ -161,7 +161,7 @@ extension SecretAlbumViewController: BottomPopupDelegate {
 }
 
 @available(iOS 14.0, *)
-extension SecretAlbumViewController: PHPickerViewControllerDelegate {
+extension SecretAssetsViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         addMediaContainer.isHidden = true
         addButton.isHidden = false
@@ -215,7 +215,7 @@ extension SecretAlbumViewController: PHPickerViewControllerDelegate {
     }
 }
 
-extension SecretAlbumViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension SecretAssetsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
             print("Selected image: \(selectedImage)")
@@ -239,7 +239,7 @@ extension SecretAlbumViewController: UIImagePickerControllerDelegate, UINavigati
     }
 }
 
-extension SecretAlbumViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SecretAssetsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         items.count
     }

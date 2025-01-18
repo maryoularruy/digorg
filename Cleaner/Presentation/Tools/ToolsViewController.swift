@@ -50,9 +50,9 @@ extension ToolsViewController: ViewControllerProtocol {
 extension ToolsViewController: ToolOptionViewDelegate {
     func tapOnOption(_ option: ToolOption) {
         let vc = switch option {
-        case .secretAlbum: StoryboardScene.SecretAlbum.initialScene.instantiate()
+        case .secretAlbum: StoryboardScene.SecretAssets.initialScene.instantiate()
         case .secretContact: StoryboardScene.SecretContacts.initialScene.instantiate()
-        case .networkSpeedTest: StoryboardScene.SecretAlbum.initialScene.instantiate()
+        case .networkSpeedTest: StoryboardScene.SecretAssets.initialScene.instantiate()
 //        case .widgets:
 //            StoryboardScene.SecretAlbum.initialScene.instantiate()
         case .battery: StoryboardScene.Battery.initialScene.instantiate()
