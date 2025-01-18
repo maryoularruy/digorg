@@ -166,8 +166,6 @@
 		FA5358692B3C4C170026FDC2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA5358682B3C4C170026FDC2 /* RealmSwift */; };
 		FA53586B2B3C4D490026FDC2 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53586A2B3C4D490026FDC2 /* Credentials.swift */; };
 		FA53586D2B3C4D6A0026FDC2 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53586C2B3C4D6A0026FDC2 /* RealmManager.swift */; };
-		FA5358702B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53586F2B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift */; };
-		FA5358722B3C5CDA0026FDC2 /* DetailedPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5358712B3C5CDA0026FDC2 /* DetailedPassword.storyboard */; };
 		FA641DDF2B3456DC00F6A466 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */; };
 		FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA641DE02B34574300F6A466 /* Calendar.storyboard */; };
 		FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DE22B34575300F6A466 /* CalendarViewController.swift */; };
@@ -177,15 +175,7 @@
 		FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */; };
 		FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */; };
 		FA641DFC2B357C7A00F6A466 /* NSImageView+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF62B357C7A00F6A466 /* NSImageView+SwiftyGif.swift */; };
-		FA99F2E62B3C389F00D4B239 /* PasswordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99F2E52B3C389F00D4B239 /* PasswordListViewController.swift */; };
-		FA99F2E92B3C38B700D4B239 /* PasswordList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA99F2E82B3C38B700D4B239 /* PasswordList.storyboard */; };
-		FA99F2ED2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99F2EB2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.swift */; };
-		FA99F2EE2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA99F2EC2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.xib */; };
-		FA99F2F12B3C3F8000D4B239 /* PasswordCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99F2F02B3C3F8000D4B239 /* PasswordCreationViewController.swift */; };
-		FA99F2F32B3C3F8E00D4B239 /* PasswordCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA99F2F22B3C3F8E00D4B239 /* PasswordCreation.storyboard */; };
 		FA99F2F62B3C462700D4B239 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */; };
-		FACA30852B3C9E6F0018FA5F /* EditPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA30842B3C9E6F0018FA5F /* EditPasswordViewController.swift */; };
-		FACA30872B3C9E790018FA5F /* EditPassword.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FACA30862B3C9E790018FA5F /* EditPassword.storyboard */; };
 		FACA308F2B3E02D30018FA5F /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA308C2B3E02D20018FA5F /* UI.swift */; };
 		FACA30932B3E03230018FA5F /* AppLocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACA30912B3E03230018FA5F /* AppLocker.xib */; };
 		FACA30942B3E03230018FA5F /* AppLocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA30922B3E03230018FA5F /* AppLocker.swift */; };
@@ -356,8 +346,6 @@
 		FA3988692B3060F10096F335 /* Extension+Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Set.swift"; sourceTree = "<group>"; };
 		FA53586A2B3C4D490026FDC2 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		FA53586C2B3C4D6A0026FDC2 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		FA53586F2B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPasswordViewController.swift; sourceTree = "<group>"; };
-		FA5358712B3C5CDA0026FDC2 /* DetailedPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailedPassword.storyboard; sourceTree = "<group>"; };
 		FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		FA641DE02B34574300F6A466 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		FA641DE22B34575300F6A466 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -368,14 +356,6 @@
 		FA641DF42B357C7A00F6A466 /* SwiftyGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyGif.h; sourceTree = "<group>"; };
 		FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyGifManager.swift; sourceTree = "<group>"; };
 		FA641DF62B357C7A00F6A466 /* NSImageView+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImageView+SwiftyGif.swift"; sourceTree = "<group>"; };
-		FA99F2E52B3C389F00D4B239 /* PasswordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListViewController.swift; sourceTree = "<group>"; };
-		FA99F2E82B3C38B700D4B239 /* PasswordList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordList.storyboard; sourceTree = "<group>"; };
-		FA99F2EB2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleChevronTableViewCell.swift; sourceTree = "<group>"; };
-		FA99F2EC2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleSubtitleChevronTableViewCell.xib; sourceTree = "<group>"; };
-		FA99F2F02B3C3F8000D4B239 /* PasswordCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCreationViewController.swift; sourceTree = "<group>"; };
-		FA99F2F22B3C3F8E00D4B239 /* PasswordCreation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordCreation.storyboard; sourceTree = "<group>"; };
-		FACA30842B3C9E6F0018FA5F /* EditPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPasswordViewController.swift; sourceTree = "<group>"; };
-		FACA30862B3C9E790018FA5F /* EditPassword.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditPassword.storyboard; sourceTree = "<group>"; };
 		FACA308C2B3E02D20018FA5F /* UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		FACA30912B3E03230018FA5F /* AppLocker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppLocker.xib; sourceTree = "<group>"; };
 		FACA30922B3E03230018FA5F /* AppLocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLocker.swift; sourceTree = "<group>"; };
@@ -600,7 +580,6 @@
 			children = (
 				A51353CF2CD1567600656965 /* Tools */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
-				FA99F2E42B3C381F00D4B239 /* Password */,
 				FA641DDD2B34564200F6A466 /* Calendar */,
 				FA3987302B3048180096F335 /* PhotoVideo */,
 				FA3987262B303DAC0096F335 /* Settings */,
@@ -1012,15 +991,6 @@
 			path = Media;
 			sourceTree = "<group>";
 		};
-		FA53586E2B3C5CBD0026FDC2 /* Detailed */ = {
-			isa = PBXGroup;
-			children = (
-				FA53586F2B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift */,
-				FA5358712B3C5CDA0026FDC2 /* DetailedPassword.storyboard */,
-			);
-			path = Detailed;
-			sourceTree = "<group>";
-		};
 		FA641DDD2B34564200F6A466 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1042,54 +1012,6 @@
 				FA641DF62B357C7A00F6A466 /* NSImageView+SwiftyGif.swift */,
 			);
 			path = SwiftyGif;
-			sourceTree = "<group>";
-		};
-		FA99F2E42B3C381F00D4B239 /* Password */ = {
-			isa = PBXGroup;
-			children = (
-				FACA30832B3C9E630018FA5F /* Edit */,
-				FA53586E2B3C5CBD0026FDC2 /* Detailed */,
-				FA99F2EF2B3C3F6600D4B239 /* Creation */,
-				FA99F2E72B3C38A600D4B239 /* List */,
-			);
-			path = Password;
-			sourceTree = "<group>";
-		};
-		FA99F2E72B3C38A600D4B239 /* List */ = {
-			isa = PBXGroup;
-			children = (
-				FA99F2EA2B3C3BF200D4B239 /* Cell */,
-				FA99F2E52B3C389F00D4B239 /* PasswordListViewController.swift */,
-				FA99F2E82B3C38B700D4B239 /* PasswordList.storyboard */,
-			);
-			path = List;
-			sourceTree = "<group>";
-		};
-		FA99F2EA2B3C3BF200D4B239 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				FA99F2EB2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.swift */,
-				FA99F2EC2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.xib */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		FA99F2EF2B3C3F6600D4B239 /* Creation */ = {
-			isa = PBXGroup;
-			children = (
-				FA99F2F02B3C3F8000D4B239 /* PasswordCreationViewController.swift */,
-				FA99F2F22B3C3F8E00D4B239 /* PasswordCreation.storyboard */,
-			);
-			path = Creation;
-			sourceTree = "<group>";
-		};
-		FACA30832B3C9E630018FA5F /* Edit */ = {
-			isa = PBXGroup;
-			children = (
-				FACA30842B3C9E6F0018FA5F /* EditPasswordViewController.swift */,
-				FACA30862B3C9E790018FA5F /* EditPassword.storyboard */,
-			);
-			path = Edit;
 			sourceTree = "<group>";
 		};
 		FACA30882B3E02D20018FA5F /* AppLocker */ = {
@@ -1222,15 +1144,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA3988052B305FA50096F335 /* Images.xcassets in Resources */,
-				FA99F2E92B3C38B700D4B239 /* PasswordList.storyboard in Resources */,
 				7532F8642AE2972C007469EA /* NoNameContacts.storyboard in Resources */,
-				FA99F2EE2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.xib in Resources */,
 				FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */,
 				FACA30932B3E03230018FA5F /* AppLocker.xib in Resources */,
 				752B10222AE6652800EC0BBA /* ActionView.xib in Resources */,
 				A5609E9F2CDBBDF9000AF19E /* SecretContacts.storyboard in Resources */,
 				A53ED8E72CCBEA6700565625 /* NoNumberContacts.storyboard in Resources */,
-				FA99F2F32B3C3F8E00D4B239 /* PasswordCreation.storyboard in Resources */,
 				75D3FC432A6069B000F351A3 /* LaunchScreen.storyboard in Resources */,
 				FA3987AA2B30599C0096F335 /* GroupedAssets.storyboard in Resources */,
 				FA3987752B3055930096F335 /* include in Resources */,
@@ -1240,8 +1159,6 @@
 				7532F8602AE290C2007469EA /* ContactsMenu.storyboard in Resources */,
 				7532F8682AE29750007469EA /* DuplicateNameContacts.storyboard in Resources */,
 				75D3FC3E2A6069AF00F351A3 /* Main.storyboard in Resources */,
-				FA5358722B3C5CDA0026FDC2 /* DetailedPassword.storyboard in Resources */,
-				FACA30872B3C9E790018FA5F /* EditPassword.storyboard in Resources */,
 				FA39872A2B303DD30096F335 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1300,7 +1217,6 @@
 				FA39877E2B3055930096F335 /* OSAbstractHash.m in Sources */,
 				FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */,
 				A5446C2D2CE74B7A00A1F940 /* InstructionCellType.swift in Sources */,
-				FA5358702B3C5CCF0026FDC2 /* DetailedPasswordViewController.swift in Sources */,
 				FA3987422B3054B90096F335 /* PHAssetGroup.swift in Sources */,
 				A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */,
 				FA3988562B30602A0096F335 /* ZoomingPlayerView.swift in Sources */,
@@ -1334,12 +1250,10 @@
 				756866D92AD1D398008DBF7C /* DeviceInfoViewController.swift in Sources */,
 				FA3987FC2B305FA50096F335 /* DKPhotoWebVC.swift in Sources */,
 				7532F8662AE29735007469EA /* NoNameContactsViewController.swift in Sources */,
-				FACA30852B3C9E6F0018FA5F /* EditPasswordViewController.swift in Sources */,
 				FA3988012B305FA50096F335 /* DKPhotoContentAnimationView.swift in Sources */,
 				FA3988432B30602A0096F335 /* UITraitCollection.swift in Sources */,
 				FA39885D2B30602A0096F335 /* CachingGeocoder.swift in Sources */,
 				A598A0752CECA12A002F346E /* Store.swift in Sources */,
-				FA99F2F12B3C3F8000D4B239 /* PasswordCreationViewController.swift in Sources */,
 				FA3987EC2B305FA50096F335 /* DKPhotoGalleryTransitionController.swift in Sources */,
 				FA39883F2B30602A0096F335 /* ZoomPushTransition.swift in Sources */,
 				A53ED8E92CCBEA7200565625 /* NoNumberContactsViewController.swift in Sources */,
@@ -1347,7 +1261,6 @@
 				FA3988452B30602A0096F335 /* Result.swift in Sources */,
 				A573446D2D314B7E00A4F3DF /* DeviceInfoView.swift in Sources */,
 				75D3FC5F2A606BA100F351A3 /* UserDefaults.swift in Sources */,
-				FA99F2ED2B3C3C4300D4B239 /* TitleSubtitleChevronTableViewCell.swift in Sources */,
 				FA3987EB2B305FA50096F335 /* DKPhotoPreviewFactory.swift in Sources */,
 				A54449162CD19C4F001ECA7A /* ToolOption.swift in Sources */,
 				FA3988592B30602A0096F335 /* PlayerSeeker.swift in Sources */,
@@ -1370,7 +1283,6 @@
 				FA39875B2B3055510096F335 /* ArraySection.swift in Sources */,
 				A55235982CC27B9300CBE265 /* ContactsInfoType.swift in Sources */,
 				FA3987EE2B305FA50096F335 /* DKPhotoGalleryTransitionPresent.swift in Sources */,
-				FA99F2E62B3C389F00D4B239 /* PasswordListViewController.swift in Sources */,
 				FA3987FE2B305FA50096F335 /* DKPhotoProgressIndicatorProtocol.swift in Sources */,
 				FA3988552B30602A0096F335 /* PlayerView.swift in Sources */,
 				FA3987F42B305FA50096F335 /* DKPlayerView.swift in Sources */,
