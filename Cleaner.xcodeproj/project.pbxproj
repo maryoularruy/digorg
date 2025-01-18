@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		7504C24C2AD44407005FB398 /* DeviceInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7504C24B2AD44407005FB398 /* DeviceInfoService.swift */; };
 		7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */ = {isa = PBXBuildFile; productRef = 7504C24E2AD5E99B005FB398 /* NetworkFlows */; };
-		752B10222AE6652800EC0BBA /* ActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 752B10212AE6652800EC0BBA /* ActionView.xib */; };
-		752B10752AEABACD00EC0BBA /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B10742AEABACD00EC0BBA /* ActionView.swift */; };
 		7532F8502AE2766B007469EA /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F84F2AE2766B007469EA /* Reachability */; };
 		7532F85D2AE290A6007469EA /* ContactsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F85C2AE290A6007469EA /* ContactsMenuViewController.swift */; };
 		7532F8602AE290C2007469EA /* ContactsMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F85F2AE290C2007469EA /* ContactsMenu.storyboard */; };
@@ -184,8 +182,6 @@
 
 /* Begin PBXFileReference section */
 		7504C24B2AD44407005FB398 /* DeviceInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoService.swift; sourceTree = "<group>"; };
-		752B10212AE6652800EC0BBA /* ActionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionView.xib; sourceTree = "<group>"; };
-		752B10742AEABACD00EC0BBA /* ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionView.swift; sourceTree = "<group>"; };
 		7532F85C2AE290A6007469EA /* ContactsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMenuViewController.swift; sourceTree = "<group>"; };
 		7532F85F2AE290C2007469EA /* ContactsMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactsMenu.storyboard; sourceTree = "<group>"; };
 		7532F8632AE2972C007469EA /* NoNameContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NoNameContacts.storyboard; sourceTree = "<group>"; };
@@ -449,15 +445,6 @@
 			path = NoNameContacts;
 			sourceTree = "<group>";
 		};
-		7532F8782AE664DF007469EA /* ActionView */ = {
-			isa = PBXGroup;
-			children = (
-				752B10212AE6652800EC0BBA /* ActionView.xib */,
-				752B10742AEABACD00EC0BBA /* ActionView.swift */,
-			);
-			path = ActionView;
-			sourceTree = "<group>";
-		};
 		756866CD2ACD9EB6008DBF7C /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -583,7 +570,6 @@
 				FA641DDD2B34564200F6A466 /* Calendar */,
 				FA3987302B3048180096F335 /* PhotoVideo */,
 				FA3987262B303DAC0096F335 /* Settings */,
-				7532F8782AE664DF007469EA /* ActionView */,
 				7532F85B2AE28B47007469EA /* Contacts */,
 				756866D72AD1D378008DBF7C /* DeviceInfo */,
 				75D3FC962A60716500F351A3 /* MainScreen */,
@@ -1147,7 +1133,6 @@
 				7532F8642AE2972C007469EA /* NoNameContacts.storyboard in Resources */,
 				FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */,
 				FACA30932B3E03230018FA5F /* AppLocker.xib in Resources */,
-				752B10222AE6652800EC0BBA /* ActionView.xib in Resources */,
 				A5609E9F2CDBBDF9000AF19E /* SecretContacts.storyboard in Resources */,
 				A53ED8E72CCBEA6700565625 /* NoNumberContacts.storyboard in Resources */,
 				75D3FC432A6069B000F351A3 /* LaunchScreen.storyboard in Resources */,
@@ -1174,7 +1159,6 @@
 				FA3987F02B305FA50096F335 /* DKPhotoGallery.swift in Sources */,
 				75D3FC812A606E6F00F351A3 /* Extension+String.swift in Sources */,
 				FA39877C2B3055930096F335 /* OSAHash.m in Sources */,
-				752B10752AEABACD00EC0BBA /* ActionView.swift in Sources */,
 				FA3988062B305FA50096F335 /* DKPhotoGalleryResource.swift in Sources */,
 				FA3987FD2B305FA50096F335 /* DKPhotoQRCodeResultVC.swift in Sources */,
 				A5446D082CE76CCE00A1F940 /* Pages.swift in Sources */,
