@@ -23,6 +23,15 @@ final class CircularProgressBar: UIView {
         createCircularPath()
     }
     
+    func progressAnimation(_ endValue: Double) {
+        let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        circularProgressAnimation.duration = 1.5
+        circularProgressAnimation.toValue = endValue
+        circularProgressAnimation.fillMode = .forwards
+        circularProgressAnimation.isRemovedOnCompletion = false
+        progressLayer.add(circularProgressAnimation, forKey: "progressAnim")
+    }
+    
     private func createCircularPath() {
         let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: 45, startAngle: startPoint, endAngle: endPoint, clockwise: true)
         circleLayer.path = circularPath.cgPath
@@ -33,14 +42,5 @@ final class CircularProgressBar: UIView {
         progressLayer.strokeEnd = 0
         progressLayer.strokeColor = UIColor.yellow.cgColor
         layer.addSublayer(progressLayer)
-    }
-    
-    func progressAnimation(_ endValue: Double) {
-        let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        circularProgressAnimation.duration = 1.5
-        circularProgressAnimation.toValue = endValue
-        circularProgressAnimation.fillMode = .forwards
-        circularProgressAnimation.isRemovedOnCompletion = false
-        progressLayer.add(circularProgressAnimation, forKey: "progressAnim")
     }
 }
