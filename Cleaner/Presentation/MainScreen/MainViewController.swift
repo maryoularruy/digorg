@@ -29,20 +29,15 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         addGestureRecognizers()
-        storageUsageView.usedMemoryLabel.text = "45 / 234 GB"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupDeviceInfoSection()
+        setupStorageUsageSection()
         checkPhotoLibraryAccessStatus()
         checkContactsAccessStatus()
         checkCalendarAccessStatus()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        storageUsageView.circularProgressBarView.progressAnimation(0.65)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -51,6 +46,31 @@ final class MainViewController: UIViewController {
         timer = nil
         speedTimer?.invalidate()
         speedTimer = nil
+    }
+    
+    private func setupDeviceInfoSection() {
+        updateRamAndCpu()
+        updateSpeed()
+        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateRamAndCpu), userInfo: nil, repeats: true)
+        speedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateRamAndCpu() {
+        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: DeviceInfoService.shared.freeRam.convertToString())
+        
+        (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: "\(String(format: "%.1f", DeviceInfoService.shared.busyCpu)) %")
+    }
+    
+    @objc func updateSpeed() {
+        if let downloadInfo = DeviceInfoService.shared.downloadInfo {
+            (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: downloadInfo.humanReadableNumber + " " + downloadInfo.humanReadableNumberUnit)
+        } else {
+            (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: "0 KB/s")
+        }
+    }
+    
+    private func setupStorageUsageSection() {
+        storageUsageView.updateData()
     }
     
     private func checkPhotoLibraryAccessStatus() {
@@ -171,32 +191,11 @@ extension MainViewController: ViewControllerProtocol {
         }
     }
     
-    private func setupDeviceInfoSection() {
-        updateRamAndCpu()
-        updateSpeed()
-        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(updateRamAndCpu), userInfo: nil, repeats: true)
-        speedTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateSpeed), userInfo: nil, repeats: true)
-    }
-    
     private func bindDeviceInfoStackView() {
         if deviceInfoStackView.arrangedSubviews.isEmpty {
             Title.allCases.forEach { title in
                 deviceInfoStackView.addArrangedSubview(DeviceInfoCell(cell: title))
             }
-        }
-    }
-
-    @objc func updateRamAndCpu() {
-        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: DeviceInfoService.shared.freeRam.convertToString())
-        
-        (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: "\(String(format: "%.1f", DeviceInfoService.shared.busyCpu)) %")
-    }
-    
-    @objc func updateSpeed() {
-        if let downloadInfo = DeviceInfoService.shared.downloadInfo {
-            (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: downloadInfo.humanReadableNumber + " " + downloadInfo.humanReadableNumberUnit)
-        } else {
-            (deviceInfoStackView.arrangedSubviews[Title.download.index] as? DeviceInfoCell)?.bind(newValue: "0 KB/s")
         }
     }
     
