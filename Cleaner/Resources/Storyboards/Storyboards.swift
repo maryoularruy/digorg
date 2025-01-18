@@ -23,20 +23,10 @@ internal enum StoryboardScene {
 
     internal static let initialScene = InitialSceneType<ContactsMenuViewController>(storyboard: ContactsMenu.self)
   }
-  internal enum DetailedPassword: StoryboardType {
-    internal static let storyboardName = "DetailedPassword"
-
-    internal static let initialScene = InitialSceneType<DetailedPasswordViewController>(storyboard: DetailedPassword.self)
-  }
   internal enum DuplicateNameContacts: StoryboardType {
     internal static let storyboardName = "DuplicateNameContacts"
 
     internal static let initialScene = InitialSceneType<DuplicateNameContactsViewController>(storyboard: DuplicateNameContacts.self)
-  }
-  internal enum EditPassword: StoryboardType {
-    internal static let storyboardName = "EditPassword"
-
-    internal static let initialScene = InitialSceneType<EditPasswordViewController>(storyboard: EditPassword.self)
   }
   internal enum GroupedAssets: StoryboardType {
     internal static let storyboardName = "GroupedAssets"
@@ -72,16 +62,6 @@ internal enum StoryboardScene {
     internal static let storyboardName = "Passcode"
 
     internal static let initialScene = InitialSceneType<PasscodeViewController>(storyboard: Passcode.self)
-  }
-  internal enum PasswordCreation: StoryboardType {
-    internal static let storyboardName = "PasswordCreation"
-
-    internal static let initialScene = InitialSceneType<PasswordCreationViewController>(storyboard: PasswordCreation.self)
-  }
-  internal enum PasswordList: StoryboardType {
-    internal static let storyboardName = "PasswordList"
-
-    internal static let initialScene = InitialSceneType<PasswordListViewController>(storyboard: PasswordList.self)
   }
   internal enum SecretAlbum: StoryboardType {
     internal static let storyboardName = "SecretAlbum"
@@ -125,7 +105,7 @@ internal struct SceneType<T: UIViewController> {
     return controller
   }
 
-  @available(iOS 13.0, tvOS 13.0, *)
+  @available(iOS 13.0, *)
   internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
     return storyboard.storyboard.instantiateViewController(identifier: identifier, creator: block)
   }
@@ -141,7 +121,7 @@ internal struct InitialSceneType<T: UIViewController> {
     return controller
   }
 
-  @available(iOS 13.0, tvOS 13.0, *)
+  @available(iOS 13.0, *)
   internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController(creator: block) else {
       fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")
@@ -152,10 +132,6 @@ internal struct InitialSceneType<T: UIViewController> {
 
 private final class BundleToken {
   static let bundle: Bundle = {
-    #if SWIFT_PACKAGE
-    return Bundle.module
-    #else
-    return Bundle(for: BundleToken.self)
-    #endif
+      Bundle(for: BundleToken.self)
   }()
 }
