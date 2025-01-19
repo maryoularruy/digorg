@@ -23,6 +23,12 @@ enum ConfirmActionWithImageType {
         }
     }
     
+    var actionButtonText: String {
+        switch self {
+        case .createPasscode: "Create Passcode"
+        }
+    }
+    
     var dismissButtonText: String {
         switch self {
         case .createPasscode: "See Later"
@@ -45,8 +51,7 @@ final class ConfirmActionWithImageViewController: BottomPopupViewController {
     var dismissDuration: Double?
     var shouldDismissInteractivelty: Bool?
     
-    lazy var actionButtonText: String = ""
-    lazy var type: ConfirmActionWithImageType = .createPasscode
+    lazy var type: ConfirmActionWithImageType? = nil
     
     @IBOutlet weak var toolbar: ActionAndCancelToolbar!
     @IBOutlet weak var primaryLabel: Semibold15LabelStyle!
@@ -56,25 +61,15 @@ final class ConfirmActionWithImageViewController: BottomPopupViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         toolbar.delegate = self
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+        guard let type else { return }
         imageView.image = type.image
         primaryLabel.bind(text: type.title)
         secondaryLabel.bind(text: type.subtitle)
-        toolbar.actionButton.bind(text: actionButtonText)
+        toolbar.actionButton.bind(text: type.actionButtonText)
         toolbar.dismissButton.bind(text: type.dismissButtonText)
     }
     
-    func bind(popupDelegate: UIViewController, type: ConfirmActionWithImageType = .createPasscode, height: Float, actionButtonText: String) {
-        self.popupDelegate = popupDelegate as? any BottomPopupDelegate
-        self.type = type
-        self.height = CGFloat(height)
-        self.actionButtonText = actionButtonText
-    }
-    
-    override var popupHeight: CGFloat { height ?? 300.0 }
+    override var popupHeight: CGFloat { height ?? 450.0 }
     override var popupTopCornerRadius: CGFloat { topCornerRadius ?? 20.0 }
     override var popupPresentDuration: Double { presentDuration ?? 0.2 }
     override var popupDismissDuration: Double { dismissDuration ?? 0.2 }

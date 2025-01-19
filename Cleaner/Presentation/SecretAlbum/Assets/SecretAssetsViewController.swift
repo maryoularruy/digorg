@@ -65,7 +65,9 @@ final class SecretAssetsViewController: UIViewController {
             
         } else {
             guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
-            vc.bind(popupDelegate: self, type: .createPasscode, height: 416, actionButtonText: "Create Passcode")
+            vc.popupDelegate = self
+            vc.height = 416
+            vc.type = .createPasscode
             DispatchQueue.main.async { [weak self] in
                 self?.present(vc, animated: true)
             }

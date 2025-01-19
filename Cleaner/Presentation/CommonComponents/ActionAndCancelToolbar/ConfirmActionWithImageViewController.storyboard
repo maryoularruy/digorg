@@ -12,7 +12,7 @@
         <!--Confirm Action With Image View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController restorationIdentifier="ConfirmActionWithImageViewController" storyboardIdentifier="ConfirmActionWithImageViewController" id="Y6W-OH-hqX" customClass="ConfirmActionWithImageViewController" customModule="Cleaner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="ConfirmActionWithImageViewController" storyboardIdentifier="ConfirmActionWithImageViewController" definesPresentationContext="YES" modalPresentationStyle="overCurrentContext" id="Y6W-OH-hqX" customClass="ConfirmActionWithImageViewController" customModule="Cleaner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,7 +44,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" name="White"/>
+                        <color key="backgroundColor" name="PaleGrey"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="rlo-3I-m1M" secondAttribute="bottom" id="0Lj-f2-X3g"/>
                             <constraint firstItem="a4A-qD-HIf" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Aam-9n-8Ju"/>
@@ -59,6 +59,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="a4A-qD-HIf" secondAttribute="trailing" constant="10" id="yzN-50-tjC"/>
                         </constraints>
                     </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="393" height="416"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="393" height="416"/>
                     <connections>
@@ -74,7 +75,7 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="White">
+        <namedColor name="PaleGrey">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
