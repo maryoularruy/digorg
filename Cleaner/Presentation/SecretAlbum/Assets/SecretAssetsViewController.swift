@@ -57,6 +57,7 @@ final class SecretAssetsViewController: UIViewController {
                 addButton.isHidden = true
             } else {
                 let vc = StoryboardScene.Passcode.initialScene.instantiate()
+                vc.assetsIsParentVC = true
                 vc.passcodeMode = .enter
                 vc.modalTransitionStyle = .crossDissolve
                 vc.modalPresentationStyle = .fullScreen

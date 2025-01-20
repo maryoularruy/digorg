@@ -29,6 +29,7 @@ final class PasscodeViewController: UIViewController {
     @IBOutlet weak var fourthChar: UIImageView!
     
     lazy var passcodeMode: PasscodeMode = .create
+    var assetsIsParentVC: Bool = true
     private var passcode: String = ""
     private var tempoparyPasscode: String?
     private lazy var userDefaultsService = UserDefaultsService.shared
@@ -42,6 +43,10 @@ final class PasscodeViewController: UIViewController {
     private func setPasscodeMode(_ mode: PasscodeMode) {
         passcodeMode = mode
         passcodeLabel.bind(text: passcodeMode.title)
+    }
+    
+    deinit {
+        print("PasscodeViewController deinit")
     }
 }
 
@@ -101,6 +106,7 @@ extension PasscodeViewController: UITextFieldDelegate {
                 if comparePasscodes() {
                     userDefaultsService.set(passcode, key: .temporaryPasscode)
                     let vc = SecurityQuestionViewController()
+                    vc.assetsIsParentVC = assetsIsParentVC
                     vc.modalPresentationStyle = .fullScreen
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
                         self?.navigationController?.pushViewController(vc, animated: true)
