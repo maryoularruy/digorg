@@ -11,6 +11,19 @@ final class SecurityQuestionView: UIView {
     private lazy var contentView: UIView = UIView()
     lazy var arrowBack: UIView = arrowBackButton
     
+    private lazy var selectQuestionLabel: Regular15LabelStyle = {
+        let label = Regular15LabelStyle()
+        label.bind(text: "Select security question")
+        return label
+    }()
+    
+    private lazy var questionMenu: QuestionMenu = {
+        let questionMenu = QuestionMenu(type: .favoriteColor)
+        questionMenu.layer.cornerRadius = 20
+        questionMenu.delegate = self
+        return questionMenu
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -29,7 +42,7 @@ final class SecurityQuestionView: UIView {
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([arrowBack])
+        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -41,6 +54,20 @@ final class SecurityQuestionView: UIView {
             arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
+            
+            selectQuestionLabel.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 20),
+            selectQuestionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            
+            questionMenu.topAnchor.constraint(equalTo: selectQuestionLabel.bottomAnchor, constant: 16),
+            questionMenu.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            questionMenu.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            questionMenu.heightAnchor.constraint(equalToConstant: 67)
         ])
+    }
+}
+
+extension SecurityQuestionView: QuestionMenuDelegate {
+    func tapOnQuestionMenu() {
+        
     }
 }
