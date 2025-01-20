@@ -374,6 +374,7 @@
 		A5609F4A2CE0C141000AF19E /* Battery */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Battery; sourceTree = "<group>"; };
 		A573446E2D3579B600A4F3DF /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A57348F42D3B396000A4F3DF /* Passcode */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Passcode; sourceTree = "<group>"; };
+		A57348F72D3EA5F500A4F3DF /* SecurityQuestion */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SecurityQuestion; sourceTree = "<group>"; };
 		A598A0712CEC9CB1002F346E /* Store */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Store; sourceTree = "<group>"; };
 		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
@@ -671,6 +672,7 @@
 		A57348F12D3B394900A4F3DF /* SecretAlbum */ = {
 			isa = PBXGroup;
 			children = (
+				A57348F72D3EA5F500A4F3DF /* SecurityQuestion */,
 				A5609E9D2CDBBDDE000AF19E /* Contacts */,
 				A54449172CD1C434001ECA7A /* Assets */,
 				A57348F42D3B396000A4F3DF /* Passcode */,
@@ -1060,6 +1062,7 @@
 				A5609F4A2CE0C141000AF19E /* Battery */,
 				A573446E2D3579B600A4F3DF /* Components */,
 				A57348F42D3B396000A4F3DF /* Passcode */,
+				A57348F72D3EA5F500A4F3DF /* SecurityQuestion */,
 				A598A0712CEC9CB1002F346E /* Store */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,

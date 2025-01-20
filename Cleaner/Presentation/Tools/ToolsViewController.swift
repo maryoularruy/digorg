@@ -57,7 +57,7 @@ extension ToolsViewController: ToolOptionViewDelegate {
 //            StoryboardScene.SecretAlbum.initialScene.instantiate()
         case .battery: StoryboardScene.Battery.initialScene.instantiate()
         }
-        userDefaultsService.remove(key: .secretPasscodeConfirmed)
+        userDefaultsService.remove(key: .isPasscodeConfirmed)
         vc.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(vc, animated: true)
     }

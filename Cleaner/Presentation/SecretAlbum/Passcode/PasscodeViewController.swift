@@ -91,24 +91,30 @@ extension PasscodeViewController: UITextFieldDelegate {
             switch passcodeMode {
             case .create:
                 saveTempoparyPasscode(passcode)
-                textField.text?.removeAll()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                    chars.forEach { $0.image =  .unfilledCircle}
+                    self?.textField.text?.removeAll()
+                    chars.forEach { $0.image = .unfilledCircle}
                     self?.setPasscodeMode(.confirm)
                 }
 
             case .confirm:
-//                guard let tempoparyPasscode else { return }
                 if comparePasscodes() {
-                    //TODO: -savePasscode, add security question
-//                    userDefaultsService.set(passcode, key: .secretAlbumPassword)
+                    userDefaultsService.set(passcode, key: .temporaryPasscode)
+                    let vc = SecurityQuestionViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
                 } else {
-                    //TODO: -savePasscode
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                        self?.textField.text?.removeAll()
+                        chars.forEach { $0.image = .unfilledCircle}
+                    }
                 }
                  
             case .enter:
                 if passcode == userDefaultsService.get(String.self, key: .secretAlbumPasscode) {
-                    userDefaultsService.set(true, key: .secretPasscodeConfirmed)
+                    userDefaultsService.set(true, key: .isPasscodeConfirmed)
                     navigationController?.popViewController(animated: true)
                 } else {
                     //TODO: -forgotPasscode
