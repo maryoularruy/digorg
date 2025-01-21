@@ -11,32 +11,22 @@ protocol QuestionMenuDelegate: AnyObject {
     func tapOnQuestionMenu()
 }
 
-enum SecurityQuestionType {
-    case favoriteColor, petName, characterName
-    
-    var title: String {
-        switch self {
-        case .favoriteColor: "What is your favorite color?"
-        case .petName: "What's your nickname pet?"
-        case .characterName: "What is the name of your favorite childhood character?"
-        }
-    }
-}
-
 final class QuestionMenu: UIView {
     weak var delegate: QuestionMenuDelegate?
-    private var type: SecurityQuestionType
+    
+    private var activeChoice: SecurityQuestion
     
     private lazy var questionLabel: Semibold15LabelStyle = {
         let label = Semibold15LabelStyle()
-        label.bind(text: type.title)
+        label.numberOfLines = 0
+        label.bind(text: activeChoice.title)
         return label
     }()
     
     private lazy var bottomArrow: UIImageView = UIImageView(image: .arrowBottomBlue)
     
-    init(type: SecurityQuestionType) {
-        self.type = type
+    init(activeChoice: SecurityQuestion) {
+        self.activeChoice = activeChoice
         super.init(frame: .zero)
         setupView()
         initConstraints()
@@ -46,8 +36,9 @@ final class QuestionMenu: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func bind(_ type: SecurityQuestionType) {
-        questionLabel.bind(text: type.title)
+    func bind(activeChoice: SecurityQuestion) {
+        self.activeChoice = activeChoice
+        questionLabel.bind(text: activeChoice.title)
     }
     
     private func setupView() {
@@ -63,6 +54,7 @@ final class QuestionMenu: UIView {
         
         NSLayoutConstraint.activate([
             questionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            questionLabel.trailingAnchor.constraint(equalTo: bottomArrow.leadingAnchor, constant: -15),
             questionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             bottomArrow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),

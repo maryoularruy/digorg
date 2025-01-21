@@ -18,10 +18,19 @@ final class SecurityQuestionView: UIView {
     }()
     
     private lazy var questionMenu: QuestionMenu = {
-        let questionMenu = QuestionMenu(type: .favoriteColor)
-        questionMenu.layer.cornerRadius = 20
+        let questionMenu = QuestionMenu(activeChoice: .favoriteColor)
         questionMenu.delegate = self
+        questionMenu.layer.cornerRadius = 20
         return questionMenu
+    }()
+    
+    private lazy var questionsListView: QuestionsListView = {
+        let questionsListView = QuestionsListView(activeChoice: .favoriteColor)
+        questionsListView.delegate = self
+        questionsListView.layer.cornerRadius = 13
+        questionsListView.addShadows()
+        questionsListView.isHidden = true
+        return questionsListView
     }()
     
     override init(frame: CGRect) {
@@ -38,11 +47,15 @@ final class SecurityQuestionView: UIView {
     
     private func setupView() {
         backgroundColor = .paleGrey
+        
+        addTapGestureRecognizer { [weak self] in
+            self?.questionsListView.isHidden = true
+        }
     }
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu])
+        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu, questionsListView])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -61,13 +74,26 @@ final class SecurityQuestionView: UIView {
             questionMenu.topAnchor.constraint(equalTo: selectQuestionLabel.bottomAnchor, constant: 16),
             questionMenu.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             questionMenu.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            questionMenu.heightAnchor.constraint(equalToConstant: 67)
+            questionMenu.heightAnchor.constraint(equalToConstant: 67),
+            
+            questionsListView.topAnchor.constraint(equalTo: questionMenu.bottomAnchor, constant: 6),
+            questionsListView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            questionsListView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
 }
 
 extension SecurityQuestionView: QuestionMenuDelegate {
     func tapOnQuestionMenu() {
-        
+        questionsListView.isHidden = !questionsListView.isHidden
+    }
+}
+
+extension SecurityQuestionView: QuestionsListViewDelegate {
+    func tapOnQuestion(_ question: SecurityQuestion) {
+        questionMenu.bind(activeChoice: question)
+        questionsListView.bind(activeChoice: question)
+        questionsListView.isHidden = true
+        layoutIfNeeded()
     }
 }
