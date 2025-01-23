@@ -14,7 +14,15 @@ protocol QuestionsListViewDelegate: AnyObject {
 enum SecurityQuestion: CaseIterable {
     case favoriteColor, petName, characterName
     
-    var title: String {
+    var id: Int {
+        switch self {
+        case .favoriteColor: 0
+        case .petName: 1
+        case .characterName: 2
+        }
+    }
+    
+    var question: String {
         switch self {
         case .favoriteColor: "What is your favorite color?"
         case .petName: "What's your nickname pet?"

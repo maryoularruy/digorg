@@ -7,12 +7,13 @@
 
 import UIKit
 
-enum SecurityQuestionMode {
+enum SecurityQuestionType {
     case create, enter
 }
 
 final class SecurityQuestionViewController: UIViewController {
     var assetsIsParentVC: Bool = true
+    var type: SecurityQuestionType = .create
     
     private lazy var rootView = SecurityQuestionView()
     
@@ -42,13 +43,30 @@ final class SecurityQuestionViewController: UIViewController {
         userDefaultsService.set(temporaryPasscode, key: .secretAlbumPasscode)
     }
     
+    private func removePasscode() {
+        userDefaultsService.remove(key: .secretAlbumPasscode)
+    }
+    
     private func removeTemporaryPasscode() {
         userDefaultsService.remove(key: .temporaryPasscode)
     }
     
     private func saveSecurityQuestion() {
-        userDefaultsService.set(rootView.questionMenu.activeChoice.title, key: .securityQuestion)
+        userDefaultsService.set(rootView.questionMenu.activeChoice.id, key: .securityQuestionId)
         userDefaultsService.set(rootView.answerTextField.text, key: .securityQuestionAnswer)
+    }
+    
+    private func removeSecurityQuestion() {
+        userDefaultsService.remove(key: .securityQuestionId)
+        userDefaultsService.remove(key: .securityQuestionAnswer)
+    }
+    
+    private func openPasscodeVC() {
+        let vc = StoryboardScene.Passcode.initialScene.instantiate()
+        vc.passcodeMode = .create
+        vc.assetsIsParentVC = assetsIsParentVC
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func popToParentVC() {
@@ -82,11 +100,25 @@ extension SecurityQuestionViewController: ViewControllerProtocol {
         view.addGestureRecognizer(swipeRightGesture)
         
         rootView.completeButton.addTapGestureRecognizer { [weak self] in
-            self?.finalTrimTextField()
-            self?.savePasscode()
-            self?.saveSecurityQuestion()
-            self?.removeTemporaryPasscode()
-            self?.popToParentVC()
+            guard let self else { return }
+            finalTrimTextField()
+            
+            switch type {
+            case .create:
+                savePasscode()
+                saveSecurityQuestion()
+                removeTemporaryPasscode()
+                popToParentVC()
+            case .enter:
+                if rootView.questionMenu.activeChoice.id == userDefaultsService.get(Int.self, key: .securityQuestionId) &&
+                    rootView.answerTextField.text == userDefaultsService.get(String.self, key: .securityQuestionAnswer) {
+                    removePasscode()
+                    removeSecurityQuestion()
+                    openPasscodeVC()
+                } else {
+                    rootView.passwordMismatchLabel.isHidden = false
+                }
+            }
         }
     }
     

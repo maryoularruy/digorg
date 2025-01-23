@@ -53,11 +53,24 @@ final class PasscodeViewController: UIViewController {
     }
     
     private func tapOnForgotPasscode() {
+        openSecurityQuestionVC(type: .enter)
+    }
+    
+    private func openSecurityQuestionVC(type: SecurityQuestionType) {
         let vc = SecurityQuestionViewController()
         vc.assetsIsParentVC = assetsIsParentVC
+        vc.type = type
         vc.modalPresentationStyle = .fullScreen
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    private func popToParentVC() {
+        if let vc = navigationController?.viewControllers.first(where: { assetsIsParentVC ? $0 is SecretAssetsViewController : $0 is SecretContactsViewController}) {
+            navigationController?.popToViewController(vc, animated: true)
+        } else {
+            navigationController?.popToRootViewController(animated: true)
         }
     }
     
@@ -78,7 +91,7 @@ extension PasscodeViewController: ViewControllerProtocol {
     
     func addGestureRecognizers() {
         arrowBackButton.addTapGestureRecognizer { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+            self?.popToParentVC()
         }
         
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
@@ -88,6 +101,10 @@ extension PasscodeViewController: ViewControllerProtocol {
         forgotPasscodeLabel.addTapGestureRecognizer { [weak self] in
             self?.tapOnForgotPasscode()
         }
+    }
+    
+    @objc override func handleSwipeRight() {
+        popToParentVC()
     }
 }
 
@@ -128,12 +145,7 @@ extension PasscodeViewController: UITextFieldDelegate {
             case .confirm:
                 if comparePasscodes() {
                     userDefaultsService.set(passcode, key: .temporaryPasscode)
-                    let vc = SecurityQuestionViewController()
-                    vc.assetsIsParentVC = assetsIsParentVC
-                    vc.modalPresentationStyle = .fullScreen
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    }
+                    openSecurityQuestionVC(type: .create)
                 } else {
                     refreshTextField()
                 }

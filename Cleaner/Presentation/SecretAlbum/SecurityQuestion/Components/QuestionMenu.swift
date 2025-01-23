@@ -19,7 +19,7 @@ final class QuestionMenu: UIView {
     private lazy var questionLabel: Semibold15LabelStyle = {
         let label = Semibold15LabelStyle()
         label.numberOfLines = 0
-        label.bind(text: activeChoice.title)
+        label.bind(text: activeChoice.question)
         return label
     }()
     
@@ -38,7 +38,7 @@ final class QuestionMenu: UIView {
     
     func bind(activeChoice: SecurityQuestion) {
         self.activeChoice = activeChoice
-        questionLabel.bind(text: activeChoice.title)
+        questionLabel.bind(text: activeChoice.question)
     }
     
     private func setupView() {

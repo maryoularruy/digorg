@@ -12,7 +12,7 @@ final class QuestionView: UIView {
     
     private lazy var questionLabel: Regular15LabelStyle = {
         let label = Regular15LabelStyle()
-        label.bind(text: question.title)
+        label.bind(text: question.question)
         label.numberOfLines = 0
         return label
     }()

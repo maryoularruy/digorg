@@ -53,6 +53,14 @@ final class SecurityQuestionView: UIView {
         return textField
     }()
     
+    lazy var passwordMismatchLabel: Regular13LabelStyle = {
+        let label = Regular13LabelStyle()
+        label.bind(text: "Password mismatch")
+        label.textColor = .red
+        label.isHidden = true
+        return label
+    }()
+    
     lazy var answerTextFieldCharsCountLabel: Regular13LabelStyle = {
         let label = Regular13LabelStyle()
         label.bind(text: "0/30")
@@ -91,7 +99,7 @@ final class SecurityQuestionView: UIView {
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu, answerTextField, answerTextFieldCharsCountLabel, tipView, questionsListView, completeButton])
+        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu, answerTextField, passwordMismatchLabel, answerTextFieldCharsCountLabel, tipView, questionsListView, completeButton])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -120,6 +128,9 @@ final class SecurityQuestionView: UIView {
             answerTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             answerTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             answerTextField.heightAnchor.constraint(equalToConstant: 44),
+            
+            passwordMismatchLabel.topAnchor.constraint(equalTo: answerTextField.bottomAnchor, constant: 8),
+            passwordMismatchLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
             answerTextFieldCharsCountLabel.topAnchor.constraint(equalTo: answerTextField.bottomAnchor, constant: 8),
             answerTextFieldCharsCountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
