@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum SecurityQuestionMode {
+    case create, enter
+}
+
 final class SecurityQuestionViewController: UIViewController {
     var assetsIsParentVC: Bool = true
     

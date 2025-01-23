@@ -62,7 +62,7 @@ final class SecretContactsViewController: UIViewController {
                 navigationController?.pushViewController(vc, animated: true)
             } else {
                 let vc = StoryboardScene.Passcode.initialScene.instantiate()
-                vc.assetsIsParentVC = true
+                vc.assetsIsParentVC = false
                 vc.passcodeMode = .enter
                 vc.modalTransitionStyle = .crossDissolve
                 vc.modalPresentationStyle = .fullScreen

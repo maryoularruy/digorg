@@ -5,9 +5,13 @@
 //  Created by Александр Пономарёв on 27.05.2022.
 //
 
-import Foundation
+import UIKit
 
 extension String {
+    var underlined: NSAttributedString {
+        NSMutableAttributedString(string: self, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+    }
+    
 	func toNSDate(format: String) -> NSDate {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = format

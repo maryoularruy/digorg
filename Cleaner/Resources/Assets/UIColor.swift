@@ -25,6 +25,8 @@ extension UIColor {
     static var yellow = UIColor(resource: .yellow)
     static var orange = UIColor(resource: .orange)
     
+    static var red = UIColor(resource: .red)
+    
     static var purple = UIColor(resource: .purple)
     
     static var black = UIColor(resource: .black)

@@ -21,7 +21,7 @@
                                 <rect key="frame" x="8" y="64" width="55" height="55"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ArrowBackIcon" translatesAutoresizingMaskIntoConstraints="NO" id="7Ph-xD-F4D">
-                                        <rect key="frame" x="-4.3333333333333357" y="-4.3333333333333357" width="63.999999999999993" height="64"/>
+                                        <rect key="frame" x="-4.3333333333333357" y="-4.3333333333333357" width="64" height="64"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -107,16 +107,32 @@
                                     <constraint firstAttribute="height" constant="44" id="ySv-oM-ACp"/>
                                 </constraints>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passcode Error" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofV-vB-qBl" customClass="Regular13LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="138.66666666666666" y="385.33333333333331" width="116" height="21"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <color key="textColor" name="Red"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot passcode?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLi-2G-QQo" customClass="Regular13LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="142.33333333333334" y="385.33333333333331" width="108.33333333333334" height="15.666666666666686"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                                <color key="textColor" name="Blue"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nve-PF-6b4"/>
                         <color key="backgroundColor" name="PaleGrey"/>
                         <constraints>
                             <constraint firstItem="c6C-D2-NHg" firstAttribute="top" secondItem="nve-PF-6b4" secondAttribute="top" constant="5" id="50K-5W-VdO"/>
                             <constraint firstItem="uS6-6H-OJp" firstAttribute="leading" secondItem="nve-PF-6b4" secondAttribute="leading" constant="20" id="5Ln-4R-sy4"/>
+                            <constraint firstItem="ofV-vB-qBl" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="8CA-T2-isk"/>
                             <constraint firstItem="bHB-Xr-K0b" firstAttribute="top" secondItem="uS6-6H-OJp" secondAttribute="bottom" constant="48" id="8bN-QE-1Kh"/>
                             <constraint firstItem="toq-q1-Msc" firstAttribute="centerX" secondItem="nve-PF-6b4" secondAttribute="centerX" id="9pS-g4-HIY"/>
+                            <constraint firstItem="CLi-2G-QQo" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Fq6-Hi-99y"/>
+                            <constraint firstItem="ofV-vB-qBl" firstAttribute="top" secondItem="bHB-Xr-K0b" secondAttribute="bottom" constant="24" id="Hnx-hA-jew"/>
                             <constraint firstItem="bHB-Xr-K0b" firstAttribute="centerX" secondItem="nve-PF-6b4" secondAttribute="centerX" id="Qr7-q0-5Hn"/>
                             <constraint firstItem="nve-PF-6b4" firstAttribute="trailing" secondItem="uS6-6H-OJp" secondAttribute="trailing" constant="20" id="R33-fz-hUc"/>
+                            <constraint firstItem="CLi-2G-QQo" firstAttribute="top" secondItem="bHB-Xr-K0b" secondAttribute="bottom" constant="24" id="T1H-m7-vty"/>
                             <constraint firstItem="toq-q1-Msc" firstAttribute="top" secondItem="nve-PF-6b4" secondAttribute="top" constant="134" id="bjc-YI-xK7"/>
                             <constraint firstItem="c6C-D2-NHg" firstAttribute="leading" secondItem="nve-PF-6b4" secondAttribute="leading" constant="8" id="ckG-vA-PRk"/>
                             <constraint firstItem="uS6-6H-OJp" firstAttribute="top" secondItem="toq-q1-Msc" secondAttribute="bottom" constant="16" id="l4d-Aw-es1"/>
@@ -125,7 +141,9 @@
                     <connections>
                         <outlet property="arrowBackButton" destination="c6C-D2-NHg" id="dgN-hI-Ddi"/>
                         <outlet property="firstChar" destination="2Us-uZ-kpM" id="KFo-gb-kIu"/>
+                        <outlet property="forgotPasscodeLabel" destination="CLi-2G-QQo" id="IlZ-SQ-s0U"/>
                         <outlet property="fourthChar" destination="lD8-Sf-qb4" id="w6D-td-Cgg"/>
+                        <outlet property="passcodeErrorLabel" destination="ofV-vB-qBl" id="SM8-J4-OMh"/>
                         <outlet property="passcodeLabel" destination="uS6-6H-OJp" id="U4U-c6-2OO"/>
                         <outlet property="secondChar" destination="jAk-Xa-NZt" id="Cmx-19-hHH"/>
                         <outlet property="textField" destination="Ly2-R1-ium" id="JZJ-AY-JCV"/>
@@ -142,8 +160,14 @@
         <image name="FilledCircle" width="68" height="68"/>
         <image name="LockedWithBackground" width="40" height="40"/>
         <image name="UnfilledCircle" width="68" height="68"/>
+        <namedColor name="Blue">
+            <color red="0.20784313725490197" green="0.52156862745098043" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <namedColor name="PaleGrey">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="Red">
+            <color red="0.97647058823529409" green="0.27058823529411763" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="White">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

@@ -27,11 +27,18 @@ final class PasscodeViewController: UIViewController {
     @IBOutlet weak var secondChar: UIImageView!
     @IBOutlet weak var thirdChar: UIImageView!
     @IBOutlet weak var fourthChar: UIImageView!
+    @IBOutlet weak var passcodeErrorLabel: Regular13LabelStyle!
+    @IBOutlet weak var forgotPasscodeLabel: Regular13LabelStyle!
     
     lazy var passcodeMode: PasscodeMode = .create
     var assetsIsParentVC: Bool = true
+    
+    private lazy var chars: [UIImageView] = [firstChar, secondChar, thirdChar, fourthChar]
+    
     private var passcode: String = ""
     private var tempoparyPasscode: String?
+    private lazy var passcodeEntryAttemps: Int = 0
+    
     private lazy var userDefaultsService = UserDefaultsService.shared
     
     override func viewDidLoad() {
@@ -45,6 +52,15 @@ final class PasscodeViewController: UIViewController {
         passcodeLabel.bind(text: passcodeMode.title)
     }
     
+    private func tapOnForgotPasscode() {
+        let vc = SecurityQuestionViewController()
+        vc.assetsIsParentVC = assetsIsParentVC
+        vc.modalPresentationStyle = .fullScreen
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     deinit {
         print("PasscodeViewController deinit")
     }
@@ -55,6 +71,9 @@ extension PasscodeViewController: ViewControllerProtocol {
         textField.delegate = self
         textField.becomeFirstResponder()
         passcodeLabel.bind(text: passcodeMode.title)
+        passcodeErrorLabel.textColor = .red
+        forgotPasscodeLabel.textColor = .blue
+        forgotPasscodeLabel.attributedText = "Forgot passcode?".underlined
     }
     
     func addGestureRecognizers() {
@@ -65,6 +84,10 @@ extension PasscodeViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+        
+        forgotPasscodeLabel.addTapGestureRecognizer { [weak self] in
+            self?.tapOnForgotPasscode()
+        }
     }
 }
 
@@ -76,7 +99,6 @@ extension PasscodeViewController: UITextFieldDelegate {
     }
     
     private func changeCharsImage(count: Int) {
-        let chars: [UIImageView] = [firstChar, secondChar, thirdChar, fourthChar]
         if count == 0 {
             chars.forEach { $0.image =  .unfilledCircle}
         } else if count == 1 {
@@ -100,11 +122,8 @@ extension PasscodeViewController: UITextFieldDelegate {
             switch passcodeMode {
             case .create:
                 saveTempoparyPasscode(passcode)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                    self?.textField.text?.removeAll()
-                    chars.forEach { $0.image = .unfilledCircle}
-                    self?.setPasscodeMode(.confirm)
-                }
+                refreshTextField()
+                setPasscodeMode(.confirm)
 
             case .confirm:
                 if comparePasscodes() {
@@ -116,10 +135,7 @@ extension PasscodeViewController: UITextFieldDelegate {
                         self?.navigationController?.pushViewController(vc, animated: true)
                     }
                 } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                        self?.textField.text?.removeAll()
-                        chars.forEach { $0.image = .unfilledCircle}
-                    }
+                    refreshTextField()
                 }
                  
             case .enter:
@@ -127,9 +143,23 @@ extension PasscodeViewController: UITextFieldDelegate {
                     userDefaultsService.set(true, key: .isPasscodeConfirmed)
                     navigationController?.popViewController(animated: true)
                 } else {
-                    //TODO: -forgotPasscode
+                    passcodeEntryAttemps += 1
+                    if passcodeEntryAttemps >= 2 {
+                        passcodeErrorLabel.isHidden = true
+                        forgotPasscodeLabel.isHidden = false
+                    } else {
+                        passcodeErrorLabel.isHidden = false
+                    }
+                    refreshTextField()
                 }
             }
+        }
+    }
+    
+    private func refreshTextField() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.textField.text?.removeAll()
+            self?.chars.forEach { $0.image = .unfilledCircle }
         }
     }
     
