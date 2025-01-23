@@ -12,6 +12,7 @@ extension UIColor {
     
     static var paleGrey = UIColor(resource: .paleGrey)
     static var lightGrey = UIColor(resource: .lightGrey)
+    static var middleGrey = UIColor(resource: .middleGrey)
     static var darkGrey = UIColor(resource: .darkGrey)
     
     static var acidGreen = UIColor(resource: .acidGreen)
@@ -23,6 +24,8 @@ extension UIColor {
     
     static var yellow = UIColor(resource: .yellow)
     static var orange = UIColor(resource: .orange)
+    
+    static var red = UIColor(resource: .red)
     
     static var purple = UIColor(resource: .purple)
     

@@ -45,6 +45,9 @@ extension UIImage {
     static var filledCircle = UIImage(resource: .filledCircle)
     static var importMedia = UIImage(resource: .importMedia)
     static var takeMedia = UIImage(resource: .takeMedia)
+    static var arrowBottomBlue = UIImage(resource: .arrowBottomBlue)
+    static var check = UIImage(resource: .check)
+    static var tip = UIImage(resource: .tip)
     
     //MARK: -BatterySavingTool
     static var optimizeBatteryCharging = UIImage(resource: .optimizeBatteryCharging)

@@ -9,7 +9,10 @@ import Foundation
 
 enum UserDefaultsKey: String {
     case secretAlbumPasscode = "SECRET_ALBUM_PASSWORD"
-    case secretPasscodeConfirmed = "PASSCODE_CONFIRMED"
+    case temporaryPasscode = "TEMPORARY_PASSWORD"
+    case isPasscodeConfirmed = "PASSCODE_CONFIRMED"
+    case securityQuestionId = "SECURITY_QUESTION_ID"
+    case securityQuestionAnswer = "SECURITY_QUESTION_ANSWER"
     case secretAlbumFolder = "DEFAULT_SECRET_ALBUM_FOLDER"
     case secretContactsFolder = "DEFAULT_SECRET_CONTACTS_FOLDER"
     case secretContactsFile = "DEFAULT_SECRET_CONTACTS_FILE"
@@ -24,7 +27,7 @@ final class UserDefaultsService {
     }
     
     var isPasscodeConfirmed: Bool {
-        self.get(Bool.self, key: .secretPasscodeConfirmed) == true
+        self.get(Bool.self, key: .isPasscodeConfirmed) == true
     }
     
     var isSubscriptionActive: Bool {
