@@ -32,7 +32,7 @@ final class SecurityQuestionView: UIView {
     }()
     
     lazy var answerTextField: TextFieldWithPadding = {
-        let textField = TextFieldWithPadding()        
+        let textField = TextFieldWithPadding()
         textField.layer.cornerRadius = 10
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor(resource: .lightGrey).cgColor
@@ -58,6 +58,8 @@ final class SecurityQuestionView: UIView {
         label.bind(text: "0/30")
         return label
     }()
+    
+    private lazy var tipView: TipView = TipView()
     
     lazy var completeButton: ActionToolbarButtonStyle = {
         let button = ActionToolbarButtonStyle()
@@ -89,7 +91,7 @@ final class SecurityQuestionView: UIView {
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu, answerTextField, answerTextFieldCharsCountLabel, questionsListView, completeButton])
+        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu, answerTextField, answerTextFieldCharsCountLabel, questionsListView, tipView, completeButton])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -121,6 +123,10 @@ final class SecurityQuestionView: UIView {
             
             answerTextFieldCharsCountLabel.topAnchor.constraint(equalTo: answerTextField.bottomAnchor, constant: 8),
             answerTextFieldCharsCountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            tipView.topAnchor.constraint(equalTo: answerTextFieldCharsCountLabel.bottomAnchor, constant: 19),
+            tipView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            tipView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
             completeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             completeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
