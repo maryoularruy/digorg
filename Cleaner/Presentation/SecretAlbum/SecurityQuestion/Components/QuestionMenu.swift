@@ -14,7 +14,7 @@ protocol QuestionMenuDelegate: AnyObject {
 final class QuestionMenu: UIView {
     weak var delegate: QuestionMenuDelegate?
     
-    private var activeChoice: SecurityQuestion
+    var activeChoice: SecurityQuestion
     
     private lazy var questionLabel: Semibold15LabelStyle = {
         let label = Semibold15LabelStyle()

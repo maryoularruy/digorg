@@ -25,6 +25,36 @@ final class SecurityQuestionViewController: UIViewController {
         addGestureRecognizers()
     }
     
+    private func finalTrimTextField() {
+        var text = rootView.answerTextField.text ?? ""
+        text = text.trimLeadingAndTrailingSpaces()
+        text = String(text.prefix(30))
+        rootView.answerTextField.text = text
+        rootView.answerTextFieldCharsCountLabel.bind(text: "\(text.count)/30")
+    }
+    
+    private func savePasscode() {
+        let temporaryPasscode = userDefaultsService.get(String.self, key: .temporaryPasscode)
+        userDefaultsService.set(temporaryPasscode, key: .secretAlbumPasscode)
+    }
+    
+    private func removeTemporaryPasscode() {
+        userDefaultsService.remove(key: .temporaryPasscode)
+    }
+    
+    private func saveSecurityQuestion() {
+        userDefaultsService.set(rootView.questionMenu.activeChoice.title, key: .securityQuestion)
+        userDefaultsService.set(rootView.answerTextField.text, key: .securityQuestionAnswer)
+    }
+    
+    private func popToParentVC() {
+        if let vc = navigationController?.viewControllers.first(where: { assetsIsParentVC ? $0 is SecretAssetsViewController : $0 is SecretContactsViewController}) {
+            navigationController?.popToViewController(vc, animated: true)
+        } else {
+            navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
     deinit {
         print("SecurityQuestionViewController deinit")
     }
@@ -48,29 +78,17 @@ extension SecurityQuestionViewController: ViewControllerProtocol {
         view.addGestureRecognizer(swipeRightGesture)
         
         rootView.completeButton.addTapGestureRecognizer { [weak self] in
-            var text = self?.rootView.answerTextField.text ?? ""
-            text = text.trimLeadingAndTrailingSpaces()
-            text = String(text.prefix(30))
-            self?.rootView.answerTextField.text = text
-            self?.rootView.answerTextFieldCharsCountLabel.bind(text: "\(text.count)/30")
+            self?.finalTrimTextField()
+            self?.savePasscode()
+            self?.saveSecurityQuestion()
+            self?.removeTemporaryPasscode()
+            self?.popToParentVC()
         }
     }
     
     @objc override func handleSwipeRight() {
         removeTemporaryPasscode()
         popToParentVC()
-    }
-    
-    private func removeTemporaryPasscode() {
-        userDefaultsService.remove(key: .temporaryPasscode)
-    }
-    
-    private func popToParentVC() {
-        if let vc = navigationController?.viewControllers.first(where: { assetsIsParentVC ? $0 is SecretAssetsViewController : $0 is SecretContactsViewController}) {
-            navigationController?.popToViewController(vc, animated: true)
-        } else {
-            navigationController?.popToRootViewController(animated: true)
-        }
     }
 }
 

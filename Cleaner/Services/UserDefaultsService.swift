@@ -11,6 +11,8 @@ enum UserDefaultsKey: String {
     case secretAlbumPasscode = "SECRET_ALBUM_PASSWORD"
     case temporaryPasscode = "TEMPORARY_PASSWORD"
     case isPasscodeConfirmed = "PASSCODE_CONFIRMED"
+    case securityQuestion = "SECURITY_QUETION"
+    case securityQuestionAnswer = "SECURITY_QUETION_ANSWER"
     case secretAlbumFolder = "DEFAULT_SECRET_ALBUM_FOLDER"
     case secretContactsFolder = "DEFAULT_SECRET_CONTACTS_FOLDER"
     case secretContactsFile = "DEFAULT_SECRET_CONTACTS_FILE"

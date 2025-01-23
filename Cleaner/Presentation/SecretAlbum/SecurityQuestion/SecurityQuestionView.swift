@@ -91,7 +91,7 @@ final class SecurityQuestionView: UIView {
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu, answerTextField, answerTextFieldCharsCountLabel, questionsListView, tipView, completeButton])
+        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu, answerTextField, answerTextFieldCharsCountLabel, tipView, questionsListView, completeButton])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
