@@ -38,9 +38,7 @@ final class SecretAssetsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if userDefaultsService.isPasscodeCreated {
-            itemsCollectionView.register(cellType: AssetCollectionViewCell.self)
-        }
+        itemsCollectionView.register(cellType: AssetCollectionViewCell.self)
         addGestureRecognizers()
     }
     
@@ -135,6 +133,10 @@ extension SecretAssetsViewController: ViewControllerProtocol {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
     }
     
     private func setupMediaContainer() {

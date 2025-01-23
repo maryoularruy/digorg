@@ -44,6 +44,7 @@ final class SecretContactsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        contactsTableView.register(cellType: ItemCell.self)
         addGestureRecognizers()
     }
     
@@ -54,9 +55,25 @@ final class SecretContactsViewController: UIViewController {
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
-        let vc = StoryboardScene.AllContacts.initialScene.instantiate()
-        vc.modalPresentationStyle = .overCurrentContext
-        navigationController?.pushViewController(vc, animated: true)
+        if userDefaultsService.isPasscodeCreated {
+            if userDefaultsService.isPasscodeConfirmed {
+                let vc = StoryboardScene.AllContacts.initialScene.instantiate()
+                vc.modalPresentationStyle = .overCurrentContext
+                navigationController?.pushViewController(vc, animated: true)
+            } else {
+                let vc = StoryboardScene.Passcode.initialScene.instantiate()
+                vc.assetsIsParentVC = true
+                vc.passcodeMode = .enter
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .fullScreen
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        } else {
+            let vc = StoryboardScene.Passcode.initialScene.instantiate()
+            vc.passcodeMode = .create
+            vc.modalPresentationStyle = .fullScreen
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func tapOnSelectionButton(_ sender: Any) {
@@ -89,7 +106,6 @@ final class SecretContactsViewController: UIViewController {
 
 extension SecretContactsViewController: ViewControllerProtocol {
     func setupUI() {
-        contactsTableView.register(cellType: ItemCell.self)
         lockedStatusIcon.image = userDefaultsService.isPasscodeCreated ? .locked :  .unlocked
     }
     
@@ -97,6 +113,10 @@ extension SecretContactsViewController: ViewControllerProtocol {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
     }
 }
 
