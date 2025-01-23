@@ -14,11 +14,16 @@ extension String {
 		return dateFormatter.date(from: self) as NSDate? ?? NSDate()
 	}
 	
-	func removeImageAndToInt() -> Int {
-			Int(self.replacingOccurrences(of: "image", with: "")) ?? 0
-	}
+    func removeImageAndToInt() -> Int {
+        Int(self.replacingOccurrences(of: "image", with: "")) ?? 0
+    }
     
     func removeVideoAndToInt() -> Int {
-            Int(self.replacingOccurrences(of: "video", with: "")) ?? 0
+        Int(self.replacingOccurrences(of: "video", with: "")) ?? 0
+    }
+    
+    func trimingLeadingSpaces(using characterSet: CharacterSet = .whitespacesAndNewlines) -> String {
+        guard let index = firstIndex(where: { !CharacterSet(charactersIn: String($0)).isSubset(of: characterSet) }) else { return self }
+        return String(self[index...])
     }
 }
