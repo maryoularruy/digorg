@@ -17,26 +17,22 @@ final class SecurityQuestionView: UIView {
         return label
     }()
     
-    private lazy var questionMenu: QuestionMenu = {
+    lazy var questionMenu: QuestionMenu = {
         let questionMenu = QuestionMenu(activeChoice: .favoriteColor)
-        questionMenu.delegate = self
         questionMenu.layer.cornerRadius = 20
         return questionMenu
     }()
     
-    private lazy var questionsListView: QuestionsListView = {
+    lazy var questionsListView: QuestionsListView = {
         let questionsListView = QuestionsListView(activeChoice: .favoriteColor)
-        questionsListView.delegate = self
         questionsListView.layer.cornerRadius = 13
         questionsListView.addShadows()
         questionsListView.isHidden = true
         return questionsListView
     }()
     
-    private lazy var answerTextField: TextFieldWithPadding = {
-        let textField = TextFieldWithPadding()
-        textField.delegate = self
-        
+    lazy var answerTextField: TextFieldWithPadding = {
+        let textField = TextFieldWithPadding()        
         textField.layer.cornerRadius = 10
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor(resource: .lightGrey).cgColor
@@ -57,10 +53,18 @@ final class SecurityQuestionView: UIView {
         return textField
     }()
     
-    private lazy var answerTextFieldCharsCountLabel: Regular13LabelStyle = {
+    lazy var answerTextFieldCharsCountLabel: Regular13LabelStyle = {
         let label = Regular13LabelStyle()
         label.bind(text: "0/30")
         return label
+    }()
+    
+    lazy var completeButton: ActionToolbarButtonStyle = {
+        let button = ActionToolbarButtonStyle()
+        button.bind(text: "Complete")
+        button.layer.cornerRadius = 25
+        button.isClickable = false
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -85,7 +89,7 @@ final class SecurityQuestionView: UIView {
     
     private func initConstraints() {
         addSubviews([contentView])
-        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu, answerTextField, answerTextFieldCharsCountLabel, questionsListView])
+        contentView.addSubviews([arrowBack, selectQuestionLabel, questionMenu, answerTextField, answerTextFieldCharsCountLabel, questionsListView, completeButton])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -116,37 +120,12 @@ final class SecurityQuestionView: UIView {
             answerTextField.heightAnchor.constraint(equalToConstant: 44),
             
             answerTextFieldCharsCountLabel.topAnchor.constraint(equalTo: answerTextField.bottomAnchor, constant: 8),
-            answerTextFieldCharsCountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            answerTextFieldCharsCountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            completeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            completeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            completeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            completeButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-    }
-}
-
-extension SecurityQuestionView: QuestionMenuDelegate {
-    func tapOnQuestionMenu() {
-        questionsListView.isHidden = !questionsListView.isHidden
-        answerTextField.resignFirstResponder()
-    }
-}
-
-extension SecurityQuestionView: QuestionsListViewDelegate {
-    func tapOnQuestion(_ question: SecurityQuestion) {
-        questionMenu.bind(activeChoice: question)
-        questionsListView.bind(activeChoice: question)
-        questionsListView.isHidden = true
-        layoutIfNeeded()
-    }
-}
-
-extension SecurityQuestionView: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        var text = textField.text ?? ""
-        text = text.trimingLeadingSpaces()
-        answerTextFieldCharsCountLabel.bind(text: "\(text.count)/30")
-        textField.text = String(text.prefix(30))
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
 }

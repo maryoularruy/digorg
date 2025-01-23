@@ -22,8 +22,16 @@ extension String {
         Int(self.replacingOccurrences(of: "video", with: "")) ?? 0
     }
     
-    func trimingLeadingSpaces(using characterSet: CharacterSet = .whitespacesAndNewlines) -> String {
+    func trimLeadingSpaces(using characterSet: CharacterSet = .whitespacesAndNewlines) -> String {
+        if CharacterSet(charactersIn: String(self)).isSubset(of: characterSet) {
+            return ""
+        }
+            
         guard let index = firstIndex(where: { !CharacterSet(charactersIn: String($0)).isSubset(of: characterSet) }) else { return self }
         return String(self[index...])
+    }
+    
+    func trimLeadingAndTrailingSpaces(using characterSet: CharacterSet = .whitespacesAndNewlines) -> String {
+        trimmingCharacters(in: characterSet)
     }
 }
