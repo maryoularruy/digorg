@@ -1,17 +1,17 @@
 //
-//  CircularProgressBar.swift
+//  SpeedTestProgressBar.swift
 //  Cleaner
 //
-//  Created by Elena Sedunova on 11.10.2024.
+//  Created by Elena Sedunova on 24.01.2025.
 //
 
 import UIKit
 
-final class CircularProgressBar: UIView {
+final class SpeedTestProgressBar: UIView {
     private lazy var circleLayer = CAShapeLayer()
     private lazy var progressLayer = CAShapeLayer()
-    private lazy var startPoint = CGFloat(Double.pi / 2)
-    private lazy var endPoint = CGFloat(5 * Double.pi / 2)
+    private lazy var startPoint = CGFloat(3 * Double.pi / 4)
+    private lazy var endPoint = CGFloat(2 * Double.pi + Double.pi / 4)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,14 +33,14 @@ final class CircularProgressBar: UIView {
     }
     
     private func createCircularPath() {
-        let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: 45, startAngle: startPoint, endAngle: endPoint, clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: 110, startAngle: startPoint, endAngle: endPoint, clockwise: true)
         circleLayer.path = circularPath.cgPath
         progressLayer.path = circularPath.cgPath
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.lineCap = .round
-        progressLayer.lineWidth = 6.0
+        progressLayer.lineWidth = 28.0
         progressLayer.strokeEnd = 0
-        progressLayer.strokeColor = UIColor.yellow.cgColor
+        progressLayer.strokeColor = UIColor.blue.cgColor
         layer.addSublayer(progressLayer)
     }
 }
