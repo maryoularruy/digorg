@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum SpeedTestType {
+    case download, upload, completed
+}
+
 final class NetworkSpeedTestView: UIView {
     private lazy var contentView: UIView = UIView()
     lazy var arrowBack: UIView = arrowBackButton

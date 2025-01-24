@@ -8,7 +8,24 @@
 import UIKit
 
 final class SpeedTestView: UIView {
-    private lazy var progressBar: SpeedTestProgressBar = SpeedTestProgressBar(frame: CGRect(origin: .zero, size: CGSize(width: 288, height: 288)))
+    static var maxSpeedInMbps = 50.0
+    
+    private lazy var progressBar: SpeedTestProgressBar = SpeedTestProgressBar(frame: CGRect(origin: .zero, size: CGSize(width: 278, height: 278)))
+    
+    private lazy var currentValueLabel: Semibold24LabelStyle = {
+        let label = Semibold24LabelStyle()
+        label.bind(text: "0")
+        return label
+    }()
+    
+    private lazy var arrowAndMbpsView: ArrowAndMbpsView = ArrowAndMbpsView()
+    
+    private lazy var completedLabel: Semibold24LabelStyle = {
+        let label = Semibold24LabelStyle()
+        label.bind(text: "Completed")
+        label.isHidden = true
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,31 +39,56 @@ final class SpeedTestView: UIView {
         initConstraints()
     }
     
-    func bind() {
+    func bind(value: Double? = nil, type: SpeedTestType) {
+        if let value {
+            currentValueLabel.bind(text: value.formatted)
+        }
+        
+        switch type {
+        case .download:
+            arrowAndMbpsView.arrowImageView.setImage(.downloadBlack)
+        case .upload:
+            arrowAndMbpsView.arrowImageView.setImage(.uploadBlack)
+        case .completed:
+            currentValueLabel.isHidden = true
+            arrowAndMbpsView.isHidden = true
+            completedLabel.isHidden = false
+            progressBar.progressAnimation(1.0)
+        }
         progressBar.progressAnimation(1.0)
+    }
+    
+    func reset() {
+        currentValueLabel.bind(text: "0")
+        arrowAndMbpsView.arrowImageView.setImage(.downloadBlack)
+        currentValueLabel.isHidden = false
+        arrowAndMbpsView.isHidden = false
+        completedLabel.isHidden = true
     }
     
     private func setupView() {
         backgroundColor = .paleGrey
         layer.cornerRadius = 20
         addShadows()
-        
-        //
-        progressBar.backgroundColor = .acidGreen.withAlphaComponent(0.2)
-        //
     }
     
     private func initConstraints() {
-        addSubviews([progressBar])
+        addSubviews([progressBar, arrowAndMbpsView, currentValueLabel, completedLabel])
         
         NSLayoutConstraint.activate([
-            progressBar.topAnchor.constraint(equalTo: topAnchor),
+            progressBar.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            progressBar.heightAnchor.constraint(equalToConstant: 278),
+            progressBar.widthAnchor.constraint(equalToConstant: 278),
+            progressBar.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-//            progressBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 42),
-//            progressBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -42),
-            progressBar.heightAnchor.constraint(equalToConstant: 288),
-            progressBar.widthAnchor.constraint(equalToConstant: 288),
-            progressBar.centerXAnchor.constraint(equalTo: centerXAnchor)
+            arrowAndMbpsView.centerXAnchor.constraint(equalTo: progressBar.centerXAnchor),
+            arrowAndMbpsView.centerYAnchor.constraint(equalTo: progressBar.centerYAnchor),
+            
+            currentValueLabel.bottomAnchor.constraint(equalTo: arrowAndMbpsView.topAnchor, constant: -7),
+            currentValueLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            completedLabel.bottomAnchor.constraint(equalTo: arrowAndMbpsView.bottomAnchor),
+            completedLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }

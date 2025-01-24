@@ -23,7 +23,7 @@ final class NetworkSpeedTestViewController: UIViewController {
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        rootView.speedTestView.bind()
+        rootView.speedTestView.bind(value: 5.2436, type: .download)
     }
     //
     
