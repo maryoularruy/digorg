@@ -369,6 +369,7 @@
 		A546AE592CF4D0790077D3F7 /* Total */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Total; sourceTree = "<group>"; };
 		A546AE642CF4FF5B0077D3F7 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A546B15D2D005BA80077D3F7 /* RegularAssets */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = RegularAssets; sourceTree = "<group>"; };
+		A54B9C162D43BFFA00F41AE3 /* NetworkSpeedTest */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = NetworkSpeedTest; sourceTree = "<group>"; };
 		A55234102CC16D2900CBE265 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5609EAE2CDBD637000AF19E /* AllContacts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AllContacts; sourceTree = "<group>"; };
 		A5609F4A2CE0C141000AF19E /* Battery */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Battery; sourceTree = "<group>"; };
@@ -567,6 +568,7 @@
 		75D3FC6C2A606C0600F351A3 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				A54B9C162D43BFFA00F41AE3 /* NetworkSpeedTest */,
 				A57348F12D3B394900A4F3DF /* SecretAlbum */,
 				A51353CF2CD1567600656965 /* Tools */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
@@ -1057,6 +1059,7 @@
 				A546AE592CF4D0790077D3F7 /* Total */,
 				A546AE642CF4FF5B0077D3F7 /* Components */,
 				A546B15D2D005BA80077D3F7 /* RegularAssets */,
+				A54B9C162D43BFFA00F41AE3 /* NetworkSpeedTest */,
 				A55234102CC16D2900CBE265 /* Components */,
 				A5609EAE2CDBD637000AF19E /* AllContacts */,
 				A5609F4A2CE0C141000AF19E /* Battery */,
