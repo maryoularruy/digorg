@@ -1,5 +1,5 @@
 //
-//  OptimizeBatteryChargingViewController.swift
+//  InstructionsViewController.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 10.11.2024.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class OptimizeBatteryChargingViewController: UIViewController {
-    private lazy var rootView = OptimizeBatteryChargingView()
+final class InstructionsViewController: UIViewController {
+    private lazy var rootView = InstructionsView()
     private var pages: [Pages.BatteryOptimizationPage] = Pages.BatteryOptimizationPage.allCases
     private var currentIndex: Int = 0
     
@@ -51,7 +51,7 @@ final class OptimizeBatteryChargingViewController: UIViewController {
     }
 }
 
-extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
+extension InstructionsViewController: ViewControllerProtocol {
     func setupUI() {
         setupPageController()
         setupPageControl()
@@ -86,7 +86,7 @@ extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
     }
 }
 
-extension OptimizeBatteryChargingViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension InstructionsViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentVC = viewController as? PageViewConroller else { return nil }
         var index = currentVC.page.index

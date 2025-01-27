@@ -61,7 +61,7 @@ extension BatteryViewController: ViewControllerProtocol {
 extension BatteryViewController: BatteryInstructionCellDelegate {
     func tapOnCell(_ type: BatteryInstructionCellType) {
         let vc: UIViewController = switch type {
-        case .optimizeBatteryCharging: OptimizeBatteryChargingViewController()
+        case .optimizeBatteryCharging: InstructionsViewController()
         case .lowPowerMode: LowPowerModeViewController()
         case .managingConnections: ManagingConnectionsViewContoller()
         case .locationServices: LocationServicesViewContoller()
