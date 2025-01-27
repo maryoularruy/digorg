@@ -21,6 +21,10 @@ enum Pages: CaseIterable {
         }
         
         var title: String {
+            "Optimize Battery Charging"
+        }
+        
+        var description: String {
             switch self {
             case .pageZero: "Open Settings"
             case .pageOne: "Go to Battery"
@@ -52,6 +56,10 @@ enum Pages: CaseIterable {
         }
         
         var title: String {
+            "Clean Safari Cache"
+        }
+        
+        var description: String {
             switch self {
             case .pageZero: "Open Settings"
             case .pageOne: "Go to Safari"
@@ -84,6 +92,10 @@ enum Pages: CaseIterable {
         }
         
         var title: String {
+            "Clean Telegram Cache"
+        }
+        
+        var description: String {
             switch self {
             case .pageZero: "Open Telegram"
             case .pageOne: "Go to Settings > Data and Storage"
@@ -117,6 +129,10 @@ enum Pages: CaseIterable {
         }
         
         var title: String {
+            "Offload Unused Apps"
+        }
+        
+        var description: String {
             switch self {
             case .pageZero: "Open Settings"
             case .pageOne: "Go to Safari"
@@ -150,6 +166,10 @@ enum Pages: CaseIterable {
         }
         
         var title: String {
+            "Optimize Viber Media"
+        }
+        
+        var description: String {
             switch self {
             case .pageZero: "Open Viber"
             case .pageOne: "Go to More > Settings"
@@ -187,6 +207,10 @@ enum Pages: CaseIterable {
         }
         
         var title: String {
+            "Clean up WhatsApp"
+        }
+        
+        var description: String {
             switch self {
             case .pageZero: "Open WhatsApp"
             case .pageOne: "Go to Settings > Storage and Data"
