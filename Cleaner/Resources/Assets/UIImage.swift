@@ -49,6 +49,13 @@ extension UIImage {
     static var check = UIImage(resource: .check)
     static var tip = UIImage(resource: .tip)
     
+    //MARK: -Network Speed Test
+    static var downloadBlue = UIImage(resource: .downloadBlue)
+    static var downloadBlack = UIImage(resource: .downloadBlack)
+    static var uploadOrange = UIImage(resource: .uploadOrange)
+    static var uploadBlack = UIImage(resource: .uploadBlack)
+    static var ping = UIImage(resource: .ping)
+    
     //MARK: -BatterySavingTool
     static var optimizeBatteryCharging = UIImage(resource: .optimizeBatteryCharging)
     static var lowPowerMode = UIImage(resource: .lowPowerMode)

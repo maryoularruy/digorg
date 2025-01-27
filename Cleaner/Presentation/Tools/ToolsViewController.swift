@@ -52,13 +52,14 @@ extension ToolsViewController: ToolOptionViewDelegate {
         let vc = switch option {
         case .secretAlbum: StoryboardScene.SecretAssets.initialScene.instantiate()
         case .secretContact: StoryboardScene.SecretContacts.initialScene.instantiate()
-        case .networkSpeedTest: StoryboardScene.SecretAssets.initialScene.instantiate()
+//        case .networkSpeedTest: NetworkSpeedTestViewController()
 //        case .widgets:
 //            StoryboardScene.SecretAlbum.initialScene.instantiate()
         case .battery: StoryboardScene.Battery.initialScene.instantiate()
         }
         userDefaultsService.remove(key: .isPasscodeConfirmed)
         vc.modalPresentationStyle = .fullScreen
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }
