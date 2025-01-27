@@ -1,5 +1,5 @@
 //
-//  InstructionsViewController.swift
+//  InstructionsMenuViewController.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 14.11.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class InstructionsViewController: UIViewController {
+final class InstructionsMenuViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var instructionsStackView: UIStackView!
     
@@ -22,7 +22,7 @@ final class InstructionsViewController: UIViewController {
     }
 }
 
-extension InstructionsViewController: ViewControllerProtocol {
+extension InstructionsMenuViewController: ViewControllerProtocol {
     func setupUI() {
         InstructionCellType.allCases.forEach { type in
             let view = InstructionCell()
@@ -43,7 +43,7 @@ extension InstructionsViewController: ViewControllerProtocol {
     }
 }
 
-extension InstructionsViewController: InstructionCellDelegate {
+extension InstructionsMenuViewController: InstructionCellDelegate {
     func tapOnCell(_ type: InstructionCellType) {
         let vc: UIViewController = switch type {
         case .safariCache: SafariCacheViewController()

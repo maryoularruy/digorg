@@ -39,9 +39,9 @@ internal enum StoryboardScene {
     internal static let initialScene = InitialSceneType<UIKit.UIViewController>(storyboard: LaunchScreen.self)
   }
   internal enum Instructions: StoryboardType {
-    internal static let storyboardName = "Instuctions"
+    internal static let storyboardName = "InstuctionsMenu"
 
-    internal static let initialScene = InitialSceneType<InstructionsViewController>(storyboard: Instructions.self)
+    internal static let initialScene = InitialSceneType<InstructionsMenuViewController>(storyboard: Instructions.self)
   }
   internal enum Main: StoryboardType {
     internal static let storyboardName = "Main"
