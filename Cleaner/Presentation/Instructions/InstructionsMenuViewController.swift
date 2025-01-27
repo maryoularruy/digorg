@@ -45,12 +45,12 @@ extension InstructionsMenuViewController: ViewControllerProtocol {
 
 extension InstructionsMenuViewController: InstructionCellDelegate {
     func tapOnCell(_ type: InstructionCellType) {
-        let vc: UIViewController = switch type {
-        case .safariCache: SafariCacheViewController()
-        case .telegramCache: TelegramCacheViewController()
-        case .offloadUnusedApps: UnusedAppsOffloadViewController()
-        case .optimizeViberMedia: ViberOptimizeViewController()
-        case .whatsAppCleanup: WhatsAppCleanupViewController()
+        let vc: InstructionsViewController = switch type {
+        case .safariCache: InstructionsViewController(pages: Pages.SafariCachePage.allCases)
+        case .telegramCache: InstructionsViewController(pages: Pages.TelegramCachePage.allCases)
+        case .offloadUnusedApps: InstructionsViewController(pages: Pages.OffloadUnusedApps.allCases)
+        case .optimizeViberMedia: InstructionsViewController(pages: Pages.OptimizeViberMedia.allCases)
+        case .whatsAppCleanup: InstructionsViewController(pages: Pages.WhatsAppCleanup.allCases)
         }
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .coverVertical
