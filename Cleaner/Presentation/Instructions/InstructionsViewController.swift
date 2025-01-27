@@ -16,6 +16,10 @@ final class InstructionsViewController: UIViewController {
         setupUI()
         addGestureRecognizers()
     }
+    
+    deinit {
+        print("InstructionsViewController deinit")
+    }
 }
 
 extension InstructionsViewController: ViewControllerProtocol {
@@ -32,14 +36,24 @@ extension InstructionsViewController: ViewControllerProtocol {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
     }
 }
 
 extension InstructionsViewController: InstructionCellDelegate {
     func tapOnCell(_ type: InstructionCellType) {
-        
-//        vc.modalPresentationStyle = .fullScreen
-//        vc.modalTransitionStyle = .coverVertical
-//        present(vc, animated: true)
+        let vc: UIViewController = switch type {
+        case .safariCache: SafariCacheViewController()
+        case .telegramCache: TelegramCacheViewController()
+        case .offloadUnusedApps: UnusedAppsOffloadViewController()
+        case .optimizeViberMedia: ViberOptimizeViewController()
+        case .whatsAppCleanup: WhatsAppCleanupViewController()
+        }
+        vc.modalPresentationStyle = .fullScreen
+        vc.modalTransitionStyle = .coverVertical
+        present(vc, animated: true)
     }
 }
