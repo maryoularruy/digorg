@@ -60,8 +60,8 @@ Turn it off for all the apps at the top of the screen or go through the list to 
             contentView.bottomAnchor.constraint(equalTo: scroll.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scroll.widthAnchor, constant: -32),
             
-            arrowBack.topAnchor.constraint(equalTo: scroll.topAnchor),
-            arrowBack.leadingAnchor.constraint(equalTo: scroll.leadingAnchor, constant: -16),
+            arrowBack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12.5),
+            arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
             
