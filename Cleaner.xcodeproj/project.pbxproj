@@ -583,6 +583,8 @@
 				75D3FC972A60717300F351A3 /* Launch */,
 				A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */,
 				A53EDA192CD0417900565625 /* CommonComponents */,
+				A5609F4A2CE0C141000AF19E /* Battery */,
+				A50D5B212CE66100006C259C /* Instructions */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -646,8 +648,6 @@
 		A51353CF2CD1567600656965 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				A50D5B212CE66100006C259C /* Instructions */,
-				A5609F4A2CE0C141000AF19E /* Battery */,
 				A54449102CD19943001ECA7A /* Components */,
 				A51353D02CD156BC00656965 /* Tools.storyboard */,
 				A51353D22CD156C500656965 /* ToolsViewController.swift */,
