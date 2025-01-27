@@ -9,8 +9,17 @@ import UIKit
 
 final class InstructionsViewController: UIViewController {
     private lazy var rootView = InstructionsView()
-    private var pages: [Pages.BatteryOptimizationPage] = Pages.BatteryOptimizationPage.allCases
+    private var pages: [any PageProtocol]
     private var currentIndex: Int = 0
+    
+    init(pages: [any PageProtocol]) {
+        self.pages = pages
+        super.init(nibName: .none, bundle: .none)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -55,6 +64,7 @@ extension InstructionsViewController: ViewControllerProtocol {
     func setupUI() {
         setupPageController()
         setupPageControl()
+        rootView.label.bind(text: pages.first?.title ?? "")
         rootView.actionButton.bind(text: "\(currentIndex == pages.count - 1 ? "Close" : "Next")")
     }
     
