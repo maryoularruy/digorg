@@ -43,12 +43,12 @@ final class PageViewConroller: UIViewController {
         view.addSubviews([label, instructionsImageView])
         
         NSLayoutConstraint.activate([
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -46),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             instructionsImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
             instructionsImageView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -33),
-            instructionsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            label.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            instructionsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }

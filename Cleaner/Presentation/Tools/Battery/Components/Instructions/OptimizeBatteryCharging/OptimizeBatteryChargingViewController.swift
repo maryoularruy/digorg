@@ -54,6 +54,7 @@ final class OptimizeBatteryChargingViewController: UIViewController {
 extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
     func setupUI() {
         setupPageController()
+        setupPageControl()
         rootView.actionButton.bind(text: "\(currentIndex == pages.count - 1 ? "Close" : "Next")")
     }
     
@@ -61,6 +62,10 @@ extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
         rootView.arrowBack.addTapGestureRecognizer { [weak self] in
             self?.dismiss(animated: true)
         }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
         
         rootView.actionButton.addTapGestureRecognizer { [weak self] in
             guard let self else { return }
@@ -74,6 +79,10 @@ extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
                 updateCurrentPage(index: currentVC.page.index + 1)
             }
         }
+    }
+    
+    @objc override func handleSwipeRight() {
+        dismiss(animated: true)
     }
 }
 
@@ -94,15 +103,6 @@ extension OptimizeBatteryChargingViewController: UIPageViewControllerDataSource,
         
         index += 1
         return PageViewConroller(with: pages[index])
-    }
-    
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        setupPageControl()
-        return pages.count
-    }
-    
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        currentIndex
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {

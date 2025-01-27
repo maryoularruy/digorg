@@ -34,8 +34,12 @@ final class BatteryLevelView: UIView {
 
     private func setup() {
         Bundle.main.loadNibNamed(nibName, owner: self)
-        contentView.layer.cornerRadius = 20
+        
+        progressBar.layer.cornerRadius = 6
+        progressBar.clipsToBounds = true
         savingModeLabel.setGreyTextColor()
+        
+        contentView.layer.cornerRadius = 20
         addShadows()
         addSubview(contentView)
         contentView.frame = bounds

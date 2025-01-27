@@ -51,6 +51,10 @@ extension BatteryViewController: ViewControllerProtocol {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
     }
 }
 

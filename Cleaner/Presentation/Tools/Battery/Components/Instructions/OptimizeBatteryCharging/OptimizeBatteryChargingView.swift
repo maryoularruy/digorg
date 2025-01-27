@@ -38,6 +38,7 @@ final class OptimizeBatteryChargingView: UIView {
     
     private func setupView() {
         backgroundColor = .paleGrey
+        actionButton.layer.cornerRadius = 25
     }
     
     private func initConstraints() {
@@ -49,8 +50,8 @@ final class OptimizeBatteryChargingView: UIView {
                     ])
         
         NSLayoutConstraint.activate([
-            arrowBack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 2),
-            arrowBack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
+            arrowBack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12.5),
+            arrowBack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
             arrowBack.widthAnchor.constraint(equalToConstant: arrowBackButton.frame.width),
             
