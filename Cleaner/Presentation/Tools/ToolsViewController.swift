@@ -52,7 +52,7 @@ extension ToolsViewController: ToolOptionViewDelegate {
         let vc = switch option {
         case .secretAlbum: StoryboardScene.SecretAssets.initialScene.instantiate()
         case .secretContact: StoryboardScene.SecretContacts.initialScene.instantiate()
-        case .networkSpeedTest: NetworkSpeedTestViewController()
+//        case .networkSpeedTest: NetworkSpeedTestViewController()
 //        case .widgets:
 //            StoryboardScene.SecretAlbum.initialScene.instantiate()
         case .battery: StoryboardScene.Battery.initialScene.instantiate()

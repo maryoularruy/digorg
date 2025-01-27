@@ -11,7 +11,7 @@ import UIKit
 enum ToolOption: String, CaseIterable {
     case secretAlbum = "Secret Album",
          secretContact = "Secret Contact",
-         networkSpeedTest = "Network Speed Test",
+//         networkSpeedTest = "Network Speed Test"
 //         widgets = "Widgets",
          battery = "Battery"
     
@@ -19,7 +19,7 @@ enum ToolOption: String, CaseIterable {
         switch self {
         case .secretAlbum: .secretAlbum
         case .secretContact: .secretContact
-        case .networkSpeedTest: .networkSpeedTest
+//        case .networkSpeedTest: .networkSpeedTest
 //        case .widgets: .widgets
         case .battery: .battery
         }
@@ -29,7 +29,7 @@ enum ToolOption: String, CaseIterable {
         switch self {
         case .secretAlbum: "Secret folder for photos and videos"
         case .secretContact: "Secret contact folder"
-        case .networkSpeedTest: "Check your internet connection’s performance"
+//        case .networkSpeedTest: "Check your internet connection’s performance"
 //        case .widgets: "Personalize your Home screen"
         case .battery: "Save your battery life"
         }
@@ -39,7 +39,7 @@ enum ToolOption: String, CaseIterable {
         switch self {
         case .secretAlbum: true
         case .secretContact: true
-        case .networkSpeedTest: false
+//        case .networkSpeedTest: false
 //        case .widgets: false
         case .battery: false
         }
