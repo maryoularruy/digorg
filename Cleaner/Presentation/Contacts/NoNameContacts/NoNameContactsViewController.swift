@@ -93,10 +93,6 @@ final class NoNameContactsViewController: UIViewController {
             view.addSubview(emptyStateView)
         }
     }
-    
-    deinit {
-        print("deinit no names")
-    }
 }
 
 extension NoNameContactsViewController: ViewControllerProtocol {

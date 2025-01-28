@@ -16,10 +16,6 @@ final class InstructionsMenuViewController: UIViewController {
         setupUI()
         addGestureRecognizers()
     }
-    
-    deinit {
-        print("InstructionsViewController deinit")
-    }
 }
 
 extension InstructionsMenuViewController: ViewControllerProtocol {

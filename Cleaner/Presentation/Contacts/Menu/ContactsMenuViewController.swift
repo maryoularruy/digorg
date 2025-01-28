@@ -74,10 +74,6 @@ final class ContactsMenuViewController: UIViewController {
         alertController.addAction(settingsAction)
         present(alertController, animated: true, completion: nil)
     }
-    
-    deinit {
-        print("deinit contacts menu")
-    }
 }
 
 extension ContactsMenuViewController: ViewControllerProtocol {

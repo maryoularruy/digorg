@@ -19,10 +19,6 @@ final class PremiumViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
     }
-    
-    deinit {
-        print("deinit")
-    }
 }
 
 extension PremiumViewController: ViewControllerProtocol {
@@ -31,9 +27,7 @@ extension PremiumViewController: ViewControllerProtocol {
         rootView.premiumOfferView.delegate = self
     }
     
-    func addGestureRecognizers() {
-        
-    }
+    func addGestureRecognizers() {}
 }
 
 extension PremiumViewController: PremiumViewDelegate {

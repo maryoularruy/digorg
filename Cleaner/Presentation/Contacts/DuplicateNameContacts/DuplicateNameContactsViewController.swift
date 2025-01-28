@@ -75,10 +75,6 @@ final class DuplicateNameContactsViewController: UIViewController {
             navigationController?.pushViewController(contactVC, animated: true)
         }
     }
-    
-    deinit {
-        print("deinit dup names")
-    }
 }
 
 extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewDataSource {
