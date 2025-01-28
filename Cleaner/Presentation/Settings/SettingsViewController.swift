@@ -19,6 +19,7 @@ final class SettingsViewController: UIViewController {
 extension SettingsViewController: ViewControllerProtocol {
     func setupUI() {
         buyPremiumView.delegate = self
+        buyPremiumView.heightAnchor.constraint(equalToConstant: BuyPremiumView.height).isActive = true
     }
     
     func addGestureRecognizers() {}
