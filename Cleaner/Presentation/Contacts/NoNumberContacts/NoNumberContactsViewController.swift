@@ -93,10 +93,6 @@ final class NoNumberContactsViewController: UIViewController {
             view.addSubview(emptyStateView)
         }
     }
-    
-    deinit {
-        print("deinit no number")
-    }
 }
 
 extension NoNumberContactsViewController: ViewControllerProtocol {

@@ -1,5 +1,5 @@
 //
-//  OptimizeBatteryChargingView.swift
+//  InstructionsView.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 11.11.2024.
@@ -7,14 +7,10 @@
 
 import UIKit
 
-final class OptimizeBatteryChargingView: UIView {
+final class InstructionsView: UIView {
     lazy var arrowBack: UIView = arrowBackButton
     
-    private lazy var label: Semibold15LabelStyle = {
-        let label = Semibold15LabelStyle()
-        label.bind(text: "Optimize Battery Charging")
-        return label
-    }()
+    lazy var label: Semibold15LabelStyle = Semibold15LabelStyle()
     
     lazy var pageController: UIPageViewController = UIPageViewController(transitionStyle: .scroll,
                                                                          navigationOrientation: .horizontal,
@@ -42,12 +38,7 @@ final class OptimizeBatteryChargingView: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([arrowBack,
-                     label,
-                     pageController.view,
-                     pageControl,
-                     actionButton
-                    ])
+        addSubviews([arrowBack, label, pageController.view, pageControl, actionButton])
         
         NSLayoutConstraint.activate([
             arrowBack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12.5),

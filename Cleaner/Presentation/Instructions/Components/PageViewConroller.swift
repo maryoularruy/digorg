@@ -10,6 +10,7 @@ import UIKit
 protocol PageProtocol: CaseIterable {
     var index: Int { get }
     var title: String { get }
+    var description: String { get }
     var image: UIImage { get }
 }
 
@@ -35,7 +36,7 @@ final class PageViewConroller: UIViewController {
     }
     
     private func bind(_ page: any PageProtocol) {
-        label.bind(text: page.title)
+        label.bind(text: page.description)
         instructionsImageView.image = page.image
     }
     

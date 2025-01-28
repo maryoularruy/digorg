@@ -21,7 +21,6 @@
 		756866CF2ACD9ED0008DBF7C /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866CE2ACD9ED0008DBF7C /* OnboardingModel.swift */; };
 		756866D12AD1AE58008DBF7C /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866D02AD1AE58008DBF7C /* CardModel.swift */; };
 		756866D92AD1D398008DBF7C /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866D82AD1D398008DBF7C /* DeviceInfoViewController.swift */; };
-		756DF0A92ADC6D0700CC187D /* InternetSpeed in Frameworks */ = {isa = PBXBuildFile; productRef = 756DF0A82ADC6D0700CC187D /* InternetSpeed */; };
 		75D3FC372A6069AF00F351A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC362A6069AF00F351A3 /* AppDelegate.swift */; };
 		75D3FC3B2A6069AF00F351A3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC3A2A6069AF00F351A3 /* MainViewController.swift */; };
 		75D3FC3E2A6069AF00F351A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC3C2A6069AF00F351A3 /* Main.storyboard */; };
@@ -161,10 +160,6 @@
 		FA3988602B30602A0096F335 /* VideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39883A2B30602A0096F335 /* VideoSource.swift */; };
 		FA3988682B3060A90096F335 /* Disk in Frameworks */ = {isa = PBXBuildFile; productRef = FA3988672B3060A90096F335 /* Disk */; };
 		FA39886A2B3060F10096F335 /* Extension+Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988692B3060F10096F335 /* Extension+Set.swift */; };
-		FA5358672B3C4C170026FDC2 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FA5358662B3C4C170026FDC2 /* Realm */; };
-		FA5358692B3C4C170026FDC2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA5358682B3C4C170026FDC2 /* RealmSwift */; };
-		FA53586B2B3C4D490026FDC2 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53586A2B3C4D490026FDC2 /* Credentials.swift */; };
-		FA53586D2B3C4D6A0026FDC2 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53586C2B3C4D6A0026FDC2 /* RealmManager.swift */; };
 		FA641DDF2B3456DC00F6A466 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */; };
 		FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA641DE02B34574300F6A466 /* Calendar.storyboard */; };
 		FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DE22B34575300F6A466 /* CalendarViewController.swift */; };
@@ -342,8 +337,6 @@
 		FA3988392B30602A0096F335 /* ImageFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFormat.swift; sourceTree = "<group>"; };
 		FA39883A2B30602A0096F335 /* VideoSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSource.swift; sourceTree = "<group>"; };
 		FA3988692B3060F10096F335 /* Extension+Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Set.swift"; sourceTree = "<group>"; };
-		FA53586A2B3C4D490026FDC2 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
-		FA53586C2B3C4D6A0026FDC2 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		FA641DE02B34574300F6A466 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		FA641DE22B34575300F6A466 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -392,14 +385,11 @@
 				FA3987B42B305B190096F335 /* BottomPopup in Frameworks */,
 				75D3FC6F2A606DBB00F351A3 /* SwiftyUserDefaults in Frameworks */,
 				7532F8752AE30517007469EA /* SwiftyContacts in Frameworks */,
-				756DF0A92ADC6D0700CC187D /* InternetSpeed in Frameworks */,
 				FA3988682B3060A90096F335 /* Disk in Frameworks */,
 				75D3FC722A606DD100F351A3 /* Reusable in Frameworks */,
 				FA99F2F62B3C462700D4B239 /* IQKeyboardManagerSwift in Frameworks */,
 				FACA30972B3E035C0018FA5F /* Valet in Frameworks */,
-				FA5358692B3C4C170026FDC2 /* RealmSwift in Frameworks */,
 				7532F8502AE2766B007469EA /* Reachability in Frameworks */,
-				FA5358672B3C4C170026FDC2 /* Realm in Frameworks */,
 				7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */,
 				FA3987B72B305C120096F335 /* Haneke in Frameworks */,
 				FA3987B12B305A3A0096F335 /* SDWebImagePhotosPlugin in Frameworks */,
@@ -456,7 +446,6 @@
 				FA3987412B3054B90096F335 /* PHAssetGroup.swift */,
 				756866CE2ACD9ED0008DBF7C /* OnboardingModel.swift */,
 				756866D02AD1AE58008DBF7C /* CardModel.swift */,
-				FA53586A2B3C4D490026FDC2 /* Credentials.swift */,
 				A53836A02CBC68C2005BE39C /* CleanupOption.swift */,
 				A53836CF2CBEC6DE005BE39C /* Mode.swift */,
 				A55235972CC27B9300CBE265 /* ContactsInfoType.swift */,
@@ -583,6 +572,8 @@
 				75D3FC972A60717300F351A3 /* Launch */,
 				A50F58B42CB6D10100AB3166 /* ViewControllerProtocol.swift */,
 				A53EDA192CD0417900565625 /* CommonComponents */,
+				A5609F4A2CE0C141000AF19E /* Battery */,
+				A50D5B212CE66100006C259C /* Instructions */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -636,7 +627,6 @@
 				7504C24B2AD44407005FB398 /* DeviceInfoService.swift */,
 				7532F8712AE304B5007469EA /* ContactManager.swift */,
 				FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */,
-				FA53586C2B3C4D6A0026FDC2 /* RealmManager.swift */,
 				A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */,
 				A598A0742CECA12A002F346E /* Store.swift */,
 			);
@@ -646,8 +636,6 @@
 		A51353CF2CD1567600656965 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				A50D5B212CE66100006C259C /* Instructions */,
-				A5609F4A2CE0C141000AF19E /* Battery */,
 				A54449102CD19943001ECA7A /* Components */,
 				A51353D02CD156BC00656965 /* Tools.storyboard */,
 				A51353D22CD156C500656965 /* ToolsViewController.swift */,
@@ -1079,7 +1067,6 @@
 				75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */,
 				75D3FC712A606DD100F351A3 /* Reusable */,
 				7504C24E2AD5E99B005FB398 /* NetworkFlows */,
-				756DF0A82ADC6D0700CC187D /* InternetSpeed */,
 				7532F84F2AE2766B007469EA /* Reachability */,
 				7532F8742AE30517007469EA /* SwiftyContacts */,
 				FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */,
@@ -1087,8 +1074,6 @@
 				FA3987B62B305C120096F335 /* Haneke */,
 				FA3988672B3060A90096F335 /* Disk */,
 				FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */,
-				FA5358662B3C4C170026FDC2 /* Realm */,
-				FA5358682B3C4C170026FDC2 /* RealmSwift */,
 				FACA30962B3E035C0018FA5F /* Valet */,
 			);
 			productName = VideoCalls;
@@ -1124,7 +1109,6 @@
 				75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
 				75D3FC702A606DD100F351A3 /* XCRemoteSwiftPackageReference "Reusable" */,
 				7504C24D2AD5E99B005FB398 /* XCRemoteSwiftPackageReference "NetworkFlows" */,
-				756DF0A72ADC6D0700CC187D /* XCRemoteSwiftPackageReference "InternetSpeed" */,
 				7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */,
 				7532F8732AE30517007469EA /* XCRemoteSwiftPackageReference "SwiftyContacts" */,
 				FA3987AF2B305A3A0096F335 /* XCRemoteSwiftPackageReference "SDWebImagePhotosPlugin" */,
@@ -1132,7 +1116,6 @@
 				FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */,
 				FA3988662B3060A90096F335 /* XCRemoteSwiftPackageReference "Disk" */,
 				FA99F2F42B3C462700D4B239 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				FA5358652B3C4C170026FDC2 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				FACA30952B3E035C0018FA5F /* XCRemoteSwiftPackageReference "Valet" */,
 			);
 			productRefGroup = 75D3FC342A6069AF00F351A3 /* Products */;
@@ -1274,13 +1257,11 @@
 				FA3987812B3058140096F335 /* Extension+PHAsset.swift in Sources */,
 				FA39885F2B30602A0096F335 /* ImageFormat.swift in Sources */,
 				FA3987FB2B305FA50096F335 /* DKPhotoBaseImagePreviewVC.swift in Sources */,
-				FA53586D2B3C4D6A0026FDC2 /* RealmManager.swift in Sources */,
 				FA3987762B3055930096F335 /* OSTypes.m in Sources */,
 				A5609EA12CDBBE06000AF19E /* SecretContactsViewController.swift in Sources */,
 				FA3987522B3055510096F335 /* ContentEquatable.swift in Sources */,
 				A5600F612CD532CA006EE6BC /* NSItemProvider+ext.swift in Sources */,
 				FA3987AB2B30599C0096F335 /* GroupedAssetsViewController.swift in Sources */,
-				FA53586B2B3C4D490026FDC2 /* Credentials.swift in Sources */,
 				FA641DDF2B3456DC00F6A466 /* CalendarManager.swift in Sources */,
 				7504C24C2AD44407005FB398 /* DeviceInfoService.swift in Sources */,
 				FA3988442B30602A0096F335 /* dprint.swift in Sources */,
@@ -1598,14 +1579,6 @@
 				kind = branch;
 			};
 		};
-		756DF0A72ADC6D0700CC187D /* XCRemoteSwiftPackageReference "InternetSpeed" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/HumorousGhost/InternetSpeed";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sunshinejr/SwiftyUserDefaults.git";
@@ -1654,14 +1627,6 @@
 				minimumVersion = 0.6.4;
 			};
 		};
-		FA5358652B3C4C170026FDC2 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		FA99F2F42B3C462700D4B239 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
@@ -1696,11 +1661,6 @@
 			package = 7532F8732AE30517007469EA /* XCRemoteSwiftPackageReference "SwiftyContacts" */;
 			productName = SwiftyContacts;
 		};
-		756DF0A82ADC6D0700CC187D /* InternetSpeed */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 756DF0A72ADC6D0700CC187D /* XCRemoteSwiftPackageReference "InternetSpeed" */;
-			productName = InternetSpeed;
-		};
 		75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */;
@@ -1730,16 +1690,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA3988662B3060A90096F335 /* XCRemoteSwiftPackageReference "Disk" */;
 			productName = Disk;
-		};
-		FA5358662B3C4C170026FDC2 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FA5358652B3C4C170026FDC2 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		FA5358682B3C4C170026FDC2 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FA5358652B3C4C170026FDC2 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;

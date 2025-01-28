@@ -1,5 +1,5 @@
 //
-//  OptimizeBatteryChargingViewController.swift
+//  InstructionsViewController.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 10.11.2024.
@@ -7,10 +7,19 @@
 
 import UIKit
 
-final class OptimizeBatteryChargingViewController: UIViewController {
-    private lazy var rootView = OptimizeBatteryChargingView()
-    private var pages: [Pages.BatteryOptimizationPage] = Pages.BatteryOptimizationPage.allCases
+final class InstructionsViewController: UIViewController {
+    private lazy var rootView = InstructionsView()
+    private var pages: [any PageProtocol]
     private var currentIndex: Int = 0
+    
+    init(pages: [any PageProtocol]) {
+        self.pages = pages
+        super.init(nibName: .none, bundle: .none)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         super.loadView()
@@ -51,10 +60,11 @@ final class OptimizeBatteryChargingViewController: UIViewController {
     }
 }
 
-extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
+extension InstructionsViewController: ViewControllerProtocol {
     func setupUI() {
         setupPageController()
         setupPageControl()
+        rootView.label.bind(text: pages.first?.title ?? "")
         rootView.actionButton.bind(text: "\(currentIndex == pages.count - 1 ? "Close" : "Next")")
     }
     
@@ -86,7 +96,7 @@ extension OptimizeBatteryChargingViewController: ViewControllerProtocol {
     }
 }
 
-extension OptimizeBatteryChargingViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension InstructionsViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentVC = viewController as? PageViewConroller else { return nil }
         var index = currentVC.page.index

@@ -83,10 +83,6 @@ final class DuplicateNumberContactsViewController: UIViewController {
             navigationController?.pushViewController(contactVC, animated: true)
         }
     }
-    
-    deinit {
-        print("deinit dup numbers")
-    }
 }
 
 extension DuplicateNumberContactsViewController: ViewControllerProtocol {

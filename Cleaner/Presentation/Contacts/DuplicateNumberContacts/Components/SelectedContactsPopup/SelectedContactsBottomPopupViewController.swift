@@ -119,10 +119,6 @@ final class SelectedContactsBottomPopupViewController: BottomPopupViewController
         }
         height = CGFloat(h)
     }
-    
-    deinit {
-        print("SelectedContactsBottomPopupViewController deinit")
-    }
 }
 
 extension SelectedContactsBottomPopupViewController: ActionAndCancelToolbarDelegate {
