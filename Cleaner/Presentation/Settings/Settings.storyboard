@@ -29,17 +29,33 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fkg-3B-Hwp" customClass="BuyPremiumView" customModule="Cleaner" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="73" width="365" height="122"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nr6-5Q-dhQ">
+                                                <rect key="frame" x="2" y="56" width="361" height="200"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Remove after Import" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rA-ik-yt3" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                                                <rect key="frame" x="2" y="373" width="155.66666666666666" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5b7-N9-3Hd" customClass="SettingsOptionsContainer" customModule="Cleaner" customModuleProvider="target">
+                                                <rect key="frame" x="2" y="441" width="361" height="128"/>
+                                                <color key="backgroundColor" name="PaleGrey"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Sxn-dI-Q9s" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" id="69T-iK-AV1"/>
-                                            <constraint firstItem="fkg-3B-Hwp" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" id="LOM-ei-yMD"/>
-                                            <constraint firstItem="fkg-3B-Hwp" firstAttribute="top" secondItem="Sxn-dI-Q9s" secondAttribute="bottom" constant="24" id="eaB-6f-X0J"/>
-                                            <constraint firstAttribute="trailing" secondItem="fkg-3B-Hwp" secondAttribute="trailing" id="rOc-Hx-r0J"/>
+                                            <constraint firstItem="nr6-5Q-dhQ" firstAttribute="top" secondItem="Sxn-dI-Q9s" secondAttribute="bottom" constant="24" id="AkR-PX-kpR"/>
+                                            <constraint firstItem="nr6-5Q-dhQ" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" constant="2" id="GBM-MM-BgM"/>
+                                            <constraint firstAttribute="trailing" secondItem="nr6-5Q-dhQ" secondAttribute="trailing" constant="2" id="IhQ-Nm-uFB"/>
+                                            <constraint firstItem="5b7-N9-3Hd" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" constant="2" id="Iza-JE-h0M"/>
+                                            <constraint firstItem="5b7-N9-3Hd" firstAttribute="top" secondItem="5rA-ik-yt3" secondAttribute="bottom" constant="16" id="OCe-i6-Vqh"/>
+                                            <constraint firstItem="5rA-ik-yt3" firstAttribute="top" secondItem="nr6-5Q-dhQ" secondAttribute="bottom" constant="32" id="aAJ-mn-Q4P"/>
+                                            <constraint firstItem="5rA-ik-yt3" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" constant="2" id="f1W-05-tYI"/>
+                                            <constraint firstAttribute="trailing" secondItem="5b7-N9-3Hd" secondAttribute="trailing" constant="2" id="teX-bw-0lo"/>
+                                            <constraint firstAttribute="bottom" secondItem="5b7-N9-3Hd" secondAttribute="bottom" id="uFx-SH-AHE"/>
                                             <constraint firstItem="Sxn-dI-Q9s" firstAttribute="top" secondItem="5Vz-xh-KEj" secondAttribute="top" constant="7" id="zd7-YD-MA8"/>
                                         </constraints>
                                     </view>
@@ -66,7 +82,8 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="4J1-4I-gSB"/>
                     <connections>
-                        <outlet property="buyPremiumView" destination="fkg-3B-Hwp" id="LLN-vy-R3y"/>
+                        <outlet property="removeAfterImportContainer" destination="5b7-N9-3Hd" id="tQM-uo-VjI"/>
+                        <outlet property="subscriptionStackView" destination="nr6-5Q-dhQ" id="wo8-v1-1f9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

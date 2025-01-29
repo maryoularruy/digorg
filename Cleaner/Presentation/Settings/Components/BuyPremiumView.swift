@@ -84,7 +84,8 @@ final class BuyPremiumView: UIView {
             background.topAnchor.constraint(equalTo: contentView.topAnchor),
             background.leadingAnchor.constraint(equalTo: label.trailingAnchor),
             background.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            background.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            background.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            background.heightAnchor.constraint(equalToConstant: BuyPremiumView.height)
         ])
     }
 }
