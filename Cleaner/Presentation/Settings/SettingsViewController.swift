@@ -10,6 +10,8 @@ import UIKit
 final class SettingsViewController: UIViewController {
     @IBOutlet weak var subscriptionStackView: UIStackView!
     @IBOutlet weak var removeAfterImportContainer: SettingsOptionsContainer!
+    @IBOutlet weak var passcodeOptionsContainer: SettingsOptionsContainer!
+    @IBOutlet weak var applicationOptionsContainer: SettingsOptionsContainer!
     
     private lazy var buyPremiumView = BuyPremiumView()
     private lazy var subscriptionInfoView = SettingsOptionsContainer()
@@ -46,6 +48,13 @@ extension SettingsViewController: ViewControllerProtocol {
         
         removeAfterImportContainer.bind(views: SettingsOption.removeAfterImportOptions)
         removeAfterImportContainer.delegate = self
+        
+        passcodeOptionsContainer.bind(views: SettingsOption.passcodeOptions)
+        passcodeOptionsContainer.delegate = self
+        
+//        applicationOptionsContainer.bind(views: SettingsOption.applicationOptions)
+//        applicationOptionsContainer.heightAnchor.constraint(equalToConstant: 211).isActive = true
+//        applicationOptionsContainer.delegate = self
     }
     
     func addGestureRecognizers() {}
