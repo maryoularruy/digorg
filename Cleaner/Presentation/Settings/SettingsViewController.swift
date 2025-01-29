@@ -12,6 +12,7 @@ final class SettingsViewController: UIViewController {
     @IBOutlet weak var removeAfterImportContainer: SettingsOptionsContainer!
     
     private lazy var buyPremiumView = BuyPremiumView()
+    private lazy var subscriptionInfoView = SettingsOptionsContainer()
     
     private lazy var userDefaultsService = UserDefaultsService.shared
 
@@ -27,29 +28,23 @@ final class SettingsViewController: UIViewController {
     
     private func setupSubscriptionStackView() {
 //        buyPremiumView.isHidden = !userDefaultsService.isSubscriptionActive
-//        testView.isHidden = userDefaultsService.isSubscriptionActive
+//        subscriptionInfoView.isHidden = userDefaultsService.isSubscriptionActive
         
         //
-//        testView.isHidden = true
+        subscriptionInfoView.isHidden = true
         //
     }
 }
 
 extension SettingsViewController: ViewControllerProtocol {
     func setupUI() {
+        subscriptionInfoView.bind(views: SettingsOption.subscriptionOption)
         subscriptionStackView.addArrangedSubview(buyPremiumView)
-        //
-//        subscriptionStackView.addArrangedSubview(testView)
-        //
-        
+        subscriptionStackView.addArrangedSubview(subscriptionInfoView)
         buyPremiumView.delegate = self
+        subscriptionInfoView.delegate = self
         
-        //
-        removeAfterImportContainer.bind(views: [SettingsOption(title: "Subscription", type: .subscriptionInfo),
-                                                SettingsOption(title: "Sub", type: .subscriptionInfo),
-                                                SettingsOption(title: "asi", isSwitchable: true, type: .changePassword)])
-        //
-        
+        removeAfterImportContainer.bind(views: SettingsOption.removeAfterImportOptions)
         removeAfterImportContainer.delegate = self
     }
     
