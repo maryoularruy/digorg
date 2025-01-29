@@ -33,28 +33,27 @@ final class SettingsViewController: UIViewController {
 //        subscriptionInfoView.isHidden = userDefaultsService.isSubscriptionActive
         
         //
-        subscriptionInfoView.isHidden = true
+        buyPremiumView.isHidden = true
         //
     }
 }
 
 extension SettingsViewController: ViewControllerProtocol {
     func setupUI() {
-        subscriptionInfoView.bind(views: SettingsOption.subscriptionOption)
+        subscriptionInfoView.bind(options: SettingsOption.subscriptionOption)
         subscriptionStackView.addArrangedSubview(buyPremiumView)
         subscriptionStackView.addArrangedSubview(subscriptionInfoView)
         buyPremiumView.delegate = self
         subscriptionInfoView.delegate = self
         
-        removeAfterImportContainer.bind(views: SettingsOption.removeAfterImportOptions)
+        removeAfterImportContainer.bind(options: SettingsOption.removeAfterImportOptions)
         removeAfterImportContainer.delegate = self
         
-        passcodeOptionsContainer.bind(views: SettingsOption.passcodeOptions)
+        passcodeOptionsContainer.bind(options: SettingsOption.passcodeOptions)
         passcodeOptionsContainer.delegate = self
         
-//        applicationOptionsContainer.bind(views: SettingsOption.applicationOptions)
-//        applicationOptionsContainer.heightAnchor.constraint(equalToConstant: 211).isActive = true
-//        applicationOptionsContainer.delegate = self
+        applicationOptionsContainer.bind(options: SettingsOption.applicationOptions)
+        applicationOptionsContainer.delegate = self
     }
     
     func addGestureRecognizers() {}

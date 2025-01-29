@@ -13,7 +13,6 @@ protocol SettingsOptionCellDelegate: AnyObject {
 
 final class SettingsOptionCell: UIView {
     weak var delegate: SettingsOptionCellDelegate?
-    static var height: CGFloat = 52.0
     
     private lazy var title: Semibold15LabelStyle = Semibold15LabelStyle()
     private lazy var rightArrowImageView: UIImageView = UIImageView(image: .arrowForwardGrey)
@@ -70,7 +69,7 @@ final class SettingsOptionCell: UIView {
             
             NSLayoutConstraint.activate([
                 optionSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-                optionSwitch.centerYAnchor.constraint(equalTo: title.centerYAnchor),
+                optionSwitch.centerYAnchor.constraint(equalTo: centerYAnchor),
                 optionSwitch.heightAnchor.constraint(equalToConstant: 31)
             ])
         } else {
@@ -78,7 +77,7 @@ final class SettingsOptionCell: UIView {
             
             NSLayoutConstraint.activate([
                 rightArrowImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-                rightArrowImageView.centerYAnchor.constraint(equalTo: title.centerYAnchor),
+                rightArrowImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
                 rightArrowImageView.heightAnchor.constraint(equalToConstant: 20),
                 rightArrowImageView.widthAnchor.constraint(equalToConstant: 20)
             ])

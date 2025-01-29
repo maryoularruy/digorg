@@ -11,7 +11,7 @@ protocol SettingsOptionsContainerDelegate: AnyObject {
     func tapOnOption(_ option: SettingsOption)
 }
 
-final class SettingsOptionsContainer: UIView {
+final class SettingsOptionsContainer: UIStackView {
     weak var delegate: SettingsOptionsContainerDelegate?
     
     override init(frame: CGRect) {
@@ -19,51 +19,48 @@ final class SettingsOptionsContainer: UIView {
         setupView()
     }
     
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
     }
     
-    func bind(views: [SettingsOption]) {
-        let separatorView = UIView()
-        separatorView.backgroundColor = .lightGrey
+    func bind(options: [SettingsOption]) {
+        arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        views.forEach { option in
+        options.forEach { option in
             let cell = SettingsOptionCell(option: option)
             cell.delegate = self
-            addSubviews([cell])
-
-            NSLayoutConstraint.activate([
-                cell.leadingAnchor.constraint(equalTo: leadingAnchor),
-                cell.trailingAnchor.constraint(equalTo: trailingAnchor),
-                cell.heightAnchor.constraint(equalToConstant: SettingsOptionCell.height)
-            ])
             
-            if option == views.first {
-                cell.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            } else {
-                cell.topAnchor.constraint(equalTo: subviews[subviews.count - 2].bottomAnchor).isActive = true
-            }
+            addArrangedSubview(cell)
             
-            if option == views.last {
-                cell.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-            } else {
-                addSubviews([separatorView])
-                
-                NSLayoutConstraint.activate([
-                    separatorView.topAnchor.constraint(equalTo: subviews[subviews.count - 2].bottomAnchor),
-                    separatorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-                    separatorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-                    separatorView.heightAnchor.constraint(equalToConstant: 1)
-                ])
+            if option != options.last {
+                addArrangedSubview(getSeparator())
             }
         }
+    }
+    
+    private func getSeparator() -> UIView {
+        let view = UIView()
+        let separatorView = UIView()
+        separatorView.backgroundColor = .lightGrey
+        view.addSubviews([separatorView])
+        
+        NSLayoutConstraint.activate([
+            separatorView.topAnchor.constraint(equalTo: view.topAnchor),
+            separatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            separatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            separatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+        return view
     }
     
     private func setupView() {
         backgroundColor = .paleGrey
         layer.cornerRadius = 20
         addShadows()
+        
+        axis = .vertical
     }
 }
 

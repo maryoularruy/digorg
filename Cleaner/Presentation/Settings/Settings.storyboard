@@ -63,7 +63,6 @@
                                             <constraint firstItem="WcV-fR-RG2" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" id="24K-Sd-qV0"/>
                                             <constraint firstAttribute="trailing" secondItem="Hpv-9f-1sb" secondAttribute="trailing" id="5Lm-nP-ksF"/>
                                             <constraint firstItem="Sxn-dI-Q9s" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" constant="-2" id="69T-iK-AV1"/>
-                                            <constraint firstItem="5b7-N9-3Hd" firstAttribute="top" secondItem="5Vz-xh-KEj" secondAttribute="bottom" id="Ajj-rK-w34"/>
                                             <constraint firstItem="nr6-5Q-dhQ" firstAttribute="top" secondItem="Sxn-dI-Q9s" secondAttribute="bottom" constant="24" id="AkR-PX-kpR"/>
                                             <constraint firstItem="b7o-qV-pFP" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" id="G9o-kh-Wvg"/>
                                             <constraint firstItem="nr6-5Q-dhQ" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" constant="-2" id="GBM-MM-BgM"/>
@@ -74,19 +73,19 @@
                                             <constraint firstItem="5b7-N9-3Hd" firstAttribute="top" secondItem="5rA-ik-yt3" secondAttribute="bottom" constant="16" id="OCe-i6-Vqh"/>
                                             <constraint firstItem="WcV-fR-RG2" firstAttribute="top" secondItem="Hpv-9f-1sb" secondAttribute="bottom" constant="32" id="SRC-uR-986"/>
                                             <constraint firstItem="b7o-qV-pFP" firstAttribute="top" secondItem="WcV-fR-RG2" secondAttribute="bottom" constant="32" id="XAd-Cz-ITS"/>
-                                            <constraint firstItem="5b7-N9-3Hd" firstAttribute="top" secondItem="5Vz-xh-KEj" secondAttribute="bottom" id="ZHy-Or-91Y"/>
                                             <constraint firstItem="5rA-ik-yt3" firstAttribute="top" secondItem="nr6-5Q-dhQ" secondAttribute="bottom" constant="32" id="aAJ-mn-Q4P"/>
                                             <constraint firstAttribute="trailing" secondItem="b7o-qV-pFP" secondAttribute="trailing" id="b86-0F-RQK"/>
                                             <constraint firstItem="5rA-ik-yt3" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" id="f1W-05-tYI"/>
                                             <constraint firstAttribute="trailing" secondItem="WcV-fR-RG2" secondAttribute="trailing" id="jZk-tu-eMA"/>
                                             <constraint firstAttribute="trailing" secondItem="5b7-N9-3Hd" secondAttribute="trailing" id="teX-bw-0lo"/>
+                                            <constraint firstAttribute="bottom" secondItem="b7o-qV-pFP" secondAttribute="bottom" id="z4n-MT-vyr"/>
                                             <constraint firstItem="Sxn-dI-Q9s" firstAttribute="top" secondItem="5Vz-xh-KEj" secondAttribute="top" constant="7" id="zd7-YD-MA8"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="5Vz-xh-KEj" secondAttribute="bottom" constant="100" id="1U1-64-StQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Vz-xh-KEj" secondAttribute="bottom" constant="70" id="1U1-64-StQ"/>
                                     <constraint firstItem="5Vz-xh-KEj" firstAttribute="top" secondItem="r4f-KK-ltr" secondAttribute="top" id="J90-2n-XMw"/>
                                     <constraint firstItem="5Vz-xh-KEj" firstAttribute="leading" secondItem="r4f-KK-ltr" secondAttribute="leading" constant="16" id="VLR-TR-oT7"/>
                                     <constraint firstItem="5Vz-xh-KEj" firstAttribute="width" secondItem="r4f-KK-ltr" secondAttribute="width" constant="-32" id="bvi-T9-zJj"/>
