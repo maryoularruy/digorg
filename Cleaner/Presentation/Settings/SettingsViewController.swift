@@ -40,19 +40,19 @@ final class SettingsViewController: UIViewController {
 
 extension SettingsViewController: ViewControllerProtocol {
     func setupUI() {
-        subscriptionInfoView.bind(options: SettingsOption.subscriptionOption)
+        subscriptionInfoView.bind(options: SettingsOption.subscriptionOption, isDefaultHeight: true)
         subscriptionStackView.addArrangedSubview(buyPremiumView)
         subscriptionStackView.addArrangedSubview(subscriptionInfoView)
         buyPremiumView.delegate = self
         subscriptionInfoView.delegate = self
         
-        removeAfterImportContainer.bind(options: SettingsOption.removeAfterImportOptions)
+        removeAfterImportContainer.bind(options: SettingsOption.removeAfterImportOptions, isDefaultHeight: false)
         removeAfterImportContainer.delegate = self
         
-        passcodeOptionsContainer.bind(options: SettingsOption.passcodeOptions)
+        passcodeOptionsContainer.bind(options: SettingsOption.passcodeOptions, isDefaultHeight: false)
         passcodeOptionsContainer.delegate = self
         
-        applicationOptionsContainer.bind(options: SettingsOption.applicationOptions)
+        applicationOptionsContainer.bind(options: SettingsOption.applicationOptions, isDefaultHeight: true)
         applicationOptionsContainer.delegate = self
     }
     

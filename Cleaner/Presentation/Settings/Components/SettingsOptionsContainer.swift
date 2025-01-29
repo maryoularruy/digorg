@@ -24,11 +24,11 @@ final class SettingsOptionsContainer: UIStackView {
         setupView()
     }
     
-    func bind(options: [SettingsOption]) {
+    func bind(options: [SettingsOption], isDefaultHeight: Bool) {
         arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         options.forEach { option in
-            let cell = SettingsOptionCell(option: option)
+            let cell = SettingsOptionCell(option: option, isDefaultHeight: isDefaultHeight)
             cell.delegate = self
             
             addArrangedSubview(cell)

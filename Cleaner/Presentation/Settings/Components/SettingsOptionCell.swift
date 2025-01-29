@@ -25,11 +25,11 @@ final class SettingsOptionCell: UIView {
     
     private var option: SettingsOption
     
-    init(option: SettingsOption) {
+    init(option: SettingsOption, isDefaultHeight: Bool) {
         self.option = option
         super.init(frame: .zero)
         setupView()
-        initConstraints()
+        initConstraints(isDefaultHeight: isDefaultHeight)
     }
     
     required init?(coder: NSCoder) {
@@ -55,13 +55,13 @@ final class SettingsOptionCell: UIView {
         delegate?.tapOnCell(option: option)
     }
     
-    private func initConstraints() {
+    private func initConstraints(isDefaultHeight: Bool) {
         addSubviews([title])
         
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            title.topAnchor.constraint(equalTo: topAnchor, constant: isDefaultHeight ? 16 : 22.5),
             title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            title.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            title.bottomAnchor.constraint(equalTo: bottomAnchor, constant: isDefaultHeight ? -16 : -22.5)
         ])
         
         if let _ = option.isSwitchable {
