@@ -11,6 +11,20 @@ enum SettingsOptionType {
     case subscriptionInfo, photosRemovable, contactsRemovable, usePasscode, changePassword, share, sendFeedback, privacyPolicy, termsOfUse
 }
 
+var removeAfterImportOptions: [SettingsOption] {
+    [
+        SettingsOption(title: "Photos", isSwitchable: UserDefaultsService.shared.isRemovePhotosAfterImport, type: .photosRemovable),
+        SettingsOption(title: "Contacts", isSwitchable: UserDefaultsService.shared.isRemoveContactsAfterImport, type: .contactsRemovable)
+    ]
+}
+
+var passcodeOptions: [SettingsOption] {
+    [
+        SettingsOption(title: "Use Passcode", isSwitchable: UserDefaultsService.shared.isPasscodeTurnOn, type: .usePasscode),
+        SettingsOption(title: "Change Password", type: .changePassword)
+    ]
+}
+
 struct SettingsOption: Equatable {
     let title: String
     var isSwitchable: Bool?
@@ -18,16 +32,6 @@ struct SettingsOption: Equatable {
     
     static let subscriptionOption: [SettingsOption] = [
         SettingsOption(title: "Subscription", type: .subscriptionInfo)
-    ]
-    
-    static let removeAfterImportOptions: [SettingsOption] = [
-        SettingsOption(title: "Photos", isSwitchable: true, type: .photosRemovable),
-        SettingsOption(title: "Contacts", isSwitchable: true, type: .contactsRemovable)
-    ]
-    
-    static let passcodeOptions: [SettingsOption] = [
-        SettingsOption(title: "Use Passcode", isSwitchable: true, type: .usePasscode),
-        SettingsOption(title: "Change Password", type: .changePassword)
     ]
     
     static let applicationOptions: [SettingsOption] = [

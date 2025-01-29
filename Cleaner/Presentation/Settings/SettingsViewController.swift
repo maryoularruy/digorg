@@ -25,16 +25,33 @@ final class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateUserDefaultsKeys()
         setupSubscriptionStackView()
+        updateSettingsContainers()
+    }
+    
+    private func updateUserDefaultsKeys() {
+        if userDefaultsService.get(Bool.self, key: .isPasscodeTurnOn) == nil {
+            userDefaultsService.set(true, key: .isPasscodeTurnOn)
+        }
+        
+        if userDefaultsService.get(Bool.self, key: .isRemovePhotosAfterImport) == nil {
+            userDefaultsService.set(true, key: .isRemovePhotosAfterImport)
+        }
+        
+        if userDefaultsService.get(Bool.self, key: .isRemoveContactsAfterImport) == nil {
+            userDefaultsService.set(true, key: .isRemoveContactsAfterImport)
+        }
     }
     
     private func setupSubscriptionStackView() {
-//        buyPremiumView.isHidden = !userDefaultsService.isSubscriptionActive
-//        subscriptionInfoView.isHidden = userDefaultsService.isSubscriptionActive
-        
-        //
-        buyPremiumView.isHidden = true
-        //
+        buyPremiumView.isHidden = !userDefaultsService.isSubscriptionActive
+        subscriptionInfoView.isHidden = userDefaultsService.isSubscriptionActive
+    }
+    
+    private func updateSettingsContainers() {
+        removeAfterImportContainer.bind(options: removeAfterImportOptions, isDefaultHeight: false)
+        passcodeOptionsContainer.bind(options: passcodeOptions, isDefaultHeight: false)
     }
 }
 
@@ -43,16 +60,12 @@ extension SettingsViewController: ViewControllerProtocol {
         subscriptionInfoView.bind(options: SettingsOption.subscriptionOption, isDefaultHeight: true)
         subscriptionStackView.addArrangedSubview(buyPremiumView)
         subscriptionStackView.addArrangedSubview(subscriptionInfoView)
+        applicationOptionsContainer.bind(options: SettingsOption.applicationOptions, isDefaultHeight: true)
+        
         buyPremiumView.delegate = self
         subscriptionInfoView.delegate = self
-        
-        removeAfterImportContainer.bind(options: SettingsOption.removeAfterImportOptions, isDefaultHeight: false)
         removeAfterImportContainer.delegate = self
-        
-        passcodeOptionsContainer.bind(options: SettingsOption.passcodeOptions, isDefaultHeight: false)
         passcodeOptionsContainer.delegate = self
-        
-        applicationOptionsContainer.bind(options: SettingsOption.applicationOptions, isDefaultHeight: true)
         applicationOptionsContainer.delegate = self
     }
     
@@ -69,6 +82,29 @@ extension SettingsViewController: BuyPremiumViewDelegate {
 
 extension SettingsViewController: SettingsOptionsContainerDelegate {
     func tapOnOption(_ option: SettingsOption) {
-        
+        switch option.type {
+        case .subscriptionInfo:
+            break
+        case .photosRemovable:
+            userDefaultsService.set(option.isSwitchable, key: .isRemovePhotosAfterImport)
+        case .contactsRemovable:
+            userDefaultsService.set(option.isSwitchable, key: .isRemoveContactsAfterImport)
+        case .usePasscode:
+            userDefaultsService.set(option.isSwitchable, key: .isPasscodeTurnOn)
+        case .changePassword:
+            break
+        case .share:
+            //TODO
+            break
+        case .sendFeedback:
+            //TODO
+            break
+        case .privacyPolicy:
+            //TODO
+            break
+        case .termsOfUse:
+            //TODO
+            break
+        }
     }
 }
