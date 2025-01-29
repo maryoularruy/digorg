@@ -8,6 +8,7 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
+    @IBOutlet weak var premiumIcon: UIImageView!
     @IBOutlet weak var subscriptionStackView: UIStackView!
     @IBOutlet weak var removeAfterImportContainer: SettingsOptionsContainer!
     @IBOutlet weak var passcodeOptionsContainer: SettingsOptionsContainer!
@@ -26,7 +27,7 @@ final class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateUserDefaultsKeys()
-        setupSubscriptionStackView()
+        updateSubscriptionUI()
         updateSettingsContainers()
     }
     
@@ -44,7 +45,8 @@ final class SettingsViewController: UIViewController {
         }
     }
     
-    private func setupSubscriptionStackView() {
+    private func updateSubscriptionUI() {
+        premiumIcon.isHidden = userDefaultsService.isSubscriptionActive
         buyPremiumView.isHidden = !userDefaultsService.isSubscriptionActive
         subscriptionInfoView.isHidden = userDefaultsService.isSubscriptionActive
     }
