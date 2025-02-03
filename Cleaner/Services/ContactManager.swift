@@ -80,34 +80,40 @@ final class ContactManager {
             }
         }
         
-        let deletedContacts = contacts.filter { $0 != bestContact! }
-        guard let bestContact = bestContact?.mutableCopy() as? CNMutableContact else { return }
-        deletedContacts.forEach { bestContact.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
+        let contactsForDeletion = contacts.filter { $0 != bestContact! }
+        guard let contactForMerging = bestContact?.mutableCopy() as? CNMutableContact else { return }
+        
+        contactsForDeletion.forEach { deletedContact in
+            deletedContact.phoneNumbers.forEach { phoneNumber in
+                contactForMerging.phoneNumbers.append(CNLabeledValue(label: phoneNumber.label, value: phoneNumber.value))
+            }
+        }
 
         do {
-            try updateContact(bestContact)
-        } catch {
-            print(error.localizedDescription)
-        }
-        delete(deletedContacts)
-        DispatchQueue.main.async {
+            try updateContact(contactForMerging)
+            delete(contactsForDeletion)
             completion(true)
+        } catch {
+            completion(false)
         }
     }
     
     func merge(_ contacts: [CNContact], userChoice: Int, completion: @escaping ((Bool) -> ())) {
-        let deletedContacts = contacts.filter { $0 != contacts[userChoice] }
+        let contactsForDeletion = contacts.filter { $0 != contacts[userChoice] }
         guard let contactForMerging = contacts[userChoice].mutableCopy() as? CNMutableContact else { return }
-        deletedContacts.forEach { contactForMerging.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
+        
+        contactsForDeletion.forEach { deletedContact in
+            deletedContact.phoneNumbers.forEach { phoneNumber in
+                contactForMerging.phoneNumbers.append(CNLabeledValue(label: phoneNumber.label, value: phoneNumber.value))
+            }
+        }
         
         do {
             try updateContact(contactForMerging)
-        } catch {
-            print(error.localizedDescription)
-        }
-        delete(deletedContacts)
-        DispatchQueue.main.async {
+            delete(contactsForDeletion)
             completion(true)
+        } catch {
+            completion(false)
         }
     }
     
