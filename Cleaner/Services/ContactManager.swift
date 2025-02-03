@@ -32,7 +32,7 @@ final class ContactManager {
     }
     
     func countUnresolvedContacts(completion: @escaping (Int, Int, Int, Int, Int) -> ()) {
-        loadContacts { [weak self] contacts in
+        fetchAllContacts { [weak self] contacts in
             guard let self else { return }
             let duplicatedByName = fitlerDuplicatedByName(contacts).count
             let duplicatedByNumber = fitlerDuplicatedByNumber(contacts).count
@@ -45,27 +45,27 @@ final class ContactManager {
     }
 
     func loadDuplicatedByName(completion: @escaping ([[CNContact]]) -> ()) {
-        loadContacts { [weak self] contacts in
+        fetchAllContacts { [weak self] contacts in
             guard let self else { return }
             completion(fitlerDuplicatedByName(contacts))
         }
     }
     
     func loadDuplicatedByNumber(completion: @escaping ([[CNContact]]) -> ()) {
-        loadContacts { [weak self] contacts in
+        fetchAllContacts { [weak self] contacts in
             guard let self else { return }
             completion(fitlerDuplicatedByNumber(contacts))
         }
     }
     
     func loadIncompletedByName(completion: @escaping ([CNContact]) -> ()) {
-        loadContacts { contacts in
+        fetchAllContacts { contacts in
             completion(contacts.filter { $0.givenName.isEmpty && $0.familyName.isEmpty && !$0.phoneNumbers.isEmpty })
         }
     }
     
     func loadIncompletedByNumber(completion: @escaping ([CNContact]) -> ()) {
-        loadContacts { contacts in
+        fetchAllContacts { contacts in
             completion(contacts.filter { $0.phoneNumbers.isEmpty })
         }
     }
@@ -98,7 +98,7 @@ final class ContactManager {
                 }
             }
         }
-
+    
         do {
             try updateContact(contactForMerging)
             delete(contactsForDeletion)
@@ -127,7 +127,7 @@ final class ContactManager {
                 }
             }
         }
-        
+
         do {
             try updateContact(contactForMerging)
             delete(contactsForDeletion)
@@ -159,7 +159,7 @@ final class ContactManager {
     }
     
     func loadAllContacts(completion: @escaping ([CNContactSection]) -> ()) {
-        loadContacts { [weak self] contacts in
+        fetchAllContacts { [weak self] contacts in
             guard let self else { return }
             completion(sortBySections(contacts))
         }
@@ -193,14 +193,20 @@ final class ContactManager {
         }
     }
     
-    private func loadContacts(handler: @escaping (([CNContact]) -> ())) {
-        checkStatus {
-            fetchContacts { result in
-                switch result {
-                case .success(let contacts): handler(contacts)
-                case .failure: break
+    private func fetchAllContacts(handler: @escaping (([CNContact]) -> ())) {
+        checkStatus { [weak self] in
+            guard let self else { return }
+            do {
+                var contacts: [CNContact] = []
+                let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+                fetchRequest.unifyResults = true
+                fetchRequest.sortOrder = .none
+                
+                try store.enumerateContacts(with: fetchRequest) { contact, _ in
+                    contacts.append(contact)
                 }
-            }
+                handler(contacts)
+            } catch {}
         }
     }
     
@@ -224,6 +230,12 @@ final class ContactManager {
                 print("Contacts Access Denied: \(error.localizedDescription)")
             }
         }
+    }
+    
+    private func updateContact(_ contact: CNMutableContact) throws {
+        let saveRequest = CNSaveRequest()
+        saveRequest.update(contact)
+        try store.execute(saveRequest)
     }
     
     private func sortBySections(_ contacts: [CNContact]) -> [CNContactSection] {
