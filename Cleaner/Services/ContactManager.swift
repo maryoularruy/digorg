@@ -85,7 +85,17 @@ final class ContactManager {
         
         contactsForDeletion.forEach { deletedContact in
             deletedContact.phoneNumbers.forEach { phoneNumber in
-                contactForMerging.phoneNumbers.append(CNLabeledValue(label: phoneNumber.label, value: phoneNumber.value))
+                var isExistingNumber: Bool = false
+                for number in contactForMerging.phoneNumbers {
+                    if number.value == phoneNumber.value {
+                        isExistingNumber = true
+                        break
+                    }
+                }
+                
+                if !isExistingNumber {
+                    contactForMerging.phoneNumbers.append(CNLabeledValue(label: phoneNumber.label, value: phoneNumber.value))
+                }
             }
         }
 
@@ -104,7 +114,17 @@ final class ContactManager {
         
         contactsForDeletion.forEach { deletedContact in
             deletedContact.phoneNumbers.forEach { phoneNumber in
-                contactForMerging.phoneNumbers.append(CNLabeledValue(label: phoneNumber.label, value: phoneNumber.value))
+                var isExistingNumber: Bool = false
+                for number in contactForMerging.phoneNumbers {
+                    if number.value == phoneNumber.value {
+                        isExistingNumber = true
+                        break
+                    }
+                }
+                
+                if !isExistingNumber {
+                    contactForMerging.phoneNumbers.append(CNLabeledValue(label: phoneNumber.label, value: phoneNumber.value))
+                }
             }
         }
         
