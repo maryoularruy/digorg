@@ -5,7 +5,6 @@
 //  Created by Максим Лебедев on 03.06.2022.
 //
 
-import SwiftyContacts
 import ContactsUI
 
 struct CNContactSection {
@@ -211,7 +210,7 @@ final class ContactManager {
     }
     
     private func checkStatus(handler: @escaping () -> ()) {
-        if authorizationStatus() == .authorized {
+        if CNContactStore.authorizationStatus(for: .contacts) == .authorized {
             handler()
         } else {
             requestContactAccess {
@@ -221,14 +220,12 @@ final class ContactManager {
     }
     
     private func requestContactAccess(handler: @escaping () -> ()) {
-        requestAccess { response in
-            switch response {
-            case .success(_):
-                handler()
-                print("Contacts Access Granted")
-            case .failure(let error):
+        store.requestAccess(for: .contacts) { _, error in
+            if error != nil {
                 print("Contacts Access Denied: \(error.localizedDescription)")
+                handler()
             }
+            handler()
         }
     }
     
