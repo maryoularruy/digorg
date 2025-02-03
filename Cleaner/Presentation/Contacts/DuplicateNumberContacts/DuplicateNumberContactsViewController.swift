@@ -187,11 +187,11 @@ extension DuplicateNumberContactsViewController: SelectedContactsBottomPopupView
                 view.addSubview(successView)
                 successView.setHidden {
                     successView.removeFromSuperview()
-                }
-                DispatchQueue.global(qos: .userInitiated).sync { [weak self] in
-                    guard let self else { return }
-                    setupUI()
-                    rootView.duplicatesTableView.reloadData()
+                    DispatchQueue.global(qos: .userInitiated).sync { [weak self] in
+                        guard let self else { return }
+                        setupUI()
+                        rootView.duplicatesTableView.reloadData()
+                    }
                 }
             case false: break
             }

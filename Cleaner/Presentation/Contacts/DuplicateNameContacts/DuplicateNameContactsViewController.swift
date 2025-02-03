@@ -210,13 +210,13 @@ extension DuplicateNameContactsViewController: ActionAndCancelToolbarDelegate, B
                     view.addSubview(successView)
                     successView.setHidden {
                         successView.removeFromSuperview()
-                    }
-                    DispatchQueue.global(qos: .userInitiated).sync { [weak self] in
-                        guard let self else { return }
-                        refreshData()
-                        setupUnresolvedContactsTableView()
-                        toolbar.isHidden = true
-                        unresolvedContactsTableView.reloadData()
+                        DispatchQueue.global(qos: .userInitiated).sync { [weak self] in
+                            guard let self else { return }
+                            refreshData()
+                            setupUnresolvedContactsTableView()
+                            toolbar.isHidden = true
+                            unresolvedContactsTableView.reloadData()
+                        }
                     }
                 case false: break
                 }

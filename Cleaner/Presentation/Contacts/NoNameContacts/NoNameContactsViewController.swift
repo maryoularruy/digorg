@@ -168,8 +168,16 @@ extension NoNameContactsViewController: ActionToolbarDelegate, BottomPopupDelega
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
             contactManager.delete(Array(contactsForDeletion))
-            contactsForDeletion.removeAll()
-            reloadData()
+            let successView = SuccessView(frame: SuccessView.myFrame)
+            successView.bind(type: .successDelete)
+            successView.center = view.center
+            view.addSubview(successView)
+            successView.setHidden { [weak self] in
+                guard let self else { return }
+                successView.removeFromSuperview()
+                contactsForDeletion.removeAll()
+                reloadData()
+            }
         }
     }
 }
