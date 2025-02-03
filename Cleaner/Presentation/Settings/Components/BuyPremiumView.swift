@@ -12,7 +12,7 @@ protocol BuyPremiumViewDelegate: AnyObject {
 }
 
 final class BuyPremiumView: UIView {
-    static var height: Float = 122.0
+    static var height: CGFloat = 122.0
     weak var delegate: BuyPremiumViewDelegate?
     
     private lazy var contentView: UIView = UIView()
@@ -27,12 +27,13 @@ final class BuyPremiumView: UIView {
     private lazy var startTrialButton: Medium12ButtonStyle = {
         let button = Medium12ButtonStyle()
         button.bind(text: "Start Trial")
+        button.layer.cornerRadius = 16
         return button
     }()
     
     private lazy var background: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = .buyPremiumBackground
+        let imageView = UIImageView(image: .buyPremiumBackground)
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -78,12 +79,13 @@ final class BuyPremiumView: UIView {
             
             startTrialButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 12),
             startTrialButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17),
-            startTrialButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            startTrialButton.heightAnchor.constraint(equalToConstant: 32),
             
             background.topAnchor.constraint(equalTo: contentView.topAnchor),
-            background.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: -10),
+            background.leadingAnchor.constraint(equalTo: label.trailingAnchor),
             background.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            background.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            background.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            background.heightAnchor.constraint(equalToConstant: BuyPremiumView.height)
         ])
     }
 }
