@@ -1,5 +1,5 @@
 {
-  "originHash" : "10b2ef5b868178549603320d6010f2cea0bf4fad2ee5bb0a5546e1194d91a762",
+  "originHash" : "4fd4e10812da5cdd8ca9c26dbff63af5e41e78f374ce89e4c0860ff08b9b9643",
   "pins" : [
     {
       "identity" : "bottompopup",
@@ -28,15 +28,6 @@
       }
     },
     {
-      "identity" : "internetspeed",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/HumorousGhost/InternetSpeed",
-      "state" : {
-        "revision" : "e0ebbcbc6bd083788c05296141dee4373ba00b6e",
-        "version" : "1.0.1"
-      }
-    },
-    {
       "identity" : "iqkeyboardmanager",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hackiftekhar/IQKeyboardManager",
@@ -61,24 +52,6 @@
       "state" : {
         "revision" : "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
         "version" : "5.1.0"
-      }
-    },
-    {
-      "identity" : "realm-core",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-core.git",
-      "state" : {
-        "revision" : "7227d6a447821c28895daa099b6c7cd4c99d461b",
-        "version" : "13.25.1"
-      }
-    },
-    {
-      "identity" : "realm-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-swift",
-      "state" : {
-        "branch" : "master",
-        "revision" : "569c656a8494ad03d790fd1075338c1da92d495a"
       }
     },
     {
