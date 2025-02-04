@@ -100,3 +100,19 @@ extension PHAsset {
 		return thumbnail
 	}
 }
+
+extension Array where Element: PHAsset {
+    func getAssetsSize(handler: @escaping (Int64) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var size: Int64 = 0
+            forEach { asset in
+                let resources = PHAssetResource.assetResources(for: asset)
+                if let resource = resources.first {
+                    let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong
+                    size += Int64(bitPattern: UInt64(unsignedInt64!))
+                }
+            }
+            handler(size)
+        }
+    }
+}

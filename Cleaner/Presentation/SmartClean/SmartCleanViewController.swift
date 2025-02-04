@@ -22,11 +22,11 @@ final class SmartCleanViewController: UIViewController {
         contactManager.selectedContactsForSmartCleaning.count
     }
     
-    private var itemsSize: Int64 {
-        photoVideoManager.selectedPhotosForSmartCleaning.reduce(0) { $0 + $1.imageSize } +
-        photoVideoManager.selectedScreenshotsForSmartCleaning.reduce(0) { $0 + $1.imageSize } +
-        photoVideoManager.selectedVideosForSmartCleaning.reduce(0) { $0 + $1.imageSize }
-    }
+//    private var itemsSize: Int64 {
+////        photoVideoManager.selectedPhotosForSmartCleaning.reduce(0) { $0 + $1.imageSize } +
+////        photoVideoManager.selectedScreenshotsForSmartCleaning.reduce(0) { $0 + $1.imageSize } +
+////        photoVideoManager.selectedVideosForSmartCleaning.reduce(0) { $0 + $1.imageSize }
+//    }
     
     override func loadView() {
         super.loadView()
@@ -41,6 +41,25 @@ final class SmartCleanViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupUI()
+    }
+    
+    private func getItemsSize(handler: @escaping (Int64) -> Void) {
+        var totalSize: Int64 = 0
+        let dispatchGroup = DispatchGroup()
+        
+        [photoVideoManager.selectedPhotosForSmartCleaning,
+         photoVideoManager.selectedScreenshotsForSmartCleaning,
+         photoVideoManager.selectedVideosForSmartCleaning].forEach { assets in
+            dispatchGroup.enter()
+            assets.getAssetsSize { size in
+                totalSize += size
+                dispatchGroup.leave()
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            handler(totalSize)
+        }
     }
     
     deinit {
@@ -96,8 +115,10 @@ extension SmartCleanViewController: ViewControllerProtocol {
         }
         
         dispatchGroup.notify(queue: .main) { [weak self] in
-            guard let self else { return }
-            rootView.scanningStoreView.bind(.scanningDone, value: 100, finalSize: itemsSize)
+            self?.getItemsSize { [weak self] finalSize in
+                guard let self else { return }
+                rootView.scanningStoreView.bind(.scanningDone, value: 100, finalSize: finalSize)
+            }
         }
     }
     

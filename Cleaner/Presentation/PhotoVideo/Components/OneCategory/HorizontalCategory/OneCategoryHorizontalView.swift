@@ -41,11 +41,15 @@ final class OneCategoryHorizontalView: UIView, OneCategoryProtocol {
     
     lazy var assets: [PHAsset] = [] {
         didSet {
-            let size: Int64 = assets.reduce(0) { $0 + $1.imageSize }
-            assetsSizeLabel.bind(text: size.convertToString())
-            assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
-            assetsCollectionViewHeight.constant = assets.isEmpty ? 0 : TargetSize.small.size.height
-            assetsCollectionView.reloadData()
+            assets.getAssetsSize { size in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    assetsSizeLabel.bind(text: size.convertToString())
+                    assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
+                    assetsCollectionViewHeight.constant = assets.isEmpty ? 0 : TargetSize.small.size.height
+                    assetsCollectionView.reloadData()
+                }
+            }
         }
     }
     
