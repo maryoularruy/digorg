@@ -173,6 +173,9 @@ extension MainViewController: ViewControllerProtocol {
         deviceInfoLabel.addTapGestureRecognizer(action: openDeviceInfoScreen)
         deviceInfoStackView.addGestureRecognizer(gesture)
         
+        storageUsageView.addTapGestureRecognizer(action: openSmartClean)
+        storageUsageView.analyzeStorageButton.addTapGestureRecognizer(action: openSmartClean)
+        
         photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
         photosCleanup.infoButton.addTapGestureRecognizer(action: openPhotosCleanup)
         videosCleanup.addTapGestureRecognizer(action: openVideosCleanup)
@@ -196,6 +199,15 @@ extension MainViewController: ViewControllerProtocol {
             Title.allCases.forEach { title in
                 deviceInfoStackView.addArrangedSubview(DeviceInfoCell(cell: title))
             }
+        }
+    }
+    
+    private func openSmartClean() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let vc = SmartCleanViewController()
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
