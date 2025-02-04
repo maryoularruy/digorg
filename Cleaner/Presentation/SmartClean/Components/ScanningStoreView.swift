@@ -13,6 +13,7 @@ enum ScanningStoreViewType {
 
 final class ScanningStoreView: UIView {
     private var type: ScanningStoreViewType
+    private var currentProgress: CGFloat = 0.0
     
     private lazy var titleLabel: Semibold24LabelStyle = Semibold24LabelStyle()
     
@@ -44,9 +45,11 @@ final class ScanningStoreView: UIView {
         
         switch type {
         case .scanning:
-            titleLabel.bind(text: "\(Int(value))%")
+            currentProgress += CGFloat(value / 100)
+            
+            titleLabel.bind(text: "\(Int(currentProgress * 100))%")
+            progressBar.updateProgress(to: currentProgress, duration: 0.1)
             descriptionLabel.bind(text: "Scanning your Storage...")
-            progressBar.updateProgress(to: CGFloat(value / 100))
         case .scanningDone:
             let availableSize = NSAttributedString(string: String(Int(value)), attributes: [.foregroundColor: UIColor.purple])
             let available = NSMutableAttributedString(string: "Available ")
@@ -55,6 +58,16 @@ final class ScanningStoreView: UIView {
             
             descriptionLabel.bind(text: "Unnecessary files for storage\noptimization have been identified")
         }
+    }
+    
+    func resetProgress() {
+        currentProgress = 0
+        type = .scanning
+        changeComponentsVisability()
+        
+        titleLabel.bind(text: "0%")
+        descriptionLabel.bind(text: "Scanning your Storage...")
+        progressBar.updateProgress(to: currentProgress)
     }
     
     private func changeComponentsVisability() {
@@ -70,8 +83,7 @@ final class ScanningStoreView: UIView {
         addShadows()
         
         progressBar.backgroundView.frame = CGRect(origin: .zero, size: CGSize(width: 213, height: 12))
-        
-        bind(.scanning, value: 0)
+        resetProgress()
     }
     
     private func initConstraints() {
