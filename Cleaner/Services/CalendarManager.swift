@@ -10,6 +10,8 @@ import EventKit
 final class CalendarManager {
     static let shared = CalendarManager()
     
+    var selectedEventsForSmartCleaning: [EKEvent] = []
+    
     private let eventStore = EKEventStore()
     private lazy var twoYears = TimeInterval(63113852)
     
@@ -24,13 +26,11 @@ final class CalendarManager {
         }
     }
 
-    func fetchEvents(completion: @escaping ([EKEventGroup]) -> Void) {
-        let events = eventStore.events(matching: eventStore
+    func fetchEvents(completion: @escaping ([EKEvent]) -> Void) {
+        completion(eventStore.events(matching: eventStore
             .predicateForEvents(withStart: Date(timeIntervalSinceNow: -twoYears),
                                 end: Date(timeIntervalSinceNow: twoYears),
-                                calendars: eventStore.calendars(for: .event).filter { $0.allowsContentModifications } ))
-        
-        completion(sortByYears(events))
+                                calendars: eventStore.calendars(for: .event).filter { $0.allowsContentModifications } )))
     }
     
     func deleteEvents(_ events: [EKEvent], completion: @escaping (Bool) -> ()) {
@@ -47,6 +47,17 @@ final class CalendarManager {
         }
     }
     
+    func sortByYears(_ events: [EKEvent]) -> [EKEventGroup] {
+        let years = Set(events.map { $0.startDate.year() }).sorted(by: <)
+        
+        var groups = [EKEventGroup]()
+        years.forEach { year in
+            let events = events.filter { $0.startDate.year() == year }
+            groups.append(EKEventGroup(year: year, events: events))
+        }
+        return groups
+    }
+    
     private func requestAutorization(completion: @escaping (Bool) -> Void) {
         if #available(iOS 17.0, *) {
             eventStore.requestFullAccessToEvents { granted, _ in
@@ -57,16 +68,5 @@ final class CalendarManager {
                 completion(granted)
             }
         }
-    }
-    
-    private func sortByYears(_ events: [EKEvent]) -> [EKEventGroup] {
-        let years = Set(events.map { $0.startDate.year() }).sorted(by: <)
-        
-        var groups = [EKEventGroup]()
-        years.forEach { year in
-            let events = events.filter { $0.startDate.year() == year }
-            groups.append(EKEventGroup(year: year, events: events))
-        }
-        return groups
     }
 }

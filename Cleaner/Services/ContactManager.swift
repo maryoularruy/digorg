@@ -15,6 +15,8 @@ struct CNContactSection {
 final class ContactManager {
     static let shared = ContactManager()
     
+    var selectedContactsForSmartCleaning: [CNContact] = []
+    
     private let store = CNContactStore()
     private let defaultDescriptor = CNContactViewController.descriptorForRequiredKeys()
     

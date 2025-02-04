@@ -13,14 +13,12 @@ final class PhotoVideoManager {
     static var defaultStartDate = "01 Jan 1970 00:00:00"
     static var defaultEndDate = "01 Jan 2030 00:00:00"
     
-    private(set) var isLoadingPhotos: Bool = false
-    private(set) var isLoadingVideos: Bool = false
+    var selectedPhotosForSmartCleaning: [PHAsset] = []
+    var selectedScreenshotsForSmartCleaning: [PHAsset] = []
+    var selectedVideosForSmartCleaning: [PHAsset] = []
     
     private(set) var similarPhotos: [PHAssetGroup] = []
-    private(set) var similarPhotosCount: Int = 0
-    
     private(set) var similarVideos: [PHAssetGroup] = []
-    private(set) var similarVideosCount: Int = 0
     
     func checkStatus(handler: @escaping (PHAuthorizationStatus) -> ()) {
         let status = if #available(iOS 14, *) {
@@ -63,7 +61,6 @@ final class PhotoVideoManager {
     }
     
     func fetchSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int, Int64) -> ()) {
-        isLoadingPhotos = true
         fetchPhotos(from: dateFrom, to: dateTo, live: live) { photoInAlbum in
             DispatchQueue.global(qos: .userInitiated).async {
                 var images: [OSTuple<NSString, NSData>] = []
@@ -132,8 +129,6 @@ final class PhotoVideoManager {
                     var size: Int64 = 0
                     similarPhotoGroups.forEach { size += $0.assets.reduce(0) { $0 + $1.imageSize } }
                     self?.similarPhotos = similarPhotoGroups
-                    self?.isLoadingPhotos = false
-                    self?.similarPhotosCount = duplicatesCount
                     handler(similarPhotoGroups, duplicatesCount, size)
                 }
             }
@@ -141,7 +136,6 @@ final class PhotoVideoManager {
     }
 
 	func fetchSimilarVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAssetGroup], Int, Int64) -> ()) {
-        isLoadingVideos = true
 			fetchVideos(from: dateFrom, to: dateTo) { videosInAlbum in
 				DispatchQueue.global(qos: .background).async {
 					var videos: [OSTuple<NSString, NSData>] = []
@@ -209,8 +203,6 @@ final class PhotoVideoManager {
                         var size: Int64 = 0
                         similarVideoGroups.forEach { size += $0.assets.reduce(0) { $0 + $1.imageSize } }
                         self?.similarVideos = similarVideoGroups
-                        self?.similarVideosCount = duplicatesCount
-                        self?.isLoadingVideos = false
                         handler(similarVideoGroups, duplicatesCount, size)
 					}
 				}

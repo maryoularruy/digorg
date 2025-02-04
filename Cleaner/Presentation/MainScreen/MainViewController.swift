@@ -149,10 +149,9 @@ final class MainViewController: UIViewController {
     
     private func updateCalendarCleanupOption() {
         DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.calendarManager.fetchEvents { eventGroups in
-                let eventsCount = eventGroups.reduce(0) { $0 + $1.events.count }
+            self?.calendarManager.fetchEvents { events in
                 DispatchQueue.main.async {
-                    self?.calendarCleanup.infoButton.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
+                    self?.calendarCleanup.infoButton.bind(text: "\(events.count) event\(events.count == 1 ? "" : "s")")
                 }
             }
         }

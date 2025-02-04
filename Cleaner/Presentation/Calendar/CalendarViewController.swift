@@ -77,7 +77,8 @@ final class CalendarViewController: UIViewController {
     
     private func fetchEvents() {
         CalendarManager.shared.fetchEvents { [weak self] events in
-            self?.eventGroups = events
+            guard let self else { return }
+            eventGroups = calendarManager.sortByYears(events)
         }
     }
     

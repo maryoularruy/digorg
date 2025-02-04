@@ -37,7 +37,7 @@ final class ScanningStoreView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func bind(_ type: ScanningStoreViewType, value: Double) {
+    func bind(_ type: ScanningStoreViewType, value: Double, finalSize: Int64 = 0) {
         if self.type != type {
             self.type = type
             changeComponentsVisability()
@@ -51,7 +51,7 @@ final class ScanningStoreView: UIView {
             progressBar.updateProgress(to: currentProgress, duration: 0.1)
             descriptionLabel.bind(text: "Scanning your Storage...")
         case .scanningDone:
-            let availableSize = NSAttributedString(string: String(Int(value)), attributes: [.foregroundColor: UIColor.purple])
+            let availableSize = NSAttributedString(string: finalSize.convertToString(), attributes: [.foregroundColor: UIColor.purple])
             let available = NSMutableAttributedString(string: "Available ")
             available.append(availableSize)
             titleLabel.attributedText = available
