@@ -17,7 +17,6 @@
 		7532F8682AE29750007469EA /* DuplicateNameContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F8672AE29750007469EA /* DuplicateNameContacts.storyboard */; };
 		7532F86A2AE29758007469EA /* DuplicateNameContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8692AE29758007469EA /* DuplicateNameContactsViewController.swift */; };
 		7532F8722AE304B5007469EA /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F8712AE304B5007469EA /* ContactManager.swift */; };
-		7532F8752AE30517007469EA /* SwiftyContacts in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F8742AE30517007469EA /* SwiftyContacts */; };
 		756866D92AD1D398008DBF7C /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756866D82AD1D398008DBF7C /* DeviceInfoViewController.swift */; };
 		75D3FC372A6069AF00F351A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC362A6069AF00F351A3 /* AppDelegate.swift */; };
 		75D3FC3B2A6069AF00F351A3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC3A2A6069AF00F351A3 /* MainViewController.swift */; };
@@ -382,7 +381,6 @@
 			files = (
 				FA3987B42B305B190096F335 /* BottomPopup in Frameworks */,
 				75D3FC6F2A606DBB00F351A3 /* SwiftyUserDefaults in Frameworks */,
-				7532F8752AE30517007469EA /* SwiftyContacts in Frameworks */,
 				FA3988682B3060A90096F335 /* Disk in Frameworks */,
 				75D3FC722A606DD100F351A3 /* Reusable in Frameworks */,
 				FA99F2F62B3C462700D4B239 /* IQKeyboardManagerSwift in Frameworks */,
@@ -1065,7 +1063,6 @@
 				75D3FC712A606DD100F351A3 /* Reusable */,
 				7504C24E2AD5E99B005FB398 /* NetworkFlows */,
 				7532F84F2AE2766B007469EA /* Reachability */,
-				7532F8742AE30517007469EA /* SwiftyContacts */,
 				FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */,
 				FA3987B32B305B190096F335 /* BottomPopup */,
 				FA3987B62B305C120096F335 /* Haneke */,
@@ -1107,7 +1104,6 @@
 				75D3FC702A606DD100F351A3 /* XCRemoteSwiftPackageReference "Reusable" */,
 				7504C24D2AD5E99B005FB398 /* XCRemoteSwiftPackageReference "NetworkFlows" */,
 				7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */,
-				7532F8732AE30517007469EA /* XCRemoteSwiftPackageReference "SwiftyContacts" */,
 				FA3987AF2B305A3A0096F335 /* XCRemoteSwiftPackageReference "SDWebImagePhotosPlugin" */,
 				FA3987B22B305B190096F335 /* XCRemoteSwiftPackageReference "BottomPopup" */,
 				FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */,
@@ -1567,14 +1563,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		7532F8732AE30517007469EA /* XCRemoteSwiftPackageReference "SwiftyContacts" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyContacts/SwiftyContacts";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sunshinejr/SwiftyUserDefaults.git";
@@ -1651,11 +1639,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */;
 			productName = Reachability;
-		};
-		7532F8742AE30517007469EA /* SwiftyContacts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7532F8732AE30517007469EA /* XCRemoteSwiftPackageReference "SwiftyContacts" */;
-			productName = SwiftyContacts;
 		};
 		75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */ = {
 			isa = XCSwiftPackageProductDependency;

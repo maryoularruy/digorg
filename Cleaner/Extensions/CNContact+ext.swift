@@ -5,7 +5,7 @@
 //  Created by Elena Sedunova on 22.10.2024.
 //
 
-import SwiftyContacts
+import Contacts
 
 extension CNContact {
     var fullName: String {

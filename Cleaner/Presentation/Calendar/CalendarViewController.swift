@@ -183,12 +183,13 @@ extension CalendarViewController: ActionToolbarDelegate, BottomPopupDelegate {
                     successView.bind(type: .successDelete)
                     successView.center = view.center
                     view.addSubview(successView)
-                    successView.setHidden {
+                    successView.setHidden { [weak self] in
+                        guard let self else { return }
                         successView.removeFromSuperview()
+                        eventsForDeletion.removeAll()
+                        reloadData()
                     }
-                    eventsForDeletion.removeAll()
-                    reloadData()
-                    
+
                 case false: break
                 }
             }

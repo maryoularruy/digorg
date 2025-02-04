@@ -5,7 +5,6 @@
 //  Created by Максим Лебедев on 03.06.2022.
 //
 
-import SwiftyContacts
 import ContactsUI
 
 struct CNContactSection {
@@ -32,7 +31,7 @@ final class ContactManager {
     }
     
     func countUnresolvedContacts(completion: @escaping (Int, Int, Int, Int, Int) -> ()) {
-        loadContacts { [weak self] contacts in
+        fetchAllContacts { [weak self] contacts in
             guard let self else { return }
             let duplicatedByName = fitlerDuplicatedByName(contacts).count
             let duplicatedByNumber = fitlerDuplicatedByNumber(contacts).count
@@ -45,27 +44,27 @@ final class ContactManager {
     }
 
     func loadDuplicatedByName(completion: @escaping ([[CNContact]]) -> ()) {
-        loadContacts { [weak self] contacts in
+        fetchAllContacts { [weak self] contacts in
             guard let self else { return }
             completion(fitlerDuplicatedByName(contacts))
         }
     }
     
     func loadDuplicatedByNumber(completion: @escaping ([[CNContact]]) -> ()) {
-        loadContacts { [weak self] contacts in
+        fetchAllContacts { [weak self] contacts in
             guard let self else { return }
             completion(fitlerDuplicatedByNumber(contacts))
         }
     }
     
     func loadIncompletedByName(completion: @escaping ([CNContact]) -> ()) {
-        loadContacts { contacts in
+        fetchAllContacts { contacts in
             completion(contacts.filter { $0.givenName.isEmpty && $0.familyName.isEmpty && !$0.phoneNumbers.isEmpty })
         }
     }
     
     func loadIncompletedByNumber(completion: @escaping ([CNContact]) -> ()) {
-        loadContacts { contacts in
+        fetchAllContacts { contacts in
             completion(contacts.filter { $0.phoneNumbers.isEmpty })
         }
     }
@@ -80,34 +79,60 @@ final class ContactManager {
             }
         }
         
-        let deletedContacts = contacts.filter { $0 != bestContact! }
-        guard let bestContact = bestContact?.mutableCopy() as? CNMutableContact else { return }
-        deletedContacts.forEach { bestContact.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
-
-        do {
-            try updateContact(bestContact)
-        } catch {
-            print(error.localizedDescription)
+        let contactsForDeletion = contacts.filter { $0 != bestContact! }
+        guard let contactForMerging = bestContact?.mutableCopy() as? CNMutableContact else { return }
+        
+        contactsForDeletion.forEach { deletedContact in
+            deletedContact.phoneNumbers.forEach { phoneNumber in
+                var isExistingNumber: Bool = false
+                for number in contactForMerging.phoneNumbers {
+                    if number.value == phoneNumber.value {
+                        isExistingNumber = true
+                        break
+                    }
+                }
+                
+                if !isExistingNumber {
+                    contactForMerging.phoneNumbers.append(CNLabeledValue(label: phoneNumber.label, value: phoneNumber.value))
+                }
+            }
         }
-        delete(deletedContacts)
-        DispatchQueue.main.async {
+    
+        do {
+            try updateContact(contactForMerging)
+            delete(contactsForDeletion)
             completion(true)
+        } catch {
+            completion(false)
         }
     }
     
     func merge(_ contacts: [CNContact], userChoice: Int, completion: @escaping ((Bool) -> ())) {
-        let deletedContacts = contacts.filter { $0 != contacts[userChoice] }
+        let contactsForDeletion = contacts.filter { $0 != contacts[userChoice] }
         guard let contactForMerging = contacts[userChoice].mutableCopy() as? CNMutableContact else { return }
-        deletedContacts.forEach { contactForMerging.phoneNumbers.append(contentsOf: $0.phoneNumbers) }
         
+        contactsForDeletion.forEach { deletedContact in
+            deletedContact.phoneNumbers.forEach { phoneNumber in
+                var isExistingNumber: Bool = false
+                for number in contactForMerging.phoneNumbers {
+                    if number.value == phoneNumber.value {
+                        isExistingNumber = true
+                        break
+                    }
+                }
+                
+                if !isExistingNumber {
+                    contactForMerging.phoneNumbers.append(CNLabeledValue(label: phoneNumber.label, value: phoneNumber.value))
+                }
+            }
+        }
+
         do {
             try updateContact(contactForMerging)
-        } catch {
-            print(error.localizedDescription)
-        }
-        delete(deletedContacts)
-        DispatchQueue.main.async {
+            delete(contactsForDeletion)
             completion(true)
+        } catch {
+            completion(false)
         }
     }
     
@@ -133,7 +158,7 @@ final class ContactManager {
     }
     
     func loadAllContacts(completion: @escaping ([CNContactSection]) -> ()) {
-        loadContacts { [weak self] contacts in
+        fetchAllContacts { [weak self] contacts in
             guard let self else { return }
             completion(sortBySections(contacts))
         }
@@ -167,19 +192,25 @@ final class ContactManager {
         }
     }
     
-    private func loadContacts(handler: @escaping (([CNContact]) -> ())) {
-        checkStatus {
-            fetchContacts { result in
-                switch result {
-                case .success(let contacts): handler(contacts)
-                case .failure: break
+    private func fetchAllContacts(handler: @escaping (([CNContact]) -> ())) {
+        checkStatus { [weak self] in
+            guard let self else { return }
+            do {
+                var contacts: [CNContact] = []
+                let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+                fetchRequest.unifyResults = true
+                fetchRequest.sortOrder = .none
+                
+                try store.enumerateContacts(with: fetchRequest) { contact, _ in
+                    contacts.append(contact)
                 }
-            }
+                handler(contacts)
+            } catch {}
         }
     }
     
     private func checkStatus(handler: @escaping () -> ()) {
-        if authorizationStatus() == .authorized {
+        if CNContactStore.authorizationStatus(for: .contacts) == .authorized {
             handler()
         } else {
             requestContactAccess {
@@ -189,15 +220,19 @@ final class ContactManager {
     }
     
     private func requestContactAccess(handler: @escaping () -> ()) {
-        requestAccess { response in
-            switch response {
-            case .success(_):
-                handler()
-                print("Contacts Access Granted")
-            case .failure(let error):
+        store.requestAccess(for: .contacts) { _, error in
+            if error != nil {
                 print("Contacts Access Denied: \(error.localizedDescription)")
+                handler()
             }
+            handler()
         }
+    }
+    
+    private func updateContact(_ contact: CNMutableContact) throws {
+        let saveRequest = CNSaveRequest()
+        saveRequest.update(contact)
+        try store.execute(saveRequest)
     }
     
     private func sortBySections(_ contacts: [CNContact]) -> [CNContactSection] {
