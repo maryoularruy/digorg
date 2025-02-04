@@ -13,10 +13,6 @@ final class SmartCleanViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view = rootView
-        
-        //
-        rootView.backgroundColor = .acidGreen
-        //
     }
     
     override func viewDidLoad() {
@@ -31,9 +27,9 @@ extension SmartCleanViewController: ViewControllerProtocol {
     }
     
     func addGestureRecognizers() {
-//        rootView.arrowBack.addTapGestureRecognizer { [weak self] in
-//            self?.navigationController?.popViewController(animated: true)
-//        }
+        rootView.arrowBack.addTapGestureRecognizer { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
         
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
