@@ -19,6 +19,24 @@ final class SmartCleanViewController: UIViewController {
         super.viewDidLoad()
         addGestureRecognizers()
     }
+    
+    //
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.rootView.scanningStoreView.bind(.scanning, value: 20)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.rootView.scanningStoreView.bind(.scanning, value: 34)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.rootView.scanningStoreView.bind(.scanningDone, value: 67)
+        }
+    }
+    //
 }
 
 extension SmartCleanViewController: ViewControllerProtocol {

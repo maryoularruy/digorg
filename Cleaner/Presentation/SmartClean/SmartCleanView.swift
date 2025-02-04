@@ -18,6 +18,8 @@ final class SmartCleanView: UIView {
         return label
     }()
     
+    lazy var scanningStoreView: ScanningStoreView = ScanningStoreView(type: .scanning)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -37,7 +39,7 @@ final class SmartCleanView: UIView {
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label])
+        contentView.addSubviews([arrowBack, label, scanningStoreView])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -58,6 +60,11 @@ final class SmartCleanView: UIView {
             
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            
+            scanningStoreView.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 18),
+            scanningStoreView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            scanningStoreView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            scanningStoreView.heightAnchor.constraint(equalToConstant: 108)
         ])
     }
 }
