@@ -9,10 +9,12 @@ import Photos
 import UIKit
 
 enum TargetSize {
-    case small, medium, large
+    case smartClean, small, medium, large
     
     var size: CGSize {
         switch self {
+        case .smartClean:
+            CGSize(width: 40, height: 40)
         case .small:
             CGSize(width: 78, height: 78)
         case .medium:

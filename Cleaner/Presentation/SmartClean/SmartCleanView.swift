@@ -84,7 +84,7 @@ final class SmartCleanView: UIView {
             contentView.topAnchor.constraint(equalTo: scroll.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scroll.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scroll.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scroll.bottomAnchor, constant: -90),
+            contentView.bottomAnchor.constraint(equalTo: scroll.bottomAnchor, constant: -60),
             contentView.widthAnchor.constraint(equalTo: scroll.widthAnchor, constant: -32),
             
             arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

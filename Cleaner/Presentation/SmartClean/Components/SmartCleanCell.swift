@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 protocol SmartCleanCellDelegate: AnyObject {
     func tapOnManageButton(_ type: SmartCleanCellType)
@@ -74,6 +75,23 @@ final class SmartCleanCell: UIView {
         return button
     }()
     
+    private lazy var itemsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 8
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(cellType: SmartCleanCollectionViewCell.self)
+        
+        return collectionView
+    }()
+    
+    private lazy var photoVideoManager = PhotoVideoManager.shared
+    
     init(type: SmartCleanCellType) {
         self.type = type
         super.init(frame: .zero)
@@ -89,6 +107,7 @@ final class SmartCleanCell: UIView {
         manageButton.isHidden = false
         markRedImageView.isHidden = itemsCount == 0
         spinner.endAnimation()
+        itemsCollectionView.reloadData()
     }
     
     func startSpinner() {
@@ -108,14 +127,11 @@ final class SmartCleanCell: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([imageView, title, markRedImageView, spinner, manageButton])
+        addSubviews([imageView, title, markRedImageView, spinner, manageButton, itemsCollectionView])
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            //
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            //
             imageView.heightAnchor.constraint(equalToConstant: 24),
             imageView.widthAnchor.constraint(equalToConstant: 24),
             
@@ -132,7 +148,49 @@ final class SmartCleanCell: UIView {
             
             manageButton.topAnchor.constraint(equalTo: topAnchor, constant: 12),
             manageButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            manageButton.heightAnchor.constraint(equalToConstant: 32)
+            manageButton.heightAnchor.constraint(equalToConstant: 32),
+            
+            itemsCollectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 14),
+            itemsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            itemsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            itemsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            itemsCollectionView.heightAnchor.constraint(equalToConstant: SmartCleanCollectionViewCell.size.height)
         ])
+    }
+}
+
+extension SmartCleanCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch type {
+        case .calendar: 0
+        case .contacts: 0
+        case .duplicatePhotos: photoVideoManager.selectedPhotosForSmartCleaning.count
+        case .screenshots: photoVideoManager.selectedScreenshotsForSmartCleaning.count
+        case .duplicatesVideos: photoVideoManager.selectedVideosForSmartCleaning.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: SmartCleanCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        
+        let asset: PHAsset? = switch type {
+        case .calendar: nil
+        case .contacts: nil
+        case .duplicatePhotos:
+            photoVideoManager.selectedPhotosForSmartCleaning[indexPath.row]
+        case .screenshots:
+            photoVideoManager.selectedScreenshotsForSmartCleaning[indexPath.row]
+        case .duplicatesVideos:
+            photoVideoManager.selectedVideosForSmartCleaning[indexPath.row]
+        }
+        
+        if let asset {
+            cell.bind(image: asset.getAssetThumbnail(TargetSize.smartClean.size))
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        TargetSize.smartClean.size
     }
 }
