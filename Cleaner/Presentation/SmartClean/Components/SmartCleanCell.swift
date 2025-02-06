@@ -127,7 +127,7 @@ final class SmartCleanCell: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([imageView, title, markRedImageView, spinner, manageButton, itemsCollectionView])
+        addSubviews([imageView, title, markRedImageView, spinner, manageButton])
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -148,14 +148,22 @@ final class SmartCleanCell: UIView {
             
             manageButton.topAnchor.constraint(equalTo: topAnchor, constant: 12),
             manageButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            manageButton.heightAnchor.constraint(equalToConstant: 32),
-            
-            itemsCollectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 14),
-            itemsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            itemsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            itemsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            itemsCollectionView.heightAnchor.constraint(equalToConstant: SmartCleanCollectionViewCell.size.height)
+            manageButton.heightAnchor.constraint(equalToConstant: 32)
         ])
+        
+        if type.isShowAssets {
+            addSubviews([itemsCollectionView])
+            
+            NSLayoutConstraint.activate([
+                itemsCollectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 14),
+                itemsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+                itemsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                itemsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+                itemsCollectionView.heightAnchor.constraint(equalToConstant: SmartCleanCollectionViewCell.size.height)
+            ])
+        } else {
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+        }
     }
 }
 

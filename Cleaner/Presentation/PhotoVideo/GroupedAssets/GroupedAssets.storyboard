@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -60,7 +59,7 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHd-R4-dnf" customClass="ActionToolbar" customModule="Cleaner" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="796" width="414" height="100"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="PureWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="oiO-k7-wts"/>
                                 </constraints>
@@ -72,7 +71,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WX4-Ey-lrt"/>
-                        <color key="backgroundColor" name="White"/>
+                        <color key="backgroundColor" name="PaleGrey"/>
                         <constraints>
                             <constraint firstItem="WX4-Ey-lrt" firstAttribute="trailing" secondItem="e6p-HG-smV" secondAttribute="trailing" id="0TR-dl-wdD"/>
                             <constraint firstItem="N1k-U1-7FJ" firstAttribute="leading" secondItem="WX4-Ey-lrt" secondAttribute="leading" id="B2d-jz-rTn"/>
@@ -111,11 +110,11 @@
     </scenes>
     <resources>
         <image name="ArrowBackIcon" width="64" height="64"/>
-        <namedColor name="White">
+        <namedColor name="PaleGrey">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="PureWhite">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>

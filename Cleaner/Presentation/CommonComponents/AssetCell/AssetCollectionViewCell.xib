@@ -46,6 +46,7 @@
                     <constraint firstItem="F0e-8I-vKB" firstAttribute="leading" secondItem="CsV-er-Rhh" secondAttribute="leading" id="unc-3v-c7q"/>
                 </constraints>
             </collectionViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <size key="customSize" width="266" height="250"/>
             <connections>
                 <outlet property="bestIcon" destination="ric-Ae-S40" id="V67-v3-VK7"/>
