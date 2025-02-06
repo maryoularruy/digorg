@@ -30,6 +30,7 @@ final class SmartCleanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addGestureRecognizers()
+        rootView.smartCleanStackViewCells.forEach { $0.delegate = self }
         rootView.actionToolbar.delegate = self
     }
     
@@ -65,7 +66,8 @@ final class SmartCleanViewController: UIViewController {
 extension SmartCleanViewController: ViewControllerProtocol {
     func setupUI() {
         let progressStep: Double = 100.0 / 5
-        rootView.scanningStoreView.resetProgress()
+        rootView.scanningStorageView.resetProgress()
+        rootView.startSpinner()
         
         let dispatchGroup = DispatchGroup()
         
@@ -73,7 +75,8 @@ extension SmartCleanViewController: ViewControllerProtocol {
         photoVideoManager.fetchSimilarPhotos(live: false) { [weak self] assetGroups, _, _ in
             guard let self else { return }
             photoVideoManager.selectedPhotosForSmartCleaning = photoVideoManager.join(assetGroups)
-            rootView.scanningStoreView.bind(.scanning, value: progressStep)
+            rootView.scanningStorageView.bind(.scanning, value: progressStep)
+            rootView.duplicatePhotosCleanCell.bind(itemsCount: photoVideoManager.selectedPhotosForSmartCleaning.count)
             dispatchGroup.leave()
         }
         
@@ -81,7 +84,8 @@ extension SmartCleanViewController: ViewControllerProtocol {
         photoVideoManager.fetchScreenshots { [weak self] screenshots in
             guard let self else { return }
             photoVideoManager.selectedScreenshotsForSmartCleaning = screenshots
-            rootView.scanningStoreView.bind(.scanning, value: progressStep)
+            rootView.scanningStorageView.bind(.scanning, value: progressStep)
+            rootView.screenshotsCleanCell.bind(itemsCount: photoVideoManager.selectedScreenshotsForSmartCleaning.count)
             dispatchGroup.leave()
         }
         
@@ -89,7 +93,8 @@ extension SmartCleanViewController: ViewControllerProtocol {
         photoVideoManager.fetchSimilarVideos { [weak self] assetGroups, _, size in
             guard let self else { return }
             photoVideoManager.selectedVideosForSmartCleaning = photoVideoManager.join(assetGroups)
-            rootView.scanningStoreView.bind(.scanning, value: progressStep)
+            rootView.scanningStorageView.bind(.scanning, value: progressStep)
+            rootView.duplicateVideosCleanCell.bind(itemsCount: photoVideoManager.selectedVideosForSmartCleaning.count)
             dispatchGroup.leave()
         }
         
@@ -97,7 +102,8 @@ extension SmartCleanViewController: ViewControllerProtocol {
         calendarManager.fetchEvents { [weak self] events in
             guard let self else { return }
             calendarManager.selectedEventsForSmartCleaning = events
-            rootView.scanningStoreView.bind(.scanning, value: progressStep)
+            rootView.scanningStorageView.bind(.scanning, value: progressStep)
+            rootView.calendarCleanCell.bind(itemsCount: calendarManager.selectedEventsForSmartCleaning.count)
             dispatchGroup.leave()
         }
         
@@ -105,14 +111,15 @@ extension SmartCleanViewController: ViewControllerProtocol {
         contactManager.loadIncompletedByNumber { [weak self] contacts in
             guard let self else { return }
             contactManager.selectedContactsForSmartCleaning = contacts
-            rootView.scanningStoreView.bind(.scanning, value: progressStep)
+            rootView.scanningStorageView.bind(.scanning, value: progressStep)
+            rootView.contactsCleanCell.bind(itemsCount: contactManager.selectedContactsForSmartCleaning.count)
             dispatchGroup.leave()
         }
         
         dispatchGroup.notify(queue: .main) { [weak self] in
             self?.getItemsSize { [weak self] finalSize in
                 guard let self else { return }
-                rootView.scanningStoreView.bind(.scanningDone, value: 100, finalSize: finalSize)
+                rootView.scanningStorageView.bind(.scanningDone, value: 100, finalSize: finalSize)
                 rootView.actionToolbar.toolbarButton.isClickable = itemsCount == 0 ? false : true
                 rootView.actionToolbar.toolbarButton.bind(text: "Delete \(itemsCount) item\(itemsCount == 1 ? "" : "s"), \(finalSize.convertToString())")
             }
@@ -127,6 +134,12 @@ extension SmartCleanViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+    }
+}
+
+extension SmartCleanViewController: SmartCleanCellDelegate {
+    func tapOnManageButton(_ type: SmartCleanCellType) {
+        
     }
 }
 

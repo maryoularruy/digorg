@@ -1,5 +1,5 @@
 //
-//  ScanningStoreView.swift
+//  ScanningStorageView.swift
 //  Cleaner
 //
 //  Created by Elena Sedunova on 04.02.2025.
@@ -11,7 +11,7 @@ enum ScanningStoreViewType {
     case scanning, scanningDone
 }
 
-final class ScanningStoreView: UIView {
+final class ScanningStorageView: UIView {
     private var type: ScanningStoreViewType
     private var currentProgress: CGFloat = 0.0
     

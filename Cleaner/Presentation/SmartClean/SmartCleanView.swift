@@ -18,7 +18,28 @@ final class SmartCleanView: UIView {
         return label
     }()
     
-    lazy var scanningStoreView: ScanningStoreView = ScanningStoreView(type: .scanning)
+    lazy var scanningStorageView: ScanningStorageView = ScanningStorageView(type: .scanning)
+    
+    private lazy var smartCleanStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .equalSpacing
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        
+        smartCleanStackViewCells.forEach { cell in
+            stackView.addArrangedSubview(cell)
+        }
+        
+        return stackView
+    }()
+    
+    lazy var smartCleanStackViewCells = [calendarCleanCell, contactsCleanCell, duplicatePhotosCleanCell, screenshotsCleanCell, duplicateVideosCleanCell]
+    
+    lazy var calendarCleanCell = SmartCleanCell(type: .calendar)
+    lazy var contactsCleanCell = SmartCleanCell(type: .contacts)
+    lazy var duplicatePhotosCleanCell = SmartCleanCell(type: .duplicatePhotos)
+    lazy var screenshotsCleanCell = SmartCleanCell(type: .screenshots)
+    lazy var duplicateVideosCleanCell = SmartCleanCell(type: .duplicatesVideos)
     
     lazy var actionToolbar: ActionToolbar = {
         let toolbar = ActionToolbar()
@@ -38,6 +59,12 @@ final class SmartCleanView: UIView {
         setupView()
         initConstraints()
     }
+    
+    func startSpinner() {
+        smartCleanStackViewCells.forEach { cell in
+            cell.startSpinner()
+        }
+    }
 
     private func setupView() {
         backgroundColor = .paleGrey
@@ -46,7 +73,7 @@ final class SmartCleanView: UIView {
     private func initConstraints() {
         addSubviews([scroll, actionToolbar])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, scanningStoreView])
+        contentView.addSubviews([arrowBack, label, scanningStorageView, smartCleanStackView])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -68,10 +95,15 @@ final class SmartCleanView: UIView {
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            scanningStoreView.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 18),
-            scanningStoreView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            scanningStoreView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            scanningStoreView.heightAnchor.constraint(equalToConstant: 108),
+            scanningStorageView.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 18),
+            scanningStorageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            scanningStorageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            scanningStorageView.heightAnchor.constraint(equalToConstant: 108),
+            
+            smartCleanStackView.topAnchor.constraint(equalTo: scanningStorageView.bottomAnchor, constant: 16),
+            smartCleanStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            smartCleanStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            smartCleanStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             actionToolbar.leadingAnchor.constraint(equalTo: leadingAnchor),
             actionToolbar.trailingAnchor.constraint(equalTo: trailingAnchor),
