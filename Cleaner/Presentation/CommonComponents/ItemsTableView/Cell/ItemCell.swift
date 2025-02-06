@@ -126,7 +126,7 @@ final class ItemCell: UITableViewCell, NibReusable {
     }
     
     private func setup() {
-        clipsToBounds = false
+        layer.cornerRadius = 20
         content.clipsToBounds = true
         secondLabel.setGreyTextColor()
         addShadows()

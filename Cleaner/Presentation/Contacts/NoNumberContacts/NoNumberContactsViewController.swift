@@ -79,18 +79,6 @@ final class NoNumberContactsViewController: UIViewController {
         setupUnresolvedContactsTableView()
     }
     
-    deinit {
-        print("NoNumberContactsViewController")
-    }
-    
-    @IBAction func tapOnSelectionButton(_ sender: Any) {
-        if contactsForDeletion.count == contacts.count {
-            contactsForDeletion.removeAll()
-        } else {
-            contactsForDeletion.insert(contacts)
-        }
-    }
-    
     private func setupUnresolvedContactsTableView() {
         unresolvedContactsTableView.register(cellType: ItemCell.self)
     }
@@ -135,6 +123,7 @@ final class NoNumberContactsViewController: UIViewController {
 extension NoNumberContactsViewController: ViewControllerProtocol {
     func setupUI() {
         toolbar.delegate = self
+        selectionButton.delegate = self
     }
     
     func addGestureRecognizers() {
@@ -156,6 +145,7 @@ extension NoNumberContactsViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
         cell.delegate = self
+        cell.setupSingleCellInSection()
         cell.bindNoNumber(contact: contacts[indexPath.row], indexPath.row)
         
         cell.checkBoxButton.image = contactsForDeletion.contains(contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
@@ -183,6 +173,16 @@ extension NoNumberContactsViewController: ItemCellProtocol {
     
     func tapOnCell(_ position: (Int, Int)) {
         presentContact(contact: contacts[position.1])
+    }
+}
+
+extension NoNumberContactsViewController: SelectionButtonDelegate {
+    func tapOnButton() {
+        if contactsForDeletion.count == contacts.count {
+            contactsForDeletion.removeAll()
+        } else {
+            contactsForDeletion.insert(contacts)
+        }
     }
 }
 
