@@ -37,6 +37,9 @@ extension UIImage {
     
     static var sortIcon = UIImage(resource: .sortIcon)
     
+    //MARK: -Calendar
+    static var event = UIImage(resource: .event)
+    
     //MARK: -ToolOption
     static var secretAlbum = UIImage(resource: .secretAlbum)
     static var secretContact = UIImage(resource: .secretContact)

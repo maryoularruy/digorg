@@ -43,6 +43,7 @@ final class GroupedAssetsViewController: UIViewController {
                 setupEmptyState()
             } else {
                 selectionButton.bind(text: assetsForDeletion.count == allAssetsCount ? .deselectAll : .selectAll)
+                emptyStateView = nil
             }
         }
     }
@@ -75,6 +76,8 @@ final class GroupedAssetsViewController: UIViewController {
 			}
 		}
 	}
+    
+    private lazy var emptyStateView: EmptyStateView? = nil
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +96,15 @@ final class GroupedAssetsViewController: UIViewController {
     }
     
     private func setupEmptyState() {
-        
+        selectionButton.bind(text: .selectAll)
+        toolbar.toolbarButton.bind(text: "Back")
+        toolbar.toolbarButton.isClickable = true
+        emptyStateView?.removeFromSuperview()
+        emptyStateView = view.createEmptyState(type: .empty)
+        if let emptyStateView {
+            view.addSubview(emptyStateView)
+        }
+        view.layoutIfNeeded()
     }
 }
 

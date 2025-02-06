@@ -29,6 +29,7 @@ final class CalendarViewController: UIViewController {
                 selectionButton.bind(text: eventsForDeletion.count == eventsCount ? .deselectAll : .selectAll)
                 toolbar.toolbarButton.bind(text: eventsForDeletion.isEmpty ? "Delete 0 Items" : "Delete Items (\(eventsForDeletion.count))")
                 toolbar.toolbarButton.isClickable = !eventsForDeletion.isEmpty
+                emptyStateView = nil
             }
         }
     }
@@ -41,6 +42,8 @@ final class CalendarViewController: UIViewController {
             unresolvedEventsTableView.reloadData()
         }
     }
+    
+    private lazy var emptyStateView: EmptyStateView? = nil
     
     private var eventsCount: Int {
         eventGroups.reduce(0) { $0 + $1.events.count }
@@ -84,6 +87,10 @@ final class CalendarViewController: UIViewController {
     
     private func setupEmptyState() {
         selectionButton.bind(text: .selectAll)
+        emptyStateView = view.createEmptyState(type: .noEvents)
+        if let emptyStateView {
+            view.addSubview(emptyStateView)
+        }
         toolbar.toolbarButton.bind(text: "Back")
         toolbar.toolbarButton.isClickable = true
     }
@@ -98,6 +105,10 @@ extension CalendarViewController: ViewControllerProtocol {
         arrowBackButton.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
     }
 }
 

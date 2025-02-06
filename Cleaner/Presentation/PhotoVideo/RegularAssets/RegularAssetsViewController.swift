@@ -43,7 +43,7 @@ final class RegularAssetsViewController: UIViewController {
                     rootView.selectionButton.bind(text: assetsForDeletion.count == assets.count ? .deselectAll : .selectAll)
                     rootView.toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s")")
                     rootView.toolbar.toolbarButton.isClickable = !assetsForDeletion.isEmpty
-                    hideEmptyState()
+                    emptyStateView = nil
                 }
             }
         }
@@ -92,20 +92,12 @@ final class RegularAssetsViewController: UIViewController {
         rootView.selectionButton.bind(text: .selectAll)
         rootView.toolbar.toolbarButton.bind(text: "Back")
         rootView.toolbar.toolbarButton.isClickable = true
-        rootView.assetsCollectionView.isHidden = true
         emptyStateView?.removeFromSuperview()
         emptyStateView = rootView.createEmptyState(type: .empty)
         if let emptyStateView {
             rootView.addSubview(emptyStateView)
         }
         rootView.layoutIfNeeded()
-    }
-    
-    private func hideEmptyState() {
-        rootView.assetsCollectionView.isHidden = false
-        rootView.assetsCollectionView.reloadData()
-        emptyStateView?.removeFromSuperview()
-        emptyStateView = nil
     }
     
     private func fetchAssets(isFirstResponder: Bool = true) {
