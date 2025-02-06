@@ -7,21 +7,21 @@
 
 import UIKit
 
-enum EntryFrom {
+enum CleaningAssetsEntryFrom {
     case smartClean, regularAssets
 }
 
 final class CleaningAssetsViewController: UIViewController {
     private lazy var rootView = CleaningAssetsView()
     
-    private var from: EntryFrom
+    private var from: CleaningAssetsEntryFrom
     private var itemsForDeletion: Int
     
     private lazy var photoVideoManager = PhotoVideoManager.shared
     private lazy var contactManager = ContactManager.shared
     private lazy var calendarManager = CalendarManager.shared
     
-    init(from: EntryFrom, itemsForDeleting: Int) {
+    init(from: CleaningAssetsEntryFrom, itemsForDeleting: Int) {
         self.from = from
         self.itemsForDeletion = itemsForDeleting
         super.init(nibName: nil, bundle: nil)

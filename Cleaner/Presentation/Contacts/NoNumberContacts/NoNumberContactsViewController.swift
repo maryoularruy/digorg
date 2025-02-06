@@ -8,12 +8,18 @@
 import ContactsUI
 import BottomPopup
 
+enum NoNumberContactsEntryFrom {
+    case smartClean, contactsCleanMenu
+}
+
 final class NoNumberContactsViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var unresolvedContactsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedContactsTableView: UITableView!
     @IBOutlet weak var toolbar: ActionToolbar!
+    
+    lazy var from: NoNumberContactsEntryFrom = .contactsCleanMenu
     
     private lazy var contactManager = ContactManager.shared
     
@@ -26,8 +32,16 @@ final class NoNumberContactsViewController: UIViewController {
                 setupEmptyState()
             } else {
                 selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
-                toolbar.toolbarButton.bind(text: "Delete")
-                toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
+                
+                switch from {
+                case .smartClean:
+                    toolbar.toolbarButton.bind(text: "Apply")
+                    toolbar.toolbarButton.isClickable = true
+                case .contactsCleanMenu:
+                    toolbar.toolbarButton.bind(text: "Delete")
+                    toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
+                }
+                
                 emptyStateView = nil
             }
         }
@@ -36,8 +50,16 @@ final class NoNumberContactsViewController: UIViewController {
     private lazy var contactsForDeletion = Set<CNContact>() {
         didSet {
             selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
-            toolbar.toolbarButton.bind(text: "Delete\(contactsForDeletion.isEmpty ? "" : " Selected (\(contactsForDeletion.count))")")
-            toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
+            
+            switch from {
+            case .smartClean:
+                toolbar.toolbarButton.bind(text: "Apply")
+                toolbar.toolbarButton.isClickable = true
+            case .contactsCleanMenu:
+                toolbar.toolbarButton.bind(text: "Delete\(contactsForDeletion.isEmpty ? "" : " Selected (\(contactsForDeletion.count))")")
+                toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
+            }
+            
             unresolvedContactsTableView.reloadData()
         }
     }
@@ -57,6 +79,10 @@ final class NoNumberContactsViewController: UIViewController {
         setupUnresolvedContactsTableView()
     }
     
+    deinit {
+        print("NoNumberContactsViewController")
+    }
+    
     @IBAction func tapOnSelectionButton(_ sender: Any) {
         if contactsForDeletion.count == contacts.count {
             contactsForDeletion.removeAll()
@@ -70,8 +96,12 @@ final class NoNumberContactsViewController: UIViewController {
     }
     
     private func reloadData() {
-        contactManager.loadIncompletedByNumber { contacts in
-            self.contacts = contacts
+        contactManager.loadIncompletedByNumber { [weak self] contacts in
+            self?.contacts = contacts
+        }
+        
+        if from == .smartClean {
+            contactsForDeletion.insert(contactManager.selectedContactsForSmartCleaning)
         }
     }
     
@@ -86,7 +116,14 @@ final class NoNumberContactsViewController: UIViewController {
     
     private func setupEmptyState() {
         selectionButton.bind(text: .selectAll)
-        toolbar.toolbarButton.bind(text: "Back")
+        
+        switch from {
+        case .smartClean:
+            toolbar.toolbarButton.bind(text: "Apply")
+        case .contactsCleanMenu:
+            toolbar.toolbarButton.bind(text: "Back")
+        }
+        
         toolbar.toolbarButton.isClickable = true
         emptyStateView = view.createEmptyState(type: .noNameContacts)
         if let emptyStateView {
@@ -151,32 +188,40 @@ extension NoNumberContactsViewController: ItemCellProtocol {
 
 extension NoNumberContactsViewController: ActionToolbarDelegate, BottomPopupDelegate {
     func tapOnActionButton() {
-        if contacts.isEmpty {
+        switch from {
+        case .smartClean:
+            contactManager.selectedContactsForSmartCleaning = Array(contactsForDeletion)
             navigationController?.popViewController(animated: true)
-        } else {
-            guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
-            vc.popupDelegate = self
-            vc.height = 238
-            vc.actionButtonText = "Delete Selected (\(contactsForDeletion.count))"
-            vc.type = .deleteContacts
-            DispatchQueue.main.async { [weak self] in
-                self?.present(vc, animated: true)
+            
+        case .contactsCleanMenu:
+            if contacts.isEmpty {
+                navigationController?.popViewController(animated: true)
+            } else {
+                guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
+                vc.popupDelegate = self
+                vc.height = 238
+                vc.actionButtonText = "Delete Selected (\(contactsForDeletion.count))"
+                vc.type = .deleteContacts
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(vc, animated: true)
+                }
             }
         }
     }
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
-            contactManager.delete(Array(contactsForDeletion))
-            let successView = SuccessView(frame: SuccessView.myFrame)
-            successView.bind(type: .successDelete)
-            successView.center = view.center
-            view.addSubview(successView)
-            successView.setHidden { [weak self] in
-                guard let self else { return }
-                successView.removeFromSuperview()
-                contactsForDeletion.removeAll()
-                reloadData()
+            if contactManager.delete(Array(contactsForDeletion)) {
+                let successView = SuccessView(frame: SuccessView.myFrame)
+                successView.bind(type: .successDelete)
+                successView.center = view.center
+                view.addSubview(successView)
+                successView.setHidden { [weak self] in
+                    guard let self else { return }
+                    successView.removeFromSuperview()
+                    contactsForDeletion.removeAll()
+                    reloadData()
+                }
             }
         }
     }
