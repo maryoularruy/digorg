@@ -28,7 +28,7 @@ final class HorizontalProgressBar: UIView {
     
     func addProgress(_ progress: CGFloat) {
         currentProgress += progress
-        updateProgress(to: currentProgress)
+        updateProgress(to: currentProgress, duration: 0.05)
     }
     
     func updateProgress(to progress: CGFloat, duration: TimeInterval = 0.2) {

@@ -147,8 +147,9 @@ final class ContactManager {
         }
     }
     
-    func delete(_ contacts: [CNContact]) {
+    func delete(_ contacts: [CNContact]) -> Bool {
         contacts.forEach { delete($0) }
+        return true
     }
     
     func delete(_ contact: CNContact) {

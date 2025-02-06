@@ -43,7 +43,22 @@ final class CalendarManager {
                     print("\(error.localizedDescription)")
                     completion(false)
                 }
+            } else {
+                completion(false)
             }
+        }
+    }
+    
+    func delete(_ events: [EKEvent]) -> Bool {
+        events.forEach { delete($0) }
+        return true
+    }
+    
+    func delete(_ event: EKEvent) {
+        if let event = eventStore.event(withIdentifier: event.eventIdentifier) {
+            do {
+                try eventStore.remove(event, span: .thisEvent)
+            } catch {}
         }
     }
     

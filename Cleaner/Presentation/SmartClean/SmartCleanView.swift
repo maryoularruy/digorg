@@ -20,6 +20,13 @@ final class SmartCleanView: UIView {
     
     lazy var scanningStoreView: ScanningStoreView = ScanningStoreView(type: .scanning)
     
+    lazy var actionToolbar: ActionToolbar = {
+        let toolbar = ActionToolbar()
+        toolbar.toolbarButton.isClickable = false
+        toolbar.toolbarButton.bind(text: "Delete all")
+        return toolbar
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -37,7 +44,7 @@ final class SmartCleanView: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([scroll])
+        addSubviews([scroll, actionToolbar])
         scroll.addSubviews([contentView])
         contentView.addSubviews([arrowBack, label, scanningStoreView])
         
@@ -64,7 +71,12 @@ final class SmartCleanView: UIView {
             scanningStoreView.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 18),
             scanningStoreView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             scanningStoreView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            scanningStoreView.heightAnchor.constraint(equalToConstant: 108)
+            scanningStoreView.heightAnchor.constraint(equalToConstant: 108),
+            
+            actionToolbar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            actionToolbar.trailingAnchor.constraint(equalTo: trailingAnchor),
+            actionToolbar.bottomAnchor.constraint(equalTo: bottomAnchor),
+            actionToolbar.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 }

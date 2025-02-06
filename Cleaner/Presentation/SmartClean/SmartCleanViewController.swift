@@ -22,12 +22,6 @@ final class SmartCleanViewController: UIViewController {
         contactManager.selectedContactsForSmartCleaning.count
     }
     
-//    private var itemsSize: Int64 {
-////        photoVideoManager.selectedPhotosForSmartCleaning.reduce(0) { $0 + $1.imageSize } +
-////        photoVideoManager.selectedScreenshotsForSmartCleaning.reduce(0) { $0 + $1.imageSize } +
-////        photoVideoManager.selectedVideosForSmartCleaning.reduce(0) { $0 + $1.imageSize }
-//    }
-    
     override func loadView() {
         super.loadView()
         view = rootView
@@ -36,6 +30,7 @@ final class SmartCleanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addGestureRecognizers()
+        rootView.actionToolbar.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -118,6 +113,8 @@ extension SmartCleanViewController: ViewControllerProtocol {
             self?.getItemsSize { [weak self] finalSize in
                 guard let self else { return }
                 rootView.scanningStoreView.bind(.scanningDone, value: 100, finalSize: finalSize)
+                rootView.actionToolbar.toolbarButton.isClickable = itemsCount == 0 ? false : true
+                rootView.actionToolbar.toolbarButton.bind(text: "Delete \(itemsCount) item\(itemsCount == 1 ? "" : "s"), \(finalSize.convertToString())")
             }
         }
     }
@@ -130,5 +127,13 @@ extension SmartCleanViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+    }
+}
+
+extension SmartCleanViewController: ActionToolbarDelegate {
+    func tapOnActionButton() {
+        let vc = CleaningAssetsViewController(from: .smartClean, itemsForDeleting: itemsCount)
+        vc.modalPresentationStyle = .currentContext
+        navigationController?.pushViewController(vc, animated: false)
     }
 }

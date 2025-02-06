@@ -248,7 +248,7 @@ extension RegularAssetsViewController: ActionToolbarDelegate {
             navigationController?.popViewController(animated: true)
         } else {
             if photoVideoManager.delete(assets: Array(assetsForDeletion)) {
-                let vc = CleaningAssetsViewController(itemsForDeleting: assetsForDeletion.count)
+                let vc = CleaningAssetsViewController(from: .regularAssets, itemsForDeleting: assetsForDeletion.count)
                 vc.modalPresentationStyle = .currentContext
                 navigationController?.pushViewController(vc, animated: false)
                 assetsForDeletion.removeAll()
