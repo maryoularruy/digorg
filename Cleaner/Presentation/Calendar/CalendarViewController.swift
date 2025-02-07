@@ -48,6 +48,10 @@ final class CalendarViewController: UIViewController {
         }
     }
     
+    private var eventsCount: Int {
+        eventGroups.reduce(0) { $0 + $1.events.count }
+    }
+    
     private lazy var eventsForDeletion = Set<EKEvent>() {
         didSet {
             selectionButton.bind(text: eventsForDeletion.count == eventsCount ? .deselectAll : .selectAll)
@@ -67,10 +71,6 @@ final class CalendarViewController: UIViewController {
     
     private lazy var emptyStateView: EmptyStateView? = nil
     
-    private var eventsCount: Int {
-        eventGroups.reduce(0) { $0 + $1.events.count }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -82,18 +82,6 @@ final class CalendarViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         reloadData()
         setupUnresolvedEventsTableView()
-    }
-    
-    deinit {
-        print("CalendarViewController deinit")
-    }
-    
-    @IBAction func tapOnSelectionButton(_ sender: Any) {
-        if eventsForDeletion.count == eventsCount {
-            eventsForDeletion.removeAll()
-        } else {
-            eventGroups.forEach { eventsForDeletion.insert($0.events) }
-        }
     }
     
     private func setupUnresolvedEventsTableView() {
@@ -127,10 +115,22 @@ final class CalendarViewController: UIViewController {
             view.addSubview(emptyStateView)
         }
     }
+    
+    private func isContainsForDeletion(events: [EKEvent]) -> Bool {
+        var isContains = true
+        for i in 0..<events.count {
+            if !eventsForDeletion.contains(events[0]) {
+                isContains = false
+                break
+            }
+        }
+        return isContains
+    }
 }
 
 extension CalendarViewController: ViewControllerProtocol {
     func setupUI() {
+        selectionButton.delegate = self
         toolbar.delegate = self
     }
     
@@ -158,9 +158,8 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
         cell.delegate = self
         
+        cell.setupSingleCellInSection()
         cell.bind(event: eventGroups[indexPath.section].events[indexPath.row], (indexPath.section, indexPath.row))
-        
-        cell.isUserInteractionEnabled = true
         
         cell.checkBoxButton.image = eventsForDeletion.contains(eventGroups[indexPath.section].events[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         
@@ -176,9 +175,14 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ItemCellHeader()
+        header.delegate = self
+        header.bind(section: section)
+        
         header.firstLabel.bind(text: "\(eventGroups[section].year)")
-        header.secondLabel.bind(text: "\(eventGroups[section].events.count) event\(eventGroups[section].events.count == 1 ? "" : "s")")
         header.secondLabel.isHidden = false
+        header.secondLabel.bind(text: "\(eventGroups[section].events.count) event\(eventGroups[section].events.count == 1 ? "" : "s")")
+        
+        header.selectAllButton.bind(text: isContainsForDeletion(events: eventGroups[section].events) ? .deselectAll : .selectAll)
         return header
     }
     
@@ -187,7 +191,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension CalendarViewController: ItemCellProtocol {
+extension CalendarViewController: ItemCellProtocol, HeaderSelectAllButtonDelegate {
     func tapOnCheckBox(_ position: (Int, Int)) {
         tapOnCell(position)
     }
@@ -199,6 +203,29 @@ extension CalendarViewController: ItemCellProtocol {
         } else {
             eventsForDeletion.insert(event)
         }
+    }
+    
+    func tapOnSelectAllButton(_ section: Int) {
+        let events = eventGroups[section].events
+        if isContainsForDeletion(events: events) {
+            events.forEach { eventsForDeletion.remove($0) }
+        } else {
+            eventsForDeletion.insert(events)
+        }
+    }
+}
+
+extension CalendarViewController: SelectionButtonDelegate {
+    func tapOnButton() {
+        if eventsCount == eventsForDeletion.count {
+            eventsForDeletion.removeAll()
+        } else {
+            eventsForDeletion.removeAll()
+            eventGroups.forEach { eventGroup in
+                eventsForDeletion.insert(eventGroup.events)
+            }
+        }
+        unresolvedEventsTableView.reloadData()
     }
 }
 

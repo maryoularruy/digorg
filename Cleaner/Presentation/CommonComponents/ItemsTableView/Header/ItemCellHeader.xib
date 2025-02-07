@@ -27,9 +27,8 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsW-ON-Fmq" customClass="SelectionTransparentButtonStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="339" y="0.0" width="54" height="34"/>
+                    <rect key="frame" x="363" y="0.0" width="30" height="34"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Button"/>
                 </button>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gd-nR-eVw" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
                     <rect key="frame" x="8" y="0.0" width="0.0" height="0.0"/>
