@@ -81,11 +81,6 @@ final class CalendarViewController: UIViewController {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(true, animated: false)
         reloadData()
-        setupUnresolvedEventsTableView()
-    }
-    
-    private func setupUnresolvedEventsTableView() {
-        unresolvedEventsTableView.register(cellType: ItemCell.self)
     }
     
     private func reloadData() {
@@ -119,7 +114,7 @@ final class CalendarViewController: UIViewController {
     private func isContainsForDeletion(events: [EKEvent]) -> Bool {
         var isContains = true
         for i in 0..<events.count {
-            if !eventsForDeletion.contains(events[0]) {
+            if !eventsForDeletion.contains(events[i]) {
                 isContains = false
                 break
             }
@@ -132,6 +127,7 @@ extension CalendarViewController: ViewControllerProtocol {
     func setupUI() {
         selectionButton.delegate = self
         toolbar.delegate = self
+        unresolvedEventsTableView.register(cellType: ItemCell.self)
     }
     
     func addGestureRecognizers() {

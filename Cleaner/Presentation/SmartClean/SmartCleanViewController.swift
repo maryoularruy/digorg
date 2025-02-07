@@ -161,11 +161,11 @@ extension SmartCleanViewController: SmartCleanCellDelegate {
         case .contacts:
             StoryboardScene.NoNumberContacts.initialScene.instantiate()
         case .duplicatePhotos:
-            GroupedAssetsViewController()
+            StoryboardScene.GroupedAssets.initialScene.instantiate()
         case .screenshots:
             RegularAssetsViewController(type: .screenshots)
         case .duplicatesVideos:
-            GroupedAssetsViewController()
+            StoryboardScene.GroupedAssets.initialScene.instantiate()
         }
         
         switch type {
@@ -174,11 +174,13 @@ extension SmartCleanViewController: SmartCleanCellDelegate {
         case .contacts:
             (vc as? NoNumberContactsViewController)?.from = .smartClean
         case .duplicatePhotos:
-            break
+            (vc as? GroupedAssetsViewController)?.type = .duplicatePhotos
+            (vc as? GroupedAssetsViewController)?.from = .smartClean
         case .screenshots:
             break
         case .duplicatesVideos:
-            break
+            (vc as? GroupedAssetsViewController)?.type = .duplicateVideos
+            (vc as? GroupedAssetsViewController)?.from = .smartClean
         }
         
         vc.modalPresentationStyle = .fullScreen

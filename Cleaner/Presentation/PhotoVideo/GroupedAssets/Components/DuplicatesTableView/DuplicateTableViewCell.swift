@@ -35,9 +35,11 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
 		duplicateGroupCV.reloadData()
 	}
 	
-	func setupData(assets: [PHAsset]) {
+    func setupData(assets: [PHAsset]) {
 		self.assets = assets
         selectAllButton.isHidden = true
+//        selectAllButton.bind(text: assets.count == assetsForDeletion.count ? .deselectAll : .selectAll)
+        selectionStyle = .none
         selectAllButton.addTapGestureRecognizer { [weak self] in
             self?.onTapSelectAll?(assets)
         }
