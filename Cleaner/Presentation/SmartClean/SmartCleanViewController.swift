@@ -170,7 +170,7 @@ extension SmartCleanViewController: SmartCleanCellDelegate {
         
         switch type {
         case .calendar:
-            break
+            (vc as? CalendarViewController)?.from = .smartClean
         case .contacts:
             (vc as? NoNumberContactsViewController)?.from = .smartClean
         case .duplicatePhotos:

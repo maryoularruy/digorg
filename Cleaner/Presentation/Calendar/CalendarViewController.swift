@@ -9,12 +9,18 @@ import EventKit
 import UIKit
 import BottomPopup
 
+enum CalendarEntryFrom {
+    case smartClean, mainScreen
+}
+
 final class CalendarViewController: UIViewController {
     @IBOutlet weak var arrowBackButton: UIView!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var unresolvedEventsCount: Regular13LabelStyle!
     @IBOutlet weak var unresolvedEventsTableView: UITableView!
     @IBOutlet weak var toolbar: ActionToolbar!
+    
+    lazy var from: CalendarEntryFrom = .mainScreen
     
     private lazy var calendarManager = CalendarManager.shared
     
@@ -27,8 +33,16 @@ final class CalendarViewController: UIViewController {
                 setupEmptyState()
             } else {
                 selectionButton.bind(text: eventsForDeletion.count == eventsCount ? .deselectAll : .selectAll)
-                toolbar.toolbarButton.bind(text: eventsForDeletion.isEmpty ? "Delete 0 Items" : "Delete Items (\(eventsForDeletion.count))")
-                toolbar.toolbarButton.isClickable = !eventsForDeletion.isEmpty
+                
+                switch from {
+                case .smartClean:
+                    toolbar.toolbarButton.bind(text: "Apply")
+                    toolbar.toolbarButton.isClickable = true
+                case .mainScreen:
+                    toolbar.toolbarButton.bind(text: eventsForDeletion.isEmpty ? "Delete 0 Items" : "Delete Items (\(eventsForDeletion.count))")
+                    toolbar.toolbarButton.isClickable = !eventsForDeletion.isEmpty
+                }
+                
                 emptyStateView = nil
             }
         }
@@ -37,8 +51,16 @@ final class CalendarViewController: UIViewController {
     private lazy var eventsForDeletion = Set<EKEvent>() {
         didSet {
             selectionButton.bind(text: eventsForDeletion.count == eventsCount ? .deselectAll : .selectAll)
-            toolbar.toolbarButton.bind(text: eventsForDeletion.isEmpty ? "Delete 0 Items" : "Delete Items (\(eventsForDeletion.count))")
-            toolbar.toolbarButton.isClickable = !eventsForDeletion.isEmpty
+            
+            switch from {
+            case .smartClean:
+                toolbar.toolbarButton.bind(text: "Apply")
+                toolbar.toolbarButton.isClickable = true
+            case .mainScreen:
+                toolbar.toolbarButton.bind(text: eventsForDeletion.isEmpty ? "Delete 0 Items" : "Delete Items (\(eventsForDeletion.count))")
+                toolbar.toolbarButton.isClickable = !eventsForDeletion.isEmpty
+            }
+            
             unresolvedEventsTableView.reloadData()
         }
     }
@@ -62,6 +84,10 @@ final class CalendarViewController: UIViewController {
         setupUnresolvedEventsTableView()
     }
     
+    deinit {
+        print("CalendarViewController deinit")
+    }
+    
     @IBAction func tapOnSelectionButton(_ sender: Any) {
         if eventsForDeletion.count == eventsCount {
             eventsForDeletion.removeAll()
@@ -75,24 +101,31 @@ final class CalendarViewController: UIViewController {
     }
     
     private func reloadData() {
-        fetchEvents()
-    }
-    
-    private func fetchEvents() {
-        CalendarManager.shared.fetchEvents { [weak self] events in
+        calendarManager.fetchEvents { [weak self] events in
             guard let self else { return }
             eventGroups = calendarManager.sortByYears(events)
+        }
+        
+        if from == .smartClean {
+            eventsForDeletion.insert(calendarManager.selectedEventsForSmartCleaning)
         }
     }
     
     private func setupEmptyState() {
         selectionButton.bind(text: .selectAll)
+        
+        switch from {
+        case .smartClean:
+            toolbar.toolbarButton.bind(text: "Apply")
+        case .mainScreen:
+            toolbar.toolbarButton.bind(text: "Back")
+        }
+        
+        toolbar.toolbarButton.isClickable = true
         emptyStateView = view.createEmptyState(type: .noEvents)
         if let emptyStateView {
             view.addSubview(emptyStateView)
         }
-        toolbar.toolbarButton.bind(text: "Back")
-        toolbar.toolbarButton.isClickable = true
     }
 }
 
@@ -171,16 +204,23 @@ extension CalendarViewController: ItemCellProtocol {
 
 extension CalendarViewController: ActionToolbarDelegate, BottomPopupDelegate {
     func tapOnActionButton() {
-        if eventsForDeletion.isEmpty {
+        switch from {
+        case .smartClean:
+            calendarManager.selectedEventsForSmartCleaning = Array(eventsForDeletion)
             navigationController?.popViewController(animated: true)
-        } else {
-            guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
-            vc.popupDelegate = self
-            vc.height = 238
-            vc.actionButtonText = "Delete Items (\(eventsForDeletion.count))"
-            vc.type = .deleteContacts
-            DispatchQueue.main.async { [weak self] in
-                self?.present(vc, animated: true)
+            
+        case .mainScreen:
+            if eventsForDeletion.isEmpty {
+                navigationController?.popViewController(animated: true)
+            } else {
+                guard let vc = UIStoryboard(name: ConfirmActionViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionViewController.idenfifier) as? ConfirmActionViewController else { return }
+                vc.popupDelegate = self
+                vc.height = 238
+                vc.actionButtonText = "Delete Items (\(eventsForDeletion.count))"
+                vc.type = .deleteContacts
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(vc, animated: true)
+                }
             }
         }
     }
