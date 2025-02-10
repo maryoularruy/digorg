@@ -47,8 +47,6 @@ final class SpeedTestView: UIView {
         switch type {
         case .download:
             arrowAndMbpsView.arrowImageView.setImage(.downloadBlack)
-        case .upload:
-            arrowAndMbpsView.arrowImageView.setImage(.uploadBlack)
         case .completed:
             currentValueLabel.isHidden = true
             arrowAndMbpsView.isHidden = true

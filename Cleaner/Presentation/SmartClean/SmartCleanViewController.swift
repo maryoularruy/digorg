@@ -59,10 +59,6 @@ final class SmartCleanViewController: UIViewController {
             handler(totalSize)
         }
     }
-    
-    deinit {
-        print("SmartCleanViewController deinit")
-    }
 }
 
 extension SmartCleanViewController: ViewControllerProtocol {

@@ -8,7 +8,7 @@
 import UIKit
 
 enum SpeedTestType {
-    case download, upload, completed
+    case download, completed
 }
 
 final class NetworkSpeedTestView: UIView {
