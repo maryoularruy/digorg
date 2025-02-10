@@ -11,7 +11,7 @@ final class SecurityQuestionView: UIView {
     private lazy var contentView: UIView = UIView()
     lazy var arrowBack: UIView = arrowBackButton
     
-    private lazy var selectQuestionLabel: Regular15LabelStyle = {
+    lazy var selectQuestionLabel: Regular15LabelStyle = {
         let label = Regular15LabelStyle()
         label.bind(text: "Select security question")
         return label

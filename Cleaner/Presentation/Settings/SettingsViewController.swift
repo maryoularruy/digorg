@@ -93,8 +93,14 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
             userDefaultsService.set(option.isSwitchable, key: .isRemoveContactsAfterImport)
         case .usePasscode:
             userDefaultsService.set(option.isSwitchable, key: .isPasscodeTurnOn)
+            
         case .changePassword:
-            break
+            let vc = SecurityQuestionViewController()
+            vc.type = .change
+            vc.modalPresentationStyle = .fullScreen
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
+            
         case .share:
             //TODO: -add application's id
             //"https://apps.apple.com/app/id"
@@ -102,11 +108,13 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
             let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             vc.popoverPresentationController?.sourceView = self.view
             present(vc, animated: true)
+            
         case .sendFeedback:
             if let url = URL(string: "mailto:\("maryoularruy@gmail.com")?subject=\("Feedback about Cleaner")&body=\("")"),
                UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
+            
         case .privacyPolicy:
             //TODO
             break
