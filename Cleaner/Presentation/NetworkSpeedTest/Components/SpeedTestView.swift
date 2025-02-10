@@ -8,7 +8,7 @@
 import UIKit
 
 final class SpeedTestView: UIView {
-    static var maxSpeedInMbps = 50.0
+    private var maxSpeedInMbps = 50.0
     
     private lazy var progressBar: SpeedTestProgressBar = SpeedTestProgressBar(frame: CGRect(origin: .zero, size: CGSize(width: 278, height: 278)))
     
@@ -39,27 +39,24 @@ final class SpeedTestView: UIView {
         initConstraints()
     }
     
-    func bind(value: Double? = nil, type: SpeedTestType) {
-        if let value {
-            currentValueLabel.bind(text: value.formatted)
-        }
-        
+    func updateData(value: Double? = nil, type: SpeedTestType) {
         switch type {
         case .download:
-            arrowAndMbpsView.arrowImageView.setImage(.downloadBlack)
+            guard let value else { return }
+            currentValueLabel.bind(text: value.formatted)
+            progressBar.progressAnimation(value / maxSpeedInMbps)
         case .ping: break
         case .completed:
             currentValueLabel.isHidden = true
             arrowAndMbpsView.isHidden = true
             completedLabel.isHidden = false
-            progressBar.progressAnimation(1.0)
+            progressBar.progressAnimation(1.0, duration: 0.1)
         }
-        progressBar.progressAnimation(1.0)
     }
     
     func reset() {
         currentValueLabel.bind(text: "0")
-        arrowAndMbpsView.arrowImageView.setImage(.downloadBlack)
+        progressBar.progressAnimation(0, duration: 0)
         currentValueLabel.isHidden = false
         arrowAndMbpsView.isHidden = false
         completedLabel.isHidden = true

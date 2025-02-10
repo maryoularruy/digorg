@@ -36,6 +36,17 @@ final class SpeedTestCategoryView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func updateData(newValue: Double) {
+        switch type {
+        case .download:
+            valueLabel.bind(text: newValue.formatted + " Mbs")
+        case .ping:
+            valueLabel.bind(text: newValue.formatted + " ms")
+        case .completed:
+            break
+        }
+    }
+    
     func reset() {
         valueLabel.bind(text: type.startValue)
     }

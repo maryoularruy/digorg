@@ -87,15 +87,27 @@ final class NetworkSpeedTestView: UIView {
         self.mode = mode
         
         switch mode {
-        case .start:
+        case.start: break
+        case .stop:
             speedTestView.reset()
             downloadView.reset()
             pingView.reset()
-            toolbar.toolbarButton.bind(text: "Start")
-        case .stop:
             toolbar.toolbarButton.bind(text: "Stop")
         case .restart:
+            speedTestView.updateData(type: .completed)
             toolbar.toolbarButton.bind(text: "Restart")
+        }
+    }
+    
+    func updateData(type: SpeedTestType, value: Double) {
+        switch type {
+        case .download:
+            speedTestView.updateData(value: value, type: .download)
+            downloadView.updateData(newValue: value)
+        case .ping:
+            pingView.updateData(newValue: value)
+        case .completed:
+            break
         }
     }
     

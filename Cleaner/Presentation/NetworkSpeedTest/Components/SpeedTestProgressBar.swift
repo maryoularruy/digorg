@@ -26,9 +26,9 @@ final class SpeedTestProgressBar: UIView {
         setupLayer(&progressLayer, isBackgroundLayer: false)
     }
     
-    func progressAnimation(_ endValue: Double) {
+    func progressAnimation(_ endValue: Double, duration: CFTimeInterval = 0.3) {
         let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        circularProgressAnimation.duration = 1.5
+        circularProgressAnimation.duration = duration
         circularProgressAnimation.toValue = endValue
         circularProgressAnimation.fillMode = .forwards
         circularProgressAnimation.isRemovedOnCompletion = false

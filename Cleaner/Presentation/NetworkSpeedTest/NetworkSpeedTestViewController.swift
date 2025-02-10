@@ -10,6 +10,8 @@ import UIKit
 final class NetworkSpeedTestViewController: UIViewController {
     private lazy var rootView = NetworkSpeedTestView()
     
+    private lazy var networkService = NetworkService.shared
+    
     override func loadView() {
         super.loadView()
         view = rootView
@@ -21,15 +23,30 @@ final class NetworkSpeedTestViewController: UIViewController {
         addGestureRecognizers()
     }
     
-    //
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        rootView.speedTestView.bind(value: 5.2436, type: .download)
-    }
-    //
-    
-    deinit {
-        print("NetworkSpeedTestViewController deinit")
+    private func startTest() {
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        networkService.measureDownloadSpeed { [weak self] res in
+            if res != nil && self?.rootView.mode != .restart {
+                self?.rootView.updateData(type: .download, value: res!)
+            }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        networkService.measurePing { [weak self] res in
+            if res != nil && self?.rootView.mode != .restart {
+                self?.rootView.updateData(type: .ping, value: res!)
+            }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) { [weak self] in
+            if self?.rootView.mode != .restart {
+                self?.rootView.bind(.restart)
+            }
+        }
     }
 }
 
@@ -54,10 +71,12 @@ extension NetworkSpeedTestViewController: ActionToolbarDelegate {
         switch rootView.mode {
         case .start:
             rootView.bind(.stop)
+            startTest()
         case .stop:
             rootView.bind(.restart)
         case .restart:
             rootView.bind(.stop)
+            startTest()
         }
     }
 }
