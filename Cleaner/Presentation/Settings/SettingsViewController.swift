@@ -96,11 +96,17 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
         case .changePassword:
             break
         case .share:
-            //TODO
-            break
+            //TODO: -add application's id
+            //"https://apps.apple.com/app/id"
+            guard let url = NSURL(string: "https://apps.apple.com") else { return }
+            let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            vc.popoverPresentationController?.sourceView = self.view
+            present(vc, animated: true)
         case .sendFeedback:
-            //TODO
-            break
+            if let url = URL(string: "mailto:\("maryoularruy@gmail.com")?subject=\("Feedback about Cleaner")&body=\("")"),
+               UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
         case .privacyPolicy:
             //TODO
             break
