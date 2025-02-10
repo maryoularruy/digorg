@@ -17,13 +17,14 @@ final class NetworkSpeedTestViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         addGestureRecognizers()
     }
     
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        rootView.speedTestView.bind(value: 5.2436, type: .download)
+//        rootView.speedTestView.bind(value: 5.2436, type: .download)
     }
     //
     
@@ -34,7 +35,7 @@ final class NetworkSpeedTestViewController: UIViewController {
 
 extension NetworkSpeedTestViewController: ViewControllerProtocol {
     func setupUI() {
-        
+        rootView.toolbar.delegate = self
     }
     
     func addGestureRecognizers() {
@@ -45,5 +46,18 @@ extension NetworkSpeedTestViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+    }
+}
+
+extension NetworkSpeedTestViewController: ActionToolbarDelegate {
+    func tapOnActionButton() {
+        switch rootView.mode {
+        case .start:
+            rootView.bind(.stop)
+        case .stop:
+            rootView.bind(.restart)
+        case .restart:
+            rootView.bind(.stop)
+        }
     }
 }
