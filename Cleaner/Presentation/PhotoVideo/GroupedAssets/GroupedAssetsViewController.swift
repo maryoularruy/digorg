@@ -114,10 +114,6 @@ final class GroupedAssetsViewController: UIViewController {
         reloadData()
     }
     
-    deinit {
-        print("GroupedAssetsViewController deinit")
-    }
-    
     private func reloadData() {
         guard let type else { return }
         var groups = switch type {

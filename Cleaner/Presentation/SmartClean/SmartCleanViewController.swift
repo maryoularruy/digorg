@@ -177,7 +177,7 @@ extension SmartCleanViewController: SmartCleanCellDelegate {
             (vc as? GroupedAssetsViewController)?.type = .duplicatePhotos
             (vc as? GroupedAssetsViewController)?.from = .smartClean
         case .screenshots:
-            break
+            (vc as? RegularAssetsViewController)?.from = .smartClean
         case .duplicatesVideos:
             (vc as? GroupedAssetsViewController)?.type = .duplicateVideos
             (vc as? GroupedAssetsViewController)?.from = .smartClean
