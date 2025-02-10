@@ -15,6 +15,8 @@ struct CNContactSection {
 final class ContactManager {
     static let shared = ContactManager()
     
+    var selectedContactsForSmartCleaning: [CNContact] = []
+    
     private let store = CNContactStore()
     private let defaultDescriptor = CNContactViewController.descriptorForRequiredKeys()
     
@@ -145,8 +147,9 @@ final class ContactManager {
         }
     }
     
-    func delete(_ contacts: [CNContact]) {
+    func delete(_ contacts: [CNContact]) -> Bool {
         contacts.forEach { delete($0) }
+        return true
     }
     
     func delete(_ contact: CNContact) {

@@ -22,17 +22,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTf-kn-mGo" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="17" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsW-ON-Fmq" customClass="SelectionTransparentButtonStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="339" y="0.0" width="54" height="34"/>
+                    <rect key="frame" x="363" y="0.0" width="30" height="34"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Button"/>
                 </button>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gd-nR-eVw" customClass="Regular15LabelStyle" customModule="Cleaner" customModuleProvider="target">
-                    <rect key="frame" x="8" y="0.0" width="0.0" height="0.0"/>
+                    <rect key="frame" x="8" y="17" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                 <constraint firstItem="NsW-ON-Fmq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LOf-xx-iwY"/>
                 <constraint firstAttribute="trailing" secondItem="NsW-ON-Fmq" secondAttribute="trailing" id="YzS-Wz-PZd"/>
                 <constraint firstItem="4gd-nR-eVw" firstAttribute="centerY" secondItem="QTf-kn-mGo" secondAttribute="centerY" id="ZAH-Yz-2Y7"/>
-                <constraint firstItem="QTf-kn-mGo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dfl-KI-5g9"/>
+                <constraint firstItem="NsW-ON-Fmq" firstAttribute="centerY" secondItem="QTf-kn-mGo" secondAttribute="centerY" id="tdY-Cj-WNy"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-1" y="20"/>

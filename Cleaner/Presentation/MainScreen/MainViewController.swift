@@ -118,42 +118,33 @@ final class MainViewController: UIViewController {
     }
     
     private func updatePhotosCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.photoVideoManager.fetchSimilarPhotos(live: false) { assetsGroups, duplicatesCount, size in
-                DispatchQueue.main.async {
-                    self?.photosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.convertToString())")
-                }
+        photoVideoManager.fetchSimilarPhotos(live: false) { assetsGroups, duplicatesCount, size in
+            DispatchQueue.main.async { [weak self] in
+                self?.photosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.convertToString())")
             }
         }
     }
     
     private func updateVideosCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.photoVideoManager.fetchSimilarVideos { _, duplicatesCount, size in
-                DispatchQueue.main.async {
-                    self?.videosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.convertToString())")
-                }
+        photoVideoManager.fetchSimilarVideos { _, duplicatesCount, size in
+            DispatchQueue.main.async { [weak self] in
+                self?.videosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.convertToString())")
             }
         }
     }
     
     private func updateContactsCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.contactManager.countUnresolvedContacts { _, _, _, _, summaryCount in
-                DispatchQueue.main.async {
-                    self?.contactsCleanup.infoButton.bind(text: "\(summaryCount) contact\(summaryCount == 1 ? "" : "s")")
-                }
+        contactManager.countUnresolvedContacts { _, _, _, _, summaryCount in
+            DispatchQueue.main.async { [weak self] in
+                self?.contactsCleanup.infoButton.bind(text: "\(summaryCount) contact\(summaryCount == 1 ? "" : "s")")
             }
         }
     }
     
     private func updateCalendarCleanupOption() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.calendarManager.fetchEvents { eventGroups in
-                let eventsCount = eventGroups.reduce(0) { $0 + $1.events.count }
-                DispatchQueue.main.async {
-                    self?.calendarCleanup.infoButton.bind(text: "\(eventsCount) event\(eventsCount == 1 ? "" : "s")")
-                }
+        calendarManager.fetchEvents { events in
+            DispatchQueue.main.async { [weak self] in
+                self?.calendarCleanup.infoButton.bind(text: "\(events.count) event\(events.count == 1 ? "" : "s")")
             }
         }
     }
@@ -172,6 +163,9 @@ extension MainViewController: ViewControllerProtocol {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openDeviceInfoScreen))
         deviceInfoLabel.addTapGestureRecognizer(action: openDeviceInfoScreen)
         deviceInfoStackView.addGestureRecognizer(gesture)
+        
+        storageUsageView.addTapGestureRecognizer(action: openSmartClean)
+        storageUsageView.analyzeStorageButton.addTapGestureRecognizer(action: openSmartClean)
         
         photosCleanup.addTapGestureRecognizer(action: openPhotosCleanup)
         photosCleanup.infoButton.addTapGestureRecognizer(action: openPhotosCleanup)
@@ -196,6 +190,15 @@ extension MainViewController: ViewControllerProtocol {
             Title.allCases.forEach { title in
                 deviceInfoStackView.addArrangedSubview(DeviceInfoCell(cell: title))
             }
+        }
+    }
+    
+    private func openSmartClean() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let vc = SmartCleanViewController()
+            vc.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     

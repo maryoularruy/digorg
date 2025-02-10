@@ -9,10 +9,12 @@ import Photos
 import UIKit
 
 enum TargetSize {
-    case small, medium, large
+    case smartClean, small, medium, large
     
     var size: CGSize {
         switch self {
+        case .smartClean:
+            CGSize(width: 40, height: 40)
         case .small:
             CGSize(width: 78, height: 78)
         case .medium:
@@ -55,14 +57,16 @@ extension PHAsset {
 		}
 	}
 	
-	var imageSize : Int64 {
-		let resources = PHAssetResource.assetResources(for: self)
-		var sizeOnDisk: Int64 = 0
+	var imageSize: Int64 {
+        var sizeOnDisk: Int64 = 0
+        DispatchQueue.global(qos: .userInitiated).sync {
+            let resources = PHAssetResource.assetResources(for: self)
 
-		if let resource = resources.first {
-			let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong
-			sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64!))
-		}
+            if let resource = resources.first {
+                let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong
+                sizeOnDisk = Int64(bitPattern: UInt64(unsignedInt64!))
+            }
+        }
 		return sizeOnDisk
 	}
     
@@ -97,4 +101,20 @@ extension PHAsset {
 			}
 		return thumbnail
 	}
+}
+
+extension Array where Element: PHAsset {
+    func getAssetsSize(handler: @escaping (Int64) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var size: Int64 = 0
+            forEach { asset in
+                let resources = PHAssetResource.assetResources(for: asset)
+                if let resource = resources.first {
+                    let unsignedInt64 = resource.value(forKey: "fileSize") as? CLong
+                    size += Int64(bitPattern: UInt64(unsignedInt64!))
+                }
+            }
+            handler(size)
+        }
+    }
 }

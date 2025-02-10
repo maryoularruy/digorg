@@ -22,11 +22,23 @@ extension UIImage {
     static var downloadIcon = UIImage(resource: .download)
     static var cpuIcon = UIImage(resource: .CPU)
     
+    //MARK: -Smart Clean
+    static var broom = UIImage(resource: .broomWithStars)
+    static var calendarIcon = UIImage(resource: .calendar)
+    static var contactsIcon = UIImage(resource: .contactsPurple)
+    static var duplicatePhotosIcon = UIImage(resource: .duplicatePhotos)
+    static var duplicateVideosIcon = UIImage(resource: .duplicateVideos)
+    static var screenshotsIcon = UIImage(resource: .screenshots)
+    static var redMark = UIImage(resource: .redMark)
+    
     //MARK: -Photo&Video Assets
     static var liveViewBackground = UIImage(resource: .liveViewBackground)
     static var blurryViewBackground = UIImage(resource: .blurryViewBackground)
     
     static var sortIcon = UIImage(resource: .sortIcon)
+    
+    //MARK: -Calendar
+    static var event = UIImage(resource: .event)
     
     //MARK: -ToolOption
     static var secretAlbum = UIImage(resource: .secretAlbum)

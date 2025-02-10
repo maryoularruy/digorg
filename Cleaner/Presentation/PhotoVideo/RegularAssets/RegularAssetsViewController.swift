@@ -24,8 +24,13 @@ enum RegularAssetsType {
     }
 }
 
+enum RegularAssetsEntryFrom {
+    case smartClean, assetsCleanMenu
+}
+
 final class RegularAssetsViewController: UIViewController {
     private var type: RegularAssetsType
+    lazy var from: RegularAssetsEntryFrom = .assetsCleanMenu
     
     private lazy var rootView = RegularAssetsView(type)
     private lazy var photoVideoManager = PhotoVideoManager.shared
@@ -41,9 +46,17 @@ final class RegularAssetsViewController: UIViewController {
                     setupEmptyState()
                 } else {
                     rootView.selectionButton.bind(text: assetsForDeletion.count == assets.count ? .deselectAll : .selectAll)
-                    rootView.toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s")")
-                    rootView.toolbar.toolbarButton.isClickable = !assetsForDeletion.isEmpty
-                    hideEmptyState()
+                    
+                    switch from {
+                    case .smartClean:
+                        rootView.toolbar.toolbarButton.bind(text: "Apply")
+                        rootView.toolbar.toolbarButton.isClickable = true
+                    case .assetsCleanMenu:
+                        rootView.toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s")")
+                        rootView.toolbar.toolbarButton.isClickable = !assetsForDeletion.isEmpty
+                    }
+
+                    emptyStateView = nil
                 }
             }
         }
@@ -53,14 +66,18 @@ final class RegularAssetsViewController: UIViewController {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
-                if assets.isEmpty {
-                    setupEmptyState()
-                } else {
+                rootView.selectionButton.bind(text: assetsForDeletion.count == assets.count ? .deselectAll : .selectAll)
+                
+                switch from {
+                case .smartClean:
+                    rootView.toolbar.toolbarButton.bind(text: "Apply")
+                    rootView.toolbar.toolbarButton.isClickable = true
+                case .assetsCleanMenu:
                     rootView.toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s")")
-                    rootView.selectionButton.bind(text: assetsForDeletion.count == assets.count ? .deselectAll : .selectAll)
                     rootView.toolbar.toolbarButton.isClickable = !assetsForDeletion.isEmpty
-                    rootView.assetsCollectionView.reloadData()
                 }
+                
+                rootView.assetsCollectionView.reloadData()
             }
         }
     }
@@ -88,11 +105,22 @@ final class RegularAssetsViewController: UIViewController {
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadData()
+    }
+    
     private func setupEmptyState() {
         rootView.selectionButton.bind(text: .selectAll)
-        rootView.toolbar.toolbarButton.bind(text: "Back")
+        
+        switch from {
+        case .smartClean:
+            rootView.toolbar.toolbarButton.bind(text: "Apply")
+        case .assetsCleanMenu:
+            rootView.toolbar.toolbarButton.bind(text: "Back")
+        }
+        
         rootView.toolbar.toolbarButton.isClickable = true
-        rootView.assetsCollectionView.isHidden = true
         emptyStateView?.removeFromSuperview()
         emptyStateView = rootView.createEmptyState(type: .empty)
         if let emptyStateView {
@@ -101,14 +129,7 @@ final class RegularAssetsViewController: UIViewController {
         rootView.layoutIfNeeded()
     }
     
-    private func hideEmptyState() {
-        rootView.assetsCollectionView.isHidden = false
-        rootView.assetsCollectionView.reloadData()
-        emptyStateView?.removeFromSuperview()
-        emptyStateView = nil
-    }
-    
-    private func fetchAssets(isFirstResponder: Bool = true) {
+    private func reloadData(isFirstResponder: Bool = true) {
         switch type {
         case .livePhotos:
             photoVideoManager.fetchLivePhotos { [weak self] assets in
@@ -135,6 +156,7 @@ final class RegularAssetsViewController: UIViewController {
                 assetsForDeletion.insert(isFirstResponder ? self.assets : [])
             }
         case .screenshots:
+            
             photoVideoManager.fetchScreenshots { [weak self] assets in
                 guard let self else { return }
                 var unsortedAssets = assets
@@ -142,6 +164,11 @@ final class RegularAssetsViewController: UIViewController {
                 self.assets = unsortedAssets
                 assetsForDeletion.insert(isFirstResponder ? self.assets : [])
             }
+            
+            if from == .smartClean {
+                assetsForDeletion.insert(photoVideoManager.selectedScreenshotsForSmartCleaning)
+            }
+            
         case .allPhotos:
             photoVideoManager.fetchAllPhotos { [weak self] assets in
                 guard let self else { return }
@@ -172,8 +199,6 @@ final class RegularAssetsViewController: UIViewController {
 
 extension RegularAssetsViewController: ViewControllerProtocol {
     func setupUI() {
-        fetchAssets()
-        
         rootView.assetsCollectionView.delegate = self
         rootView.assetsCollectionView.dataSource = self
         rootView.selectionButton.delegate = self
@@ -244,15 +269,22 @@ extension RegularAssetsViewController: UIContextMenuInteractionDelegate {
 
 extension RegularAssetsViewController: ActionToolbarDelegate {
     func tapOnActionButton() {
-        if assets.isEmpty {
+        switch from {
+        case .smartClean:
+            photoVideoManager.selectedScreenshotsForSmartCleaning = Array(assetsForDeletion)
             navigationController?.popViewController(animated: true)
-        } else {
-            if photoVideoManager.delete(assets: Array(assetsForDeletion)) {
-                let vc = CleaningAssetsViewController(itemsForDeleting: assetsForDeletion.count)
-                vc.modalPresentationStyle = .currentContext
-                navigationController?.pushViewController(vc, animated: false)
-                assetsForDeletion.removeAll()
-                fetchAssets(isFirstResponder: false)
+            
+        case .assetsCleanMenu:
+            if assets.isEmpty {
+                navigationController?.popViewController(animated: true)
+            } else {
+                if photoVideoManager.delete(assets: Array(assetsForDeletion)) {
+                    let vc = CleaningAssetsViewController(from: .regularAssets, itemsForDeleting: assetsForDeletion.count)
+                    vc.modalPresentationStyle = .currentContext
+                    navigationController?.pushViewController(vc, animated: false)
+                    assetsForDeletion.removeAll()
+                    reloadData(isFirstResponder: false)
+                }
             }
         }
     }
