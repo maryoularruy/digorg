@@ -18,7 +18,7 @@ final class TipView: UIView {
     
     private lazy var tipDescriptionLabel: Regular15LabelStyle = {
         let label = Regular15LabelStyle()
-        label.bind(text: "Don’t let other know  your answer")
+        label.bind(text: "Don’t let other know your answer")
         return label
     }()
     

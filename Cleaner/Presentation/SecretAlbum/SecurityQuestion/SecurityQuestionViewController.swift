@@ -8,7 +8,7 @@
 import UIKit
 
 enum SecurityQuestionType {
-    case create, enter
+    case create, enter, change
 }
 
 final class SecurityQuestionViewController: UIViewController {
@@ -70,15 +70,15 @@ final class SecurityQuestionViewController: UIViewController {
     }
     
     private func popToParentVC() {
-        if let vc = navigationController?.viewControllers.first(where: { assetsIsParentVC ? $0 is SecretAssetsViewController : $0 is SecretContactsViewController}) {
-            navigationController?.popToViewController(vc, animated: true)
+        if type == .change {
+            navigationController?.popViewController(animated: true)
         } else {
-            navigationController?.popToRootViewController(animated: true)
+            if let vc = navigationController?.viewControllers.first(where: { assetsIsParentVC ? $0 is SecretAssetsViewController : $0 is SecretContactsViewController}) {
+                navigationController?.popToViewController(vc, animated: true)
+            } else {
+                navigationController?.popToRootViewController(animated: true)
+            }
         }
-    }
-    
-    deinit {
-        print("SecurityQuestionViewController deinit")
     }
 }
 
@@ -87,6 +87,13 @@ extension SecurityQuestionViewController: ViewControllerProtocol {
         rootView.questionMenu.delegate = self
         rootView.questionsListView.delegate = self
         rootView.answerTextField.delegate = self
+        
+        if type == .change {
+            if userDefaultsService.get(Int.self, key: .securityQuestionId) == nil &&
+                userDefaultsService.get(String.self, key: .securityQuestionAnswer) == nil {
+                rootView.selectQuestionLabel.bind(text: "Select new security question")
+            }
+        }
     }
     
     func addGestureRecognizers() {
@@ -101,6 +108,11 @@ extension SecurityQuestionViewController: ViewControllerProtocol {
         
         rootView.completeButton.addTapGestureRecognizer { [weak self] in
             guard let self else { return }
+            
+            if rootView.answerTextField.text == nil || rootView.answerTextField.text?.isEmpty == true {
+                return
+            }
+            
             finalTrimTextField()
             
             switch type {
@@ -109,6 +121,7 @@ extension SecurityQuestionViewController: ViewControllerProtocol {
                 saveSecurityQuestion()
                 removeTemporaryPasscode()
                 popToParentVC()
+                
             case .enter:
                 if rootView.questionMenu.activeChoice.id == userDefaultsService.get(Int.self, key: .securityQuestionId) &&
                     rootView.answerTextField.text == userDefaultsService.get(String.self, key: .securityQuestionAnswer) {
@@ -117,6 +130,25 @@ extension SecurityQuestionViewController: ViewControllerProtocol {
                     openPasscodeVC()
                 } else {
                     rootView.passwordMismatchLabel.isHidden = false
+                }
+                
+            case .change:
+                if userDefaultsService.get(Int.self, key: .securityQuestionId) == nil &&
+                    userDefaultsService.get(String.self, key: .securityQuestionAnswer) == nil {
+                    saveSecurityQuestion()
+                    popToParentVC()
+
+                } else {
+                    if rootView.questionMenu.activeChoice.id == userDefaultsService.get(Int.self, key: .securityQuestionId) &&
+                        rootView.answerTextField.text == userDefaultsService.get(String.self, key: .securityQuestionAnswer) {
+                        removeSecurityQuestion()
+                        rootView.selectQuestionLabel.bind(text: "Select new security question")
+                        rootView.questionMenu.bind(activeChoice: .favoriteColor)
+                        rootView.answerTextField.text = ""
+                        rootView.passwordMismatchLabel.isHidden = true
+                    } else {
+                        rootView.passwordMismatchLabel.isHidden = false
+                    }
                 }
             }
         }
