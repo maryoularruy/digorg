@@ -10,7 +10,7 @@ import Reusable
 import UIKit
 
 final class DuplicateTableViewCell: UITableViewCell, NibReusable {
-    @IBOutlet var duplicatesAmountLabel: UILabel!
+    @IBOutlet weak var duplicatesAmountLabel: UILabel!
     @IBOutlet weak var dateLabel: Regular15LabelStyle!
     @IBOutlet weak var selectAllButton: SelectionTransparentButtonStyle!
     @IBOutlet weak var duplicateGroupCV: UICollectionView!

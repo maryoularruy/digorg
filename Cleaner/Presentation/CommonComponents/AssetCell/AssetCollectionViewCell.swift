@@ -12,8 +12,8 @@ import Disk
 
 final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var bestIcon: BestIcon!
-    @IBOutlet var photoImageView: UIImageView!
-	@IBOutlet var checkBox: UIImageView!
+    @IBOutlet weak var photoImageView: UIImageView!
+	@IBOutlet weak var checkBox: UIImageView!
     
 	lazy var asset = UIImage()
 	lazy var isChecked: Bool = false {

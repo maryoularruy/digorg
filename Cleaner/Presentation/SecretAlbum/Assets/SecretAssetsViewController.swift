@@ -117,7 +117,7 @@ final class SecretAssetsViewController: UIViewController {
             let fileNames = try FileManager.default.getAll(folderName: folderName).sorted(by: <)
             
             fileNames.forEach { name in
-                if !items.contains(where: { $0.id == name} ) {
+                if !items.contains(where: { $0.id == name } ) {
                     if name.contains("photo") {
                         guard let image = FileManager.default.getImage(imageName: name, folderName: folderName) else { return }
                         items.append(SecretItemModel(id: name, image: image))
@@ -312,10 +312,11 @@ extension SecretAssetsViewController: UICollectionViewDataSource, UICollectionVi
         
         cell.photoImageView.image = item.mediaType == .photo ? item.image : item.videoThumbnail
         cell.isChecked = itemsForDeletionAndRestoring.contains(item)
-        cell.addTapGestureRecognizer {
-            cell.isChecked.toggle()
-        }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        (collectionView.cellForItem(at: indexPath) as? AssetCollectionViewCell)?.isChecked.toggle()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
