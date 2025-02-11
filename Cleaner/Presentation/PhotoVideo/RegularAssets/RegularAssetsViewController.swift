@@ -297,17 +297,20 @@ extension RegularAssetsViewController: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.photoImageView.image = assets[indexPath.row].getAssetThumbnail(TargetSize.medium.size)
-        cell.isChecked = assetsForDeletion.contains(assets[indexPath.row])
-        cell.addTapGestureRecognizer { [weak self] in
-            guard let self else { return }
-            if cell.isChecked {
-                assetsForDeletion.remove(assets[indexPath.row])
-            } else {
-                assetsForDeletion.insert(assets[indexPath.row])
-            }
-        }
+        let item = assets[indexPath.row]
+        cell.photoImageView.image = item.getAssetThumbnail(TargetSize.medium.size)
+        cell.isChecked = assetsForDeletion.contains(item)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? AssetCollectionViewCell else { return }
+        cell.isChecked.toggle()
+        if cell.isChecked {
+            assetsForDeletion.remove(assets[indexPath.row])
+        } else {
+            assetsForDeletion.insert(assets[indexPath.row])
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
