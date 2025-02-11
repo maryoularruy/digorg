@@ -19,7 +19,7 @@ final class SecretAssetsViewController: UIViewController {
     @IBOutlet weak var takeMediaButton: ActionToolbarButtonStyle!
     @IBOutlet weak var cancelButton: DismissButtonStyle!
     
-    private lazy var items = [MediaModel]() {
+    private lazy var items = [SecretItemModel]() {
         didSet {
             itemsCountLabel.bind(text: "\(items.count) item\(items.count == 1 ? "" : "s")")
             itemsCollectionView.reloadData()
@@ -31,10 +31,12 @@ final class SecretAssetsViewController: UIViewController {
         }
     }
     
-    private lazy var itemsForDeletionAndRestoring = Set<MediaModel>()
+    private lazy var itemsForDeletionAndRestoring = Set<SecretItemModel>()
     
     private lazy var emptyStateView: EmptyStateView? = nil
+    
     private lazy var userDefaultsService = UserDefaultsService.shared
+    private lazy var folderName = userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,13 +114,15 @@ final class SecretAssetsViewController: UIViewController {
     
     private func reloadData() {
         items.removeAll()
-        guard let folderName = UserDefaultsService.shared.get(String.self, key: .secretAlbumFolder) else { return }
         
         do {
-            let itemNames = try FileManager.default.getAll(folderName: folderName)
-            itemNames.forEach { name in
-                if let image = FileManager.default.getImage(imageName: name, folderName: folderName) {
-                    items.append(MediaModel(with: image))
+            let fileNames = try FileManager.default.getAll(folderName: folderName)
+            
+            fileNames.forEach { name in
+                if name.contains("photo") {
+                    
+                } else if name.contains("video") {
+                    
                 }
             }
         } catch { return }
@@ -204,39 +208,35 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
         results.forEach { result in
             let itemProvider = result.itemProvider
             guard let typeIdentifier = itemProvider.registeredTypeIdentifiers.first,
-                  let utType = UTType(typeIdentifier)
-            else { return }
+                    let utType = UTType(typeIdentifier) else { return }
 
-            let identifier = result.assetIdentifier
-            
             if utType.conforms(to: .image) {
-                itemProvider.getPhoto { [weak self] result in
-                    guard let self else { return }
-                    switch result {
-                    case .success(let item):
-                        guard let photo = item.photo else { return }
+                itemProvider.getPhoto { image in
+                    guard let image else { return }
+                    itemProvider.getFileName(typeIdentifier: UTType.image.identifier) { [weak self] fileName in
+                        guard let self, let fileName else { return }
                         
                         do {
-                            let folderName = userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
+                            try FileManager.default.saveImage(image: image, imageName: fileName, folderName: folderName)
                             
-                            try FileManager.default.saveImage(image: photo, imageName: item.id, folderName: folderName)
-                            
-                            if let identifier {
-                                assetsIdentifiersForDeletion.append(identifier)
+                            if let assetIdentifier = result.assetIdentifier {
+                                assetsIdentifiersForDeletion.append(assetIdentifier)
                             }
-                        } catch { break }
-
-                    case .failure(_): break }
+                        } catch {}
+                    }
                 }
                 
             } else if utType.conforms(to: .movie) {
-                itemProvider.getVideo(typeIdentifier: typeIdentifier) { [weak self] result in
-                    switch result {
-                    case .success(let item):
-                        DispatchQueue.main.async {
-                            self?.items.append(item)
+                itemProvider.getVideoURL(typeIdentifier: UTType.movie.identifier) { [weak self] url in
+                    guard let self, let url else { return }
+                    
+                    do {
+                        try FileManager.default.saveVideo(videoUrl: url, folderName: folderName)
+                        
+                        if let assetIdentifier = result.assetIdentifier {
+                            assetsIdentifiersForDeletion.append(assetIdentifier)
                         }
-                    case .failure(_): break }
+                    } catch {}
                 }
             }
         }
@@ -259,6 +259,8 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
     private func configureImagePicker() {
         var configuration = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
         configuration.selectionLimit = 0
+        configuration.filter = .any(of: [.images, .videos])
+        
         let pickerViewController = PHPickerViewController(configuration: configuration)
         pickerViewController.delegate = self
         present(pickerViewController, animated: true)
@@ -296,7 +298,7 @@ extension SecretAssetsViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.photoImageView.image = items[indexPath.row].photo
+        cell.photoImageView.image = items[indexPath.row].image
         cell.isChecked = itemsForDeletionAndRestoring.contains(items[indexPath.row])
         cell.addTapGestureRecognizer {
             cell.isChecked.toggle()

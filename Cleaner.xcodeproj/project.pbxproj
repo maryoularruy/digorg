@@ -53,7 +53,7 @@
 		A55CA2612CC904780026D434 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2602CC904780026D434 /* UIImage.swift */; };
 		A55CA2632CC907350026D434 /* UIFont+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2622CC907350026D434 /* UIFont+ext.swift */; };
 		A5600F612CD532CA006EE6BC /* NSItemProvider+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */; };
-		A5600F632CD94B50006EE6BC /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5600F622CD94B50006EE6BC /* MediaModel.swift */; };
+		A5600F632CD94B50006EE6BC /* SecretItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5600F622CD94B50006EE6BC /* SecretItemModel.swift */; };
 		A5609E9F2CDBBDF9000AF19E /* SecretContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5609E9E2CDBBDF9000AF19E /* SecretContacts.storyboard */; };
 		A5609EA12CDBBE06000AF19E /* SecretContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */; };
 		A5609FD22CE0F83A000AF19E /* Float+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609FD12CE0F83A000AF19E /* Float+ext.swift */; };
@@ -215,7 +215,7 @@
 		A55CA2602CC904780026D434 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		A55CA2622CC907350026D434 /* UIFont+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+ext.swift"; sourceTree = "<group>"; };
 		A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSItemProvider+ext.swift"; sourceTree = "<group>"; };
-		A5600F622CD94B50006EE6BC /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
+		A5600F622CD94B50006EE6BC /* SecretItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretItemModel.swift; sourceTree = "<group>"; };
 		A5609E9E2CDBBDF9000AF19E /* SecretContacts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecretContacts.storyboard; sourceTree = "<group>"; };
 		A5609EA02CDBBE06000AF19E /* SecretContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretContactsViewController.swift; sourceTree = "<group>"; };
 		A5609FD12CE0F83A000AF19E /* Float+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+ext.swift"; sourceTree = "<group>"; };
@@ -438,7 +438,7 @@
 				A55235972CC27B9300CBE265 /* ContactsInfoType.swift */,
 				A53EDA222CD0422700565625 /* EKEventGroup.swift */,
 				A54449152CD19C4F001ECA7A /* ToolOption.swift */,
-				A5600F622CD94B50006EE6BC /* MediaModel.swift */,
+				A5600F622CD94B50006EE6BC /* SecretItemModel.swift */,
 				A5609FD72CE12BB3000AF19E /* BatteryInstructionCellType.swift */,
 				A5446C2C2CE74B7A00A1F940 /* InstructionCellType.swift */,
 				A5446D072CE76CCE00A1F940 /* Pages.swift */,
@@ -1174,7 +1174,7 @@
 				A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */,
 				FA3988562B30602A0096F335 /* ZoomingPlayerView.swift in Sources */,
 				FA3988512B30602A0096F335 /* UILabel.swift in Sources */,
-				A5600F632CD94B50006EE6BC /* MediaModel.swift in Sources */,
+				A5600F632CD94B50006EE6BC /* SecretItemModel.swift in Sources */,
 				FA3987F92B305FA50096F335 /* DKPhotoImageUtility.swift in Sources */,
 				FA3988492B30602A0096F335 /* PHAsset.swift in Sources */,
 				A53836AB2CBC68C2005BE39C /* CleanupOption.swift in Sources */,
