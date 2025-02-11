@@ -163,11 +163,9 @@
 		FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA641DE02B34574300F6A466 /* Calendar.storyboard */; };
 		FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DE22B34575300F6A466 /* CalendarViewController.swift */; };
 		FA641DF72B357C7A00F6A466 /* UIImageView+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */; };
-		FA641DF82B357C7A00F6A466 /* NSImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF12B357C7A00F6A466 /* NSImage+SwiftyGif.swift */; };
 		FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */; };
 		FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */; };
 		FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */; };
-		FA641DFC2B357C7A00F6A466 /* NSImageView+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF62B357C7A00F6A466 /* NSImageView+SwiftyGif.swift */; };
 		FA99F2F62B3C462700D4B239 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */; };
 		FACA30972B3E035C0018FA5F /* Valet in Frameworks */ = {isa = PBXBuildFile; productRef = FACA30962B3E035C0018FA5F /* Valet */; };
 /* End PBXBuildFile section */
@@ -337,12 +335,10 @@
 		FA641DE02B34574300F6A466 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		FA641DE22B34575300F6A466 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+SwiftyGif.swift"; sourceTree = "<group>"; };
-		FA641DF12B357C7A00F6A466 /* NSImage+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+SwiftyGif.swift"; sourceTree = "<group>"; };
 		FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjcAssociatedWeakObject.swift; sourceTree = "<group>"; };
 		FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SwiftyGif.swift"; sourceTree = "<group>"; };
 		FA641DF42B357C7A00F6A466 /* SwiftyGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyGif.h; sourceTree = "<group>"; };
 		FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyGifManager.swift; sourceTree = "<group>"; };
-		FA641DF62B357C7A00F6A466 /* NSImageView+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImageView+SwiftyGif.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -988,12 +984,10 @@
 			isa = PBXGroup;
 			children = (
 				FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */,
-				FA641DF12B357C7A00F6A466 /* NSImage+SwiftyGif.swift */,
 				FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */,
 				FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */,
 				FA641DF42B357C7A00F6A466 /* SwiftyGif.h */,
 				FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */,
-				FA641DF62B357C7A00F6A466 /* NSImageView+SwiftyGif.swift */,
 			);
 			path = SwiftyGif;
 			sourceTree = "<group>";
@@ -1181,7 +1175,6 @@
 				FA3988562B30602A0096F335 /* ZoomingPlayerView.swift in Sources */,
 				FA3988512B30602A0096F335 /* UILabel.swift in Sources */,
 				A5600F632CD94B50006EE6BC /* MediaModel.swift in Sources */,
-				FA641DFC2B357C7A00F6A466 /* NSImageView+SwiftyGif.swift in Sources */,
 				FA3987F92B305FA50096F335 /* DKPhotoImageUtility.swift in Sources */,
 				FA3988492B30602A0096F335 /* PHAsset.swift in Sources */,
 				A53836AB2CBC68C2005BE39C /* CleanupOption.swift in Sources */,
@@ -1198,7 +1191,6 @@
 				75D3FC802A606E6F00F351A3 /* Extension+UIViewController.swift in Sources */,
 				FA3987F32B305FA50096F335 /* DKPhotoGalleryItem.swift in Sources */,
 				FA3987582B3055510096F335 /* StagedChangeset.swift in Sources */,
-				FA641DF82B357C7A00F6A466 /* NSImage+SwiftyGif.swift in Sources */,
 				FA3988032B305FA50096F335 /* DKPhotoGalleryScrollView.swift in Sources */,
 				A552341C2CC17F2000CBE265 /* UILabel+ext.swift in Sources */,
 				A50F58B52CB6D10100AB3166 /* ViewControllerProtocol.swift in Sources */,
