@@ -132,7 +132,6 @@ final class SecretAssetsViewController: UIViewController {
     private func showSecretAssets() {
         addMediaContainer.isHidden = false
         addButton.isHidden = true
-        reloadData()
     }
     
     private func setupEmptyState() {
@@ -225,10 +224,6 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
                             if let identifier {
                                 assetsIdentifiersForDeletion.append(identifier)
                             }
-                            
-                            DispatchQueue.main.async { [weak self] in
-                                self?.items.append(item)
-                            }
                         } catch { break }
 
                     case .failure(_): break }
@@ -248,6 +243,8 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
         
         picker.dismiss(animated: true) { [weak self] in
             guard let self else { return }
+            reloadData()
+            
             if userDefaultsService.isRemovePhotosAfterImport {
                 let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: assetsIdentifiersForDeletion, options: nil)
                 var assets = [PHAsset]()
