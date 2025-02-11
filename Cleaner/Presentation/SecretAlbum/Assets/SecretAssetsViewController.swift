@@ -113,23 +113,23 @@ final class SecretAssetsViewController: UIViewController {
     }
     
     private func reloadData() {
-        items.removeAll()
-        
         do {
-            let fileNames = try FileManager.default.getAll(folderName: folderName)
+            let fileNames = try FileManager.default.getAll(folderName: folderName).sorted(by: <)
             
             fileNames.forEach { name in
-                if name.contains("photo") {
-                    guard let image = FileManager.default.getImage(imageName: name, folderName: folderName) else { return }
-                    items.append(SecretItemModel(id: name, image: image))
-                    
-                } else if name.contains("video") {
-                    guard let url = FileManager.default.getVideoURL(videoName: name, folderName: folderName) else { return }
-                    
-                    FileManager.default.getVideoThumbnail(from: url) { [weak self] thumbnail in
-                        let thumbnail = thumbnail ?? #imageLiteral(resourceName: "gif")
+                if !items.contains(where: { $0.id == name} ) {
+                    if name.contains("photo") {
+                        guard let image = FileManager.default.getImage(imageName: name, folderName: folderName) else { return }
+                        items.append(SecretItemModel(id: name, image: image))
                         
-                        self?.items.append(SecretItemModel(id: name, videoUrl: url, videoThumbnail: thumbnail))
+                    } else if name.contains("video") {
+                        guard let url = FileManager.default.getVideoURL(videoName: name, folderName: folderName) else { return }
+                        
+                        FileManager.default.getVideoThumbnail(from: url) { [weak self] thumbnail in
+                            let thumbnail = thumbnail ?? #imageLiteral(resourceName: "gif")
+                            
+                            self?.items.append(SecretItemModel(id: name, videoUrl: url, videoThumbnail: thumbnail))
+                        }
                     }
                 }
             }
@@ -311,7 +311,7 @@ extension SecretAssetsViewController: UICollectionViewDataSource, UICollectionVi
         let item = items[indexPath.row]
         
         cell.photoImageView.image = item.mediaType == .photo ? item.image : item.videoThumbnail
-        cell.isChecked = itemsForDeletionAndRestoring.contains(items[indexPath.row])
+        cell.isChecked = itemsForDeletionAndRestoring.contains(item)
         cell.addTapGestureRecognizer {
             cell.isChecked.toggle()
         }

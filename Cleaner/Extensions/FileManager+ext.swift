@@ -116,7 +116,7 @@ extension FileManager {
         createFolderIfNeeded(folderName: folderName, isMedia: true)
 
         guard let data = image.jpegData(compressionQuality: 1.0),
-            let url = getUrlForFile(fileName: "photo \(imageName)", folderName: folderName) else { return }
+            let url = getUrlForFile(fileName: "\(Date().timeIntervalSince1970) photo \(imageName)", folderName: folderName) else { return }
         
         try data.write(to: url)
     }
@@ -124,7 +124,7 @@ extension FileManager {
     func saveVideo(videoUrl: URL, folderName: String) throws {
         createFolderIfNeeded(folderName: folderName, isMedia: true)
         
-        guard let url = getUrlForFile(fileName: "video \(videoUrl.lastPathComponent)", folderName: folderName) else { return }
+        guard let url = getUrlForFile(fileName: "\(Date().timeIntervalSince1970) video \(videoUrl.lastPathComponent)", folderName: folderName) else { return }
         
         try FileManager.default.copyItem(at: videoUrl, to: url)
     }
