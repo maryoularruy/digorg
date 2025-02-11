@@ -22,13 +22,10 @@ extension NSItemProvider {
     func getPhoto(completion: @escaping (UIImage?) -> Void) {
         if canLoadObject(ofClass: UIImage.self) {
             loadObject(ofClass: UIImage.self) { object, error in
-                if let error {
-                    completion(nil)
-                    return
-                }
-
-                if let image = object as? UIImage {
+                if error == nil, let image = object as? UIImage {
                     completion(image)
+                } else {
+                    completion(nil)
                 }
             }
         } else {

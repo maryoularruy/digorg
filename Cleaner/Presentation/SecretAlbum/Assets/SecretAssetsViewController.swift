@@ -120,9 +120,17 @@ final class SecretAssetsViewController: UIViewController {
             
             fileNames.forEach { name in
                 if name.contains("photo") {
+                    guard let image = FileManager.default.getImage(imageName: name, folderName: folderName) else { return }
+                    items.append(SecretItemModel(id: name, image: image))
                     
                 } else if name.contains("video") {
+                    guard let url = FileManager.default.getVideoURL(videoName: name, folderName: folderName) else { return }
                     
+                    FileManager.default.getVideoThumbnail(from: url) { [weak self] thumbnail in
+                        let thumbnail = thumbnail ?? #imageLiteral(resourceName: "gif")
+                        
+                        self?.items.append(SecretItemModel(id: name, videoUrl: url, videoThumbnail: thumbnail))
+                    }
                 }
             }
         } catch { return }
@@ -209,7 +217,9 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
             let itemProvider = result.itemProvider
             guard let typeIdentifier = itemProvider.registeredTypeIdentifiers.first,
                     let utType = UTType(typeIdentifier) else { return }
-
+            
+            let assetIdentifier = result.assetIdentifier
+            
             if utType.conforms(to: .image) {
                 itemProvider.getPhoto { image in
                     guard let image else { return }
@@ -219,7 +229,7 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
                         do {
                             try FileManager.default.saveImage(image: image, imageName: fileName, folderName: folderName)
                             
-                            if let assetIdentifier = result.assetIdentifier {
+                            if let assetIdentifier {
                                 assetsIdentifiersForDeletion.append(assetIdentifier)
                             }
                         } catch {}
@@ -233,7 +243,7 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
                     do {
                         try FileManager.default.saveVideo(videoUrl: url, folderName: folderName)
                         
-                        if let assetIdentifier = result.assetIdentifier {
+                        if let assetIdentifier {
                             assetsIdentifiersForDeletion.append(assetIdentifier)
                         }
                     } catch {}
@@ -248,7 +258,7 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
             if userDefaultsService.isRemovePhotosAfterImport {
                 let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: assetsIdentifiersForDeletion, options: nil)
                 var assets = [PHAsset]()
-                fetchResult.enumerateObjects { asset, index, stop  in
+                fetchResult.enumerateObjects { asset, _, _  in
                     assets.append(asset)
                 }
                 PhotoVideoManager.shared.delete(assets: assets)
@@ -298,7 +308,9 @@ extension SecretAssetsViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.photoImageView.image = items[indexPath.row].image
+        let item = items[indexPath.row]
+        
+        cell.photoImageView.image = item.mediaType == .photo ? item.image : item.videoThumbnail
         cell.isChecked = itemsForDeletionAndRestoring.contains(items[indexPath.row])
         cell.addTapGestureRecognizer {
             cell.isChecked.toggle()

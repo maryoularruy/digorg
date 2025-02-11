@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 import Contacts
 
 extension FileManager {
@@ -81,6 +82,34 @@ extension FileManager {
         guard let url = getUrlForFile(fileName: imageName, folderName: folderName),
             FileManager.default.fileExists(atPath: url.path) else { return nil }
         return UIImage(contentsOfFile: url.path)
+    }
+    
+    func getVideoURL(videoName: String, folderName: String) -> URL? {
+        guard let url = getUrlForFile(fileName: videoName, folderName: folderName),
+            FileManager.default.fileExists(atPath: url.path) else { return nil }
+        return url
+    }
+    
+    func getVideoThumbnail(from videoURL: URL, completion: @escaping (UIImage?) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            let asset = AVAsset(url: videoURL)
+            let imageGenerator = AVAssetImageGenerator(asset: asset)
+            imageGenerator.appliesPreferredTrackTransform = true
+
+            let time = CMTime(seconds: 1, preferredTimescale: 600)
+            do {
+                let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                let thumbnail = UIImage(cgImage: cgImage)
+
+                DispatchQueue.main.async {
+                    completion(thumbnail)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }
     }
     
     func saveImage(image: UIImage, imageName: String, folderName: String) throws {
