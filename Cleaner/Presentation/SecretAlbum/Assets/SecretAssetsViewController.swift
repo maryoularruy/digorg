@@ -38,38 +38,45 @@ final class SecretAssetsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        itemsCollectionView.register(cellType: AssetCollectionViewCell.self)
+        setupUI()
         addGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupUI()
-        reloadData()
+        updateUI()
+    }
+    
+    deinit {
+        print("SecretAssetsViewController deinit")
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
-        if userDefaultsService.isPasscodeCreated {
-            if userDefaultsService.isPasscodeConfirmed {
-                addMediaContainer.isHidden = false
-                addButton.isHidden = true
+        if userDefaultsService.isPasscodeTurnOn {
+            
+            if userDefaultsService.isPasscodeCreated {
+                if userDefaultsService.isPasscodeConfirmed {
+                    showSecretAssets()
+                } else {
+                    let vc = StoryboardScene.Passcode.initialScene.instantiate()
+                    vc.assetsIsParentVC = true
+                    vc.passcodeMode = .enter
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .fullScreen
+                    navigationController?.pushViewController(vc, animated: true)
+                }
             } else {
-                let vc = StoryboardScene.Passcode.initialScene.instantiate()
-                vc.assetsIsParentVC = true
-                vc.passcodeMode = .enter
-                vc.modalTransitionStyle = .crossDissolve
-                vc.modalPresentationStyle = .fullScreen
-                navigationController?.pushViewController(vc, animated: true)
+                guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
+                vc.popupDelegate = self
+                vc.height = 416
+                vc.type = .createPasscode
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(vc, animated: true)
+                }
             }
             
         } else {
-            guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
-            vc.popupDelegate = self
-            vc.height = 416
-            vc.type = .createPasscode
-            DispatchQueue.main.async { [weak self] in
-                self?.present(vc, animated: true)
-            }
+            showSecretAssets()
         }
     }
     
@@ -89,6 +96,45 @@ final class SecretAssetsViewController: UIViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
+    private func updateUI() {
+        lockedStatusIcon.image = userDefaultsService.isPasscodeCreated ? .locked :  .unlocked
+        
+        if userDefaultsService.isPasscodeTurnOn {
+            if userDefaultsService.isPasscodeConfirmed {
+                reloadData()
+            } else {
+                showSecretAlbumCover()
+            }
+        } else {
+            reloadData()
+        }
+    }
+    
+    private func reloadData() {
+        items.removeAll()
+        guard let folderName = UserDefaultsService.shared.get(String.self, key: .secretAlbumFolder) else { return }
+        
+        do {
+            let itemNames = try FileManager.default.getAll(folderName: folderName)
+            itemNames.forEach { name in
+                if let image = FileManager.default.getImage(imageName: name, folderName: folderName) {
+                    items.append(MediaModel(with: image))
+                }
+            }
+        } catch { return }
+    }
+
+    private func showSecretAlbumCover() {
+        itemsCollectionView.isHidden = true
+        itemsCountLabel.bind(text: "0 items")
+    }
+    
+    private func showSecretAssets() {
+        addMediaContainer.isHidden = false
+        addButton.isHidden = true
+        reloadData()
+    }
+    
     private func setupEmptyState() {
         itemsCollectionView.isHidden = true
         itemsCountLabel.bind(text: "0 items")
@@ -105,28 +151,12 @@ final class SecretAssetsViewController: UIViewController {
         emptyStateView?.removeFromSuperview()
         emptyStateView = nil
     }
-    
-    private func reloadData() {
-        items.removeAll()
-        guard let folderName = UserDefaultsService.shared.get(String.self, key: .secretAlbumFolder) else { return }
-        
-        do {
-            let itemNames = try FileManager.default.getAll(folderName: folderName)
-            itemNames.forEach { name in
-                if let image = FileManager.default.getImage(imageName: name, folderName: folderName) {
-                    items.append(MediaModel(with: image))
-                }
-            }
-        } catch { return }
-    }
 }
 
 extension SecretAssetsViewController: ViewControllerProtocol {
     func setupUI() {
-        lockedStatusIcon.image = userDefaultsService.isPasscodeCreated ? .locked :  .unlocked
-        if userDefaultsService.isPasscodeConfirmed {
-            setupMediaContainer()
-        }
+        itemsCollectionView.register(cellType: AssetCollectionViewCell.self)
+        setupMediaContainer()
     }
     
     func addGestureRecognizers() {
@@ -140,8 +170,7 @@ extension SecretAssetsViewController: ViewControllerProtocol {
     }
     
     private func setupMediaContainer() {
-        takeMediaButton.bind(text: "Take photo or video",
-                             image: .takeMedia)
+        takeMediaButton.bind(text: "Take photo or video", image: .takeMedia)
         importMediaButton.bind(text: "Import photo or video",
                                backgroundColor: .acidGreen,
                                textColor: .black,
@@ -171,24 +200,33 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
         addMediaContainer.isHidden = true
         addButton.isHidden = false
         
+        var assetsIdentifiersForDeletion = [String]()
+        
         results.forEach { result in
             let itemProvider = result.itemProvider
             guard let typeIdentifier = itemProvider.registeredTypeIdentifiers.first,
                   let utType = UTType(typeIdentifier)
             else { return }
+
+            let identifier = result.assetIdentifier
             
             if utType.conforms(to: .image) {
                 itemProvider.getPhoto { [weak self] result in
+                    guard let self else { return }
                     switch result {
                     case .success(let item):
                         guard let photo = item.photo else { return }
                         
                         do {
-                            let folderName = self?.userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
+                            let folderName = userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
                             
                             try FileManager.default.saveImage(image: photo, imageName: item.id, folderName: folderName)
                             
-                            DispatchQueue.main.async {
+                            if let identifier {
+                                assetsIdentifiersForDeletion.append(identifier)
+                            }
+                            
+                            DispatchQueue.main.async { [weak self] in
                                 self?.items.append(item)
                             }
                         } catch { break }
@@ -208,11 +246,21 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
             }
         }
         
-        picker.dismiss(animated: true)
+        picker.dismiss(animated: true) { [weak self] in
+            guard let self else { return }
+            if userDefaultsService.isRemovePhotosAfterImport {
+                let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: assetsIdentifiersForDeletion, options: nil)
+                var assets = [PHAsset]()
+                fetchResult.enumerateObjects { asset, index, stop  in
+                    assets.append(asset)
+                }
+                PhotoVideoManager.shared.delete(assets: assets)
+            }
+        }
     }
     
     private func configureImagePicker() {
-        var configuration = PHPickerConfiguration()
+        var configuration = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
         configuration.selectionLimit = 0
         let pickerViewController = PHPickerViewController(configuration: configuration)
         pickerViewController.delegate = self
