@@ -6,16 +6,22 @@
 //
 
 import Reusable
-import Photos
 import UIKit
-import Disk
+
+protocol AssetCollectionViewCellDelegate: AnyObject {
+    func tapOnCheckBox(index: Int)
+}
 
 final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var bestIcon: BestIcon!
     @IBOutlet weak var photoImageView: UIImageView!
 	@IBOutlet weak var checkBox: UIImageView!
     
+    weak var delegate: AssetCollectionViewCellDelegate?
+    
 	lazy var asset = UIImage()
+    lazy var index = 0
+    
 	lazy var isChecked: Bool = false {
 		didSet {
 			if isChecked {
@@ -25,6 +31,7 @@ final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
 			}
 		}
 	}
+    
     lazy var isBest: Bool = false {
         didSet {
             bestIcon.isHidden = !isBest
@@ -35,17 +42,15 @@ final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
 		super.awakeFromNib()
         setupUI()
 	}
-
-	private func setupForStorage(with image: String) {
-		do {
-			let retrievedImage = try Disk.retrieve(image, from: .documents, as: UIImage.self)
-			photoImageView.image = retrievedImage
-		} catch {
-			print()
-		}
-	}
     
     private func setupUI() {
         layer.cornerRadius = 16.0
+                
+        checkBox.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnCheckBox)))
+    }
+    
+    @objc func tapOnCheckBox() {
+        isChecked.toggle()
+        delegate?.tapOnCheckBox(index: index)
     }
 }

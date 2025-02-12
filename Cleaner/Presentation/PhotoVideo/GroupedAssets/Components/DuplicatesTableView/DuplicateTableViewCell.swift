@@ -9,17 +9,25 @@ import Photos
 import Reusable
 import UIKit
 
+protocol DuplicateTableViewCellDelegate: AnyObject {
+    func tapOnCell(assets: [PHAsset], currentPosition: Int)
+    func tapOnCheckBox(groupIndex: Int, assetIndex: Int)
+}
+
 final class DuplicateTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet weak var duplicatesAmountLabel: UILabel!
     @IBOutlet weak var dateLabel: Regular15LabelStyle!
     @IBOutlet weak var selectAllButton: SelectionTransparentButtonStyle!
     @IBOutlet weak var duplicateGroupCV: UICollectionView!
     
-    var onTap: (([PHAsset], Int) -> ())?
-	var onTapCheckBox: ((Int) -> ())?
+    weak var delegate: DuplicateTableViewCellDelegate?
+    
     var onTapSelectAll: (([PHAsset]) -> ())?
     
-	var assetsForDeletion = Set<PHAsset>()
+    lazy var index: Int = 0
+    
+    var assetsForDeletion = Set<PHAsset>()
+    
     private lazy var assets = [PHAsset]()
     private lazy var indexOfBest = 0
 	
@@ -35,7 +43,7 @@ final class DuplicateTableViewCell: UITableViewCell, NibReusable {
 		duplicateGroupCV.reloadData()
 	}
 	
-    func setupData(assets: [PHAsset]) {
+    func bind(assets: [PHAsset]) {
 		self.assets = assets
         selectAllButton.isHidden = true
 //        selectAllButton.bind(text: assets.count == assetsForDeletion.count ? .deselectAll : .selectAll)
@@ -57,21 +65,26 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
     
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.photoImageView.image = assets[indexPath.item].getAssetThumbnail(TargetSize.large.size)
-        cell.isChecked = assetsForDeletion.contains(assets[indexPath.item])
-        cell.isBest = indexPath.item == indexOfBest ? true : false
-        cell.addTapGestureRecognizer { [weak self] in
-            guard let self else { return }
-            onTap?(assets, indexPath.item)
-		}
-        cell.checkBox.addTapGestureRecognizer { [weak self] in
-            cell.isChecked.toggle()
-            self?.onTapCheckBox?(indexPath.item)
-        }
+        cell.delegate = self
+        let item = assets[indexPath.row]
+        cell.index = indexPath.row
+        cell.photoImageView.image = item.getAssetThumbnail(TargetSize.large.size)
+        cell.isChecked = assetsForDeletion.contains(item)
+        cell.isBest = indexPath.row == indexOfBest ? true : false
 		return cell
 	}
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.tapOnCell(assets: assets, currentPosition: indexPath.item)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         TargetSize.large.size
+    }
+}
+
+extension DuplicateTableViewCell: AssetCollectionViewCellDelegate {
+    func tapOnCheckBox(index: Int) {
+        delegate?.tapOnCheckBox(groupIndex: self.index, assetIndex: index)
     }
 }
