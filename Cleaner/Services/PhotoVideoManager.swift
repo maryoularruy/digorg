@@ -354,6 +354,15 @@ final class PhotoVideoManager {
         return assets
     }
     
+    func delete(identifiers: [String]) {
+        let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        var assets = [PHAsset]()
+        fetchResult.enumerateObjects { asset, _, _  in
+            assets.append(asset)
+        }
+        PhotoVideoManager.shared.delete(assets: assets)
+    }
+    
     func delete(assets: [PHAsset]) -> Bool {
         let semaphore = DispatchSemaphore(value: 0)
         var result = false

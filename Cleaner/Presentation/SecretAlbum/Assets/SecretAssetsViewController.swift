@@ -36,6 +36,7 @@ final class SecretAssetsViewController: UIViewController {
     private lazy var emptyStateView: EmptyStateView? = nil
     
     private lazy var userDefaultsService = UserDefaultsService.shared
+    private lazy var photoVideoManager = PhotoVideoManager.shared
     private lazy var folderName = userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
     
     override func viewDidLoad() {
@@ -219,6 +220,7 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
                     let utType = UTType(typeIdentifier) else { return }
             
             let assetIdentifier = result.assetIdentifier
+            let isLast = result == results.last
             
             if utType.conforms(to: .image) {
                 itemProvider.getPhoto { image in
@@ -232,6 +234,17 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
                             if let assetIdentifier {
                                 assetsIdentifiersForDeletion.append(assetIdentifier)
                             }
+                            
+                            if isLast {
+                                if userDefaultsService.isRemovePhotosAfterImport {
+                                    photoVideoManager.delete(identifiers: assetsIdentifiersForDeletion)
+                                }
+                                
+                                DispatchQueue.main.async { [weak self] in
+                                    self?.reloadData()
+                                }
+                            }
+                            
                         } catch {}
                     }
                 }
@@ -246,6 +259,16 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
                         if let assetIdentifier {
                             assetsIdentifiersForDeletion.append(assetIdentifier)
                         }
+                        
+                        if isLast {
+                            if userDefaultsService.isRemovePhotosAfterImport {
+                                photoVideoManager.delete(identifiers: assetsIdentifiersForDeletion)
+                            }
+                            
+                            DispatchQueue.main.async { [weak self] in
+                                self?.reloadData()
+                            }
+                        }
                     } catch {}
                 }
             }
@@ -254,15 +277,6 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
         picker.dismiss(animated: true) { [weak self] in
             guard let self else { return }
             reloadData()
-            
-            if userDefaultsService.isRemovePhotosAfterImport {
-                let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: assetsIdentifiersForDeletion, options: nil)
-                var assets = [PHAsset]()
-                fetchResult.enumerateObjects { asset, _, _  in
-                    assets.append(asset)
-                }
-                PhotoVideoManager.shared.delete(assets: assets)
-            }
         }
     }
     
