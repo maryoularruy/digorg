@@ -27,33 +27,29 @@ final class ActionToolbarButtonStyle: UIButton {
     
     func bind(text: String) {
         setTitle(text, for: .normal)
-        setTitle(text, for: .selected)
     }
     
     func bind(backgroundColor: UIColor) {
         self.backgroundColor = backgroundColor
     }
     
-    func bind(text: String, backgroundColor: UIColor = .blue, textColor: UIColor = .paleGrey, image: UIImage) {
+    func bind(text: String, backgroundColor: UIColor = .blue, textColor: UIColor = .paleGrey, image: UIImage? = nil, borderColor: UIColor = .clear, borderWidth: CGFloat = 0.0) {
         self.backgroundColor = backgroundColor
         
         setTitle(text, for: .normal)
-        setTitle(text, for: .selected)
         setTitleColor(textColor, for: .normal)
-        setTitleColor(textColor, for: .selected)
+        
+        layer.borderColor = borderColor.cgColor
+        layer.borderWidth = borderWidth
         
         imageView?.image = image
-//        myConfiguration.imagePlacement = .leading
-//        myConfiguration.imagePadding = 6
     }
     
     func setupCancelSubscriptionStyle() {
         backgroundColor = .pureWhite
         
         setTitle("Cancel Subscription", for: .normal)
-        setTitle("Cancel Subscription", for: .selected)
         setTitleColor(.darkGrey, for: .normal)
-        setTitleColor(.darkGrey, for: .selected)
     }
     
     private func setup() {
@@ -62,7 +58,6 @@ final class ActionToolbarButtonStyle: UIButton {
         contentEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
        
         setTitleColor(.paleGrey, for: .normal)
-        setTitleColor(.paleGrey, for: .selected)
         titleLabel?.font = .semibold15
         titleLabel?.textAlignment = .center
     }

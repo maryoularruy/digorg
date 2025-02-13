@@ -13,16 +13,25 @@ final class SecretAssetsViewController: UIViewController {
     @IBOutlet weak var itemsCountLabel: Regular13LabelStyle!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var addMediaContainer: UIView!
+    
     @IBOutlet weak var lockedStatusIcon: UIImageView!
     @IBOutlet weak var itemsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var addMediaContainer: UIView!
     @IBOutlet weak var importMediaButton: ActionToolbarButtonStyle!
     @IBOutlet weak var takeMediaButton: ActionToolbarButtonStyle!
-    @IBOutlet weak var cancelButton: DismissButtonStyle!
+    @IBOutlet weak var cancelButtonInAddMediaContainer: DismissButtonStyle!
+    
+    @IBOutlet weak var deleteOrRestoreMediaContainer: UIView!
+    @IBOutlet weak var itemsForDeletionOrRestoreCountLabel: Semibold15LabelStyle!
+    @IBOutlet weak var deleteButton: ActionToolbarButtonStyle!
+    @IBOutlet weak var restoreButton: ActionToolbarButtonStyle!
+    @IBOutlet weak var cancelButtonInDeleteOrRestoreContainer: DismissButtonStyle!
     
     private lazy var items = [SecretItemModel]() {
         didSet {
             itemsCountLabel.bind(text: "\(items.count) item\(items.count == 1 ? "" : "s")")
+            deleteOrRestoreMediaContainer.isHidden = itemsForDeletionAndRestoring.isEmpty
             itemsCollectionView.reloadData()
             if items.isEmpty {
                 setupEmptyState()
@@ -34,6 +43,8 @@ final class SecretAssetsViewController: UIViewController {
     
     private lazy var itemsForDeletionAndRestoring = Set<SecretItemModel>() {
         didSet {
+            deleteOrRestoreMediaContainer.isHidden = itemsForDeletionAndRestoring.isEmpty
+            itemsForDeletionOrRestoreCountLabel.bind(text: "Delete \(itemsForDeletionAndRestoring.count) item\(itemsForDeletionAndRestoring.count == 1 ? "" : "s")?")
             selectionButton.bind(text: itemsForDeletionAndRestoring.count == items.count ? .deselectAll : .selectAll)
             itemsCollectionView.reloadData()
         }
@@ -89,6 +100,7 @@ final class SecretAssetsViewController: UIViewController {
         }
     }
     
+    //subviews of addMediaContainer
     @IBAction func tapOnTakeMediaButton(_ sender: Any) {
         //TODO: -Open camera
     }
@@ -101,10 +113,24 @@ final class SecretAssetsViewController: UIViewController {
         }
     }
     
-    @IBAction func tapOnCancelButton(_ sender: Any) {
-        navigationController?.popToRootViewController(animated: true)
+    @IBAction func tapOnCancelInAddMediaContainer(_ sender: Any) {
+        addMediaContainer.isHidden = true
+        addButton.isHidden = false
     }
     
+    //subviews of deleteOrRestoreMediaContainer
+    @IBAction func tapOnDeleteButton(_ sender: Any) {
+        //TODO: -Delete
+    }
+    
+    @IBAction func tapOnRestoreButton(_ sender: Any) {
+        //TODO: -Restore
+    }
+    
+    @IBAction func tapOnCancelInDeleteOrRestoreContainer(_ sender: Any) {
+        deleteOrRestoreMediaContainer.isHidden = true
+    }
+
     private func updateUI() {
         lockedStatusIcon.image = userDefaultsService.isPasscodeCreated && userDefaultsService.isPasscodeTurnOn ? .locked :  .unlocked
         
@@ -182,6 +208,7 @@ extension SecretAssetsViewController: ViewControllerProtocol {
         itemsCollectionView.register(cellType: AssetCollectionViewCell.self)
         selectionButton.delegate = self
         setupMediaContainer()
+        setupdeleteOrRestoreMediaContainer()
     }
     
     func addGestureRecognizers() {
@@ -200,11 +227,20 @@ extension SecretAssetsViewController: ViewControllerProtocol {
                                backgroundColor: .acidGreen,
                                textColor: .black,
                                image: .importMedia)
-        cancelButton.bind(text: "Cancel")
+        cancelButtonInAddMediaContainer.bind(text: "Cancel")
         
         addMediaContainer.layer.cornerRadius = 20
         addMediaContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         addMediaContainer.addShadows()
+    }
+    
+    private func setupdeleteOrRestoreMediaContainer() {
+        restoreButton.bind(text: "Restore", backgroundColor: .clear, textColor: .black, borderColor: .blue, borderWidth: 2.0)
+        cancelButtonInDeleteOrRestoreContainer.bind(text: "Cancel")
+        
+        deleteOrRestoreMediaContainer.layer.cornerRadius = 20
+        deleteOrRestoreMediaContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        deleteOrRestoreMediaContainer.addShadows()
     }
 }
 
