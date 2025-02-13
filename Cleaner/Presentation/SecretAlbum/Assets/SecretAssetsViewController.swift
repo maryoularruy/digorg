@@ -11,6 +11,7 @@ import BottomPopup
 final class SecretAssetsViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var itemsCountLabel: Regular13LabelStyle!
+    @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var addMediaContainer: UIView!
     @IBOutlet weak var lockedStatusIcon: UIImageView!
@@ -31,7 +32,12 @@ final class SecretAssetsViewController: UIViewController {
         }
     }
     
-    private lazy var itemsForDeletionAndRestoring = Set<SecretItemModel>()
+    private lazy var itemsForDeletionAndRestoring = Set<SecretItemModel>() {
+        didSet {
+            selectionButton.bind(text: itemsForDeletionAndRestoring.count == items.count ? .deselectAll : .selectAll)
+            itemsCollectionView.reloadData()
+        }
+    }
     
     private lazy var emptyStateView: EmptyStateView? = nil
     
@@ -100,7 +106,7 @@ final class SecretAssetsViewController: UIViewController {
     }
     
     private func updateUI() {
-        lockedStatusIcon.image = userDefaultsService.isPasscodeCreated ? .locked :  .unlocked
+        lockedStatusIcon.image = userDefaultsService.isPasscodeCreated && userDefaultsService.isPasscodeTurnOn ? .locked :  .unlocked
         
         if userDefaultsService.isPasscodeTurnOn {
             if userDefaultsService.isPasscodeConfirmed {
@@ -140,6 +146,7 @@ final class SecretAssetsViewController: UIViewController {
     private func showSecretAlbumCover() {
         itemsCollectionView.isHidden = true
         itemsCountLabel.bind(text: "0 items")
+        selectionButton.isHidden = true
     }
     
     private func showSecretAssets() {
@@ -150,6 +157,7 @@ final class SecretAssetsViewController: UIViewController {
     private func setupEmptyState() {
         itemsCollectionView.isHidden = true
         itemsCountLabel.bind(text: "0 items")
+        selectionButton.isHidden = true
         emptyStateView?.removeFromSuperview()
         emptyStateView = view.createEmptyState(type: userDefaultsService.isPasscodeConfirmed ? .emptySecretAlbumConfirmed : .emptySecretAlbum)
         if let emptyStateView {
@@ -160,6 +168,10 @@ final class SecretAssetsViewController: UIViewController {
     private func hideEmptyState() {
         itemsCollectionView.reloadData()
         itemsCollectionView.isHidden = false
+        
+        selectionButton.isHidden = false
+        selectionButton.bind(text: itemsForDeletionAndRestoring.count == items.count ? .deselectAll : .selectAll)
+        
         emptyStateView?.removeFromSuperview()
         emptyStateView = nil
     }
@@ -168,6 +180,7 @@ final class SecretAssetsViewController: UIViewController {
 extension SecretAssetsViewController: ViewControllerProtocol {
     func setupUI() {
         itemsCollectionView.register(cellType: AssetCollectionViewCell.self)
+        selectionButton.delegate = self
         setupMediaContainer()
     }
     
@@ -192,6 +205,16 @@ extension SecretAssetsViewController: ViewControllerProtocol {
         addMediaContainer.layer.cornerRadius = 20
         addMediaContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         addMediaContainer.addShadows()
+    }
+}
+
+extension SecretAssetsViewController: SelectionButtonDelegate {
+    func tapOnButton() {
+        if itemsForDeletionAndRestoring.count == items.count {
+            itemsForDeletionAndRestoring.removeAll()
+        } else {
+            itemsForDeletionAndRestoring.insert(items)
+        }
     }
 }
 
@@ -330,7 +353,12 @@ extension SecretAssetsViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        (collectionView.cellForItem(at: indexPath) as? AssetCollectionViewCell)?.isChecked.toggle()
+        let item = items[indexPath.row]
+        if itemsForDeletionAndRestoring.contains(item) {
+            itemsForDeletionAndRestoring.remove(item)
+        } else {
+            itemsForDeletionAndRestoring.insert(item)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
