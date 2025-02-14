@@ -1,5 +1,5 @@
 {
-  "originHash" : "3e472eede174ef37c48b4338ee86324ce72774b523b228e8c489882c9c4438c7",
+  "originHash" : "3979492f39e1426c9e77fdff309c29dbfb91cc3aced26778b9c83215b91ed18b",
   "pins" : [
     {
       "identity" : "bottompopup",
@@ -8,15 +8,6 @@
       "state" : {
         "revision" : "23e3ce5ab9e1576aae60bad90cf7eea34709881d",
         "version" : "0.7.1"
-      }
-    },
-    {
-      "identity" : "disk",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/saoudrizwan/Disk",
-      "state" : {
-        "revision" : "b0cb4fdf23e51849cc2460bdc6de795c3bcca99d",
-        "version" : "0.6.4"
       }
     },
     {

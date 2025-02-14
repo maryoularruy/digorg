@@ -157,7 +157,6 @@
 		FA39885E2B30602A0096F335 /* ImageEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988382B30602A0096F335 /* ImageEncoding.swift */; };
 		FA39885F2B30602A0096F335 /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988392B30602A0096F335 /* ImageFormat.swift */; };
 		FA3988602B30602A0096F335 /* VideoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39883A2B30602A0096F335 /* VideoSource.swift */; };
-		FA3988682B3060A90096F335 /* Disk in Frameworks */ = {isa = PBXBuildFile; productRef = FA3988672B3060A90096F335 /* Disk */; };
 		FA39886A2B3060F10096F335 /* Extension+Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3988692B3060F10096F335 /* Extension+Set.swift */; };
 		FA641DDF2B3456DC00F6A466 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */; };
 		FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA641DE02B34574300F6A466 /* Calendar.storyboard */; };
@@ -374,7 +373,6 @@
 			files = (
 				FA3987B42B305B190096F335 /* BottomPopup in Frameworks */,
 				75D3FC6F2A606DBB00F351A3 /* SwiftyUserDefaults in Frameworks */,
-				FA3988682B3060A90096F335 /* Disk in Frameworks */,
 				75D3FC722A606DD100F351A3 /* Reusable in Frameworks */,
 				FA99F2F62B3C462700D4B239 /* IQKeyboardManagerSwift in Frameworks */,
 				FACA30972B3E035C0018FA5F /* Valet in Frameworks */,
@@ -1041,7 +1039,6 @@
 				FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */,
 				FA3987B32B305B190096F335 /* BottomPopup */,
 				FA3987B62B305C120096F335 /* Haneke */,
-				FA3988672B3060A90096F335 /* Disk */,
 				FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */,
 				FACA30962B3E035C0018FA5F /* Valet */,
 			);
@@ -1082,7 +1079,6 @@
 				FA3987AF2B305A3A0096F335 /* XCRemoteSwiftPackageReference "SDWebImagePhotosPlugin" */,
 				FA3987B22B305B190096F335 /* XCRemoteSwiftPackageReference "BottomPopup" */,
 				FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */,
-				FA3988662B3060A90096F335 /* XCRemoteSwiftPackageReference "Disk" */,
 				FA99F2F42B3C462700D4B239 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				FACA30952B3E035C0018FA5F /* XCRemoteSwiftPackageReference "Valet" */,
 			);
@@ -1576,14 +1572,6 @@
 				revision = a2e8e5b9a91eef90138a4f43c9a0044c4e90a6ef;
 			};
 		};
-		FA3988662B3060A90096F335 /* XCRemoteSwiftPackageReference "Disk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/saoudrizwan/Disk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.6.4;
-			};
-		};
 		FA99F2F42B3C462700D4B239 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
@@ -1637,11 +1625,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */;
 			productName = Haneke;
-		};
-		FA3988672B3060A90096F335 /* Disk */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FA3988662B3060A90096F335 /* XCRemoteSwiftPackageReference "Disk" */;
-			productName = Disk;
 		};
 		FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
