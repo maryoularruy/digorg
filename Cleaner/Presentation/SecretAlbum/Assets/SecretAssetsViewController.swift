@@ -369,23 +369,49 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
 
 extension SecretAssetsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
-            print("Selected image: \(selectedImage)")
-        } else if let selectedVideoURL = info[.mediaURL] as? URL {
-            print("Selected video URL: \(selectedVideoURL)")
-        }
+        addMediaContainer.isHidden = true
+        addButton.isHidden = false
         
-        picker.dismiss(animated: true)
+        if let image = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
+            let fileName = (info[.imageURL] as? URL)?.lastPathComponent ?? UUID().uuidString
+            
+            do {
+                try FileManager.default.saveImage(image: image, imageName: fileName, folderName: folderName)
+                
+                if userDefaultsService.isRemovePhotosAfterImport {
+                    guard let asset = info[.phAsset] as? PHAsset else { return }
+                    photoVideoManager.delete(assets: [asset])
+                }
+                
+                DispatchQueue.main.async { [weak self] in
+                    picker.dismiss(animated: true)
+                    self?.reloadData()
+                }
+            } catch {}
+            
+        } else if let videoURL = info[.mediaURL] as? URL {
+            do {
+                try FileManager.default.saveVideo(videoUrl: videoURL, folderName: folderName)
+                
+                if userDefaultsService.isRemovePhotosAfterImport {
+                    guard let asset = info[.phAsset] as? PHAsset else { return }
+                    photoVideoManager.delete(assets: [asset])
+                }
+                
+                DispatchQueue.main.async { [weak self] in
+                    picker.dismiss(animated: true)
+                    self?.reloadData()
+                }
+            } catch {}
+        }
     }
     
     private func configurePicker() {
         guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
-
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .photoLibrary
-        picker.mediaTypes = ["public.image"]
-//        picker.mediaTypes = ["public.image", "public.movie"]
+        picker.mediaTypes = ["public.image", "public.movie"]
         picker.allowsEditing = true
         present(picker, animated: true, completion: nil)
     }
