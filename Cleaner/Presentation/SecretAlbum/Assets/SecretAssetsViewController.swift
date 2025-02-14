@@ -55,6 +55,7 @@ final class SecretAssetsViewController: UIViewController {
     private lazy var userDefaultsService = UserDefaultsService.shared
     private lazy var photoVideoManager = PhotoVideoManager.shared
     private lazy var folderName = userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
+    private lazy var isPickerForPhotoLibrary: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,14 +103,14 @@ final class SecretAssetsViewController: UIViewController {
     
     //subviews of addMediaContainer
     @IBAction func tapOnTakeMediaButton(_ sender: Any) {
-        //TODO: -Open camera
+        configurePicker(.camera)
     }
     
     @IBAction func tapOnImportMediaButton(_ sender: Any) {
         if #available(iOS 14.0, *) {
             configureImagePicker()
         } else {
-            configurePicker()
+            configurePicker(.photoLibrary)
         }
     }
     
@@ -378,7 +379,7 @@ extension SecretAssetsViewController: UIImagePickerControllerDelegate, UINavigat
             do {
                 try FileManager.default.saveImage(image: image, imageName: fileName, folderName: folderName)
                 
-                if userDefaultsService.isRemovePhotosAfterImport {
+                if isPickerForPhotoLibrary && userDefaultsService.isRemovePhotosAfterImport {
                     guard let asset = info[.phAsset] as? PHAsset else { return }
                     photoVideoManager.delete(assets: [asset])
                 }
@@ -406,13 +407,20 @@ extension SecretAssetsViewController: UIImagePickerControllerDelegate, UINavigat
         }
     }
     
-    private func configurePicker() {
+    private func configurePicker(_ sourceType: UIImagePickerController.SourceType) {
         guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.sourceType = .photoLibrary
-        picker.mediaTypes = ["public.image", "public.movie"]
-        picker.allowsEditing = true
+        picker.sourceType = sourceType
+        
+        if sourceType == .photoLibrary {
+            picker.mediaTypes = ["public.image", "public.movie"]
+            picker.allowsEditing = true
+            isPickerForPhotoLibrary = true
+        } else {
+            isPickerForPhotoLibrary = false
+        }
+        
         present(picker, animated: true, completion: nil)
     }
 }
