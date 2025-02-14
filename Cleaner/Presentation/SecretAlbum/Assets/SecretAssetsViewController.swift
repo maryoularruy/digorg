@@ -128,7 +128,8 @@ final class SecretAssetsViewController: UIViewController {
     }
     
     @IBAction func tapOnRestoreButton(_ sender: Any) {
-        //TODO: -Restore
+        photoVideoManager.saveToCameraRollFolder(Array(itemsForDeletionAndRestoring))
+        itemsForDeletionAndRestoring.removeAll()
     }
     
     @IBAction func tapOnCancelInDeleteOrRestoreContainer(_ sender: Any) {
@@ -287,7 +288,7 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
         var assetsIdentifiersForDeletion = [String]()
         
         var counter: Int = 0
-        var maxCounter = results.count
+        let maxCounter = results.count
         
         results.forEach { result in
             let itemProvider = result.itemProvider

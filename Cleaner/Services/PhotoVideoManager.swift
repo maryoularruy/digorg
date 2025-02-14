@@ -5,7 +5,7 @@
 //  Created by Александр Пономарёв on 19.05.2022.
 //
 
-import Photos
+import PhotosUI
 import Vision
 
 final class PhotoVideoManager {
@@ -352,6 +352,20 @@ final class PhotoVideoManager {
         var assets: [PHAsset] = []
         groups.forEach { assets.append(contentsOf: $0.assets) }
         return assets
+    }
+    
+    func saveToCameraRollFolder(_ items: [SecretItemModel]) {
+        items.forEach { item in
+            switch item.mediaType {
+            case .photo:
+                guard let image = item.image else { break }
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                
+            case .video:
+                guard let path = item.videoUrl?.relativePath else { break }
+                UISaveVideoAtPathToSavedPhotosAlbum(path, nil, nil, nil)
+            }
+        }
     }
     
     func delete(identifiers: [String]) {
