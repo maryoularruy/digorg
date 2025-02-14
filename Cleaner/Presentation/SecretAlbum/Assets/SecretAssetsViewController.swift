@@ -286,13 +286,15 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
         
         var assetsIdentifiersForDeletion = [String]()
         
+        var counter: Int = 0
+        var maxCounter = results.count
+        
         results.forEach { result in
             let itemProvider = result.itemProvider
             guard let typeIdentifier = itemProvider.registeredTypeIdentifiers.first,
                     let utType = UTType(typeIdentifier) else { return }
             
             let assetIdentifier = result.assetIdentifier
-            let isLast = result == results.last
             
             if utType.conforms(to: .image) {
                 itemProvider.getPhoto { image in
@@ -307,12 +309,15 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
                                 assetsIdentifiersForDeletion.append(assetIdentifier)
                             }
                             
-                            if isLast {
+                            counter += 1
+                            
+                            if counter == maxCounter {
                                 if userDefaultsService.isRemovePhotosAfterImport {
                                     photoVideoManager.delete(identifiers: assetsIdentifiersForDeletion)
                                 }
                                 
                                 DispatchQueue.main.async { [weak self] in
+                                    picker.dismiss(animated: true)
                                     self?.reloadData()
                                 }
                             }
@@ -332,12 +337,15 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
                             assetsIdentifiersForDeletion.append(assetIdentifier)
                         }
                         
-                        if isLast {
+                        counter += 1
+                        
+                        if counter == maxCounter {
                             if userDefaultsService.isRemovePhotosAfterImport {
                                 photoVideoManager.delete(identifiers: assetsIdentifiersForDeletion)
                             }
                             
                             DispatchQueue.main.async { [weak self] in
+                                picker.dismiss(animated: true)
                                 self?.reloadData()
                             }
                         }
@@ -345,12 +353,11 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
-        picker.dismiss(animated: true)
     }
     
     private func configureImagePicker() {
         var configuration = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
-        configuration.selectionLimit = 0
+        configuration.selectionLimit = 10
         configuration.filter = .any(of: [.images, .videos])
         
         let pickerViewController = PHPickerViewController(configuration: configuration)
