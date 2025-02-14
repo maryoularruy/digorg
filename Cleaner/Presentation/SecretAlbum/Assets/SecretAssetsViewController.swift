@@ -120,7 +120,12 @@ final class SecretAssetsViewController: UIViewController {
     
     //subviews of deleteOrRestoreMediaContainer
     @IBAction func tapOnDeleteButton(_ sender: Any) {
-        //TODO: -Delete
+        let vc = CleaningAssetsViewController(from: .secretAlbum, itemsCount: itemsForDeletionAndRestoring.count, items: Array(itemsForDeletionAndRestoring))
+        vc.modalPresentationStyle = .currentContext
+        navigationController?.pushViewController(vc, animated: false)
+        itemsForDeletionAndRestoring.removeAll()
+        items.removeAll()
+        cancelButtonInDeleteOrRestoreContainer.isHidden = true
     }
     
     @IBAction func tapOnRestoreButton(_ sender: Any) {

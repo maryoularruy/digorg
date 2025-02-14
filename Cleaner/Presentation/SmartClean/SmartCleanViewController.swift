@@ -187,7 +187,7 @@ extension SmartCleanViewController: SmartCleanCellDelegate {
 
 extension SmartCleanViewController: ActionToolbarDelegate {
     func tapOnActionButton() {
-        let vc = CleaningAssetsViewController(from: .smartClean, itemsForDeleting: itemsCount)
+        let vc = CleaningAssetsViewController(from: .smartClean, itemsCount: itemsCount)
         vc.modalPresentationStyle = .currentContext
         navigationController?.pushViewController(vc, animated: false)
     }
