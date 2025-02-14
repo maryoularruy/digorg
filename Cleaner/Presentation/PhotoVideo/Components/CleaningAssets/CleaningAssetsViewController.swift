@@ -22,6 +22,8 @@ final class CleaningAssetsViewController: UIViewController {
     private lazy var contactManager = ContactManager.shared
     private lazy var calendarManager = CalendarManager.shared
     
+    private lazy var secretFolderName = UserDefaultsService.shared.get(String.self, key: .secretAlbumFolder) ?? "media"
+    
     init(from: CleaningAssetsEntryFrom, itemsCount: Int, items: Any? = nil) {
         self.from = from
         self.itemsCount = itemsCount
@@ -149,7 +151,15 @@ final class CleaningAssetsViewController: UIViewController {
         items.forEach { item in
             switch item.mediaType {
             case .photo:
-                break
+                guard let url = FileManager.default.getUrlForFile(fileName: item.id, folderName: secretFolderName) else { return }
+                
+                if FileManager.default.fileExists(atPath: url.path) {
+                    do {
+                        try FileManager.default.removeItem(at: url)
+                    } catch {
+                        undeletedItemsCount += 1
+                    }
+                }
                 
             case .video:
                 guard let url = item.videoUrl else { return }
@@ -160,10 +170,7 @@ final class CleaningAssetsViewController: UIViewController {
                 }
             }
             rootView.addProgress(progressStep)
-            
-            if item == items.last {
-                showCongratsView(deletedItemsCount: itemsCount - undeletedItemsCount)
-            }
         }
+        showCongratsView(deletedItemsCount: itemsCount - undeletedItemsCount)
     }
 }

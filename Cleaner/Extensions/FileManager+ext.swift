@@ -129,7 +129,7 @@ extension FileManager {
         try FileManager.default.copyItem(at: videoUrl, to: url)
     }
     
-    private func getUrlForFile(fileName: String, folderName: String) -> URL? {
+    func getUrlForFile(fileName: String, folderName: String) -> URL? {
         guard let folderURL = getURLForFolder(folderName: folderName) else { return nil }
         return folderURL.appendingPathComponent(fileName)
     }

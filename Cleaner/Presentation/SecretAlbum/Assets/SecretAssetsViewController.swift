@@ -125,7 +125,6 @@ final class SecretAssetsViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: false)
         itemsForDeletionAndRestoring.removeAll()
         items.removeAll()
-        cancelButtonInDeleteOrRestoreContainer.isHidden = true
     }
     
     @IBAction func tapOnRestoreButton(_ sender: Any) {
@@ -171,6 +170,10 @@ final class SecretAssetsViewController: UIViewController {
                     }
                 }
             }
+            
+            if items.isEmpty {
+                setupEmptyState()
+            }
         } catch { return }
     }
 
@@ -189,8 +192,11 @@ final class SecretAssetsViewController: UIViewController {
         itemsCollectionView.isHidden = true
         itemsCountLabel.bind(text: "0 items")
         selectionButton.isHidden = true
+        addMediaContainer.isHidden = true
+        deleteOrRestoreMediaContainer.isHidden = true
+        
         emptyStateView?.removeFromSuperview()
-        emptyStateView = view.createEmptyState(type: userDefaultsService.isPasscodeConfirmed ? .emptySecretAlbumConfirmed : .emptySecretAlbum)
+        emptyStateView = view.createEmptyState(type: .emptySecretAlbum)
         if let emptyStateView {
             view.addSubview(emptyStateView)
         }
@@ -202,6 +208,8 @@ final class SecretAssetsViewController: UIViewController {
         
         selectionButton.isHidden = false
         selectionButton.bind(text: itemsForDeletionAndRestoring.count == items.count ? .deselectAll : .selectAll)
+        
+        addButton.isHidden = false
         
         emptyStateView?.removeFromSuperview()
         emptyStateView = nil
@@ -337,11 +345,7 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
-        
-        picker.dismiss(animated: true) { [weak self] in
-            guard let self else { return }
-            reloadData()
-        }
+        picker.dismiss(animated: true)
     }
     
     private func configureImagePicker() {
