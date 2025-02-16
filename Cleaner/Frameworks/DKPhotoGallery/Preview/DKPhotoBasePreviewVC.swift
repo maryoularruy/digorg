@@ -32,10 +32,6 @@ public protocol DKPhotoBasePreviewDataSource : NSObjectProtocol {
     func enableZoom() -> Bool
     
     func enableIndicatorView() -> Bool
-        
-    func defaultPreviewActions() -> [UIPreviewActionItem]
-    
-    func defaultLongPressActions() -> [UIAlertAction]
     
     var previewType: DKPhotoPreviewType { get }
 }
@@ -198,10 +194,6 @@ open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhoto
             
             singleTapGesture?.require(toFail: doubleTapGesture)
         }
-        
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressAction(gesture:)))
-        longPressGesture.minimumPressDuration = 0.5
-        self.view.addGestureRecognizer(longPressGesture)
     }
     
     private func startFetchContent() {
@@ -319,54 +311,6 @@ open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhoto
         }
     }
     
-    @objc private func longPressAction(gesture: UIGestureRecognizer) {
-        guard gesture.state == .began, self.scrollView.maximumZoomScale > self.scrollView.minimumZoomScale else {
-            return
-        }
-        
-        let defaultLongPressActions = self.defaultLongPressActions()
-        
-        if defaultLongPressActions.count + (self.customLongPressActions?.count ?? 0) == 0 {
-            return
-        }
-        
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        for defaultLongPressAction in defaultLongPressActions {
-            alertController.addAction(defaultLongPressAction)
-        }
-        
-        if let customLongPressActions = self.customLongPressActions {
-            for customLongPressAction in customLongPressActions {
-                alertController.addAction(customLongPressAction)
-            }
-        }
-        
-        alertController.addAction(UIAlertAction(title: DKPhotoGalleryResource.localizedStringWithKey("preview.image.longPress.cancel"),
-                                                style: .cancel,
-                                                handler: nil))
-        
-        if let popoverController = alertController.popoverPresentationController {
-            popoverController.sourceView = self.view
-            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-            popoverController.permittedArrowDirections = []
-        }
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    // MARK: - Touch 3D
-    
-    open override var previewActionItems: [UIPreviewActionItem] {
-        let defaultPreviewActions = self.defaultPreviewActions()
-        
-        if let customPreviewActions = self._customPreviewActions {
-            return customPreviewActions + defaultPreviewActions
-        } else {
-            return defaultPreviewActions
-        }
-    }
-    
     // MARK: - Orientations & Status Bar
     
     open override var shouldAutorotate: Bool {
@@ -427,14 +371,6 @@ open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhoto
     
     public func enableIndicatorView() -> Bool {
         return true
-    }
-    
-    public func defaultPreviewActions() -> [UIPreviewActionItem] {
-        return []
-    }
-    
-    public func defaultLongPressActions() -> [UIAlertAction] {
-        return []
     }
     
     public var previewType: DKPhotoPreviewType {

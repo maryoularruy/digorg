@@ -10,57 +10,6 @@ import UIKit
 import Photos
 
 open class DKPhotoBaseImagePreviewVC: DKPhotoBasePreviewVC {
-    
-    // MARK: - Save Image
-    
-    private func saveImageToAlbum() {
-        guard let contentView = self.contentView as? DKPhotoImageView else { return }
-        
-        func saveImage(with imageData: Data) {
-            PHPhotoLibrary.shared().performChanges({
-                let assetRequest = PHAssetCreationRequest.forAsset()
-                assetRequest.addResource(with: .photo, data: imageData, options: nil)
-            }) { (success, error) in
-                DispatchQueue.main.async(execute: {
-                    self.showImageSaveResult(with: error)
-                })
-            }
-        }
-        
-        PHPhotoLibrary.requestAuthorization { (status) in
-            DispatchQueue.main.async(execute: {
-                switch status {
-                case .authorized:
-                    if let imageData = contentView.gifImage?.imageData {
-                        saveImage(with: imageData)
-                    } else if let imageURL = self.item.imageURL, imageURL.isFileURL, let data = try? Data(contentsOf: imageURL) {
-                        saveImage(with: data)
-                    } else if let image = contentView.image {
-                        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
-                    }
-                case .restricted:
-                    fallthrough
-                case .denied:
-                    self.showTips(DKPhotoGalleryResource.localizedStringWithKey("preview.image.saveImage.permission.error"))
-                default:
-                    break
-                }
-            })
-        }
-    }
-    
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
-        self.showImageSaveResult(with: error)
-    }
-    
-    func showImageSaveResult(with error: Error?) {
-        if let error = error {
-            self.showTips(error.localizedDescription)
-        } else {
-            self.showTips(DKPhotoGalleryResource.localizedStringWithKey("preview.image.saveImage.result.success"))
-        }
-    }
-    
     // MARK: - DKPhotoBasePreviewDataSource
     
     override public func createContentView() -> UIView {
@@ -120,26 +69,5 @@ open class DKPhotoBaseImagePreviewVC: DKPhotoBasePreviewVC {
         } else {
             return CGSize.zero
         }
-    }
-    
-    public override func defaultPreviewActions() -> [UIPreviewActionItem] {
-        let saveActionItem = UIPreviewAction(title: DKPhotoGalleryResource.localizedStringWithKey("preview.3DTouch.saveImage.title"),
-                                             style: .default) { (action, previewViewController) in
-                                                self.saveImageToAlbum()
-        }
-        
-        return [saveActionItem]
-    }
-    
-    public override func defaultLongPressActions() -> [UIAlertAction] {
-        var actions = [UIAlertAction]()
-        
-        let saveImageAction = UIAlertAction(title: DKPhotoGalleryResource.localizedStringWithKey("preview.image.longPress.saveImage.title"),
-                                            style: .default) { [weak self] (action) in
-                                                self?.saveImageToAlbum()
-        }
-        actions.append(saveImageAction)
-        
-        return actions
     }
 }
