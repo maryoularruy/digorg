@@ -269,13 +269,9 @@ extension GroupedAssetsViewController: UIContextMenuInteractionDelegate {
     }
     
     private func setupSort() {
-        if #available(iOS 14.0, *) {
-            let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
-            sortButton.showsMenuAsPrimaryAction = true
-            sortButton.menu = menu
-        } else {
-            sortButton.addInteraction(UIContextMenuInteraction(delegate: self))
-        }
+        let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
+        sortButton.showsMenuAsPrimaryAction = true
+        sortButton.menu = menu
     }
     
     private func getSortMenuElements() -> [UIMenuElement] {

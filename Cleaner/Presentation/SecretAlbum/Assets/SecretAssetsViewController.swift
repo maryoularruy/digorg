@@ -55,7 +55,6 @@ final class SecretAssetsViewController: UIViewController {
     private lazy var userDefaultsService = UserDefaultsService.shared
     private lazy var photoVideoManager = PhotoVideoManager.shared
     private lazy var folderName = userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
-    private lazy var isPickerForPhotoLibrary: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,15 +102,11 @@ final class SecretAssetsViewController: UIViewController {
     
     //subviews of addMediaContainer
     @IBAction func tapOnTakeMediaButton(_ sender: Any) {
-        configurePicker(.camera)
+        configurePicker()
     }
     
     @IBAction func tapOnImportMediaButton(_ sender: Any) {
-        if #available(iOS 14.0, *) {
-            configureImagePicker()
-        } else {
-            configurePicker(.photoLibrary)
-        }
+        configureImagePicker()
     }
     
     @IBAction func tapOnCancelInAddMediaContainer(_ sender: Any) {
@@ -280,7 +275,6 @@ extension SecretAssetsViewController: BottomPopupDelegate {
     }
 }
 
-@available(iOS 14.0, *)
 extension SecretAssetsViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         addMediaContainer.isHidden = true
@@ -378,12 +372,7 @@ extension SecretAssetsViewController: UIImagePickerControllerDelegate, UINavigat
             
             do {
                 try FileManager.default.saveImage(image: image, imageName: fileName, folderName: folderName)
-                
-                if isPickerForPhotoLibrary && userDefaultsService.isRemovePhotosAfterImport {
-                    guard let asset = info[.phAsset] as? PHAsset else { return }
-                    photoVideoManager.delete(assets: [asset])
-                }
-                
+
                 DispatchQueue.main.async { [weak self] in
                     picker.dismiss(animated: true)
                     self?.reloadData()
@@ -394,11 +383,6 @@ extension SecretAssetsViewController: UIImagePickerControllerDelegate, UINavigat
             do {
                 try FileManager.default.saveVideo(videoUrl: videoURL, folderName: folderName)
                 
-                if userDefaultsService.isRemovePhotosAfterImport {
-                    guard let asset = info[.phAsset] as? PHAsset else { return }
-                    photoVideoManager.delete(assets: [asset])
-                }
-                
                 DispatchQueue.main.async { [weak self] in
                     picker.dismiss(animated: true)
                     self?.reloadData()
@@ -407,20 +391,11 @@ extension SecretAssetsViewController: UIImagePickerControllerDelegate, UINavigat
         }
     }
     
-    private func configurePicker(_ sourceType: UIImagePickerController.SourceType) {
-        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
+    private func configurePicker() {
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.sourceType = sourceType
-        
-        if sourceType == .photoLibrary {
-            picker.mediaTypes = ["public.image", "public.movie"]
-            picker.allowsEditing = true
-            isPickerForPhotoLibrary = true
-        } else {
-            isPickerForPhotoLibrary = false
-        }
-        
+        picker.sourceType = .camera
         present(picker, animated: true, completion: nil)
     }
 }

@@ -21,11 +21,7 @@ final class PhotoVideoManager {
     private(set) var similarVideos: [PHAssetGroup] = []
     
     func checkStatus(handler: @escaping (PHAuthorizationStatus) -> ()) {
-        let status = if #available(iOS 14, *) {
-            PHPhotoLibrary.authorizationStatus(for: .readWrite)
-        } else {
-            PHPhotoLibrary.authorizationStatus()
-        }
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         
         if status == .notDetermined {
             requestPhotoLibraryAutorization() { status in
@@ -446,15 +442,8 @@ final class PhotoVideoManager {
     }
     
     private func requestPhotoLibraryAutorization(handler: @escaping (PHAuthorizationStatus) -> ()) {
-        if #available(iOS 14, *) {
-            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
-                handler(status)
-            }
-            
-        } else {
-            PHPhotoLibrary.requestAuthorization { status in
-                handler(status)
-            }
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            handler(status)
         }
     }
 }

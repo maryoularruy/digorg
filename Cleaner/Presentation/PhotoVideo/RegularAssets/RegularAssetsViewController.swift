@@ -235,13 +235,9 @@ extension RegularAssetsViewController: UIContextMenuInteractionDelegate {
     }
     
     private func setupSort() {
-        if #available(iOS 14.0, *) {
-            let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
-            rootView.sortButton.showsMenuAsPrimaryAction = true
-            rootView.sortButton.menu = menu
-        } else {
-            rootView.sortButton.addInteraction(UIContextMenuInteraction(delegate: self))
-        }
+        let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
+        rootView.sortButton.showsMenuAsPrimaryAction = true
+        rootView.sortButton.menu = menu
     }
     
     private func getSortMenuElements() -> [UIMenuElement] {
