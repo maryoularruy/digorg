@@ -114,8 +114,6 @@
 		FA3987F92B305FA50096F335 /* DKPhotoImageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987D72B305FA40096F335 /* DKPhotoImageUtility.swift */; };
 		FA3987FA2B305FA50096F335 /* DKPhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987D82B305FA40096F335 /* DKPhotoImageView.swift */; };
 		FA3987FB2B305FA50096F335 /* DKPhotoBaseImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987D92B305FA40096F335 /* DKPhotoBaseImagePreviewVC.swift */; };
-		FA3987FC2B305FA50096F335 /* DKPhotoWebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987DB2B305FA40096F335 /* DKPhotoWebVC.swift */; };
-		FA3987FD2B305FA50096F335 /* DKPhotoQRCodeResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987DC2B305FA40096F335 /* DKPhotoQRCodeResultVC.swift */; };
 		FA3987FE2B305FA50096F335 /* DKPhotoProgressIndicatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987DD2B305FA40096F335 /* DKPhotoProgressIndicatorProtocol.swift */; };
 		FA3987FF2B305FA50096F335 /* DKPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987DF2B305FA40096F335 /* DKPDFView.swift */; };
 		FA3988002B305FA50096F335 /* DKPhotoPDFPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987E02B305FA40096F335 /* DKPhotoPDFPreviewVC.swift */; };
@@ -285,8 +283,6 @@
 		FA3987D72B305FA40096F335 /* DKPhotoImageUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoImageUtility.swift; sourceTree = "<group>"; };
 		FA3987D82B305FA40096F335 /* DKPhotoImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoImageView.swift; sourceTree = "<group>"; };
 		FA3987D92B305FA40096F335 /* DKPhotoBaseImagePreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoBaseImagePreviewVC.swift; sourceTree = "<group>"; };
-		FA3987DB2B305FA40096F335 /* DKPhotoWebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoWebVC.swift; sourceTree = "<group>"; };
-		FA3987DC2B305FA40096F335 /* DKPhotoQRCodeResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoQRCodeResultVC.swift; sourceTree = "<group>"; };
 		FA3987DD2B305FA40096F335 /* DKPhotoProgressIndicatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoProgressIndicatorProtocol.swift; sourceTree = "<group>"; };
 		FA3987DF2B305FA40096F335 /* DKPDFView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPDFView.swift; sourceTree = "<group>"; };
 		FA3987E02B305FA40096F335 /* DKPhotoPDFPreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoPDFPreviewVC.swift; sourceTree = "<group>"; };
@@ -809,7 +805,6 @@
 				FA3987D02B305FA40096F335 /* PlayerPreview */,
 				FA3987D32B305FA40096F335 /* DKPhotoBasePreviewVC.swift */,
 				FA3987D42B305FA40096F335 /* ImagePreview */,
-				FA3987DA2B305FA40096F335 /* QRCode */,
 				FA3987DD2B305FA40096F335 /* DKPhotoProgressIndicatorProtocol.swift */,
 				FA3987DE2B305FA40096F335 /* PDFPreview */,
 				FA3987E12B305FA40096F335 /* DKPhotoContentAnimationView.swift */,
@@ -837,15 +832,6 @@
 				FA3987D92B305FA40096F335 /* DKPhotoBaseImagePreviewVC.swift */,
 			);
 			path = ImagePreview;
-			sourceTree = "<group>";
-		};
-		FA3987DA2B305FA40096F335 /* QRCode */ = {
-			isa = PBXGroup;
-			children = (
-				FA3987DB2B305FA40096F335 /* DKPhotoWebVC.swift */,
-				FA3987DC2B305FA40096F335 /* DKPhotoQRCodeResultVC.swift */,
-			);
-			path = QRCode;
 			sourceTree = "<group>";
 		};
 		FA3987DE2B305FA40096F335 /* PDFPreview */ = {
@@ -1127,7 +1113,6 @@
 				75D3FC812A606E6F00F351A3 /* Extension+String.swift in Sources */,
 				FA39877C2B3055930096F335 /* OSAHash.m in Sources */,
 				FA3988062B305FA50096F335 /* DKPhotoGalleryResource.swift in Sources */,
-				FA3987FD2B305FA50096F335 /* DKPhotoQRCodeResultVC.swift in Sources */,
 				A5446D082CE76CCE00A1F940 /* Pages.swift in Sources */,
 				FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */,
 				FA39883D2B30602A0096F335 /* ZoomTransitionController.swift in Sources */,
@@ -1195,7 +1180,6 @@
 				FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */,
 				A53EDA232CD0422700565625 /* EKEventGroup.swift in Sources */,
 				756866D92AD1D398008DBF7C /* DeviceInfoViewController.swift in Sources */,
-				FA3987FC2B305FA50096F335 /* DKPhotoWebVC.swift in Sources */,
 				7532F8662AE29735007469EA /* NoNameContactsViewController.swift in Sources */,
 				FA3988012B305FA50096F335 /* DKPhotoContentAnimationView.swift in Sources */,
 				FA3988432B30602A0096F335 /* UITraitCollection.swift in Sources */,
