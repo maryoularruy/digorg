@@ -163,13 +163,9 @@ open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhoto
         }
     }
     
-    open func photoPreviewWillAppear() {
-        
-    }
+    open func photoPreviewWillAppear() {}
     
-    open func photoPreviewWillDisappear() {
-        
-    }
+    open func photoPreviewWillDisappear() {}
     
     open func resetScale() {
         self.scrollView.zoomScale = 1.0
@@ -456,6 +452,4 @@ open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhoto
     internal class func isIphoneX() -> Bool {
         return max(UIScreen.main.bounds.height, UIScreen.main.bounds.width) >= 812
     }
-
 }
-

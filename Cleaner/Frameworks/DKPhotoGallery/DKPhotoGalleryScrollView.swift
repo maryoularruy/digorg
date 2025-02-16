@@ -62,9 +62,8 @@ class DKPhotoGalleryScrollView: UIScrollView {
         if vc.view.superview == nil {
             self.addSubview(vc.view)
         } else {
-            vc.viewWillAppear(true)
+            vc.beginAppearanceTransition(true, animated: true)
             vc.view.isHidden = false
-            vc.viewDidAppear(true)
         }
         vc.view.frame = self.cellRect(for: index)
         self.items[item] = vc.view
@@ -72,9 +71,8 @@ class DKPhotoGalleryScrollView: UIScrollView {
     
     public func remove(vc: UIViewController, item: DKPhotoGalleryItem) {
         if let view = self.items[item], !view.isHidden {
-            vc.viewWillDisappear(true)
+            vc.endAppearanceTransition()
             view.isHidden = true
-            vc.viewDidDisappear(true)
         }
     }
     

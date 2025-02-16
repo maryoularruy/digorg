@@ -110,6 +110,4 @@ open class DKPhotoGalleryItem: NSObject {
         
         return items
     }
-
 }
-

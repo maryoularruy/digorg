@@ -104,14 +104,6 @@ DKPhotoGalleryContentDataSource, DKPhotoGalleryContentDelegate {
         contentVC.currentIndex = min(self.presentationIndex, self.numberOfItems() - 1)
         
         contentVC.footerView = self.footerView
-        
-        if #available(iOS 13.0, *) {} else {
-            let keyData = Data([0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x42, 0x61, 0x72])
-            let key = String(data: keyData, encoding: String.Encoding.ascii)!
-            if let statusBar = UIApplication.shared.value(forKey: key) as? UIView {
-                self.statusBar = statusBar
-            }            
-        }
     }
     
     private lazy var doSetupOnce: () -> Void = {
@@ -200,7 +192,7 @@ DKPhotoGalleryContentDataSource, DKPhotoGalleryContentDelegate {
         }
     }
     
-    @objc open func showsControlView () {
+    @objc open func showsControlView() {
         self.isNavigationBarHidden = false
         self.statusBar?.alpha = 1
         self.contentVC?.setFooterViewHidden(false, animated: false)
@@ -210,7 +202,7 @@ DKPhotoGalleryContentDataSource, DKPhotoGalleryContentDelegate {
         }
     }
     
-    @objc open func hidesControlView () {
+    @objc open func hidesControlView() {
         self.isNavigationBarHidden = true
         self.statusBar?.alpha = 0
         self.contentVC?.setFooterViewHidden(true, animated: false)
@@ -404,23 +396,6 @@ DKPhotoGalleryContentDataSource, DKPhotoGalleryContentDelegate {
     }
     
     // MARK: - Utilities
-        
-    internal class func imageFromColor(color: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        
-        // create a 1 by 1 pixel context
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
-        
-        color.setFill()
-        UIRectFill(rect)
-        
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
-        
-        return image!
-    }
-    
     public class func setPreferredStatusBarStyle(statusBarStyle: UIStatusBarStyle) {
         _preferredStatusBarStyle = statusBarStyle
     }
@@ -428,7 +403,6 @@ DKPhotoGalleryContentDataSource, DKPhotoGalleryContentDelegate {
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return DKPhotoGallery._preferredStatusBarStyle
     }
-
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

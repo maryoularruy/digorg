@@ -122,5 +122,4 @@ open class DKPhotoPlayerPreviewVC: DKPhotoBasePreviewVC {
     open override var previewType: DKPhotoPreviewType {
         get { return .video }
     }
-
 }
