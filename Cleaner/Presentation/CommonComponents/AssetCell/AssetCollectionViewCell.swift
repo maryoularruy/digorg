@@ -43,6 +43,14 @@ final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
         setupUI()
 	}
     
+    func bind(image: UIImage?, isChecked: Bool, index: Int) {
+        self.index = index
+        if let image {
+            photoImageView.setImage(image)
+        }
+        self.isChecked = isChecked
+    }
+    
     private func setupUI() {
         layer.cornerRadius = 16.0
                 
@@ -50,7 +58,6 @@ final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
     }
     
     @objc func tapOnCheckBox() {
-        isChecked.toggle()
         delegate?.tapOnCheckBox(index: index)
     }
 }

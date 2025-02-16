@@ -7,6 +7,7 @@
 
 import PhotosUI
 import BottomPopup
+import AVKit
 
 final class SecretAssetsViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
@@ -407,23 +408,51 @@ extension SecretAssetsViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        let item = items[indexPath.row]
+        cell.delegate = self
         
-        cell.photoImageView.image = item.mediaType == .photo ? item.image : item.videoThumbnail
-        cell.isChecked = itemsForDeletionAndRestoring.contains(item)
+        let item = items[indexPath.row]
+        cell.bind(image: item.mediaType == .photo ? item.image : item.videoThumbnail,
+                  isChecked: itemsForDeletionAndRestoring.contains(item),
+                  index: indexPath.row)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = items[indexPath.row]
-        if itemsForDeletionAndRestoring.contains(item) {
-            itemsForDeletionAndRestoring.remove(item)
-        } else {
-            itemsForDeletionAndRestoring.insert(item)
+        
+        switch item.mediaType {
+        case .photo:
+            guard let image = item.image else { return }
+            
+            let gallery = DKPhotoGallery()
+            gallery.singleTapMode = .dismiss
+            gallery.items = [DKPhotoGalleryItem(image: image)]
+            present(photoGallery: gallery)
+            
+        case .video:
+            guard let url = item.videoUrl else { return }
+            let player = AVPlayer(url: url)
+            let controller = AVPlayerViewController()
+            controller.player = player
+
+            present(controller, animated: true) {
+                player.play()
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         TargetSize.medium.size
+    }
+}
+
+extension SecretAssetsViewController: AssetCollectionViewCellDelegate {
+    func tapOnCheckBox(index: Int) {
+        let item = items[index]
+        if itemsForDeletionAndRestoring.contains(item) {
+            itemsForDeletionAndRestoring.remove(item)
+        } else {
+            itemsForDeletionAndRestoring.insert(item)
+        }
     }
 }
