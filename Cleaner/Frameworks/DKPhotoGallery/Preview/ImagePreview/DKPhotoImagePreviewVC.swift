@@ -6,7 +6,6 @@
 //  Copyright © 2017 ZhangAo. All rights reserved.
 //
 
-import UIKit
 import Photos
 
 #if canImport(SDWebImage)
@@ -290,5 +289,4 @@ class DKPhotoImagePreviewVC: DKPhotoBaseImagePreviewVC {
         self.asset = nil
         self.downloadOriginalImageButton.isHidden = true
     }
-    
 }

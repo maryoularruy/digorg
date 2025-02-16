@@ -244,5 +244,4 @@ fileprivate class DKPhotoIncrementalRightIndicator : DKPhotoIncrementalIndicator
     override func resetRefreshState() {
         self.scrollView?.contentInset.right = 0
     }
-    
 }

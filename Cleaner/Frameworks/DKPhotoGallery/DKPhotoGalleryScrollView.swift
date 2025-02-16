@@ -16,6 +16,7 @@ class DKPhotoGalleryScrollView: UIScrollView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        contentInsetAdjustmentBehavior = .automatic
         self.backgroundColor = UIColor.black
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
@@ -118,5 +119,4 @@ class DKPhotoGalleryScrollView: UIScrollView {
             return nil
         }
     }
-    
 }

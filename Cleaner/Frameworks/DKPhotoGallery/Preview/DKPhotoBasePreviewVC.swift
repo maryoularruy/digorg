@@ -79,8 +79,6 @@ internal extension UIView {
     }
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////
-
 @objc
 open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhotoBasePreviewDataSource {
     
@@ -114,9 +112,7 @@ open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhoto
         self.scrollView.alwaysBounceHorizontal = true
         self.scrollView.showsVerticalScrollIndicator = false
         self.scrollView.showsHorizontalScrollIndicator = false
-        if #available(iOS 11.0, *) {
-            self.scrollView.contentInsetAdjustmentBehavior = .never
-        }
+        self.scrollView.contentInsetAdjustmentBehavior = .never
         
         if self.enableZoom() {
             self.scrollView.minimumZoomScale = 1

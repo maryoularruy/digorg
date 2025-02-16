@@ -405,8 +405,6 @@ DKPhotoGalleryContentDataSource, DKPhotoGalleryContentDelegate {
     }
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////
-
 public extension UIViewController {
     
     @objc func present(photoGallery gallery: DKPhotoGallery, completion: (() -> Swift.Void)? = nil) {

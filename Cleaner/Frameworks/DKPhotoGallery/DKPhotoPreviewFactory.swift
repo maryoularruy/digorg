@@ -49,5 +49,4 @@ extension DKPhotoBasePreviewVC {
         
         return previewVC
     }
-    
 }

@@ -131,5 +131,4 @@ class DKPhotoGalleryInteractiveTransition: UIPercentDrivenInteractiveTransition,
             return true
         }
     }
-
 }

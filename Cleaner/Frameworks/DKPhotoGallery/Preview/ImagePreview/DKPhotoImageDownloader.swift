@@ -122,5 +122,4 @@ class DKPhotoImageAssetDownloader: DKPhotoImageDownloader {
             assertionFailure()
         }
     }
-    
 }

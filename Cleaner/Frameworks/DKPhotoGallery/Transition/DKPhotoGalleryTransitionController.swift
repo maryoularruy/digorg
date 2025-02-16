@@ -49,5 +49,4 @@ open class DKPhotoGalleryTransitionController: UIPresentationController, UIViewC
     public func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return nil
     }
-    
 }

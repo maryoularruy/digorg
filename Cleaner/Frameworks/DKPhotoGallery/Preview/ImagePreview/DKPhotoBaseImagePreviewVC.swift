@@ -194,6 +194,5 @@ open class DKPhotoBaseImagePreviewVC: DKPhotoBasePreviewVC {
         actions.append(saveImageAction)
         
         return actions
-        
     }
 }
