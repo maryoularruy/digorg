@@ -115,8 +115,6 @@
 		FA3987FA2B305FA50096F335 /* DKPhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987D82B305FA40096F335 /* DKPhotoImageView.swift */; };
 		FA3987FB2B305FA50096F335 /* DKPhotoBaseImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987D92B305FA40096F335 /* DKPhotoBaseImagePreviewVC.swift */; };
 		FA3987FE2B305FA50096F335 /* DKPhotoProgressIndicatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987DD2B305FA40096F335 /* DKPhotoProgressIndicatorProtocol.swift */; };
-		FA3987FF2B305FA50096F335 /* DKPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987DF2B305FA40096F335 /* DKPDFView.swift */; };
-		FA3988002B305FA50096F335 /* DKPhotoPDFPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987E02B305FA40096F335 /* DKPhotoPDFPreviewVC.swift */; };
 		FA3988012B305FA50096F335 /* DKPhotoContentAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987E12B305FA40096F335 /* DKPhotoContentAnimationView.swift */; };
 		FA3988022B305FA50096F335 /* DKPhotoProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987E22B305FA40096F335 /* DKPhotoProgressIndicator.swift */; };
 		FA3988032B305FA50096F335 /* DKPhotoGalleryScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987E32B305FA40096F335 /* DKPhotoGalleryScrollView.swift */; };
@@ -284,8 +282,6 @@
 		FA3987D82B305FA40096F335 /* DKPhotoImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoImageView.swift; sourceTree = "<group>"; };
 		FA3987D92B305FA40096F335 /* DKPhotoBaseImagePreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoBaseImagePreviewVC.swift; sourceTree = "<group>"; };
 		FA3987DD2B305FA40096F335 /* DKPhotoProgressIndicatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoProgressIndicatorProtocol.swift; sourceTree = "<group>"; };
-		FA3987DF2B305FA40096F335 /* DKPDFView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPDFView.swift; sourceTree = "<group>"; };
-		FA3987E02B305FA40096F335 /* DKPhotoPDFPreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoPDFPreviewVC.swift; sourceTree = "<group>"; };
 		FA3987E12B305FA40096F335 /* DKPhotoContentAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoContentAnimationView.swift; sourceTree = "<group>"; };
 		FA3987E22B305FA40096F335 /* DKPhotoProgressIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoProgressIndicator.swift; sourceTree = "<group>"; };
 		FA3987E32B305FA40096F335 /* DKPhotoGalleryScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKPhotoGalleryScrollView.swift; sourceTree = "<group>"; };
@@ -806,7 +802,6 @@
 				FA3987D32B305FA40096F335 /* DKPhotoBasePreviewVC.swift */,
 				FA3987D42B305FA40096F335 /* ImagePreview */,
 				FA3987DD2B305FA40096F335 /* DKPhotoProgressIndicatorProtocol.swift */,
-				FA3987DE2B305FA40096F335 /* PDFPreview */,
 				FA3987E12B305FA40096F335 /* DKPhotoContentAnimationView.swift */,
 				FA3987E22B305FA40096F335 /* DKPhotoProgressIndicator.swift */,
 			);
@@ -832,15 +827,6 @@
 				FA3987D92B305FA40096F335 /* DKPhotoBaseImagePreviewVC.swift */,
 			);
 			path = ImagePreview;
-			sourceTree = "<group>";
-		};
-		FA3987DE2B305FA40096F335 /* PDFPreview */ = {
-			isa = PBXGroup;
-			children = (
-				FA3987DF2B305FA40096F335 /* DKPDFView.swift */,
-				FA3987E02B305FA40096F335 /* DKPhotoPDFPreviewVC.swift */,
-			);
-			path = PDFPreview;
 			sourceTree = "<group>";
 		};
 		FA3987E42B305FA40096F335 /* Resource */ = {
@@ -1147,7 +1133,6 @@
 				FA39885C2B30602A0096F335 /* PHAssetResourceManager.swift in Sources */,
 				A55CA2632CC907350026D434 /* UIFont+ext.swift in Sources */,
 				FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */,
-				FA3987FF2B305FA50096F335 /* DKPDFView.swift in Sources */,
 				FA39877E2B3055930096F335 /* OSAbstractHash.m in Sources */,
 				FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */,
 				A5446C2D2CE74B7A00A1F940 /* InstructionCellType.swift in Sources */,
@@ -1223,7 +1208,6 @@
 				FA3988602B30602A0096F335 /* VideoSource.swift in Sources */,
 				A5609FD82CE12BB3000AF19E /* BatteryInstructionCellType.swift in Sources */,
 				FA39883E2B30602A0096F335 /* ZoomPopTransition.swift in Sources */,
-				FA3988002B305FA50096F335 /* DKPhotoPDFPreviewVC.swift in Sources */,
 				FA3987BE2B305D720096F335 /* UIKitExtension.swift in Sources */,
 				FA3987562B3055510096F335 /* Algorithm.swift in Sources */,
 				A54BAC242D5A63F900F41AE3 /* NetworkService.swift in Sources */,

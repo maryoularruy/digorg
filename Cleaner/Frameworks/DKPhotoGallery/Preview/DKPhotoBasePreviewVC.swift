@@ -11,8 +11,6 @@ import AVFoundation
 
 public enum DKPhotoPreviewType {
     case photo, video
-    @available(iOS 11.0, *)
-    case pdf
 }
 
 public protocol DKPhotoBasePreviewDataSource : NSObjectProtocol {

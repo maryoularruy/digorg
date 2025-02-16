@@ -10,10 +10,6 @@
 
 "preview.3DTouch.saveImage.title" = "Save Image";
 
-"preview.image.extractQRCode.title" = "Extract QR code";
-
-"preview.image.extractQRCode.result.text.title" = "QR Code Info";
-
 "preview.image.longPress.cancel" = "Cancel";
 
 "preview.image.longPress.saveImage.title" = "Save Image";
