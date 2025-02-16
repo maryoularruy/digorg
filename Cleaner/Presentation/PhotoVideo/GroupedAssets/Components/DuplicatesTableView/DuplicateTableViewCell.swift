@@ -66,11 +66,12 @@ extension DuplicateTableViewCell: UICollectionViewDataSource, UICollectionViewDe
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.delegate = self
+        
         let item = assets[indexPath.row]
-        cell.index = indexPath.row
-        cell.photoImageView.image = item.getAssetThumbnail(TargetSize.large.size)
-        cell.isChecked = assetsForDeletion.contains(item)
-        cell.isBest = indexPath.row == indexOfBest ? true : false
+        cell.bind(image: item.getAssetThumbnail(TargetSize.large.size),
+                  isChecked: assetsForDeletion.contains(item),
+                  index: indexPath.row,
+                  isBest: indexPath.row == indexOfBest)
 		return cell
 	}
     

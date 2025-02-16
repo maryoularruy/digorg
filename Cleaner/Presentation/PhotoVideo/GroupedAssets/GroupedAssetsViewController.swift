@@ -222,8 +222,7 @@ extension GroupedAssetsViewController: DuplicateTableViewCellDelegate {
         } else {
             assetsForDeletion.remove(asset)
         }
-        
-        (tableView.cellForRow(at: IndexPath(row: groupIndex, section: 0)) as? DuplicateTableViewCell)?.assetsForDeletion = assetsForDeletion
+        tableView.reloadRows(at: [IndexPath(row: groupIndex, section: 0)], with: .none)
     }
 }
 

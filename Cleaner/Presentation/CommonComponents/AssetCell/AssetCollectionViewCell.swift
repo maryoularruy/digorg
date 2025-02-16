@@ -43,12 +43,16 @@ final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
         setupUI()
 	}
     
-    func bind(image: UIImage?, isChecked: Bool, index: Int) {
+    func bind(image: UIImage?, isChecked: Bool, index: Int, isBest: Bool? = nil) {
         self.index = index
         if let image {
             photoImageView.setImage(image)
         }
         self.isChecked = isChecked
+        
+        if let isBest {
+            self.isBest = isBest
+        }
     }
     
     private func setupUI() {
