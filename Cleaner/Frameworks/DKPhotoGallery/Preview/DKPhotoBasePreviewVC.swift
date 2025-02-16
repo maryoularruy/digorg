@@ -376,10 +376,4 @@ open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhoto
     public var previewType: DKPhotoPreviewType {
         get { return .photo }
     }
-    
-    // MARK: - Utilities
-    
-    internal class func isIphoneX() -> Bool {
-        return max(UIScreen.main.bounds.height, UIScreen.main.bounds.width) >= 812
-    }
 }

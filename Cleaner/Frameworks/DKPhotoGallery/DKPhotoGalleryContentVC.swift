@@ -228,7 +228,7 @@ open class DKPhotoGalleryContentVC: UIViewController, UIScrollViewDelegate {
         if let footerView = self.footerView {
             self.footerViewContainer = DKPhotoGalleryContentFooterViewContainer(footerView: footerView)
             
-            let footerViewHeight = footerView.bounds.height + (DKPhotoBasePreviewVC.isIphoneX() ? 34 : 0)
+            let footerViewHeight = footerView.bounds.height
             self.footerViewContainer!.frame = CGRect(x: 0, y: self.view.bounds.height - footerViewHeight,
                                                      width: self.view.bounds.width, height: footerViewHeight)
             self.view.addSubview(self.footerViewContainer!)

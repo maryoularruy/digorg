@@ -386,7 +386,6 @@ open class DKPlayerView: UIView {
         
         let bottomView = UIView()
         bottomView.translatesAutoresizingMaskIntoConstraints = false
-        self.controlView.addSubview(bottomView)
         
         self.playPauseButton.setImage(DKPhotoGalleryResource.videoToolbarPlayImage(), for: .normal)
         self.playPauseButton.setImage(DKPhotoGalleryResource.videoToolbarPauseImage(), for: .selected)
@@ -515,32 +514,27 @@ open class DKPlayerView: UIView {
                                                     multiplier: 1,
                                                     constant: 0))
         
-        self.controlView.addConstraint(NSLayoutConstraint(item: bottomView,
-                                                    attribute: .left,
-                                                    relatedBy: .equal,
-                                                    toItem: self.controlView,
-                                                    attribute: .left,
-                                                    multiplier: 1,
-                                                    constant: 0))
-        self.controlView.addConstraint(NSLayoutConstraint(item: bottomView,
-                                                          attribute: .right,
-                                                          relatedBy: .equal,
-                                                          toItem: self.controlView,
-                                                          attribute: .right,
-                                                          multiplier: 1,
-                                                          constant: 0))
-        self.controlView.addConstraint(NSLayoutConstraint(item: bottomView,
-                                                          attribute: .bottom,
-                                                          relatedBy: .equal,
-                                                          toItem: self.controlView,
-                                                          attribute: .bottom,
-                                                          multiplier: 1,
-                                                          constant: DKPhotoBasePreviewVC.isIphoneX() ? -34 : 0))
-        
         if let controlParentView = self.controlParentView {
             controlParentView.addSubview(self.controlView)
+            
+            controlParentView.addSubview(bottomView)
+            
+            NSLayoutConstraint.activate([
+                bottomView.bottomAnchor.constraint(equalTo: controlParentView.bottomAnchor, constant: -50),
+                bottomView.leadingAnchor.constraint(equalTo: controlParentView.leadingAnchor),
+                bottomView.trailingAnchor.constraint(equalTo: controlParentView.trailingAnchor),
+                bottomView.heightAnchor.constraint(equalToConstant: 40)
+            ])
         } else {
             self.addSubview(self.controlView)
+            addSubview(bottomView)
+            
+            NSLayoutConstraint.activate([
+                bottomView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
+                bottomView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                bottomView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                bottomView.heightAnchor.constraint(equalToConstant: 40)
+            ])
         }
         
         self.controlView.frame = self.controlView.superview!.bounds
