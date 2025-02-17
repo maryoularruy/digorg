@@ -1,39 +1,27 @@
 //
-//  DKPhotoBasePreviewVC.swift
-//  MediaCarousel
+//  MediaCarouselBasePreviewVC.swift
 //
 //  Created by ZhangAo on 08/09/2017.
-//  Copyright © 2017 ZhangAo. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 
-public enum DKPhotoPreviewType {
+public enum MediaCarouselPreviewType {
     case photo, video
 }
 
-public protocol DKPhotoBasePreviewDataSource : NSObjectProtocol {
-    
+public protocol MediaCarouselBasePreviewDataSource: NSObjectProtocol {
     func createContentView() -> UIView
-    
     func updateContentView(with content: Any)
-    
     func contentSize() -> CGSize
-    
     func fetchContent(withProgressBlock progressBlock: @escaping ((_ progress: Float) -> Void), completeBlock: @escaping ((_ data: Any?, _ error: Error?) -> Void))
-    
     func snapshotImage() -> UIImage?
-    
     func showError()
-    
     func hidesError()
-    
     func enableZoom() -> Bool
-    
     func enableIndicatorView() -> Bool
-    
-    var previewType: DKPhotoPreviewType { get }
+    var previewType: MediaCarouselPreviewType { get }
 }
 
 internal extension UIView {
@@ -74,7 +62,7 @@ internal extension UIView {
 }
 
 @objc
-open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhotoBasePreviewDataSource {
+open class MediaCarouselBasePreviewVC: UIViewController, UIScrollViewDelegate, MediaCarouselBasePreviewDataSource {
     
     @objc open internal(set) var item: MediaCarouselItem!
     
@@ -339,7 +327,7 @@ open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhoto
         self.centerContentView()
     }
     
-    // MARK: - DKPhotoBasePreviewDataSource
+    // MARK: - MediaCarouselBasePreviewDataSource
     
     public func createContentView() -> UIView {
         preconditionFailure("This method must be overridden.")
@@ -373,7 +361,7 @@ open class DKPhotoBasePreviewVC: UIViewController, UIScrollViewDelegate, DKPhoto
         return true
     }
     
-    public var previewType: DKPhotoPreviewType {
+    public var previewType: MediaCarouselPreviewType {
         get { return .photo }
     }
 }

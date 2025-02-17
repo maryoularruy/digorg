@@ -1,17 +1,15 @@
 //
-//  DKPlayerView.swift
-//  MediaCarousel
+//  MediaCarouselPlayerView.swift
 //
 //  Created by ZhangAo on 28/09/2017.
-//  Copyright © 2017 ZhangAo. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 
-private var DKPlayerViewKVOContext = 0
+private var MediaCarouselPlayerViewKVOContext = 0
 
-private class DKPlayerControlView: UIView {
+private class MediaCarouselControlView: UIView {
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitTestingView = super.hitTest(point, with: event)
@@ -20,7 +18,7 @@ private class DKPlayerControlView: UIView {
     
 }
 
-open class DKPlayerView: UIView {
+open class MediaCarouselPlayerView: UIView {
     
     public var url: URL? {
         
@@ -148,11 +146,7 @@ open class DKPlayerView: UIView {
     private let durationLabel = UILabel()
     private var tapGesture: UITapGestureRecognizer!
     private lazy var bufferingIndicator: UIActivityIndicatorView = {
-        #if swift(>=4.2)
-        return UIActivityIndicatorView(style: .gray)
-        #else
-        return UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        #endif
+        return UIActivityIndicatorView(style: .medium)
     }()
     
     private var playerLayer: AVPlayerLayer {
@@ -179,7 +173,7 @@ open class DKPlayerView: UIView {
         }
     }
     
-    private let controlView = DKPlayerControlView()
+    private let controlView = MediaCarouselControlView()
     
     private var autoPlayOrShowErrorOnce = false
     
@@ -671,11 +665,11 @@ open class DKPlayerView: UIView {
     
     private func addObservers(for playerItem: AVPlayerItem) {
 		try! AVAudioSession.sharedInstance().setCategory(.playback)
-        playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.duration), options: [.new, .initial], context: &DKPlayerViewKVOContext)
-        playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new, .initial], context: &DKPlayerViewKVOContext)
-        playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp), options: [.new, .initial], context: &DKPlayerViewKVOContext)
-        playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferEmpty), options: [.new, .initial], context: &DKPlayerViewKVOContext)
-        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.rate), options: [.new, .initial], context: &DKPlayerViewKVOContext)
+        playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.duration), options: [.new, .initial], context: &MediaCarouselPlayerViewKVOContext)
+        playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new, .initial], context: &MediaCarouselPlayerViewKVOContext)
+        playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp), options: [.new, .initial], context: &MediaCarouselPlayerViewKVOContext)
+        playerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferEmpty), options: [.new, .initial], context: &MediaCarouselPlayerViewKVOContext)
+        player.addObserver(self, forKeyPath: #keyPath(AVPlayer.rate), options: [.new, .initial], context: &MediaCarouselPlayerViewKVOContext)
         
         NotificationCenter.default.addObserver(self, selector: #selector(itemDidPlayToEndTime), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         
@@ -694,11 +688,11 @@ open class DKPlayerView: UIView {
     }
     
     private func removeObservers(for playerItem: AVPlayerItem) {
-        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.duration), context: &DKPlayerViewKVOContext)
-        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), context: &DKPlayerViewKVOContext)
-        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp), context: &DKPlayerViewKVOContext)
-        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferEmpty), context: &DKPlayerViewKVOContext)
-        self.player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.rate), context: &DKPlayerViewKVOContext)
+        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.duration), context: &MediaCarouselPlayerViewKVOContext)
+        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), context: &MediaCarouselPlayerViewKVOContext)
+        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp), context: &MediaCarouselPlayerViewKVOContext)
+        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferEmpty), context: &MediaCarouselPlayerViewKVOContext)
+        self.player.removeObserver(self, forKeyPath: #keyPath(AVPlayer.rate), context: &MediaCarouselPlayerViewKVOContext)
         
         NotificationCenter.default.removeObserver(self)
         
@@ -717,7 +711,7 @@ open class DKPlayerView: UIView {
     
     // Update our UI when player or `player.currentItem` changes.
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &DKPlayerViewKVOContext else {
+        guard context == &MediaCarouselPlayerViewKVOContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }

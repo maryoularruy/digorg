@@ -1,16 +1,14 @@
 //
-//  DKPhotoPlayerPreviewVC.swift
-//  MediaCarousel
+//  MediaCarouselPlayerPreviewVC.swift
 //
 //  Created by ZhangAo on 15/09/2017.
-//  Copyright © 2017 ZhangAo. All rights reserved.
 //
 
 import UIKit
 import AVKit
 import Photos
 
-open class DKPhotoPlayerPreviewVC: DKPhotoBasePreviewVC {
+open class MediaCarouselPlayerPreviewVC: MediaCarouselBasePreviewVC {
 
     public var closeBlock: (() -> Void)?
     
@@ -28,7 +26,7 @@ open class DKPhotoPlayerPreviewVC: DKPhotoBasePreviewVC {
         }
     }
 
-    private var playerView: DKPlayerView?
+    private var playerView: MediaCarouselPlayerView?
     
     deinit {
         self.playerView?.stop()
@@ -53,10 +51,10 @@ open class DKPhotoPlayerPreviewVC: DKPhotoBasePreviewVC {
         self.playerView?.reset()
     }
     
-    // MARK: - DKPhotoBasePreviewDataSource
+    // MARK: - MediaCarouselBasePreviewDataSource
     
     open override func createContentView() -> UIView {
-        self.playerView = DKPlayerView(controlParentView: self.view)
+        self.playerView = MediaCarouselPlayerView(controlParentView: self.view)
         return self.playerView!
     }
     
@@ -119,7 +117,7 @@ open class DKPhotoPlayerPreviewVC: DKPhotoBasePreviewVC {
         return false
     }
     
-    open override var previewType: DKPhotoPreviewType {
+    open override var previewType: MediaCarouselPreviewType {
         get { return .video }
     }
 }

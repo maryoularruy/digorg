@@ -10,9 +10,9 @@ import Foundation
 import Photos
 
 @objc
-extension DKPhotoBasePreviewVC {
+extension MediaCarouselBasePreviewVC {
     
-    @objc public class func photoPreviewClass(with item: MediaCarouselItem) -> DKPhotoBasePreviewVC.Type {
+    @objc public class func photoPreviewClass(with item: MediaCarouselItem) -> MediaCarouselBasePreviewVC.Type {
         if item.image != nil {
             return DKPhotoImagePreviewVC.self
             
@@ -21,7 +21,7 @@ extension DKPhotoBasePreviewVC {
             
         } else if let asset = item.asset {
             if asset.mediaType == .video {
-                return DKPhotoPlayerPreviewVC.self
+                return MediaCarouselPlayerPreviewVC.self
             } else {
                 return DKPhotoImagePreviewVC.self
             }
@@ -32,15 +32,15 @@ extension DKPhotoBasePreviewVC {
             return self.photoPreviewClass(with: item)
             
         } else if item.videoURL != nil {
-            return DKPhotoPlayerPreviewVC.self
+            return MediaCarouselPlayerPreviewVC.self
 
         } else {
             assertionFailure()
-            return DKPhotoBasePreviewVC.self
+            return MediaCarouselBasePreviewVC.self
         }
     }
     
-    @objc public class func photoPreviewVC(with item: MediaCarouselItem) -> DKPhotoBasePreviewVC {
+    @objc public class func photoPreviewVC(with item: MediaCarouselItem) -> MediaCarouselBasePreviewVC {
         let previewVC = self.photoPreviewClass(with: item).init()
         previewVC.item = item
         

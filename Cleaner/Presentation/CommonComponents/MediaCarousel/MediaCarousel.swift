@@ -163,7 +163,7 @@ MediaCarouselContentDataSource, MediaCarouselContentDelegate {
         return self.contentVC!.currentContentView
     }
     
-    @objc open func currentContentVC() -> DKPhotoBasePreviewVC {
+    @objc open func currentContentVC() -> MediaCarouselBasePreviewVC {
         return self.contentVC!.currentVC
     }
     
@@ -197,7 +197,7 @@ MediaCarouselContentDataSource, MediaCarouselContentDelegate {
         self.statusBar?.alpha = 1
         self.contentVC?.setFooterViewHidden(false, animated: false)
         
-        if let videoPreviewVCs = self.contentVC?.filterVisibleVCs(with: DKPhotoPlayerPreviewVC.self) {
+        if let videoPreviewVCs = self.contentVC?.filterVisibleVCs(with: MediaCarouselPlayerPreviewVC.self) {
             let _ = videoPreviewVCs.map { $0.isControlHidden = false }
         }
     }
@@ -207,7 +207,7 @@ MediaCarouselContentDataSource, MediaCarouselContentDelegate {
         self.statusBar?.alpha = 0
         self.contentVC?.setFooterViewHidden(true, animated: false)
         
-        if let videoPreviewVCs = self.contentVC?.filterVisibleVCs(with: DKPhotoPlayerPreviewVC.self) {
+        if let videoPreviewVCs = self.contentVC?.filterVisibleVCs(with: MediaCarouselPlayerPreviewVC.self) {
             let _ = videoPreviewVCs.map { $0.isControlHidden = true }
         }
     }
@@ -226,14 +226,14 @@ MediaCarouselContentDataSource, MediaCarouselContentDelegate {
         }
     }
     
-    private func setup(previewVC: DKPhotoBasePreviewVC) {
+    private func setup(previewVC: MediaCarouselBasePreviewVC) {
         previewVC.customLongPressActions = self.customLongPressActions
         previewVC.customPreviewActions = self.customPreviewActions
         previewVC.singleTapBlock = { [weak self] in
             self?.handleSingleTap()
         }
         
-        if previewVC.previewType == .video, let videoPreviewVC = previewVC as? DKPhotoPlayerPreviewVC {
+        if previewVC.previewType == .video, let videoPreviewVC = previewVC as? MediaCarouselPlayerPreviewVC {
             if self.singleTapMode == .dismiss {
                 videoPreviewVC.closeBlock = { [weak self] in
                     self?.dismissGallery()

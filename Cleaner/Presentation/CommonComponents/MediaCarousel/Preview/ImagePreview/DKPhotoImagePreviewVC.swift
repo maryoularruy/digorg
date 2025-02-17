@@ -157,13 +157,13 @@ class DKPhotoImagePreviewVC: DKPhotoBaseImagePreviewVC {
                                progressBlock: @escaping ((_ progress: Float) -> Void),
                                completeBlock: @escaping ((_ data: Any?, _ error: Error?) -> Void)) {
         var key = ""
-        var downloader: DKPhotoImageDownloader! = nil
+        var downloader: MediaCarouselImageDownloader! = nil
         if let URL = identifier as? URL {
             key = URL.absoluteString
-            downloader = DKPhotoImageWebDownloader.downloader()
+            downloader = MediaCarouselImageWebDownloader.downloader()
         } else if let asset = identifier as? PHAsset {
             key = asset.localIdentifier
-            downloader = DKPhotoImageAssetDownloader.downloader()
+            downloader = MediaCarouselImageAssetDownloader.downloader()
         } else {
             assertionFailure()
         }
@@ -191,7 +191,7 @@ class DKPhotoImagePreviewVC: DKPhotoBaseImagePreviewVC {
         }
     }
     
-    // MARK: - DKPhotoBasePreviewDataSource
+    // MARK: - MediaCarouselBasePreviewDataSource
     
     override func photoPreviewWillAppear() {
         super.photoPreviewWillAppear()

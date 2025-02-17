@@ -34,7 +34,7 @@ open class MediaCarouselTransitionDismiss: NSObject, UIViewControllerAnimatedTra
             
             self.gallery.currentContentView().isHidden = true
         } else if (self.gallery.currentContentVC().previewType == .video) {
-            let playerView = self.gallery.currentContentView() as! DKPlayerView
+            let playerView = self.gallery.currentContentView() as! MediaCarouselPlayerView
             playerView.autoresizingMask = []
             let frame = self.gallery.currentContentView().superview!.convert(playerView.frame, to: nil)
             

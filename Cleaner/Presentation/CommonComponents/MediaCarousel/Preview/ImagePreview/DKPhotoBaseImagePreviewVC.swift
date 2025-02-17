@@ -9,8 +9,8 @@
 import UIKit
 import Photos
 
-open class DKPhotoBaseImagePreviewVC: DKPhotoBasePreviewVC {
-    // MARK: - DKPhotoBasePreviewDataSource
+open class DKPhotoBaseImagePreviewVC: MediaCarouselBasePreviewVC {
+    // MARK: - MediaCarouselBasePreviewDataSource
     
     override public func createContentView() -> UIView {
         let contentView = DKPhotoImageView()

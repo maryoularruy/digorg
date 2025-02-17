@@ -63,7 +63,7 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
     internal weak var delegate: MediaCarouselContentDelegate?
     
     public var pageChangeBlock: ((_ index: Int) -> Void)?
-    public var prepareToShow: ((_ previewVC: DKPhotoBasePreviewVC) -> Void)?
+    public var prepareToShow: ((_ previewVC: MediaCarouselBasePreviewVC) -> Void)?
     
     open var currentIndex = 0 {
         didSet {
@@ -71,7 +71,7 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    public var currentVC: DKPhotoBasePreviewVC {
+    public var currentVC: MediaCarouselBasePreviewVC {
         get { return self.visibleVCs[self.dataSource.item(for: self.currentIndex)]! }
     }
     
@@ -80,8 +80,8 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
     }
     
     private let mainView = MediaCarouselScrollView()
-    private var reuseableVCs: [ObjectIdentifier : [DKPhotoBasePreviewVC] ] = [:] // DKPhotoBasePreviewVC.Type : [DKPhotoBasePreviewVC]
-    private var visibleVCs: [MediaCarouselItem : DKPhotoBasePreviewVC] = [:]
+    private var reuseableVCs: [ObjectIdentifier : [MediaCarouselBasePreviewVC] ] = [:] // DKPhotoBasePreviewVC.Type : [DKPhotoBasePreviewVC]
+    private var visibleVCs: [MediaCarouselItem : MediaCarouselBasePreviewVC] = [:]
     
     open var footerView: UIView? {
         didSet {
@@ -286,13 +286,13 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    private func previewVC(for item: MediaCarouselItem) -> DKPhotoBasePreviewVC {
+    private func previewVC(for item: MediaCarouselItem) -> MediaCarouselBasePreviewVC {
         if let vc = self.visibleVCs[item] {
             return vc
         }
         
-        let previewVCClass = DKPhotoBasePreviewVC.photoPreviewClass(with: item)
-        var previewVC: DKPhotoBasePreviewVC! = self.findPreviewVC(for: previewVCClass)
+        let previewVCClass = MediaCarouselBasePreviewVC.photoPreviewClass(with: item)
+        var previewVC: MediaCarouselBasePreviewVC! = self.findPreviewVC(for: previewVCClass)
         if previewVC == nil {
             previewVC = previewVCClass.init()
         } else {
@@ -308,7 +308,7 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
         return previewVC
     }
     
-    private func findPreviewVC(for vcClass: DKPhotoBasePreviewVC.Type) -> DKPhotoBasePreviewVC? {
+    private func findPreviewVC(for vcClass: MediaCarouselBasePreviewVC.Type) -> MediaCarouselBasePreviewVC? {
         let classKey = ObjectIdentifier(vcClass)
         return self.reuseableVCs[classKey]?.popLast()
     }
@@ -322,7 +322,7 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    private func addToReuseQueue(vc: DKPhotoBasePreviewVC) {
+    private func addToReuseQueue(vc: MediaCarouselBasePreviewVC) {
         let classKey = ObjectIdentifier(type(of: vc))
         var queue = self.reuseableVCs[classKey] ?? []
         
@@ -338,9 +338,9 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
         
         [DKPhotoImagePreviewVC(),
          DKPhotoImagePreviewVC(),
-         DKPhotoPlayerPreviewVC(),
-         DKPhotoPlayerPreviewVC(),
-         self.currentVC.previewType == .photo ? DKPhotoPlayerPreviewVC() : DKPhotoImagePreviewVC()]
+         MediaCarouselPlayerPreviewVC(),
+         MediaCarouselPlayerPreviewVC(),
+         self.currentVC.previewType == .photo ? MediaCarouselPlayerPreviewVC() : DKPhotoImagePreviewVC()]
             
             .forEach { (previewVC) in
                 previewVC.view.isHidden = true
