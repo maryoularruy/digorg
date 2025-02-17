@@ -15,16 +15,15 @@ final class SecretContactsViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var contactsTableView: UITableView!
+    @IBOutlet weak var toolbar: ActionToolbar!
     
     private lazy var contacts: [CNContact] = [] {
         didSet {
             itemsCountLabel.bind(text: "\(contacts.count) contact\(contacts.count == 1 ? "" : "s")")
-            selectionButton.isClickable = !contacts.isEmpty
             contactsTableView.reloadData()
             if contacts.isEmpty {
                 setupEmptyState()
             } else {
-                selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
                 hideEmptyState()
             }
         }
@@ -33,8 +32,9 @@ final class SecretContactsViewController: UIViewController {
     private var contactsForDeletion = Set<CNContact>() {
         didSet {
             selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
-//            toolbar.toolbarButton.bind(text: "Delete\(contactsForDeletion.isEmpty ? "" : " Selected (\(contactsForDeletion.count))")")
-//            toolbar.toolbarButton.isClickable = !contactsForDeletion.isEmpty
+            toolbar.isHidden = contactsForDeletion.isEmpty
+            toolbar.toolbarButton.bind(text: "Delete Contact\(contactsForDeletion.count == 1 ? "" : "s") (\(contactsForDeletion.count))")
+            addButton.isHidden = !contactsForDeletion.isEmpty
             contactsTableView.reloadData()
         }
     }
@@ -57,33 +57,20 @@ final class SecretContactsViewController: UIViewController {
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
-        if userDefaultsService.isPasscodeCreated {
-            if userDefaultsService.isPasscodeConfirmed {
-                let vc = StoryboardScene.AllContacts.initialScene.instantiate()
-                vc.modalPresentationStyle = .overCurrentContext
-                navigationController?.pushViewController(vc, animated: true)
+        if userDefaultsService.isPasscodeTurnOn {
+            
+            if userDefaultsService.isPasscodeCreated {
+                if userDefaultsService.isPasscodeConfirmed {
+                    importContacts()
+                } else {
+                    openPasscodeVC(.enter)
+                }
             } else {
-                let vc = StoryboardScene.Passcode.initialScene.instantiate()
-                vc.assetsIsParentVC = false
-                vc.passcodeMode = .enter
-                vc.modalTransitionStyle = .crossDissolve
-                vc.modalPresentationStyle = .fullScreen
-                navigationController?.pushViewController(vc, animated: true)
+                openPasscodeVC(.create)
             }
+            
         } else {
-            let vc = StoryboardScene.Passcode.initialScene.instantiate()
-            vc.passcodeMode = .create
-            vc.assetsIsParentVC = false
-            vc.modalPresentationStyle = .fullScreen
-            navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
-    @IBAction func tapOnSelectionButton(_ sender: Any) {
-        if contactsForDeletion.count == contacts.count {
-            contactsForDeletion.removeAll()
-        } else {
-            contactsForDeletion.insert(contacts)
+            importContacts()
         }
     }
     
@@ -109,6 +96,7 @@ final class SecretContactsViewController: UIViewController {
         contactsTableView.isHidden = true
         itemsCountLabel.bind(text: "0 contacts")
         selectionButton.isHidden = true
+        toolbar.isHidden = true
     }
     
     private func setupEmptyState() {
@@ -130,16 +118,34 @@ final class SecretContactsViewController: UIViewController {
         selectionButton.isHidden = false
         selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
         
-        addButton.isHidden = false
+        toolbar.isHidden = contactsForDeletion.isEmpty
+        toolbar.toolbarButton.bind(text: "Delete Contact\(contactsForDeletion.count == 1 ? "" : "s") (\(contactsForDeletion.count))")
+        addButton.isHidden = !contactsForDeletion.isEmpty
         
         emptyStateView?.removeFromSuperview()
         emptyStateView = nil
+    }
+    
+    private func importContacts() {
+        let vc = StoryboardScene.AllContacts.initialScene.instantiate()
+        vc.modalPresentationStyle = .overCurrentContext
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func openPasscodeVC(_ passcodeMode: PasscodeMode) {
+        let vc = StoryboardScene.Passcode.initialScene.instantiate()
+        vc.passcodeMode = passcodeMode
+        vc.assetsIsParentVC = false
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension SecretContactsViewController: ViewControllerProtocol {
     func setupUI() {
         contactsTableView.register(cellType: ItemCell.self)
+        selectionButton.delegate = self
+        toolbar.delegate = self
     }
     
     func addGestureRecognizers() {
@@ -152,6 +158,23 @@ extension SecretContactsViewController: ViewControllerProtocol {
         view.addGestureRecognizer(swipeRightGesture)
     }
 }
+
+extension SecretContactsViewController: SelectionButtonDelegate {
+    func tapOnButton() {
+        if contactsForDeletion.count == contacts.count {
+            contactsForDeletion.removeAll()
+        } else {
+            contactsForDeletion.insert(contacts)
+        }
+    }
+}
+
+extension SecretContactsViewController: ActionToolbarDelegate {
+    func tapOnActionButton() {
+        
+    }
+}
+
 
 extension SecretContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
