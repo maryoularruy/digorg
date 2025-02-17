@@ -43,7 +43,6 @@ final class SecretContactsViewController: UIViewController {
     
     private lazy var userDefaultsService = UserDefaultsService.shared
     private lazy var contactManager = ContactManager.shared
-    private lazy var folderName = userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,6 +143,8 @@ final class SecretContactsViewController: UIViewController {
 extension SecretContactsViewController: ViewControllerProtocol {
     func setupUI() {
         contactsTableView.register(cellType: ItemCell.self)
+        contactsTableView.contentInset.bottom = 100
+        contactsTableView.showsVerticalScrollIndicator = false
         selectionButton.delegate = self
         toolbar.delegate = self
     }
@@ -171,7 +172,16 @@ extension SecretContactsViewController: SelectionButtonDelegate {
 
 extension SecretContactsViewController: ActionToolbarDelegate {
     func tapOnActionButton() {
+        contactsForDeletion.forEach { contactForDeletetion in
+            if let index = contacts.firstIndex(where: { $0.identifier == contactForDeletetion.identifier } ) {
+                contacts.remove(at: index)
+            }
+        }
         
+        contactManager.saveSecretContacts(contacts, removeFromGallery: false, cleanBeforeSaving: true)
+        
+        contactsForDeletion.removeAll()
+        reloadData()
     }
 }
 

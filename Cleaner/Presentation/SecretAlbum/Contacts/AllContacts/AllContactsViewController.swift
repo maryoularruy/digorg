@@ -15,8 +15,6 @@ final class AllContactsViewController: UIViewController {
     @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var toolbar: ActionToolbar!
     
-    private lazy var contactManager = ContactManager.shared
-    
     private lazy var sections: [CNContactSection] = [] {
         didSet {
             contactsCountLabel.bind(text: "\(allContactsCount) contact\(allContactsCount == 1 ? "" : "s")")
@@ -44,6 +42,9 @@ final class AllContactsViewController: UIViewController {
     private var allContactsCount: Int {
         sections.reduce(0) { $0 + $1.contacts.count }
     }
+    
+    private lazy var contactManager = ContactManager.shared
+    private lazy var userDefaultsService = UserDefaultsService.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,7 +172,7 @@ extension AllContactsViewController: ActionToolbarDelegate {
         if sections.isEmpty {
             navigationController?.popViewController(animated: true)
         } else {
-            contactManager.importSecretContacts(Array(contactsForImport))
+            contactManager.saveSecretContacts(Array(contactsForImport), removeFromGallery: userDefaultsService.isRemoveContactsAfterImport, cleanBeforeSaving: false)
             navigationController?.popViewController(animated: true)
         }
     }

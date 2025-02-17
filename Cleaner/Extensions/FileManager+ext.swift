@@ -46,10 +46,10 @@ extension FileManager {
         return url.appendingPathComponent(folderName)
     }
     
-    private func clear(contentsOf directory: URL) throws {
+    private func clear(contentsOf directory: URL) {
         do {
             try contentsOfDirectory(at: directory, includingPropertiesForKeys: []).forEach(removeItem)
-        }
+        } catch {}
     }
 }
 
@@ -146,11 +146,15 @@ extension FileManager {
         return convertDataToContacts(url)
     }
     
-    func saveSecretContacts(_ contacts: [CNContact]) {
+    func saveSecretContacts(_ contacts: [CNContact], cleanBeforeSaving: Bool = false) {
         let folderName = UserDefaultsService.shared.get(String.self, key: .secretContactsFolder) ?? "contacts"
         createFolderIfNeeded(folderName: folderName, isMedia: false)
         
         guard let url = FileManager.default.getURLForFolder(folderName: folderName) else { return }
+        
+        if cleanBeforeSaving {
+            clear(contentsOf: url)
+        }
         
         if let fileName = UserDefaultsService.shared.get(String.self, key: .secretContactsFile) {
             
