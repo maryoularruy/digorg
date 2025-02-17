@@ -185,7 +185,7 @@ final class ContactManager {
         return nil
     }
     
-    static func getSecretContacts() -> [CNContact]? {
+    func getSecretContacts() -> [CNContact]? {
         FileManager.default.getSecretContacts()
     }
     

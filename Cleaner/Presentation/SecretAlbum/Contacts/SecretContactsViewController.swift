@@ -40,18 +40,20 @@ final class SecretContactsViewController: UIViewController {
     }
     
     private lazy var emptyStateView: EmptyStateView? = nil
+    
     private lazy var userDefaultsService = UserDefaultsService.shared
+    private lazy var contactManager = ContactManager.shared
+    private lazy var folderName = userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        contactsTableView.register(cellType: ItemCell.self)
+        setupUI()
         addGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupUI()
-        reloadData()
+        updateUI()
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
@@ -85,12 +87,35 @@ final class SecretContactsViewController: UIViewController {
         }
     }
     
+    private func updateUI() {
+        lockedStatusIcon.image = userDefaultsService.isPasscodeCreated && userDefaultsService.isPasscodeTurnOn ? .locked :  .unlocked
+        
+        if userDefaultsService.isPasscodeTurnOn {
+            if userDefaultsService.isPasscodeConfirmed {
+                reloadData()
+            } else {
+                showSecretAlbumCover()
+            }
+        } else {
+            reloadData()
+        }
+    }
+    
     private func reloadData() {
-        contacts = ContactManager.getSecretContacts() ?? []
+        contacts = contactManager.getSecretContacts() ?? []
+    }
+    
+    private func showSecretAlbumCover() {
+        contactsTableView.isHidden = true
+        itemsCountLabel.bind(text: "0 contacts")
+        selectionButton.isHidden = true
     }
     
     private func setupEmptyState() {
-        selectionButton.bind(text: .selectAll)
+        contactsTableView.isHidden = true
+        itemsCountLabel.bind(text: "0 contacts")
+        selectionButton.isHidden = true
+        
         emptyStateView?.removeFromSuperview()
         emptyStateView = view.createEmptyState(type: .emptySecretContacts)
         if let emptyStateView {
@@ -99,7 +124,14 @@ final class SecretContactsViewController: UIViewController {
     }
     
     private func hideEmptyState() {
+        contactsTableView.isHidden = false
         contactsTableView.reloadData()
+        
+        selectionButton.isHidden = false
+        selectionButton.bind(text: contactsForDeletion.count == contacts.count ? .deselectAll : .selectAll)
+        
+        addButton.isHidden = false
+        
         emptyStateView?.removeFromSuperview()
         emptyStateView = nil
     }
@@ -107,7 +139,7 @@ final class SecretContactsViewController: UIViewController {
 
 extension SecretContactsViewController: ViewControllerProtocol {
     func setupUI() {
-        lockedStatusIcon.image = userDefaultsService.isPasscodeCreated ? .locked :  .unlocked
+        contactsTableView.register(cellType: ItemCell.self)
     }
     
     func addGestureRecognizers() {
@@ -129,6 +161,7 @@ extension SecretContactsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
         cell.delegate = self
+        cell.setupSingleCellInSection()
         cell.bind(contact: contacts[indexPath.row], indexPath.row)
         
         cell.checkBoxButton.image = contactsForDeletion.contains(contacts[indexPath.row]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
