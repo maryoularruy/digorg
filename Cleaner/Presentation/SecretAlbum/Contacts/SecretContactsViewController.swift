@@ -212,6 +212,14 @@ extension SecretContactsViewController: UITableViewDelegate, UITableViewDataSour
 
 extension SecretContactsViewController: ItemCellProtocol {
     func tapOnCheckBox(_ position: (Int, Int)) {
+        removeOrAddContact(position: position)
+    }
+    
+    func tapOnCell(_ position: (Int, Int)) {
+        removeOrAddContact(position: position)
+    }
+    
+    func removeOrAddContact(position: (Int, Int)) {
         let contact = contacts[position.1]
         if contactsForDeletion.contains(contact) {
             contactsForDeletion.remove(contact)
@@ -219,6 +227,4 @@ extension SecretContactsViewController: ItemCellProtocol {
             contactsForDeletion.insert(contact)
         }
     }
-    
-    func tapOnCell(_ position: (Int, Int)) {}
 }

@@ -58,16 +58,6 @@ final class AllContactsViewController: UIViewController {
         reloadData()
     }
     
-    @IBAction func tapOnSelectionButton(_ sender: Any) {
-        if contactsForImport.count == allContactsCount {
-            contactsForImport.removeAll()
-        } else {
-            var contacts: [CNContact] = []
-            sections.forEach { contacts.append(contentsOf: $0.contacts) }
-            contactsForImport.insert(contacts)
-        }
-    }
-    
     private func reloadData() {
         contactManager.loadAllContacts { contacts in
             self.sections = contacts
@@ -92,13 +82,43 @@ final class AllContactsViewController: UIViewController {
 
 extension AllContactsViewController: ViewControllerProtocol {
     func setupUI() {
-        toolbar.delegate = self
         contactsTableView.register(cellType: ItemCell.self)
+        contactsTableView.contentInset.bottom = 100
+        contactsTableView.showsVerticalScrollIndicator = false
+        selectionButton.delegate = self
+        toolbar.delegate = self
     }
     
     func addGestureRecognizers() {
         arrowBackView.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
+        }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
+    }
+}
+
+extension AllContactsViewController: SelectionButtonDelegate {
+    func tapOnButton() {
+        if contactsForImport.count == allContactsCount {
+            contactsForImport.removeAll()
+        } else {
+            var contacts: [CNContact] = []
+            sections.forEach { contacts.append(contentsOf: $0.contacts) }
+            contactsForImport.insert(contacts)
+        }
+    }
+}
+
+extension AllContactsViewController: ActionToolbarDelegate {
+    func tapOnActionButton() {
+        if sections.isEmpty {
+            navigationController?.popViewController(animated: true)
+        } else {
+            contactManager.saveSecretContacts(Array(contactsForImport), removeFromGallery: userDefaultsService.isRemoveContactsAfterImport, cleanBeforeSaving: false)
+            navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -164,16 +184,5 @@ extension AllContactsViewController: ItemCellProtocol {
     
     func tapOnCell(_ position: (Int, Int)) {
         presentContact(contact: sections[position.0].contacts[position.1])
-    }
-}
-
-extension AllContactsViewController: ActionToolbarDelegate {
-    func tapOnActionButton() {
-        if sections.isEmpty {
-            navigationController?.popViewController(animated: true)
-        } else {
-            contactManager.saveSecretContacts(Array(contactsForImport), removeFromGallery: userDefaultsService.isRemoveContactsAfterImport, cleanBeforeSaving: false)
-            navigationController?.popViewController(animated: true)
-        }
     }
 }
