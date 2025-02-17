@@ -1,23 +1,24 @@
 //
-//  DuplicatesTableViewCell.swift
+//  DuplicateNamesTableViewCell.swift
 //  Cleaner
 //
-//  Created by Elena Sedunova on 25.12.2024.
+//  Created by Elena Sedunova on 17.02.2025.
 //
 
 import UIKit
 import Contacts
+import Reusable
 
-protocol DuplicatesTableViewCellDelegate: AnyObject {
+protocol DuplicateNamesTableViewCellDelegate: AnyObject {
     func tapOnSelectButton(row: Int)
     func tapOnCheckBox(selectedContacts: [CNContact], row: Int)
     func tapOnCell(contact: CNContact)
     func tapOnMergeContacts(contactsForMerge: [CNContact], row: Int)
 }
 
-final class DuplicatesTableViewCell: UITableViewCell {
-    static var identifier = "DuplicatesTableViewCell"
-    weak var delegate: DuplicatesTableViewCellDelegate?
+final class DuplicateNamesTableViewCell: UITableViewCell, Reusable {
+    static var identifier = "DuplicateNamesTableViewCell"
+    weak var delegate: DuplicateNamesTableViewCellDelegate?
     
     private lazy var duplicateNumberLabel: Semibold15LabelStyle = Semibold15LabelStyle()
     lazy var selectionButton: SelectionTransparentButtonStyle = SelectionTransparentButtonStyle()
@@ -79,10 +80,10 @@ final class DuplicatesTableViewCell: UITableViewCell {
         self.contacts = contacts
         self.contactsForMerge = contactsForMerge
         self.position = position
-        if let number = contactManager.findDuplicatedNumber(contacts) {
-            duplicateNumber = number
-            duplicateNumberLabel.bind(text: number)
-        }
+//        if let number = contactManager.findDuplicatedNumber(contacts) {
+//            duplicateNumber = number
+//            duplicateNumberLabel.bind(text: number)
+//        }
         selectionButton.bind(text: contactsForMerge.count == contacts.count ? .deselectAll : .selectAll)
         duplicatesListTableView.reloadData()
         containerForInnerTableViewHeight.constant = (DuplicatesListCell.HEIGHT * Double(contacts.count)) + DuplicatesListCell.LAST_CELL_BOTTOM_CONSTRAINT
@@ -145,7 +146,7 @@ final class DuplicatesTableViewCell: UITableViewCell {
     }
 }
 
-extension DuplicatesTableViewCell: DuplicatesListCellDelegate {
+extension DuplicateNamesTableViewCell: DuplicatesListCellDelegate {
     func tapOnCell(contact: CNContact) {
         delegate?.tapOnCell(contact: contact)
     }
@@ -155,7 +156,7 @@ extension DuplicatesTableViewCell: DuplicatesListCellDelegate {
     }
 }
 
-extension DuplicatesTableViewCell: UITableViewDelegate, UITableViewDataSource {
+extension DuplicateNamesTableViewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         contacts.count
     }

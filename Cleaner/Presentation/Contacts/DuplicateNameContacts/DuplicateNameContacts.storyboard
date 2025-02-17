@@ -50,7 +50,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xge-Oo-nOS">
-                                <rect key="frame" x="16" y="174" width="361" height="644"/>
+                                <rect key="frame" x="0.0" y="174" width="393" height="678"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="cva-ai-5LW"/>
@@ -78,10 +78,10 @@
                             <constraint firstItem="adP-Ie-DuI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="86I-37-cJU"/>
                             <constraint firstItem="adP-Ie-DuI" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="HSd-c0-WgL"/>
                             <constraint firstItem="CbR-7W-sDH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="JhQ-Ui-ICW"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xge-Oo-nOS" secondAttribute="trailing" constant="16" id="Lhl-R4-izF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xge-Oo-nOS" secondAttribute="trailing" id="Lhl-R4-izF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3ue-yE-53G" secondAttribute="trailing" constant="16" id="RLk-wK-ESX"/>
                             <constraint firstItem="xge-Oo-nOS" firstAttribute="top" secondItem="odr-cq-nVd" secondAttribute="bottom" constant="14" id="ROA-Fp-smE"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="xge-Oo-nOS" secondAttribute="bottom" id="Sot-uf-bRC"/>
+                            <constraint firstAttribute="bottom" secondItem="xge-Oo-nOS" secondAttribute="bottom" id="Sot-uf-bRC"/>
                             <constraint firstItem="odr-cq-nVd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="TnW-JD-dnk"/>
                             <constraint firstAttribute="bottom" secondItem="CbR-7W-sDH" secondAttribute="bottom" id="UnR-nY-Dic"/>
                             <constraint firstItem="ClE-fA-3z3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Y68-vo-QZ1"/>
@@ -89,7 +89,7 @@
                             <constraint firstItem="odr-cq-nVd" firstAttribute="top" secondItem="ClE-fA-3z3" secondAttribute="bottom" constant="6" id="e8K-ek-xtf"/>
                             <constraint firstItem="x5d-Ne-Os9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="iLQ-OU-CjO"/>
                             <constraint firstAttribute="bottom" secondItem="adP-Ie-DuI" secondAttribute="bottom" id="tYP-l7-KfZ"/>
-                            <constraint firstItem="xge-Oo-nOS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="wZQ-Pv-dwi"/>
+                            <constraint firstItem="xge-Oo-nOS" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="wZQ-Pv-dwi"/>
                             <constraint firstItem="x5d-Ne-Os9" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="yk1-Vh-Dzd"/>
                         </constraints>
                     </view>

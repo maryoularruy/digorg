@@ -31,7 +31,7 @@ final class DuplicateNameContactsViewController: UIViewController {
         }
     }
     
-    private lazy var contactsForMerge = Set<[CNContact]>() {
+    private lazy var contactsForMerge = [Int: [CNContact]]() {
         didSet {
             selectionButton.bind(text: contactGroups.count == contactsForMerge.count ? .deselectAll : .selectAll)
             unresolvedContactsCount.text = "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")"
@@ -58,7 +58,6 @@ final class DuplicateNameContactsViewController: UIViewController {
 
     private func setupUnresolvedContactsTableView() {
         unresolvedContactsCount.bind(text: "\(contactGroups.count) contact\(contactGroups.count == 1 ? "" : "s")")
-        unresolvedContactsTableView.register(cellType: ItemCell.self)
     }
     
     private func refreshData() {
@@ -77,85 +76,10 @@ final class DuplicateNameContactsViewController: UIViewController {
     }
 }
 
-extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        contactGroups[section].count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
-        cell.delegate = self
-        cell.bind(contact: contactGroups[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
-        if indexPath.row == 0 {
-            cell.setupFirstCellInSection()
-        } else if indexPath.row == contactGroups[indexPath.section].count - 1 {
-            cell.setupLastCellInSection()
-        } else {
-            cell.setupMiddleCellInSection()
-        }
-        
-        cell.content.backgroundColor = contactsForMerge.contains(contactGroups[indexPath.section]) ? .lightBlue : .clear
-        cell.checkBoxButton.image = contactsForMerge.contains(contactGroups[indexPath.section]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
-        
-        cell.bind(contact: contactGroups[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        86
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        contactGroups.count
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = ItemCellHeader()
-        header.delegate = self
-        header.bind(section: section)
-        header.firstLabel.bind(text: "\(contactGroups[section].count) duplicates")
-        header.selectAllButton.bind(text: contactsForMerge.contains(contactGroups[section]) ? .deselectAll : .selectAll)
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        34
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        UIView()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        24
-    }
-}
-
-extension DuplicateNameContactsViewController: ItemCellProtocol, HeaderSelectAllButtonDelegate {
-    func tapOnCheckBox(_ position: (Int, Int)) {
-        let duplicateContacts = contactGroups[position.0]
-        if contactsForMerge.contains(duplicateContacts) {
-            contactsForMerge.remove(duplicateContacts)
-        } else {
-            contactsForMerge.insert(duplicateContacts)
-        }
-    }
-    
-    func tapOnCell(_ position: (Int, Int)) {
-        presentContact(contact: contactGroups[position.0][position.1])
-    }
-    
-    func tapOnSelectAllButton(_ section: Int) {
-        if contactsForMerge.contains(contactGroups[section]) {
-            contactsForMerge.remove(contactGroups[section])
-        } else {
-            contactsForMerge.insert(contactGroups[section])
-        }
-    }
-}
-
 extension DuplicateNameContactsViewController: ViewControllerProtocol {
     func setupUI() {
+        unresolvedContactsTableView.register(cellType: DuplicateNamesTableViewCell.self)
+        unresolvedContactsTableView.contentInset.bottom = 160
         selectionButton.delegate = self
         toolbar.delegate = self
     }
@@ -176,8 +100,12 @@ extension DuplicateNameContactsViewController: SelectionButtonDelegate {
         if contactsForMerge.count == contactGroups.count {
             contactsForMerge.removeAll()
         } else {
-            contactsForMerge.insert(contactGroups)
+            contactsForMerge.removeAll()
+            for i in 0..<contactGroups.count {
+                contactsForMerge[i] = contactGroups[i]
+            }
         }
+        unresolvedContactsTableView.reloadData()
     }
 }
 
@@ -200,7 +128,7 @@ extension DuplicateNameContactsViewController: ActionAndCancelToolbarDelegate, B
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         if newValue == 100 {
-            contactsForMerge.forEach { contactManager.merge($0) { [weak self] result in
+            contactsForMerge.forEach { contactManager.merge($0.value) { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case true:
@@ -239,5 +167,107 @@ extension DuplicateNameContactsViewController: ActionToolbarDelegate {
         emptyStateToolbar.toolbarButton.bind(text: "Back")
         emptyStateToolbar.delegate = self
         emptyStateToolbar.isHidden = false
+    }
+}
+
+extension DuplicateNameContactsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        contactGroups[section].count
+        contactGroups.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DuplicateNamesTableViewCell.identifier, for: indexPath) as! DuplicateNamesTableViewCell
+        cell.delegate = self
+        cell.bind(contactGroups[indexPath.row], position: indexPath.row, contactsForMerge: contactsForMerge[indexPath.row] ?? [])
+        return cell
+        
+        
+//        let cell = tableView.dequeueReusableCell(for: indexPath) as ItemCell
+//        cell.delegate = self
+//        cell.bind(contact: contactGroups[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
+//        if indexPath.row == 0 {
+//            cell.setupFirstCellInSection()
+//        } else if indexPath.row == contactGroups[indexPath.section].count - 1 {
+//            cell.setupLastCellInSection()
+//        } else {
+//            cell.setupMiddleCellInSection()
+//        }
+//        
+//        cell.content.backgroundColor = contactsForMerge.contains(contactGroups[indexPath.section]) ? .lightBlue : .clear
+//        cell.checkBoxButton.image = contactsForMerge.contains(contactGroups[indexPath.section]) ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
+//        
+//        cell.bind(contact: contactGroups[indexPath.section][indexPath.row], (indexPath.section, indexPath.row))
+//        return cell
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        86
+//    }
+//    
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        contactGroups.count
+//    }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let header = ItemCellHeader()
+//        header.delegate = self
+//        header.bind(section: section)
+//        header.firstLabel.bind(text: "\(contactGroups[section].count) duplicates")
+//        header.selectAllButton.bind(text: contactsForMerge.contains(contactGroups[section]) ? .deselectAll : .selectAll)
+//        return header
+//    }
+//    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        34
+//    }
+//    
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        UIView()
+//    }
+//    
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        24
+//    }
+}
+//
+//extension DuplicateNameContactsViewController: ItemCellProtocol, HeaderSelectAllButtonDelegate {
+//    func tapOnCheckBox(_ position: (Int, Int)) {
+//        let duplicateContacts = contactGroups[position.0]
+//        if contactsForMerge.contains(duplicateContacts) {
+//            contactsForMerge.remove(duplicateContacts)
+//        } else {
+//            contactsForMerge.insert(duplicateContacts)
+//        }
+//    }
+//    
+//    func tapOnCell(_ position: (Int, Int)) {
+//        presentContact(contact: contactGroups[position.0][position.1])
+//    }
+//    
+//    func tapOnSelectAllButton(_ section: Int) {
+//        if contactsForMerge.contains(contactGroups[section]) {
+//            contactsForMerge.remove(contactGroups[section])
+//        } else {
+//            contactsForMerge.insert(contactGroups[section])
+//        }
+//    }
+//}
+
+extension DuplicateNameContactsViewController: DuplicateNamesTableViewCellDelegate {
+    func tapOnSelectButton(row: Int) {
+        
+    }
+    
+    func tapOnCheckBox(selectedContacts: [CNContact], row: Int) {
+        
+    }
+    
+    func tapOnCell(contact: CNContact) {
+        
+    }
+    
+    func tapOnMergeContacts(contactsForMerge: [CNContact], row: Int) {
+        
     }
 }

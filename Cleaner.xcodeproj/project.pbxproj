@@ -303,6 +303,7 @@
 		A573446E2D3579B600A4F3DF /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A57348F42D3B396000A4F3DF /* Passcode */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Passcode; sourceTree = "<group>"; };
 		A57348F72D3EA5F500A4F3DF /* SecurityQuestion */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SecurityQuestion; sourceTree = "<group>"; };
+		A58ABE8F2D639D750056F0E9 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A598A0712CEC9CB1002F346E /* Store */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Store; sourceTree = "<group>"; };
 		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
@@ -355,6 +356,7 @@
 		7532F8612AE29707007469EA /* DuplicateNameContacts */ = {
 			isa = PBXGroup;
 			children = (
+				A58ABE8F2D639D750056F0E9 /* Components */,
 				7532F8672AE29750007469EA /* DuplicateNameContacts.storyboard */,
 				7532F8692AE29758007469EA /* DuplicateNameContactsViewController.swift */,
 			);
@@ -868,6 +870,7 @@
 				A573446E2D3579B600A4F3DF /* Components */,
 				A57348F42D3B396000A4F3DF /* Passcode */,
 				A57348F72D3EA5F500A4F3DF /* SecurityQuestion */,
+				A58ABE8F2D639D750056F0E9 /* Components */,
 				A598A0712CEC9CB1002F346E /* Store */,
 				A5B4237C2CC7F3CB00EF8FE4 /* Components */,
 				A5C4CF792CB8AEA3002B3C41 /* Styles */,
