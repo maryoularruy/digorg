@@ -179,37 +179,18 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(for: indexPath) as DuplicateTableViewCell
-        cell.setupData(assets: assetGroups[indexPath.item].assets)
-		cell.onTap = { [weak self] assets, index in
-			guard let self = self else { return }
-			let gallery = DKPhotoGallery()
-			gallery.singleTapMode = .dismiss
-			var dkarr = [DKPhotoGalleryItem]()
-            assets.forEach { asset in
-				dkarr.append(DKPhotoGalleryItem(asset: asset))
-			}
-			gallery.items = dkarr
-			gallery.presentationIndex = index
-			present(photoGallery: gallery)
-		}
-		cell.onTapCheckBox = { [weak self] index in
-			guard let self else { return }
-			if !assetsForDeletion.contains(assetGroups[indexPath.item].assets[index]) {
-				assetsForDeletion.insert(assetGroups[indexPath.item].assets[index])
-			} else {
-				assetsForDeletion.remove(assetGroups[indexPath.item].assets[index])
-			}
-            cell.assetsForDeletion = assetsForDeletion
-		}
-		cell.onTapSelectAll = { [weak self] assets in
-			guard let self else { return }
-            if isContainsForDeletion(assets: assets) {
-                assets.forEach { [weak self] in self?.assetsForDeletion.remove($0) }
-            } else {
-                assetsForDeletion.insert(assets)
-            }
-            tableView.reloadRows(at: [indexPath], with: .none)
-		}
+        cell.delegate = self
+        cell.index = indexPath.item
+        cell.bind(assets: assetGroups[indexPath.item].assets)
+//		cell.onTapSelectAll = { [weak self] assets in
+//			guard let self else { return }
+//            if isContainsForDeletion(assets: assets) {
+//                assets.forEach { [weak self] in self?.assetsForDeletion.remove($0) }
+//            } else {
+//                assetsForDeletion.insert(assets)
+//            }
+//            tableView.reloadRows(at: [indexPath], with: .none)
+//		}
         cell.selectAllButton.bind(text: isContainsForDeletion(assets: assetGroups[indexPath.item].assets) ? .deselectAll : .selectAll)
         cell.assetsForDeletion = assetsForDeletion
         
@@ -218,6 +199,30 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
+    }
+}
+
+extension GroupedAssetsViewController: DuplicateTableViewCellDelegate {
+    func tapOnCell(assets: [PHAsset], currentPosition: Int) {
+        let gallery = MediaCarousel()
+        gallery.singleTapMode = .dismiss
+        var dkarr = [MediaCarouselItem]()
+        assets.forEach { asset in
+            dkarr.append(MediaCarouselItem(asset: asset))
+        }
+        gallery.items = dkarr
+        gallery.presentationIndex = currentPosition
+        present(photoGallery: gallery)
+    }
+    
+    func tapOnCheckBox(groupIndex: Int, assetIndex: Int) {
+        let asset = assetGroups[groupIndex].assets[assetIndex]
+        if !assetsForDeletion.contains(asset) {
+            assetsForDeletion.insert(asset)
+        } else {
+            assetsForDeletion.remove(asset)
+        }
+        tableView.reloadRows(at: [IndexPath(row: groupIndex, section: 0)], with: .none)
     }
 }
 
@@ -263,13 +268,9 @@ extension GroupedAssetsViewController: UIContextMenuInteractionDelegate {
     }
     
     private func setupSort() {
-        if #available(iOS 14.0, *) {
-            let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
-            sortButton.showsMenuAsPrimaryAction = true
-            sortButton.menu = menu
-        } else {
-            sortButton.addInteraction(UIContextMenuInteraction(delegate: self))
-        }
+        let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
+        sortButton.showsMenuAsPrimaryAction = true
+        sortButton.menu = menu
     }
     
     private func getSortMenuElements() -> [UIMenuElement] {

@@ -8,22 +8,26 @@
 import UIKit
 
 enum CleaningAssetsEntryFrom {
-    case smartClean, regularAssets
+    case smartClean, regularAssets, secretAlbum
 }
 
 final class CleaningAssetsViewController: UIViewController {
     private lazy var rootView = CleaningAssetsView()
     
     private var from: CleaningAssetsEntryFrom
-    private var itemsForDeletion: Int
+    private var itemsCount: Int
+    private var items: Any?
     
     private lazy var photoVideoManager = PhotoVideoManager.shared
     private lazy var contactManager = ContactManager.shared
     private lazy var calendarManager = CalendarManager.shared
     
-    init(from: CleaningAssetsEntryFrom, itemsForDeleting: Int) {
+    private lazy var secretFolderName = UserDefaultsService.shared.get(String.self, key: .secretAlbumFolder) ?? "media"
+    
+    init(from: CleaningAssetsEntryFrom, itemsCount: Int, items: Any? = nil) {
         self.from = from
-        self.itemsForDeletion = itemsForDeleting
+        self.itemsCount = itemsCount
+        self.items = items
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,13 +46,21 @@ final class CleaningAssetsViewController: UIViewController {
         switch from {
         case .smartClean:
             startSmartCleaning()
+            
         case .regularAssets:
             rootView.startProgress()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                 guard let self else { return }
-                showCongratsView(deletedItemsCount: itemsForDeletion)
+                showCongratsView(deletedItemsCount: itemsCount)
             }
+            
+        case .secretAlbum:
+            startCleaningSecretAlbum()
         }
+    }
+    
+    deinit {
+        print("CleaningAssetsViewController deinit")
     }
     
     private func showCongratsView(deletedItemsCount: Int) {
@@ -60,7 +72,7 @@ final class CleaningAssetsViewController: UIViewController {
     }
     
     private func startSmartCleaning() {
-        let progressStep: Float = 1.0 / Float(itemsForDeletion)
+        let progressStep: Float = 1.0 / Float(itemsCount)
         rootView.resetProgress()
         
         let dispatchGroup = DispatchGroup()
@@ -125,8 +137,40 @@ final class CleaningAssetsViewController: UIViewController {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 guard let self else { return }
-                showCongratsView(deletedItemsCount: itemsForDeletion - undeletedItemsCount)
+                showCongratsView(deletedItemsCount: itemsCount - undeletedItemsCount)
             }
         }
+    }
+    
+    private func startCleaningSecretAlbum() {
+        guard let items = items as? [SecretItemModel] else { return }
+        let progressStep: Float = 1.0 / Float(itemsCount)
+        var undeletedItemsCount = 0
+        rootView.resetProgress()
+        
+        items.forEach { item in
+            switch item.mediaType {
+            case .photo:
+                guard let url = FileManager.default.getUrlForFile(fileName: item.id, folderName: secretFolderName) else { return }
+                
+                if FileManager.default.fileExists(atPath: url.path) {
+                    do {
+                        try FileManager.default.removeItem(at: url)
+                    } catch {
+                        undeletedItemsCount += 1
+                    }
+                }
+                
+            case .video:
+                guard let url = item.videoUrl else { return }
+                do {
+                    try FileManager.default.removeItem(at: url)
+                } catch {
+                    undeletedItemsCount += 1
+                }
+            }
+            rootView.addProgress(progressStep)
+        }
+        showCongratsView(deletedItemsCount: itemsCount - undeletedItemsCount)
     }
 }

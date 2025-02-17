@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 import Contacts
 
 extension FileManager {
@@ -78,27 +79,59 @@ extension FileManager {
 // MARK: -Photo&Video
 extension FileManager {
     func getImage(imageName: String, folderName: String) -> UIImage? {
-        guard let url = getURLForImage(imageName: imageName, folderName: folderName),
+        guard let url = getUrlForFile(fileName: imageName, folderName: folderName),
             FileManager.default.fileExists(atPath: url.path) else { return nil }
         return UIImage(contentsOfFile: url.path)
+    }
+    
+    func getVideoURL(videoName: String, folderName: String) -> URL? {
+        guard let url = getUrlForFile(fileName: videoName, folderName: folderName),
+            FileManager.default.fileExists(atPath: url.path) else { return nil }
+        return url
+    }
+    
+    func getVideoThumbnail(from videoURL: URL, completion: @escaping (UIImage?) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            let asset = AVAsset(url: videoURL)
+            let imageGenerator = AVAssetImageGenerator(asset: asset)
+            imageGenerator.appliesPreferredTrackTransform = true
+
+            let time = CMTime(seconds: 1, preferredTimescale: 600)
+            do {
+                let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                let thumbnail = UIImage(cgImage: cgImage)
+
+                DispatchQueue.main.async {
+                    completion(thumbnail)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }
     }
     
     func saveImage(image: UIImage, imageName: String, folderName: String) throws {
         createFolderIfNeeded(folderName: folderName, isMedia: true)
 
         guard let data = image.jpegData(compressionQuality: 1.0),
-            let url = getURLForImage(imageName: imageName, folderName: folderName) else { return }
+            let url = getUrlForFile(fileName: "\(Date().timeIntervalSince1970) photo \(imageName)", folderName: folderName) else { return }
         
-        do {
-            try data.write(to: url)
-        } catch {
-            print("Error saving image. ImageName: \(imageName). \(error)")
-        }
+        try data.write(to: url)
     }
     
-    private func getURLForImage(imageName: String, folderName: String) -> URL? {
+    func saveVideo(videoUrl: URL, folderName: String) throws {
+        createFolderIfNeeded(folderName: folderName, isMedia: true)
+        
+        guard let url = getUrlForFile(fileName: "\(Date().timeIntervalSince1970) video \(videoUrl.lastPathComponent)", folderName: folderName) else { return }
+        
+        try FileManager.default.copyItem(at: videoUrl, to: url)
+    }
+    
+    func getUrlForFile(fileName: String, folderName: String) -> URL? {
         guard let folderURL = getURLForFolder(folderName: folderName) else { return nil }
-        return folderURL.appendingPathComponent(imageName)
+        return folderURL.appendingPathComponent(fileName)
     }
 }
 

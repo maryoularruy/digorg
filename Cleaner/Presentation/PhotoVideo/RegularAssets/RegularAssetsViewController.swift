@@ -235,13 +235,9 @@ extension RegularAssetsViewController: UIContextMenuInteractionDelegate {
     }
     
     private func setupSort() {
-        if #available(iOS 14.0, *) {
-            let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
-            rootView.sortButton.showsMenuAsPrimaryAction = true
-            rootView.sortButton.menu = menu
-        } else {
-            rootView.sortButton.addInteraction(UIContextMenuInteraction(delegate: self))
-        }
+        let menu = UIMenu(options: UIMenu.Options.displayInline, children: getSortMenuElements())
+        rootView.sortButton.showsMenuAsPrimaryAction = true
+        rootView.sortButton.menu = menu
     }
     
     private func getSortMenuElements() -> [UIMenuElement] {
@@ -279,7 +275,7 @@ extension RegularAssetsViewController: ActionToolbarDelegate {
                 navigationController?.popViewController(animated: true)
             } else {
                 if photoVideoManager.delete(assets: Array(assetsForDeletion)) {
-                    let vc = CleaningAssetsViewController(from: .regularAssets, itemsForDeleting: assetsForDeletion.count)
+                    let vc = CleaningAssetsViewController(from: .regularAssets, itemsCount: assetsForDeletion.count)
                     vc.modalPresentationStyle = .currentContext
                     navigationController?.pushViewController(vc, animated: false)
                     assetsForDeletion.removeAll()
@@ -297,21 +293,40 @@ extension RegularAssetsViewController: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.photoImageView.image = assets[indexPath.row].getAssetThumbnail(TargetSize.medium.size)
-        cell.isChecked = assetsForDeletion.contains(assets[indexPath.row])
-        cell.addTapGestureRecognizer { [weak self] in
-            guard let self else { return }
-            if cell.isChecked {
-                assetsForDeletion.remove(assets[indexPath.row])
-            } else {
-                assetsForDeletion.insert(assets[indexPath.row])
-            }
-        }
+        cell.delegate = self
+        
+        let asset = assets[indexPath.row]
+        cell.bind(image: asset.getAssetThumbnail(TargetSize.medium.size),
+                  isChecked: assetsForDeletion.contains(asset),
+                  index: indexPath.row)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let gallery = MediaCarousel()
+        gallery.singleTapMode = .dismiss
+        var dkarr = [MediaCarouselItem]()
+        assets.forEach { asset in
+            dkarr.append(MediaCarouselItem(asset: asset))
+        }
+        gallery.items = dkarr
+        gallery.presentationIndex = indexPath.row
+        present(photoGallery: gallery)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let oneSideSize = (rootView.assetsCollectionView.frame.width / RegularAssetsView.assetsInRow) - RegularAssetsView.spacingBetweenAssets
         return CGSize(width: oneSideSize, height: oneSideSize)
+    }
+}
+
+extension RegularAssetsViewController: AssetCollectionViewCellDelegate {
+    func tapOnCheckBox(index: Int) {
+        let asset = assets[index]
+        if assetsForDeletion.contains(asset) {
+            assetsForDeletion.remove(asset)
+        } else {
+            assetsForDeletion.insert(asset)
+        }
     }
 }

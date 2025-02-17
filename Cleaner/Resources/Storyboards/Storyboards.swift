@@ -105,7 +105,6 @@ internal struct SceneType<T: UIViewController> {
     return controller
   }
 
-  @available(iOS 13.0, *)
   internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
     return storyboard.storyboard.instantiateViewController(identifier: identifier, creator: block)
   }
@@ -121,7 +120,6 @@ internal struct InitialSceneType<T: UIViewController> {
     return controller
   }
 
-  @available(iOS 13.0, *)
   internal func instantiate(creator block: @escaping (NSCoder) -> T?) -> T {
     guard let controller = storyboard.storyboard.instantiateInitialViewController(creator: block) else {
       fatalError("Storyboard \(storyboard.storyboardName) does not have an initial scene.")

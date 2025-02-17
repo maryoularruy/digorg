@@ -75,16 +75,9 @@ final class MainViewController: UIViewController {
     
     private func checkPhotoLibraryAccessStatus() {
         photoVideoManager.checkStatus { [weak self] status in
-            if #available(iOS 14, *) {
-                if status == .authorized || status == .limited {
-                    self?.updatePhotosCleanupOption()
-                    self?.updateVideosCleanupOption()
-                }
-            } else {
-                if status == .authorized {
-                    self?.updatePhotosCleanupOption()
-                    self?.updateVideosCleanupOption()
-                }
+            if status == .authorized || status == .limited {
+                self?.updatePhotosCleanupOption()
+                self?.updateVideosCleanupOption()
             }
         }
     }

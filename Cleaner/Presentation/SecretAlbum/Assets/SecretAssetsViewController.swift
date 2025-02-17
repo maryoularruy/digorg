@@ -7,21 +7,32 @@
 
 import PhotosUI
 import BottomPopup
+import AVKit
 
 final class SecretAssetsViewController: UIViewController {
     @IBOutlet weak var arrowBackView: UIView!
     @IBOutlet weak var itemsCountLabel: Regular13LabelStyle!
+    @IBOutlet weak var selectionButton: SelectionButtonStyle!
     @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var addMediaContainer: UIView!
+    
     @IBOutlet weak var lockedStatusIcon: UIImageView!
     @IBOutlet weak var itemsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var addMediaContainer: UIView!
     @IBOutlet weak var importMediaButton: ActionToolbarButtonStyle!
     @IBOutlet weak var takeMediaButton: ActionToolbarButtonStyle!
-    @IBOutlet weak var cancelButton: DismissButtonStyle!
+    @IBOutlet weak var cancelButtonInAddMediaContainer: DismissButtonStyle!
     
-    private lazy var items = [MediaModel]() {
+    @IBOutlet weak var deleteOrRestoreMediaContainer: UIView!
+    @IBOutlet weak var itemsForDeletionOrRestoreCountLabel: Semibold15LabelStyle!
+    @IBOutlet weak var deleteButton: ActionToolbarButtonStyle!
+    @IBOutlet weak var restoreButton: ActionToolbarButtonStyle!
+    @IBOutlet weak var cancelButtonInDeleteOrRestoreContainer: DismissButtonStyle!
+    
+    private lazy var items = [SecretItemModel]() {
         didSet {
             itemsCountLabel.bind(text: "\(items.count) item\(items.count == 1 ? "" : "s")")
+            deleteOrRestoreMediaContainer.isHidden = itemsForDeletionAndRestoring.isEmpty
             itemsCollectionView.reloadData()
             if items.isEmpty {
                 setupEmptyState()
@@ -31,69 +42,159 @@ final class SecretAssetsViewController: UIViewController {
         }
     }
     
-    private lazy var itemsForDeletionAndRestoring = Set<MediaModel>()
+    private lazy var itemsForDeletionAndRestoring = Set<SecretItemModel>() {
+        didSet {
+            deleteOrRestoreMediaContainer.isHidden = itemsForDeletionAndRestoring.isEmpty
+            itemsForDeletionOrRestoreCountLabel.bind(text: "Delete \(itemsForDeletionAndRestoring.count) item\(itemsForDeletionAndRestoring.count == 1 ? "" : "s")?")
+            selectionButton.bind(text: itemsForDeletionAndRestoring.count == items.count ? .deselectAll : .selectAll)
+            itemsCollectionView.reloadData()
+        }
+    }
     
     private lazy var emptyStateView: EmptyStateView? = nil
+    
     private lazy var userDefaultsService = UserDefaultsService.shared
+    private lazy var photoVideoManager = PhotoVideoManager.shared
+    private lazy var folderName = userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        itemsCollectionView.register(cellType: AssetCollectionViewCell.self)
+        setupUI()
         addGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupUI()
-        reloadData()
+        updateUI()
+    }
+    
+    deinit {
+        print("SecretAssetsViewController deinit")
     }
     
     @IBAction func tapOnAddButton(_ sender: Any) {
-        if userDefaultsService.isPasscodeCreated {
-            if userDefaultsService.isPasscodeConfirmed {
-                addMediaContainer.isHidden = false
-                addButton.isHidden = true
+        if userDefaultsService.isPasscodeTurnOn {
+            
+            if userDefaultsService.isPasscodeCreated {
+                if userDefaultsService.isPasscodeConfirmed {
+                    showSecretAssets()
+                } else {
+                    let vc = StoryboardScene.Passcode.initialScene.instantiate()
+                    vc.assetsIsParentVC = true
+                    vc.passcodeMode = .enter
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .fullScreen
+                    navigationController?.pushViewController(vc, animated: true)
+                }
             } else {
-                let vc = StoryboardScene.Passcode.initialScene.instantiate()
-                vc.assetsIsParentVC = true
-                vc.passcodeMode = .enter
-                vc.modalTransitionStyle = .crossDissolve
-                vc.modalPresentationStyle = .fullScreen
-                navigationController?.pushViewController(vc, animated: true)
+                guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
+                vc.popupDelegate = self
+                vc.height = 416
+                vc.type = .createPasscode
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(vc, animated: true)
+                }
             }
             
         } else {
-            guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
-            vc.popupDelegate = self
-            vc.height = 416
-            vc.type = .createPasscode
-            DispatchQueue.main.async { [weak self] in
-                self?.present(vc, animated: true)
-            }
+            showSecretAssets()
         }
     }
     
+    //subviews of addMediaContainer
     @IBAction func tapOnTakeMediaButton(_ sender: Any) {
-        //TODO: -Open camera
+        configurePicker()
     }
     
     @IBAction func tapOnImportMediaButton(_ sender: Any) {
-        if #available(iOS 14.0, *) {
-            configureImagePicker()
+        configureImagePicker()
+    }
+    
+    @IBAction func tapOnCancelInAddMediaContainer(_ sender: Any) {
+        addMediaContainer.isHidden = true
+        addButton.isHidden = false
+    }
+    
+    //subviews of deleteOrRestoreMediaContainer
+    @IBAction func tapOnDeleteButton(_ sender: Any) {
+        let vc = CleaningAssetsViewController(from: .secretAlbum, itemsCount: itemsForDeletionAndRestoring.count, items: Array(itemsForDeletionAndRestoring))
+        vc.modalPresentationStyle = .currentContext
+        navigationController?.pushViewController(vc, animated: false)
+        itemsForDeletionAndRestoring.removeAll()
+        items.removeAll()
+    }
+    
+    @IBAction func tapOnRestoreButton(_ sender: Any) {
+        photoVideoManager.saveToCameraRollFolder(Array(itemsForDeletionAndRestoring))
+        itemsForDeletionAndRestoring.removeAll()
+    }
+    
+    @IBAction func tapOnCancelInDeleteOrRestoreContainer(_ sender: Any) {
+        deleteOrRestoreMediaContainer.isHidden = true
+    }
+
+    private func updateUI() {
+        lockedStatusIcon.image = userDefaultsService.isPasscodeCreated && userDefaultsService.isPasscodeTurnOn ? .locked :  .unlocked
+        
+        if userDefaultsService.isPasscodeTurnOn {
+            if userDefaultsService.isPasscodeConfirmed {
+                reloadData()
+            } else {
+                showSecretAlbumCover()
+            }
         } else {
-            configurePicker()
+            reloadData()
         }
     }
     
-    @IBAction func tapOnCancelButton(_ sender: Any) {
-        navigationController?.popToRootViewController(animated: true)
+    private func reloadData() {
+        do {
+            let fileNames = try FileManager.default.getAll(folderName: folderName).sorted(by: <)
+            
+            fileNames.forEach { name in
+                if !items.contains(where: { $0.id == name } ) {
+                    if name.contains("photo") {
+                        guard let image = FileManager.default.getImage(imageName: name, folderName: folderName) else { return }
+                        items.append(SecretItemModel(id: name, image: image))
+                        
+                    } else if name.contains("video") {
+                        guard let url = FileManager.default.getVideoURL(videoName: name, folderName: folderName) else { return }
+                        
+                        FileManager.default.getVideoThumbnail(from: url) { [weak self] thumbnail in
+                            let thumbnail = thumbnail ?? #imageLiteral(resourceName: "gif")
+                            
+                            self?.items.append(SecretItemModel(id: name, videoUrl: url, videoThumbnail: thumbnail))
+                        }
+                    }
+                }
+            }
+            
+            if items.isEmpty {
+                setupEmptyState()
+            }
+        } catch { return }
+    }
+
+    private func showSecretAlbumCover() {
+        itemsCollectionView.isHidden = true
+        itemsCountLabel.bind(text: "0 items")
+        selectionButton.isHidden = true
+    }
+    
+    private func showSecretAssets() {
+        addMediaContainer.isHidden = false
+        addButton.isHidden = true
     }
     
     private func setupEmptyState() {
         itemsCollectionView.isHidden = true
         itemsCountLabel.bind(text: "0 items")
+        selectionButton.isHidden = true
+        addMediaContainer.isHidden = true
+        deleteOrRestoreMediaContainer.isHidden = true
+        
         emptyStateView?.removeFromSuperview()
-        emptyStateView = view.createEmptyState(type: userDefaultsService.isPasscodeConfirmed ? .emptySecretAlbumConfirmed : .emptySecretAlbum)
+        emptyStateView = view.createEmptyState(type: .emptySecretAlbum)
         if let emptyStateView {
             view.addSubview(emptyStateView)
         }
@@ -102,31 +203,23 @@ final class SecretAssetsViewController: UIViewController {
     private func hideEmptyState() {
         itemsCollectionView.reloadData()
         itemsCollectionView.isHidden = false
+        
+        selectionButton.isHidden = false
+        selectionButton.bind(text: itemsForDeletionAndRestoring.count == items.count ? .deselectAll : .selectAll)
+        
+        addButton.isHidden = false
+        
         emptyStateView?.removeFromSuperview()
         emptyStateView = nil
-    }
-    
-    private func reloadData() {
-        items.removeAll()
-        guard let folderName = UserDefaultsService.shared.get(String.self, key: .secretAlbumFolder) else { return }
-        
-        do {
-            let itemNames = try FileManager.default.getAll(folderName: folderName)
-            itemNames.forEach { name in
-                if let image = FileManager.default.getImage(imageName: name, folderName: folderName) {
-                    items.append(MediaModel(with: image))
-                }
-            }
-        } catch { return }
     }
 }
 
 extension SecretAssetsViewController: ViewControllerProtocol {
     func setupUI() {
-        lockedStatusIcon.image = userDefaultsService.isPasscodeCreated ? .locked :  .unlocked
-        if userDefaultsService.isPasscodeConfirmed {
-            setupMediaContainer()
-        }
+        itemsCollectionView.register(cellType: AssetCollectionViewCell.self)
+        selectionButton.delegate = self
+        setupMediaContainer()
+        setupdeleteOrRestoreMediaContainer()
     }
     
     func addGestureRecognizers() {
@@ -140,17 +233,35 @@ extension SecretAssetsViewController: ViewControllerProtocol {
     }
     
     private func setupMediaContainer() {
-        takeMediaButton.bind(text: "Take photo or video",
-                             image: .takeMedia)
+        takeMediaButton.bind(text: "Take photo or video", image: .takeMedia)
         importMediaButton.bind(text: "Import photo or video",
                                backgroundColor: .acidGreen,
                                textColor: .black,
                                image: .importMedia)
-        cancelButton.bind(text: "Cancel")
+        cancelButtonInAddMediaContainer.bind(text: "Cancel")
         
         addMediaContainer.layer.cornerRadius = 20
         addMediaContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         addMediaContainer.addShadows()
+    }
+    
+    private func setupdeleteOrRestoreMediaContainer() {
+        restoreButton.bind(text: "Restore", backgroundColor: .clear, textColor: .black, borderColor: .blue, borderWidth: 2.0)
+        cancelButtonInDeleteOrRestoreContainer.bind(text: "Cancel")
+        
+        deleteOrRestoreMediaContainer.layer.cornerRadius = 20
+        deleteOrRestoreMediaContainer.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        deleteOrRestoreMediaContainer.addShadows()
+    }
+}
+
+extension SecretAssetsViewController: SelectionButtonDelegate {
+    func tapOnButton() {
+        if itemsForDeletionAndRestoring.count == items.count {
+            itemsForDeletionAndRestoring.removeAll()
+        } else {
+            itemsForDeletionAndRestoring.insert(items)
+        }
     }
 }
 
@@ -165,55 +276,87 @@ extension SecretAssetsViewController: BottomPopupDelegate {
     }
 }
 
-@available(iOS 14.0, *)
 extension SecretAssetsViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         addMediaContainer.isHidden = true
         addButton.isHidden = false
         
+        var assetsIdentifiersForDeletion = [String]()
+        
+        var counter: Int = 0
+        let maxCounter = results.count
+        
         results.forEach { result in
             let itemProvider = result.itemProvider
             guard let typeIdentifier = itemProvider.registeredTypeIdentifiers.first,
-                  let utType = UTType(typeIdentifier)
-            else { return }
+                    let utType = UTType(typeIdentifier) else { return }
+            
+            let assetIdentifier = result.assetIdentifier
             
             if utType.conforms(to: .image) {
-                itemProvider.getPhoto { [weak self] result in
-                    switch result {
-                    case .success(let item):
-                        guard let photo = item.photo else { return }
+                itemProvider.getPhoto { image in
+                    guard let image else { return }
+                    itemProvider.getFileName(typeIdentifier: UTType.image.identifier) { [weak self] fileName in
+                        guard let self, let fileName else { return }
                         
                         do {
-                            let folderName = self?.userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
+                            try FileManager.default.saveImage(image: image, imageName: fileName, folderName: folderName)
                             
-                            try FileManager.default.saveImage(image: photo, imageName: item.id, folderName: folderName)
-                            
-                            DispatchQueue.main.async {
-                                self?.items.append(item)
+                            if let assetIdentifier {
+                                assetsIdentifiersForDeletion.append(assetIdentifier)
                             }
-                        } catch { break }
-
-                    case .failure(_): break }
+                            
+                            counter += 1
+                            
+                            if counter == maxCounter {
+                                if userDefaultsService.isRemovePhotosAfterImport {
+                                    photoVideoManager.delete(identifiers: assetsIdentifiersForDeletion)
+                                }
+                                
+                                DispatchQueue.main.async { [weak self] in
+                                    picker.dismiss(animated: true)
+                                    self?.reloadData()
+                                }
+                            }
+                            
+                        } catch {}
+                    }
                 }
                 
             } else if utType.conforms(to: .movie) {
-                itemProvider.getVideo(typeIdentifier: typeIdentifier) { [weak self] result in
-                    switch result {
-                    case .success(let item):
-                        DispatchQueue.main.async {
-                            self?.items.append(item)
+                itemProvider.getVideoURL(typeIdentifier: UTType.movie.identifier) { [weak self] url in
+                    guard let self, let url else { return }
+                    
+                    do {
+                        try FileManager.default.saveVideo(videoUrl: url, folderName: folderName)
+                        
+                        if let assetIdentifier {
+                            assetsIdentifiersForDeletion.append(assetIdentifier)
                         }
-                    case .failure(_): break }
+                        
+                        counter += 1
+                        
+                        if counter == maxCounter {
+                            if userDefaultsService.isRemovePhotosAfterImport {
+                                photoVideoManager.delete(identifiers: assetsIdentifiersForDeletion)
+                            }
+                            
+                            DispatchQueue.main.async { [weak self] in
+                                picker.dismiss(animated: true)
+                                self?.reloadData()
+                            }
+                        }
+                    } catch {}
                 }
             }
         }
-        
-        picker.dismiss(animated: true)
     }
     
     private func configureImagePicker() {
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 0
+        var configuration = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
+        configuration.selectionLimit = 10
+        configuration.filter = .any(of: [.images, .videos])
+        
         let pickerViewController = PHPickerViewController(configuration: configuration)
         pickerViewController.delegate = self
         present(pickerViewController, animated: true)
@@ -222,24 +365,38 @@ extension SecretAssetsViewController: PHPickerViewControllerDelegate {
 
 extension SecretAssetsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let selectedImage = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
-            print("Selected image: \(selectedImage)")
-        } else if let selectedVideoURL = info[.mediaURL] as? URL {
-            print("Selected video URL: \(selectedVideoURL)")
-        }
+        addMediaContainer.isHidden = true
+        addButton.isHidden = false
         
-        picker.dismiss(animated: true)
+        if let image = info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage {
+            let fileName = (info[.imageURL] as? URL)?.lastPathComponent ?? UUID().uuidString
+            
+            do {
+                try FileManager.default.saveImage(image: image, imageName: fileName, folderName: folderName)
+
+                DispatchQueue.main.async { [weak self] in
+                    picker.dismiss(animated: true)
+                    self?.reloadData()
+                }
+            } catch {}
+            
+        } else if let videoURL = info[.mediaURL] as? URL {
+            do {
+                try FileManager.default.saveVideo(videoUrl: videoURL, folderName: folderName)
+                
+                DispatchQueue.main.async { [weak self] in
+                    picker.dismiss(animated: true)
+                    self?.reloadData()
+                }
+            } catch {}
+        }
     }
     
     private func configurePicker() {
-        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
-
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.sourceType = .photoLibrary
-        picker.mediaTypes = ["public.image"]
-//        picker.mediaTypes = ["public.image", "public.movie"]
-        picker.allowsEditing = true
+        picker.sourceType = .camera
         present(picker, animated: true, completion: nil)
     }
 }
@@ -251,15 +408,51 @@ extension SecretAssetsViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.photoImageView.image = items[indexPath.row].photo
-        cell.isChecked = itemsForDeletionAndRestoring.contains(items[indexPath.row])
-        cell.addTapGestureRecognizer {
-            cell.isChecked.toggle()
-        }
+        cell.delegate = self
+        
+        let item = items[indexPath.row]
+        cell.bind(image: item.mediaType == .photo ? item.image : item.videoThumbnail,
+                  isChecked: itemsForDeletionAndRestoring.contains(item),
+                  index: indexPath.row)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = items[indexPath.row]
+        
+        switch item.mediaType {
+        case .photo:
+            guard let image = item.image else { return }
+            
+            let gallery = MediaCarousel()
+            gallery.singleTapMode = .dismiss
+            gallery.items = [MediaCarouselItem(image: image)]
+            present(photoGallery: gallery)
+            
+        case .video:
+            guard let url = item.videoUrl else { return }
+            let player = AVPlayer(url: url)
+            let controller = AVPlayerViewController()
+            controller.player = player
+
+            present(controller, animated: true) {
+                player.play()
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         TargetSize.medium.size
+    }
+}
+
+extension SecretAssetsViewController: AssetCollectionViewCellDelegate {
+    func tapOnCheckBox(index: Int) {
+        let item = items[index]
+        if itemsForDeletionAndRestoring.contains(item) {
+            itemsForDeletionAndRestoring.remove(item)
+        } else {
+            itemsForDeletionAndRestoring.insert(item)
+        }
     }
 }

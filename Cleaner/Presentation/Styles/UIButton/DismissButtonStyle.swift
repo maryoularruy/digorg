@@ -25,7 +25,7 @@ final class DismissButtonStyle: UIButton {
     private func setup() {
         layer.cornerRadius = 34
         titleLabel?.textAlignment = .center
-        backgroundColor = .paleGrey
+        backgroundColor = .clear
         titleLabel?.textColor = .blue
         titleLabel?.font = .semibold15
     }

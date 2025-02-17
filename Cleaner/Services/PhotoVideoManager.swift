@@ -5,7 +5,7 @@
 //  Created by Александр Пономарёв on 19.05.2022.
 //
 
-import Photos
+import PhotosUI
 import Vision
 
 final class PhotoVideoManager {
@@ -21,11 +21,7 @@ final class PhotoVideoManager {
     private(set) var similarVideos: [PHAssetGroup] = []
     
     func checkStatus(handler: @escaping (PHAuthorizationStatus) -> ()) {
-        let status = if #available(iOS 14, *) {
-            PHPhotoLibrary.authorizationStatus(for: .readWrite)
-        } else {
-            PHPhotoLibrary.authorizationStatus()
-        }
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         
         if status == .notDetermined {
             requestPhotoLibraryAutorization() { status in
@@ -354,6 +350,29 @@ final class PhotoVideoManager {
         return assets
     }
     
+    func saveToCameraRollFolder(_ items: [SecretItemModel]) {
+        items.forEach { item in
+            switch item.mediaType {
+            case .photo:
+                guard let image = item.image else { break }
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                
+            case .video:
+                guard let path = item.videoUrl?.relativePath else { break }
+                UISaveVideoAtPathToSavedPhotosAlbum(path, nil, nil, nil)
+            }
+        }
+    }
+    
+    func delete(identifiers: [String]) {
+        let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        var assets = [PHAsset]()
+        fetchResult.enumerateObjects { asset, _, _  in
+            assets.append(asset)
+        }
+        PhotoVideoManager.shared.delete(assets: assets)
+    }
+    
     func delete(assets: [PHAsset]) -> Bool {
         let semaphore = DispatchSemaphore(value: 0)
         var result = false
@@ -423,15 +442,8 @@ final class PhotoVideoManager {
     }
     
     private func requestPhotoLibraryAutorization(handler: @escaping (PHAuthorizationStatus) -> ()) {
-        if #available(iOS 14, *) {
-            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
-                handler(status)
-            }
-            
-        } else {
-            PHPhotoLibrary.requestAuthorization { status in
-                handler(status)
-            }
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            handler(status)
         }
     }
 }
