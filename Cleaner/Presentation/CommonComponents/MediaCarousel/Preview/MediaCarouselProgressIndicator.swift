@@ -1,9 +1,7 @@
 //
 //  MediaCarouselProgressIndicator.swift
-//  MediaCarousel
 //
 //  Created by ZhangAo on 08/09/2017.
-//  Copyright © 2017 ZhangAo. All rights reserved.
 //
 
 import UIKit

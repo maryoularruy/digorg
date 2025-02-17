@@ -1,6 +1,5 @@
 //
 //  MediaCarouselIncrementalIndicator.swift
-//  MediaCarousel
 //
 //  Created by ZhangAo on 2018/5/17.
 //

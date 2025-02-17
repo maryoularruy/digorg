@@ -1,22 +1,16 @@
 //
 //  MediaCarouselProgressIndicatorProtocol.swift
-//  MediaCarousel
 //
 //  Created by ZhangAo on 08/09/2017.
-//  Copyright © 2017 ZhangAo. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public protocol MediaCarouselProgressIndicatorProtocol : NSObjectProtocol {
-    
+public protocol MediaCarouselProgressIndicatorProtocol: NSObjectProtocol {
     init(with view: UIView)
-    
     func startIndicator()
-    
     func stopIndicator()
-    
     func setIndicatorProgress(_ progress: Float)
 }
 

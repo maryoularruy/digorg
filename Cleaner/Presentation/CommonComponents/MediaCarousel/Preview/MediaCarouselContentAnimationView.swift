@@ -1,11 +1,7 @@
 //
 //  MediaCarouselContentAnimationView.swift
-//  MediaCarousel
 //
 //  Created by ZhangAo on 07/11/2017.
-//  Copyright © 2017 ZhangAo. All rights reserved.
-//
-//  Inspired by: https://github.com/patrickbdev/PBImageView/blob/master/PBImageView/Classes/PBImageView.swift
 //
 
 import UIKit
