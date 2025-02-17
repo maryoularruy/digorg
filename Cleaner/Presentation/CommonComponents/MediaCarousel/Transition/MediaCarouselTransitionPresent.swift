@@ -30,7 +30,7 @@ open class MediaCarouselTransitionPresent: NSObject, UIViewControllerAnimatedTra
         
         if let fromImageView = self.gallery.presentingFromImageView, let fromImage = fromImageView.image {
             let fromImageViewFrameInScreen = fromImageView.superview?.convert(fromImageView.frame, to: nil)
-            let snapshotImageView = DKPhotoContentAnimationView(image: fromImage)
+            let snapshotImageView = MediaCarouselContentAnimationView(image: fromImage)
             snapshotImageView.frame = fromImageViewFrameInScreen!
             snapshotImageView.contentMode = fromImageView.contentMode
             snapshotImageView.backgroundColor = fromImageView.backgroundColor

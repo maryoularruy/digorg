@@ -1,24 +1,22 @@
 //
-//  DKPhotoBaseImagePreviewVC.swift
-//  MediaCarousel
+//  MediaCarouselBaseImagePreviewVC.swift
 //
 //  Created by ZhangAo on 15/09/2017.
-//  Copyright © 2017 ZhangAo. All rights reserved.
 //
 
 import UIKit
 import Photos
 
-open class DKPhotoBaseImagePreviewVC: MediaCarouselBasePreviewVC {
+open class MediaCarouselBaseImagePreviewVC: MediaCarouselBasePreviewVC {
     // MARK: - MediaCarouselBasePreviewDataSource
     
     override public func createContentView() -> UIView {
-        let contentView = DKPhotoImageView()
+        let contentView = MediaCarouselImageView()
         return contentView
     }
         
     override public func updateContentView(with content: Any) {
-        guard let contentView = self.contentView as? DKPhotoImageView else { return }
+        guard let contentView = self.contentView as? MediaCarouselImageView else { return }
         
         if let data = content as? Data {
             let imageFormat = NSData.sd_imageFormat(forImageData: data)
@@ -35,7 +33,7 @@ open class DKPhotoBaseImagePreviewVC: MediaCarouselBasePreviewVC {
     }
     
     public override func snapshotImage() -> UIImage? {
-        if let contentView = self.contentView as? DKPhotoImageView {
+        if let contentView = self.contentView as? MediaCarouselImageView {
             if let image = contentView.image {
                 return image
             } else {
@@ -49,7 +47,7 @@ open class DKPhotoBaseImagePreviewVC: MediaCarouselBasePreviewVC {
     public override func showError() {
         if self.item.thumbnail != nil { return }
         
-        guard let contentView = self.contentView as? DKPhotoImageView else { return }
+        guard let contentView = self.contentView as? MediaCarouselImageView else { return }
         
         contentView.image = MediaCarouselResource.downloadFailedImage()
         contentView.contentMode = .center
@@ -60,7 +58,7 @@ open class DKPhotoBaseImagePreviewVC: MediaCarouselBasePreviewVC {
     }
     
     override public func contentSize() -> CGSize {
-        guard let contentView = self.contentView as? DKPhotoImageView else { return CGSize.zero }
+        guard let contentView = self.contentView as? MediaCarouselImageView else { return CGSize.zero }
         
         if let image = contentView.image {
             return image.size

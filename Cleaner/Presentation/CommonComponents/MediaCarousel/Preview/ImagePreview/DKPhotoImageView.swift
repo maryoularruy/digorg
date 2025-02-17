@@ -1,5 +1,5 @@
 //
-//  DKPhotoImageView.swift
+//  MediaCarouselImageView.swift
 //  MediaCarousel
 //
 //  Created by ZhangAo on 13/12/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class DKPhotoImageView: UIImageView {
+open class MediaCarouselImageView: UIImageView {
     
     public override init(image: UIImage? = nil, highlightedImage: UIImage? = nil) {
         super.init(image: image, highlightedImage: highlightedImage)

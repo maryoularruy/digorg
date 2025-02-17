@@ -1,5 +1,5 @@
 //
-//  DKPhotoProgressIndicatorProtocol.swift
+//  MediaCarouselProgressIndicatorProtocol.swift
 //  MediaCarousel
 //
 //  Created by ZhangAo on 08/09/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public protocol DKPhotoProgressIndicatorProtocol : NSObjectProtocol {
+public protocol MediaCarouselProgressIndicatorProtocol : NSObjectProtocol {
     
     init(with view: UIView)
     

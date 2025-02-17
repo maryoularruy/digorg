@@ -1,5 +1,5 @@
 //
-//  DKPhotoIncrementalIndicator.swift
+//  MediaCarouselIncrementalIndicator.swift
 //  MediaCarousel
 //
 //  Created by ZhangAo on 2018/5/17.
@@ -7,17 +7,17 @@
 
 import UIKit
 
-public enum DKPhotoIncrementalIndicatorDirection {
+public enum MediaCarouselIncrementalIndicatorDirection {
     case left, right
 }
 
-class DKPhotoIncrementalIndicator: UIView {
+class MediaCarouselIncrementalIndicator: UIView {
 
     override open class var layerClass: Swift.AnyClass {
         get { return CAReplicatorLayer.self }
     }
     
-    public let direction: DKPhotoIncrementalIndicatorDirection
+    public let direction: MediaCarouselIncrementalIndicatorDirection
     public let refreshBlock: (() -> Void)
     public var isEnabled = true {
         didSet {
@@ -45,16 +45,16 @@ class DKPhotoIncrementalIndicator: UIView {
         }
     }
     
-    class func indicator(with direction: DKPhotoIncrementalIndicatorDirection, refreshBlock: @escaping (() -> Void)) -> DKPhotoIncrementalIndicator {
+    class func indicator(with direction: MediaCarouselIncrementalIndicatorDirection, refreshBlock: @escaping (() -> Void)) -> MediaCarouselIncrementalIndicator {
         switch direction {
         case .left:
-            return DKPhotoIncrementalLeftIndicator(direction: direction, refreshBlock: refreshBlock)
+            return MediaCarouselIncrementalLeftIndicator(direction: direction, refreshBlock: refreshBlock)
         case .right:
-            return DKPhotoIncrementalRightIndicator(direction: direction, refreshBlock: refreshBlock)
+            return MediaCarouselIncrementalRightIndicator(direction: direction, refreshBlock: refreshBlock)
         }
     }
     
-    fileprivate init(direction: DKPhotoIncrementalIndicatorDirection, refreshBlock: @escaping (() -> Void)) {
+    fileprivate init(direction: MediaCarouselIncrementalIndicatorDirection, refreshBlock: @escaping (() -> Void)) {
         self.direction = direction
         self.refreshBlock = refreshBlock
         
@@ -151,29 +151,29 @@ class DKPhotoIncrementalIndicator: UIView {
 }
 
 // KVO
-extension DKPhotoIncrementalIndicator {
+extension MediaCarouselIncrementalIndicator {
     
-    fileprivate static var context = "DKPhotoIncrementalIndicatorKVOContext"
+    fileprivate static var context = "MediaCarouselIncrementalIndicatorKVOContext"
     fileprivate static let contentOffsetKeyPath = "contentOffset"
     fileprivate static let contentSizeKeyPath = "contentSize"
     
     fileprivate func addObservers(scrollView: UIScrollView) {
-        scrollView.addObserver(self, forKeyPath: DKPhotoIncrementalIndicator.contentSizeKeyPath, options: [.new], context: &DKPhotoIncrementalIndicator.context)
-        scrollView.addObserver(self, forKeyPath: DKPhotoIncrementalIndicator.contentOffsetKeyPath, options: [.new], context: &DKPhotoIncrementalIndicator.context)
+        scrollView.addObserver(self, forKeyPath: MediaCarouselIncrementalIndicator.contentSizeKeyPath, options: [.new], context: &MediaCarouselIncrementalIndicator.context)
+        scrollView.addObserver(self, forKeyPath: MediaCarouselIncrementalIndicator.contentOffsetKeyPath, options: [.new], context: &MediaCarouselIncrementalIndicator.context)
     }
     
     fileprivate func removeObservers() {
-        self.superview?.removeObserver(self, forKeyPath: DKPhotoIncrementalIndicator.contentSizeKeyPath)
-        self.superview?.removeObserver(self, forKeyPath: DKPhotoIncrementalIndicator.contentOffsetKeyPath)
+        self.superview?.removeObserver(self, forKeyPath: MediaCarouselIncrementalIndicator.contentSizeKeyPath)
+        self.superview?.removeObserver(self, forKeyPath: MediaCarouselIncrementalIndicator.contentOffsetKeyPath)
     }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if context == &DKPhotoIncrementalIndicator.context {
+        if context == &MediaCarouselIncrementalIndicator.context {
             guard let _ = self.scrollView, self.isEnabled else { return }
             
-            if keyPath == DKPhotoIncrementalIndicator.contentSizeKeyPath {
+            if keyPath == MediaCarouselIncrementalIndicator.contentSizeKeyPath {
                 self.updateFrame()
-            } else if keyPath == DKPhotoIncrementalIndicator.contentOffsetKeyPath {
+            } else if keyPath == MediaCarouselIncrementalIndicator.contentOffsetKeyPath {
                 self.contentOffsetDidChange()
             }
         } else {
@@ -183,7 +183,7 @@ extension DKPhotoIncrementalIndicator {
     
 }
 
-fileprivate class DKPhotoIncrementalLeftIndicator : DKPhotoIncrementalIndicator {
+fileprivate class MediaCarouselIncrementalLeftIndicator : MediaCarouselIncrementalIndicator {
     
     override func updateFrame() {
         guard let scrollView = self.superview as? UIScrollView else { return }
@@ -214,7 +214,7 @@ fileprivate class DKPhotoIncrementalLeftIndicator : DKPhotoIncrementalIndicator 
     }
 }
 
-fileprivate class DKPhotoIncrementalRightIndicator : DKPhotoIncrementalIndicator {
+fileprivate class MediaCarouselIncrementalRightIndicator : MediaCarouselIncrementalIndicator {
     
     override func updateFrame() {
         guard let scrollView = self.superview as? UIScrollView else { return }

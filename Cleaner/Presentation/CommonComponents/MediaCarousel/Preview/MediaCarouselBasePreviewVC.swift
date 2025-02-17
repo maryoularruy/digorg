@@ -80,7 +80,7 @@ open class MediaCarouselBasePreviewVC: UIViewController, UIScrollViewDelegate, M
     
     fileprivate var scrollView: UIScrollView!
     
-    private var indicatorView: DKPhotoProgressIndicatorProtocol?
+    private var indicatorView: MediaCarouselProgressIndicatorProtocol?
     
     open override func loadView() {
         super.loadView()
@@ -122,7 +122,7 @@ open class MediaCarouselBasePreviewVC: UIViewController, UIScrollViewDelegate, M
         self.scrollView.addSubview(self.contentView)
         
         if self.enableIndicatorView() {
-            self.indicatorView = DKPhotoProgressIndicator(with: self.view)
+            self.indicatorView = MediaCarouselProgressIndicator(with: self.view)
         }
         
         self.thumbnailView.frame = self.contentView.bounds

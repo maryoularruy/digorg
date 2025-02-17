@@ -1,5 +1,5 @@
 //
-//  DKPhotoProgressIndicator.swift
+//  MediaCarouselProgressIndicator.swift
 //  MediaCarousel
 //
 //  Created by ZhangAo on 08/09/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DKPhotoProgressIndicator: UIView, DKPhotoProgressIndicatorProtocol {
+class MediaCarouselProgressIndicator: UIView, MediaCarouselProgressIndicatorProtocol {
     
     private var progress: Float = 0
     
@@ -58,7 +58,7 @@ class DKPhotoProgressIndicator: UIView, DKPhotoProgressIndicatorProtocol {
         processPath.stroke()
     }
     
-    // MARK: - DKPhotoProgressIndicatorProtocol
+    // MARK: - MediaCarouselProgressIndicatorProtocol
     
     func startIndicator() {
         self.progress = 0

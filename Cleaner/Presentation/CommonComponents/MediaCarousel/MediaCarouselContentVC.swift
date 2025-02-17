@@ -80,7 +80,7 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
     }
     
     private let mainView = MediaCarouselScrollView()
-    private var reuseableVCs: [ObjectIdentifier : [MediaCarouselBasePreviewVC] ] = [:] // DKPhotoBasePreviewVC.Type : [DKPhotoBasePreviewVC]
+    private var reuseableVCs: [ObjectIdentifier : [MediaCarouselBasePreviewVC] ] = [:] // MediaCarouselBasePreviewVC.Type : [MediaCarouselBasePreviewVC]
     private var visibleVCs: [MediaCarouselItem : MediaCarouselBasePreviewVC] = [:]
     
     open var footerView: UIView? {
@@ -94,8 +94,8 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
     }
         
     private var footerViewContainer: MediaCarouselContentFooterViewContainer?    
-    private var leftIncrementalIndicator: DKPhotoIncrementalIndicator?
-    private var rightIncrementalIndicator: DKPhotoIncrementalIndicator?
+    private var leftIncrementalIndicator: MediaCarouselIncrementalIndicator?
+    private var rightIncrementalIndicator: MediaCarouselIncrementalIndicator?
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,7 +116,7 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
         self.updateFooterView()
         
         if self.dataSource.hasIncrementalDataForLeft() {
-            self.leftIncrementalIndicator = DKPhotoIncrementalIndicator.indicator(with: .left) { [weak self] in
+            self.leftIncrementalIndicator = MediaCarouselIncrementalIndicator.indicator(with: .left) { [weak self] in
                 guard let strongSelf = self else { return }
                 
                 strongSelf.dataSource.incrementalItemsForLeft { [weak self] (count) in
@@ -150,7 +150,7 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
         }
         
         if self.dataSource.hasIncrementalDataForRight() {
-            self.rightIncrementalIndicator = DKPhotoIncrementalIndicator.indicator(with: .right) { [weak self] in
+            self.rightIncrementalIndicator = MediaCarouselIncrementalIndicator.indicator(with: .right) { [weak self] in
                 guard let strongSelf = self else { return }
                 
                 strongSelf.dataSource.incrementalItemsForRight { [weak self] (count) in
@@ -336,11 +336,11 @@ open class MediaCarouselContentVC: UIViewController, UIScrollViewDelegate {
         
         self.isFilled = true
         
-        [DKPhotoImagePreviewVC(),
-         DKPhotoImagePreviewVC(),
+        [MediaCarouselImagePreviewVC(),
+         MediaCarouselImagePreviewVC(),
          MediaCarouselPlayerPreviewVC(),
          MediaCarouselPlayerPreviewVC(),
-         self.currentVC.previewType == .photo ? MediaCarouselPlayerPreviewVC() : DKPhotoImagePreviewVC()]
+         self.currentVC.previewType == .photo ? MediaCarouselPlayerPreviewVC() : MediaCarouselImagePreviewVC()]
             
             .forEach { (previewVC) in
                 previewVC.view.isHidden = true

@@ -41,7 +41,7 @@ open class MediaCarouselItem: NSObject {
     /**
      MediaCarousel will automatically decide whether to create ImagePreview or PlayerPreview via the mediaType of the asset.
      
-     See more: DKPhotoPreviewFactory.swift
+     See more: MediaCarouselPreviewFactory.swift
      */
     @objc open var asset: PHAsset?
     @objc open var assetLocalIdentifier: String?

@@ -1,5 +1,5 @@
 //
-//  DKPhotoPreviewFactory.swift
+//  MediaCarouselPreviewFactory.swift
 //  MediaCarousel
 //
 //  Created by ZhangAo on 15/09/2017.
@@ -14,16 +14,16 @@ extension MediaCarouselBasePreviewVC {
     
     @objc public class func photoPreviewClass(with item: MediaCarouselItem) -> MediaCarouselBasePreviewVC.Type {
         if item.image != nil {
-            return DKPhotoImagePreviewVC.self
+            return MediaCarouselImagePreviewVC.self
             
         } else if item.imageURL != nil {
-            return DKPhotoImagePreviewVC.self
+            return MediaCarouselImagePreviewVC.self
             
         } else if let asset = item.asset {
             if asset.mediaType == .video {
                 return MediaCarouselPlayerPreviewVC.self
             } else {
-                return DKPhotoImagePreviewVC.self
+                return MediaCarouselImagePreviewVC.self
             }
             
         } else if let assetLocalIdentifier = item.assetLocalIdentifier {

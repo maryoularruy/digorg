@@ -1,18 +1,13 @@
 //
-//  DKPhotoImagePreviewVC.swift
-//  MediaCarousel
+//  MediaCarouselImagePreviewVC.swift
 //
 //  Created by ZhangAo on 08/09/2017.
-//  Copyright © 2017 ZhangAo. All rights reserved.
 //
 
 import Photos
-
-#if canImport(SDWebImage)
 import SDWebImage
-#endif
 
-class DKPhotoImagePreviewVC: DKPhotoBaseImagePreviewVC {
+class MediaCarouselImagePreviewVC: MediaCarouselBaseImagePreviewVC {
 
     private var image: UIImage?
     private var downloadURL: URL?
@@ -120,9 +115,9 @@ class DKPhotoImagePreviewVC: DKPhotoBaseImagePreviewVC {
         }
     }
     
-    static let ioQueue = DispatchQueue(label: "DKPhotoImagePreviewVC.ioQueue")
+    static let ioQueue = DispatchQueue(label: "MediaCarouselImagePreviewVC.ioQueue")
     private func asyncFetchLocalImage(with URL: URL, completeBlock: @escaping ((_ data: Any?, _ error: Error?) -> Void)) {
-        DKPhotoImagePreviewVC.ioQueue.async {
+        MediaCarouselImagePreviewVC.ioQueue.async {
             let key = URL.absoluteString
             
             var image = SDImageCache.shared.imageFromMemoryCache(forKey: key)

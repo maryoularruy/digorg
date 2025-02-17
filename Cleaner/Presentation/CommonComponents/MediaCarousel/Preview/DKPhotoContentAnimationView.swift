@@ -1,5 +1,5 @@
 //
-//  DKPhotoContentAnimationView.swift
+//  MediaCarouselContentAnimationView.swift
 //  MediaCarousel
 //
 //  Created by ZhangAo on 07/11/2017.
@@ -10,7 +10,7 @@
 
 import UIKit
 
-open class DKPhotoContentAnimationView: UIView {
+open class MediaCarouselContentAnimationView: UIView {
     
     let contentView: UIView
     let contentSize: CGSize

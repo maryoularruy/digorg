@@ -26,7 +26,7 @@ open class MediaCarouselTransitionDismiss: NSObject, UIViewControllerAnimatedTra
         
         var fromContentView: UIView!
         if self.gallery.currentContentVC().previewType == .photo {
-            fromContentView = DKPhotoContentAnimationView(image: self.gallery.currentContentVC().snapshotImage())
+            fromContentView = MediaCarouselContentAnimationView(image: self.gallery.currentContentVC().snapshotImage())
             fromContentView.frame = self.gallery.currentContentView().superview!.convert(self.gallery.currentContentView().frame, to: nil)
             fromContentView.contentMode = self.gallery.currentContentView().contentMode
             fromContentView.layer.cornerRadius = self.gallery.currentContentView().layer.cornerRadius
@@ -38,7 +38,7 @@ open class MediaCarouselTransitionDismiss: NSObject, UIViewControllerAnimatedTra
             playerView.autoresizingMask = []
             let frame = self.gallery.currentContentView().superview!.convert(playerView.frame, to: nil)
             
-            fromContentView = DKPhotoContentAnimationView(view: playerView)
+            fromContentView = MediaCarouselContentAnimationView(view: playerView)
             fromContentView.frame = frame
             fromContentView.contentMode = playerView.contentMode
             fromContentView.layer.cornerRadius = playerView.layer.cornerRadius

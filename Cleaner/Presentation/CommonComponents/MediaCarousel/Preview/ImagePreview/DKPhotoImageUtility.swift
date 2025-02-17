@@ -1,5 +1,5 @@
 //
-//  DKPhotoImageUtility.swift
+//  MediaCarouselImageUtility.swift
 //  MediaCarousel
 //
 //  Created by ZhangAo on 2018/6/6.
