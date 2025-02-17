@@ -19,10 +19,9 @@ final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
     
     weak var delegate: AssetCollectionViewCellDelegate?
     
-	lazy var asset = UIImage()
-    lazy var index = 0
+    private lazy var index = 0
     
-	lazy var isChecked: Bool = false {
+	private lazy var isChecked: Bool = false {
 		didSet {
 			if isChecked {
                 checkBox.image = .selectedCheckBox
@@ -32,7 +31,7 @@ final class AssetCollectionViewCell: UICollectionViewCell, NibReusable {
 		}
 	}
     
-    lazy var isBest: Bool = false {
+    private lazy var isBest: Bool = false {
         didSet {
             bestIcon.isHidden = !isBest
         }

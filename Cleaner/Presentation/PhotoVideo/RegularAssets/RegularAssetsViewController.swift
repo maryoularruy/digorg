@@ -293,24 +293,40 @@ extension RegularAssetsViewController: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AssetCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        let item = assets[indexPath.row]
-        cell.photoImageView.image = item.getAssetThumbnail(TargetSize.medium.size)
-        cell.isChecked = assetsForDeletion.contains(item)
+        cell.delegate = self
+        
+        let asset = assets[indexPath.row]
+        cell.bind(image: asset.getAssetThumbnail(TargetSize.medium.size),
+                  isChecked: assetsForDeletion.contains(asset),
+                  index: indexPath.row)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? AssetCollectionViewCell else { return }
-        cell.isChecked.toggle()
-        if cell.isChecked {
-            assetsForDeletion.remove(assets[indexPath.row])
-        } else {
-            assetsForDeletion.insert(assets[indexPath.row])
+        let gallery = DKPhotoGallery()
+        gallery.singleTapMode = .dismiss
+        var dkarr = [DKPhotoGalleryItem]()
+        assets.forEach { asset in
+            dkarr.append(DKPhotoGalleryItem(asset: asset))
         }
+        gallery.items = dkarr
+        gallery.presentationIndex = indexPath.row
+        present(photoGallery: gallery)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let oneSideSize = (rootView.assetsCollectionView.frame.width / RegularAssetsView.assetsInRow) - RegularAssetsView.spacingBetweenAssets
         return CGSize(width: oneSideSize, height: oneSideSize)
+    }
+}
+
+extension RegularAssetsViewController: AssetCollectionViewCellDelegate {
+    func tapOnCheckBox(index: Int) {
+        let asset = assets[index]
+        if assetsForDeletion.contains(asset) {
+            assetsForDeletion.remove(asset)
+        } else {
+            assetsForDeletion.insert(asset)
+        }
     }
 }
