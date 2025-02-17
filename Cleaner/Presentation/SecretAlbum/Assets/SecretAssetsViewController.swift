@@ -424,9 +424,9 @@ extension SecretAssetsViewController: UICollectionViewDataSource, UICollectionVi
         case .photo:
             guard let image = item.image else { return }
             
-            let gallery = DKPhotoGallery()
+            let gallery = MediaCarousel()
             gallery.singleTapMode = .dismiss
-            gallery.items = [DKPhotoGalleryItem(image: image)]
+            gallery.items = [MediaCarouselItem(image: image)]
             present(photoGallery: gallery)
             
         case .video:

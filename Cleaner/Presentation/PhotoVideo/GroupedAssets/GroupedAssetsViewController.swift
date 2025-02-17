@@ -204,11 +204,11 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension GroupedAssetsViewController: DuplicateTableViewCellDelegate {
     func tapOnCell(assets: [PHAsset], currentPosition: Int) {
-        let gallery = DKPhotoGallery()
+        let gallery = MediaCarousel()
         gallery.singleTapMode = .dismiss
-        var dkarr = [DKPhotoGalleryItem]()
+        var dkarr = [MediaCarouselItem]()
         assets.forEach { asset in
-            dkarr.append(DKPhotoGalleryItem(asset: asset))
+            dkarr.append(MediaCarouselItem(asset: asset))
         }
         gallery.items = dkarr
         gallery.presentationIndex = currentPosition
