@@ -49,8 +49,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xge-Oo-nOS">
-                                <rect key="frame" x="0.0" y="174" width="393" height="678"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xge-Oo-nOS">
+                                <rect key="frame" x="0.0" y="180" width="393" height="672"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="cva-ai-5LW"/>
@@ -80,7 +80,7 @@
                             <constraint firstItem="CbR-7W-sDH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="JhQ-Ui-ICW"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xge-Oo-nOS" secondAttribute="trailing" id="Lhl-R4-izF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3ue-yE-53G" secondAttribute="trailing" constant="16" id="RLk-wK-ESX"/>
-                            <constraint firstItem="xge-Oo-nOS" firstAttribute="top" secondItem="odr-cq-nVd" secondAttribute="bottom" constant="14" id="ROA-Fp-smE"/>
+                            <constraint firstItem="xge-Oo-nOS" firstAttribute="top" secondItem="odr-cq-nVd" secondAttribute="bottom" constant="20" id="ROA-Fp-smE"/>
                             <constraint firstAttribute="bottom" secondItem="xge-Oo-nOS" secondAttribute="bottom" id="Sot-uf-bRC"/>
                             <constraint firstItem="odr-cq-nVd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="TnW-JD-dnk"/>
                             <constraint firstAttribute="bottom" secondItem="CbR-7W-sDH" secondAttribute="bottom" id="UnR-nY-Dic"/>
