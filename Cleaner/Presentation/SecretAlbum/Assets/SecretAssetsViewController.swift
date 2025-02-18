@@ -68,10 +68,6 @@ final class SecretAssetsViewController: UIViewController {
         updateUI()
     }
     
-    deinit {
-        print("SecretAssetsViewController deinit")
-    }
-    
     @IBAction func tapOnAddButton(_ sender: Any) {
         if userDefaultsService.isPasscodeTurnOn {
             

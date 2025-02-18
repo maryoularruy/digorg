@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MGc-bS-evQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MGc-bS-evQ">
                                 <rect key="frame" x="16" y="203" width="361" height="649"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -26,10 +26,10 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47x-fM-VUu">
-                                <rect key="frame" x="0.0" y="64" width="55" height="55"/>
+                                <rect key="frame" x="8" y="64" width="55" height="55"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ArrowBackIcon" translatesAutoresizingMaskIntoConstraints="NO" id="5Eo-7q-oky">
-                                        <rect key="frame" x="-4.6666666666666679" y="-4.3333333333333357" width="64.333333333333329" height="64"/>
+                                        <rect key="frame" x="-4.3333333333333357" y="-4.3333333333333357" width="64" height="64"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -52,13 +52,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsr-u9-nft" customClass="SelectionButtonStyle" customModule="Cleaner" customModuleProvider="target">
-                                <rect key="frame" x="282" y="74" width="95" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Select All"/>
-                                <connections>
-                                    <action selector="tapOnSelectionButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cWn-nm-xn9"/>
-                                </connections>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsr-u9-nft" customClass="SelectionButtonStyle" customModule="Cleaner" customModuleProvider="target">
+                                <rect key="frame" x="302" y="74.666666666666671" width="75" height="34"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Select All"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="maS-YL-Smn" customClass="ActionToolbar" customModule="Cleaner" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="752" width="393" height="100"/>
@@ -68,7 +65,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" name="White"/>
+                        <color key="backgroundColor" name="PaleGrey"/>
                         <constraints>
                             <constraint firstItem="zgk-Yq-bRB" firstAttribute="top" secondItem="47x-fM-VUu" secondAttribute="bottom" constant="16" id="6pI-TE-DjL"/>
                             <constraint firstAttribute="bottom" secondItem="MGc-bS-evQ" secondAttribute="bottom" id="7mt-vq-EYM"/>
@@ -81,7 +78,7 @@
                             <constraint firstAttribute="bottom" secondItem="maS-YL-Smn" secondAttribute="bottom" id="Vsz-uN-XKA"/>
                             <constraint firstAttribute="trailing" secondItem="maS-YL-Smn" secondAttribute="trailing" id="ebX-ZV-vwz"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="MGc-bS-evQ" secondAttribute="trailing" constant="16" id="ihR-Hw-nyZ"/>
-                            <constraint firstItem="47x-fM-VUu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="o56-XR-S2h"/>
+                            <constraint firstItem="47x-fM-VUu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="o56-XR-S2h"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Nsr-u9-nft" secondAttribute="trailing" constant="16" id="raH-mF-2Lb"/>
                             <constraint firstItem="Wjj-dg-Irr" firstAttribute="top" secondItem="zgk-Yq-bRB" secondAttribute="bottom" constant="6" id="vmj-xE-5X6"/>
                             <constraint firstItem="zgk-Yq-bRB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="yWM-14-oFo"/>
@@ -102,7 +99,7 @@
     </scenes>
     <resources>
         <image name="ArrowBackIcon" width="64" height="64"/>
-        <namedColor name="White">
+        <namedColor name="PaleGrey">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>

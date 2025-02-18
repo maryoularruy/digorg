@@ -167,11 +167,6 @@ final class ContactManager {
         }
     }
     
-    func importSecretContacts(_ contacts: [CNContact]) {
-        FileManager.default.saveSecretContacts(contacts)
-        delete(contacts)
-    }
-    
     func findDuplicatedNumber(_ contacts: [CNContact]) -> String? {
         for i in 0..<contacts.count {
             for j in 0..<contacts[i].phoneNumbers.count {
@@ -185,7 +180,14 @@ final class ContactManager {
         return nil
     }
     
-    static func getSecretContacts() -> [CNContact]? {
+    func saveSecretContacts(_ contacts: [CNContact], removeFromGallery: Bool = false, cleanBeforeSaving: Bool = false) {
+        FileManager.default.saveSecretContacts(contacts, cleanBeforeSaving: cleanBeforeSaving)
+        if removeFromGallery {
+            delete(contacts)
+        }
+    }
+    
+    func getSecretContacts() -> [CNContact]? {
         FileManager.default.getSecretContacts()
     }
     

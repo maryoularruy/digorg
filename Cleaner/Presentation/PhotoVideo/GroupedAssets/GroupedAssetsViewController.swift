@@ -67,8 +67,6 @@ final class GroupedAssetsViewController: UIViewController {
         assetGroups.reduce(0) { $0 + $1.assets.count }
     }
     
-    private lazy var duplicatesCount: Int = 0
-    
     private lazy var assetsForDeletion = Set<PHAsset>() {
         didSet {
             selectionButton.bind(text: assetsForDeletion.count == assetsCount ? .deselectAll : .selectAll)
@@ -204,15 +202,15 @@ extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension GroupedAssetsViewController: DuplicateTableViewCellDelegate {
     func tapOnCell(assets: [PHAsset], currentPosition: Int) {
-        let gallery = MediaCarousel()
-        gallery.singleTapMode = .dismiss
-        var dkarr = [MediaCarouselItem]()
+        let carousel = MediaCarousel()
+        carousel.singleTapMode = .dismiss
+        var items = [MediaCarouselItem]()
         assets.forEach { asset in
-            dkarr.append(MediaCarouselItem(asset: asset))
+            items.append(MediaCarouselItem(asset: asset))
         }
-        gallery.items = dkarr
-        gallery.presentationIndex = currentPosition
-        present(photoGallery: gallery)
+        carousel.items = items
+        carousel.presentationIndex = currentPosition
+        present(photoGallery: carousel)
     }
     
     func tapOnCheckBox(groupIndex: Int, assetIndex: Int) {
