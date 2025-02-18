@@ -303,15 +303,15 @@ extension RegularAssetsViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let gallery = MediaCarousel()
-        gallery.singleTapMode = .dismiss
-        var dkarr = [MediaCarouselItem]()
+        let carousel = MediaCarousel()
+        carousel.singleTapMode = .dismiss
+        var items = [MediaCarouselItem]()
         assets.forEach { asset in
-            dkarr.append(MediaCarouselItem(asset: asset))
+            items.append(MediaCarouselItem(asset: asset))
         }
-        gallery.items = dkarr
-        gallery.presentationIndex = indexPath.row
-        present(photoGallery: gallery)
+        carousel.items = items
+        carousel.presentationIndex = indexPath.row
+        present(photoGallery: carousel)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
