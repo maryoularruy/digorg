@@ -9,6 +9,9 @@ import StoreKit
 
 final class PremiumViewController: UIViewController {
     private lazy var rootView = PremiumView()
+    private lazy var store = Store.shared
+
+    private var product: Product?
     
     override func loadView() {
         super.loadView()
@@ -18,6 +21,13 @@ final class PremiumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //
+        rootView.premiumOfferView.configureUI(for: .purchaseThreeDaysTrial)
+        //
     }
 }
 
@@ -36,7 +46,7 @@ extension PremiumViewController: PremiumViewDelegate {
     }
     
     func tapOnRestore() {
-        Store.shared.restorePurchases()
+//        Store.shared.restorePurchases()
     }
     
     func tapOnPrivacyPolicy() {
@@ -50,17 +60,14 @@ extension PremiumViewController: PremiumViewDelegate {
 
 extension PremiumViewController: PremiumOfferViewDelegate {
     func tapOnOfferButton(with status: PurchaseStatus) {
-        guard let subscription = Store.shared.subscriptions.first else { return }
+        guard let product = store.products.first else { return }
         
-        switch status {
-        case .purchaseThreeDaysTrial:
-            Store.shared.purchase(subscription)
-            
-        case .purchaseWeeklyRenewableSubscription:
-            Store.shared.purchase(subscription)
-            
-        case .cancelSubscription:
-            Store.shared.purchase(subscription)
+        Task.init {
+            do {
+                try await store.purchase()
+            } catch {
+                
+            }
         }
     }
 }

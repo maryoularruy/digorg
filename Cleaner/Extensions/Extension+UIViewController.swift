@@ -30,11 +30,9 @@ extension UIViewController {
     
     func showAlert(error: Error) {
         if let error = error as? StoreError {
-            if error.isShowAlert {
-                let alert = UIAlertController(title: error.title, message: error.subtitle, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                present(alert, animated: true)
-            }
+            let alert = UIAlertController(title: error.title, message: error.subtitle, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alert, animated: true)
         } else {
             let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))

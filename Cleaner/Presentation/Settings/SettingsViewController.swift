@@ -46,9 +46,9 @@ final class SettingsViewController: UIViewController {
     }
     
     private func updateSubscriptionUI() {
-        premiumIcon.isHidden = userDefaultsService.isSubscriptionActive
-        buyPremiumView.isHidden = !userDefaultsService.isSubscriptionActive
-        subscriptionInfoView.isHidden = userDefaultsService.isSubscriptionActive
+        premiumIcon.isHidden = !userDefaultsService.isSubscriptionActive
+        buyPremiumView.isHidden = userDefaultsService.isSubscriptionActive
+        subscriptionInfoView.isHidden = !userDefaultsService.isSubscriptionActive
     }
     
     private func updateSettingsContainers() {
@@ -86,7 +86,9 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
     func tapOnOption(_ option: SettingsOption) {
         switch option.type {
         case .subscriptionInfo:
-            break
+            let vc = PremiumViewController()
+            vc.modalPresentationStyle = .pageSheet
+            present(vc, animated: true)
         case .photosRemovable:
             userDefaultsService.set(option.isSwitchable, key: .isRemovePhotosAfterImport)
         case .contactsRemovable:
