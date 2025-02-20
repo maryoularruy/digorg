@@ -29,6 +29,12 @@
                                                 <color key="textColor" name="Black"/>
                                                 <color key="highlightedColor" name="BlackTextColor"/>
                                             </label>
+                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProViewWithText" translatesAutoresizingMaskIntoConstraints="NO" id="1Ua-x7-5AX">
+                                                <rect key="frame" x="292" y="11" width="71" height="26"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="26" id="YqD-Di-2dm"/>
+                                                </constraints>
+                                            </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="80D-7X-N8u">
                                                 <rect key="frame" x="0.0" y="85.666666666666657" width="365" height="55"/>
                                                 <constraints>
@@ -84,6 +90,8 @@
                                             <constraint firstAttribute="trailing" secondItem="80D-7X-N8u" secondAttribute="trailing" id="p14-7u-MwM"/>
                                             <constraint firstItem="80D-7X-N8u" firstAttribute="leading" secondItem="GIo-qk-VCV" secondAttribute="leading" id="s4z-ID-c5Y"/>
                                             <constraint firstItem="80D-7X-N8u" firstAttribute="top" secondItem="zHM-bM-q0t" secondAttribute="bottom" constant="8" id="tWl-fL-lpx"/>
+                                            <constraint firstItem="1Ua-x7-5AX" firstAttribute="centerY" secondItem="lu2-o2-cXL" secondAttribute="centerY" id="tx5-vs-xS8"/>
+                                            <constraint firstAttribute="trailing" secondItem="1Ua-x7-5AX" secondAttribute="trailing" constant="2" id="xhq-lh-OPb"/>
                                             <constraint firstItem="lu2-o2-cXL" firstAttribute="leading" secondItem="GIo-qk-VCV" secondAttribute="leading" id="y6t-Ut-fpq"/>
                                         </constraints>
                                     </view>
@@ -116,6 +124,7 @@
                         <outlet property="deviceInfoLabel" destination="zHM-bM-q0t" id="TaH-6d-JMX"/>
                         <outlet property="deviceInfoStackView" destination="80D-7X-N8u" id="hmM-Ge-llP"/>
                         <outlet property="photosCleanup" destination="5Gq-Bb-ynR" id="0IA-K1-MLC"/>
+                        <outlet property="premiumImageView" destination="1Ua-x7-5AX" id="of2-K1-gSP"/>
                         <outlet property="storageUsageView" destination="TQ5-mm-K5l" id="69h-7x-7y6"/>
                         <outlet property="videosCleanup" destination="cCW-Cu-DQW" id="vVh-P3-Guh"/>
                     </connections>
@@ -187,12 +196,13 @@
     <resources>
         <image name="HomeNormalTabBarItem" width="53" height="42"/>
         <image name="HomeSelectedTabBarItem" width="53" height="42"/>
+        <image name="ProViewWithText" width="71" height="26"/>
         <image name="SettingsNormalTabBarItem" width="53" height="42"/>
         <image name="SettingsSelectedTabBarItem" width="53" height="42"/>
         <image name="ToolsNormalTabBarItem" width="53" height="42"/>
         <image name="ToolsSelectedTabBarItem" width="53" height="42"/>
         <namedColor name="Black">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.11764705882352941" green="0.12156862745098039" blue="0.12941176470588237" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="BlackTextColor">
             <color red="0.11764705882352941" green="0.12156862745098039" blue="0.12941176470588237" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

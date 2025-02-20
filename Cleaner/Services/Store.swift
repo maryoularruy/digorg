@@ -44,9 +44,7 @@ final class Store {
                 try await fetchProducts()
             } catch {}
             
-            await checkSubscriptionStatus()
-            
-            let rr = await isTrialNow()
+            await checkSubscriptionStatus()            
         }
     }
     
@@ -138,7 +136,6 @@ final class Store {
     }
     
     private func updateCustomerProductStatus(_ transaction: Transaction) {
-        let expirationDate = transaction.expirationDate
-        
+        UserDefaultsService.shared.set(transaction.expirationDate, key: .subscriptionExpirationDate)
     }
 }

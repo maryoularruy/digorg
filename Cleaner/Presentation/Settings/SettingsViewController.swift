@@ -8,7 +8,7 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
-    @IBOutlet weak var premiumIcon: UIImageView!
+    @IBOutlet weak var premiumImageView: UIImageView!
     @IBOutlet weak var subscriptionStackView: UIStackView!
     @IBOutlet weak var removeAfterImportContainer: SettingsOptionsContainer!
     @IBOutlet weak var passcodeOptionsContainer: SettingsOptionsContainer!
@@ -46,9 +46,11 @@ final class SettingsViewController: UIViewController {
     }
     
     private func updateSubscriptionUI() {
-        premiumIcon.isHidden = !userDefaultsService.isSubscriptionActive
-        buyPremiumView.isHidden = userDefaultsService.isSubscriptionActive
-        subscriptionInfoView.isHidden = !userDefaultsService.isSubscriptionActive
+        let isSubscriptionActive = userDefaultsService.isSubscriptionActive
+        
+        premiumImageView.isHidden = !isSubscriptionActive
+        buyPremiumView.isHidden = isSubscriptionActive
+        subscriptionInfoView.isHidden = !isSubscriptionActive
     }
     
     private func updateSettingsContainers() {
@@ -77,7 +79,7 @@ extension SettingsViewController: ViewControllerProtocol {
 extension SettingsViewController: BuyPremiumViewDelegate {
     func tapOnStartTrial() {
         let vc = PremiumViewController()
-        vc.modalPresentationStyle = .pageSheet
+        vc.modalPresentationStyle = .popover
         present(vc, animated: true)
     }
 }
@@ -87,7 +89,7 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
         switch option.type {
         case .subscriptionInfo:
             let vc = PremiumViewController()
-            vc.modalPresentationStyle = .pageSheet
+            vc.modalPresentationStyle = .popover
             present(vc, animated: true)
         case .photosRemovable:
             userDefaultsService.set(option.isSwitchable, key: .isRemovePhotosAfterImport)

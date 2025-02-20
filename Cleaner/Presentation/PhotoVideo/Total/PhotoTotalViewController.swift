@@ -10,7 +10,9 @@ import Photos
 
 final class PhotoTotalViewController: UIViewController {
     private lazy var rootView = PhotoTotalView()
+    
     private lazy var photoVideoManager = PhotoVideoManager.shared
+    private lazy var userDefaultsService = UserDefaultsService.shared
     
     override func loadView() {
         super.loadView()
@@ -30,6 +32,12 @@ final class PhotoTotalViewController: UIViewController {
 
 extension PhotoTotalViewController: ViewControllerProtocol {
     func setupUI() {
+        if userDefaultsService.isSubscriptionActive {
+            rootView.duplicatePhotosView.unlock()
+        } else {
+            rootView.duplicatePhotosView.setLocked()
+        }
+        
         let progressStep: CGFloat = 1.0 / 6
         rootView.progressViewHeight.constant = ScanningGalleryProgressView.height
         rootView.progressView.resetProgress()

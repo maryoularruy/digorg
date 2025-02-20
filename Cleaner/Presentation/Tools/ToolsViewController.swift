@@ -8,8 +8,14 @@
 import UIKit
 
 final class ToolsViewController: UIViewController {
-    @IBOutlet weak var proImageView: UIImageView!
+    @IBOutlet weak var premiumImageView: UIImageView!
+    
     @IBOutlet weak var toolOptionsStackView: UIStackView!
+    private lazy var secretAlbumOptionToolView = ToolOptionView(.secretAlbum)
+    private lazy var secretContactsOptionToolView = ToolOptionView(.secretContact)
+    private lazy var networkSpeedTestOptionToolView = ToolOptionView(.networkSpeedTest)
+    private lazy var batteryOptionToolView = ToolOptionView(.battery)
+    
     @IBOutlet weak var instructionsView: UIView!
     @IBOutlet weak var instructionsIcon: UIImageView!
     
@@ -20,15 +26,31 @@ final class ToolsViewController: UIViewController {
         setupUI()
         addGestureRecognizers()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
+    }
+    
+    private func updateUI() {
+        let isSubscriptionActive = userDefaultsService.isSubscriptionActive
+        
+        premiumImageView.isHidden = !isSubscriptionActive
+        
+        if isSubscriptionActive {
+            [secretAlbumOptionToolView, secretContactsOptionToolView].forEach { $0.unlock() }
+        } else {
+            [secretAlbumOptionToolView, secretContactsOptionToolView].forEach { $0.setLocked() }
+        }
+    }
 }
 
 extension ToolsViewController: ViewControllerProtocol {
     func setupUI() {
-        ToolOption.allCases.forEach { option in
-            let view = ToolOptionView()
-            view.delegate = self
-            view.bind(option)
-            toolOptionsStackView.addArrangedSubview(view)
+        [secretAlbumOptionToolView, secretContactsOptionToolView,
+         networkSpeedTestOptionToolView, batteryOptionToolView].forEach { optionView in
+            optionView.delegate = self
+            toolOptionsStackView.addArrangedSubview(optionView)
         }
         
         instructionsIcon.layer.cornerRadius = 20

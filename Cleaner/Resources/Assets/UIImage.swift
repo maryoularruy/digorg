@@ -166,5 +166,8 @@ extension UIImage {
     static var selectedCheckBoxBlue = UIImage(resource: .selectedCheckBoxBlue)
     
     static var blackStar = UIImage(resource: .blackStar)
-    static var pro = UIImage(resource: .proView)
+    
+    //MARK: -Premium
+    static var premiumIcon = UIImage(resource: .proView)
+    static var premiumWithTextIcon = UIImage(resource: .proViewWithText)
 }

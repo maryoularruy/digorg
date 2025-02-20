@@ -9,9 +9,12 @@ import UIKit
 import Contacts
 
 final class MainViewController: UIViewController {
+    @IBOutlet weak var premiumImageView: UIImageView!
+    
     @IBOutlet weak var deviceInfoLabel: UILabel!
     @IBOutlet weak var deviceInfoStackView: UIStackView!
     @IBOutlet weak var storageUsageView: StorageUsageView!
+    
     @IBOutlet weak var cleanupOptionsStackView: UIStackView!
     @IBOutlet weak var photosCleanup: CleanupOptionView!
     @IBOutlet weak var videosCleanup: CleanupOptionView!
@@ -21,6 +24,7 @@ final class MainViewController: UIViewController {
     private lazy var photoVideoManager = PhotoVideoManager.shared
     private lazy var contactManager = ContactManager.shared
     private lazy var calendarManager = CalendarManager.shared
+    private lazy var userDefaultsService = UserDefaultsService.shared
     
     private var timer: Timer?
     private var speedTimer: Timer?
@@ -33,11 +37,7 @@ final class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupDeviceInfoSection()
-        setupStorageUsageSection()
-        checkPhotoLibraryAccessStatus()
-        checkContactsAccessStatus()
-        checkCalendarAccessStatus()
+        updateUI()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -46,6 +46,16 @@ final class MainViewController: UIViewController {
         timer = nil
         speedTimer?.invalidate()
         speedTimer = nil
+    }
+    
+    private func updateUI() {
+        premiumImageView.isHidden = !userDefaultsService.isSubscriptionActive
+        
+        setupDeviceInfoSection()
+        setupStorageUsageSection()
+        checkPhotoLibraryAccessStatus()
+        checkContactsAccessStatus()
+        checkCalendarAccessStatus()
     }
     
     private func setupDeviceInfoSection() {

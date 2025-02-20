@@ -24,10 +24,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProViewWithText" translatesAutoresizingMaskIntoConstraints="NO" id="L6w-0y-Vxj">
-                                <rect key="frame" x="302" y="62.666666666666657" width="75" height="27"/>
+                                <rect key="frame" x="306" y="62.666666666666657" width="71" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="2sz-fe-ZkN"/>
-                                    <constraint firstAttribute="width" constant="75" id="xsI-ZF-TEz"/>
                                 </constraints>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oy2-lT-tR7">
@@ -103,7 +102,7 @@
                     <connections>
                         <outlet property="instructionsIcon" destination="z2D-Q0-nSG" id="ydz-ct-Mzb"/>
                         <outlet property="instructionsView" destination="553-JY-dI7" id="NC8-A7-qCT"/>
-                        <outlet property="proImageView" destination="L6w-0y-Vxj" id="Q2m-l3-gD8"/>
+                        <outlet property="premiumImageView" destination="L6w-0y-Vxj" id="Q2m-l3-gD8"/>
                         <outlet property="toolOptionsStackView" destination="ay4-DS-pQj" id="ghv-lR-2LJ"/>
                     </connections>
                 </viewController>
