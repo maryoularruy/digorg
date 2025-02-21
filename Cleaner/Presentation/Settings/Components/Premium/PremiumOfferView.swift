@@ -14,25 +14,16 @@ protocol PremiumOfferViewDelegate: AnyObject {
 final class PremiumOfferView: UIView {
     weak var delegate: PremiumOfferViewDelegate?
     
-    func configureUI(for status: PurchaseStatus) {
-        subviews.forEach { $0.removeFromSuperview() }
-        
-        switch status {
-        case .purchaseThreeDaysTrial: setupTrialUI()
-        case .purchaseWeeklyRenewableSubscription: setupSubscriptionUI()
-        case .cancelSubscription: setupCancelSubscriptionUI()
-        }
-    }
-    
-    private func setupTrialUI() {
+    func setupTrialUI(price: String) {
         let title = Semibold24LabelStyle()
         title.bind(text: "3 days for Free!")
         
         let commonPriceLabel = Semibold15LabelStyle()
         commonPriceLabel.setGreyText()
-        commonPriceLabel.bind(text: "$5,99 / week")
+        commonPriceLabel.bind(text: price)
         
         let startTrialButton = ActionToolbarButtonStyle()
+        startTrialButton.layer.cornerRadius = 30
         startTrialButton.bind(text: "Start 3 days trial")
         startTrialButton.addTapGestureRecognizer { [weak self] in
             self?.delegate?.tapOnOfferButton(with: .purchaseThreeDaysTrial)

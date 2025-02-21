@@ -44,7 +44,7 @@ final class Store {
                 try await fetchProducts()
             } catch {}
             
-            await checkSubscriptionStatus()            
+            await checkSubscriptionStatus()
         }
     }
     
@@ -107,9 +107,20 @@ final class Store {
         return false
     }
     
-    func checkTrialEligibility() async -> Bool {
+    func isTrialEligible() async -> Bool {
         guard let product = products.first else { return false }
         return await product.subscription?.isEligibleForIntroOffer ?? false
+    }
+    
+    func isAutoRenew() async -> Bool {
+        guard let product = products.first else { return false }
+        
+        do {
+            guard let status = try await product.subscription?.status.first else { return false }
+            return try status.renewalInfo.payloadValue.willAutoRenew
+        } catch {
+            return false
+        }
     }
     
     private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {

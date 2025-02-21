@@ -8,17 +8,7 @@
 import UIKit
 
 final class OfferDescriptionView: UIView {
-    func configureUI(for status: PurchaseStatus) {
-        subviews.forEach { $0.removeFromSuperview() }
-        
-        switch status {
-        case .purchaseThreeDaysTrial: setupTrialUI()
-        case .purchaseWeeklyRenewableSubscription: setupSubscriptionUI()
-        case .cancelSubscription: setupCancelSubscriptionUI()
-        }
-    }
-    
-    private func setupTrialUI() {
+    func setupTrialUI() {
         let label = Regular15LabelStyle()
         label.bind(text: "Get full access to all features")
         label.setGreyTextColor()

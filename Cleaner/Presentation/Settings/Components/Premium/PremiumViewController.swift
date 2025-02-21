@@ -15,10 +15,10 @@ final class PremiumViewController: UIViewController {
     weak var delegate: PremiumVCDelegate?
     
     private lazy var rootView = PremiumView()
-    private lazy var store = Store.shared
-
-    private var product: Product?
     
+    private lazy var store = Store.shared
+    private lazy var userDefaultsService = UserDefaultsService.shared
+
     override func loadView() {
         super.loadView()
         view = rootView
@@ -31,14 +31,32 @@ final class PremiumViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //
-        rootView.premiumOfferView.configureUI(for: .purchaseThreeDaysTrial)
-        //
+        updateUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         delegate?.viewWasDismissed()
+    }
+    
+    private func updateUI() {
+        guard let product = store.products.first else { return }
+        let price = "\(product.displayPrice) / week"
+        
+        //
+        if userDefaultsService.isSubscriptionActive {
+            
+        } else {
+            Task.init {
+                if await store.isTrialEligible() {
+                    rootView.offerDescriptionView.setupTrialUI()
+                    rootView.premiumOfferView.setupTrialUI(price: price)
+                } else {
+                    
+                }
+            }
+        }
+        //
     }
 }
 
