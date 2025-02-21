@@ -57,6 +57,19 @@ final class SettingsViewController: UIViewController {
         removeAfterImportContainer.bind(options: removeAfterImportOptions, isDefaultHeight: false)
         passcodeOptionsContainer.bind(options: passcodeOptions, isDefaultHeight: false)
     }
+    
+    private func openPremiumVC() {
+        let vc = PremiumViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .popover
+        present(vc, animated: true)
+    }
+}
+
+extension SettingsViewController: PremiumVCDelegate {
+    func viewWasDismissed() {
+        updateSubscriptionUI()
+    }
 }
 
 extension SettingsViewController: ViewControllerProtocol {
@@ -78,9 +91,7 @@ extension SettingsViewController: ViewControllerProtocol {
 
 extension SettingsViewController: BuyPremiumViewDelegate {
     func tapOnStartTrial() {
-        let vc = PremiumViewController()
-        vc.modalPresentationStyle = .popover
-        present(vc, animated: true)
+        openPremiumVC()
     }
 }
 
@@ -88,9 +99,8 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
     func tapOnOption(_ option: SettingsOption) {
         switch option.type {
         case .subscriptionInfo:
-            let vc = PremiumViewController()
-            vc.modalPresentationStyle = .popover
-            present(vc, animated: true)
+            openPremiumVC()
+            
         case .photosRemovable:
             userDefaultsService.set(option.isSwitchable, key: .isRemovePhotosAfterImport)
         case .contactsRemovable:

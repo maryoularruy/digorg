@@ -7,7 +7,13 @@
 
 import StoreKit
 
+protocol PremiumVCDelegate: AnyObject {
+    func viewWasDismissed()
+}
+
 final class PremiumViewController: UIViewController {
+    weak var delegate: PremiumVCDelegate?
+    
     private lazy var rootView = PremiumView()
     private lazy var store = Store.shared
 
@@ -28,6 +34,11 @@ final class PremiumViewController: UIViewController {
         //
         rootView.premiumOfferView.configureUI(for: .purchaseThreeDaysTrial)
         //
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.viewWasDismissed()
     }
 }
 
