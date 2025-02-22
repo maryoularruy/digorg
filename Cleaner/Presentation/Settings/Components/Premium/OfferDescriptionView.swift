@@ -8,17 +8,7 @@
 import UIKit
 
 final class OfferDescriptionView: UIView {
-    func configureUI(for status: PurchaseStatus) {
-        subviews.forEach { $0.removeFromSuperview() }
-        
-        switch status {
-        case .purchaseThreeDaysTrial: setupTrialUI()
-        case .purchaseWeeklyRenewableSubscription: setupSubscriptionUI()
-        case .cancelSubscription: setupCancelSubscriptionUI()
-        }
-    }
-    
-    private func setupTrialUI() {
+    func setupStartSubscriptionUI() {
         let label = Regular15LabelStyle()
         label.bind(text: "Get full access to all features")
         label.setGreyTextColor()
@@ -32,12 +22,12 @@ final class OfferDescriptionView: UIView {
         ])
     }
     
-    private func setupSubscriptionUI() {
+    func setupTrialUI(price: String, expirationDate: Date) {
         let currentStatusLabel = Semibold24LabelStyle()
         currentStatusLabel.bind(text: "3 days Trial")
         
         let renewsDateLabel = Regular15LabelStyle()
-        renewsDateLabel.bind(text: "Renews 14 July, $5.99/week")
+        renewsDateLabel.bind(text: "Renews \(expirationDate.toDayAndMonth()), \(price)")
         renewsDateLabel.setGreyTextColor()
         
         addSubviews([currentStatusLabel, renewsDateLabel])
@@ -52,12 +42,12 @@ final class OfferDescriptionView: UIView {
         ])
     }
     
-    private func setupCancelSubscriptionUI() {
+    func setupSubscriptionUI(price: String, expirationDate: Date) {
         let currentStatusLabel = Semibold24LabelStyle()
-        currentStatusLabel.bind(text: "$5.99 / week")
+        currentStatusLabel.bind(text: price)
         
         let renewsDateLabel = Regular15LabelStyle()
-        renewsDateLabel.bind(text: "Renews 14 July")
+        renewsDateLabel.bind(text: "Renews \(expirationDate.toDayAndMonth())")
         renewsDateLabel.setGreyTextColor()
         
         addSubviews([currentStatusLabel, renewsDateLabel])

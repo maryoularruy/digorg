@@ -34,14 +34,4 @@ enum ToolOption: String, CaseIterable {
         case .battery: "Save your battery life"
         }
     }
-    
-    var isProFunction: Bool {
-        switch self {
-        case .secretAlbum: true
-        case .secretContact: true
-        case .networkSpeedTest: false
-//        case .widgets: false
-        case .battery: false
-        }
-    }
 }

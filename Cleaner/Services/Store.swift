@@ -11,179 +11,175 @@ var WEEKLY_PREMIUM_ID = "premium.weekly"
 
 enum StoreError: Error {
     case failedVerification,
-         waitingOnSCAOrBuyApproval,
-         unknowedError,
-         userCancelled
+         networkError,
+         unknowedError
     
-    var isShowAlert: Bool {
-        switch self {
-        case .failedVerification: true
-        case .waitingOnSCAOrBuyApproval: false
-        case .unknowedError: true
-        case.userCancelled: false
-        }
-    }
-    
-    var title: String? {
+    var title: String {
         switch self {
         case .failedVerification: "Failed Verification"
-        case .waitingOnSCAOrBuyApproval: nil
+        case .networkError: "Network Error"
         case .unknowedError: "Unknowed error"
-        case.userCancelled: nil
         }
     }
     
-    var subtitle: String? {
+    var subtitle: String {
         switch self {
         case .failedVerification: "Your verification is failed"
-        case .waitingOnSCAOrBuyApproval: nil
+        case .networkError: "Check your network connection and try again"
         case .unknowedError: "Unknowed error"
-        case .userCancelled: nil
         }
     }
 }
 
-final class Store: NSObject {
+final class Store {
     static var shared = Store()
-    static let productIds = [WEEKLY_PREMIUM_ID]
     
-    private(set) var subscriptions: [SKProduct] = []
-    private var productRequest: SKProductsRequest?
+    private(set) var products: [Product] = []
+    private let productIds = [WEEKLY_PREMIUM_ID]
     
-    override init() {
-        super.init()
-        SKPaymentQueue.default().add(self)
+    var updateListenerTask: Task<Void, Error>? = nil
+    
+    init() {
+        updateListenerTask = listenForTransactions()
+        
+        Task.init {
+            do {
+                try await fetchProducts()
+            } catch {}
+            
+            await checkSubscriptionStatus()
+        }
+    }
+    
+    deinit {
+        updateListenerTask?.cancel()
     }
 
-    deinit {
-        SKPaymentQueue.default().remove(self)
+    func fetchProducts() async throws {
+        products = try await Product.products(for: productIds)
     }
     
-    func fetchProducts(productIdentifiers: [String]) {
-        let productIdentifiersSet = Set(productIdentifiers)
-        productRequest = SKProductsRequest(productIdentifiers: productIdentifiersSet)
-        productRequest?.delegate = self
-        productRequest?.start()
-    }
-    
-    func purchase(_ product: SKProduct) {
-        if SKPaymentQueue.canMakePayments() {
-            SKPaymentQueue.default().add(SKPayment(product: product))
+    func purchase() async throws {
+        if products.isEmpty {
+            try await fetchProducts()
+            try await purchaseProduct()
         } else {
-            print("User cannot make payments")
+            try await purchaseProduct()
         }
     }
     
-    func restorePurchases() {
-        SKPaymentQueue.default().restoreCompletedTransactions()
-    }
-    
-    func checkUserSubscription() {
-        guard let receiptData = getAppReceipt() else { return }
-        let receiptString = receiptData.base64EncodedString()
+    private func purchaseProduct() async throws {
+        guard let product = products.first else { throw StoreError.networkError }
         
-        validateReceipt(receiptData: receiptString, isSandbox: false) { [weak self] res in
-            guard let res else { return }
-            self?.parseReceipt(res)
+        let result = try await product.purchase()
+
+        switch result {
+        case .success(let verification):
+            let transaction = try checkVerified(verification)
+            await transaction.finish()
+            updateCustomerProductStatus(transaction)
+        case .userCancelled, .pending:
+            return
+        default:
+            return
         }
     }
     
-    private func parseReceipt(_ receipt: [String: Any]) {
-        if let latestReceiptInfo = receipt["latest_receipt_info"] as? [[String: Any]] {
-            for transaction in latestReceiptInfo {
-                if let productId = transaction["product_id"] as? String,
-                   let expiresDateStr = transaction["expires_date"] as? String,
-                   let expiresDate = parseDate(expiresDateStr) {
-                    let isActive = isSubscriptionActive(expiresDate: expiresDate)
+    func restore(completion: @escaping (Bool) -> Void) throws {
+        Task {
+            do {
+                var restored = false
+                for await result in Transaction.currentEntitlements {
+                    switch result {
+                    case .verified(let transaction):
+                        if transaction.revocationDate == nil {
+                            restored = true
+                        }
+                    case .unverified(_, let error):
+                        throw error
+                    }
+                }
+                completion(restored)
+            } catch {
+                throw error
+            }
+        }
+    }
+    
+    func checkSubscriptionStatus() async {
+        for await result in Transaction.currentEntitlements {
+            switch result {
+            case .verified(let transaction):
+                let productID = transaction.productID
+                let expirationDate = transaction.expirationDate
+                let isTrial = transaction.offerType == .introductory
+
+                if let expirationDate, expirationDate > Date() {
+                    if isTrial {
+                        print("\(productID) is active on a **free trial** until \(expirationDate).")
+                    } else {
+                        print("\(productID) is **actively subscribed (paid)** until \(expirationDate).")
+                    }
+                } else {
+                    print("\(productID) has **expired**.")
+                }
+            case .unverified(let transaction, let error):
+                print("Unverified transaction for \(transaction.productID): \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func isTrialNow() async -> Bool {
+        for await result in Transaction.currentEntitlements {
+            if case .verified(let transaction) = result {
+                if transaction.offerType == .introductory {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func isTrialEligible() async -> Bool {
+        guard let product = products.first else { return false }
+        return await product.subscription?.isEligibleForIntroOffer ?? false
+    }
+    
+    func isAutoRenew() async -> Bool {
+        guard let product = products.first else { return false }
+        
+        do {
+            guard let status = try await product.subscription?.status.first else { return false }
+            return try status.renewalInfo.payloadValue.willAutoRenew
+        } catch {
+            return false
+        }
+    }
+    
+    private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
+        switch result {
+        case .unverified:
+            throw StoreError.failedVerification
+        case .verified(let safe):
+            return safe
+        }
+    }
+    
+    private func listenForTransactions() -> Task<Void, Error> {
+        return Task.detached {
+            for await result in Transaction.updates {
+                do {
+                    let transaction = try self.checkVerified(result)
+                    self.updateCustomerProductStatus(transaction)
+                    await transaction.finish()
+                } catch {
+                    print("Transaction failed verification.")
                 }
             }
         }
     }
-
-    private func parseDate(_ dateStr: String) -> Date? {
-        // For example, "2023-11-25 10:00:00 Etc/GMT"
-        nil
-    }
     
-    private func isSubscriptionActive(expiresDate: Date) -> Bool {
-        Date() < expiresDate
+    private func updateCustomerProductStatus(_ transaction: Transaction) {
+        UserDefaultsService.shared.set(transaction.expirationDate, key: .subscriptionExpirationDate)
     }
-    
-    private func validateReceipt(receiptData: String, isSandbox: Bool = false, completion: @escaping ([String: Any]?) -> Void) {
-        let urlString = isSandbox ? "https://sandbox.itunes.apple.com/verifyReceipt" : "https://buy.itunes.apple.com/verifyReceipt"
-        guard let url = URL(string: urlString) else { return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        let requestData: [String: Any] = [
-            "receipt-data": receiptData,
-            "password": "<your-shared-secret>",
-            "exclude-old-transactions": true
-        ]
-        
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: requestData, options: []) else { return }
-        request.httpBody = httpBody
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data,
-                  let receiptInfo = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                completion(nil)
-                return
-            }
-            completion(receiptInfo)
-        }
-        task.resume()
-    }
-    
-    private func getAppReceipt() -> Data? {
-        if let appReceiptURL = Bundle.main.appStoreReceiptURL,
-           let receiptData = try? Data(contentsOf: appReceiptURL) {
-            return receiptData
-        } else {
-            refreshReceipt()
-            return nil
-        }
-    }
-    
-    private func refreshReceipt() {
-        let request = SKReceiptRefreshRequest()
-        request.delegate = self
-        request.start()
-    }
-}
-
-extension Store: SKPaymentTransactionObserver {
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        transactions.forEach { transaction in
-            switch transaction.transactionState {
-            case .purchasing:
-                break
-            case .purchased:
-                print("purchase success")
-                UserDefaultsService.shared.set(true, key: .isSubscriptionActive)
-                SKPaymentQueue.default().finishTransaction(transaction)
-            case .failed:
-                SKPaymentQueue.default().finishTransaction(transaction)
-            case .restored:
-                SKPaymentQueue.default().finishTransaction(transaction)
-            case .deferred:
-                break
-            @unknown default:
-                break
-            }
-        }
-    }
-}
-
-extension Store: SKProductsRequestDelegate {
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        subscriptions = response.products
-    }
-    
-    func request(_ request: SKRequest, didFailWithError error: any Error) {
-        print(error.localizedDescription)
-    }
-    
-    func requestDidFinish(_ request: SKRequest) {}
 }

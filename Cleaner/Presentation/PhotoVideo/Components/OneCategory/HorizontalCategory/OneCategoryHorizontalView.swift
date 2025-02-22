@@ -65,11 +65,12 @@ final class OneCategoryHorizontalView: UIView, OneCategoryProtocol {
     }
     
     func setLocked() {
-        arrowForwardImageView.image = .pro
+        arrowForwardImageView.image = .premiumIcon
         isUserInteractionEnabled = false
     }
     
     func unlock() {
+        arrowForwardImageView.setImage(.arrowForwardBlue)
         isUserInteractionEnabled = true
     }
     

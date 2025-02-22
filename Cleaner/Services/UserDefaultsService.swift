@@ -24,7 +24,7 @@ enum UserDefaultsKeys: String {
     case secretContactsFolder = "DEFAULT_SECRET_CONTACTS_FOLDER"
     case secretContactsFile = "DEFAULT_SECRET_CONTACTS_FILE"
     
-    case isSubscriptionActive = "SUBSCRIPTION_STATUS"
+    case subscriptionExpirationDate = "SUBSCRIPTION_EXPIRATION_DATE"
 }
 
 final class UserDefaultsService {
@@ -51,7 +51,8 @@ final class UserDefaultsService {
     }
     
     var isSubscriptionActive: Bool {
-        self.get(Bool.self, key: .isSubscriptionActive) == true
+        guard let expirationDate = self.get(Date.self, key: .subscriptionExpirationDate) else { return false }
+        return expirationDate > Date.now
     }
     
     func get<T>(_ value: T.Type, key: UserDefaultsKeys) -> T? {

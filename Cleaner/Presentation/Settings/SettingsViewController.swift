@@ -8,7 +8,7 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
-    @IBOutlet weak var premiumIcon: UIImageView!
+    @IBOutlet weak var premiumImageView: UIImageView!
     @IBOutlet weak var subscriptionStackView: UIStackView!
     @IBOutlet weak var removeAfterImportContainer: SettingsOptionsContainer!
     @IBOutlet weak var passcodeOptionsContainer: SettingsOptionsContainer!
@@ -17,6 +17,7 @@ final class SettingsViewController: UIViewController {
     private lazy var buyPremiumView = BuyPremiumView()
     private lazy var subscriptionInfoView = SettingsOptionsContainer()
     
+    private lazy var store = Store.shared
     private lazy var userDefaultsService = UserDefaultsService.shared
 
     override func viewDidLoad() {
@@ -46,14 +47,35 @@ final class SettingsViewController: UIViewController {
     }
     
     private func updateSubscriptionUI() {
-        premiumIcon.isHidden = userDefaultsService.isSubscriptionActive
-        buyPremiumView.isHidden = !userDefaultsService.isSubscriptionActive
-        subscriptionInfoView.isHidden = userDefaultsService.isSubscriptionActive
+        premiumImageView.isHidden = !userDefaultsService.isSubscriptionActive
+        
+        Task.init {
+            if await store.isTrialEligible() {
+                buyPremiumView.isHidden = false
+                subscriptionInfoView.isHidden = true
+            } else {
+                buyPremiumView.isHidden = true
+                subscriptionInfoView.isHidden = false
+            }
+        }
     }
     
     private func updateSettingsContainers() {
         removeAfterImportContainer.bind(options: removeAfterImportOptions, isDefaultHeight: false)
         passcodeOptionsContainer.bind(options: passcodeOptions, isDefaultHeight: false)
+    }
+    
+    private func openPremiumVC() {
+        let vc = PremiumViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .popover
+        present(vc, animated: true)
+    }
+}
+
+extension SettingsViewController: PremiumVCDelegate {
+    func viewWasDismissed() {
+        updateSubscriptionUI()
     }
 }
 
@@ -76,9 +98,7 @@ extension SettingsViewController: ViewControllerProtocol {
 
 extension SettingsViewController: BuyPremiumViewDelegate {
     func tapOnStartTrial() {
-        let vc = PremiumViewController()
-        vc.modalPresentationStyle = .pageSheet
-        present(vc, animated: true)
+        openPremiumVC()
     }
 }
 
@@ -86,7 +106,8 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
     func tapOnOption(_ option: SettingsOption) {
         switch option.type {
         case .subscriptionInfo:
-            break
+            openPremiumVC()
+            
         case .photosRemovable:
             userDefaultsService.set(option.isSwitchable, key: .isRemovePhotosAfterImport)
         case .contactsRemovable:

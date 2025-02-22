@@ -14,31 +14,40 @@ protocol ToolOptionViewDelegate: AnyObject {
 final class ToolOptionView: UIView {
     private lazy var nibName = "ToolOptionView"
     
-    @IBOutlet var contentView: UIView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: Semibold15LabelStyle!
     @IBOutlet weak var optionDescription: Regular13LabelStyle!
-    @IBOutlet weak var proView: UIImageView!
+    @IBOutlet weak var premiumImageView: UIImageView!
     
     weak var delegate: ToolOptionViewDelegate?
-    private var type: ToolOption?
+    private(set) var type: ToolOption?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(_ type: ToolOption) {
+        self.type = type
+        super.init(frame: .zero)
         setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setup()
     }
     
-    func bind(_ option: ToolOption) {
-        type = option
-        icon.image = option.icon
-        title.bind(text: option.rawValue)
-        optionDescription.bind(text: option.description)
-        proView.isHidden = !option.isProFunction
+    func setLocked() {
+        isUserInteractionEnabled = false
+        premiumImageView.isHidden = false
+    }
+    
+    func unlock() {
+        isUserInteractionEnabled = true
+        premiumImageView.isHidden = true
+    }
+    
+    private func bind() {
+        guard let type else { return }
+        icon.image = type.icon
+        title.bind(text: type.rawValue)
+        optionDescription.bind(text: type.description)
     }
     
     private func setup() {
@@ -53,5 +62,7 @@ final class ToolOptionView: UIView {
             guard let self, let type else { return }
             delegate?.tapOnOption(type)
         }
+        
+        bind()
     }
 }

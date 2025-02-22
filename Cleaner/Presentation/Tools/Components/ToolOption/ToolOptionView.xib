@@ -14,7 +14,7 @@
                 <outlet property="contentView" destination="iN0-l3-epB" id="hr4-Aw-dDE"/>
                 <outlet property="icon" destination="kEl-y8-eCB" id="NlL-ox-jCA"/>
                 <outlet property="optionDescription" destination="mnR-ZU-J9j" id="KCO-2F-FnJ"/>
-                <outlet property="proView" destination="RUL-Sv-ppt" id="iec-x9-jYz"/>
+                <outlet property="premiumImageView" destination="RUL-Sv-ppt" id="iec-x9-jYz"/>
                 <outlet property="title" destination="Cl2-Qf-X2i" id="nJs-nP-zLh"/>
             </connections>
         </placeholder>
@@ -42,7 +42,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProView" translatesAutoresizingMaskIntoConstraints="NO" id="RUL-Sv-ppt">
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProView" translatesAutoresizingMaskIntoConstraints="NO" id="RUL-Sv-ppt">
                     <rect key="frame" x="342" y="9" width="42" height="26"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="42" id="7AQ-TI-emn"/>
