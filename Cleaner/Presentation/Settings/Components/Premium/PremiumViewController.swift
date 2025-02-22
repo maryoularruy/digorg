@@ -115,7 +115,21 @@ extension PremiumViewController: PremiumViewDelegate {
     }
     
     func tapOnRestore() {
-//        Store.shared.restorePurchases()
+        do {
+            try Store.shared.restore() { [weak self] result in
+                DispatchQueue.main.async {
+                    if result {
+                        self?.showAlert(title: "Success", subtitle: "Your subscriptions have been restored")
+                    } else {
+                        self?.showAlert(title: "Error", subtitle: "Could not restore purchases")
+                    }
+                }
+            }
+        } catch(let error) {
+            DispatchQueue.main.async { [weak self] in
+                self?.showAlert(error: error)
+            }
+        }
     }
     
     func tapOnPrivacyPolicy() {
@@ -133,8 +147,8 @@ extension PremiumViewController: PremiumOfferViewDelegate {
             do {
                 try await store.purchase()
                 updateUI()
-            } catch {
-                
+            } catch(let error) {
+                showAlert(error: error)
             }
         }
     }

@@ -11,11 +11,13 @@ var WEEKLY_PREMIUM_ID = "premium.weekly"
 
 enum StoreError: Error {
     case failedVerification,
+         networkError,
          unknowedError
     
     var title: String {
         switch self {
         case .failedVerification: "Failed Verification"
+        case .networkError: "Network Error"
         case .unknowedError: "Unknowed error"
         }
     }
@@ -23,6 +25,7 @@ enum StoreError: Error {
     var subtitle: String {
         switch self {
         case .failedVerification: "Your verification is failed"
+        case .networkError: "Check your network connection and try again"
         case .unknowedError: "Unknowed error"
         }
     }
@@ -56,8 +59,18 @@ final class Store {
         products = try await Product.products(for: productIds)
     }
     
-    func purchase() async throws -> Transaction? {
-        guard let product = products.first else { return nil }
+    func purchase() async throws {
+        if products.isEmpty {
+            try await fetchProducts()
+            try await purchaseProduct()
+        } else {
+            try await purchaseProduct()
+        }
+    }
+    
+    private func purchaseProduct() async throws {
+        guard let product = products.first else { throw StoreError.networkError }
+        
         let result = try await product.purchase()
 
         switch result {
@@ -65,11 +78,31 @@ final class Store {
             let transaction = try checkVerified(verification)
             await transaction.finish()
             updateCustomerProductStatus(transaction)
-            return transaction
         case .userCancelled, .pending:
-            return nil
+            return
         default:
-            return nil
+            return
+        }
+    }
+    
+    func restore(completion: @escaping (Bool) -> Void) throws {
+        Task {
+            do {
+                var restored = false
+                for await result in Transaction.currentEntitlements {
+                    switch result {
+                    case .verified(let transaction):
+                        if transaction.revocationDate == nil {
+                            restored = true
+                        }
+                    case .unverified(_, let error):
+                        throw error
+                    }
+                }
+                completion(restored)
+            } catch {
+                throw error
+            }
         }
     }
     
