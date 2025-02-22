@@ -17,6 +17,7 @@ final class SettingsViewController: UIViewController {
     private lazy var buyPremiumView = BuyPremiumView()
     private lazy var subscriptionInfoView = SettingsOptionsContainer()
     
+    private lazy var store = Store.shared
     private lazy var userDefaultsService = UserDefaultsService.shared
 
     override func viewDidLoad() {
@@ -46,11 +47,17 @@ final class SettingsViewController: UIViewController {
     }
     
     private func updateSubscriptionUI() {
-        let isSubscriptionActive = userDefaultsService.isSubscriptionActive
+        premiumImageView.isHidden = !userDefaultsService.isSubscriptionActive
         
-        premiumImageView.isHidden = !isSubscriptionActive
-        buyPremiumView.isHidden = isSubscriptionActive
-        subscriptionInfoView.isHidden = !isSubscriptionActive
+        Task.init {
+            if await store.isTrialEligible() {
+                buyPremiumView.isHidden = false
+                subscriptionInfoView.isHidden = true
+            } else {
+                buyPremiumView.isHidden = true
+                subscriptionInfoView.isHidden = false
+            }
+        }
     }
     
     private func updateSettingsContainers() {
