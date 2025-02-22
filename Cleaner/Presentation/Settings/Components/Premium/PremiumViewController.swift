@@ -40,23 +40,63 @@ final class PremiumViewController: UIViewController {
     }
     
     private func updateUI() {
-        guard let product = store.products.first else { return }
-        let price = "\(product.displayPrice) / week"
+        cleanSubviews()
         
-        //
         if userDefaultsService.isSubscriptionActive {
+            Task.init {
+                if await store.isAutoRenew() {
+                    guard let expirationDate = getExpirationDate() else { return }
+                    setupCancelSubscriptionUI(expirationDate: expirationDate)
+                } else {
+                    setupStartSubscriptionUI(expirationDate: getExpirationDate())
+                }
+            }
             
         } else {
             Task.init {
                 if await store.isTrialEligible() {
-                    rootView.offerDescriptionView.setupTrialUI()
-                    rootView.premiumOfferView.setupTrialUI(price: price)
+                    setupStartTrialUI()
                 } else {
-                    
+                    setupStartSubscriptionUI()
                 }
             }
         }
-        //
+    }
+    
+    private func setupStartTrialUI() {
+        rootView.offerDescriptionView.setupStartSubscriptionUI()
+        rootView.premiumOfferView.setupTrialUI(price: getSubscriptionPrice())
+    }
+    
+    private func setupStartSubscriptionUI(expirationDate: Date? = nil) {
+        rootView.offerDescriptionView.setupStartSubscriptionUI()
+        rootView.premiumOfferView.setupStartSubscription(price: getSubscriptionPrice(), expirationDate: expirationDate)
+    }
+    
+    private func setupCancelSubscriptionUI(expirationDate: Date) {
+        Task.init {
+            if await store.isTrialNow() {
+                rootView.offerDescriptionView.setupTrialUI(price: getSubscriptionPrice(), expirationDate: expirationDate)
+            } else {
+                rootView.offerDescriptionView.setupSubscriptionUI(price: getSubscriptionPrice(), expirationDate: expirationDate)
+            }
+        }
+        
+        rootView.premiumOfferView.setupCancelSubscriptionUI(expirationDate: expirationDate)
+    }
+    
+    private func cleanSubviews() {
+        rootView.offerDescriptionView.subviews.forEach { $0.removeFromSuperview() }
+        rootView.premiumOfferView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func getSubscriptionPrice() -> String {
+        guard let product = store.products.first else { return "" }
+        return "\(product.displayPrice) / week"
+    }
+    
+    private func getExpirationDate() -> Date? {
+        userDefaultsService.get(Date.self, key: .subscriptionExpirationDate)
     }
 }
 
@@ -89,11 +129,10 @@ extension PremiumViewController: PremiumViewDelegate {
 
 extension PremiumViewController: PremiumOfferViewDelegate {
     func tapOnOfferButton(with status: PurchaseStatus) {
-        guard let product = store.products.first else { return }
-        
         Task.init {
             do {
                 try await store.purchase()
+                updateUI()
             } catch {
                 
             }

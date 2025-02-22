@@ -19,9 +19,25 @@ fileprivate let formatter2: DateFormatter = {
     return formatter
 }()
 
+fileprivate let formatter3: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "d MMMM"
+    return formatter
+}()
+
+fileprivate let formatter4: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "dd.MM.yy"
+    return formatter
+}()
+
 extension Date {
     func year() -> Int {
         Calendar.current.component(.year, from: self)
+    }
+    
+    func toDayAndMonth() -> String {
+        formatter3.string(from: self)
     }
     
     func toYear() -> String {
@@ -30,5 +46,9 @@ extension Date {
     
     func toFullDate() -> String {
         formatter2.string(from: self)
+    }
+    
+    func toFullDateWithDots() -> String {
+        formatter4.string(from: self)
     }
 }
