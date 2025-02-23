@@ -189,15 +189,15 @@ final class PremiumView: UIView {
             premiumFeaturesStackView.trailingAnchor.constraint(equalTo: premiumFeaturesView.trailingAnchor, constant: -24),
             premiumFeaturesStackView.bottomAnchor.constraint(equalTo: premiumFeaturesView.bottomAnchor, constant: -25),
             
-            premiumOfferView.topAnchor.constraint(equalTo: premiumFeaturesView.bottomAnchor, constant: 12),
-            premiumOfferView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            premiumOfferView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
             privacyPolicyLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
             privacyPolicyLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
             
             termsOfUseLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -38),
             termsOfUseLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            
+            premiumOfferView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            premiumOfferView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            premiumOfferView.bottomAnchor.constraint(equalTo: termsOfUseLabel.topAnchor, constant: -16)
         ])
     }
 }

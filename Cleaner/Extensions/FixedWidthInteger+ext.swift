@@ -15,9 +15,9 @@ extension FixedWidthInteger {
         
         let sizeInKB = self / 1024
         return if sizeInKB < 1000 {
-            "\(sizeInKB) KB"
+            String(format: "%.1f", (Double(sizeInKB))) + " KB"
         } else if sizeInKB >= 1000 && sizeInKB < 1_000_000 {
-            "\(sizeInKB / 1024) MB"
+            String(format: "%.1f", (Double(sizeInKB) / 1024)) + " MB"
         } else {
             String(format: "%.1f", (Double(sizeInKB) / (1024 * 1024))) + " GB"
         }

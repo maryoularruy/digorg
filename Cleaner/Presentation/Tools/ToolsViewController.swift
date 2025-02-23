@@ -29,6 +29,7 @@ final class ToolsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
         updateUI()
     }
     
@@ -81,7 +82,6 @@ extension ToolsViewController: ToolOptionViewDelegate {
         }
         userDefaultsService.remove(key: .isPasscodeConfirmed)
         vc.modalPresentationStyle = .fullScreen
-        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 }
