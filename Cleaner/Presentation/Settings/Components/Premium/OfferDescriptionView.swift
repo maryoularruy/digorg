@@ -18,7 +18,7 @@ final class OfferDescriptionView: UIView {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: topAnchor),
             label.centerXAnchor.constraint(equalTo: centerXAnchor),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+            label.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
