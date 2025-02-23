@@ -25,7 +25,16 @@ final class VideoTotalView: UIView {
     lazy var superSizedVideosView = OneCategoryHorizontalView(.superSizedVideos)
     lazy var allVideosView = OneCategoryHorizontalView(.allVideos)
     
-    lazy var containerForVisibleOneCategoryViews = UIView()
+    private lazy var categoriesStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .equalSpacing
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        
+        oneCategoryViews.forEach { stackView.addArrangedSubview($0) }
+        
+        return stackView
+    }()
     
     private lazy var oneCategoryViews: [OneCategoryProtocol] = [
         duplicateVideosView,
@@ -45,47 +54,20 @@ final class VideoTotalView: UIView {
         initConstraints()
     }
     
-    func constrainVisibleOneCategoryViews() {
-        let visibleViews: [UIView] = oneCategoryViews.filter { !$0.assets.isEmpty }
-        containerForVisibleOneCategoryViews.subviews.forEach { $0.removeFromSuperview() }
-        containerForVisibleOneCategoryViews.addSubviews(visibleViews)
-
-        for (index, subview) in containerForVisibleOneCategoryViews.subviews.enumerated() {
-            //setup top contsraint
-            if index == 0 {
-                NSLayoutConstraint.activate([
-                    subview.topAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.topAnchor)
-                ])
-            } else {
-                NSLayoutConstraint.activate([
-                    subview.topAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.subviews[index - 1].bottomAnchor, constant: 8)
-                ])
-            }
-            
-            //setup leading&trailing constraints
-            NSLayoutConstraint.activate([
-                subview.leadingAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.leadingAnchor),
-                subview.trailingAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.trailingAnchor)
-            ])
-            
-            //setup bottom constraints
-            if index == containerForVisibleOneCategoryViews.subviews.count - 1 {
-                NSLayoutConstraint.activate([
-                    subview.bottomAnchor.constraint(equalTo: containerForVisibleOneCategoryViews.bottomAnchor, constant: -8)
-                ])
-            }
-        }
+    func setupVisibility() {
+        oneCategoryViews.forEach { $0.isHidden = $0.assets.isEmpty }
     }
     
     private func setupView() {
         backgroundColor = .paleGrey
         arrowBack.contentMode = .center
+        setupVisibility()
     }
     
     private func initConstraints() {
         addSubviews([scroll])
         scroll.addSubviews([contentView])
-        contentView.addSubviews([arrowBack, label, progressView, containerForVisibleOneCategoryViews])
+        contentView.addSubviews([arrowBack, label, progressView, categoriesStackView])
         
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -112,10 +94,10 @@ final class VideoTotalView: UIView {
             progressView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             progressViewHeight,
             
-            containerForVisibleOneCategoryViews.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 16),
-            containerForVisibleOneCategoryViews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            containerForVisibleOneCategoryViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            containerForVisibleOneCategoryViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            categoriesStackView.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 16),
+            categoriesStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            categoriesStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            categoriesStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
        ])
     }
 }
