@@ -44,7 +44,7 @@ final class OneCategoryHorizontalView: UIView, OneCategoryProtocol {
             assets.getAssetsSize { size in
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
-                    assetsSizeLabel.bind(text: size.convertToString())
+                    assetsSizeLabel.bind(text: size.toStringWithComma())
                     assetsCountLabel.bind(text: "\(assets.count) File\(assets.count == 1 ? "" :  "s")")
                     assetsCollectionViewHeight.constant = assets.isEmpty ? 0 : TargetSize.small.size.height
                     assetsCollectionView.reloadData()

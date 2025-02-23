@@ -54,7 +54,7 @@ final class GroupedAssetsViewController: UIViewController {
                     toolbar.toolbarButton.isClickable = true
                 case .assetsCleanMenu:
                     let size = assetsForDeletion.reduce(0) { $0 + $1.imageSize }
-                    toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(size.convertToString())")
+                    toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(size.roundAndToString())")
                     toolbar.toolbarButton.isClickable = !assetsForDeletion.isEmpty
                 }
                 
@@ -77,7 +77,7 @@ final class GroupedAssetsViewController: UIViewController {
                 toolbar.toolbarButton.isClickable = true
             case .assetsCleanMenu:
                 let size = assetsForDeletion.reduce(0) { $0 + $1.imageSize }
-                toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(size.convertToString())")
+                toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(size.roundAndToString())")
                 toolbar.toolbarButton.isClickable = !assetsForDeletion.isEmpty
             }
         }
