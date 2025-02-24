@@ -129,10 +129,7 @@
 		FA641DDF2B3456DC00F6A466 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */; };
 		FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA641DE02B34574300F6A466 /* Calendar.storyboard */; };
 		FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DE22B34575300F6A466 /* CalendarViewController.swift */; };
-		FA641DF72B357C7A00F6A466 /* UIImageView+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */; };
-		FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */; };
 		FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */; };
-		FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -269,11 +266,8 @@
 		FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		FA641DE02B34574300F6A466 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		FA641DE22B34575300F6A466 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+SwiftyGif.swift"; sourceTree = "<group>"; };
-		FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjcAssociatedWeakObject.swift; sourceTree = "<group>"; };
 		FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SwiftyGif.swift"; sourceTree = "<group>"; };
 		FA641DF42B357C7A00F6A466 /* SwiftyGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyGif.h; sourceTree = "<group>"; };
-		FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyGifManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -805,11 +799,8 @@
 		FA641DEF2B357C7A00F6A466 /* SwiftyGif */ = {
 			isa = PBXGroup;
 			children = (
-				FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */,
-				FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */,
 				FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */,
 				FA641DF42B357C7A00F6A466 /* SwiftyGif.h */,
-				FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */,
 			);
 			path = SwiftyGif;
 			sourceTree = "<group>";
@@ -938,7 +929,6 @@
 				75D3FC812A606E6F00F351A3 /* Extension+String.swift in Sources */,
 				FA39877C2B3055930096F335 /* OSAHash.m in Sources */,
 				A5446D082CE76CCE00A1F940 /* Pages.swift in Sources */,
-				FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */,
 				FA39883D2B30602A0096F335 /* ZoomTransitionController.swift in Sources */,
 				A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */,
 				FA3987402B3054930096F335 /* PhotoVideoManager.swift in Sources */,
@@ -948,7 +938,6 @@
 				FA3988462B30602A0096F335 /* NSObject.swift in Sources */,
 				7532F86A2AE29758007469EA /* DuplicateNameContactsViewController.swift in Sources */,
 				75D3FC842A606E6F00F351A3 /* Extension+UIView.swift in Sources */,
-				FA641DF72B357C7A00F6A466 /* UIImageView+SwiftyGif.swift in Sources */,
 				FA39884E2B30602A0096F335 /* Combine.swift in Sources */,
 				FA3987792B3055930096F335 /* OSImageHashing.m in Sources */,
 				FA39877B2B3055930096F335 /* OSSimilaritySearch.m in Sources */,
@@ -967,7 +956,6 @@
 				A55CA2632CC907350026D434 /* UIFont+ext.swift in Sources */,
 				FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */,
 				FA39877E2B3055930096F335 /* OSAbstractHash.m in Sources */,
-				FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */,
 				A5446C2D2CE74B7A00A1F940 /* InstructionCellType.swift in Sources */,
 				FA3987422B3054B90096F335 /* PHAssetGroup.swift in Sources */,
 				A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */,
