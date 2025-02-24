@@ -53,8 +53,6 @@ final class GroupedAssetsViewController: UIViewController {
                     toolbar.toolbarButton.bind(text: "Apply")
                     toolbar.toolbarButton.isClickable = true
                 case .assetsCleanMenu:
-                    let size = assetsForDeletion.reduce(0) { $0 + $1.imageSize }
-                    toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(size.roundAndToString())")
                     toolbar.toolbarButton.isClickable = !assetsForDeletion.isEmpty
                 }
                 
@@ -76,8 +74,6 @@ final class GroupedAssetsViewController: UIViewController {
                 toolbar.toolbarButton.bind(text: "Apply")
                 toolbar.toolbarButton.isClickable = true
             case .assetsCleanMenu:
-                let size = assetsForDeletion.reduce(0) { $0 + $1.imageSize }
-                toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(size.roundAndToString())")
                 toolbar.toolbarButton.isClickable = !assetsForDeletion.isEmpty
             }
         }
@@ -168,6 +164,13 @@ final class GroupedAssetsViewController: UIViewController {
         }
         return isContains
     }
+    
+    private func calcAssetsSizeForDeletion() {
+        Array(assetsForDeletion).getAssetsSize { [weak self] size in
+            guard let self else { return }
+            toolbar.toolbarButton.bind(text: "Delete \(assetsForDeletion.count) Item\(assetsForDeletion.count == 1 ? "" : "s"), \(size.roundAndToString())")
+        }
+    }
 }
 
 extension GroupedAssetsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -220,6 +223,7 @@ extension GroupedAssetsViewController: DuplicateTableViewCellDelegate {
         } else {
             assetsForDeletion.remove(asset)
         }
+        calcAssetsSizeForDeletion()
         tableView.reloadRows(at: [IndexPath(row: groupIndex, section: 0)], with: .none)
     }
 }
@@ -253,6 +257,7 @@ extension GroupedAssetsViewController: SelectionButtonDelegate {
         } else {
             assetGroups.forEach { assetsForDeletion.insert($0.assets) }
         }
+        calcAssetsSizeForDeletion()
         tableView.reloadData()
     }
 }

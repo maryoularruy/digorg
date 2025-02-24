@@ -114,7 +114,9 @@ extension Array where Element: PHAsset {
                     size += Int64(bitPattern: UInt64(unsignedInt64!))
                 }
             }
-            handler(size)
+            DispatchQueue.main.async {
+                handler(size)
+            }
         }
     }
 }
