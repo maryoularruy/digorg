@@ -137,7 +137,6 @@
 		FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */; };
 		FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */; };
 		FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */; };
-		FA99F2F62B3C462700D4B239 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */; };
 		FACA30972B3E035C0018FA5F /* Valet in Frameworks */ = {isa = PBXBuildFile; productRef = FACA30962B3E035C0018FA5F /* Valet */; };
 /* End PBXBuildFile section */
 
@@ -318,7 +317,6 @@
 				FA3987B42B305B190096F335 /* BottomPopup in Frameworks */,
 				75D3FC6F2A606DBB00F351A3 /* SwiftyUserDefaults in Frameworks */,
 				75D3FC722A606DD100F351A3 /* Reusable in Frameworks */,
-				FA99F2F62B3C462700D4B239 /* IQKeyboardManagerSwift in Frameworks */,
 				FACA30972B3E035C0018FA5F /* Valet in Frameworks */,
 				7532F8502AE2766B007469EA /* Reachability in Frameworks */,
 				7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */,
@@ -885,7 +883,6 @@
 				FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */,
 				FA3987B32B305B190096F335 /* BottomPopup */,
 				FA3987B62B305C120096F335 /* Haneke */,
-				FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */,
 				FACA30962B3E035C0018FA5F /* Valet */,
 			);
 			productName = VideoCalls;
@@ -925,7 +922,6 @@
 				FA3987AF2B305A3A0096F335 /* XCRemoteSwiftPackageReference "SDWebImagePhotosPlugin" */,
 				FA3987B22B305B190096F335 /* XCRemoteSwiftPackageReference "BottomPopup" */,
 				FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */,
-				FA99F2F42B3C462700D4B239 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				FACA30952B3E035C0018FA5F /* XCRemoteSwiftPackageReference "Valet" */,
 			);
 			productRefGroup = 75D3FC342A6069AF00F351A3 /* Products */;
@@ -1381,14 +1377,6 @@
 				revision = a2e8e5b9a91eef90138a4f43c9a0044c4e90a6ef;
 			};
 		};
-		FA99F2F42B3C462700D4B239 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.5.16;
-			};
-		};
 		FACA30952B3E035C0018FA5F /* XCRemoteSwiftPackageReference "Valet" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/square/Valet";
@@ -1434,11 +1422,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */;
 			productName = Haneke;
-		};
-		FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FA99F2F42B3C462700D4B239 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
-			productName = IQKeyboardManagerSwift;
 		};
 		FACA30962B3E035C0018FA5F /* Valet */ = {
 			isa = XCSwiftPackageProductDependency;
