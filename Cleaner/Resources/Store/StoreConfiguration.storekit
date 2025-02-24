@@ -100,7 +100,7 @@
       "localizations" : [
 
       ],
-      "name" : "premium",
+      "name" : "premiumtest",
       "subscriptions" : [
         {
           "adHocOffers" : [
@@ -125,9 +125,9 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "premium.weekly",
+          "productID" : "premiumtest.weeklytest",
           "recurringSubscriptionPeriod" : "P1W",
-          "referenceName" : "weekly",
+          "referenceName" : "weeklytest",
           "subscriptionGroupID" : "CF179DF7",
           "type" : "RecurringSubscription",
           "winbackOffers" : [
