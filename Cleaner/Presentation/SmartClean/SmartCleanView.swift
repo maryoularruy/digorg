@@ -26,9 +26,7 @@ final class SmartCleanView: UIView {
         stackView.axis = .vertical
         stackView.spacing = 8
         
-        smartCleanStackViewCells.forEach { cell in
-            stackView.addArrangedSubview(cell)
-        }
+        smartCleanStackViewCells.forEach { stackView.addArrangedSubview($0) }
         
         return stackView
     }()

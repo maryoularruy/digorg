@@ -51,7 +51,7 @@ final class ScanningStorageView: UIView {
             progressBar.updateProgress(to: currentProgress, duration: 0.1)
             descriptionLabel.bind(text: "Scanning your Storage...")
         case .scanningDone:
-            let availableSize = NSAttributedString(string: finalSize.convertToString(), attributes: [.foregroundColor: UIColor.purple])
+            let availableSize = NSAttributedString(string: finalSize.roundAndToString(), attributes: [.foregroundColor: UIColor.purple])
             let available = NSMutableAttributedString(string: "Available ")
             available.append(availableSize)
             titleLabel.attributedText = available

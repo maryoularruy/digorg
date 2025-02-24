@@ -67,7 +67,7 @@ final class MainViewController: UIViewController {
     }
     
     @objc func updateRamAndCpu() {
-        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: DeviceInfoService.shared.freeRam.convertToString())
+        (deviceInfoStackView.arrangedSubviews[Title.available.index] as? DeviceInfoCell)?.bind(newValue: DeviceInfoService.shared.freeRam.toStringWithDot())
         
         (deviceInfoStackView.arrangedSubviews[Title.used.index] as? DeviceInfoCell)?.bind(newValue: "\(String(format: "%.1f", DeviceInfoService.shared.busyCpu)) %")
     }
@@ -124,7 +124,7 @@ final class MainViewController: UIViewController {
     private func updatePhotosCleanupOption() {
         photoVideoManager.fetchSimilarPhotos(live: false) { assetsGroups, duplicatesCount, size in
             DispatchQueue.main.async { [weak self] in
-                self?.photosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.convertToString())")
+                self?.photosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.roundAndToString())")
             }
         }
     }
@@ -132,7 +132,7 @@ final class MainViewController: UIViewController {
     private func updateVideosCleanupOption() {
         photoVideoManager.fetchSimilarVideos { _, duplicatesCount, size in
             DispatchQueue.main.async { [weak self] in
-                self?.videosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.convertToString())")
+                self?.videosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.roundAndToString())")
             }
         }
     }

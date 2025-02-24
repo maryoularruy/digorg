@@ -149,7 +149,7 @@ extension SmartCleanViewController: ViewControllerProtocol {
             guard let self else { return }
             rootView.scanningStorageView.bind(.scanningDone, value: 100, finalSize: finalSize)
             rootView.actionToolbar.toolbarButton.isClickable = itemsCount == 0 ? false : true
-            rootView.actionToolbar.toolbarButton.bind(text: "Delete \(itemsCount) item\(itemsCount == 1 ? "" : "s"), \(finalSize.convertToString())")
+            rootView.actionToolbar.toolbarButton.bind(text: "Delete \(itemsCount) item\(itemsCount == 1 ? "" : "s"), \(finalSize.roundAndToString())")
         }
     }
 }

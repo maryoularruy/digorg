@@ -21,9 +21,6 @@
                                 <rect key="frame" x="302" y="74.666666666666671" width="75" height="34"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Select All"/>
-                                <connections>
-                                    <action selector="tapOnSelectionButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="X2a-PP-GCG"/>
-                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCM-Ln-Ad1">
                                 <rect key="frame" x="8" y="64" width="55" height="55"/>
