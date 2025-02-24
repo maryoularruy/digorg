@@ -24,7 +24,7 @@ final class SuccessView: UIView {
     private lazy var nibName = "SuccessView"
     private lazy var type: SuccessViewType = .successMerge
 
-    @IBOutlet var contentView: UIView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var title: Semibold15LabelStyle!
     
     override init(frame: CGRect) {
