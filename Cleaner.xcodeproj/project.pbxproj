@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7504C24C2AD44407005FB398 /* DeviceInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7504C24B2AD44407005FB398 /* DeviceInfoService.swift */; };
 		7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */ = {isa = PBXBuildFile; productRef = 7504C24E2AD5E99B005FB398 /* NetworkFlows */; };
-		7532F8502AE2766B007469EA /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F84F2AE2766B007469EA /* Reachability */; };
 		7532F85D2AE290A6007469EA /* ContactsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F85C2AE290A6007469EA /* ContactsMenuViewController.swift */; };
 		7532F8602AE290C2007469EA /* ContactsMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F85F2AE290C2007469EA /* ContactsMenu.storyboard */; };
 		7532F8642AE2972C007469EA /* NoNameContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F8632AE2972C007469EA /* NoNameContacts.storyboard */; };
@@ -24,9 +23,7 @@
 		75D3FC402A6069B000F351A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC3F2A6069B000F351A3 /* Assets.xcassets */; };
 		75D3FC432A6069B000F351A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC412A6069B000F351A3 /* LaunchScreen.storyboard */; };
 		75D3FC5E2A606BA100F351A3 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC4C2A606BA100F351A3 /* Storyboards.swift */; };
-		75D3FC5F2A606BA100F351A3 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC4E2A606BA100F351A3 /* UserDefaults.swift */; };
 		75D3FC602A606BA100F351A3 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC502A606BA100F351A3 /* Keys.swift */; };
-		75D3FC6F2A606DBB00F351A3 /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = 75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */; };
 		75D3FC722A606DD100F351A3 /* Reusable in Frameworks */ = {isa = PBXBuildFile; productRef = 75D3FC712A606DD100F351A3 /* Reusable */; };
 		75D3FC802A606E6F00F351A3 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC7B2A606E6F00F351A3 /* Extension+UIViewController.swift */; };
 		75D3FC812A606E6F00F351A3 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC7C2A606E6F00F351A3 /* Extension+String.swift */; };
@@ -62,6 +59,7 @@
 		A57346B02D36C89200A4F3DF /* UIDevice+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */; };
 		A57346B62D3A92D100A4F3DF /* FixedWidthInteger+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57346B52D3A92D100A4F3DF /* FixedWidthInteger+ext.swift */; };
 		A5858DD82D0C500C00C4BDD9 /* Int64+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5858DD72D0C500C00C4BDD9 /* Int64+ext.swift */; };
+		A58ACC052D6BFEE30056F0E9 /* UIImageView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58ACC042D6BFEE30056F0E9 /* UIImageView+ext.swift */; };
 		A598A0752CECA12A002F346E /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598A0742CECA12A002F346E /* Store.swift */; };
 		A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */; };
 		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
@@ -95,7 +93,6 @@
 		FA3987AB2B30599C0096F335 /* GroupedAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39879C2B30599C0096F335 /* GroupedAssetsViewController.swift */; };
 		FA3987B12B305A3A0096F335 /* SDWebImagePhotosPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */; };
 		FA3987B42B305B190096F335 /* BottomPopup in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B32B305B190096F335 /* BottomPopup */; };
-		FA3987B72B305C120096F335 /* Haneke in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B62B305C120096F335 /* Haneke */; };
 		FA3987BE2B305D720096F335 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987BC2B305D720096F335 /* UIKitExtension.swift */; };
 		FA39883B2B30602A0096F335 /* ZoomTransitionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39880E2B30602A0096F335 /* ZoomTransitionTypes.swift */; };
 		FA39883C2B30602A0096F335 /* TransitionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39880F2B30602A0096F335 /* TransitionUtilities.swift */; };
@@ -133,12 +130,6 @@
 		FA641DDF2B3456DC00F6A466 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */; };
 		FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA641DE02B34574300F6A466 /* Calendar.storyboard */; };
 		FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DE22B34575300F6A466 /* CalendarViewController.swift */; };
-		FA641DF72B357C7A00F6A466 /* UIImageView+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */; };
-		FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */; };
-		FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */; };
-		FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */; };
-		FA99F2F62B3C462700D4B239 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */; };
-		FACA30972B3E035C0018FA5F /* Valet in Frameworks */ = {isa = PBXBuildFile; productRef = FACA30962B3E035C0018FA5F /* Valet */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -159,7 +150,6 @@
 		75D3FC422A6069B000F351A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75D3FC442A6069B000F351A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75D3FC4C2A606BA100F351A3 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
-		75D3FC4E2A606BA100F351A3 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		75D3FC502A606BA100F351A3 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		75D3FC7B2A606E6F00F351A3 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		75D3FC7C2A606E6F00F351A3 /* Extension+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
@@ -195,6 +185,7 @@
 		A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+ext.swift"; sourceTree = "<group>"; };
 		A57346B52D3A92D100A4F3DF /* FixedWidthInteger+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FixedWidthInteger+ext.swift"; sourceTree = "<group>"; };
 		A5858DD72D0C500C00C4BDD9 /* Int64+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+ext.swift"; sourceTree = "<group>"; };
+		A58ACC042D6BFEE30056F0E9 /* UIImageView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ext.swift"; sourceTree = "<group>"; };
 		A598A0742CECA12A002F346E /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
 		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
@@ -276,11 +267,6 @@
 		FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		FA641DE02B34574300F6A466 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		FA641DE22B34575300F6A466 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+SwiftyGif.swift"; sourceTree = "<group>"; };
-		FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjcAssociatedWeakObject.swift; sourceTree = "<group>"; };
-		FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SwiftyGif.swift"; sourceTree = "<group>"; };
-		FA641DF42B357C7A00F6A466 /* SwiftyGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyGif.h; sourceTree = "<group>"; };
-		FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyGifManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -316,13 +302,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA3987B42B305B190096F335 /* BottomPopup in Frameworks */,
-				75D3FC6F2A606DBB00F351A3 /* SwiftyUserDefaults in Frameworks */,
 				75D3FC722A606DD100F351A3 /* Reusable in Frameworks */,
-				FA99F2F62B3C462700D4B239 /* IQKeyboardManagerSwift in Frameworks */,
-				FACA30972B3E035C0018FA5F /* Valet in Frameworks */,
-				7532F8502AE2766B007469EA /* Reachability in Frameworks */,
 				7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */,
-				FA3987B72B305C120096F335 /* Haneke in Frameworks */,
 				FA3987B12B305A3A0096F335 /* SDWebImagePhotosPlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,7 +417,6 @@
 			children = (
 				A598A0712CEC9CB1002F346E /* Store */,
 				75D3FC4B2A606BA100F351A3 /* Storyboards */,
-				75D3FC4D2A606BA100F351A3 /* UserDefaults */,
 				75D3FC4F2A606BA100F351A3 /* Keys */,
 				75D3FC512A606BA100F351A3 /* Fonts */,
 				75D3FC5B2A606BA100F351A3 /* Assets */,
@@ -450,14 +430,6 @@
 				75D3FC4C2A606BA100F351A3 /* Storyboards.swift */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		75D3FC4D2A606BA100F351A3 /* UserDefaults */ = {
-			isa = PBXGroup;
-			children = (
-				75D3FC4E2A606BA100F351A3 /* UserDefaults.swift */,
-			);
-			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		75D3FC4F2A606BA100F351A3 /* Keys */ = {
@@ -530,6 +502,7 @@
 				A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */,
 				A57346B52D3A92D100A4F3DF /* FixedWidthInteger+ext.swift */,
 				A54B9C262D43FD1000F41AE3 /* Double+ext.swift */,
+				A58ACC042D6BFEE30056F0E9 /* UIImageView+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -646,7 +619,6 @@
 		FA3987452B30553A0096F335 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FA641DEF2B357C7A00F6A466 /* SwiftyGif */,
 				FA39880C2B30602A0096F335 /* LivePhoto */,
 				FA39875D2B30557E0096F335 /* ImageHashing */,
 				FA3987462B3055420096F335 /* DiffAlgo */,
@@ -823,18 +795,6 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
-		FA641DEF2B357C7A00F6A466 /* SwiftyGif */ = {
-			isa = PBXGroup;
-			children = (
-				FA641DF02B357C7A00F6A466 /* UIImageView+SwiftyGif.swift */,
-				FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */,
-				FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */,
-				FA641DF42B357C7A00F6A466 /* SwiftyGif.h */,
-				FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */,
-			);
-			path = SwiftyGif;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -878,15 +838,10 @@
 			);
 			name = Cleaner;
 			packageProductDependencies = (
-				75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */,
 				75D3FC712A606DD100F351A3 /* Reusable */,
 				7504C24E2AD5E99B005FB398 /* NetworkFlows */,
-				7532F84F2AE2766B007469EA /* Reachability */,
 				FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */,
 				FA3987B32B305B190096F335 /* BottomPopup */,
-				FA3987B62B305C120096F335 /* Haneke */,
-				FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */,
-				FACA30962B3E035C0018FA5F /* Valet */,
 			);
 			productName = VideoCalls;
 			productReference = 75D3FC332A6069AF00F351A3 /* Cleaner.app */;
@@ -918,15 +873,10 @@
 			);
 			mainGroup = 75D3FC2A2A6069AF00F351A3;
 			packageReferences = (
-				75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
 				75D3FC702A606DD100F351A3 /* XCRemoteSwiftPackageReference "Reusable" */,
 				7504C24D2AD5E99B005FB398 /* XCRemoteSwiftPackageReference "NetworkFlows" */,
-				7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */,
 				FA3987AF2B305A3A0096F335 /* XCRemoteSwiftPackageReference "SDWebImagePhotosPlugin" */,
 				FA3987B22B305B190096F335 /* XCRemoteSwiftPackageReference "BottomPopup" */,
-				FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */,
-				FA99F2F42B3C462700D4B239 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				FACA30952B3E035C0018FA5F /* XCRemoteSwiftPackageReference "Valet" */,
 			);
 			productRefGroup = 75D3FC342A6069AF00F351A3 /* Products */;
 			projectDirPath = "";
@@ -969,7 +919,6 @@
 				75D3FC812A606E6F00F351A3 /* Extension+String.swift in Sources */,
 				FA39877C2B3055930096F335 /* OSAHash.m in Sources */,
 				A5446D082CE76CCE00A1F940 /* Pages.swift in Sources */,
-				FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */,
 				FA39883D2B30602A0096F335 /* ZoomTransitionController.swift in Sources */,
 				A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */,
 				FA3987402B3054930096F335 /* PhotoVideoManager.swift in Sources */,
@@ -979,7 +928,6 @@
 				FA3988462B30602A0096F335 /* NSObject.swift in Sources */,
 				7532F86A2AE29758007469EA /* DuplicateNameContactsViewController.swift in Sources */,
 				75D3FC842A606E6F00F351A3 /* Extension+UIView.swift in Sources */,
-				FA641DF72B357C7A00F6A466 /* UIImageView+SwiftyGif.swift in Sources */,
 				FA39884E2B30602A0096F335 /* Combine.swift in Sources */,
 				FA3987792B3055930096F335 /* OSImageHashing.m in Sources */,
 				FA39877B2B3055930096F335 /* OSSimilaritySearch.m in Sources */,
@@ -987,6 +935,7 @@
 				A57346B62D3A92D100A4F3DF /* FixedWidthInteger+ext.swift in Sources */,
 				FA39884D2B30602A0096F335 /* UIViewController.swift in Sources */,
 				FA3987572B3055510096F335 /* ElementPath.swift in Sources */,
+				A58ACC052D6BFEE30056F0E9 /* UIImageView+ext.swift in Sources */,
 				FA3988542B30602A0096F335 /* VideoController.swift in Sources */,
 				FA39875A2B3055510096F335 /* AnyDifferentiable.swift in Sources */,
 				FA3987542B3055510096F335 /* DifferentiableSection.swift in Sources */,
@@ -996,9 +945,7 @@
 				FA3987772B3055930096F335 /* OSDHash.m in Sources */,
 				FA39885C2B30602A0096F335 /* PHAssetResourceManager.swift in Sources */,
 				A55CA2632CC907350026D434 /* UIFont+ext.swift in Sources */,
-				FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */,
 				FA39877E2B3055930096F335 /* OSAbstractHash.m in Sources */,
-				FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */,
 				A5446C2D2CE74B7A00A1F940 /* InstructionCellType.swift in Sources */,
 				FA3987422B3054B90096F335 /* PHAssetGroup.swift in Sources */,
 				A53836D02CBEC6DE005BE39C /* Mode.swift in Sources */,
@@ -1032,7 +979,6 @@
 				75D3FC602A606BA100F351A3 /* Keys.swift in Sources */,
 				FA3988452B30602A0096F335 /* Result.swift in Sources */,
 				A573446D2D314B7E00A4F3DF /* DeviceInfoView.swift in Sources */,
-				75D3FC5F2A606BA100F351A3 /* UserDefaults.swift in Sources */,
 				A54449162CD19C4F001ECA7A /* ToolOption.swift in Sources */,
 				FA3988592B30602A0096F335 /* PlayerSeeker.swift in Sources */,
 				A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */,
@@ -1333,22 +1279,6 @@
 				kind = branch;
 			};
 		};
-		7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-		75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sunshinejr/SwiftyUserDefaults.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		75D3FC702A606DD100F351A3 /* XCRemoteSwiftPackageReference "Reusable" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/Reusable";
@@ -1373,30 +1303,6 @@
 				minimumVersion = 0.7.1;
 			};
 		};
-		FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Haneke/HanekeSwift.git";
-			requirement = {
-				kind = revision;
-				revision = a2e8e5b9a91eef90138a4f43c9a0044c4e90a6ef;
-			};
-		};
-		FA99F2F42B3C462700D4B239 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.5.16;
-			};
-		};
-		FACA30952B3E035C0018FA5F /* XCRemoteSwiftPackageReference "Valet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/square/Valet";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1404,16 +1310,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7504C24D2AD5E99B005FB398 /* XCRemoteSwiftPackageReference "NetworkFlows" */;
 			productName = NetworkFlows;
-		};
-		7532F84F2AE2766B007469EA /* Reachability */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */;
-			productName = Reachability;
-		};
-		75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */;
-			productName = SwiftyUserDefaults;
 		};
 		75D3FC712A606DD100F351A3 /* Reusable */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1429,21 +1325,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA3987B22B305B190096F335 /* XCRemoteSwiftPackageReference "BottomPopup" */;
 			productName = BottomPopup;
-		};
-		FA3987B62B305C120096F335 /* Haneke */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */;
-			productName = Haneke;
-		};
-		FA99F2F52B3C462700D4B239 /* IQKeyboardManagerSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FA99F2F42B3C462700D4B239 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
-			productName = IQKeyboardManagerSwift;
-		};
-		FACA30962B3E035C0018FA5F /* Valet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FACA30952B3E035C0018FA5F /* XCRemoteSwiftPackageReference "Valet" */;
-			productName = Valet;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

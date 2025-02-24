@@ -25,7 +25,7 @@ final class OneCategoryCell: UICollectionViewCell {
     }
     
     func bind(_ image: UIImage) {
-        imageView.setImage(image)
+        imageView.image = image
     }
     
     private func setupUI() {

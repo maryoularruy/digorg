@@ -168,7 +168,9 @@ final class SecretAssetsViewController: UIViewController {
             if items.isEmpty {
                 setupEmptyState()
             }
-        } catch { return }
+        } catch {
+            setupEmptyState()
+        }
     }
 
     private func showSecretAlbumCover() {

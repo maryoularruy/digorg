@@ -65,7 +65,7 @@ final class DuplicatesListCell: UITableViewCell {
         }
         numbersLabel.text = contact.phoneNumbers.isEmpty ? "Number is missing" : numbers.joined(separator: ", ")
         
-        checkBox.setImage(isSelected ? .selectedCheckBoxBlue : .emptyCheckBoxBlue)
+        checkBox.image = isSelected ? .selectedCheckBoxBlue : .emptyCheckBoxBlue
         contentView.backgroundColor = isSelected ? .lightBlue : .paleGrey
         
         labelsContainerBottomConstraint.constant = isLast ? -16 : -8

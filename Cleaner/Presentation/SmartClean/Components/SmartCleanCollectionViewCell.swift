@@ -29,7 +29,7 @@ final class SmartCleanCollectionViewCell: UICollectionViewCell, Reusable {
     }
     
     func bind(image: UIImage) {
-        imageView.setImage(image)
+        imageView.image = image
     }
     
     private func setupView() {

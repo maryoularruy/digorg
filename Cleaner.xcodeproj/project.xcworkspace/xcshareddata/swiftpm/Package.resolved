@@ -1,5 +1,5 @@
 {
-  "originHash" : "3979492f39e1426c9e77fdff309c29dbfb91cc3aced26778b9c83215b91ed18b",
+  "originHash" : "2ef302997cec84b7113cba4fd5ecd55fc2c9068d552bdc654e57d7d2d49b9574",
   "pins" : [
     {
       "identity" : "bottompopup",
@@ -11,38 +11,12 @@
       }
     },
     {
-      "identity" : "hanekeswift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Haneke/HanekeSwift.git",
-      "state" : {
-        "revision" : "a2e8e5b9a91eef90138a4f43c9a0044c4e90a6ef"
-      }
-    },
-    {
-      "identity" : "iqkeyboardmanager",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/hackiftekhar/IQKeyboardManager",
-      "state" : {
-        "revision" : "c00b1ae9fa1ad8af4465bb6ca901f6943fc98eba",
-        "version" : "6.5.16"
-      }
-    },
-    {
       "identity" : "networkflows",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/megabitsenmzq/NetworkFlows",
       "state" : {
         "branch" : "master",
         "revision" : "eebd5b15ebb87b4cfc07b521b650a0a4f56f6eab"
-      }
-    },
-    {
-      "identity" : "reachability.swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ashleymills/Reachability.swift",
-      "state" : {
-        "revision" : "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
-        "version" : "5.1.0"
       }
     },
     {
@@ -70,24 +44,6 @@
       "state" : {
         "revision" : "50ad20e10396527afd8e4a4b698bd5df76efc9bc",
         "version" : "1.2.0"
-      }
-    },
-    {
-      "identity" : "swiftyuserdefaults",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/sunshinejr/SwiftyUserDefaults.git",
-      "state" : {
-        "revision" : "f66bcd04088582c8fbb5cb8554d577e303bae396",
-        "version" : "5.3.0"
-      }
-    },
-    {
-      "identity" : "valet",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/square/Valet",
-      "state" : {
-        "revision" : "89f12b93553055f4908c0d2548c9b8655926940a",
-        "version" : "4.2.0"
       }
     }
   ],

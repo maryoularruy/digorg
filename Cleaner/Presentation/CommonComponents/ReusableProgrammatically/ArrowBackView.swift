@@ -9,7 +9,7 @@ import UIKit
 
 var arrowBackButton: UIImageView {
     let view = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
-    view.setImage(.arrowBackIcon)
+    view.image = .arrowBackIcon
     view.contentMode = .center
     return view
 }

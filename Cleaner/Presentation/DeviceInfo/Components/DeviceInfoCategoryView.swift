@@ -89,7 +89,7 @@ final class DeviceInfoCategoryView: UIView {
         contentView.layer.cornerRadius = 24
         contentView.addShadows()
         
-        iconImageView.setImage(type.icon)
+        iconImageView.image = type.icon
         titleLabel.bind(text: type.title)
         hintLabel.bind(text: type.hint)
         descriptionLabel.bind(text: type.description)
