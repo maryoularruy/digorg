@@ -68,7 +68,7 @@ final class OneCategoryHorizontalView: UIView, OneCategoryProtocol {
     }
     
     func unlock() {
-        arrowForwardImageView.setImage(.arrowForwardBlue)
+        arrowForwardImageView.image = .arrowForwardBlue
         isUserInteractionEnabled = true
     }
     
