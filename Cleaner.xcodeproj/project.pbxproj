@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7504C24C2AD44407005FB398 /* DeviceInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7504C24B2AD44407005FB398 /* DeviceInfoService.swift */; };
 		7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */ = {isa = PBXBuildFile; productRef = 7504C24E2AD5E99B005FB398 /* NetworkFlows */; };
-		7532F8502AE2766B007469EA /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 7532F84F2AE2766B007469EA /* Reachability */; };
 		7532F85D2AE290A6007469EA /* ContactsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7532F85C2AE290A6007469EA /* ContactsMenuViewController.swift */; };
 		7532F8602AE290C2007469EA /* ContactsMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F85F2AE290C2007469EA /* ContactsMenu.storyboard */; };
 		7532F8642AE2972C007469EA /* NoNameContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7532F8632AE2972C007469EA /* NoNameContacts.storyboard */; };
@@ -95,7 +94,6 @@
 		FA3987AB2B30599C0096F335 /* GroupedAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39879C2B30599C0096F335 /* GroupedAssetsViewController.swift */; };
 		FA3987B12B305A3A0096F335 /* SDWebImagePhotosPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */; };
 		FA3987B42B305B190096F335 /* BottomPopup in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B32B305B190096F335 /* BottomPopup */; };
-		FA3987B72B305C120096F335 /* Haneke in Frameworks */ = {isa = PBXBuildFile; productRef = FA3987B62B305C120096F335 /* Haneke */; };
 		FA3987BE2B305D720096F335 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987BC2B305D720096F335 /* UIKitExtension.swift */; };
 		FA39883B2B30602A0096F335 /* ZoomTransitionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39880E2B30602A0096F335 /* ZoomTransitionTypes.swift */; };
 		FA39883C2B30602A0096F335 /* TransitionUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39880F2B30602A0096F335 /* TransitionUtilities.swift */; };
@@ -137,7 +135,6 @@
 		FA641DF92B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF22B357C7A00F6A466 /* ObjcAssociatedWeakObject.swift */; };
 		FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */; };
 		FA641DFB2B357C7A00F6A466 /* SwiftyGifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF52B357C7A00F6A466 /* SwiftyGifManager.swift */; };
-		FACA30972B3E035C0018FA5F /* Valet in Frameworks */ = {isa = PBXBuildFile; productRef = FACA30962B3E035C0018FA5F /* Valet */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -317,10 +314,7 @@
 				FA3987B42B305B190096F335 /* BottomPopup in Frameworks */,
 				75D3FC6F2A606DBB00F351A3 /* SwiftyUserDefaults in Frameworks */,
 				75D3FC722A606DD100F351A3 /* Reusable in Frameworks */,
-				FACA30972B3E035C0018FA5F /* Valet in Frameworks */,
-				7532F8502AE2766B007469EA /* Reachability in Frameworks */,
 				7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */,
-				FA3987B72B305C120096F335 /* Haneke in Frameworks */,
 				FA3987B12B305A3A0096F335 /* SDWebImagePhotosPlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -879,11 +873,8 @@
 				75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */,
 				75D3FC712A606DD100F351A3 /* Reusable */,
 				7504C24E2AD5E99B005FB398 /* NetworkFlows */,
-				7532F84F2AE2766B007469EA /* Reachability */,
 				FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */,
 				FA3987B32B305B190096F335 /* BottomPopup */,
-				FA3987B62B305C120096F335 /* Haneke */,
-				FACA30962B3E035C0018FA5F /* Valet */,
 			);
 			productName = VideoCalls;
 			productReference = 75D3FC332A6069AF00F351A3 /* Cleaner.app */;
@@ -918,11 +909,8 @@
 				75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
 				75D3FC702A606DD100F351A3 /* XCRemoteSwiftPackageReference "Reusable" */,
 				7504C24D2AD5E99B005FB398 /* XCRemoteSwiftPackageReference "NetworkFlows" */,
-				7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */,
 				FA3987AF2B305A3A0096F335 /* XCRemoteSwiftPackageReference "SDWebImagePhotosPlugin" */,
 				FA3987B22B305B190096F335 /* XCRemoteSwiftPackageReference "BottomPopup" */,
-				FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */,
-				FACA30952B3E035C0018FA5F /* XCRemoteSwiftPackageReference "Valet" */,
 			);
 			productRefGroup = 75D3FC342A6069AF00F351A3 /* Products */;
 			projectDirPath = "";
@@ -1329,14 +1317,6 @@
 				kind = branch;
 			};
 		};
-		7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sunshinejr/SwiftyUserDefaults.git";
@@ -1369,22 +1349,6 @@
 				minimumVersion = 0.7.1;
 			};
 		};
-		FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Haneke/HanekeSwift.git";
-			requirement = {
-				kind = revision;
-				revision = a2e8e5b9a91eef90138a4f43c9a0044c4e90a6ef;
-			};
-		};
-		FACA30952B3E035C0018FA5F /* XCRemoteSwiftPackageReference "Valet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/square/Valet";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1392,11 +1356,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7504C24D2AD5E99B005FB398 /* XCRemoteSwiftPackageReference "NetworkFlows" */;
 			productName = NetworkFlows;
-		};
-		7532F84F2AE2766B007469EA /* Reachability */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7532F84E2AE2766B007469EA /* XCRemoteSwiftPackageReference "Reachability" */;
-			productName = Reachability;
 		};
 		75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1417,16 +1376,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA3987B22B305B190096F335 /* XCRemoteSwiftPackageReference "BottomPopup" */;
 			productName = BottomPopup;
-		};
-		FA3987B62B305C120096F335 /* Haneke */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FA3987B52B305C120096F335 /* XCRemoteSwiftPackageReference "HanekeSwift" */;
-			productName = Haneke;
-		};
-		FACA30962B3E035C0018FA5F /* Valet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FACA30952B3E035C0018FA5F /* XCRemoteSwiftPackageReference "Valet" */;
-			productName = Valet;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

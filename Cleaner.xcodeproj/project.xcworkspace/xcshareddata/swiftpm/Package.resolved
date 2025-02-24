@@ -1,5 +1,5 @@
 {
-  "originHash" : "2cd73847d15b32d8801be68d1d2b0f32cd9f2ba1c37e3352d9a655317443f890",
+  "originHash" : "27846b38f53609966c7d49768aee6eecef552430e479c604d4f002ee0c06921f",
   "pins" : [
     {
       "identity" : "bottompopup",
@@ -11,29 +11,12 @@
       }
     },
     {
-      "identity" : "hanekeswift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Haneke/HanekeSwift.git",
-      "state" : {
-        "revision" : "a2e8e5b9a91eef90138a4f43c9a0044c4e90a6ef"
-      }
-    },
-    {
       "identity" : "networkflows",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/megabitsenmzq/NetworkFlows",
       "state" : {
         "branch" : "master",
         "revision" : "eebd5b15ebb87b4cfc07b521b650a0a4f56f6eab"
-      }
-    },
-    {
-      "identity" : "reachability.swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ashleymills/Reachability.swift",
-      "state" : {
-        "revision" : "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
-        "version" : "5.1.0"
       }
     },
     {
@@ -70,15 +53,6 @@
       "state" : {
         "revision" : "f66bcd04088582c8fbb5cb8554d577e303bae396",
         "version" : "5.3.0"
-      }
-    },
-    {
-      "identity" : "valet",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/square/Valet",
-      "state" : {
-        "revision" : "89f12b93553055f4908c0d2548c9b8655926940a",
-        "version" : "4.2.0"
       }
     }
   ],
