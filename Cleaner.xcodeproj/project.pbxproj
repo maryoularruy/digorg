@@ -23,9 +23,7 @@
 		75D3FC402A6069B000F351A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC3F2A6069B000F351A3 /* Assets.xcassets */; };
 		75D3FC432A6069B000F351A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75D3FC412A6069B000F351A3 /* LaunchScreen.storyboard */; };
 		75D3FC5E2A606BA100F351A3 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC4C2A606BA100F351A3 /* Storyboards.swift */; };
-		75D3FC5F2A606BA100F351A3 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC4E2A606BA100F351A3 /* UserDefaults.swift */; };
 		75D3FC602A606BA100F351A3 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC502A606BA100F351A3 /* Keys.swift */; };
-		75D3FC6F2A606DBB00F351A3 /* SwiftyUserDefaults in Frameworks */ = {isa = PBXBuildFile; productRef = 75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */; };
 		75D3FC722A606DD100F351A3 /* Reusable in Frameworks */ = {isa = PBXBuildFile; productRef = 75D3FC712A606DD100F351A3 /* Reusable */; };
 		75D3FC802A606E6F00F351A3 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC7B2A606E6F00F351A3 /* Extension+UIViewController.swift */; };
 		75D3FC812A606E6F00F351A3 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC7C2A606E6F00F351A3 /* Extension+String.swift */; };
@@ -155,7 +153,6 @@
 		75D3FC422A6069B000F351A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75D3FC442A6069B000F351A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75D3FC4C2A606BA100F351A3 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
-		75D3FC4E2A606BA100F351A3 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		75D3FC502A606BA100F351A3 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		75D3FC7B2A606E6F00F351A3 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		75D3FC7C2A606E6F00F351A3 /* Extension+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
@@ -312,7 +309,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA3987B42B305B190096F335 /* BottomPopup in Frameworks */,
-				75D3FC6F2A606DBB00F351A3 /* SwiftyUserDefaults in Frameworks */,
 				75D3FC722A606DD100F351A3 /* Reusable in Frameworks */,
 				7504C24F2AD5E99B005FB398 /* NetworkFlows in Frameworks */,
 				FA3987B12B305A3A0096F335 /* SDWebImagePhotosPlugin in Frameworks */,
@@ -428,7 +424,6 @@
 			children = (
 				A598A0712CEC9CB1002F346E /* Store */,
 				75D3FC4B2A606BA100F351A3 /* Storyboards */,
-				75D3FC4D2A606BA100F351A3 /* UserDefaults */,
 				75D3FC4F2A606BA100F351A3 /* Keys */,
 				75D3FC512A606BA100F351A3 /* Fonts */,
 				75D3FC5B2A606BA100F351A3 /* Assets */,
@@ -442,14 +437,6 @@
 				75D3FC4C2A606BA100F351A3 /* Storyboards.swift */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		75D3FC4D2A606BA100F351A3 /* UserDefaults */ = {
-			isa = PBXGroup;
-			children = (
-				75D3FC4E2A606BA100F351A3 /* UserDefaults.swift */,
-			);
-			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		75D3FC4F2A606BA100F351A3 /* Keys */ = {
@@ -870,7 +857,6 @@
 			);
 			name = Cleaner;
 			packageProductDependencies = (
-				75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */,
 				75D3FC712A606DD100F351A3 /* Reusable */,
 				7504C24E2AD5E99B005FB398 /* NetworkFlows */,
 				FA3987B02B305A3A0096F335 /* SDWebImagePhotosPlugin */,
@@ -906,7 +892,6 @@
 			);
 			mainGroup = 75D3FC2A2A6069AF00F351A3;
 			packageReferences = (
-				75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */,
 				75D3FC702A606DD100F351A3 /* XCRemoteSwiftPackageReference "Reusable" */,
 				7504C24D2AD5E99B005FB398 /* XCRemoteSwiftPackageReference "NetworkFlows" */,
 				FA3987AF2B305A3A0096F335 /* XCRemoteSwiftPackageReference "SDWebImagePhotosPlugin" */,
@@ -1016,7 +1001,6 @@
 				75D3FC602A606BA100F351A3 /* Keys.swift in Sources */,
 				FA3988452B30602A0096F335 /* Result.swift in Sources */,
 				A573446D2D314B7E00A4F3DF /* DeviceInfoView.swift in Sources */,
-				75D3FC5F2A606BA100F351A3 /* UserDefaults.swift in Sources */,
 				A54449162CD19C4F001ECA7A /* ToolOption.swift in Sources */,
 				FA3988592B30602A0096F335 /* PlayerSeeker.swift in Sources */,
 				A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */,
@@ -1317,14 +1301,6 @@
 				kind = branch;
 			};
 		};
-		75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sunshinejr/SwiftyUserDefaults.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		75D3FC702A606DD100F351A3 /* XCRemoteSwiftPackageReference "Reusable" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/Reusable";
@@ -1356,11 +1332,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7504C24D2AD5E99B005FB398 /* XCRemoteSwiftPackageReference "NetworkFlows" */;
 			productName = NetworkFlows;
-		};
-		75D3FC6E2A606DBB00F351A3 /* SwiftyUserDefaults */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 75D3FC6D2A606DBB00F351A3 /* XCRemoteSwiftPackageReference "SwiftyUserDefaults" */;
-			productName = SwiftyUserDefaults;
 		};
 		75D3FC712A606DD100F351A3 /* Reusable */ = {
 			isa = XCSwiftPackageProductDependency;
