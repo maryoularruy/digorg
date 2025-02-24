@@ -59,6 +59,7 @@
 		A57346B02D36C89200A4F3DF /* UIDevice+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */; };
 		A57346B62D3A92D100A4F3DF /* FixedWidthInteger+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57346B52D3A92D100A4F3DF /* FixedWidthInteger+ext.swift */; };
 		A5858DD82D0C500C00C4BDD9 /* Int64+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5858DD72D0C500C00C4BDD9 /* Int64+ext.swift */; };
+		A58ACC052D6BFEE30056F0E9 /* UIImageView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58ACC042D6BFEE30056F0E9 /* UIImageView+ext.swift */; };
 		A598A0752CECA12A002F346E /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = A598A0742CECA12A002F346E /* Store.swift */; };
 		A5B422C42CC4678000EF8FE4 /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */; };
 		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
@@ -129,7 +130,6 @@
 		FA641DDF2B3456DC00F6A466 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */; };
 		FA641DE12B34574300F6A466 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA641DE02B34574300F6A466 /* Calendar.storyboard */; };
 		FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DE22B34575300F6A466 /* CalendarViewController.swift */; };
-		FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -185,6 +185,7 @@
 		A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+ext.swift"; sourceTree = "<group>"; };
 		A57346B52D3A92D100A4F3DF /* FixedWidthInteger+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FixedWidthInteger+ext.swift"; sourceTree = "<group>"; };
 		A5858DD72D0C500C00C4BDD9 /* Int64+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+ext.swift"; sourceTree = "<group>"; };
+		A58ACC042D6BFEE30056F0E9 /* UIImageView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ext.swift"; sourceTree = "<group>"; };
 		A598A0742CECA12A002F346E /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		A5B422C32CC4678000EF8FE4 /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
 		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
@@ -266,8 +267,6 @@
 		FA641DDE2B3456DC00F6A466 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		FA641DE02B34574300F6A466 /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		FA641DE22B34575300F6A466 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+SwiftyGif.swift"; sourceTree = "<group>"; };
-		FA641DF42B357C7A00F6A466 /* SwiftyGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyGif.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -503,6 +502,7 @@
 				A57346AF2D36C89200A4F3DF /* UIDevice+ext.swift */,
 				A57346B52D3A92D100A4F3DF /* FixedWidthInteger+ext.swift */,
 				A54B9C262D43FD1000F41AE3 /* Double+ext.swift */,
+				A58ACC042D6BFEE30056F0E9 /* UIImageView+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -619,7 +619,6 @@
 		FA3987452B30553A0096F335 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FA641DEF2B357C7A00F6A466 /* SwiftyGif */,
 				FA39880C2B30602A0096F335 /* LivePhoto */,
 				FA39875D2B30557E0096F335 /* ImageHashing */,
 				FA3987462B3055420096F335 /* DiffAlgo */,
@@ -796,15 +795,6 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
-		FA641DEF2B357C7A00F6A466 /* SwiftyGif */ = {
-			isa = PBXGroup;
-			children = (
-				FA641DF32B357C7A00F6A466 /* UIImage+SwiftyGif.swift */,
-				FA641DF42B357C7A00F6A466 /* SwiftyGif.h */,
-			);
-			path = SwiftyGif;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -945,6 +935,7 @@
 				A57346B62D3A92D100A4F3DF /* FixedWidthInteger+ext.swift in Sources */,
 				FA39884D2B30602A0096F335 /* UIViewController.swift in Sources */,
 				FA3987572B3055510096F335 /* ElementPath.swift in Sources */,
+				A58ACC052D6BFEE30056F0E9 /* UIImageView+ext.swift in Sources */,
 				FA3988542B30602A0096F335 /* VideoController.swift in Sources */,
 				FA39875A2B3055510096F335 /* AnyDifferentiable.swift in Sources */,
 				FA3987542B3055510096F335 /* DifferentiableSection.swift in Sources */,
@@ -954,7 +945,6 @@
 				FA3987772B3055930096F335 /* OSDHash.m in Sources */,
 				FA39885C2B30602A0096F335 /* PHAssetResourceManager.swift in Sources */,
 				A55CA2632CC907350026D434 /* UIFont+ext.swift in Sources */,
-				FA641DFA2B357C7A00F6A466 /* UIImage+SwiftyGif.swift in Sources */,
 				FA39877E2B3055930096F335 /* OSAbstractHash.m in Sources */,
 				A5446C2D2CE74B7A00A1F940 /* InstructionCellType.swift in Sources */,
 				FA3987422B3054B90096F335 /* PHAssetGroup.swift in Sources */,
