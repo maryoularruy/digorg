@@ -27,7 +27,7 @@ final class CleanupOptionView: UIView {
     
     func bind(_ option: CleanupOption) {
         titleLabel.text = option.rawValue
-        imageView.setImage(UIImage(resource: option.image))
+        imageView.image = UIImage(resource: option.image)
     }
     
     private func setup() {

@@ -19,12 +19,7 @@ open class MediaCarouselBaseImagePreviewVC: MediaCarouselBasePreviewVC {
         guard let contentView = self.contentView as? MediaCarouselImageView else { return }
         
         if let data = content as? Data {
-            let imageFormat = NSData.sd_imageFormat(forImageData: data)
-            if imageFormat == .GIF, let gifImage = try? UIImage(gifData: data) {
-                contentView.setGifImage(gifImage)
-            } else {
-                contentView.image = UIImage(data: data)
-            }
+            contentView.image = UIImage(data: data)
         } else if let image = content as? UIImage {
             contentView.image = image
         } else {
@@ -62,8 +57,6 @@ open class MediaCarouselBaseImagePreviewVC: MediaCarouselBasePreviewVC {
         
         if let image = contentView.image {
             return image.size
-        } else if let animatedImage = contentView.currentImage {
-            return animatedImage.size
         } else {
             return CGSize.zero
         }
