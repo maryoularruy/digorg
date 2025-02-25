@@ -269,6 +269,16 @@
 		FA641DE22B34575300F6A466 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		136670EB2D6C9B71007B1394 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Store.storekit,
+			);
+			target = 75D3FC322A6069AF00F351A3 /* Cleaner */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A50D5B212CE66100006C259C /* Instructions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Instructions; sourceTree = "<group>"; };
 		A50F58AE2CB6BB6C00AB3166 /* Poppins */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Poppins; sourceTree = "<group>"; };
@@ -290,7 +300,7 @@
 		A57348F42D3B396000A4F3DF /* Passcode */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Passcode; sourceTree = "<group>"; };
 		A57348F72D3EA5F500A4F3DF /* SecurityQuestion */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SecurityQuestion; sourceTree = "<group>"; };
 		A58ABE8F2D639D750056F0E9 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
-		A598A0712CEC9CB1002F346E /* Store */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Store; sourceTree = "<group>"; };
+		A598A0712CEC9CB1002F346E /* Store */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (136670EB2D6C9B71007B1394 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Store; sourceTree = "<group>"; };
 		A5B4237C2CC7F3CB00EF8FE4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		A5C4CF792CB8AEA3002B3C41 /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
 		A5CBDF112D1603820065862E /* DuplicateNumberContacts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DuplicateNumberContacts; sourceTree = "<group>"; };

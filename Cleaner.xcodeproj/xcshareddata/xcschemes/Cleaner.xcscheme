@@ -51,7 +51,7 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <StoreKitConfigurationFileReference
-         identifier = "../../Cleaner/Resources/Store/StoreConfiguration.storekit">
+         identifier = "../../Cleaner/Resources/Store/Store.storekit">
       </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction

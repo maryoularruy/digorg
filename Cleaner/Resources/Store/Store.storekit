@@ -9,7 +9,7 @@
       }
     ]
   },
-  "identifier" : "FAB27347",
+  "identifier" : "0FC93499",
   "nonRenewingSubscriptions" : [
 
   ],
@@ -17,65 +17,45 @@
 
   ],
   "settings" : {
-    "_askToBuyEnabled" : false,
+    "_applicationInternalID" : "6741464903",
+    "_developerTeamID" : "4GS69FQ7LG",
     "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 762095946.61605,
     "_locale" : "en_US",
-    "_renewalBillingIssuesEnabled" : false,
     "_storefront" : "USA",
     "_storeKitErrors" : [
       {
-        "current" : {
-          "index" : 2,
-          "type" : "generic"
-        },
+        "current" : null,
         "enabled" : false,
         "name" : "Load Products"
       },
       {
-        "current" : {
-          "index" : 1,
-          "type" : "purchase"
-        },
+        "current" : null,
         "enabled" : false,
         "name" : "Purchase"
       },
       {
-        "current" : {
-          "index" : 0,
-          "type" : "verification"
-        },
+        "current" : null,
         "enabled" : false,
         "name" : "Verification"
       },
       {
-        "current" : {
-          "index" : 2,
-          "type" : "generic"
-        },
+        "current" : null,
         "enabled" : false,
         "name" : "App Store Sync"
       },
       {
-        "current" : {
-          "index" : 2,
-          "type" : "generic"
-        },
+        "current" : null,
         "enabled" : false,
         "name" : "Subscription Status"
       },
       {
-        "current" : {
-          "index" : 3,
-          "type" : "generic"
-        },
+        "current" : null,
         "enabled" : false,
         "name" : "App Transaction"
       },
       {
-        "current" : {
-          "index" : 3,
-          "type" : "generic"
-        },
+        "current" : null,
         "enabled" : false,
         "name" : "Manage Subscriptions Sheet"
       },
@@ -85,10 +65,7 @@
         "name" : "Refund Request Sheet"
       },
       {
-        "current" : {
-          "index" : 4,
-          "type" : "generic"
-        },
+        "current" : null,
         "enabled" : false,
         "name" : "Offer Code Redeem Sheet"
       }
@@ -96,11 +73,11 @@
   },
   "subscriptionGroups" : [
     {
-      "id" : "CF179DF7",
+      "id" : "21640180",
       "localizations" : [
 
       ],
-      "name" : "premiumtest",
+      "name" : "premium",
       "subscriptions" : [
         {
           "adHocOffers" : [
@@ -112,23 +89,24 @@
           "displayPrice" : "5.99",
           "familyShareable" : false,
           "groupNumber" : 1,
-          "internalID" : "DCBC37EC",
+          "internalID" : "6742403648",
           "introductoryOffer" : {
-            "internalID" : "BF197EE5",
+            "internalID" : "DF131E44",
+            "numberOfPeriods" : 1,
             "paymentMode" : "free",
             "subscriptionPeriod" : "P3D"
           },
           "localizations" : [
             {
-              "description" : "Auto-renewable weekly subscription",
-              "displayName" : "Auto-renewable weekly",
+              "description" : "Get full access to all features",
+              "displayName" : "Premium",
               "locale" : "en_US"
             }
           ],
-          "productID" : "premiumtest.weeklytest",
+          "productID" : "premium.weekly",
           "recurringSubscriptionPeriod" : "P1W",
-          "referenceName" : "weeklytest",
-          "subscriptionGroupID" : "CF179DF7",
+          "referenceName" : "weekly",
+          "subscriptionGroupID" : "21640180",
           "type" : "RecurringSubscription",
           "winbackOffers" : [
 
