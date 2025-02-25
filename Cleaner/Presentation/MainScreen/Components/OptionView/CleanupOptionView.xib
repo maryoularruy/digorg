@@ -33,7 +33,7 @@
                         <constraint firstAttribute="width" constant="140" id="TtS-ez-MeQ"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqu-Ut-uae" customClass="Medium12ButtonStyle" customModule="Cleaner" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqu-Ut-uae" customClass="Medium12WithSpinnerButtonStyle" customModule="Cleaner" customModuleProvider="target">
                     <rect key="frame" x="16" y="46" width="30" height="35"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title=" "/>

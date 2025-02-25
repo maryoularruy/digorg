@@ -122,33 +122,49 @@ final class MainViewController: UIViewController {
     }
     
     private func updatePhotosCleanupOption() {
+        photosCleanup.infoButton.startSpinner()
+        photosCleanup.isUserInteractionEnabled = false
         photoVideoManager.fetchSimilarPhotos(live: false) { assetsGroups, duplicatesCount, size in
             DispatchQueue.main.async { [weak self] in
+                self?.photosCleanup.infoButton.endSpinner()
                 self?.photosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.roundAndToString())")
+                self?.photosCleanup.isUserInteractionEnabled = true
             }
         }
     }
     
     private func updateVideosCleanupOption() {
+        videosCleanup.infoButton.startSpinner()
+        videosCleanup.isUserInteractionEnabled = false
         photoVideoManager.fetchSimilarVideos { _, duplicatesCount, size in
             DispatchQueue.main.async { [weak self] in
+                self?.videosCleanup.infoButton.endSpinner()
                 self?.videosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.roundAndToString())")
+                self?.videosCleanup.isUserInteractionEnabled = true
             }
         }
     }
     
     private func updateContactsCleanupOption() {
+        contactsCleanup.infoButton.startSpinner()
+        contactsCleanup.isUserInteractionEnabled = false
         contactManager.countUnresolvedContacts { _, _, _, _, summaryCount in
             DispatchQueue.main.async { [weak self] in
+                self?.contactsCleanup.infoButton.endSpinner()
                 self?.contactsCleanup.infoButton.bind(text: "\(summaryCount) contact\(summaryCount == 1 ? "" : "s")")
+                self?.contactsCleanup.isUserInteractionEnabled = true
             }
         }
     }
     
     private func updateCalendarCleanupOption() {
+        calendarCleanup.infoButton.startSpinner()
+        calendarCleanup.isUserInteractionEnabled = false
         calendarManager.fetchEvents { events in
             DispatchQueue.main.async { [weak self] in
+                self?.calendarCleanup.infoButton.endSpinner()
                 self?.calendarCleanup.infoButton.bind(text: "\(events.count) event\(events.count == 1 ? "" : "s")")
+                self?.calendarCleanup.isUserInteractionEnabled = true
             }
         }
     }
