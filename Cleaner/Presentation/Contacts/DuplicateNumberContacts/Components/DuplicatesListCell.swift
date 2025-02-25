@@ -57,7 +57,11 @@ final class DuplicatesListCell: UITableViewCell {
             nameContactLabel.text = fullName
         }
         
-        var numbers: [String] = [duplicateNumber]
+        var numbers: [String] = []
+        if !duplicateNumber.isEmpty {
+            numbers.append(duplicateNumber)
+        }
+        
         contact.phoneNumbers.forEach { number in
             if duplicateNumber != number.value.stringValue {
                 numbers.append(number.value.stringValue)
