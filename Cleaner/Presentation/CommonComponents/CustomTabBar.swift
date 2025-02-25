@@ -10,10 +10,11 @@ import UIKit
 final class CustomTabBar: UITabBar {
     private static let size = CGSize(width: 253, height: 62)
     private static let bottomAnchor = 32.0
+    private lazy var buttons = subviews.filter { String(describing: type(of: $0)) == "UITabBarButton" }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
+
         layer.cornerRadius = 22
         clipsToBounds = true
         addShadowsWithoutClipToBounds()
@@ -21,7 +22,8 @@ final class CustomTabBar: UITabBar {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        
+        buttons.forEach { $0.frame = CGRect(origin: $0.frame.origin, size: CGSize(width: $0.frame.size.width, height: 62.0)) }
         guard let superview else { return }
         let x = (superview.frame.width / 2) - (CustomTabBar.size.width / 2)
         let y = superview.frame.maxY - CustomTabBar.size.height - CustomTabBar.bottomAnchor
