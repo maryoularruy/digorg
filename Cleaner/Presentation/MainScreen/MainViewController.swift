@@ -37,7 +37,6 @@ final class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        tabBarController?.tabBar.isHidden = false
         updateUI()
     }
     
@@ -199,6 +198,7 @@ extension MainViewController: ViewControllerProtocol {
     
     @objc private func openDeviceInfoScreen() {
         let vc = DeviceInfoViewController()
+        vc.hidesBottomBarWhenPushed = true
         DispatchQueue.main.async { [weak self] in
             self?.navigationController?.pushViewController(vc, animated: true)
         }
@@ -216,6 +216,7 @@ extension MainViewController: ViewControllerProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             let vc = SmartCleanViewController()
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -224,6 +225,7 @@ extension MainViewController: ViewControllerProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             let vc = PhotoTotalViewController()
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -232,6 +234,7 @@ extension MainViewController: ViewControllerProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             let vc = VideoTotalViewController()
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }

@@ -20,7 +20,6 @@ final class DeviceInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBarController?.tabBar.isHidden = true
         updateRamAndCpu()
         updateSpeed()
         setupUI()
