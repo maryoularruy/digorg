@@ -13,14 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
         Store.shared.updateListenerTask
-        
-        DispatchQueue.main.async {
-            let vc = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "TabBarController") as UITabBarController
-            self.window?.rootViewController = vc
-            self.window?.makeKeyAndVisible()
-        }
         return true
     }
 }
