@@ -71,6 +71,12 @@ final class SettingsViewController: UIViewController {
         vc.modalPresentationStyle = .popover
         present(vc, animated: true)
     }
+    
+    private func openWebVC(isPrivacyPolicy: Bool) {
+        let vc = WebViewController(isPrivacyPolicy: isPrivacyPolicy)
+        vc.modalPresentationStyle = .popover
+        present(vc, animated: true)
+    }
 }
 
 extension SettingsViewController: PremiumVCDelegate {
@@ -137,11 +143,9 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
             }
             
         case .privacyPolicy:
-            //TODO
-            break
+            openWebVC(isPrivacyPolicy: true)
         case .termsOfUse:
-            //TODO
-            break
+            openWebVC(isPrivacyPolicy: false)
         }
     }
 }
