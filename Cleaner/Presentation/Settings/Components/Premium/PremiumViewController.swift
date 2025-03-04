@@ -49,6 +49,7 @@ final class PremiumViewController: UIViewController {
                     setupCancelSubscriptionUI(expirationDate: expirationDate)
                 } else {
                     setupStartSubscriptionUI(expirationDate: getExpirationDate())
+                    rootView.premiumOfferView.animateButton()
                 }
             }
             
@@ -56,8 +57,10 @@ final class PremiumViewController: UIViewController {
             Task.init {
                 if await store.isTrialEligible() {
                     setupStartTrialUI()
+                    rootView.premiumOfferView.animateButton()
                 } else {
                     setupStartSubscriptionUI()
+                    rootView.premiumOfferView.animateButton()
                 }
             }
         }
