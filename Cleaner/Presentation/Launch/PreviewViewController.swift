@@ -14,6 +14,8 @@ final class PreviewViewController: UIViewController {
     private var videoPaths: [String] = [Bundle.main.path(forResource: "DeleteDuplicatePhotos", ofType: "mov") ?? "",
                                         Bundle.main.path(forResource: "MergeDuplicateContacts", ofType: "mov") ?? ""]
     
+    private lazy var store = Store.shared
+    
     override func loadView() {
         super.loadView()
         view = rootView
@@ -22,6 +24,11 @@ final class PreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPageController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootView.bind(price: store.getSubscriptionPrice())
     }
     
     override func viewDidAppear(_ animated: Bool) {

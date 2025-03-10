@@ -19,6 +19,18 @@ final class PreviewView: UIView {
     
     lazy var pageController: UIPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: .none)
     
+    private lazy var applicationNameLabel: Semibold24LabelStyle = {
+        let label = Semibold24LabelStyle()
+        label.bind(text: "Cleaner: Mastero & Prod")
+        return label
+    }()
+    
+    private lazy var priceLabel: Regular12LabelStyle = {
+        let label = Regular12LabelStyle()
+        label.numberOfLines = 1
+        return label
+    }()
+    
     private lazy var startSubscriptionButton: ActionToolbarButtonStyle = {
         let button = ActionToolbarButtonStyle()
         button.layer.cornerRadius = 30
@@ -50,6 +62,10 @@ final class PreviewView: UIView {
         initConstraints()
     }
     
+    func bind(price: String) {
+        priceLabel.bind(text: "Try 3 days for free, then \(price)")
+    }
+    
     func animateStartSubscriptionButton() {
         startSubscriptionButton.animate()
     }
@@ -71,14 +87,14 @@ final class PreviewView: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([pageController.view, startSubscriptionButton, termsOfUseLabel, restoreLabel])
+        addSubviews([pageController.view,
+                     applicationNameLabel,
+                     priceLabel,
+                     startSubscriptionButton,
+                     termsOfUseLabel,
+                     restoreLabel])
         
         NSLayoutConstraint.activate([
-            pageController.view.topAnchor.constraint(equalTo: topAnchor),
-            pageController.view.leadingAnchor.constraint(equalTo: leadingAnchor),
-            pageController.view.trailingAnchor.constraint(equalTo: trailingAnchor),
-            pageController.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -150),
-            
             termsOfUseLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
             termsOfUseLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
             
@@ -88,7 +104,18 @@ final class PreviewView: UIView {
             startSubscriptionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
             startSubscriptionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -38),
             startSubscriptionButton.bottomAnchor.constraint(equalTo: termsOfUseLabel.topAnchor, constant: -15),
-            startSubscriptionButton.heightAnchor.constraint(equalToConstant: 60)
+            startSubscriptionButton.heightAnchor.constraint(equalToConstant: 60),
+
+            priceLabel.bottomAnchor.constraint(equalTo: startSubscriptionButton.topAnchor, constant: -22),
+            priceLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            applicationNameLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor, constant: -11),
+            applicationNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            
+            pageController.view.topAnchor.constraint(equalTo: topAnchor),
+            pageController.view.leadingAnchor.constraint(equalTo: leadingAnchor),
+            pageController.view.trailingAnchor.constraint(equalTo: trailingAnchor),
+            pageController.view.bottomAnchor.constraint(equalTo: applicationNameLabel.topAnchor, constant: -10)
         ])
     }
 }

@@ -156,6 +156,11 @@ final class Store {
         }
     }
     
+    func getSubscriptionPrice() -> String {
+        guard let product = products.first else { return "" }
+        return "\(product.displayPrice) / week"
+    }
+    
     private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         switch result {
         case .unverified:
