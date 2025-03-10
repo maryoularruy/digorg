@@ -17,12 +17,16 @@ final class PreviewViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view = rootView
-        view.backgroundColor = .red
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPageController()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        rootView.animateStartSubscriptionButton()
     }
     
     private func setupPageController() {

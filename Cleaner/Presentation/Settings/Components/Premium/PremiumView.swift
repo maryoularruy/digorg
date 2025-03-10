@@ -97,13 +97,13 @@ final class PremiumView: UIView {
     
     lazy var premiumOfferView: PremiumOfferView = PremiumOfferView()
     
-    lazy var privacyPolicyLabel: Regular13LabelStyle = {
+    private lazy var privacyPolicyLabel: Regular13LabelStyle = {
         let label = Regular13LabelStyle()
         label.underlined(text: "Privacy Policy")
         return label
     }()
     
-    lazy var termsOfUseLabel: Regular13LabelStyle = {
+    private lazy var termsOfUseLabel: Regular13LabelStyle = {
         let label = Regular13LabelStyle()
         label.underlined(text: "Terms of Use")
         return label
