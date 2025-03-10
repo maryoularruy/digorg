@@ -19,6 +19,8 @@ final class PreviewView: UIView {
     
     lazy var pageController: UIPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: .none)
     
+    private lazy var closeImageView: UIImageView = UIImageView(image: UIImage(systemName: "xmark"))
+    
     private lazy var applicationNameLabel: Semibold24LabelStyle = {
         let label = Semibold24LabelStyle()
         label.bind(text: "Cleaner: Mastero & Prod")
@@ -72,6 +74,7 @@ final class PreviewView: UIView {
     
     private func setupView() {
         backgroundColor = .paleGrey
+        closeImageView.tintColor = .black
         
         startSubscriptionButton.addTapGestureRecognizer { [weak self] in
             self?.delegate?.tapOnStartSubscriptionButton()
@@ -87,7 +90,8 @@ final class PreviewView: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([pageController.view,
+        addSubviews([closeImageView,
+                     pageController.view,
                      applicationNameLabel,
                      priceLabel,
                      startSubscriptionButton,
@@ -112,10 +116,13 @@ final class PreviewView: UIView {
             applicationNameLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor, constant: -11),
             applicationNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            pageController.view.topAnchor.constraint(equalTo: topAnchor),
+            pageController.view.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             pageController.view.leadingAnchor.constraint(equalTo: leadingAnchor),
             pageController.view.trailingAnchor.constraint(equalTo: trailingAnchor),
-            pageController.view.bottomAnchor.constraint(equalTo: applicationNameLabel.topAnchor, constant: -10)
+            pageController.view.bottomAnchor.constraint(equalTo: applicationNameLabel.topAnchor, constant: -10),
+            
+//            closeImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+//            closeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
         ])
     }
 }

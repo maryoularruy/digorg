@@ -21,14 +21,14 @@ final class PreviewViewController: UIViewController {
         view = rootView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupPageController()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         rootView.bind(price: store.getSubscriptionPrice())
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupPageController()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,6 +42,7 @@ final class PreviewViewController: UIViewController {
         addChild(rootView.pageController)
         
         let initialVC = PreviewPageViewController(videoPath: videoPaths[0])
+        initialVC.setupFrame(frame: rootView.pageController.view.frame)
         
         rootView.pageController.setViewControllers([initialVC], direction: .forward, animated: true, completion: nil)
         rootView.pageController.didMove(toParent: self)
@@ -55,7 +56,9 @@ extension PreviewViewController: UIPageViewControllerDataSource, UIPageViewContr
               index > 0 else {
             return nil
         }
-        return PreviewPageViewController(videoPath: videoPaths[index - 1])
+        let previousVC = PreviewPageViewController(videoPath: videoPaths[index - 1])
+        previousVC.setupFrame(frame: rootView.pageController.view.frame)
+        return previousVC
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -64,6 +67,14 @@ extension PreviewViewController: UIPageViewControllerDataSource, UIPageViewContr
               index < videoPaths.count - 1 else {
             return nil
         }
-        return PreviewPageViewController(videoPath: videoPaths[index + 1])
+        let nextVC = PreviewPageViewController(videoPath: videoPaths[index + 1])
+        nextVC.setupFrame(frame: rootView.pageController.view.frame)
+        return nextVC
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+//        guard completed,
+//              let currentVC = pageViewController.viewControllers?.first as? PreviewPageViewController else { return }
+//        currentVC.playVideo()
     }
 }
