@@ -17,9 +17,10 @@ protocol PreviewViewDelegate: AnyObject {
 final class PreviewView: UIView {
     weak var delegate: PreviewViewDelegate?
     
-    lazy var pageController: UIPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: .none)
-    
     private lazy var closeImageView: UIImageView = UIImageView(image: UIImage(systemName: "xmark"))
+    
+    lazy var pageController: UIPageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: .none)
+    lazy var pageControl: UIPageControl = UIPageControl()
     
     private lazy var applicationNameLabel: Semibold24LabelStyle = {
         let label = Semibold24LabelStyle()
@@ -90,8 +91,8 @@ final class PreviewView: UIView {
     }
     
     private func initConstraints() {
-        addSubviews([closeImageView,
-                     pageController.view,
+        addSubviews([pageController.view,
+                     pageControl,
                      applicationNameLabel,
                      priceLabel,
                      startSubscriptionButton,
@@ -116,10 +117,13 @@ final class PreviewView: UIView {
             applicationNameLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor, constant: -11),
             applicationNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            pageController.view.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            pageController.view.topAnchor.constraint(equalTo: topAnchor, constant: 18),
             pageController.view.leadingAnchor.constraint(equalTo: leadingAnchor),
             pageController.view.trailingAnchor.constraint(equalTo: trailingAnchor),
             pageController.view.bottomAnchor.constraint(equalTo: applicationNameLabel.topAnchor, constant: -10),
+            
+            pageControl.bottomAnchor.constraint(equalTo: pageController.view.bottomAnchor, constant: -8),
+            pageControl.centerXAnchor.constraint(equalTo: centerXAnchor)
             
 //            closeImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
 //            closeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)

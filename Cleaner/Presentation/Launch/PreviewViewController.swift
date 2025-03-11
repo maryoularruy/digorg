@@ -29,6 +29,7 @@ final class PreviewViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupPageController()
+        setupPageControl()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,6 +47,18 @@ final class PreviewViewController: UIViewController {
         
         rootView.pageController.setViewControllers([initialVC], direction: .forward, animated: true, completion: nil)
         rootView.pageController.didMove(toParent: self)
+    }
+    
+    private func setupPageControl() {
+        rootView.pageControl.isUserInteractionEnabled = false
+        rootView.pageControl.numberOfPages = videoPaths.count
+        rootView.pageControl.currentPage = 0
+        rootView.pageControl.currentPageIndicatorTintColor = .blue
+        rootView.pageControl.pageIndicatorTintColor = .lightGrey
+    }
+    
+    private func updateCurrentPage(index: Int) {
+        rootView.pageControl.currentPage = index
     }
 }
 
@@ -73,8 +86,10 @@ extension PreviewViewController: UIPageViewControllerDataSource, UIPageViewContr
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-//        guard completed,
-//              let currentVC = pageViewController.viewControllers?.first as? PreviewPageViewController else { return }
-//        currentVC.playVideo()
+        if completed,
+           let currentVC = pageViewController.viewControllers?.first as? PreviewPageViewController,
+           let index = videoPaths.firstIndex(of: currentVC.videoPath) {
+            updateCurrentPage(index: index)
+        }
     }
 }
