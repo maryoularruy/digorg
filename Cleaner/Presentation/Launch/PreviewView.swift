@@ -25,7 +25,7 @@ final class PreviewView: UIView {
     
     private lazy var applicationNameLabel: Semibold24LabelStyle = {
         let label = Semibold24LabelStyle()
-        label.bind(text: "Cleaner: Mastero & Prod")
+        label.bind(text: "Mastero: Clean & Prod")
         return label
     }()
     
