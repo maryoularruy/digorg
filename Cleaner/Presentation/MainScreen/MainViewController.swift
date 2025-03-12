@@ -31,6 +31,11 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if userDefaultsService.isFirstEntry {
+            openPreviewVC()
+        }
+        
         setupUI()
         addGestureRecognizers()
     }
@@ -174,6 +179,13 @@ final class MainViewController: UIViewController {
                 self?.calendarCleanup.isUserInteractionEnabled = true
             }
         }
+    }
+    
+    private func openPreviewVC() {
+        let vc = PreviewViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: false)
     }
 }
 

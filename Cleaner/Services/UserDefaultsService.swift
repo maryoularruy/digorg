@@ -9,6 +9,8 @@ import Foundation
 
 enum UserDefaultsKeys: String {
     
+    case isFirstEntry = "IS_FIRST_ENTRY"
+    
     case isRemovePhotosAfterImport = "REMOVE_PHOTOS_AFTER_IMPORT"
     case isRemoveContactsAfterImport = "REMOVE_CONTACTS_AFTER_IMPORT"
     
@@ -29,6 +31,10 @@ enum UserDefaultsKeys: String {
 
 final class UserDefaultsService {
     static let shared = UserDefaultsService()
+    
+    var isFirstEntry: Bool {
+        self.get(Bool.self, key: .isFirstEntry) ?? true
+    }
     
     var isPasscodeCreated: Bool {
         self.get(String.self, key: .secretAlbumPasscode) != nil

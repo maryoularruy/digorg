@@ -12,6 +12,7 @@ protocol PreviewViewDelegate: AnyObject {
     func tapOnStartSubscriptionButton()
     func tapOnRestore()
     func tapOnTermsOfUse()
+    func tapOnClose()
 }
 
 final class PreviewView: UIView {
@@ -66,7 +67,11 @@ final class PreviewView: UIView {
     }
     
     func bind(price: String) {
-        priceLabel.bind(text: "Try 3 days for free, then \(price)")
+        if price.isEmpty {
+            priceLabel.bind(text: "Try 3 days for free, then $5.99 / week")
+        } else {
+            priceLabel.bind(text: "Try 3 days for free, then \(price)")
+        }
     }
     
     func animateStartSubscriptionButton() {
@@ -75,7 +80,7 @@ final class PreviewView: UIView {
     
     private func setupView() {
         backgroundColor = .paleGrey
-        closeImageView.tintColor = .black
+        closeImageView.tintColor = .pureWhite
         
         startSubscriptionButton.addTapGestureRecognizer { [weak self] in
             self?.delegate?.tapOnStartSubscriptionButton()
@@ -88,6 +93,10 @@ final class PreviewView: UIView {
         restoreLabel.addTapGestureRecognizer { [weak self] in
             self?.delegate?.tapOnRestore()
         }
+        
+        closeImageView.addTapGestureRecognizer { [weak self] in
+            self?.delegate?.tapOnClose()
+        }
     }
     
     private func initConstraints() {
@@ -98,6 +107,7 @@ final class PreviewView: UIView {
                      startSubscriptionButton,
                      termsOfUseLabel,
                      restoreLabel])
+        pageController.view.addSubviews([closeImageView])
         
         NSLayoutConstraint.activate([
             termsOfUseLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
@@ -123,10 +133,12 @@ final class PreviewView: UIView {
             pageController.view.bottomAnchor.constraint(equalTo: applicationNameLabel.topAnchor, constant: -10),
             
             pageControl.bottomAnchor.constraint(equalTo: pageController.view.bottomAnchor, constant: -8),
-            pageControl.centerXAnchor.constraint(equalTo: centerXAnchor)
+            pageControl.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-//            closeImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-//            closeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+            closeImageView.topAnchor.constraint(equalTo: pageController.view.topAnchor, constant: 24),
+            closeImageView.leadingAnchor.constraint(equalTo: pageController.view.leadingAnchor, constant: 20),
+            closeImageView.heightAnchor.constraint(equalToConstant: 20),
+            closeImageView.widthAnchor.constraint(equalToConstant: 20)
         ])
     }
 }

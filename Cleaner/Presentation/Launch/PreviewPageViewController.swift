@@ -19,7 +19,6 @@ final class PreviewPageViewController: UIViewController {
     
     private lazy var playerLayer: AVPlayerLayer = AVPlayerLayer()
     private var player: AVPlayer?
-    private var playerLooper: AVPlayerLooper?
     
     init(videoPath: String) {
         self.videoPath = videoPath

@@ -17,6 +17,7 @@ final class PreviewViewController: UIViewController {
     private var pageVCs: [PreviewPageViewController] = []
     
     private lazy var store = Store.shared
+    private lazy var userDefaultsService = UserDefaultsService.shared
     
     override func loadView() {
         super.loadView()
@@ -25,6 +26,7 @@ final class PreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        rootView.delegate = self
         setupPages()
     }
     
@@ -71,6 +73,21 @@ final class PreviewViewController: UIViewController {
     private func updateCurrentPage(index: Int) {
         rootView.pageControl.currentPage = index
     }
+    
+    private func updateUserDefaults() {
+        userDefaultsService.set(false, key: .isFirstEntry)
+    }
+    
+    private func updateUI() {
+        if userDefaultsService.isSubscriptionActive {
+            updateAndClose()
+        }
+    }
+    
+    private func updateAndClose() {
+        updateUserDefaults()
+        navigationController?.popViewController(animated: false)
+    }
 }
 
 extension PreviewViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
@@ -107,5 +124,46 @@ extension PreviewViewController: PreviewPageViewControllerDelegate {
         let isFirst = index == 0
         rootView.pageController.setViewControllers(isFirst ? [pageVCs[1]] : [pageVCs[0]], direction: isFirst ? .forward : .reverse, animated: true, completion: nil)
         updateCurrentPage(index: isFirst ? 1 : 0)
+    }
+}
+
+extension PreviewViewController: PreviewViewDelegate {
+    func tapOnStartSubscriptionButton() {
+        Task.init {
+            do {
+                try await store.purchase()
+                updateUI()
+            } catch(let error) {
+                showAlert(error: error)
+            }
+        }
+    }
+    
+    func tapOnRestore() {
+        do {
+            try store.restore() { [weak self] result in
+                DispatchQueue.main.async {
+                    if result {
+                        self?.showAlert(title: "Success", subtitle: "Your subscriptions have been restored")
+                    } else {
+                        self?.showAlert(title: "Error", subtitle: "Could not restore purchases")
+                    }
+                }
+            }
+        } catch(let error) {
+            DispatchQueue.main.async { [weak self] in
+                self?.showAlert(error: error)
+            }
+        }
+    }
+    
+    func tapOnTermsOfUse() {
+        let vc = WebViewController(isPrivacyPolicy: true)
+        vc.modalPresentationStyle = .popover
+        present(vc, animated: true)
+    }
+    
+    func tapOnClose() {
+        updateAndClose()
     }
 }

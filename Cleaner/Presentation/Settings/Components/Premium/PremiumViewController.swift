@@ -101,6 +101,12 @@ final class PremiumViewController: UIViewController {
     private func getExpirationDate() -> Date? {
         userDefaultsService.get(Date.self, key: .subscriptionExpirationDate)
     }
+    
+    private func openWebVC(isPrivacyPolicy: Bool) {
+        let vc = WebViewController(isPrivacyPolicy: isPrivacyPolicy)
+        vc.modalPresentationStyle = .popover
+        present(vc, animated: true)
+    }
 }
 
 extension PremiumViewController: ViewControllerProtocol {
@@ -136,11 +142,11 @@ extension PremiumViewController: PremiumViewDelegate {
     }
     
     func tapOnPrivacyPolicy() {
-        
+        openWebVC(isPrivacyPolicy: true)
     }
     
     func tapOnTermsOfUse() {
-        
+        openWebVC(isPrivacyPolicy: false)
     }
 }
 
