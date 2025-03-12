@@ -8,7 +8,13 @@
 import UIKit
 import AVFoundation
 
+protocol PreviewPageViewControllerDelegate: AnyObject {
+    func videoDidEnd(videoPath: String)
+}
+
 final class PreviewPageViewController: UIViewController {
+    weak var delegate: PreviewPageViewControllerDelegate?
+    
     private(set) var videoPath: String
     
     private lazy var playerLayer: AVPlayerLayer = AVPlayerLayer()
@@ -22,8 +28,10 @@ final class PreviewPageViewController: UIViewController {
         playerLayer.videoGravity = .resizeAspectFill
         
         let item = AVPlayerItem(url: URL(fileURLWithPath: videoPath))
-        player = AVQueuePlayer()
-        playerLooper = AVPlayerLooper(player: player! as! AVQueuePlayer, templateItem: item)
+        player = AVPlayer(playerItem: item)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(videoDidEnd), name: .AVPlayerItemDidPlayToEndTime, object: item)
+        
         playerLayer.player = player
         view.layer.addSublayer(playerLayer)
     }
@@ -34,6 +42,7 @@ final class PreviewPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        player?.seek(to: CMTime.zero)
         player?.play()
     }
     
@@ -44,5 +53,13 @@ final class PreviewPageViewController: UIViewController {
     
     func setupFrame(frame: CGRect) {
         playerLayer.frame = frame
+    }
+    
+    @objc func videoDidEnd() {
+        delegate?.videoDidEnd(videoPath: videoPath)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
