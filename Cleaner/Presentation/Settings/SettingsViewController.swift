@@ -129,9 +129,7 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
             navigationController?.pushViewController(vc, animated: true)
             
         case .share:
-            //TODO: -add application's id
-            //"https://apps.apple.com/app/id"
-            guard let url = NSURL(string: "https://apps.apple.com") else { return }
+            guard let url = NSURL(string: "https://apps.apple.com/app/6741464903") else { return }
             let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             vc.popoverPresentationController?.sourceView = self.view
             present(vc, animated: true)
