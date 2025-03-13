@@ -22,12 +22,41 @@ final class PhotoTotalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addGestureRecognizers()
+        checkPermissionStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
         setupUI()
+    }
+    
+    private func checkPermissionStatus() {
+        photoVideoManager.checkStatus { [weak self] status in
+            if status == .authorized || status == .limited {
+                return
+            } else {
+                self?.showPermissionAlert()
+            }
+        }
+    }
+    
+    private func showPermissionAlert() {
+        let alertController = UIAlertController(title: "You did not give access to 'Gallery'",
+                                                message: "We need access to the gallery. Please go to the settings and allow access, then restart the app.",
+                                                preferredStyle: .alert)
+        let disallowAction = UIAlertAction(title: "Disallow", style: .cancel)
+        let settingsAction = UIAlertAction(title: "In settings", style: .default) { _ in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl) { _ in }
+            }
+        }
+        alertController.addAction(disallowAction)
+        alertController.addAction(settingsAction)
+        DispatchQueue.main.async { [weak self] in
+            self?.present(alertController, animated: true, completion: nil)
+        }
     }
 }
 

@@ -45,15 +45,21 @@ final class PhotoVideoManager {
     }
     
     func fetchAllVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, handler: @escaping ([PHAsset]) -> ()) {
-        let options = PHFetchOptions()
-        options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.video.rawValue)
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        let fetchResult = PHAsset.fetchAssets(with: options)
-        var videos: [PHAsset] = []
-        fetchResult.enumerateObjects { asset, _, _ in
-            videos.append(asset)
+        checkStatus { status in
+            if status == .authorized || status == .limited {
+                let options = PHFetchOptions()
+                options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.video.rawValue)
+                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                let fetchResult = PHAsset.fetchAssets(with: options)
+                var videos: [PHAsset] = []
+                fetchResult.enumerateObjects { asset, _, _ in
+                    videos.append(asset)
+                }
+                handler(videos)
+            } else {
+                handler([])
+            }
         }
-        handler(videos)
     }
     
     func fetchSimilarPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping ([PHAssetGroup], Int, Int64) -> ()) {
@@ -414,30 +420,48 @@ final class PhotoVideoManager {
     }
     
     private func fetchPhotos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, live: Bool, handler: @escaping (PHFetchResult<PHAsset>) -> ()) {
-        let options = PHFetchOptions()
-        let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        albumsPhoto.enumerateObjects { collection, _, _ in
-            handler(PHAsset.fetchAssets(in: collection, options: options))
+        checkStatus { status in
+            if status == .authorized || status == .limited {
+                let options = PHFetchOptions()
+                let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: live ? .smartAlbumLivePhotos : .smartAlbumUserLibrary, options: options)
+                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                albumsPhoto.enumerateObjects { collection, _, _ in
+                    handler(PHAsset.fetchAssets(in: collection, options: options))
+                }
+            } else {
+                handler(PHFetchResult())
+            }
         }
     }
     
     private func fetchVideos(from dateFrom: String = defaultStartDate, to dateTo: String = defaultEndDate, _ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
-        let options = PHFetchOptions()
-        let albumVideos: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: options)
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        albumVideos.enumerateObjects { collection, _, _ in
-            handler(PHAsset.fetchAssets(in: collection, options: options))
+        checkStatus { status in
+            if status == .authorized || status == .limited {
+                let options = PHFetchOptions()
+                let albumVideos: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumVideos, options: options)
+                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                albumVideos.enumerateObjects { collection, _, _ in
+                    handler(PHAsset.fetchAssets(in: collection, options: options))
+                }
+            } else {
+                handler(PHFetchResult())
+            }
         }
     }
     
     private func fetchSelfies(_ handler: @escaping ((PHFetchResult<PHAsset>) -> ())) {
-        let options = PHFetchOptions()
-        let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumSelfPortraits, options: options)
-        options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        albumsPhoto.enumerateObjects { collection, _, _ in
-            handler(PHAsset.fetchAssets(in: collection, options: options))
+        checkStatus { status in
+            if status == .authorized || status == .limited {
+                let options = PHFetchOptions()
+                let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumSelfPortraits, options: options)
+                options.predicate = NSPredicate(format: "mediaType == %d", PHAssetMediaType.image.rawValue)
+                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                albumsPhoto.enumerateObjects { collection, _, _ in
+                    handler(PHAsset.fetchAssets(in: collection, options: options))
+                }
+            } else {
+                handler(PHFetchResult())
+            }
         }
     }
     
@@ -475,13 +499,19 @@ extension PhotoVideoManager {
     }
     
     private func fetchScreenshots(handler: @escaping (PHFetchResult<PHAsset>) -> Void) {
-        let options = PHFetchOptions()
-        let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(
-            with: .smartAlbum,
-            subtype: .smartAlbumScreenshots,
-            options: options
-        )
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        handler(PHAsset.fetchAssets(in: albumsPhoto[0], options: options))
+        checkStatus { status in
+            if status == .authorized || status == .limited {
+                let options = PHFetchOptions()
+                let albumsPhoto: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(
+                    with: .smartAlbum,
+                    subtype: .smartAlbumScreenshots,
+                    options: options
+                )
+                options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                handler(PHAsset.fetchAssets(in: albumsPhoto[0], options: options))
+            } else {
+                handler(PHFetchResult())
+            }
+        }
     }
 }

@@ -61,7 +61,7 @@ final class ContactsMenuViewController: UIViewController {
     
     private func showPermissionAlert() {
         let alertController = UIAlertController(title: "You did not give access to 'Contacts'",
-                                                message: "We need access to the “Contacts”. Please go to the settings and allow access, then restart the app.",
+                                                message: "We need access to the contacts. Please go to the settings and allow access, then restart the app.",
                                                 preferredStyle: .alert)
         let disallowAction = UIAlertAction(title: "Disallow", style: .cancel)
         let settingsAction = UIAlertAction(title: "In settings", style: .default) { _ in
@@ -72,7 +72,9 @@ final class ContactsMenuViewController: UIViewController {
         }
         alertController.addAction(disallowAction)
         alertController.addAction(settingsAction)
-        present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async { [weak self] in
+            self?.present(alertController, animated: true, completion: nil)
+        }
     }
 }
 
