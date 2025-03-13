@@ -10,9 +10,9 @@ import UIKit
 final class CleanupOptionView: UIView {
     private lazy var nibName = "CleanupOptionView"
     
-    @IBOutlet var contentView: UIView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleLabel: Semibold15LabelStyle!
-    @IBOutlet weak var infoButton: Medium12ButtonStyle!
+    @IBOutlet weak var infoButton: Medium12WithSpinnerButtonStyle!
     @IBOutlet weak var imageView: UIImageView!
     
     init() {

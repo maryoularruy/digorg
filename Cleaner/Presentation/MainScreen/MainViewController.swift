@@ -31,13 +31,17 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if userDefaultsService.isFirstEntry {
+            openPreviewVC()
+        }
+        
         setupUI()
         addGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        tabBarController?.tabBar.isHidden = false
         updateUI()
     }
     
@@ -122,35 +126,66 @@ final class MainViewController: UIViewController {
     }
     
     private func updatePhotosCleanupOption() {
-        photoVideoManager.fetchSimilarPhotos(live: false) { assetsGroups, duplicatesCount, size in
-            DispatchQueue.main.async { [weak self] in
-                self?.photosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.roundAndToString())")
-            }
+        DispatchQueue.main.async { [weak self] in
+            self?.photosCleanup.infoButton.startSpinner()
+            self?.photosCleanup.isUserInteractionEnabled = false
+        }
+        
+        photoVideoManager.fetchSimilarPhotos(live: false) { [weak self] assetsGroups, duplicatesCount, size in
+            self?.photosCleanup.infoButton.endSpinner()
+            self?.photosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.roundAndToString())")
+            self?.photosCleanup.isUserInteractionEnabled = true
         }
     }
     
     private func updateVideosCleanupOption() {
-        photoVideoManager.fetchSimilarVideos { _, duplicatesCount, size in
-            DispatchQueue.main.async { [weak self] in
-                self?.videosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.roundAndToString())")
-            }
+        DispatchQueue.main.async { [weak self] in
+            self?.videosCleanup.infoButton.startSpinner()
+            self?.videosCleanup.isUserInteractionEnabled = false
+        }
+        
+        photoVideoManager.fetchSimilarVideos { [weak self] _, duplicatesCount, size in
+            self?.videosCleanup.infoButton.endSpinner()
+            self?.videosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.roundAndToString())")
+            self?.videosCleanup.isUserInteractionEnabled = true
         }
     }
     
     private func updateContactsCleanupOption() {
+        DispatchQueue.main.async { [weak self] in
+            self?.contactsCleanup.infoButton.startSpinner()
+            self?.contactsCleanup.isUserInteractionEnabled = false
+        }
+        
         contactManager.countUnresolvedContacts { _, _, _, _, summaryCount in
             DispatchQueue.main.async { [weak self] in
+                self?.contactsCleanup.infoButton.endSpinner()
                 self?.contactsCleanup.infoButton.bind(text: "\(summaryCount) contact\(summaryCount == 1 ? "" : "s")")
+                self?.contactsCleanup.isUserInteractionEnabled = true
             }
         }
     }
     
     private func updateCalendarCleanupOption() {
+        DispatchQueue.main.async { [weak self] in
+            self?.calendarCleanup.infoButton.startSpinner()
+            self?.calendarCleanup.isUserInteractionEnabled = false
+        }
+
         calendarManager.fetchEvents { events in
             DispatchQueue.main.async { [weak self] in
+                self?.calendarCleanup.infoButton.endSpinner()
                 self?.calendarCleanup.infoButton.bind(text: "\(events.count) event\(events.count == 1 ? "" : "s")")
+                self?.calendarCleanup.isUserInteractionEnabled = true
             }
         }
+    }
+    
+    private func openPreviewVC() {
+        let vc = PreviewViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: false)
     }
 }
 
@@ -183,6 +218,7 @@ extension MainViewController: ViewControllerProtocol {
     
     @objc private func openDeviceInfoScreen() {
         let vc = DeviceInfoViewController()
+        vc.hidesBottomBarWhenPushed = true
         DispatchQueue.main.async { [weak self] in
             self?.navigationController?.pushViewController(vc, animated: true)
         }
@@ -200,6 +236,7 @@ extension MainViewController: ViewControllerProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             let vc = SmartCleanViewController()
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -208,6 +245,7 @@ extension MainViewController: ViewControllerProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             let vc = PhotoTotalViewController()
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -216,6 +254,7 @@ extension MainViewController: ViewControllerProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             let vc = VideoTotalViewController()
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }

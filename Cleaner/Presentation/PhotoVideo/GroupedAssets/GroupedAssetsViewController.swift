@@ -132,6 +132,7 @@ final class GroupedAssetsViewController: UIViewController {
             }
         } else {
             assetsForDeletion = []
+            calcAssetsSizeForDeletion()
         }
     }
     

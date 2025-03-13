@@ -127,4 +127,9 @@ final class PremiumOfferView: UIView {
             cancelSubscriptionButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
+    
+    func animateButton() {
+        guard let button = subviews.first(where: { $0 is ActionToolbarButtonStyle }) as? ActionToolbarButtonStyle else { return }
+        button.animate()
+    }
 }

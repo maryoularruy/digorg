@@ -71,6 +71,12 @@ final class SettingsViewController: UIViewController {
         vc.modalPresentationStyle = .popover
         present(vc, animated: true)
     }
+    
+    private func openWebVC(isPrivacyPolicy: Bool) {
+        let vc = WebViewController(isPrivacyPolicy: isPrivacyPolicy)
+        vc.modalPresentationStyle = .popover
+        present(vc, animated: true)
+    }
 }
 
 extension SettingsViewController: PremiumVCDelegate {
@@ -123,9 +129,7 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
             navigationController?.pushViewController(vc, animated: true)
             
         case .share:
-            //TODO: -add application's id
-            //"https://apps.apple.com/app/id"
-            guard let url = NSURL(string: "https://apps.apple.com") else { return }
+            guard let url = NSURL(string: "https://apps.apple.com/app/6741464903") else { return }
             let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             vc.popoverPresentationController?.sourceView = self.view
             present(vc, animated: true)
@@ -137,11 +141,9 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
             }
             
         case .privacyPolicy:
-            //TODO
-            break
+            openWebVC(isPrivacyPolicy: true)
         case .termsOfUse:
-            //TODO
-            break
+            openWebVC(isPrivacyPolicy: false)
         }
     }
 }

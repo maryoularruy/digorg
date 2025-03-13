@@ -15,10 +15,10 @@ enum ContactsInfoType: String {
     
     var icon: UIImage {
         switch self {
-        case .duplicateNames: UIImage.duplicateContactNamesIcon
-        case .dublicateNumbers: UIImage.duplicateContactNumbersIcon
-        case .noNameContacts: UIImage.noNameContactsIcon
-        case .noNumberContacts: UIImage.noNumberContactsIcon
+        case .duplicateNames: .duplicateContactNamesIcon
+        case .dublicateNumbers: .duplicateContactNumbersIcon
+        case .noNameContacts: .noNameContactsIcon
+        case .noNumberContacts: .noNumberContactsIcon
         }
     }
 }

@@ -52,6 +52,12 @@ final class ActionToolbarButtonStyle: UIButton {
         setTitleColor(.darkGrey, for: .normal)
     }
     
+    func animate() {
+        UIView.animate(withDuration: 0.4, delay: 0.1, options: [.repeat, .autoreverse, .allowUserInteraction], animations: {
+            self.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        })
+    }
+    
     private func setup() {
         backgroundColor = .blue
         layer.cornerRadius = frame.height / 2
