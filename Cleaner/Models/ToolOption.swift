@@ -7,12 +7,11 @@
 
 import UIKit
 
-//WIDGETS IS A FUTURE FEATURE IN NEXT RELEASE VERSION
 enum ToolOption: String, CaseIterable {
     case secretAlbum = "Secret Album",
          secretContact = "Secret Contact",
          networkSpeedTest = "Network Speed Test",
-//         widgets = "Widgets",
+         widgets = "Widgets",
          battery = "Battery"
     
     var icon: UIImage {
@@ -20,7 +19,7 @@ enum ToolOption: String, CaseIterable {
         case .secretAlbum: .secretAlbum
         case .secretContact: .secretContact
         case .networkSpeedTest: .networkSpeedTest
-//        case .widgets: .widgets
+        case .widgets: .widgets
         case .battery: .battery
         }
     }
@@ -30,7 +29,7 @@ enum ToolOption: String, CaseIterable {
         case .secretAlbum: "Secret folder for photos and videos"
         case .secretContact: "Secret contact folder"
         case .networkSpeedTest: "Check your internet connection’s performance"
-//        case .widgets: "Personalize your Home screen"
+        case .widgets: "Personalize your Home screen"
         case .battery: "Save your battery life"
         }
     }
