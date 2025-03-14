@@ -66,6 +66,9 @@ extension UIImage {
     static var downloadBlack = UIImage(resource: .downloadBlack)
     static var ping = UIImage(resource: .ping)
     
+    //MARK: -Widgets
+    static var widgetsHelp = UIImage(resource: .widgetHelpIcon)
+    
     //MARK: -BatterySavingTool
     static var optimizeBatteryCharging = UIImage(resource: .optimizeBatteryCharging)
     static var lowPowerMode = UIImage(resource: .lowPowerMode)
