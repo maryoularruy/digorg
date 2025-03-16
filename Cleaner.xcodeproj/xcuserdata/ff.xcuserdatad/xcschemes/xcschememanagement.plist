@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BatteryWidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Cleaner.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +18,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>75D3FC322A6069AF00F351A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A55205342D84DE4A002FD0B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
