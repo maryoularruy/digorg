@@ -10,37 +10,53 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
+        SimpleEntry(date: Date(), batteryPercent: 25, isLowPowerModeOn: false)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+        let entry = SimpleEntry(date: Date(), batteryPercent: 25, isLowPowerModeOn: false)
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
+        
+        getCurrentBatteryState { entry in
+            
+//                    for hourOffset in 0 ..< 5 {
+//                        let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: entry.date)!
+//                        let entry = SimpleEntry(date: entryDate, batteryPercent: UIDevice.current.batteryLevel.toPercent(), isLowPowerModeOn: ProcessInfo.processInfo.isLowPowerModeEnabled)
+//                        entries.append(entry)
+//                    }
+//            
+//                    let timeline = Timeline(entries: entries, policy: .atEnd)
+//                    completion(timeline)
+            
+            
             entries.append(entry)
+            completion(Timeline(entries: entries, policy: .atEnd))
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
     }
 
 //    func relevances() async -> WidgetRelevances<Void> {
 //        // Generate a list containing the contexts this widget is relevant in.
 //    }
+    
+    private func getCurrentBatteryState(completion: @escaping (SimpleEntry) -> Void) {
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        
+        completion(SimpleEntry(date: .now,
+                               batteryPercent: UIDevice.current.batteryLevel.toPercent(),
+                               isLowPowerModeOn: ProcessInfo.processInfo.isLowPowerModeEnabled))
+        
+    }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let emoji: String
+    let batteryPercent: Int
+    let isLowPowerModeOn: Bool
+    var backgroundColor: Color = .blue
 }
 
 struct BatteryWidgetEntryView : View {
@@ -54,7 +70,7 @@ struct BatteryWidgetEntryView : View {
                         .font(.regular13)
                         .foregroundStyle(.lightGrey)
                     
-                    Text("25 %")
+                    Text("\(entry.batteryPercent) %")
                         .font(.semibold24)
                         .foregroundStyle(.paleGrey)
                 }
@@ -69,7 +85,7 @@ struct BatteryWidgetEntryView : View {
                 .font(.regular13)
                 .foregroundStyle(.lightGrey)
             
-            Text("Low power mode\ndisabled")
+            Text("Low power mode\n\(entry.isLowPowerModeOn ? "enabled" : "disabled")")
                 .font(.medium13)
                 .lineLimit(2)
                 .foregroundStyle(.paleGrey)
@@ -85,21 +101,19 @@ struct BatteryWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(iOS 17.0, *) {
                 BatteryWidgetEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
+                    .containerBackground(entry.backgroundColor, for: .widget)
             } else {
                 BatteryWidgetEntryView(entry: entry)
                     .padding()
-                    .background()
+                    .background(entry.backgroundColor)
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Battery Widget")
     }
 }
 
 #Preview(as: .systemSmall) {
     BatteryWidget()
 } timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
+    SimpleEntry(date: .now, batteryPercent: 25, isLowPowerModeOn: true, backgroundColor: .blue)
 }

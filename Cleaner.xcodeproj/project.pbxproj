@@ -53,6 +53,7 @@
 		A55235982CC27B9300CBE265 /* ContactsInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55235972CC27B9300CBE265 /* ContactsInfoType.swift */; };
 		A55CA2612CC904780026D434 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2602CC904780026D434 /* UIImage.swift */; };
 		A55CA2632CC907350026D434 /* UIFont+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CA2622CC907350026D434 /* UIFont+ext.swift */; };
+		A55FC81E2D89D653005FB15E /* Float+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5609FD12CE0F83A000AF19E /* Float+ext.swift */; };
 		A5600F612CD532CA006EE6BC /* NSItemProvider+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5600F602CD532CA006EE6BC /* NSItemProvider+ext.swift */; };
 		A5600F632CD94B50006EE6BC /* SecretItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5600F622CD94B50006EE6BC /* SecretItemModel.swift */; };
 		A5609E9F2CDBBDF9000AF19E /* SecretContacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5609E9E2CDBBDF9000AF19E /* SecretContacts.storyboard */; };
@@ -321,7 +322,7 @@
 		A54B24E42D86683200CDA6DD /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Font+ext.swift",
+				"Resources/Fonts/Font+ext.swift",
 			);
 			target = 75D3FC322A6069AF00F351A3 /* Cleaner */;
 		};
@@ -1172,6 +1173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A55FC81E2D89D653005FB15E /* Float+ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
