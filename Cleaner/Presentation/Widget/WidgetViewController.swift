@@ -29,6 +29,7 @@ final class WidgetViewController: UIViewController {
 extension WidgetViewController: ViewControllerProtocol {
     func setupUI() {
         tabBarController?.tabBar.isHidden = true
+        rootView.delegate = self
         rootView.toolbar.delegate = self
     }
     
@@ -42,6 +43,14 @@ extension WidgetViewController: ViewControllerProtocol {
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+    }
+}
+
+extension WidgetViewController: WidgetViewDelegate {
+    func tapOnWidgetHelp() {
+        let vc = InstructionsViewController(pages: Pages.WidgetAddingHelp.allCases)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 

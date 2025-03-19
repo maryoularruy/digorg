@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol WidgetViewDelegate: AnyObject {
+    func tapOnWidgetHelp()
+}
+
 final class WidgetView: UIView {
+    weak var delegate: WidgetViewDelegate?
+    
     private lazy var contentView: UIView = UIView()
     lazy var arrowBack: UIView = arrowBackButton
     
@@ -58,6 +64,10 @@ final class WidgetView: UIView {
     
     private func setupView() {
         backgroundColor = .paleGrey
+        
+        widgetsHelpImageView.addTapGestureRecognizer { [weak self] in
+            self?.delegate?.tapOnWidgetHelp()
+        }
     }
     
     private func initConstraints() {
