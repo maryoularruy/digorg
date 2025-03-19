@@ -20,10 +20,6 @@ final class WidgetViewController: UIViewController {
         setupUI()
         addGestureRecognizers()
     }
-    
-    @objc func segmentChanged(_ sender: UISegmentedControl) {
-        //sender.selectedSegmentIndex        
-    }
 }
 
 extension WidgetViewController: ViewControllerProtocol {
@@ -31,14 +27,13 @@ extension WidgetViewController: ViewControllerProtocol {
         tabBarController?.tabBar.isHidden = true
         rootView.delegate = self
         rootView.toolbar.delegate = self
+        rootView.customSegmentedControl.delegate = self
     }
     
     func addGestureRecognizers() {
         rootView.arrowBack.addTapGestureRecognizer { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
-        
-        rootView.segmentedControl.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
         
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight))
         swipeRightGesture.direction = .right
@@ -51,6 +46,12 @@ extension WidgetViewController: WidgetViewDelegate {
         let vc = InstructionsViewController(pages: Pages.WidgetAddingHelp.allCases)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+    }
+}
+
+extension WidgetViewController: CustomSegmentedControlDelegate {
+    func tapOnButton(index: Int) {
+        
     }
 }
 

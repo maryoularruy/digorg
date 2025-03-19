@@ -25,17 +25,10 @@ final class WidgetView: UIView {
     
     private lazy var widgetsHelpImageView: UIImageView = UIImageView(image: .widgetsHelp)
     
-    lazy var segmentedControl: UISegmentedControl = {
-        let sc = UISegmentedControl(items: ["Battery", "Storage"])
-        sc.selectedSegmentIndex = 0
-        sc.selectedSegmentTintColor = .blue
-        
-        sc.backgroundColor = .paleGrey
-        sc.layer.cornerRadius = 12
-        sc.layer.masksToBounds = true
-        sc.addShadows()
-        return sc
-    }()
+    lazy var customSegmentedControl: CustomSegmentedControl = CustomSegmentedControl(buttons: [
+        CustomSegmentedControlButton(index: 0, title: "Battery", isSelected: true),
+        CustomSegmentedControlButton(index: 1, title: "Storage", isSelected: false)
+    ])
     
     private lazy var batteryWidgetPreview: UIView = {
         let view = UIView()
@@ -73,7 +66,7 @@ final class WidgetView: UIView {
     private func initConstraints() {
         addSubviews([contentView, toolbar])
         
-        contentView.addSubviews([arrowBack, label, widgetsHelpImageView, segmentedControl, batteryWidgetPreview])
+        contentView.addSubviews([arrowBack, label, widgetsHelpImageView, customSegmentedControl, batteryWidgetPreview])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -94,12 +87,12 @@ final class WidgetView: UIView {
             widgetsHelpImageView.heightAnchor.constraint(equalToConstant: 24),
             widgetsHelpImageView.widthAnchor.constraint(equalToConstant: 24),
             
-            segmentedControl.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 22),
-            segmentedControl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            segmentedControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            segmentedControl.heightAnchor.constraint(equalToConstant: 42),
+            customSegmentedControl.topAnchor.constraint(equalTo: arrowBack.bottomAnchor, constant: 22),
+            customSegmentedControl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            customSegmentedControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            customSegmentedControl.heightAnchor.constraint(equalToConstant: 42),
             
-            batteryWidgetPreview.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20),
+            batteryWidgetPreview.topAnchor.constraint(equalTo: customSegmentedControl.bottomAnchor, constant: 20),
             batteryWidgetPreview.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             batteryWidgetPreview.heightAnchor.constraint(equalToConstant: 158),
             batteryWidgetPreview.widthAnchor.constraint(equalToConstant: 158),
