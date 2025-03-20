@@ -14,40 +14,24 @@ struct Provider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), batteryPercent: 25, isLowPowerModeOn: false)
-        completion(entry)
+        completion(getCurrentBatteryStateEntry())
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         
-        getCurrentBatteryState { entry in
-            
-//                    for hourOffset in 0 ..< 5 {
-//                        let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: entry.date)!
-//                        let entry = SimpleEntry(date: entryDate, batteryPercent: UIDevice.current.batteryLevel.toPercent(), isLowPowerModeOn: ProcessInfo.processInfo.isLowPowerModeEnabled)
-//                        entries.append(entry)
-//                    }
-//            
-//                    let timeline = Timeline(entries: entries, policy: .atEnd)
-//                    completion(timeline)
-            
-            
-            entries.append(entry)
-            completion(Timeline(entries: entries, policy: .atEnd))
-        }
+        let entry = getCurrentBatteryStateEntry()
+        let nextUpdationDate = Calendar.current.date(byAdding: .minute, value: 30, to: entry.date)!
+        entries.append(entry)
+        completion(Timeline(entries: entries, policy: .after(nextUpdationDate)))
     }
 
-//    func relevances() async -> WidgetRelevances<Void> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
-    
-    private func getCurrentBatteryState(completion: @escaping (SimpleEntry) -> Void) {
+    private func getCurrentBatteryStateEntry() -> SimpleEntry {
         UIDevice.current.isBatteryMonitoringEnabled = true
         
-        completion(SimpleEntry(date: .now,
+        return SimpleEntry(date: .now,
                                batteryPercent: UIDevice.current.batteryLevel.toPercent(),
-                               isLowPowerModeOn: ProcessInfo.processInfo.isLowPowerModeEnabled))
+                               isLowPowerModeOn: ProcessInfo.processInfo.isLowPowerModeEnabled)
         
     }
 }
