@@ -7,53 +7,6 @@
 
 import UIKit
 
-enum WidgetPreviewType: CaseIterable {
-    case battery, storage
-    
-    var index: Int {
-        switch self {
-        case .battery: 0
-        case .storage: 1
-        }
-    }
-    
-    var title: String {
-        switch self {
-        case .battery: "Battery"
-        case .storage: "Storage"
-        }
-    }
-    
-    var defaultValue: String {
-        switch self {
-        case .battery: "25 %"
-        case .storage: "87 %"
-        }
-    }
-    
-    var info: String {
-        switch self {
-        case .battery: "No activity"
-        case .storage: "Storage Usage"
-        }
-    }
-    
-    var infoValue: String {
-        switch self {
-        case .battery: "Low power mode\ndisabled"
-        case .storage: "112GB / 128 GB"
-        }
-    }
-    
-    var image: UIImage {
-        switch self {
-        case .battery: UIImage(resource: .batteryWidgetIcon)
-            //TODO: -add storage widget icon
-        case .storage: UIImage(resource: .batteryWidgetIcon)
-        }
-    }
-}
-
 final class WidgetSmallPreview: UIView {
     private var type: WidgetPreviewType
     
@@ -85,7 +38,7 @@ final class WidgetSmallPreview: UIView {
         return label
     }()
     
-    private lazy var icon: UIImageView = UIImageView(image: type.image)
+    private lazy var icon: UIImageView = UIImageView(image: type.smallImage)
     
     init(type: WidgetPreviewType) {
         self.type = type

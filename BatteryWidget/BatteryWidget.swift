@@ -59,7 +59,7 @@ struct BatteryWidgetEntryView : View {
                         .foregroundStyle(.paleGrey)
                 }
                 Spacer()
-                Image(.batteryWidgetIcon)
+                Image(.batteryWidgetSmallIcon)
                     .frame(width: 40, height: 40, alignment: .trailing)
             }
             
