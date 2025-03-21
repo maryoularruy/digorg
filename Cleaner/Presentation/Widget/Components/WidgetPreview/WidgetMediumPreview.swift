@@ -37,23 +37,7 @@ final class WidgetMediumPreview: UIView {
         return label
     }()
     
-    private lazy var iconWithShadow: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        view.addShadowsWithoutClipToBounds(color: .pureWhite, radius: 40.0, opacity: 1.0, offset: CGSize(width: -5, height: -8))
-        
-        let imageView = UIImageView(image: type.mediumImage)
-        view.addSubviews([imageView])
-        
-        NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 128),
-            imageView.widthAnchor.constraint(equalToConstant: 128),
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        
-        return view
-    }()
+    private lazy var iconWithShadow: UIImageView = UIImageView(image: type.mediumImage)
     
     init(type: WidgetPreviewType) {
         self.type = type
@@ -92,11 +76,11 @@ final class WidgetMediumPreview: UIView {
             infoValueLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 4),
             infoValueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             infoValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            
-            iconWithShadow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 23),
-            iconWithShadow.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 22),
-            iconWithShadow.heightAnchor.constraint(equalToConstant: 170),
-            iconWithShadow.widthAnchor.constraint(equalToConstant: 170)
+
+            iconWithShadow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 150),
+            iconWithShadow.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 142),
+            iconWithShadow.heightAnchor.constraint(equalToConstant: 389),
+            iconWithShadow.widthAnchor.constraint(equalToConstant: 410)
         ])
     }
 }
