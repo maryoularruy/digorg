@@ -26,16 +26,18 @@ final class WidgetView: UIView {
     private lazy var widgetsHelpImageView: UIImageView = UIImageView(image: .widgetsHelp)
     
     lazy var customSegmentedControl: CustomSegmentedControl = CustomSegmentedControl(buttons: [
-        CustomSegmentedControlButton(index: 0, title: "Battery", isSelected: true),
-        CustomSegmentedControlButton(index: 1, title: "Storage", isSelected: false)
+        CustomSegmentedControlButton(index: WidgetPreviewType.battery.index, title: WidgetPreviewType.battery.title, isSelected: true),
+        CustomSegmentedControlButton(index: WidgetPreviewType.storage.index, title: WidgetPreviewType.storage.title, isSelected: false)
     ])
     
-    private lazy var batteryWidgetPreview: UIView = {
+    private lazy var widgetSmallPreviewContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
-        view.layer.cornerRadius = 20
+        view.backgroundColor = .clear
         return view
     }()
+    
+    private lazy var batteryWidgetSmallPreview: WidgetSmallPreview = WidgetSmallPreview(type: .battery)
+    private lazy var storageWidgetSmallPreview: WidgetSmallPreview = WidgetSmallPreview(type: .storage)
     
     lazy var toolbar: ActionToolbar = {
         let toolbar = ActionToolbar()
@@ -55,8 +57,25 @@ final class WidgetView: UIView {
         initConstraints()
     }
     
+    func changeWigdetPreviews(index: Int) {
+        guard let widgetType = WidgetPreviewType.allCases.first(where: { $0.index == index }) else { return }
+        
+        widgetSmallPreviewContainer.subviews.forEach { $0.removeFromSuperview() }
+        
+        switch widgetType {
+        case .battery:
+            widgetSmallPreviewContainer.addSubviews([batteryWidgetSmallPreview])
+        case .storage:
+            widgetSmallPreviewContainer.addSubviews([storageWidgetSmallPreview])
+        }
+        
+        widgetSmallPreviewContainer.layoutIfNeeded()
+    }
+    
     private func setupView() {
         backgroundColor = .paleGrey
+        
+        widgetSmallPreviewContainer.addSubviews([batteryWidgetSmallPreview])
         
         widgetsHelpImageView.addTapGestureRecognizer { [weak self] in
             self?.delegate?.tapOnWidgetHelp()
@@ -66,7 +85,7 @@ final class WidgetView: UIView {
     private func initConstraints() {
         addSubviews([contentView, toolbar])
         
-        contentView.addSubviews([arrowBack, label, widgetsHelpImageView, customSegmentedControl, batteryWidgetPreview])
+        contentView.addSubviews([arrowBack, label, widgetsHelpImageView, customSegmentedControl, widgetSmallPreviewContainer])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -92,10 +111,8 @@ final class WidgetView: UIView {
             customSegmentedControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             customSegmentedControl.heightAnchor.constraint(equalToConstant: 42),
             
-            batteryWidgetPreview.topAnchor.constraint(equalTo: customSegmentedControl.bottomAnchor, constant: 20),
-            batteryWidgetPreview.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            batteryWidgetPreview.heightAnchor.constraint(equalToConstant: 158),
-            batteryWidgetPreview.widthAnchor.constraint(equalToConstant: 158),
+            widgetSmallPreviewContainer.topAnchor.constraint(equalTo: customSegmentedControl.bottomAnchor, constant: 20),
+            widgetSmallPreviewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
             toolbar.leadingAnchor.constraint(equalTo: leadingAnchor),
             toolbar.trailingAnchor.constraint(equalTo: trailingAnchor),

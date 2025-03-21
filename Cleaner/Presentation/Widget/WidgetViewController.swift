@@ -51,7 +51,7 @@ extension WidgetViewController: WidgetViewDelegate {
 
 extension WidgetViewController: CustomSegmentedControlDelegate {
     func tapOnButton(index: Int) {
-        
+        rootView.changeWigdetPreviews(index: index)
     }
 }
 

@@ -21,4 +21,8 @@ final class Regular13LabelStyle: Regular11LabelStyle {
         )
         self.attributedText = attributes
     }
+    
+    func setLightGreyTextColor() {
+        textColor = .lightGrey
+    }
 }
