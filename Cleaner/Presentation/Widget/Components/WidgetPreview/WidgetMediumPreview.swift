@@ -1,13 +1,13 @@
 //
-//  WidgetSmallPreview.swift
+//  WidgetMediumPreview.swift
 //  Cleaner
 //
-//  Created by Elena Sedunova on 20.03.2025.
+//  Created by Elena Sedunova on 21.03.2025.
 //
 
 import UIKit
 
-final class WidgetSmallPreview: UIView {
+final class WidgetMediumPreview: UIView {
     private var type: WidgetPreviewType
     
     private lazy var titleLabel: Regular13LabelStyle = {
@@ -33,12 +33,27 @@ final class WidgetSmallPreview: UIView {
     
     private lazy var infoValueLabel: Medium13LabelStyle = {
         let label = Medium13LabelStyle()
-        label.numberOfLines = 2
-        label.bind(text: type.smallInfoValue)
+        label.bind(text: type.mediumInfoValue)
         return label
     }()
     
-    private lazy var icon: UIImageView = UIImageView(image: type.smallImage)
+    private lazy var iconWithShadow: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.addShadowsWithoutClipToBounds(color: .pureWhite, radius: 40.0, opacity: 1.0, offset: CGSize(width: -5, height: -8))
+        
+        let imageView = UIImageView(image: type.mediumImage)
+        view.addSubviews([imageView])
+        
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 128),
+            imageView.widthAnchor.constraint(equalToConstant: 128),
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        return view
+    }()
     
     init(type: WidgetPreviewType) {
         self.type = type
@@ -58,31 +73,30 @@ final class WidgetSmallPreview: UIView {
     private func setupView() {
         layer.cornerRadius = 20
         backgroundColor = .blue
+        clipsToBounds = true
     }
     
     private func initConstraints() {
-        addSubviews([titleLabel, defaultValueLabel, icon, infoLabel, infoValueLabel])
+        addSubviews([titleLabel, defaultValueLabel, infoLabel, infoValueLabel, iconWithShadow])
         
-        NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 160),
-            widthAnchor.constraint(equalToConstant: 158),
-            
+        NSLayoutConstraint.activate([            
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             
             defaultValueLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
             defaultValueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             
-            icon.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            icon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            icon.heightAnchor.constraint(equalToConstant: 40),
-            icon.widthAnchor.constraint(equalToConstant: 40),
-            
-            infoLabel.topAnchor.constraint(equalTo: defaultValueLabel.bottomAnchor, constant: 20),
+            infoLabel.topAnchor.constraint(equalTo: defaultValueLabel.bottomAnchor, constant: 8),
             infoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             
+            infoValueLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 4),
             infoValueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            infoValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            infoValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            
+            iconWithShadow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 23),
+            iconWithShadow.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 22),
+            iconWithShadow.heightAnchor.constraint(equalToConstant: 170),
+            iconWithShadow.widthAnchor.constraint(equalToConstant: 170)
         ])
     }
 }

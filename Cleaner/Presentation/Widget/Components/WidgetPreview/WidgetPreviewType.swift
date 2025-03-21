@@ -38,9 +38,16 @@ enum WidgetPreviewType: CaseIterable {
         }
     }
     
-    var infoValue: String {
+    var smallInfoValue: String {
         switch self {
         case .battery: "Low power mode\ndisabled"
+        case .storage: "112GB / 128 GB"
+        }
+    }
+    
+    var mediumInfoValue: String {
+        switch self {
+        case .battery: "Low power mode disabled"
         case .storage: "112GB / 128 GB"
         }
     }
