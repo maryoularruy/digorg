@@ -42,6 +42,20 @@ final class WidgetView: UIView {
     private lazy var batteryWidgetMediumPreview: WidgetMediumPreview = WidgetMediumPreview(type: .battery)
     private lazy var storageWidgetMediumPreview: WidgetMediumPreview = WidgetMediumPreview(type: .storage)
     
+    lazy var backgroundColorsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 36
+        layout.minimumLineSpacing = 32
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(cellType: WidgetBackgroundCollectionViewCell.self)
+        
+        return collectionView
+    }()
+    
     lazy var toolbar: ActionToolbar = {
         let toolbar = ActionToolbar()
         toolbar.toolbarButton.bind(text: "Settings")
@@ -94,7 +108,7 @@ final class WidgetView: UIView {
     private func initConstraints() {
         addSubviews([contentView, toolbar])
         
-        contentView.addSubviews([arrowBack, label, widgetsHelpImageView, customSegmentedControl, widgetSmallPreviewContainer, batteryWidgetMediumPreview, storageWidgetMediumPreview])
+        contentView.addSubviews([arrowBack, label, widgetsHelpImageView, customSegmentedControl, widgetSmallPreviewContainer, batteryWidgetMediumPreview, storageWidgetMediumPreview, backgroundColorsCollectionView])
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -131,6 +145,11 @@ final class WidgetView: UIView {
             storageWidgetMediumPreview.topAnchor.constraint(equalTo: widgetSmallPreviewContainer.bottomAnchor, constant: 20),
             storageWidgetMediumPreview.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             storageWidgetMediumPreview.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            backgroundColorsCollectionView.topAnchor.constraint(equalTo: batteryWidgetMediumPreview.bottomAnchor, constant: 30),
+            backgroundColorsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 26),
+            backgroundColorsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -26),
+            backgroundColorsCollectionView.heightAnchor.constraint(equalToConstant: 140),
             
             toolbar.leadingAnchor.constraint(equalTo: leadingAnchor),
             toolbar.trailingAnchor.constraint(equalTo: trailingAnchor),

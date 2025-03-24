@@ -28,6 +28,8 @@ extension WidgetViewController: ViewControllerProtocol {
         rootView.delegate = self
         rootView.toolbar.delegate = self
         rootView.customSegmentedControl.delegate = self
+        rootView.backgroundColorsCollectionView.delegate = self
+        rootView.backgroundColorsCollectionView.dataSource = self
     }
     
     func addGestureRecognizers() {
@@ -58,5 +60,21 @@ extension WidgetViewController: CustomSegmentedControlDelegate {
 extension WidgetViewController: ActionToolbarDelegate {
     func tapOnActionButton() {
         
+    }
+}
+
+extension WidgetViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: WidgetBackgroundCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.bind(widgetBackground: WidgetBackground(id: 0, color: .blue, selectedImage: UIImage(resource: .blueSelected), isSelected: false))
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        WidgetBackgroundCollectionViewCell.size
     }
 }
