@@ -70,7 +70,7 @@ extension WidgetViewController: UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: WidgetBackgroundCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.bind(widgetBackground: WidgetBackground(id: 0, color: .blue, selectedImage: UIImage(resource: .blueSelected), isSelected: false))
+        cell.bind(widgetBackground: WidgetBackground(hex: "", color: .paleGrey, isSelected: false))
         return cell
     }
     

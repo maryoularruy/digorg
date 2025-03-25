@@ -9,20 +9,19 @@ import UIKit
 import Reusable
 
 struct WidgetBackground {
-    let id: Int
+    let hex: String
     let color: UIColor
-    let selectedImage: UIImage
     let isSelected: Bool
 }
 
 final class WidgetBackgroundCollectionViewCell: UICollectionViewCell, Reusable {
     static var size: CGSize = CGSize(width: 46, height: 46)
     
-    private lazy var colorImageView: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: WidgetBackgroundCollectionViewCell.size))
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
+    private lazy var innerView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 12
+        view.layer.borderWidth = 3
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -37,8 +36,15 @@ final class WidgetBackgroundCollectionViewCell: UICollectionViewCell, Reusable {
     
     func bind(widgetBackground: WidgetBackground) {
         contentView.backgroundColor = widgetBackground.color
-        colorImageView.image = widgetBackground.selectedImage
-        colorImageView.isHidden = !widgetBackground.isSelected
+        innerView.backgroundColor = widgetBackground.color
+        innerView.layer.borderColor = UIColor(resource: widgetBackground.color == .paleGrey ? .middleGrey : .paleGrey).cgColor
+        
+        if widgetBackground.color == .paleGrey {
+            contentView.layer.borderWidth = 1
+            contentView.layer.borderColor = UIColor(resource: .middleGrey).cgColor
+        }
+        
+        innerView.isHidden = !widgetBackground.isSelected
     }
     
     private func setupView() {
@@ -47,15 +53,13 @@ final class WidgetBackgroundCollectionViewCell: UICollectionViewCell, Reusable {
     }
     
     private func initConstraints() {
-        contentView.addSubviews([colorImageView])
+        contentView.addSubviews([innerView])
         
         NSLayoutConstraint.activate([
-            colorImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            colorImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            colorImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            colorImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            colorImageView.heightAnchor.constraint(equalToConstant: SmartCleanCollectionViewCell.size.height),
-            colorImageView.widthAnchor.constraint(equalToConstant: SmartCleanCollectionViewCell.size.width)
+            innerView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            innerView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            innerView.heightAnchor.constraint(equalToConstant: 40),
+            innerView.widthAnchor.constraint(equalToConstant: 40)
         ])
     }
 }
