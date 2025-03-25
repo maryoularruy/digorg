@@ -27,6 +27,9 @@ enum UserDefaultsKeys: String {
     case secretContactsFile = "DEFAULT_SECRET_CONTACTS_FILE"
     
     case subscriptionExpirationDate = "SUBSCRIPTION_EXPIRATION_DATE"
+    
+    case batteryWidgetHexBackgroundColor = "BATTERY_WIDGET_BACKGROUND_COLOR"
+    case storageWidgetHexBackgroundColor = "STORAGE_WIDGET_BACKGROUND_COLOR"
 }
 
 final class UserDefaultsService {
@@ -59,6 +62,14 @@ final class UserDefaultsService {
     var isSubscriptionActive: Bool {
         guard let expirationDate = self.get(Date.self, key: .subscriptionExpirationDate) else { return false }
         return expirationDate > Date.now
+    }
+    
+    var batteryWidgetHexBackground: String? {
+        self.get(String.self, key: .batteryWidgetHexBackgroundColor)
+    }
+    
+    var storageWidgetHexBackground: String? {
+        self.get(String.self, key: .storageWidgetHexBackgroundColor)
     }
     
     func get<T>(_ value: T.Type, key: UserDefaultsKeys) -> T? {

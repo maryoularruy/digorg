@@ -11,7 +11,7 @@ import Reusable
 struct WidgetBackground {
     let hex: String
     let color: UIColor
-    let isSelected: Bool
+    var isSelected: Bool
 }
 
 final class WidgetBackgroundCollectionViewCell: UICollectionViewCell, Reusable {

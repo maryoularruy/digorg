@@ -1,5 +1,5 @@
 //
-//  Extension+String.swift
+//  String+ext.swift
 //  Cleaner
 //
 //  Created by Александр Пономарёв on 27.05.2022.
@@ -11,12 +11,6 @@ extension String {
     var underlined: NSAttributedString {
         NSMutableAttributedString(string: self, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
     }
-    
-	func toNSDate(format: String) -> NSDate {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = format
-		return dateFormatter.date(from: self) as NSDate? ?? NSDate()
-	}
 	
     func removeImageAndToInt() -> Int {
         Int(self.replacingOccurrences(of: "image", with: "")) ?? 0
@@ -37,5 +31,10 @@ extension String {
     
     func trimLeadingAndTrailingSpaces(using characterSet: CharacterSet = .whitespacesAndNewlines) -> String {
         trimmingCharacters(in: characterSet)
+    }
+    
+    func conforms(to pattern: String) -> Bool {
+        let pattern = NSPredicate(format: "SELF MATCHES %@", pattern)
+        return pattern.evaluate(with: self)
     }
 }

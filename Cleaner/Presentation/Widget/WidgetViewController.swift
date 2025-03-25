@@ -21,6 +21,8 @@ final class WidgetViewController: UIViewController {
         WidgetBackground(hex: "FF68C2", color: .pink, isSelected: false)
     ]
     
+    private lazy var userDefaultsService = UserDefaultsService.shared
+    
     override func loadView() {
         super.loadView()
         view = rootView
@@ -30,6 +32,25 @@ final class WidgetViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         addGestureRecognizers()
+        findWidgetBackgroundColor(isBatteryWidget: true)
+    }
+    
+    private func findWidgetBackgroundColor(isBatteryWidget: Bool) {
+        if let colorHex = isBatteryWidget ? userDefaultsService.batteryWidgetHexBackground : userDefaultsService.storageWidgetHexBackground,
+           let widgetBackgroundIndex = palette.firstIndex(where: { $0.hex == colorHex }) {
+            palette.indices.forEach { palette[$0].isSelected = false }
+            palette[widgetBackgroundIndex].isSelected = true
+        } else {
+            setWidgetBackgroundColor(palette[0], isBatteryWidget: isBatteryWidget)
+        }
+    }
+    
+    private func setWidgetBackgroundColor(_ color: WidgetBackground, isBatteryWidget: Bool) {
+        userDefaultsService.set(color.hex, key: isBatteryWidget ? .batteryWidgetHexBackgroundColor : .storageWidgetHexBackgroundColor)
+    }
+    
+    private func updateWidgetPreviews() {
+        
     }
 }
 
@@ -87,5 +108,16 @@ extension WidgetViewController: UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         WidgetBackgroundCollectionViewCell.size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        palette.indices.forEach { palette[$0].isSelected = false }
+        palette[indexPath.item].isSelected = true
+        
+        let segmentedControlIndex = rootView.customSegmentedControl.selectedIndex
+        setWidgetBackgroundColor(palette[indexPath.item], isBatteryWidget: segmentedControlIndex == 0)
+        
+        updateWidgetPreviews()
+        collectionView.reloadData()
     }
 }

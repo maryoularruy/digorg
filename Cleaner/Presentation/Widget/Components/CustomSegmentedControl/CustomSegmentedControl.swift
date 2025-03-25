@@ -14,7 +14,11 @@ protocol CustomSegmentedControlDelegate: AnyObject {
 final class CustomSegmentedControl: UIStackView {
     weak var delegate: CustomSegmentedControlDelegate?
     
-    let buttons: [CustomSegmentedControlButton]
+    var selectedIndex: Int {
+        buttons.firstIndex { $0.isSelectedButton == true } ?? 0
+    }
+    
+    private let buttons: [CustomSegmentedControlButton]
     
     init(buttons: [CustomSegmentedControlButton]) {
         self.buttons = buttons
