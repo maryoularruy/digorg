@@ -38,10 +38,10 @@ final class WidgetViewController: UIViewController {
     private func findWidgetBackgroundColor(isBatteryWidget: Bool) {
         if let colorHex = isBatteryWidget ? userDefaultsService.batteryWidgetHexBackground : userDefaultsService.storageWidgetHexBackground,
            let widgetBackgroundIndex = palette.firstIndex(where: { $0.hex == colorHex }) {
-            palette.indices.forEach { palette[$0].isSelected = false }
-            palette[widgetBackgroundIndex].isSelected = true
+            updateSelectedColor(index: widgetBackgroundIndex)
         } else {
             setWidgetBackgroundColor(palette[0], isBatteryWidget: isBatteryWidget)
+            updateSelectedColor(index: 0)
         }
     }
     
@@ -51,6 +51,11 @@ final class WidgetViewController: UIViewController {
     
     private func updateWidgetPreviews() {
         
+    }
+    
+    private func updateSelectedColor(index: Int) {
+        palette.indices.forEach { palette[$0].isSelected = false }
+        palette[index].isSelected = true
     }
 }
 
@@ -86,6 +91,9 @@ extension WidgetViewController: WidgetViewDelegate {
 extension WidgetViewController: CustomSegmentedControlDelegate {
     func tapOnButton(index: Int) {
         rootView.changeWigdetPreviews(index: index)
+        findWidgetBackgroundColor(isBatteryWidget: index == 0)
+        updateWidgetPreviews()
+        rootView.backgroundColorsCollectionView.reloadData()
     }
 }
 
@@ -111,8 +119,7 @@ extension WidgetViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        palette.indices.forEach { palette[$0].isSelected = false }
-        palette[indexPath.item].isSelected = true
+        updateSelectedColor(index: indexPath.item)
         
         let segmentedControlIndex = rootView.customSegmentedControl.selectedIndex
         setWidgetBackgroundColor(palette[indexPath.item], isBatteryWidget: segmentedControlIndex == 0)
