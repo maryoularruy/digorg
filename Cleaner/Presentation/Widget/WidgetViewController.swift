@@ -10,6 +10,17 @@ import UIKit
 final class WidgetViewController: UIViewController {
     private lazy var rootView = WidgetView()
     
+    private lazy var palette: [WidgetBackground] = [
+        WidgetBackground(hex: "3585E5", color: .blue, isSelected: true),
+        WidgetBackground(hex: "9C60E8", color: .deepPurple, isSelected: false),
+        WidgetBackground(hex: "FF971E", color: .deepOrange, isSelected: false),
+        WidgetBackground(hex: "F94545", color: .red, isSelected: false),
+        WidgetBackground(hex: "F9FAFC", color: .paleGrey, isSelected: false),
+        WidgetBackground(hex: "1E1F21", color: .black, isSelected: false),
+        WidgetBackground(hex: "2CD747", color: .green, isSelected: false),
+        WidgetBackground(hex: "FF68C2", color: .pink, isSelected: false)
+    ]
+    
     override func loadView() {
         super.loadView()
         view = rootView
@@ -65,12 +76,12 @@ extension WidgetViewController: ActionToolbarDelegate {
 
 extension WidgetViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        8
+        palette.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: WidgetBackgroundCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-        cell.bind(widgetBackground: WidgetBackground(hex: "", color: .paleGrey, isSelected: false))
+        cell.bind(widgetBackground: palette[indexPath.item])
         return cell
     }
     

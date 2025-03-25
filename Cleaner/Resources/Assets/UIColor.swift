@@ -24,10 +24,13 @@ extension UIColor {
     
     static var yellow = UIColor(resource: .yellow)
     static var orange = UIColor(resource: .orange)
+    static var deepOrange = UIColor(resource: .deepOrange)
     
     static var red = UIColor(resource: .red)
+    static var pink = UIColor(resource: .pink)
     
     static var purple = UIColor(resource: .purple)
+    static var deepPurple = UIColor(resource: .deepPurple)
     
     static var black = UIColor(resource: .black)
     
