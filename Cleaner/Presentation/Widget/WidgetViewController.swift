@@ -51,7 +51,7 @@ final class WidgetViewController: UIViewController {
     }
     
     private func updateWidgetPreviews(segmentedControlIndex: Int) {
-        rootView.updateWidgetPreviewsBackground(segmentedControlIndex: rootView.customSegmentedControl.selectedIndex, color: getSelectedColor())
+        rootView.updateWidgetPreviewsBackground(segmentedControlIndex: segmentedControlIndex, color: getSelectedColor())
     }
     
     private func getSelectedColor() -> UIColor {
