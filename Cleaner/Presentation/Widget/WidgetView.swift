@@ -88,9 +88,7 @@ final class WidgetView: UIView {
             widgetSmallPreviewContainer.addSubviews([storageWidgetSmallPreview])
             batteryWidgetMediumPreview.isHidden = true
             storageWidgetMediumPreview.isHidden = false
-        }
-        
-        layoutIfNeeded()
+        }        
     }
     
     func updateWidgetPreviewsBackground(segmentedControlIndex: Int, color: UIColor) {
@@ -104,8 +102,6 @@ final class WidgetView: UIView {
             storageWidgetSmallPreview.updateBackgroundColor(color: color)
             storageWidgetMediumPreview.updateBackgroundColor(color: color)
         }
-        
-        layoutIfNeeded()
     }
     
     private func setupView() {
@@ -127,10 +123,10 @@ final class WidgetView: UIView {
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            contentView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            
+
             arrowBack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12.5),
             arrowBack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             arrowBack.heightAnchor.constraint(equalToConstant: arrowBackButton.frame.height),
