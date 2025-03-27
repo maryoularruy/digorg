@@ -33,6 +33,7 @@ final class WidgetViewController: UIViewController {
         setupUI()
         addGestureRecognizers()
         findWidgetBackgroundColor(isBatteryWidget: true)
+        updateWidgetPreviews(segmentedControlIndex: 0)
     }
     
     private func findWidgetBackgroundColor(isBatteryWidget: Bool) {
@@ -49,8 +50,12 @@ final class WidgetViewController: UIViewController {
         userDefaultsService.set(color.hex, key: isBatteryWidget ? .batteryWidgetHexBackgroundColor : .storageWidgetHexBackgroundColor)
     }
     
-    private func updateWidgetPreviews() {
-        
+    private func updateWidgetPreviews(segmentedControlIndex: Int) {
+        rootView.updateWidgetPreviewsBackground(segmentedControlIndex: rootView.customSegmentedControl.selectedIndex, color: getSelectedColor())
+    }
+    
+    private func getSelectedColor() -> UIColor {
+        palette.first(where: { $0.isSelected })?.color ?? .blue
     }
     
     private func updateSelectedColor(index: Int) {
@@ -92,7 +97,7 @@ extension WidgetViewController: CustomSegmentedControlDelegate {
     func tapOnButton(index: Int) {
         rootView.changeWigdetPreviews(index: index)
         findWidgetBackgroundColor(isBatteryWidget: index == 0)
-        updateWidgetPreviews()
+        updateWidgetPreviews(segmentedControlIndex: index)
         rootView.backgroundColorsCollectionView.reloadData()
     }
 }
@@ -123,8 +128,8 @@ extension WidgetViewController: UICollectionViewDelegateFlowLayout, UICollection
         
         let segmentedControlIndex = rootView.customSegmentedControl.selectedIndex
         setWidgetBackgroundColor(palette[indexPath.item], isBatteryWidget: segmentedControlIndex == 0)
+        updateWidgetPreviews(segmentedControlIndex: segmentedControlIndex)
         
-        updateWidgetPreviews()
         collectionView.reloadData()
     }
 }

@@ -93,6 +93,21 @@ final class WidgetView: UIView {
         layoutIfNeeded()
     }
     
+    func updateWidgetPreviewsBackground(segmentedControlIndex: Int, color: UIColor) {
+        guard let widgetType = WidgetPreviewType.allCases.first(where: { $0.index == segmentedControlIndex }) else { return }
+        
+        switch widgetType {
+        case .battery:
+            batteryWidgetSmallPreview.updateBackgroundColor(color: color)
+            batteryWidgetMediumPreview.updateBackgroundColor(color: color)
+        case .storage:
+            storageWidgetSmallPreview.updateBackgroundColor(color: color)
+            storageWidgetMediumPreview.updateBackgroundColor(color: color)
+        }
+        
+        layoutIfNeeded()
+    }
+    
     private func setupView() {
         backgroundColor = .paleGrey
         

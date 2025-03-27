@@ -50,8 +50,8 @@ final class WidgetMediumPreview: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateBackgroundColor() {
-        
+    func updateBackgroundColor(color: UIColor) {
+        backgroundColor = color
     }
     
     private func setupView() {
