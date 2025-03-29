@@ -15,7 +15,15 @@ struct WidgetBackground {
 }
 
 final class WidgetBackgroundCollectionViewCell: UICollectionViewCell, Reusable {
-    static var size: CGSize = CGSize(width: 46, height: 46)
+    static var size: CGSize {
+        let outerPadding = 41.5 * 2
+        let innerPadding = 36.0 * 3
+        let elementsInRow = 4.0
+        
+        let oneSideSize = Int((UIScreen.main.bounds.width - outerPadding - innerPadding) / elementsInRow)
+        
+        return CGSize(width: oneSideSize, height: oneSideSize)
+    }
     
     private lazy var innerView: UIView = {
         let view = UIView()
@@ -58,8 +66,8 @@ final class WidgetBackgroundCollectionViewCell: UICollectionViewCell, Reusable {
         NSLayoutConstraint.activate([
             innerView.centerXAnchor.constraint(equalTo: centerXAnchor),
             innerView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            innerView.heightAnchor.constraint(equalToConstant: 40),
-            innerView.widthAnchor.constraint(equalToConstant: 40)
+            innerView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.87),
+            innerView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.87),
         ])
     }
 }

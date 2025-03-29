@@ -158,9 +158,10 @@ final class WidgetView: UIView {
             storageWidgetMediumPreview.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
             backgroundColorsCollectionView.topAnchor.constraint(equalTo: batteryWidgetMediumPreview.bottomAnchor, constant: 30),
-            backgroundColorsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 26),
-            backgroundColorsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -26),
-            backgroundColorsCollectionView.heightAnchor.constraint(equalToConstant: 140),
+            backgroundColorsCollectionView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            backgroundColorsCollectionView.leadingAnchor.constraint(lessThanOrEqualTo: contentView.leadingAnchor, constant: 25),
+            backgroundColorsCollectionView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -25),
+            backgroundColorsCollectionView.heightAnchor.constraint(equalToConstant: 160),
             
             toolbar.leadingAnchor.constraint(equalTo: leadingAnchor),
             toolbar.trailingAnchor.constraint(equalTo: trailingAnchor),
