@@ -38,7 +38,7 @@ final class WidgetSmallPreview: UIView {
         return label
     }()
     
-    private lazy var icon: UIImageView = UIImageView(image: type.smallImage)
+    private lazy var icon: UIImageView = UIImageView(image: type.smallImageWithWhiteBackground)
     
     init(type: WidgetPreviewType) {
         self.type = type
@@ -53,6 +53,27 @@ final class WidgetSmallPreview: UIView {
     
     func updateBackgroundColor(color: UIColor) {
         backgroundColor = color
+        
+        setStyles(isWhiteBackground: color == .paleGrey)
+    }
+    
+    private func setStyles(isWhiteBackground: Bool) {
+        if isWhiteBackground {
+            titleLabel.setDarkGreyTextColor()
+            defaultValueLabel.setBlackTextColor()
+            infoLabel.setDarkGreyTextColor()
+            infoValueLabel.setBlackTextColor()
+            
+            icon.image = type.smallImageWithBlueBackground
+            //TODO: -add shadows
+        } else {
+            titleLabel.setLightGreyTextColor()
+            defaultValueLabel.setPaleGreyTextColor()
+            infoLabel.setLightGreyTextColor()
+            infoValueLabel.setPaleGreyTextColor()
+            
+            icon.image = type.smallImageWithWhiteBackground
+        }
     }
     
     private func setupView() {

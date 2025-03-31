@@ -16,4 +16,8 @@ final class Semibold24LabelStyle: Semibold15LabelStyle {
     func setPaleGreyTextColor() {
         textColor = .paleGrey
     }
+    
+    func setBlackTextColor() {
+        textColor = .black
+    }
 }

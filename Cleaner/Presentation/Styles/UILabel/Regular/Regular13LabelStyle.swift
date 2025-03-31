@@ -25,4 +25,8 @@ final class Regular13LabelStyle: Regular11LabelStyle {
     func setLightGreyTextColor() {
         textColor = .lightGrey
     }
+    
+    func setDarkGreyTextColor() {
+        textColor = .darkGrey
+    }
 }

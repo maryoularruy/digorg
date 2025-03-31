@@ -52,10 +52,17 @@ enum WidgetPreviewType: CaseIterable {
         }
     }
     
-    var smallImage: UIImage {
+    var smallImageWithWhiteBackground: UIImage {
         switch self {
-        case .battery: UIImage(resource: .batteryWidgetSmallIcon)
-        case .storage: UIImage(resource: .storageWidgetSmallIcon)
+        case .battery: UIImage(resource: .batteryWidgetSmallWhiteIcon)
+        case .storage: UIImage(resource: .storageWidgetSmallWhiteIcon)
+        }
+    }
+    
+    var smallImageWithBlueBackground: UIImage {
+        switch self {
+        case .battery: UIImage(resource: .batteryWidgetSmallBlueIcon)
+        case .storage: UIImage(resource: .storageWidgetSmallBlueIcon)
         }
     }
     
@@ -69,7 +76,7 @@ enum WidgetPreviewType: CaseIterable {
     var mediumImageWithBlueBackground: UIImage {
         switch self {
         case .battery: UIImage(resource: .batteryWidgetMediumBlueIcon)
-        case .storage: UIImage(resource: .batteryWidgetMediumBlueIcon)
+        case .storage: UIImage(resource: .storageWidgetMediumBlueIcon)
         }
     }
 }

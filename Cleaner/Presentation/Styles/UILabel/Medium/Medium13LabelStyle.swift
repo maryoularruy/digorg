@@ -26,4 +26,12 @@ final class Medium13LabelStyle: UILabel {
         font = UIFont.medium13 ?? UIFont.systemFont(ofSize: 13)
         textColor = .paleGrey
     }
+    
+    func setPaleGreyTextColor() {
+        textColor = .paleGrey
+    }
+    
+    func setBlackTextColor() {
+        textColor = .black
+    }
 }

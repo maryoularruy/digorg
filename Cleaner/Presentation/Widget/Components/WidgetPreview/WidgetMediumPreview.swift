@@ -52,6 +52,27 @@ final class WidgetMediumPreview: UIView {
     
     func updateBackgroundColor(color: UIColor) {
         backgroundColor = color
+        
+        setStyles(isWhiteBackground: color == .paleGrey)
+    }
+    
+    private func setStyles(isWhiteBackground: Bool) {
+        if isWhiteBackground {
+            titleLabel.setDarkGreyTextColor()
+            defaultValueLabel.setBlackTextColor()
+            infoLabel.setDarkGreyTextColor()
+            infoValueLabel.setBlackTextColor()
+            
+            iconWithShadow.image = type.mediumImageWithBlueBackground
+            //TODO: -add shadows
+        } else {
+            titleLabel.setLightGreyTextColor()
+            defaultValueLabel.setPaleGreyTextColor()
+            infoLabel.setLightGreyTextColor()
+            infoValueLabel.setPaleGreyTextColor()
+            
+            iconWithShadow.image = type.mediumImageWithWhiteBackground
+        }
     }
     
     private func setupView() {

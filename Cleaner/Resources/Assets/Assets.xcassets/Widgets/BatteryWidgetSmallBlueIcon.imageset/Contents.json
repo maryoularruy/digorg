@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "BatteryWidgetIcon.png",
+      "filename" : "BatteryWidgetSmallBlueIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "BatteryWidgetIcon@2x.png",
+      "filename" : "BatteryWidgetSmallBlueIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "BatteryWidgetIcon@3x.png",
+      "filename" : "BatteryWidgetSmallBlueIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
