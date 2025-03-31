@@ -55,16 +55,21 @@ enum WidgetPreviewType: CaseIterable {
     var smallImage: UIImage {
         switch self {
         case .battery: UIImage(resource: .batteryWidgetSmallIcon)
-            //TODO: -add storage widget icon
-        case .storage: UIImage(resource: .batteryWidgetSmallIcon)
+        case .storage: UIImage(resource: .storageWidgetSmallIcon)
         }
     }
     
-    var mediumImage: UIImage {
+    var mediumImageWithWhiteBackground: UIImage {
         switch self {
-        case .battery: UIImage(resource: .batteryWidgetMediumIcon)
-            //TODO: -add storage widget icon
-        case .storage: UIImage(resource: .batteryWidgetMediumIcon)
+        case .battery: UIImage(resource: .batteryWidgetMediumWhiteIcon)
+        case .storage: UIImage(resource: .storageWidgetMediumWhiteIcon)
+        }
+    }
+    
+    var mediumImageWithBlueBackground: UIImage {
+        switch self {
+        case .battery: UIImage(resource: .batteryWidgetMediumBlueIcon)
+        case .storage: UIImage(resource: .batteryWidgetMediumBlueIcon)
         }
     }
 }

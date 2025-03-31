@@ -37,7 +37,7 @@ final class WidgetMediumPreview: UIView {
         return label
     }()
     
-    private lazy var iconWithShadow: UIImageView = UIImageView(image: type.mediumImage)
+    private lazy var iconWithShadow: UIImageView = UIImageView(image: type.mediumImageWithWhiteBackground)
     
     init(type: WidgetPreviewType) {
         self.type = type
@@ -76,11 +76,9 @@ final class WidgetMediumPreview: UIView {
             infoValueLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 4),
             infoValueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             infoValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-
-            iconWithShadow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 150),
-            iconWithShadow.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 142),
-            iconWithShadow.heightAnchor.constraint(equalToConstant: 389),
-            iconWithShadow.widthAnchor.constraint(equalToConstant: 410)
+            
+            iconWithShadow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 121),
+            iconWithShadow.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 120)
         ])
     }
 }
