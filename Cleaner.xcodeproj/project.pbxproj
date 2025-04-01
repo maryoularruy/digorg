@@ -70,6 +70,9 @@
 		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
 		A5CB0E632D9307210067986B /* UIColor+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB0E622D9307210067986B /* UIColor+ext.swift */; };
 		A5E920ED2CD256C1008159DB /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */; };
+		A5EE947E2D9C6AC60073BCB5 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */; };
+		A5EE947F2D9C6C4D0073BCB5 /* UIColor+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB0E622D9307210067986B /* UIColor+ext.swift */; };
+		A5EE94802D9C6C920073BCB5 /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC7C2A606E6F00F351A3 /* String+ext.swift */; };
 		A5EEA5132D7E2E880041F582 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EEA5122D7E2E880041F582 /* PreviewViewController.swift */; };
 		A5EEA6A02D7F31000041F582 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EEA69F2D7F31000041F582 /* PreviewView.swift */; };
 		A5EEA6A22D7F405B0041F582 /* PreviewPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EEA6A12D7F405B0041F582 /* PreviewPageViewController.swift */; };
@@ -229,6 +232,8 @@
 		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
 		A5CB0E622D9307210067986B /* UIColor+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ext.swift"; sourceTree = "<group>"; };
 		A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		A5EE947C2D9C695B0073BCB5 /* Cleaner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cleaner.entitlements; sourceTree = "<group>"; };
+		A5EE947D2D9C696E0073BCB5 /* BatteryWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BatteryWidgetExtension.entitlements; sourceTree = "<group>"; };
 		A5EEA5122D7E2E880041F582 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		A5EEA69F2D7F31000041F582 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		A5EEA6A12D7F405B0041F582 /* PreviewPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPageViewController.swift; sourceTree = "<group>"; };
@@ -463,6 +468,7 @@
 		75D3FC2A2A6069AF00F351A3 = {
 			isa = PBXGroup;
 			children = (
+				A5EE947D2D9C696E0073BCB5 /* BatteryWidgetExtension.entitlements */,
 				75D3FC352A6069AF00F351A3 /* Cleaner */,
 				A552053B2D84DE4A002FD0B3 /* BatteryWidget */,
 				A55205362D84DE4A002FD0B3 /* Frameworks */,
@@ -482,6 +488,7 @@
 		75D3FC352A6069AF00F351A3 /* Cleaner */ = {
 			isa = PBXGroup;
 			children = (
+				A5EE947C2D9C695B0073BCB5 /* Cleaner.entitlements */,
 				A576FADA2CB6A9EE00B018DE /* Base */,
 				FA3987452B30553A0096F335 /* Frameworks */,
 				75D3FC7A2A606E6F00F351A3 /* Extensions */,
@@ -1177,7 +1184,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5EE94802D9C6C920073BCB5 /* String+ext.swift in Sources */,
+				A5EE947E2D9C6AC60073BCB5 /* UserDefaultsService.swift in Sources */,
 				A55FC81E2D89D653005FB15E /* Float+ext.swift in Sources */,
+				A5EE947F2D9C6C4D0073BCB5 /* UIColor+ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1418,6 +1428,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BatteryWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1452,6 +1463,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BatteryWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

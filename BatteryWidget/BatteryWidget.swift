@@ -9,16 +9,16 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), batteryPercent: 25, isLowPowerModeOn: false)
+    func placeholder(in context: Context) -> BatteryWidgetEntry {
+        BatteryWidgetEntry(date: Date(), batteryPercent: 25, isLowPowerModeOn: false)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(in context: Context, completion: @escaping (BatteryWidgetEntry) -> ()) {
         completion(getCurrentBatteryStateEntry())
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+        var entries: [BatteryWidgetEntry] = []
         
         let entry = getCurrentBatteryStateEntry()
         let nextUpdationDate = Calendar.current.date(byAdding: .minute, value: 30, to: entry.date)!
@@ -26,17 +26,26 @@ struct Provider: TimelineProvider {
         completion(Timeline(entries: entries, policy: .after(nextUpdationDate)))
     }
 
-    private func getCurrentBatteryStateEntry() -> SimpleEntry {
+    private func getCurrentBatteryStateEntry() -> BatteryWidgetEntry {
         UIDevice.current.isBatteryMonitoringEnabled = true
         
-        return SimpleEntry(date: .now,
-                               batteryPercent: UIDevice.current.batteryLevel.toPercent(),
-                               isLowPowerModeOn: ProcessInfo.processInfo.isLowPowerModeEnabled)
+        let color: Color
         
+        if let colorHex = UserDefaultsService.shared.batteryWidgetHexBackground,
+           let uiColor = UIColor(hex: colorHex) {
+            color = Color(uiColor)
+        } else {
+            color = .blue
+        }
+        
+        return BatteryWidgetEntry(date: .now,
+                           batteryPercent: UIDevice.current.batteryLevel.toPercent(),
+                           isLowPowerModeOn: ProcessInfo.processInfo.isLowPowerModeEnabled,
+                           backgroundColor: color)
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct BatteryWidgetEntry: TimelineEntry {
     let date: Date
     let batteryPercent: Int
     let isLowPowerModeOn: Bool
@@ -99,5 +108,5 @@ struct BatteryWidget: Widget {
 #Preview(as: .systemSmall) {
     BatteryWidget()
 } timeline: {
-    SimpleEntry(date: .now, batteryPercent: 25, isLowPowerModeOn: true, backgroundColor: .blue)
+    BatteryWidgetEntry(date: .now, batteryPercent: 25, isLowPowerModeOn: true, backgroundColor: .blue)
 }

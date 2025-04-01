@@ -34,6 +34,7 @@ enum UserDefaultsKeys: String {
 
 final class UserDefaultsService {
     static let shared = UserDefaultsService()
+    static let groupedUserDefaults = UserDefaults(suiteName: "group.com.cleaner.testt")
     
     var isFirstEntry: Bool {
         self.get(Bool.self, key: .isFirstEntry) ?? true
@@ -65,19 +66,27 @@ final class UserDefaultsService {
     }
     
     var batteryWidgetHexBackground: String? {
-        self.get(String.self, key: .batteryWidgetHexBackgroundColor)
+        self.getGroupedUserDefaults(String.self, key: .batteryWidgetHexBackgroundColor)
     }
     
     var storageWidgetHexBackground: String? {
-        self.get(String.self, key: .storageWidgetHexBackgroundColor)
+        self.getGroupedUserDefaults(String.self, key: .storageWidgetHexBackgroundColor)
     }
     
     func get<T>(_ value: T.Type, key: UserDefaultsKeys) -> T? {
         UserDefaults.standard.value(forKey: key.rawValue) as? T
     }
     
+    func getGroupedUserDefaults<T>(_ value: T.Type, key: UserDefaultsKeys) -> T? {
+        UserDefaultsService.groupedUserDefaults?.value(forKey: key.rawValue) as? T
+    }
+    
     func set<T>(_ value: T, key: UserDefaultsKeys) {
         UserDefaults.standard.set(value, forKey: key.rawValue)
+    }
+    
+    func setGroupedUserDefaults<T>(_ value: T, key: UserDefaultsKeys) {
+        UserDefaultsService.groupedUserDefaults?.set(value, forKey: key.rawValue)
     }
     
     func remove(key: UserDefaultsKeys) {

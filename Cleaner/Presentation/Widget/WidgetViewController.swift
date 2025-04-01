@@ -48,7 +48,7 @@ final class WidgetViewController: UIViewController {
     }
     
     private func setWidgetBackgroundColor(_ color: WidgetBackground, isBatteryWidget: Bool) {
-        userDefaultsService.set(color.hex, key: isBatteryWidget ? .batteryWidgetHexBackgroundColor : .storageWidgetHexBackgroundColor)
+        userDefaultsService.setGroupedUserDefaults(color.hex, key: isBatteryWidget ? .batteryWidgetHexBackgroundColor : .storageWidgetHexBackgroundColor)
     }
     
     private func updateWidgetPreviews(segmentedControlIndex: Int) {
