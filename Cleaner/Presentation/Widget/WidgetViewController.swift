@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 final class WidgetViewController: UIViewController {
     private lazy var rootView = WidgetView()
@@ -58,6 +59,10 @@ final class WidgetViewController: UIViewController {
         palette.first(where: { $0.isSelected })?.color ?? .blue
     }
     
+    private func getSelectedWidgetBackground() -> WidgetBackground {
+        palette.first(where: { $0.isSelected }) ?? palette[0]
+    }
+    
     private func updateSelectedColor(index: Int) {
         palette.indices.forEach { palette[$0].isSelected = false }
         palette[index].isSelected = true
@@ -104,7 +109,17 @@ extension WidgetViewController: CustomSegmentedControlDelegate {
 
 extension WidgetViewController: ActionToolbarDelegate {
     func tapOnActionButton() {
+        setWidgetBackgroundColor(getSelectedWidgetBackground(), isBatteryWidget: rootView.customSegmentedControl.selectedIndex == 0)
         
+        let successView = SuccessView(frame: SuccessView.myFrame)
+        successView.bind(type: .successSetup)
+        successView.center = view.center
+        view.addSubview(successView)
+        successView.setHidden {
+            successView.removeFromSuperview()
+        }
+        
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }
 
@@ -125,11 +140,7 @@ extension WidgetViewController: UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         updateSelectedColor(index: indexPath.item)
-        
-        let segmentedControlIndex = rootView.customSegmentedControl.selectedIndex
-        setWidgetBackgroundColor(palette[indexPath.item], isBatteryWidget: segmentedControlIndex == 0)
-        updateWidgetPreviews(segmentedControlIndex: segmentedControlIndex)
-        
+        updateWidgetPreviews(segmentedControlIndex: rootView.customSegmentedControl.selectedIndex)
         collectionView.reloadData()
     }
 }
