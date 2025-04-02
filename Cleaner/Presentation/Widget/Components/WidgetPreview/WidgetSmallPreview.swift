@@ -65,7 +65,7 @@ final class WidgetSmallPreview: UIView {
             infoValueLabel.setBlackTextColor()
             
             icon.image = type.smallImageWithBlueBackground
-            //TODO: -add shadows
+            addShadows()
         } else {
             titleLabel.setLightGreyTextColor()
             defaultValueLabel.setPaleGreyTextColor()

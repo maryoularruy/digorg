@@ -10,6 +10,8 @@ import UIKit
 final class WidgetMediumPreview: UIView {
     private var type: WidgetPreviewType
     
+    private lazy var contentView = UIView()
+    
     private lazy var titleLabel: Regular13LabelStyle = {
         let label = Regular13LabelStyle()
         label.setLightGreyTextColor()
@@ -64,7 +66,7 @@ final class WidgetMediumPreview: UIView {
             infoValueLabel.setBlackTextColor()
             
             iconWithShadow.image = type.mediumImageWithBlueBackground
-            //TODO: -add shadows
+            addShadows()
         } else {
             titleLabel.setLightGreyTextColor()
             defaultValueLabel.setPaleGreyTextColor()
@@ -78,28 +80,35 @@ final class WidgetMediumPreview: UIView {
     private func setupView() {
         layer.cornerRadius = 20
         backgroundColor = .blue
-        clipsToBounds = true
+        contentView.layer.cornerRadius = 20
+        contentView.clipsToBounds = true
     }
     
     private func initConstraints() {
-        addSubviews([titleLabel, defaultValueLabel, infoLabel, infoValueLabel, iconWithShadow])
+        addSubviews([contentView])
+        contentView.addSubviews([titleLabel, defaultValueLabel, infoLabel, infoValueLabel, iconWithShadow])
         
-        NSLayoutConstraint.activate([            
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
             defaultValueLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            defaultValueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            defaultValueLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
             infoLabel.topAnchor.constraint(equalTo: defaultValueLabel.bottomAnchor, constant: 8),
-            infoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            infoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
             infoValueLabel.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 4),
-            infoValueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            infoValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            infoValueLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            infoValueLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             
-            iconWithShadow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 121),
-            iconWithShadow.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 120)
+            iconWithShadow.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 121),
+            iconWithShadow.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 120)
         ])
     }
 }
