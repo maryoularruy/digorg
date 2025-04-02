@@ -58,9 +58,19 @@ struct BatteryWidgetEntry: TimelineEntry {
 }
 
 struct BatteryWidgetEntryView : View {
+    @Environment(\.widgetFamily) var widgetFamily
+    
     var entry: Provider.Entry
 
     var body: some View {
+        switch widgetFamily {
+        case .systemSmall: smallView()
+        case .systemMedium: mediumView()
+        default: smallView()
+        }
+    }
+    
+    func smallView() -> some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
@@ -87,7 +97,37 @@ struct BatteryWidgetEntryView : View {
                 .font(.medium13)
                 .lineLimit(2)
                 .foregroundStyle(entry.isWhiteBackground ? Color(.black) : .paleGrey)
-            
+        }
+    }
+    
+    func mediumView() -> some View {
+        VStack(alignment: .leading) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading) {
+                    Text("Battery")
+                        .font(.regular13)
+                        .foregroundStyle(entry.isWhiteBackground ? .darkGrey : .lightGrey)
+                    
+                    Text("\(entry.batteryPercent) %")
+                        .font(.semibold24)
+                        .foregroundStyle(entry.isWhiteBackground ? Color(.black) : .paleGrey)
+                    
+                    Text("No activity")
+                        .padding(.top, 8)
+                        .font(.regular13)
+                        .foregroundStyle(entry.isWhiteBackground ? .darkGrey : .lightGrey)
+                    
+                    Text("Low power mode \(entry.isLowPowerModeOn ? "enabled" : "disabled")")
+                        .font(.medium13)
+                        .foregroundStyle(entry.isWhiteBackground ? Color(.black) : .paleGrey)
+                }
+                
+                Spacer()
+                
+                Image(entry.isWhiteBackground ? .batteryWidgetMediumBlueIcon : .batteryWidgetMediumWhiteIcon)
+                    .frame(width: 40, height: 40, alignment: .center)
+                    .padding(EdgeInsets(top: 70, leading: 0, bottom: 0, trailing: 9))
+            }
         }
     }
 }
@@ -107,10 +147,11 @@ struct BatteryWidget: Widget {
             }
         }
         .configurationDisplayName("Battery Widget")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
-#Preview(as: .systemSmall) {
+#Preview(as: .systemMedium) {
     BatteryWidget()
 } timeline: {
     BatteryWidgetEntry(date: .now, batteryPercent: 25, isLowPowerModeOn: true, backgroundColor: .blue)
