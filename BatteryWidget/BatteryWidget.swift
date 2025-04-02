@@ -30,18 +30,22 @@ struct Provider: TimelineProvider {
         UIDevice.current.isBatteryMonitoringEnabled = true
         
         let color: Color
+        let isWhiteBackground: Bool
         
         if let colorHex = UserDefaultsService.shared.batteryWidgetHexBackground,
            let uiColor = UIColor(hex: colorHex) {
             color = Color(uiColor)
+            isWhiteBackground = colorHex == "F9FAFC"
         } else {
-            color = .blue
+            color = Color(.blue)
+            isWhiteBackground = false
         }
         
         return BatteryWidgetEntry(date: .now,
-                           batteryPercent: UIDevice.current.batteryLevel.toPercent(),
-                           isLowPowerModeOn: ProcessInfo.processInfo.isLowPowerModeEnabled,
-                           backgroundColor: color)
+                                  batteryPercent: UIDevice.current.batteryLevel.toPercent(),
+                                  isLowPowerModeOn: ProcessInfo.processInfo.isLowPowerModeEnabled,
+                                  backgroundColor: color,
+                                  isWhiteBackground: isWhiteBackground)
     }
 }
 
@@ -50,6 +54,7 @@ struct BatteryWidgetEntry: TimelineEntry {
     let batteryPercent: Int
     let isLowPowerModeOn: Bool
     var backgroundColor: Color = .blue
+    var isWhiteBackground: Bool = false
 }
 
 struct BatteryWidgetEntryView : View {
@@ -61,14 +66,14 @@ struct BatteryWidgetEntryView : View {
                 VStack(alignment: .leading) {
                     Text("Battery")
                         .font(.regular13)
-                        .foregroundStyle(.lightGrey)
+                        .foregroundStyle(entry.isWhiteBackground ? .darkGrey : .lightGrey)
                     
                     Text("\(entry.batteryPercent) %")
                         .font(.semibold24)
-                        .foregroundStyle(.paleGrey)
+                        .foregroundStyle(entry.isWhiteBackground ? Color(.black) : .paleGrey)
                 }
                 Spacer()
-                Image(.batteryWidgetSmallWhiteIcon)
+                Image(entry.isWhiteBackground ? .batteryWidgetSmallBlueIcon : .batteryWidgetSmallWhiteIcon)
                     .frame(width: 40, height: 40, alignment: .trailing)
             }
             
@@ -76,12 +81,12 @@ struct BatteryWidgetEntryView : View {
             
             Text("No activity")
                 .font(.regular13)
-                .foregroundStyle(.lightGrey)
+                .foregroundStyle(entry.isWhiteBackground ? .darkGrey : .lightGrey)
             
             Text("Low power mode\n\(entry.isLowPowerModeOn ? "enabled" : "disabled")")
                 .font(.medium13)
                 .lineLimit(2)
-                .foregroundStyle(.paleGrey)
+                .foregroundStyle(entry.isWhiteBackground ? Color(.black) : .paleGrey)
             
         }
     }
