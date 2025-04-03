@@ -12,5 +12,6 @@ import SwiftUI
 struct CleanerWidgetBundle: WidgetBundle {
     var body: some Widget {
         BatteryWidget()
+        StorageWidget()
     }
 }

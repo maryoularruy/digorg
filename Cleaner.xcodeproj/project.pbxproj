@@ -330,6 +330,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Resources/Fonts/Font+ext.swift",
+				StorageWidget.swift,
 			);
 			target = 75D3FC322A6069AF00F351A3 /* Cleaner */;
 		};
