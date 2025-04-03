@@ -85,7 +85,7 @@ final class WidgetSmallPreview: UIView {
         addSubviews([titleLabel, defaultValueLabel, icon, infoLabel, infoValueLabel])
         
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 160),
+            heightAnchor.constraint(equalToConstant: 158),
             widthAnchor.constraint(equalToConstant: 158),
             
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -99,11 +99,11 @@ final class WidgetSmallPreview: UIView {
             icon.heightAnchor.constraint(equalToConstant: 40),
             icon.widthAnchor.constraint(equalToConstant: 40),
             
-            infoLabel.topAnchor.constraint(equalTo: defaultValueLabel.bottomAnchor, constant: 20),
-            infoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            
             infoValueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            infoValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            infoValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            
+            infoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            infoLabel.bottomAnchor.constraint(equalTo: infoValueLabel.topAnchor, constant: -4)
         ])
     }
 }
