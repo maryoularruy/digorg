@@ -82,11 +82,11 @@ struct StorageWidgetEntryView : View {
                 VStack(alignment: .leading) {
                     Text("Storage")
                         .font(.regular13)
-                        .foregroundStyle(entry.isWhiteBackground ? Color(.darkGrey) : Color(.lightGrey))
+                        .foregroundStyle(entry.isWhiteBackground ? .darkGrey : .lightGrey)
                     
                     Text("\(entry.busySizeInPercent) %")
                         .font(.semibold24)
-                        .foregroundStyle(entry.isWhiteBackground ? Color(.black) : Color(.paleGrey))
+                        .foregroundStyle(entry.isWhiteBackground ? Color(.black) : .paleGrey)
                 }
                 Spacer()
                 Image(entry.isWhiteBackground ? .storageWidgetSmallBlueIcon : .storageWidgetSmallWhiteIcon)
@@ -97,12 +97,12 @@ struct StorageWidgetEntryView : View {
             
             Text("Storage Used")
                 .font(.regular13)
-                .foregroundStyle(entry.isWhiteBackground ? Color(.darkGrey) : Color(.lightGrey))
+                .foregroundStyle(entry.isWhiteBackground ? .darkGrey : .lightGrey)
             
             Text("\(entry.busySize)GB / \(entry.totalSize)GB")
                 .font(.medium13)
                 .lineLimit(2)
-                .foregroundStyle(entry.isWhiteBackground ? Color(.black) : Color(.paleGrey))
+                .foregroundStyle(entry.isWhiteBackground ? Color(.black) : .paleGrey)
         }
     }
     
@@ -112,20 +112,20 @@ struct StorageWidgetEntryView : View {
                 VStack(alignment: .leading) {
                     Text("Storage")
                         .font(.regular13)
-                        .foregroundStyle(entry.isWhiteBackground ? Color(.darkGrey) : Color(.lightGrey))
+                        .foregroundStyle(entry.isWhiteBackground ? .darkGrey : .lightGrey)
                     
                     Text("\(entry.busySizeInPercent) %")
                         .font(.semibold24)
-                        .foregroundStyle(entry.isWhiteBackground ? Color(.black) : Color(.paleGrey))
+                        .foregroundStyle(entry.isWhiteBackground ? Color(.black) : .paleGrey)
                     
                     Text("Storage Used")
                         .padding(.top, 8)
                         .font(.regular13)
-                        .foregroundStyle(entry.isWhiteBackground ? Color(.darkGrey) : Color(.lightGrey))
+                        .foregroundStyle(entry.isWhiteBackground ? .darkGrey : .lightGrey)
                     
                     Text("\(entry.busySize)GB / \(entry.totalSize)GB")
                         .font(.medium13)
-                        .foregroundStyle(entry.isWhiteBackground ? Color(.black) : Color(.paleGrey))
+                        .foregroundStyle(entry.isWhiteBackground ? Color(.black) : .paleGrey)
                 }
                 
                 Spacer()
@@ -157,8 +157,8 @@ struct StorageWidget: Widget {
     }
 }
 
-//#Preview(as: .systemMedium) {
-//    StorageWidget()
-//} timeline: {
-//    StorageWidgetEntry(date: .now, backgroundColor: .blue)
-//}
+#Preview(as: .systemMedium) {
+    StorageWidget()
+} timeline: {
+    StorageWidgetEntry(date: .now, totalSize: 128, busySize: 100, busySizeInPercent: 78)
+}
