@@ -126,7 +126,7 @@ struct BatteryWidgetEntryView : View {
                 
                 Image(entry.isWhiteBackground ? .batteryWidgetMediumBlueIcon : .batteryWidgetMediumWhiteIcon)
                     .frame(width: 40, height: 40, alignment: .center)
-                    .padding(EdgeInsets(top: 70, leading: 0, bottom: 0, trailing: 9))
+                    .padding(EdgeInsets(top: UIScreen.main.bounds.width > 420 ? 82 : 70, leading: 0, bottom: 0, trailing: 9))
             }
         }
     }

@@ -132,7 +132,7 @@ struct StorageWidgetEntryView : View {
                 
                 Image(entry.isWhiteBackground ? .storageWidgetMediumBlueIcon : .storageWidgetMediumWhiteIcon)
                     .frame(width: 40, height: 40, alignment: .center)
-                    .padding(EdgeInsets(top: 70, leading: 0, bottom: 0, trailing: 9))
+                    .padding(EdgeInsets(top: UIScreen.main.bounds.width > 420 ? 77 : 70, leading: 0, bottom: 0, trailing: 9))
             }
         }
     }
