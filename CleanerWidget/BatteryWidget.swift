@@ -1,6 +1,6 @@
 //
 //  BatteryWidget.swift
-//  BatteryWidget
+//  CleanerWidget
 //
 //  Created by Elena Sedunova on 15.03.2025.
 //
@@ -8,7 +8,7 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: TimelineProvider {
+struct BatteryProvider: TimelineProvider {
     func placeholder(in context: Context) -> BatteryWidgetEntry {
         BatteryWidgetEntry(date: Date(), batteryPercent: 25, isLowPowerModeOn: false)
     }
@@ -60,7 +60,7 @@ struct BatteryWidgetEntry: TimelineEntry {
 struct BatteryWidgetEntryView : View {
     @Environment(\.widgetFamily) var widgetFamily
     
-    var entry: Provider.Entry
+    var entry: BatteryProvider.Entry
 
     var body: some View {
         switch widgetFamily {
@@ -136,7 +136,7 @@ struct BatteryWidget: Widget {
     let kind: String = "BatteryWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: BatteryProvider()) { entry in
             if #available(iOS 17.0, *) {
                 BatteryWidgetEntryView(entry: entry)
                     .containerBackground(entry.backgroundColor, for: .widget)

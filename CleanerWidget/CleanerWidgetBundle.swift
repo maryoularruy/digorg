@@ -1,6 +1,6 @@
 //
-//  BatteryWidgetBundle.swift
-//  BatteryWidget
+//  CleanerWidgetBundle.swift
+//  CleanerWidget
 //
 //  Created by Elena Sedunova on 15.03.2025.
 //
@@ -9,7 +9,7 @@ import WidgetKit
 import SwiftUI
 
 @main
-struct BatteryWidgetBundle: WidgetBundle {
+struct CleanerWidgetBundle: WidgetBundle {
     var body: some Widget {
         BatteryWidget()
     }

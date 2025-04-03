@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A55205342D84DE4A002FD0B3"
-               BuildableName = "BatteryWidgetExtension.appex"
-               BlueprintName = "BatteryWidgetExtension"
+               BuildableName = "CleanerWidgetExtension.appex"
+               BlueprintName = "CleanerWidgetExtension"
                ReferencedContainer = "container:Cleaner.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A55205342D84DE4A002FD0B3"
-            BuildableName = "BatteryWidgetExtension.appex"
-            BlueprintName = "BatteryWidgetExtension"
+            BuildableName = "CleanerWidgetExtension.appex"
+            BlueprintName = "CleanerWidgetExtension"
             ReferencedContainer = "container:Cleaner.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
