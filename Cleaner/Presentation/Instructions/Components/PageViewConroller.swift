@@ -48,9 +48,11 @@ final class PageViewConroller: UIViewController {
     
     private func initContraints() {
         view.addSubviews([label, instructionsImageView])
+        instructionsImageView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         NSLayoutConstraint.activate([
-            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32),
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -46),
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             instructionsImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
