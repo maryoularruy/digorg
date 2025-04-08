@@ -8,6 +8,44 @@
 import UIKit
 
 enum Pages: CaseIterable {
+    enum WidgetAddingHelp: PageProtocol {
+        case pageZero, pageOne, pageTwo, pageThree, pageFour
+        
+        var index: Int {
+            switch self {
+            case .pageZero: 0
+            case .pageOne: 1
+            case .pageTwo: 2
+            case .pageThree: 3
+            case .pageFour: 4
+            }
+        }
+        
+        var title: String {
+            "How to add a widget"
+        }
+        
+        var description: String {
+            switch self {
+            case .pageZero: "Long press anywhere on the main\nscreen until the apps start shaking"
+            case .pageOne: "Tap the “Add” button in the top left corner"
+            case .pageTwo: "Find and select Cleaner App\nin the widget list"
+            case .pageThree: "Swipe to set the size of the widget and tap\n“Add Widget”"
+            case .pageFour: "Place the widget on your main screen and\ntap “Done” in the top right corner"
+            }
+        }
+        
+        var image: UIImage {
+            switch self {
+            case .pageZero: .widgetInsruction1
+            case .pageOne: .widgetInsruction2
+            case .pageTwo: .widgetInsruction3
+            case .pageThree: .widgetInsruction4
+            case .pageFour: .widgetInsruction5
+            }
+        }
+    }
+    
     enum BatteryOptimizationPage: PageProtocol {
         case pageZero, pageOne, pageTwo, pageThree
         

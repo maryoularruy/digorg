@@ -17,7 +17,13 @@ protocol PageProtocol: CaseIterable {
 final class PageViewConroller: UIViewController {
     var page: any PageProtocol
     
-    private lazy var label: Regular15LabelStyle = Regular15LabelStyle()
+    private lazy var label: Regular15LabelStyle = {
+        let label = Regular15LabelStyle()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        return label
+    }()
+    
     private lazy var instructionsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -42,6 +48,8 @@ final class PageViewConroller: UIViewController {
     
     private func initContraints() {
         view.addSubviews([label, instructionsImageView])
+        instructionsImageView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         NSLayoutConstraint.activate([
             label.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -46),

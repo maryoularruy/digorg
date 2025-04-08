@@ -27,10 +27,14 @@ enum UserDefaultsKeys: String {
     case secretContactsFile = "DEFAULT_SECRET_CONTACTS_FILE"
     
     case subscriptionExpirationDate = "SUBSCRIPTION_EXPIRATION_DATE"
+    
+    case batteryWidgetHexBackgroundColor = "BATTERY_WIDGET_BACKGROUND_COLOR"
+    case storageWidgetHexBackgroundColor = "STORAGE_WIDGET_BACKGROUND_COLOR"
 }
 
 final class UserDefaultsService {
     static let shared = UserDefaultsService()
+    static let groupedUserDefaults = UserDefaults(suiteName: "group.com.cleaner.testt")
     
     var isFirstEntry: Bool {
         self.get(Bool.self, key: .isFirstEntry) ?? true
@@ -61,12 +65,28 @@ final class UserDefaultsService {
         return expirationDate > Date.now
     }
     
+    var batteryWidgetHexBackground: String? {
+        self.getGroupedUserDefaults(String.self, key: .batteryWidgetHexBackgroundColor)
+    }
+    
+    var storageWidgetHexBackground: String? {
+        self.getGroupedUserDefaults(String.self, key: .storageWidgetHexBackgroundColor)
+    }
+    
     func get<T>(_ value: T.Type, key: UserDefaultsKeys) -> T? {
         UserDefaults.standard.value(forKey: key.rawValue) as? T
     }
     
+    func getGroupedUserDefaults<T>(_ value: T.Type, key: UserDefaultsKeys) -> T? {
+        UserDefaultsService.groupedUserDefaults?.value(forKey: key.rawValue) as? T
+    }
+    
     func set<T>(_ value: T, key: UserDefaultsKeys) {
         UserDefaults.standard.set(value, forKey: key.rawValue)
+    }
+    
+    func setGroupedUserDefaults<T>(_ value: T, key: UserDefaultsKeys) {
+        UserDefaultsService.groupedUserDefaults?.set(value, forKey: key.rawValue)
     }
     
     func remove(key: UserDefaultsKeys) {

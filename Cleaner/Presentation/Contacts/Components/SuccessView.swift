@@ -8,12 +8,13 @@
 import UIKit
 
 enum SuccessViewType {
-    case successMerge, successDelete
+    case successMerge, successDelete, successSetup
     
     var text: String {
         switch self {
         case .successMerge: "Merge Completed"
         case .successDelete: "Delete Completed"
+        case .successSetup: "Setup Successful"
         }
     }
 }

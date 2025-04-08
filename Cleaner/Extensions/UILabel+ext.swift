@@ -29,4 +29,24 @@ extension UILabel {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
+    
+    var actualNumberOfLines: Int {
+        let textStorage = NSTextStorage(attributedString: attributedText!)
+        let layoutManager = NSLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+        let textContainer = NSTextContainer(size: bounds.size)
+        textContainer.lineFragmentPadding = 0
+        textContainer.lineBreakMode = lineBreakMode
+        layoutManager.addTextContainer(textContainer)
+
+        let numberOfGlyphs = layoutManager.numberOfGlyphs
+        var numberOfLines = 0, index = 0, lineRange = NSMakeRange(0, 1)
+
+        while index < numberOfGlyphs {
+            layoutManager.lineFragmentRect(forGlyphAt: index, effectiveRange: &lineRange)
+            index = NSMaxRange(lineRange)
+            numberOfLines += 1
+        }
+        return numberOfLines
+    }
 }

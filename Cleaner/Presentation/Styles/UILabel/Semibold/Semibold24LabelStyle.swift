@@ -12,4 +12,12 @@ final class Semibold24LabelStyle: Semibold15LabelStyle {
         font = UIFont.semibold24 ?? UIFont.boldSystemFont(ofSize: 24)
         textColor = .black
     }
+    
+    func setPaleGreyTextColor() {
+        textColor = .paleGrey
+    }
+    
+    func setBlackTextColor() {
+        textColor = .black
+    }
 }

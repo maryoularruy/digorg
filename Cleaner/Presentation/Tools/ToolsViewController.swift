@@ -14,6 +14,7 @@ final class ToolsViewController: UIViewController {
     private lazy var secretAlbumOptionToolView = ToolOptionView(.secretAlbum)
     private lazy var secretContactsOptionToolView = ToolOptionView(.secretContact)
     private lazy var networkSpeedTestOptionToolView = ToolOptionView(.networkSpeedTest)
+    private lazy var widgetOptionToolView = ToolOptionView(.widgets)
     private lazy var batteryOptionToolView = ToolOptionView(.battery)
     
     @IBOutlet weak var instructionsView: UIView!
@@ -49,7 +50,7 @@ final class ToolsViewController: UIViewController {
 extension ToolsViewController: ViewControllerProtocol {
     func setupUI() {
         [secretAlbumOptionToolView, secretContactsOptionToolView,
-         networkSpeedTestOptionToolView, batteryOptionToolView].forEach { optionView in
+         networkSpeedTestOptionToolView, widgetOptionToolView, batteryOptionToolView].forEach { optionView in
             optionView.delegate = self
             toolOptionsStackView.addArrangedSubview(optionView)
         }
@@ -76,8 +77,7 @@ extension ToolsViewController: ToolOptionViewDelegate {
         case .secretAlbum: StoryboardScene.SecretAssets.initialScene.instantiate()
         case .secretContact: StoryboardScene.SecretContacts.initialScene.instantiate()
         case .networkSpeedTest: NetworkSpeedTestViewController()
-//        case .widgets:
-//            StoryboardScene.SecretAlbum.initialScene.instantiate()
+        case .widgets: WidgetViewController()
         case .battery: StoryboardScene.Battery.initialScene.instantiate()
         }
         userDefaultsService.remove(key: .isPasscodeConfirmed)
