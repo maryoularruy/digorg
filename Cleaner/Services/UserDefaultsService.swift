@@ -34,7 +34,7 @@ enum UserDefaultsKeys: String {
 
 final class UserDefaultsService {
     static let shared = UserDefaultsService()
-    static let groupedUserDefaults = UserDefaults(suiteName: "group.com.cleaner.testt")
+    static let groupedUserDefaults = UserDefaults(suiteName: "group.com.clean.mastero1")
     
     var isFirstEntry: Bool {
         self.get(Bool.self, key: .isFirstEntry) ?? true
