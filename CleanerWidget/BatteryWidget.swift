@@ -21,7 +21,7 @@ struct BatteryProvider: TimelineProvider {
         var entries: [BatteryWidgetEntry] = []
         
         let entry = getCurrentBatteryStateEntry()
-        let nextUpdationDate = Calendar.current.date(byAdding: .minute, value: 30, to: entry.date)!
+        let nextUpdationDate = Calendar.current.date(byAdding: .minute, value: 10, to: entry.date)!
         entries.append(entry)
         completion(Timeline(entries: entries, policy: .after(nextUpdationDate)))
     }
