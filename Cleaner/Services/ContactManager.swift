@@ -197,7 +197,7 @@ final class ContactManager {
         }
     }
     
-    private func fetchAllContacts(handler: @escaping (([CNContact]) -> ())) {
+    func fetchAllContacts(handler: @escaping (([CNContact]) -> ())) {
         checkStatus { [weak self] in
             guard let self else { return }
             do {

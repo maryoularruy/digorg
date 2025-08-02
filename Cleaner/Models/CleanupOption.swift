@@ -7,10 +7,10 @@
 import UIKit
 
 enum CleanupOption: String, CaseIterable {
-    case photos = "Photos Cleanup",
-         videos = "Videos Cleanup",
-         contacts = "Contacts Cleanup",
-         calendar = "Calendar Cleanup"
+    case photos = "Photos Organization",
+         videos = "Videos Organization",
+         contacts = "Contacts Organization",
+         calendar = "Calendar Organization"
     
     var image: ImageResource {
         switch self {

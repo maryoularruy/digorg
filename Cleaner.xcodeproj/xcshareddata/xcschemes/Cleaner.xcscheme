@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "75D3FC322A6069AF00F351A3"
-               BuildableName = "Cleaner.app"
+               BuildableName = "Digital Organizer.app"
                BlueprintName = "Cleaner"
                ReferencedContainer = "container:Cleaner.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "75D3FC322A6069AF00F351A3"
-            BuildableName = "Cleaner.app"
+            BuildableName = "Digital Organizer.app"
             BlueprintName = "Cleaner"
             ReferencedContainer = "container:Cleaner.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "75D3FC322A6069AF00F351A3"
-            BuildableName = "Cleaner.app"
+            BuildableName = "Digital Organizer.app"
             BlueprintName = "Cleaner"
             ReferencedContainer = "container:Cleaner.xcodeproj">
          </BuildableReference>

@@ -8,7 +8,7 @@
 import UIKit
 
 enum CleaningAssetsEntryFrom {
-    case smartClean, regularAssets, secretAlbum
+    case smartClean, regularAssets, secureVault
 }
 
 final class CleaningAssetsViewController: UIViewController {
@@ -22,7 +22,7 @@ final class CleaningAssetsViewController: UIViewController {
     private lazy var contactManager = ContactManager.shared
     private lazy var calendarManager = CalendarManager.shared
     
-    private lazy var secretFolderName = UserDefaultsService.shared.get(String.self, key: .secretAlbumFolder) ?? "media"
+    private lazy var secretFolderName = UserDefaultsService.shared.get(String.self, key: .secureVaultFolder) ?? "media"
     
     init(from: CleaningAssetsEntryFrom, itemsCount: Int, items: Any? = nil) {
         self.from = from
@@ -54,8 +54,8 @@ final class CleaningAssetsViewController: UIViewController {
                 showCongratsView(deletedItemsCount: itemsCount)
             }
             
-        case .secretAlbum:
-            startCleaningSecretAlbum()
+        case .secureVault:
+            startCleaningSecureVault()
         }
     }
     
@@ -142,7 +142,7 @@ final class CleaningAssetsViewController: UIViewController {
         }
     }
     
-    private func startCleaningSecretAlbum() {
+    private func startCleaningSecureVault() {
         guard let items = items as? [SecretItemModel] else { return }
         let progressStep: Float = 1.0 / Float(itemsCount)
         var undeletedItemsCount = 0

@@ -16,7 +16,7 @@ final class PremiumOfferView: UIView {
     
     func setupTrialUI(price: String) {
         let title = Semibold24LabelStyle()
-        title.bind(text: "3 days for Free!")
+        title.bind(text: "3-day free trial")
         
         let commonPriceLabel = Semibold15LabelStyle()
         commonPriceLabel.setGreyText()
@@ -24,32 +24,32 @@ final class PremiumOfferView: UIView {
         
         let startTrialButton = ActionToolbarButtonStyle()
         startTrialButton.layer.cornerRadius = 30
-        startTrialButton.bind(text: "Start 3 days trial")
+        startTrialButton.bind(text: "Start free trial")
         startTrialButton.addTapGestureRecognizer { [weak self] in
             self?.delegate?.tapOnOfferButton(with: .purchaseThreeDaysTrial)
         }
         
         let subscriptionConditionsLabel = Regular12LabelStyle()
         subscriptionConditionsLabel.numberOfLines = 1
-        subscriptionConditionsLabel.bind(text: "Auto-renewable. Cancel Anytime")
+        subscriptionConditionsLabel.bind(text: "Subscription automatically renews unless cancelled")
         
         addSubviews([title, commonPriceLabel, startTrialButton, subscriptionConditionsLabel])
         
         NSLayoutConstraint.activate([
-            subscriptionConditionsLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            subscriptionConditionsLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            title.topAnchor.constraint(equalTo: topAnchor),
+            title.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            startTrialButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
-            startTrialButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -38),
-            startTrialButton.bottomAnchor.constraint(equalTo: subscriptionConditionsLabel.topAnchor, constant: -15),
-            startTrialButton.heightAnchor.constraint(equalToConstant: 60),
-            
-            commonPriceLabel.bottomAnchor.constraint(equalTo: startTrialButton.topAnchor, constant: -22),
+            commonPriceLabel.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 8),
             commonPriceLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            title.topAnchor.constraint(equalTo: topAnchor, constant: 22),
-            title.bottomAnchor.constraint(equalTo: commonPriceLabel.topAnchor, constant: -11),
-            title.centerXAnchor.constraint(equalTo: centerXAnchor)
+            startTrialButton.topAnchor.constraint(equalTo: commonPriceLabel.bottomAnchor, constant: 16),
+            startTrialButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            startTrialButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            startTrialButton.heightAnchor.constraint(equalToConstant: 60),
+            
+            subscriptionConditionsLabel.topAnchor.constraint(equalTo: startTrialButton.bottomAnchor, constant: 8),
+            subscriptionConditionsLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            subscriptionConditionsLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
@@ -59,28 +59,29 @@ final class PremiumOfferView: UIView {
         
         let startSubscriptionButton = ActionToolbarButtonStyle()
         startSubscriptionButton.layer.cornerRadius = 30
-        startSubscriptionButton.bind(text: "Continue")
+        startSubscriptionButton.bind(text: "Subscribe")
         startSubscriptionButton.addTapGestureRecognizer { [weak self] in
             self?.delegate?.tapOnOfferButton(with: .purchaseWeeklyRenewableSubscription)
         }
         
         let subscriptionConditionsLabel = Regular12LabelStyle()
         subscriptionConditionsLabel.numberOfLines = 1
-        subscriptionConditionsLabel.bind(text: "Auto-renewable. Cancel Anytime")
+        subscriptionConditionsLabel.bind(text: "Subscription automatically renews unless cancelled")
         
         addSubviews([priceLabel, startSubscriptionButton, subscriptionConditionsLabel])
         
         NSLayoutConstraint.activate([
-            subscriptionConditionsLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            subscriptionConditionsLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            priceLabel.topAnchor.constraint(equalTo: topAnchor),
+            priceLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            startSubscriptionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 38),
-            startSubscriptionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -38),
-            startSubscriptionButton.bottomAnchor.constraint(equalTo: subscriptionConditionsLabel.topAnchor, constant: -15),
+            startSubscriptionButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 16),
+            startSubscriptionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            startSubscriptionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             startSubscriptionButton.heightAnchor.constraint(equalToConstant: 60),
             
-            priceLabel.bottomAnchor.constraint(equalTo: startSubscriptionButton.topAnchor, constant: -20),
-            priceLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            subscriptionConditionsLabel.topAnchor.constraint(equalTo: startSubscriptionButton.bottomAnchor, constant: 8),
+            subscriptionConditionsLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            subscriptionConditionsLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
         if let expirationDate {

@@ -18,7 +18,6 @@ final class ToolOptionView: UIView {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: Semibold15LabelStyle!
     @IBOutlet weak var optionDescription: Regular13LabelStyle!
-    @IBOutlet weak var premiumImageView: UIImageView!
     
     weak var delegate: ToolOptionViewDelegate?
     private(set) var type: ToolOption?
@@ -35,12 +34,10 @@ final class ToolOptionView: UIView {
     
     func setLocked() {
         isUserInteractionEnabled = false
-        premiumImageView.isHidden = false
     }
     
     func unlock() {
         isUserInteractionEnabled = true
-        premiumImageView.isHidden = true
     }
     
     private func bind() {

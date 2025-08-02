@@ -30,7 +30,7 @@ extension FileManager {
     
     private func createFolderIfNeeded(folderName: String, isMedia: Bool) {
         guard let url = getURLForFolder(folderName: folderName) else { return }
-        UserDefaultsService.shared.set(folderName, key: isMedia ? .secretAlbumFolder : .secretContactsFolder)
+        UserDefaultsService.shared.set(folderName, key: isMedia ? .secureVaultFolder : .secureContactsFolder)
         
         if !FileManager.default.fileExists(atPath: url.path) {
             do {
@@ -138,8 +138,8 @@ extension FileManager {
 // MARK: -Contacts
 extension FileManager {
     func getSecretContacts() -> [CNContact]? {
-        guard let folderName = UserDefaultsService.shared.get(String.self, key: .secretContactsFolder),
-        let fileName = UserDefaultsService.shared.get(String.self, key: .secretContactsFile) else { return nil }
+        guard let folderName = UserDefaultsService.shared.get(String.self, key: .secureContactsFolder),
+        let fileName = UserDefaultsService.shared.get(String.self, key: .secureContactsFile) else { return nil }
         
         guard let url = FileManager.default.getURLForFolder(folderName: folderName)?.appendingPathComponent(fileName) else { return nil }
         
@@ -147,7 +147,7 @@ extension FileManager {
     }
     
     func saveSecretContacts(_ contacts: [CNContact], cleanBeforeSaving: Bool = false) {
-        let folderName = UserDefaultsService.shared.get(String.self, key: .secretContactsFolder) ?? "contacts"
+        let folderName = UserDefaultsService.shared.get(String.self, key: .secureContactsFolder) ?? "contacts"
         createFolderIfNeeded(folderName: folderName, isMedia: false)
         
         guard let url = FileManager.default.getURLForFolder(folderName: folderName) else { return }
@@ -156,7 +156,7 @@ extension FileManager {
             clear(contentsOf: url)
         }
         
-        if let fileName = UserDefaultsService.shared.get(String.self, key: .secretContactsFile) {
+        if let fileName = UserDefaultsService.shared.get(String.self, key: .secureContactsFile) {
             
             if FileManager.default.fileExists(atPath: url.appendingPathComponent(fileName).path) {
                 var currentSecretContacts = convertDataToContacts(url.appendingPathComponent(fileName)) ?? []
@@ -170,8 +170,8 @@ extension FileManager {
             
         } else {
             let randomName = UUID().uuidString
-            UserDefaultsService.shared.set(randomName, key: .secretContactsFile)
-            guard let fileName = UserDefaultsService.shared.get(String.self, key: .secretContactsFile),
+            UserDefaultsService.shared.set(randomName, key: .secureContactsFile)
+            guard let fileName = UserDefaultsService.shared.get(String.self, key: .secureContactsFile),
                   let data = convertContactsToData(contacts) else { return }
             FileManager.default.createFile(atPath: url.appendingPathComponent(fileName).path, contents: data)
         }

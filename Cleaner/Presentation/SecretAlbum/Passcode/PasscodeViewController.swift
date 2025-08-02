@@ -151,7 +151,7 @@ extension PasscodeViewController: UITextFieldDelegate {
                 }
                  
             case .enter:
-                if passcode == userDefaultsService.get(String.self, key: .secretAlbumPasscode) {
+                if passcode == userDefaultsService.get(String.self, key: .secureVaultPasscode) {
                     userDefaultsService.set(true, key: .isPasscodeConfirmed)
                     navigationController?.popViewController(animated: true)
                 } else {

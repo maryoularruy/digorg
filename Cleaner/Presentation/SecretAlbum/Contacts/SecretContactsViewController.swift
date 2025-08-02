@@ -80,7 +80,7 @@ final class SecretContactsViewController: UIViewController {
             if userDefaultsService.isPasscodeConfirmed {
                 reloadData()
             } else {
-                showSecretAlbumCover()
+                showSecureVaultCover()
             }
         } else {
             reloadData()
@@ -91,7 +91,7 @@ final class SecretContactsViewController: UIViewController {
         contacts = contactManager.getSecretContacts() ?? []
     }
     
-    private func showSecretAlbumCover() {
+    private func showSecureVaultCover() {
         contactsTableView.isHidden = true
         itemsCountLabel.bind(text: "0 contacts")
         selectionButton.isHidden = true
@@ -104,7 +104,7 @@ final class SecretContactsViewController: UIViewController {
         selectionButton.isHidden = true
         
         emptyStateView?.removeFromSuperview()
-        emptyStateView = view.createEmptyState(type: .emptySecretContacts)
+        emptyStateView = view.createEmptyState(type: .emptySecureContacts)
         if let emptyStateView {
             view.addSubview(emptyStateView)
         }

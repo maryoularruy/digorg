@@ -70,15 +70,11 @@
 		A5B4237B2CC7DC7900EF8FE4 /* CNContact+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */; };
 		A5CB0E632D9307210067986B /* UIColor+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB0E622D9307210067986B /* UIColor+ext.swift */; };
 		A5E920ED2CD256C1008159DB /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */; };
-		A5EE947E2D9C6AC60073BCB5 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */; };
-		A5EE947F2D9C6C4D0073BCB5 /* UIColor+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB0E622D9307210067986B /* UIColor+ext.swift */; };
-		A5EE94802D9C6C920073BCB5 /* String+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D3FC7C2A606E6F00F351A3 /* String+ext.swift */; };
-		A5EE99D32D9E9E2C0073BCB5 /* FileManager+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39882E2B30602A0096F335 /* FileManager+ext.swift */; };
-		A5EEA5132D7E2E880041F582 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EEA5122D7E2E880041F582 /* PreviewViewController.swift */; };
-		A5EEA6A02D7F31000041F582 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EEA69F2D7F31000041F582 /* PreviewView.swift */; };
-		A5EEA6A22D7F405B0041F582 /* PreviewPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EEA6A12D7F405B0041F582 /* PreviewPageViewController.swift */; };
-		A5EEA6A92D7F686F0041F582 /* MergeDuplicateContacts.mov in Resources */ = {isa = PBXBuildFile; fileRef = A5EEA6A82D7F686F0041F582 /* MergeDuplicateContacts.mov */; };
-		A5EEA6AA2D7F686F0041F582 /* DeleteDuplicatePhotos.mov in Resources */ = {isa = PBXBuildFile; fileRef = A5EEA6A72D7F686F0041F582 /* DeleteDuplicatePhotos.mov */; };
+
+
+
+
+
 		FA3987282B303DCC0096F335 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3987272B303DCC0096F335 /* SettingsViewController.swift */; };
 		FA39872A2B303DD30096F335 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3987292B303DD30096F335 /* Settings.storyboard */; };
 		FA3987402B3054930096F335 /* PhotoVideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39873F2B3054930096F335 /* PhotoVideoManager.swift */; };
@@ -233,13 +229,8 @@
 		A5B4237A2CC7DC7900EF8FE4 /* CNContact+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNContact+ext.swift"; sourceTree = "<group>"; };
 		A5CB0E622D9307210067986B /* UIColor+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ext.swift"; sourceTree = "<group>"; };
 		A5E920EC2CD256C1008159DB /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
-		A5EE947C2D9C695B0073BCB5 /* Cleaner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cleaner.entitlements; sourceTree = "<group>"; };
-		A5EE947D2D9C696E0073BCB5 /* CleanerWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CleanerWidgetExtension.entitlements; sourceTree = "<group>"; };
-		A5EEA5122D7E2E880041F582 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
-		A5EEA69F2D7F31000041F582 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
-		A5EEA6A12D7F405B0041F582 /* PreviewPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPageViewController.swift; sourceTree = "<group>"; };
-		A5EEA6A72D7F686F0041F582 /* DeleteDuplicatePhotos.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = DeleteDuplicatePhotos.mov; sourceTree = "<group>"; };
-		A5EEA6A82D7F686F0041F582 /* MergeDuplicateContacts.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = MergeDuplicateContacts.mov; sourceTree = "<group>"; };
+
+
 		FA3987272B303DCC0096F335 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FA3987292B303DD30096F335 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		FA39873F2B3054930096F335 /* PhotoVideoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoManager.swift; sourceTree = "<group>"; };
@@ -542,7 +533,6 @@
 		75D3FC5B2A606BA100F351A3 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				A5EEA69E2D7F30D30041F582 /* Videos */,
 				A55CA2602CC904780026D434 /* UIImage.swift */,
 				A50F58C32CB7B43400AB3166 /* UIColor.swift */,
 				75D3FC3F2A6069B000F351A3 /* Assets.xcassets */,
@@ -614,9 +604,6 @@
 			isa = PBXGroup;
 			children = (
 				75D3FC412A6069B000F351A3 /* LaunchScreen.storyboard */,
-				A5EEA5122D7E2E880041F582 /* PreviewViewController.swift */,
-				A5EEA69F2D7F31000041F582 /* PreviewView.swift */,
-				A5EEA6A12D7F405B0041F582 /* PreviewPageViewController.swift */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -700,15 +687,7 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		A5EEA69E2D7F30D30041F582 /* Videos */ = {
-			isa = PBXGroup;
-			children = (
-				A5EEA6A72D7F686F0041F582 /* DeleteDuplicatePhotos.mov */,
-				A5EEA6A82D7F686F0041F582 /* MergeDuplicateContacts.mov */,
-			);
-			path = Videos;
-			sourceTree = "<group>";
-		};
+
 		FA3987262B303DAC0096F335 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1069,7 +1048,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A54B9C272D43FD1000F41AE3 /* Double+ext.swift in Sources */,
-				A5EEA6A02D7F31000041F582 /* PreviewView.swift in Sources */,
+
 				75D3FC812A606E6F00F351A3 /* String+ext.swift in Sources */,
 				FA39877C2B3055930096F335 /* OSAHash.m in Sources */,
 				A5446D082CE76CCE00A1F940 /* Pages.swift in Sources */,
@@ -1121,7 +1100,7 @@
 				A50F58B52CB6D10100AB3166 /* ViewControllerProtocol.swift in Sources */,
 				75D3FC5E2A606BA100F351A3 /* Storyboards.swift in Sources */,
 				A5E920ED2CD256C1008159DB /* UserDefaultsService.swift in Sources */,
-				A5EEA6A22D7F405B0041F582 /* PreviewPageViewController.swift in Sources */,
+
 				FA641DE32B34575300F6A466 /* CalendarViewController.swift in Sources */,
 				A53EDA232CD0422700565625 /* EKEventGroup.swift in Sources */,
 				756866D92AD1D398008DBF7C /* DeviceInfoViewController.swift in Sources */,
@@ -1142,7 +1121,7 @@
 				FA39885F2B30602A0096F335 /* ImageFormat.swift in Sources */,
 				FA3987762B3055930096F335 /* OSTypes.m in Sources */,
 				A5609EA12CDBBE06000AF19E /* SecretContactsViewController.swift in Sources */,
-				A5EEA5132D7E2E880041F582 /* PreviewViewController.swift in Sources */,
+
 				FA3987522B3055510096F335 /* ContentEquatable.swift in Sources */,
 				A5600F612CD532CA006EE6BC /* NSItemProvider+ext.swift in Sources */,
 				FA3987AB2B30599C0096F335 /* GroupedAssetsViewController.swift in Sources */,
@@ -1185,11 +1164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5EE94802D9C6C920073BCB5 /* String+ext.swift in Sources */,
-				A5EE947E2D9C6AC60073BCB5 /* UserDefaultsService.swift in Sources */,
 				A55FC81E2D89D653005FB15E /* Float+ext.swift in Sources */,
-				A5EE947F2D9C6C4D0073BCB5 /* UIColor+ext.swift in Sources */,
-				A5EE99D32D9E9E2C0073BCB5 /* FileManager+ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1352,6 +1327,7 @@
 				DEVELOPMENT_TEAM = 4GS69FQ7LG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cleaner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Digital Organizer";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app needs access to your calendar";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs access to your camera";
 				INFOPLIST_KEY_NSContactsUsageDescription = "This app needs access to your contacts";
@@ -1368,13 +1344,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.clean.mastero;
-				PRODUCT_NAME = Cleaner;
+				PRODUCT_NAME = "Digital Organizer";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Cleaner/Frameworks/ImageHashing/Cleaner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1396,6 +1373,7 @@
 				DEVELOPMENT_TEAM = 4GS69FQ7LG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cleaner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Digital Organizer";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app needs access to your calendar";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs access to your camera";
 				INFOPLIST_KEY_NSContactsUsageDescription = "This app needs access to your contacts";
@@ -1412,13 +1390,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.clean.mastero;
-				PRODUCT_NAME = Cleaner;
+				PRODUCT_NAME = "Digital Organizer";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Cleaner/Frameworks/ImageHashing/Cleaner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

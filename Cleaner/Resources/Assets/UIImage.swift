@@ -41,8 +41,8 @@ extension UIImage {
     static var event = UIImage(resource: .event)
     
     //MARK: -ToolOption
-    static var secretAlbum = UIImage(resource: .secretAlbum)
-    static var secretContact = UIImage(resource: .secretContact)
+    static var secureVault = UIImage(resource: .secretAlbum)
+    static var secureContacts = UIImage(resource: .secretContact)
     static var networkSpeedTest = UIImage(resource: .networkSpeedTest)
     static var widgets = UIImage(resource: .widgets)
     static var battery = UIImage(resource: .battery)

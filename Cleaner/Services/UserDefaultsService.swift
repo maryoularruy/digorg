@@ -10,11 +10,12 @@ import Foundation
 enum UserDefaultsKeys: String {
     
     case isFirstEntry = "IS_FIRST_ENTRY"
+    case appOpenCount = "APP_OPEN_COUNT"
     
     case isRemovePhotosAfterImport = "REMOVE_PHOTOS_AFTER_IMPORT"
     case isRemoveContactsAfterImport = "REMOVE_CONTACTS_AFTER_IMPORT"
     
-    case secretAlbumPasscode = "SECRET_ALBUM_PASSWORD"
+    case secureVaultPasscode = "SECURE_VAULT_PASSWORD"
     case temporaryPasscode = "TEMPORARY_PASSCODE"
     case isPasscodeTurnOn = "PASSCODE_TURN_ON"
     case isPasscodeConfirmed = "PASSCODE_CONFIRMED"
@@ -22,9 +23,9 @@ enum UserDefaultsKeys: String {
     case securityQuestionId = "SECURITY_QUESTION_ID"
     case securityQuestionAnswer = "SECURITY_QUESTION_ANSWER"
     
-    case secretAlbumFolder = "DEFAULT_SECRET_ALBUM_FOLDER"
-    case secretContactsFolder = "DEFAULT_SECRET_CONTACTS_FOLDER"
-    case secretContactsFile = "DEFAULT_SECRET_CONTACTS_FILE"
+    case secureVaultFolder = "DEFAULT_SECURE_VAULT_FOLDER"
+    case secureContactsFolder = "DEFAULT_SECURE_CONTACTS_FOLDER"
+    case secureContactsFile = "DEFAULT_SECURE_CONTACTS_FILE"
     
     case subscriptionExpirationDate = "SUBSCRIPTION_EXPIRATION_DATE"
     
@@ -37,11 +38,15 @@ final class UserDefaultsService {
     static let groupedUserDefaults = UserDefaults(suiteName: "group.com.clean.mastero1")
     
     var isFirstEntry: Bool {
-        self.get(Bool.self, key: .isFirstEntry) ?? true
+        self.get(Bool.self, key: .isFirstEntry) ?? false
+    }
+    
+    var appOpenCount: Int {
+        self.get(Int.self, key: .appOpenCount) ?? 0
     }
     
     var isPasscodeCreated: Bool {
-        self.get(String.self, key: .secretAlbumPasscode) != nil
+        self.get(String.self, key: .secureVaultPasscode) != nil
     }
     
     var isPasscodeTurnOn: Bool {
@@ -87,6 +92,11 @@ final class UserDefaultsService {
     
     func setGroupedUserDefaults<T>(_ value: T, key: UserDefaultsKeys) {
         UserDefaultsService.groupedUserDefaults?.set(value, forKey: key.rawValue)
+    }
+    
+    func incrementAppOpenCount() {
+        let currentCount = appOpenCount
+        set(currentCount + 1, key: .appOpenCount)
     }
     
     func remove(key: UserDefaultsKeys) {

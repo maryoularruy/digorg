@@ -55,7 +55,7 @@ final class SecretAssetsViewController: UIViewController {
     
     private lazy var userDefaultsService = UserDefaultsService.shared
     private lazy var photoVideoManager = PhotoVideoManager.shared
-    private lazy var folderName = userDefaultsService.get(String.self, key: .secretAlbumFolder) ?? "media"
+    private lazy var folderName = userDefaultsService.get(String.self, key: .secureVaultFolder) ?? "media"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,12 +83,16 @@ final class SecretAssetsViewController: UIViewController {
                     navigationController?.pushViewController(vc, animated: true)
                 }
             } else {
-                guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
-                vc.popupDelegate = self
-                vc.height = 416
-                vc.type = .createPasscode
-                DispatchQueue.main.async { [weak self] in
-                    self?.present(vc, animated: true)
+                if userDefaultsService.appOpenCount >= 3 {
+                    guard let vc = UIStoryboard(name: ConfirmActionWithImageViewController.idenfifier, bundle: .main).instantiateViewController(identifier: ConfirmActionWithImageViewController.idenfifier) as? ConfirmActionWithImageViewController else { return }
+                    vc.popupDelegate = self
+                    vc.height = 416
+                    vc.type = .createPasscode
+                    DispatchQueue.main.async { [weak self] in
+                        self?.present(vc, animated: true)
+                    }
+                } else {
+                    showSecretAssets()
                 }
             }
             
@@ -113,7 +117,7 @@ final class SecretAssetsViewController: UIViewController {
     
     //subviews of deleteOrRestoreMediaContainer
     @IBAction func tapOnDeleteButton(_ sender: Any) {
-        let vc = CleaningAssetsViewController(from: .secretAlbum, itemsCount: itemsForDeletionAndRestoring.count, items: Array(itemsForDeletionAndRestoring))
+        let vc = CleaningAssetsViewController(from: .secureVault, itemsCount: itemsForDeletionAndRestoring.count, items: Array(itemsForDeletionAndRestoring))
         vc.modalPresentationStyle = .currentContext
         navigationController?.pushViewController(vc, animated: false)
         itemsForDeletionAndRestoring.removeAll()
@@ -136,7 +140,7 @@ final class SecretAssetsViewController: UIViewController {
             if userDefaultsService.isPasscodeConfirmed {
                 reloadData()
             } else {
-                showSecretAlbumCover()
+                showSecureVaultCover()
             }
         } else {
             reloadData()
@@ -173,7 +177,7 @@ final class SecretAssetsViewController: UIViewController {
         }
     }
 
-    private func showSecretAlbumCover() {
+    private func showSecureVaultCover() {
         itemsCollectionView.isHidden = true
         itemsCountLabel.bind(text: "0 items")
         selectionButton.isHidden = true
@@ -192,7 +196,7 @@ final class SecretAssetsViewController: UIViewController {
         deleteOrRestoreMediaContainer.isHidden = true
         
         emptyStateView?.removeFromSuperview()
-        emptyStateView = view.createEmptyState(type: .emptySecretAlbum)
+        emptyStateView = view.createEmptyState(type: .emptySecureVault)
         if let emptyStateView {
             view.addSubview(emptyStateView)
         }

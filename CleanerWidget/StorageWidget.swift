@@ -8,6 +8,61 @@
 import WidgetKit
 import SwiftUI
 
+// Локальные функции для виджета
+extension FileManager {
+    func getWidgetTotalStorageSizeInGigabytes() -> Int? {
+        do {
+            let attributes = try attributesOfFileSystem(forPath: NSHomeDirectory())
+            if let totalSize = attributes[.systemSize] as? NSNumber {
+                return Int(totalSize.int64Value / (1024 * 1024 * 1024))
+            }
+        } catch {
+            print("Error getting total storage size: \(error)")
+        }
+        return nil
+    }
+    
+    func getWidgetFreeStorageSizeInGigabytes() -> Int? {
+        do {
+            let attributes = try attributesOfFileSystem(forPath: NSHomeDirectory())
+            if let freeSize = attributes[.systemFreeSize] as? NSNumber {
+                return Int(freeSize.int64Value / (1024 * 1024 * 1024))
+            }
+        } catch {
+            print("Error getting free storage size: \(error)")
+        }
+        return nil
+    }
+}
+
+extension UIColor {
+    convenience init?(widgetHex: String) {
+        let r, g, b, a: CGFloat
+
+        if widgetHex.hasPrefix("#") {
+            let start = widgetHex.index(widgetHex.startIndex, offsetBy: 1)
+            let hexColor = String(widgetHex[start...])
+
+            if hexColor.count == 6 {
+                let scanner = Scanner(string: hexColor)
+                var hexNumber: UInt64 = 0
+
+                if scanner.scanHexInt64(&hexNumber) {
+                    r = CGFloat((hexNumber & 0xff0000) >> 16) / 255
+                    g = CGFloat((hexNumber & 0x00ff00) >> 8) / 255
+                    b = CGFloat(hexNumber & 0x0000ff) / 255
+                    a = 1.0
+
+                    self.init(red: r, green: g, blue: b, alpha: a)
+                    return
+                }
+            }
+        }
+
+        return nil
+    }
+}
+
 struct StorageProvider: TimelineProvider {
     func placeholder(in context: Context) -> StorageWidgetEntry {
         StorageWidgetEntry(date: .now, totalSize: 128, busySize: 100, busySizeInPercent: 78)
@@ -27,16 +82,16 @@ struct StorageProvider: TimelineProvider {
     }
     
     private func getCurrentStorageStateEntry() -> StorageWidgetEntry {
-        let totalSize = FileManager.default.getTotalStorageSizeInGigabytes() ?? 0
-        let freeSize = FileManager.default.getFreeStorageSizeInGigabytes() ?? 0
+        let totalSize = FileManager.default.getWidgetTotalStorageSizeInGigabytes() ?? 0
+        let freeSize = FileManager.default.getWidgetFreeStorageSizeInGigabytes() ?? 0
         let busySize = totalSize - freeSize
         let busySizeInPercent = (busySize * 100) / totalSize
         
         let color: Color
         let isWhiteBackground: Bool
         
-        if let colorHex = UserDefaultsService.shared.storageWidgetHexBackground,
-           let uiColor = UIColor(hex: colorHex) {
+        if let colorHex = UserDefaults(suiteName: "group.com.cleaner.app")?.string(forKey: "storageWidgetHexBackgroundColor"),
+           let uiColor = UIColor(widgetHex: colorHex) {
             color = Color(uiColor)
             isWhiteBackground = colorHex == "F9FAFC"
         } else {

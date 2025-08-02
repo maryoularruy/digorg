@@ -32,8 +32,8 @@ struct BatteryProvider: TimelineProvider {
         let color: Color
         let isWhiteBackground: Bool
         
-        if let colorHex = UserDefaultsService.shared.batteryWidgetHexBackground,
-           let uiColor = UIColor(hex: colorHex) {
+        if let colorHex = UserDefaults(suiteName: "group.com.cleaner.app")?.string(forKey: "batteryWidgetHexBackgroundColor"),
+           let uiColor = UIColor(widgetHex: colorHex) {
             color = Color(uiColor)
             isWhiteBackground = colorHex == "F9FAFC"
         } else {

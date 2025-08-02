@@ -29,13 +29,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProViewWithText" translatesAutoresizingMaskIntoConstraints="NO" id="ICm-iW-E68">
-                                                <rect key="frame" x="290" y="4.3333333333333357" width="71" height="26"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="26" id="TBM-mJ-dDp"/>
-                                                </constraints>
-                                            </imageView>
+
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nr6-5Q-dhQ">
                                                 <rect key="frame" x="0.0" y="56" width="361" height="200"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,7 +68,7 @@
                                             <constraint firstItem="b7o-qV-pFP" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" id="G9o-kh-Wvg"/>
                                             <constraint firstItem="nr6-5Q-dhQ" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" id="GBM-MM-BgM"/>
                                             <constraint firstItem="Hpv-9f-1sb" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" id="GZT-Vs-eUP"/>
-                                            <constraint firstAttribute="trailing" secondItem="ICm-iW-E68" secondAttribute="trailing" id="IL3-3U-gPc"/>
+
                                             <constraint firstAttribute="trailing" secondItem="nr6-5Q-dhQ" secondAttribute="trailing" id="IhQ-Nm-uFB"/>
                                             <constraint firstItem="5b7-N9-3Hd" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" id="Iza-JE-h0M"/>
                                             <constraint firstItem="Hpv-9f-1sb" firstAttribute="top" secondItem="5b7-N9-3Hd" secondAttribute="bottom" constant="16" id="JJK-7C-Zh7"/>
@@ -86,7 +80,7 @@
                                             <constraint firstItem="5rA-ik-yt3" firstAttribute="leading" secondItem="5Vz-xh-KEj" secondAttribute="leading" id="f1W-05-tYI"/>
                                             <constraint firstAttribute="trailing" secondItem="WcV-fR-RG2" secondAttribute="trailing" id="jZk-tu-eMA"/>
                                             <constraint firstAttribute="trailing" secondItem="5b7-N9-3Hd" secondAttribute="trailing" id="teX-bw-0lo"/>
-                                            <constraint firstItem="ICm-iW-E68" firstAttribute="centerY" secondItem="Sxn-dI-Q9s" secondAttribute="centerY" id="ufa-pe-b3u"/>
+
                                             <constraint firstAttribute="bottom" secondItem="b7o-qV-pFP" secondAttribute="bottom" id="z4n-MT-vyr"/>
                                             <constraint firstItem="Sxn-dI-Q9s" firstAttribute="top" secondItem="5Vz-xh-KEj" secondAttribute="top" constant="7" id="zd7-YD-MA8"/>
                                         </constraints>
@@ -116,9 +110,7 @@
                     <connections>
                         <outlet property="applicationOptionsContainer" destination="b7o-qV-pFP" id="G9L-jt-6d0"/>
                         <outlet property="passcodeOptionsContainer" destination="WcV-fR-RG2" id="YBQ-iV-fza"/>
-                        <outlet property="premiumImageView" destination="ICm-iW-E68" id="kXI-Vl-SBX"/>
                         <outlet property="removeAfterImportContainer" destination="5b7-N9-3Hd" id="tQM-uo-VjI"/>
-                        <outlet property="subscriptionStackView" destination="nr6-5Q-dhQ" id="wo8-v1-1f9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -146,7 +138,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ProViewWithText" width="71" height="26"/>
         <image name="SettingsNormalTabBarItem" width="53" height="42"/>
         <image name="SettingsSelectedTabBarItem" width="53" height="42"/>
         <namedColor name="PaleGrey">

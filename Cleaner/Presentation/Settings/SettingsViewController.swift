@@ -8,16 +8,10 @@
 import UIKit
 
 final class SettingsViewController: UIViewController {
-    @IBOutlet weak var premiumImageView: UIImageView!
-    @IBOutlet weak var subscriptionStackView: UIStackView!
     @IBOutlet weak var removeAfterImportContainer: SettingsOptionsContainer!
     @IBOutlet weak var passcodeOptionsContainer: SettingsOptionsContainer!
     @IBOutlet weak var applicationOptionsContainer: SettingsOptionsContainer!
     
-    private lazy var buyPremiumView = BuyPremiumView()
-    private lazy var subscriptionInfoView = SettingsOptionsContainer()
-    
-    private lazy var store = Store.shared
     private lazy var userDefaultsService = UserDefaultsService.shared
 
     override func viewDidLoad() {
@@ -28,7 +22,6 @@ final class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateUserDefaultsKeys()
-        updateSubscriptionUI()
         updateSettingsContainers()
     }
     
@@ -46,31 +39,14 @@ final class SettingsViewController: UIViewController {
         }
     }
     
-    private func updateSubscriptionUI() {
-        premiumImageView.isHidden = !userDefaultsService.isSubscriptionActive
-        
-        Task.init {
-            if await store.isTrialEligible() {
-                buyPremiumView.isHidden = false
-                subscriptionInfoView.isHidden = true
-            } else {
-                buyPremiumView.isHidden = true
-                subscriptionInfoView.isHidden = false
-            }
-        }
-    }
+
     
     private func updateSettingsContainers() {
         removeAfterImportContainer.bind(options: removeAfterImportOptions, isDefaultHeight: false)
         passcodeOptionsContainer.bind(options: passcodeOptions, isDefaultHeight: false)
     }
     
-    private func openPremiumVC() {
-        let vc = PremiumViewController()
-        vc.delegate = self
-        vc.modalPresentationStyle = .popover
-        present(vc, animated: true)
-    }
+
     
     private func openWebVC(isPrivacyPolicy: Bool) {
         let vc = WebViewController(isPrivacyPolicy: isPrivacyPolicy)
@@ -79,21 +55,12 @@ final class SettingsViewController: UIViewController {
     }
 }
 
-extension SettingsViewController: PremiumVCDelegate {
-    func viewWasDismissed() {
-        updateSubscriptionUI()
-    }
-}
+
 
 extension SettingsViewController: ViewControllerProtocol {
     func setupUI() {
-        subscriptionInfoView.bind(options: SettingsOption.subscriptionOption, isDefaultHeight: true)
-        subscriptionStackView.addArrangedSubview(buyPremiumView)
-        subscriptionStackView.addArrangedSubview(subscriptionInfoView)
         applicationOptionsContainer.bind(options: SettingsOption.applicationOptions, isDefaultHeight: true)
         
-        buyPremiumView.delegate = self
-        subscriptionInfoView.delegate = self
         removeAfterImportContainer.delegate = self
         passcodeOptionsContainer.delegate = self
         applicationOptionsContainer.delegate = self
@@ -102,17 +69,14 @@ extension SettingsViewController: ViewControllerProtocol {
     func addGestureRecognizers() {}
 }
 
-extension SettingsViewController: BuyPremiumViewDelegate {
-    func tapOnStartTrial() {
-        openPremiumVC()
-    }
-}
+
 
 extension SettingsViewController: SettingsOptionsContainerDelegate {
     func tapOnOption(_ option: SettingsOption) {
         switch option.type {
         case .subscriptionInfo:
-            openPremiumVC()
+            // Подписка больше не нужна, так как все функции доступны
+            break
             
         case .photosRemovable:
             userDefaultsService.set(option.isSwitchable, key: .isRemovePhotosAfterImport)
@@ -135,7 +99,7 @@ extension SettingsViewController: SettingsOptionsContainerDelegate {
             present(vc, animated: true)
             
         case .sendFeedback:
-            if let url = URL(string: "mailto:\("maryoularruy@gmail.com")?subject=\("Feedback about Cleaner")&body=\("")"),
+            if let url = URL(string: "mailto:\("maryoularruy@gmail.com")?subject=\("Feedback about Digital Organizer")&body=\("")"),
                UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }

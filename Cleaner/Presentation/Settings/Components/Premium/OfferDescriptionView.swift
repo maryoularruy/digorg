@@ -10,7 +10,7 @@ import UIKit
 final class OfferDescriptionView: UIView {
     func setupStartSubscriptionUI() {
         let label = Regular15LabelStyle()
-        label.bind(text: "Get full access to all features")
+        label.bind(text: "Unlock advanced organization tools")
         label.setGreyTextColor()
         
         addSubviews([label])

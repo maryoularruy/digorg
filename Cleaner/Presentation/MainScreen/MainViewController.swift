@@ -32,10 +32,6 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if userDefaultsService.isFirstEntry {
-            openPreviewVC()
-        }
-        
         setupUI()
         addGestureRecognizers()
     }
@@ -144,10 +140,23 @@ final class MainViewController: UIViewController {
             self?.videosCleanup.isUserInteractionEnabled = false
         }
         
-        photoVideoManager.fetchSimilarVideos { [weak self] _, duplicatesCount, size in
-            self?.videosCleanup.infoButton.endSpinner()
-            self?.videosCleanup.infoButton.bind(text: "\(duplicatesCount) file\(duplicatesCount == 1 ? "" : "s"), \(size.roundAndToString())")
-            self?.videosCleanup.isUserInteractionEnabled = true
+        // Сначала получаем общее количество видео
+        photoVideoManager.fetchAllVideos { [weak self] allVideos in
+            let totalVideos = allVideos.count
+            let totalSize = allVideos.reduce(0) { $0 + $1.imageSize }
+            
+            // Затем получаем дубликаты для дополнительной информации
+            self?.photoVideoManager.fetchSimilarVideos { [weak self] _, duplicatesCount, duplicatesSize in
+                DispatchQueue.main.async {
+                    self?.videosCleanup.infoButton.endSpinner()
+                    if duplicatesCount > 0 {
+                        self?.videosCleanup.infoButton.bind(text: "\(totalVideos) file\(totalVideos == 1 ? "" : "s"), \(totalSize.roundAndToString()) (\(duplicatesCount) duplicates)")
+                    } else {
+                        self?.videosCleanup.infoButton.bind(text: "\(totalVideos) file\(totalVideos == 1 ? "" : "s"), \(totalSize.roundAndToString())")
+                    }
+                    self?.videosCleanup.isUserInteractionEnabled = true
+                }
+            }
         }
     }
     
@@ -157,11 +166,21 @@ final class MainViewController: UIViewController {
             self?.contactsCleanup.isUserInteractionEnabled = false
         }
         
-        contactManager.countUnresolvedContacts { _, _, _, _, summaryCount in
-            DispatchQueue.main.async { [weak self] in
-                self?.contactsCleanup.infoButton.endSpinner()
-                self?.contactsCleanup.infoButton.bind(text: "\(summaryCount) contact\(summaryCount == 1 ? "" : "s")")
-                self?.contactsCleanup.isUserInteractionEnabled = true
+        // Получаем общее количество контактов
+        contactManager.fetchAllContacts { [weak self] allContacts in
+            let totalContacts = allContacts.count
+            
+            // Затем получаем проблемные контакты
+            self?.contactManager.countUnresolvedContacts { duplicatedByName, duplicatedByNumber, noName, noNumber, summaryCount in
+                DispatchQueue.main.async { [weak self] in
+                    self?.contactsCleanup.infoButton.endSpinner()
+                    if summaryCount > 0 {
+                        self?.contactsCleanup.infoButton.bind(text: "\(totalContacts) contact\(totalContacts == 1 ? "" : "s") (\(summaryCount) issues)")
+                    } else {
+                        self?.contactsCleanup.infoButton.bind(text: "\(totalContacts) contact\(totalContacts == 1 ? "" : "s")")
+                    }
+                    self?.contactsCleanup.isUserInteractionEnabled = true
+                }
             }
         }
     }
@@ -175,18 +194,21 @@ final class MainViewController: UIViewController {
         calendarManager.fetchEvents { events in
             DispatchQueue.main.async { [weak self] in
                 self?.calendarCleanup.infoButton.endSpinner()
-                self?.calendarCleanup.infoButton.bind(text: "\(events.count) event\(events.count == 1 ? "" : "s")")
+                let totalEvents = events.count
+                let futureEvents = events.filter { $0.startDate > Date() }.count
+                let pastEvents = totalEvents - futureEvents
+                
+                if totalEvents > 0 {
+                    self?.calendarCleanup.infoButton.bind(text: "\(totalEvents) event\(totalEvents == 1 ? "" : "s") (\(futureEvents) future, \(pastEvents) past)")
+                } else {
+                    self?.calendarCleanup.infoButton.bind(text: "0 events")
+                }
                 self?.calendarCleanup.isUserInteractionEnabled = true
             }
         }
     }
     
-    private func openPreviewVC() {
-        let vc = PreviewViewController()
-        vc.modalPresentationStyle = .fullScreen
-        vc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(vc, animated: false)
-    }
+
 }
 
 extension MainViewController: ViewControllerProtocol {

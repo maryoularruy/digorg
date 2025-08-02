@@ -14,7 +14,6 @@
                 <outlet property="contentView" destination="iN0-l3-epB" id="hr4-Aw-dDE"/>
                 <outlet property="icon" destination="kEl-y8-eCB" id="NlL-ox-jCA"/>
                 <outlet property="optionDescription" destination="mnR-ZU-J9j" id="KCO-2F-FnJ"/>
-                <outlet property="premiumImageView" destination="RUL-Sv-ppt" id="iec-x9-jYz"/>
                 <outlet property="title" destination="Cl2-Qf-X2i" id="nJs-nP-zLh"/>
             </connections>
         </placeholder>
@@ -42,13 +41,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProView" translatesAutoresizingMaskIntoConstraints="NO" id="RUL-Sv-ppt">
-                    <rect key="frame" x="342" y="9" width="42" height="26"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="42" id="7AQ-TI-emn"/>
-                        <constraint firstAttribute="height" constant="26" id="XNp-6f-QOd"/>
-                    </constraints>
-                </imageView>
+
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" name="White"/>
@@ -58,10 +51,7 @@
                 <constraint firstItem="mnR-ZU-J9j" firstAttribute="leading" secondItem="kEl-y8-eCB" secondAttribute="trailing" constant="16" id="IEU-CQ-rK6"/>
                 <constraint firstItem="kEl-y8-eCB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="VSf-HL-Gdi"/>
                 <constraint firstItem="Cl2-Qf-X2i" firstAttribute="leading" secondItem="kEl-y8-eCB" secondAttribute="trailing" constant="16" id="ZXz-84-qD8"/>
-                <constraint firstItem="RUL-Sv-ppt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="9" id="edF-Vx-kpq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mnR-ZU-J9j" secondAttribute="bottom" constant="16" id="j0j-oD-dc1"/>
-                <constraint firstAttribute="trailing" secondItem="RUL-Sv-ppt" secondAttribute="trailing" constant="9" id="kbK-P5-rvZ"/>
-                <constraint firstItem="RUL-Sv-ppt" firstAttribute="leading" secondItem="mnR-ZU-J9j" secondAttribute="trailing" constant="5" id="vpR-hB-gA3"/>
                 <constraint firstItem="Cl2-Qf-X2i" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="yIn-EM-sTJ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -69,7 +59,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ProView" width="42" height="26"/>
         <namedColor name="White">
             <color red="0.97647058823529409" green="0.98039215686274506" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

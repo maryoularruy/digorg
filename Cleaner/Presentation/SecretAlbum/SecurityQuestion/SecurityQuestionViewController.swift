@@ -40,11 +40,11 @@ final class SecurityQuestionViewController: UIViewController {
     
     private func savePasscode() {
         let temporaryPasscode = userDefaultsService.get(String.self, key: .temporaryPasscode)
-        userDefaultsService.set(temporaryPasscode, key: .secretAlbumPasscode)
+        userDefaultsService.set(temporaryPasscode, key: .secureVaultPasscode)
     }
     
     private func removePasscode() {
-        userDefaultsService.remove(key: .secretAlbumPasscode)
+        userDefaultsService.remove(key: .secureVaultPasscode)
     }
     
     private func removeTemporaryPasscode() {

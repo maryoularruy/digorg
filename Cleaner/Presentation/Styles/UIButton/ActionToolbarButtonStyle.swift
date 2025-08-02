@@ -53,9 +53,13 @@ final class ActionToolbarButtonStyle: UIButton {
     }
     
     func animate() {
-        UIView.animate(withDuration: 0.4, delay: 0.1, options: [.repeat, .autoreverse, .allowUserInteraction], animations: {
-            self.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        })
+        UIView.animate(withDuration: 0.6, delay: 0.2, options: [.allowUserInteraction], animations: {
+            self.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        }) { _ in
+            UIView.animate(withDuration: 0.4, delay: 0.1, options: [.allowUserInteraction], animations: {
+                self.transform = .identity
+            })
+        }
     }
     
     private func setup() {

@@ -17,18 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cleaner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ref-as-cxc" customClass="Semibold24LabelStyle" customModule="Cleaner" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Digital Organizer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ref-as-cxc" customClass="Semibold24LabelStyle" customModule="Cleaner" customModuleProvider="target">
                                 <rect key="frame" x="13.999999999999996" y="66" width="58.666666666666657" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProViewWithText" translatesAutoresizingMaskIntoConstraints="NO" id="L6w-0y-Vxj">
-                                <rect key="frame" x="306" y="62.666666666666657" width="71" height="27"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="2sz-fe-ZkN"/>
-                                </constraints>
-                            </imageView>
+
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oy2-lT-tR7">
                                 <rect key="frame" x="0.0" y="99.666666666666686" width="393" height="752.33333333333326"/>
                                 <subviews>
@@ -91,18 +86,17 @@
                             <constraint firstAttribute="bottom" secondItem="Oy2-lT-tR7" secondAttribute="bottom" id="7JO-o3-LV7"/>
                             <constraint firstItem="Ref-as-cxc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="7" id="Hgg-vF-RH1"/>
                             <constraint firstItem="Oy2-lT-tR7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="JaV-lb-WJB"/>
-                            <constraint firstItem="Oy2-lT-tR7" firstAttribute="top" secondItem="L6w-0y-Vxj" secondAttribute="bottom" constant="24" id="N2b-tQ-tVK"/>
+                            <constraint firstItem="Oy2-lT-tR7" firstAttribute="top" secondItem="Ref-as-cxc" secondAttribute="bottom" constant="24" id="N2b-tQ-tVK"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Oy2-lT-tR7" secondAttribute="trailing" id="dnl-Uy-Eyb"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="L6w-0y-Vxj" secondAttribute="trailing" constant="16" id="gka-pR-n2v"/>
+
                             <constraint firstItem="Ref-as-cxc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="14" id="pi3-4a-1h3"/>
-                            <constraint firstItem="L6w-0y-Vxj" firstAttribute="centerY" secondItem="Ref-as-cxc" secondAttribute="centerY" id="sYD-c3-Xul"/>
+
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lmt-pG-MVA"/>
                     <connections>
                         <outlet property="instructionsIcon" destination="z2D-Q0-nSG" id="ydz-ct-Mzb"/>
                         <outlet property="instructionsView" destination="553-JY-dI7" id="NC8-A7-qCT"/>
-                        <outlet property="premiumImageView" destination="L6w-0y-Vxj" id="Q2m-l3-gD8"/>
                         <outlet property="toolOptionsStackView" destination="ay4-DS-pQj" id="ghv-lR-2LJ"/>
                     </connections>
                 </viewController>
@@ -135,7 +129,6 @@
     </scenes>
     <resources>
         <image name="Instructions" width="182.66667175292969" height="103.66666412353516"/>
-        <image name="ProViewWithText" width="71" height="26"/>
         <image name="ToolsNormalTabBarItem" width="53" height="42"/>
         <image name="ToolsSelectedTabBarItem" width="53" height="42"/>
         <namedColor name="White">
